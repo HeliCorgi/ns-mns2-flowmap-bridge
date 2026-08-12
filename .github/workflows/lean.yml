@@ -25,16 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # First use lean-action only to install the pinned Lean toolchain.
-      # auto-config must stay off until lake-manifest.json exists.
-      - name: Install Lean
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          build: false
-          test: false
-          lint: false
-          use-github-cache: false
+      - name: Install Elan and pinned Lean toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+          "$HOME/.elan/bin/lake" --version
 
       - name: Resolve Lake dependencies
         run: lake update
