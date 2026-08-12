@@ -2,15 +2,25 @@
 
 Last updated: 2026-08-13 (JST)
 
-This file is the short-form continuation point for future GPT/Codex/Claude sessions. Read this file together with `AGENTS.md` and `FORMAL_SCOPE.md` before changing claims or formal statements.
+This file is the short-form continuation point for future GPT/Codex/Claude sessions. Read `PROJECT_GOAL.md` first, then this file together with `AGENTS.md` and `FORMAL_SCOPE.md` before changing claims or formal statements.
+
+## Governing project target
+
+`PROJECT_GOAL.md` is the repository's top-level specification.
+
+Ultimate acceptance target: rigorously establish one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D with the exact official hypotheses and domain.
+
+Current primary attack: the breakdown side (C/D), with an unforced route `f = 0` preferred when supportable. Hou-cylinder, MNS-2, flow-map, mild-solution, POD/SVD, and Lean bridge results are intermediate infrastructure or candidate evidence until a rigorous chain reaches an exact Clay statement.
 
 ## Current frontier
 
-The current formal frontier is the time-indexed Navier–Stokes bridge interface added by merged PR #10:
+The formal frontier now includes the mild-solution semantic and quadratic-nonlinearity layers through merged PR #15:
 
-- PR #10: `Add a time-indexed Navier-Stokes bridge interface`
-- merge commit: `219e051939b751307913ba9da6e724d063f072a4`
-- main formal file: `Formal/NavierStokesTimeBridge.lean`
+- PR #12: `Formalize the mild-solution Duhamel semantics`
+- PR #13: `Connect the radial flow-map bridge to mild Duhamel endpoints`
+- PR #14: `Derive the zero-fixed bridge condition from mild uniqueness`
+- PR #15: `Formalize the derivative of a quadratic mild nonlinearity`
+- PR #16: `Link the Fable5 exclusion registry`
 
 The repository now has the following theorem/interface ladder:
 
@@ -22,6 +32,10 @@ The repository now has the following theorem/interface ladder:
 6. `Formal/FlowMapLocalContDiff.lean` — localizes to an open admissible data domain.
 7. `Formal/PDEBridgeAdapter.lean` — packages the analytic bridge with an abstract fixed-time PDE semantic relation.
 8. `Formal/NavierStokesTimeBridge.lean` — packages certified time slices using an externally supplied time-indexed Navier–Stokes semantic relation.
+9. `Formal/MildSolutionSemantics.lean` — represents a Banach-valued Duhamel equation with mathlib interval integrals.
+10. `Formal/MildFlowMapBridge.lean` — connects certified flow-map reconstruction to mild endpoint witnesses.
+11. `Formal/MildZeroUniqueness.lean` — derives the zero-fixed endpoint condition from explicit mild uniqueness assumptions.
+12. `Formal/QuadraticMildNonlinearity.lean` — formalizes `B(u)=Q(u,u)` and `DB(u)[v]=Q(u,v)+Q(v,u)` for a continuous bilinear map.
 
 CI also contains proof-hole and local-axiom guardrails, and `Formal/AxiomAudit.lean` prints axiom dependencies of the strongest current theorems.
 
@@ -39,7 +53,7 @@ Radially,
 
 `∫₀¹ (DS(s d))[d] ds = S(d) - S(0)`.
 
-If a separate hypothesis proves `S(0) = 0`, then
+If a separate argument proves `S(0) = 0`, then
 
 `S(d) = ∫₀¹ (DS(s d))[d] ds`.
 
@@ -47,39 +61,36 @@ The path tangent is always the fixed, unnormalized direction `d`.
 
 Do not replace it by `s • d`, a normalized direction, or an arbitrary amplitude tangent.
 
-## Current Navier–Stokes interface
+## Current Navier–Stokes / mild interface
 
 `Formal/NavierStokesTimeBridge.lean` is parameterized by an externally supplied relation of the form
 
 `NSEvolvesAt : ℝ → X → Y → Prop`.
 
-The time-indexed adapter carries only certified nonnegative time slices. At each certified time it must provide:
+The time-indexed adapter carries only certified nonnegative time slices. At each certified time it must provide an open admissible initial-data domain, a time-indexed state map, `C¹` dependence on the certified domain, and proof that the state map realizes the semantic relation.
 
-- an open admissible initial-data domain;
-- a time-indexed state map;
-- `C¹` dependence of that state map on the certified domain;
-- proof that the state map realizes `NSEvolvesAt` on that domain.
+`Formal/MildSolutionSemantics.lean` supplies a concrete abstract Duhamel-shaped relation
 
-A certified time slice can then be converted into the already-proved `FixedTimePDEBridgeAdapter`, so the exact affine/radial bridge follows there.
+`u(t) = H(t)u₀ - ∫₀ᵗ H(t-s) B(u(s)) ds`,
 
-This is an interface theorem, not a proof that Navier–Stokes supplies such certified slices.
+with endpoint existence existential in a witnessing trajectory rather than silently assuming uniqueness.
+
+`Formal/MildFlowMapBridge.lean` connects this mild relation to the radial flow-map identity. `Formal/MildZeroUniqueness.lean` isolates the uniqueness hypothesis needed to derive `stateMap t 0 = 0`. `Formal/QuadraticMildNonlinearity.lean` formalizes the derivative of a quadratic diagonal `B(u)=Q(u,u)`.
+
+This remains an interface/functional-analysis layer. It does not yet construct the actual three-dimensional Stokes semigroup, Leray projection, admissible Clay-domain solution theory, or a singular solution.
 
 ## Next formal step
 
-The next intended step is to give `NSEvolvesAt` concrete Navier–Stokes semantics without smuggling in existence or regularity.
+The next useful formal direction is to move from the generic quadratic mild kernel toward a concrete Navier--Stokes adapter without smuggling in existence or global regularity.
 
-Preferred direction: define a mild-solution predicate/interface based on
+High-value targets include:
 
-`u(t) = exp(ν t Δ) u₀ - ∫₀ᵗ exp(ν (t-s) Δ) P div(u ⊗ u)(s) ds`.
+1. an explicit function-space contract for the intended Clay domain;
+2. a concrete projected convection operator interface with physical three-dimensional incompressibility preserved;
+3. a residual/error theorem for approximate tangent reconstruction;
+4. eventual instantiation of the abstract `H` and `Q` with genuine Stokes/Leray objects once the required mathlib infrastructure and analytic hypotheses are available.
 
-Treat this first as a semantic predicate / contract. Do not claim that every datum has such a solution, that it is unique globally, or that the resulting solution map is globally `C¹`.
-
-A safe decomposition is:
-
-1. define the abstract ingredients needed for the mild equation (linear evolution operator, nonlinear term, time integral);
-2. define `NSMildSolution` / `NSEvolvesAt` from those ingredients;
-3. prove only structural adapter lemmas that follow from supplied hypotheses;
-4. keep existence, uniqueness, regularity, and continuation assumptions explicit and separate.
+Do not identify a finite-cylinder Hou operator with the Clay `R^3` or periodic-box problem unless a rigorous domain-transfer result has been proved.
 
 ## Numerical/research track
 
@@ -87,15 +98,15 @@ The numerical MNS-2 bridge work is distinct from the Lean continuum theorem.
 
 Key numerical facts already established in the broader project:
 
-- conservative cylindrical transport variables use
-  `U = u^θ/r`, `Ω = ω^θ/r`, `ψ = ψ^θ/r`, `Γ = r² U = r u^θ`;
+- conservative cylindrical transport variables use `U = u^θ/r`, `Ω = ω^θ/r`, `ψ = ψ^θ/r`, `Γ = r² U = r u^θ`;
 - tangent direction for amplitude-path reconstruction is fixed and unnormalized;
 - v2.2 synthetic flow-map path-independence tests passed for radial, Gamma-first, Omega-first, and closed-rectangle paths under a single frozen schedule;
 - finite-dimensional coordinate-path reconstruction is exact for the frozen discrete map;
 - a continuum promotion still requires convergence of solution maps and pathwise tangent actions on a common time interval;
-- a real provenanced Hou late-state handoff seed is still missing; synthetic seeds are not late-state evidence.
+- a real provenanced Hou late-state handoff seed is still missing; synthetic seeds are not late-state evidence;
+- full-operator low rank is not assumed; the more plausible reduced object is the pathwise tangent correction, and any POD/SVD reconstruction requires a residual certificate before promotion.
 
-Planned numerical continuation after the formal interface layer is a modal-coordinate bridge (v2.3), with explicit truncation/tail accounting and path-order diagnostics before any low-rank claim.
+Planned numerical continuation is a modal/reduced tangent bridge with explicit truncation, path quadrature, tail, and path-order diagnostics before any continuum or Clay claim.
 
 ## External exclusion / no-go registry — mandatory preflight
 
@@ -128,7 +139,8 @@ Never claim any of the following unless a new proof actually establishes it:
 - continuation of a `C¹` solution map through a possible singular time;
 - discrete MNS-2 bridge convergence to the continuum without an explicit convergence theorem;
 - numerical path-independence as proof of continuum Navier–Stokes regularity or blow-up;
-- synthetic Hou-like data as provenanced Hou late-state evidence.
+- synthetic Hou-like data as provenanced Hou late-state evidence;
+- finite-cylinder Hou behavior as an `R^3` or periodic-box Clay construction without a rigorous transfer.
 
 Keep these error classes separate:
 
@@ -137,6 +149,7 @@ Keep these error classes separate:
 - low-rank/modal truncation error;
 - PDE discretization error;
 - continuum-promotion error;
+- domain-transfer error;
 - model/provenance scope.
 
 ## Lean proof hygiene
@@ -157,8 +170,8 @@ The workflow is configured to run Lean CI for every pull request to `main`, so f
 
 A short prompt should be enough:
 
-`@GitHub ns-mns2-flowmap-bridge の HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
+`@GitHub ns-mns2-flowmap-bridge の PROJECT_GOAL.md、HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
 
-If continuing the formal track, proceed from the mild-solution semantics layer described above.
+If continuing the formal track, proceed from the concrete Navier--Stokes / reduced-tangent certification obligations above.
 
-If switching back to the numerical track, resume from the planned modal-coordinate bridge v2.3, preflight against the external Fable5 registry, and preserve all guardrails above.
+If switching back to the numerical track, resume from the reduced/modal tangent bridge, preflight against the external Fable5 registry, and preserve all Clay-domain and continuum-promotion guardrails above.

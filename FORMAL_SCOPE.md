@@ -2,6 +2,14 @@
 
 This file records what the Lean layer proves and, equally importantly, what remains outside the formalized result.
 
+## Governing project goal
+
+`PROJECT_GOAL.md` is the repository-level acceptance specification and takes priority over this file for research direction.
+
+The ultimate target is a rigorous resolution of one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D. The current primary attack is the breakdown side (C/D), preferably with `f = 0` if a valid route supports it.
+
+This file is narrower: it states only what the current Lean development has actually established. No theorem in this file should be described as a Clay A/B/C/D result unless the exact official PDE, domain, data hypotheses, force conditions, and remaining analytic obligations have been discharged.
+
 ## Current strongest bridge statement
 
 The current analytic endpoint is the open-domain `C¹` bridge in `Formal/FlowMapLocalContDiff.lean`, packaged for fixed-time PDE use by `Formal/PDEBridgeAdapter.lean` and for certified Navier–Stokes time slices by `Formal/NavierStokesTimeBridge.lean`.
@@ -24,7 +32,9 @@ The path tangent is the fixed, unnormalized vector `d`.
 
 `Formal/NavierStokesTimeBridge.lean` adds a time-indexed interface parameterized by an externally supplied relation `NSEvolvesAt : ℝ → X → Y → Prop`. It records only certified nonnegative times and extracts the already-proved fixed-time adapter at each such time.
 
-`Formal/MildSolutionSemantics.lean` now fixes an actual Banach-valued Duhamel equation shape and defines an existential endpoint evolution relation from it. This is the first layer in the repository where the time integral occurring in a mild formulation is represented directly by mathlib's interval integral rather than by an opaque placeholder relation.
+`Formal/MildSolutionSemantics.lean` fixes a Banach-valued Duhamel equation shape and defines an existential endpoint evolution relation from it. This is the first layer in the repository where the time integral occurring in a mild formulation is represented directly by mathlib's interval integral rather than by an opaque placeholder relation.
+
+`Formal/MildFlowMapBridge.lean` connects certified radial flow-map reconstruction to witnesses of the mild endpoint relation. `Formal/MildZeroUniqueness.lean` isolates the endpoint/trajectory uniqueness hypotheses needed to derive the zero-fixed condition rather than silently assuming it. `Formal/QuadraticMildNonlinearity.lean` formalizes the quadratic diagonal of a continuous bilinear map and the exact derivative formula `DB(u)[v] = Q(u,v) + Q(v,u)`.
 
 ## Theorem dependency ladder
 
@@ -87,24 +97,38 @@ for every `t ∈ [0,T]`.
 
 For a future Navier–Stokes specialization, `H(t)` is intended to be the Stokes/heat evolution `exp(ν t Δ)` on a chosen divergence-free space and `B(u)` the projected quadratic term `P div (u ⊗ u)`. Those identifications are not yet formalized by this file.
 
+### `Formal/MildFlowMapBridge.lean`
+
+Connects the time-indexed bridge adapter, when its semantic relation is the mild endpoint relation, to explicit Duhamel witnesses along certified radial paths. This is still conditional on the existence of the certified `C¹` state-map slice.
+
+### `Formal/MildZeroUniqueness.lean`
+
+Separates zero-solution existence from uniqueness. It proves zero is a mild trajectory when the nonlinearity vanishes at zero and derives `stateMap t 0 = 0` only under an explicit endpoint or trajectory uniqueness hypothesis.
+
+### `Formal/QuadraticMildNonlinearity.lean`
+
+For a continuous bilinear map `Q : V →L[ℝ] V →L[ℝ] V`, defines the quadratic diagonal `B(u)=Q(u,u)` and proves its Fréchet derivative is the continuous linear map `v ↦ Q(u,v)+Q(v,u)`. It also packages such a quadratic nonlinearity into the abstract mild kernel. This does not identify `Q` with the actual Leray-projected Navier--Stokes convection operator in a Clay-admissible function space.
+
 ## What is not formalized
 
-The Lean files do **not** currently construct a concrete three-dimensional Navier–Stokes function space, Stokes semigroup, Leray projection, or projected quadratic convection operator. They also do not prove existence or uniqueness of trajectories satisfying the new mild predicate for arbitrary data.
+The Lean files do **not** currently construct a concrete three-dimensional Navier–Stokes function space, Stokes semigroup, Leray projection, or projected quadratic convection operator. They also do not prove existence or uniqueness of trajectories satisfying the mild predicate for arbitrary data.
 
 In particular, the repository has not formalized or proved:
 
+- Clay statement A, B, C, or D;
 - global existence of smooth 3D Navier–Stokes solutions;
 - global uniqueness sufficient to define a global fixed-time solution map;
 - `C¹` dependence of a Navier–Stokes solution map through a possible singular time;
 - a blow-up counterexample;
 - a closed-form general solution;
+- a rigorous transfer from the finite-cylinder Hou setting to the official `R^3` or periodic Clay domains;
 - convergence of the MNS-2 discrete solution-map bridge to a continuum Navier–Stokes solution map.
 
 ## Remaining Navier–Stokes obligations
 
 To turn the abstract mild predicate into genuine three-dimensional incompressible Navier–Stokes semantics and populate certified bridge time slices, a future NS-specific layer must still supply:
 
-1. a concrete divergence-free Banach function space `V` suitable for the intended local solution theory;
+1. a concrete divergence-free Banach function space `V` suitable for the intended local solution theory and the chosen official Clay domain;
 2. a viscosity `ν > 0`;
 3. a concrete Stokes/heat evolution operator representing `exp(ν t Δ)` on `V`;
 4. a concrete realization of the Leray-projected nonlinear term `P div (u ⊗ u)` in the chosen spaces;
@@ -112,13 +136,16 @@ To turn the abstract mild predicate into genuine three-dimensional incompressibl
 6. existence, and where a single-valued state map is required, uniqueness of a mild solution on the selected time interval;
 7. an open admissible-data domain and `C¹` dependence of the fixed-time solution map on that domain;
 8. proof that the selected initial-data path remains inside the domain;
-9. when endpoint reconstruction rather than endpoint difference is used, proof that zero data evolve to the zero state.
+9. when endpoint reconstruction rather than endpoint difference is used, proof that zero data evolve to the zero state;
+10. if the work is to support the breakdown-side Clay target, a rigorous final argument matching the applicable statement C/D hypotheses and showing failure of global smooth evolution for the original three-dimensional equation.
 
-Only after these obligations are discharged may a certified time slice be interpreted as a genuine continuum Navier–Stokes flow-map bridge.
+Only after these obligations are discharged may a certified time slice be interpreted as a genuine continuum Navier–Stokes flow-map bridge, and only after the separate `PROJECT_GOAL.md` final gate is discharged may the project claim a Clay-level result.
 
 ## Numerical scope
 
 Finite-dimensional and discrete path-integral identities are useful validation and reduction tools, but they remain separate from the continuum theorem. A continuum promotion requires explicit convergence of the relevant solution maps and pathwise tangent actions on a common time interval.
+
+A finite-cylinder Hou computation is not itself a Clay-domain computation. Any promotion toward statement C/D must separately address domain fidelity, physical three-dimensional incompressibility, boundary/periodic-image effects, and any whole-space or periodic-box transfer.
 
 ## Audit policy
 
