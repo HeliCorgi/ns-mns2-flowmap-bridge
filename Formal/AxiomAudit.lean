@@ -1,6 +1,6 @@
 import Formal.FlowMapLocalContDiff
 
-/--
+/-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
 
 These commands do not add assumptions. They print the axiom dependencies of the declarations
