@@ -1,0 +1,7 @@
+{
+  "provenance": "synthetic smooth two-component (Gamma,Omega) state for MNS-2 path-independence bridge regression; NOT Hou late-state evidence",
+  "z_periodic": true,
+  "z_period": 1.0,
+  "purpose": "discrete flow-map line-integral path-independence regression",
+  "late_state_evidence": false
+}

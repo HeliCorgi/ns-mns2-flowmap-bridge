@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.DS_Store
+*.tmp
+*.log
+results/**/*.npz
+results/**/*.stdout.json
+results/v2.2/repro_12x24.json
+results/v2.2/repro_12x24.npz
