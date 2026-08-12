@@ -51,7 +51,8 @@ theorem quadraticDerivative_zero
 theorem hasFDerivAt_quadraticDiagonal
     (Q : V →L[ℝ] V →L[ℝ] V) (u : V) :
     HasFDerivAt (quadraticDiagonal Q) (quadraticDerivative Q u) u := by
-  simpa [quadraticDiagonal, quadraticDerivative] using
+  change HasFDerivAt (fun y : V => Q y y) (quadraticDerivative Q u) u
+  simpa [quadraticDerivative] using
     (Q.hasFDerivAt_of_bilinear
       (hasFDerivAt_id (𝕜 := ℝ) u)
       (hasFDerivAt_id (𝕜 := ℝ) u))
