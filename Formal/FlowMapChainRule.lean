@@ -17,8 +17,7 @@ theorem affine_path_hasDerivAt
     {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]
     (x d : X) (s : ℝ) :
     HasDerivAt (fun t : ℝ => x + t • d) d s := by
-  simpa using
-    (hasDerivAt_const s x).add ((hasDerivAt_id s).smul_const d)
+  exact ((hasDerivAt_id s).smul_const d).const_add x
 
 /--
 Flow-map bridge with the path derivative generated from a Fréchet derivative by the chain rule.
