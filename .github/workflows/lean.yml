@@ -8,6 +8,9 @@ on:
       - "lakefile.lean"
       - "lake-manifest.json"
       - "lean-toolchain"
+      - "AGENTS.md"
+      - "FORMAL_SCOPE.md"
+      - ".github/pull_request_template.md"
       - ".github/workflows/lean.yml"
   pull_request:
     branches: ["main"]
@@ -16,6 +19,9 @@ on:
       - "lakefile.lean"
       - "lake-manifest.json"
       - "lean-toolchain"
+      - "AGENTS.md"
+      - "FORMAL_SCOPE.md"
+      - ".github/pull_request_template.md"
       - ".github/workflows/lean.yml"
   workflow_dispatch:
 
@@ -24,6 +30,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Reject proof holes and local axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if grep -RInE --include='*.lean' '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)' Formal; then
+            echo 'ERROR: proof hole token detected under Formal/.' >&2
+            exit 1
+          fi
+
+          if grep -RInE --include='*.lean' '^[[:space:]]*(axiom|opaque)[[:space:]]' Formal; then
+            echo 'ERROR: local axiom/opaque declaration detected under Formal/.' >&2
+            exit 1
+          fi
 
       - name: Install Elan and pinned Lean toolchain
         shell: bash
@@ -40,5 +61,5 @@ jobs:
       - name: Fetch mathlib cache
         run: lake exe cache get
 
-      - name: Build formalization
+      - name: Build formalization and print axiom audit
         run: lake build
