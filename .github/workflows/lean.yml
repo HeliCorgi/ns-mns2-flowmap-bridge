@@ -1,0 +1,25 @@
+name: Lean 4 formalization
+
+on:
+  push:
+    branches: ["main", "lean4-formalization"]
+    paths:
+      - "Formal/**"
+      - "lakefile.lean"
+      - "lean-toolchain"
+      - ".github/workflows/lean.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Formal/**"
+      - "lakefile.lean"
+      - "lean-toolchain"
+      - ".github/workflows/lean.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
