@@ -2,6 +2,7 @@ import Formal.NavierStokesTimeBridge
 import Formal.MildSolutionSemantics
 import Formal.MildFlowMapBridge
 import Formal.MildZeroUniqueness
+import Formal.QuadraticMildNonlinearity
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -29,3 +30,6 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.stateMap_zero_of_mild_endpointUnique
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.stateMap_zero_of_mild_trajectoryUnique
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.radial_bridge_eq_mild_duhamel_of_endpointUnique
+#print axioms MNS2.hasFDerivAt_quadraticDiagonal
+#print axioms MNS2.fderiv_quadraticDiagonal
+#print axioms MNS2.MildEvolutionKernel.ofQuadratic_zero_evolvesAt_zero
