@@ -6,6 +6,7 @@ on:
     paths:
       - "Formal/**"
       - "lakefile.lean"
+      - "lake-manifest.json"
       - "lean-toolchain"
       - ".github/workflows/lean.yml"
   pull_request:
@@ -13,6 +14,7 @@ on:
     paths:
       - "Formal/**"
       - "lakefile.lean"
+      - "lake-manifest.json"
       - "lean-toolchain"
       - ".github/workflows/lean.yml"
   workflow_dispatch:
@@ -22,4 +24,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
+
+      # First use lean-action only to install the pinned Lean toolchain.
+      # auto-config must stay off until lake-manifest.json exists.
+      - name: Install Lean
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-github-cache: false
+
+      - name: Resolve Lake dependencies
+        run: lake update
+
+      - name: Fetch mathlib cache
+        run: lake exe cache get
+
+      - name: Build formalization
+        run: lake build
