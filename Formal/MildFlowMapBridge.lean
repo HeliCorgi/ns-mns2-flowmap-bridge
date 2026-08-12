@@ -49,13 +49,13 @@ theorem NavierStokesTimeBridgeAdapter.radial_path_has_mild_witness
     (A : NavierStokesTimeBridgeAdapter V V
       (fun t x y => K.EvolvesAt t x y))
     (t : ℝ) (ht : t ∈ A.certifiedTimes) (d : V)
-    (hpath : MapsTo (fun λ : ℝ => λ • d) (uIcc (0 : ℝ) 1) (A.admissible t))
-    {λ : ℝ} (hλ : λ ∈ uIcc (0 : ℝ) 1) :
+    (hpath : MapsTo (fun a : ℝ => a • d) (uIcc (0 : ℝ) 1) (A.admissible t))
+    {a : ℝ} (ha : a ∈ uIcc (0 : ℝ) 1) :
     ∃ u : ℝ → V,
-      K.IsMildSolutionOn t (λ • d) u ∧
-      u t = A.stateMap t (λ • d) := by
-  have hrel : K.EvolvesAt t (λ • d) (A.stateMap t (λ • d)) :=
-    A.realizesNS t ht (λ • d) (hpath hλ)
+      K.IsMildSolutionOn t (a • d) u ∧
+      u t = A.stateMap t (a • d) := by
+  have hrel : K.EvolvesAt t (a • d) (A.stateMap t (a • d)) :=
+    A.realizesNS t ht (a • d) (hpath ha)
   exact hrel
 
 /--
@@ -72,15 +72,15 @@ theorem NavierStokesTimeBridgeAdapter.radial_bridge_eq_mild_duhamel
     (A : NavierStokesTimeBridgeAdapter V V
       (fun t x y => K.EvolvesAt t x y))
     (t : ℝ) (ht : t ∈ A.certifiedTimes) (d : V)
-    (hpath : MapsTo (fun λ : ℝ => λ • d) (uIcc (0 : ℝ) 1) (A.admissible t))
+    (hpath : MapsTo (fun a : ℝ => a • d) (uIcc (0 : ℝ) 1) (A.admissible t))
     (hzero : A.stateMap t 0 = 0) :
     ∃ u : ℝ → V,
       K.IsMildSolutionOn t d u ∧
       IntervalIntegrable
         (fun s : ℝ => K.linearEvolution (t - s) (K.nonlinearity (u s)))
         volume 0 t ∧
-      (∫ λ in (0 : ℝ)..1,
-          (fderiv ℝ (A.stateMap t) (λ • d)) d) =
+      (∫ a in (0 : ℝ)..1,
+          (fderiv ℝ (A.stateMap t) (a • d)) d) =
         K.linearEvolution t d -
           ∫ s in (0 : ℝ)..t,
             K.linearEvolution (t - s) (K.nonlinearity (u s)) := by
@@ -92,8 +92,8 @@ theorem NavierStokesTimeBridgeAdapter.radial_bridge_eq_mild_duhamel
   rcases A.mild_endpoint_equation K t ht d hd with ⟨u, hu, hint, hend⟩
   refine ⟨u, hu, hint, ?_⟩
   calc
-    (∫ λ in (0 : ℝ)..1,
-        (fderiv ℝ (A.stateMap t) (λ • d)) d) =
+    (∫ a in (0 : ℝ)..1,
+        (fderiv ℝ (A.stateMap t) (a • d)) d) =
         A.stateMap t d :=
       A.radial_bridge_at_time_of_zero_fixed t ht d hpath hzero
     _ =
