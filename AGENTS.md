@@ -19,6 +19,26 @@ The strongest currently formalized analytic implication is local and conditional
 
 For the affine path `s ↦ x + s • d`, the tangent is the fixed, unnormalized direction `d`.
 
+## External exclusion / no-go registry
+
+Before proposing, implementing, or promoting a new Navier–Stokes singularity mechanism or numerical route, consult the read-only external registry:
+
+- repository/branch: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/tree/fable5-mainline`
+- binding verdicts: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/research_notes/verification_sprint_v1/VERDICTS.md`
+- numerical and whole-space audit gates: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/FABLE5_NEXT_TASK_AUDIT.md`
+- equation audit: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/equation_audit.md`
+- external working agreement: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/AGENTS.md`
+
+Treat this registry as negative-knowledge provenance, not as code owned by this repository.
+
+- Do not reopen a route marked `KILLED` or `REJECTED` unless a new argument states exactly which hypothesis or binding reason is escaped and why the old no-go does not apply.
+- Preserve every condition attached to a `CONDITIONAL` route; do not paraphrase it into an unconditional surviving mechanism.
+- Before promoting numerical evidence, apply any relevant Fable5 stability, CFL, resolution, domain/truncation, provenance, and independent-reproduction gates.
+- A formula marked `未確認`, `不整合`, or `誤り` in the external equation audit must not be used as an implementation premise here.
+- Do not mutate `ns-singularity-certificate-lab` as part of work in this repository unless the user explicitly asks for a change there. The default use is read-only cross-checking.
+
+The purpose of this cross-check is to prevent rediscovery or accidental promotion of exploration spaces that already have a recorded binding obstruction.
+
 ## Tangent-direction invariant
 
 Never replace the path derivative `d` by any of the following unless the path itself has actually been changed and the derivative is rederived:
