@@ -12,17 +12,11 @@ on:
       - "FORMAL_SCOPE.md"
       - ".github/pull_request_template.md"
       - ".github/workflows/lean.yml"
+  # Required branch-protection checks must be emitted for every PR to main.
+  # Do not add a paths filter here, otherwise documentation-only PRs can leave
+  # the required check permanently pending.
   pull_request:
     branches: ["main"]
-    paths:
-      - "Formal/**"
-      - "lakefile.lean"
-      - "lake-manifest.json"
-      - "lean-toolchain"
-      - "AGENTS.md"
-      - "FORMAL_SCOPE.md"
-      - ".github/pull_request_template.md"
-      - ".github/workflows/lean.yml"
   workflow_dispatch:
 
 jobs:
