@@ -1,4 +1,4 @@
-import Formal.PDEBridgeAdapter
+import Formal.NavierStokesTimeBridge
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -11,3 +11,6 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.FixedTimePDEBridgeAdapter.affine_bridge
 #print axioms MNS2.FixedTimePDEBridgeAdapter.radial_bridge
 #print axioms MNS2.FixedTimePDEBridgeAdapter.radial_bridge_of_zero_fixed
+#print axioms MNS2.NavierStokesTimeBridgeAdapter.affine_bridge_at_time
+#print axioms MNS2.NavierStokesTimeBridgeAdapter.radial_bridge_at_time
+#print axioms MNS2.NavierStokesTimeBridgeAdapter.radial_bridge_at_time_of_zero_fixed
