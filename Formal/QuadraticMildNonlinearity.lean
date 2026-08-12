@@ -3,6 +3,8 @@ import Formal.MildZeroUniqueness
 
 namespace MNS2
 
+noncomputable section
+
 section QuadraticMildNonlinearity
 
 variable {V : Type*}
@@ -103,5 +105,7 @@ theorem MildEvolutionKernel.ofQuadratic_zero_evolvesAt_zero
   exact (MildEvolutionKernel.ofQuadratic H Q).zero_evolvesAt_zero hT (by simp)
 
 end QuadraticMildNonlinearity
+
+end
 
 end MNS2
