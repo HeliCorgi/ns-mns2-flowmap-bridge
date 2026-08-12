@@ -1,0 +1,44 @@
+name: Lean 4 formalization
+
+on:
+  push:
+    branches: ["main", "lean4-formalization"]
+    paths:
+      - "Formal/**"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - ".github/workflows/lean.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Formal/**"
+      - "lakefile.lean"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - ".github/workflows/lean.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Elan and pinned Lean toolchain
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+          "$HOME/.elan/bin/lake" --version
+
+      - name: Resolve Lake dependencies
+        run: lake update
+
+      - name: Fetch mathlib cache
+        run: lake exe cache get
+
+      - name: Build formalization
+        run: lake build
