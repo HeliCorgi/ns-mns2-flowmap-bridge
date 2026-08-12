@@ -97,6 +97,26 @@ Key numerical facts already established in the broader project:
 
 Planned numerical continuation after the formal interface layer is a modal-coordinate bridge (v2.3), with explicit truncation/tail accounting and path-order diagnostics before any low-rank claim.
 
+## External exclusion / no-go registry — mandatory preflight
+
+Before opening a new singularity mechanism, ansatz family, shadowing route, numerical promotion argument, or whole-space interpretation, cross-check the read-only Fable5 registry:
+
+- root: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/tree/fable5-mainline`
+- recorded binding verdicts: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/research_notes/verification_sprint_v1/VERDICTS.md`
+- numerical/whole-space audit: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/FABLE5_NEXT_TASK_AUDIT.md`
+- equation audit: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/equation_audit.md`
+- external research rules: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/AGENTS.md`
+
+Operational rule:
+
+- `KILLED` / `REJECTED` means do not spend search budget there again unless the new route explicitly identifies the hypothesis that differs and explains why the recorded binding obstruction no longer applies.
+- `CONDITIONAL` means preserve the exact condition; do not silently promote it to a live unconditional mechanism.
+- For numerical work, inherit the relevant Fable5 stability/CFL, all-step gate, resolution, whole-space, provenance, domain/truncation, and independent-reproduction requirements before promotion.
+- Do not use formulas marked `未確認`, `不整合`, or `誤り` in the external equation audit as implementation premises.
+- Treat `ns-singularity-certificate-lab` as read-only provenance by default. Do not modify it unless the user explicitly requests changes in that repository.
+
+This external registry is specifically meant to stop future sessions from rediscovering exploration spaces that have already been killed or from forgetting the conditions on routes that only survived conditionally.
+
 ## Hard guardrails
 
 Never claim any of the following unless a new proof actually establishes it:
@@ -137,8 +157,8 @@ The workflow is configured to run Lean CI for every pull request to `main`, so f
 
 A short prompt should be enough:
 
-`@GitHub ns-mns2-flowmap-bridge の HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、最新PRとCIを確認して続きから。`
+`@GitHub ns-mns2-flowmap-bridge の HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
 
 If continuing the formal track, proceed from the mild-solution semantics layer described above.
 
-If switching back to the numerical track, resume from the planned modal-coordinate bridge v2.3 and preserve all guardrails above.
+If switching back to the numerical track, resume from the planned modal-coordinate bridge v2.3, preflight against the external Fable5 registry, and preserve all guardrails above.
