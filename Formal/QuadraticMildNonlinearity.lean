@@ -11,7 +11,7 @@ variable {V : Type*}
 variable [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V]
 
 /-- The quadratic diagonal associated with a continuous bilinear map. -/
-def ContinuousLinearMap.quadraticDiagonal
+def quadraticDiagonal
     (Q : V →L[ℝ] V →L[ℝ] V) (u : V) : V :=
   Q u u
 
@@ -23,51 +23,51 @@ The Fréchet derivative candidate for `u ↦ Q u u`:
 It is written with mathlib's `precompR` / `precompL` continuous-linear-map
 constructors so continuity of the derivative action is part of the object.
 -/
-def ContinuousLinearMap.quadraticDerivative
+def quadraticDerivative
     (Q : V →L[ℝ] V →L[ℝ] V) (u : V) : V →L[ℝ] V :=
   Q.precompR V u (ContinuousLinearMap.id ℝ V) +
     Q.precompL V (ContinuousLinearMap.id ℝ V) u
 
 @[simp]
-theorem ContinuousLinearMap.quadraticDiagonal_zero
+theorem quadraticDiagonal_zero
     (Q : V →L[ℝ] V →L[ℝ] V) :
-    Q.quadraticDiagonal 0 = 0 := by
-  simp [ContinuousLinearMap.quadraticDiagonal]
+    quadraticDiagonal Q 0 = 0 := by
+  simp [quadraticDiagonal]
 
 @[simp]
-theorem ContinuousLinearMap.quadraticDerivative_apply
+theorem quadraticDerivative_apply
     (Q : V →L[ℝ] V →L[ℝ] V) (u v : V) :
-    Q.quadraticDerivative u v = Q u v + Q v u := by
-  simp [ContinuousLinearMap.quadraticDerivative]
+    quadraticDerivative Q u v = Q u v + Q v u := by
+  simp [quadraticDerivative]
 
 @[simp]
-theorem ContinuousLinearMap.quadraticDerivative_zero
+theorem quadraticDerivative_zero
     (Q : V →L[ℝ] V →L[ℝ] V) :
-    Q.quadraticDerivative 0 = 0 := by
+    quadraticDerivative Q 0 = 0 := by
   ext v
   simp
 
 /-- Exact Fréchet derivative of the diagonal quadratic map. -/
-theorem ContinuousLinearMap.hasFDerivAt_quadraticDiagonal
+theorem hasFDerivAt_quadraticDiagonal
     (Q : V →L[ℝ] V →L[ℝ] V) (u : V) :
-    HasFDerivAt Q.quadraticDiagonal (Q.quadraticDerivative u) u := by
-  simpa [ContinuousLinearMap.quadraticDiagonal, ContinuousLinearMap.quadraticDerivative] using
+    HasFDerivAt (quadraticDiagonal Q) (quadraticDerivative Q u) u := by
+  simpa [quadraticDiagonal, quadraticDerivative] using
     (Q.hasFDerivAt_of_bilinear
       (hasFDerivAt_id (𝕜 := ℝ) u)
       (hasFDerivAt_id (𝕜 := ℝ) u))
 
 /-- Canonical `fderiv` formula for the quadratic nonlinearity. -/
-theorem ContinuousLinearMap.fderiv_quadraticDiagonal
+theorem fderiv_quadraticDiagonal
     (Q : V →L[ℝ] V →L[ℝ] V) (u : V) :
-    fderiv ℝ Q.quadraticDiagonal u = Q.quadraticDerivative u := by
-  exact (Q.hasFDerivAt_quadraticDiagonal u).fderiv
+    fderiv ℝ (quadraticDiagonal Q) u = quadraticDerivative Q u := by
+  exact (hasFDerivAt_quadraticDiagonal Q u).fderiv
 
 /-- The quadratic diagonal is differentiable everywhere. -/
-theorem ContinuousLinearMap.differentiable_quadraticDiagonal
+theorem differentiable_quadraticDiagonal
     (Q : V →L[ℝ] V →L[ℝ] V) :
-    Differentiable ℝ Q.quadraticDiagonal := by
+    Differentiable ℝ (quadraticDiagonal Q) := by
   intro u
-  exact (Q.hasFDerivAt_quadraticDiagonal u).differentiableAt
+  exact (hasFDerivAt_quadraticDiagonal Q u).differentiableAt
 
 /--
 Build a mild-evolution kernel whose nonlinearity has the bilinear quadratic
@@ -80,7 +80,7 @@ def MildEvolutionKernel.ofQuadratic
     (H : ℝ → V →L[ℝ] V) (Q : V →L[ℝ] V →L[ℝ] V) :
     MildEvolutionKernel V where
   linearEvolution := H
-  nonlinearity := Q.quadraticDiagonal
+  nonlinearity := quadraticDiagonal Q
 
 @[simp]
 theorem MildEvolutionKernel.ofQuadratic_nonlinearity
