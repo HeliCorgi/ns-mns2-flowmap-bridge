@@ -24,6 +24,8 @@ The path tangent is the fixed, unnormalized vector `d`.
 
 `Formal/NavierStokesTimeBridge.lean` adds a time-indexed interface parameterized by an externally supplied relation `NSEvolvesAt : ℝ → X → Y → Prop`. It records only certified nonnegative times and extracts the already-proved fixed-time adapter at each such time.
 
+`Formal/MildSolutionSemantics.lean` now fixes an actual Banach-valued Duhamel equation shape and defines an existential endpoint evolution relation from it. This is the first layer in the repository where the time integral occurring in a mild formulation is represented directly by mathlib's interval integral rather than by an opaque placeholder relation.
+
 ## Theorem dependency ladder
 
 ### `Formal/Bridge.lean`
@@ -68,11 +70,26 @@ Defines `NavierStokesTimeBridgeAdapter`, parameterized by `NSEvolvesAt : ℝ →
 
 For every certified time it constructs a `FixedTimePDEBridgeAdapter`, proves pathwise semantic realization, and derives the affine, radial, and zero-fixed radial bridge identities at that time.
 
-This is still an interface theorem. The file does not define the Navier–Stokes PDE, a mild solution predicate, or a function space in which the PDE is solved.
+### `Formal/MildSolutionSemantics.lean`
+
+Defines a Banach-space `MildEvolutionKernel` with
+
+- a time-indexed continuous linear evolution operator `H(t)`;
+- a nonlinear state operator `B`.
+
+For a trajectory `u : ℝ → V`, initial datum `u₀`, and horizon `T ≥ 0`, the predicate `IsMildSolutionOn` requires continuity on `[0,T]`, the initial condition `u(0)=u₀`, explicit interval integrability of the Duhamel integrand, and the equation
+
+`u(t) = H(t)u₀ - ∫₀ᵗ H(t-s) B(u(s)) ds`
+
+for every `t ∈ [0,T]`.
+
+`EvolvesAt t u₀ y` is existential in the trajectory, so it does not silently assume positive-time uniqueness. The file proves nonnegativity of admitted endpoint times, recovery of the initial value, recovery of the Duhamel equation at certified times, the time-zero endpoint identity, and an endpoint-witness theorem exposing the actual Duhamel formula.
+
+For a future Navier–Stokes specialization, `H(t)` is intended to be the Stokes/heat evolution `exp(ν t Δ)` on a chosen divergence-free space and `B(u)` the projected quadratic term `P div (u ⊗ u)`. Those identifications are not yet formalized by this file.
 
 ## What is not formalized
 
-The Lean files do **not** currently construct a Navier–Stokes solution map or define a full Navier–Stokes evolution predicate. They do not prove that, for arbitrary 3D initial data and arbitrary positive time, any time belongs to the certified set of a `NavierStokesTimeBridgeAdapter`.
+The Lean files do **not** currently construct a concrete three-dimensional Navier–Stokes function space, Stokes semigroup, Leray projection, or projected quadratic convection operator. They also do not prove existence or uniqueness of trajectories satisfying the new mild predicate for arbitrary data.
 
 In particular, the repository has not formalized or proved:
 
@@ -85,15 +102,17 @@ In particular, the repository has not formalized or proved:
 
 ## Remaining Navier–Stokes obligations
 
-To give `NSEvolvesAt` genuine Navier–Stokes meaning and populate certified time slices, a future NS-specific layer must still supply:
+To turn the abstract mild predicate into genuine three-dimensional incompressible Navier–Stokes semantics and populate certified bridge time slices, a future NS-specific layer must still supply:
 
-1. a concrete initial-data function space `X` and evolved-state Banach space `Y`;
-2. an actual Navier–Stokes evolution predicate, preferably via a strong or mild solution trajectory;
-3. a time-indexed solution map whose values realize that predicate;
-4. an open admissible-data domain at the time under consideration;
-5. `C¹` dependence of the fixed-time state map on that domain;
-6. proof that the selected initial-data path remains inside the domain;
-7. when endpoint reconstruction rather than endpoint difference is used, proof that zero data evolve to the zero state.
+1. a concrete divergence-free Banach function space `V` suitable for the intended local solution theory;
+2. a viscosity `ν > 0`;
+3. a concrete Stokes/heat evolution operator representing `exp(ν t Δ)` on `V`;
+4. a concrete realization of the Leray-projected nonlinear term `P div (u ⊗ u)` in the chosen spaces;
+5. proofs that these concrete objects instantiate the `MildEvolutionKernel` with the intended PDE meaning;
+6. existence, and where a single-valued state map is required, uniqueness of a mild solution on the selected time interval;
+7. an open admissible-data domain and `C¹` dependence of the fixed-time solution map on that domain;
+8. proof that the selected initial-data path remains inside the domain;
+9. when endpoint reconstruction rather than endpoint difference is used, proof that zero data evolve to the zero state.
 
 Only after these obligations are discharged may a certified time slice be interpreted as a genuine continuum Navier–Stokes flow-map bridge.
 
@@ -103,4 +122,4 @@ Finite-dimensional and discrete path-integral identities are useful validation a
 
 ## Audit policy
 
-CI rejects proof holes and local proof-bypassing declarations under `Formal/`. `Formal/AxiomAudit.lean` prints the axiom dependencies of the strongest bridge theorems into the Lean build log for inspection.
+CI rejects proof holes and local proof-bypassing declarations under `Formal/`. `Formal/AxiomAudit.lean` prints the axiom dependencies of the strongest bridge and mild-semantic theorems into the Lean build log for inspection.
