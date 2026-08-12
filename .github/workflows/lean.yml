@@ -44,7 +44,24 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
-          curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y
+
+          # elan-init downloads the Elan release tarball from GitHub Releases.
+          # Treat transient 5xx/network failures as infrastructure noise rather
+          # than immediately failing the formalization build.
+          for attempt in 1 2 3 4 5; do
+            if curl --retry 3 --retry-all-errors --retry-delay 2 \
+                https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y; then
+              break
+            fi
+
+            if [ "$attempt" -eq 5 ]; then
+              echo "ERROR: Elan installation failed after ${attempt} attempts." >&2
+              exit 1
+            fi
+
+            sleep $((attempt * 5))
+          done
+
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           "$HOME/.elan/bin/lean" --version
           "$HOME/.elan/bin/lake" --version
