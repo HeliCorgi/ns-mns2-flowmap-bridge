@@ -2,6 +2,14 @@
 
 This repository contains numerical experiments and Lean 4 formalization for the MNS-2 flow-map bridge program.
 
+## Governing project goal
+
+`PROJECT_GOAL.md` is the top-level goal and acceptance specification for this repository. Read it before choosing a research direction or promoting a result.
+
+The ultimate target is a rigorous resolution of one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D. The current primary attack is the breakdown side (C/D), with an unforced construction `f = 0` preferred when the mathematics supports it.
+
+All local theorem scopes, numerical milestones, handoff notes, and candidate mechanisms are subordinate to that target. A result in a different domain, reduced model, finite cylinder, discrete map, or conditional functional-analytic setting is an intermediate result unless a rigorous chain connects it to the exact official Clay hypotheses.
+
 ## Non-negotiable claim boundary
 
 Do **not** claim that this repository proves any of the following:
@@ -111,6 +119,7 @@ Synthetic or analytic seeds are not Hou late-state evidence. Do not label them a
 
 Every mathematical PR should state:
 
+- which Clay statement, if any, the work is intended to support, or that it is infrastructure only;
 - the mathematical claim;
 - the exact new assumptions;
 - the Lean theorem(s) or numerical artifact(s) implementing it;
@@ -118,4 +127,4 @@ Every mathematical PR should state:
 - whether it changes any numerical/runtime behavior;
 - CI status.
 
-Use `FORMAL_SCOPE.md` as the current theorem/claim boundary.
+Use `PROJECT_GOAL.md` as the project-level acceptance boundary and `FORMAL_SCOPE.md` as the current Lean theorem/claim boundary.
