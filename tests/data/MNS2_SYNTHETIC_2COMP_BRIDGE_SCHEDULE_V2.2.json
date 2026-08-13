@@ -1,10 +1,12 @@
 {
-  "seed_sha256": "a1663158f6cb39f93be446c101d329255416f4a7e68398eba367ed38fcea8912",
+  "seed_content_sha256": "cbadfc7bdcbfe65f079096cb8cdbfb6a8e5e0c44a8563317f43adbb0ac853443",
+  "seed_generator": "tests/data/generate_mns2_synthetic_seed_v2_2.py",
+  "legacy_archived_seed_sha256": "a1663158f6cb39f93be446c101d329255416f4a7e68398eba367ed38fcea8912",
   "frozen_schedule": {
     "alpha_r": 100.0,
     "alpha_z": 100.0,
     "eps_g": 1e-06,
     "eps_o": 1e-06
   },
-  "provenance": "shared conservative synthetic schedule for all initial-data paths"
+  "provenance": "shared conservative synthetic schedule; generated analytic seed is verified by canonical numerical-content SHA-256 rather than NPZ container bytes"
 }
