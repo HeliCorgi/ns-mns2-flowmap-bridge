@@ -48,8 +48,15 @@ theorem quadraticDuhamelIntegrand_hasFDerivAt
       (quadraticDuhamelDerivativeIntegrand H Q t U x₀ J s)
       x₀ := by
   unfold quadraticDuhamelIntegrand quadraticDuhamelDerivativeIntegrand
-  exact (H (t - s)).hasFDerivAt.comp x₀
-    ((hasFDerivAt_quadraticDiagonal Q (U x₀ s)).comp x₀ hU)
+  have hquad :
+      HasFDerivAt
+        (fun x : V => quadraticDiagonal Q (U x s))
+        ((quadraticDerivative Q (U x₀ s)).comp (J s))
+        x₀ := by
+    simpa only [Function.comp_apply] using
+      ((hasFDerivAt_quadraticDiagonal Q (U x₀ s)).comp x₀ hU)
+  simpa only [Function.comp_apply] using
+    ((H (t - s)).hasFDerivAt.comp x₀ hquad)
 
 /--
 Differentiate the quadratic Duhamel interval integral with respect to initial data.
