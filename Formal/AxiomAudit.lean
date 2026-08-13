@@ -4,6 +4,7 @@ import Formal.MildFlowMapBridge
 import Formal.MildZeroUniqueness
 import Formal.QuadraticMildNonlinearity
 import Formal.ReducedBridgeResidual
+import Formal.FiniteRankReducedBridge
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -37,3 +38,6 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
+#print axioms MNS2.intervalIntegral_finiteRankPath
+#print axioms MNS2.radial_finiteRank_bridge_error_bound
+#print axioms MNS2.radial_finiteRank_endpoint_error_bound_of_zero_fixed
