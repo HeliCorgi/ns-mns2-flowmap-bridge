@@ -74,9 +74,14 @@ bounded continuous linear operator on a complete function space.
 -/
 def r3StokesL2FrequencyMultiplier
     {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t) :
-    R3L2Velocity →L[ℂ] R3L2Velocity :=
-  (complexScalarActionR3C.holderL (volume : Measure R3) ⊤ 2 2)
-    (r3StokesScalarLpTop hν ht)
+    R3L2Velocity →L[ℂ] R3L2Velocity := by
+  let H :
+      Lp ℂ (⊤ : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
+        Lp R3C (2 : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
+          Lp R3C (2 : ℝ≥0∞) (volume : Measure R3) :=
+    complexScalarActionR3C.holderL
+      (volume : Measure R3) (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞)
+  exact H (r3StokesScalarLpTop hν ht)
 
 /-- Exact almost-everywhere pointwise realization of the bundled Fourier-side Stokes multiplier. -/
 theorem r3StokesL2FrequencyMultiplier_ae
@@ -120,7 +125,6 @@ theorem r3StokesL2FrequencyMultiplier_zero_time
     r3StokesL2FrequencyMultiplier hν (le_refl 0) =
       ContinuousLinearMap.id ℂ R3L2Velocity := by
   ext f
-  apply Lp.ext
   filter_upwards [r3StokesL2FrequencyMultiplier_ae hν (le_refl 0) f] with ξ hξ
   simpa [r3StokesScalarComplex, r3StokesScalar] using hξ
 
