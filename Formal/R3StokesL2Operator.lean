@@ -116,8 +116,7 @@ theorem r3StokesL2FrequencyMultiplier_ae
     [Lp.coeFn_lpSMul (r := (2 : ℝ≥0∞)) (r3StokesScalarLpTop hν ht) f,
       r3StokesScalarLpTop_ae hν ht]
     with ξ hmul hscalar
-  rw [hmul]
-  simp only [Pi.smul_apply, hscalar]
+  rw [hmul, Pi.smul_apply', hscalar]
 
 /--
 The physical-space `L²(R³; ℂ³)` Stokes operator, defined by Fourier conjugation of the bounded
