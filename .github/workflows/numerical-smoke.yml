@@ -6,9 +6,11 @@ on:
     paths:
       - "src/core/**"
       - "src/bridge/**"
+      - "src/lattice/**"
       - "tests/data/**"
       - "tests/test_v211_repro.py"
       - "tests/test_v212_predictive_repro.py"
+      - "tests/test_v213_lattice_repro.py"
       - "requirements.txt"
       - ".github/workflows/numerical-smoke.yml"
   pull_request:
@@ -16,9 +18,11 @@ on:
     paths:
       - "src/core/**"
       - "src/bridge/**"
+      - "src/lattice/**"
       - "tests/data/**"
       - "tests/test_v211_repro.py"
       - "tests/test_v212_predictive_repro.py"
+      - "tests/test_v213_lattice_repro.py"
       - "requirements.txt"
       - ".github/workflows/numerical-smoke.yml"
   workflow_dispatch:
@@ -45,9 +49,11 @@ jobs:
             src/core/mns2_full_holomorphic_adjoint_v1.2.py \
             src/bridge/mns2_path_correction_pod_bridge_v2.11.py \
             src/bridge/mns2_predictive_path_pod_bridge_v2.12.py \
+            src/lattice/mns2_predictive_convergence_lattice_v2.13.py \
             tests/data/generate_mns2_synthetic_seed_v2_2.py \
             tests/test_v211_repro.py \
-            tests/test_v212_predictive_repro.py
+            tests/test_v212_predictive_repro.py \
+            tests/test_v213_lattice_repro.py
 
       - name: Audit historical runtime stack
         run: python src/bridge/mns2_path_correction_pod_bridge_v2.11.py --audit-stack
@@ -57,3 +63,6 @@ jobs:
 
       - name: Reproduce v2.12 predictive bridge gates
         run: python tests/test_v212_predictive_repro.py
+
+      - name: Reproduce v2.13 grid-dt-time lattice gates
+        run: python tests/test_v213_lattice_repro.py
