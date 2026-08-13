@@ -102,10 +102,14 @@ theorem r3LeraySymbol_apply
     (ξ v : R3) :
     r3LeraySymbol ξ v =
       v - (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ := by
+  have hsingle :
+      (ℝ ∙ ξ : Submodule ℝ R3).starProjection v =
+        (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ := by
+    simpa using
+      (Submodule.starProjection_singleton (𝕜 := ℝ) (v := ξ) v)
   change (ℝ ∙ ξ : Submodule ℝ R3)ᗮ.starProjection v =
     v - (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ
-  rw [Submodule.starProjection_orthogonal_val,
-    Submodule.starProjection_singleton]
+  rw [Submodule.starProjection_orthogonal_val, hsingle]
 
 end
 
