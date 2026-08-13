@@ -111,6 +111,19 @@ When touching the numerical stack, preserve the project conventions unless a cha
 - clustered singular subspaces rather than individual singular-vector identities through degeneracy;
 - no per-path or per-amplitude schedule retuning when comparing path integrals.
 
+## Hou production wall-vorticity gate
+
+The current v1.1 full holomorphic pilot is **not** a Hou-production no-slip wall-vorticity discretization. Before any longer-time result is promoted as a Hou production reproduction, Hou late-state validation, or resolved Hou singular regime, the numerical stack must implement and audit the transformed wall conditions described in Hou 2022, Section 2, equations (2.3)--(2.5), including
+
+- `psi1=0` and `psi1_r=0` at `r=1`;
+- `u1=0` at `r=1`;
+- vorticity creation via `omega1=-psi1_rr` at `r=1`;
+- matching JVP and adjoint contributions for the wall closure.
+
+Do not invent an undocumented stencil and label it Hou's production stencil. See `docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md` for the current blocker and required verification gates.
+
+Short synthetic finite-discrete flow-map/JVP regressions may continue under the existing pilot only under their explicitly limited scope.
+
 ## Provenance guardrail
 
 Synthetic or analytic seeds are not Hou late-state evidence. Do not label them as such. A genuine late-state comparison requires explicit provenance for the numerical state and schedule.
