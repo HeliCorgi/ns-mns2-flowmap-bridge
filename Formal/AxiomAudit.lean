@@ -5,6 +5,7 @@ import Formal.MildZeroUniqueness
 import Formal.QuadraticMildNonlinearity
 import Formal.QuadraticLinearizedMild
 import Formal.QuadraticMildTangentAdapter
+import Formal.QuadraticMildFixedPointDerivative
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -44,6 +45,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.QuadraticMildC1TangentAdapter.fderiv_realizes_linearized_mild
 #print axioms MNS2.QuadraticMildC1TangentAdapter.radial_bridge_with_linearized_mild_semantics
 #print axioms MNS2.QuadraticMildC1TangentAdapter.radial_endpoint_bridge_with_linearized_mild_semantics
+#print axioms MNS2.quadraticMild_fixedPoint_fderiv_eq_of_dominated
+#print axioms MNS2.quadraticMild_fixedPoint_fderiv_apply_eq_of_dominated
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
