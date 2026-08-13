@@ -22,7 +22,7 @@ theorem r3NormalizedDivergencePointwise_eq_zero_iff
   unfold r3NormalizedDivergencePointwise r3NormalizedFrequencyCoordinate
     r3RawDivergencePointwise
   simp only [Complex.ofReal_div]
-  field_simp [hsC]
+  field_simp [hsC] <;> simp
 
 end
 
