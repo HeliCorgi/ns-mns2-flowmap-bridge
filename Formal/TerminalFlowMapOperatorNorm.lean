@@ -49,7 +49,12 @@ theorem FlowMapUniformRestartPackage.terminal_fderiv_opNorm_unbounded_of_nonexte
   let L : V →L[ℝ] V := fderiv ℝ (A.stateMap t) (a • d)
   have happly : ‖L d‖ ≤ ‖L‖ * ‖d‖ := L.le_opNorm d
   have hprod : N * ‖d‖ < ‖L‖ * ‖d‖ := hamp.trans_le happly
-  have hop : N < ‖L‖ := (mul_lt_mul_right hdNorm).mp hprod
+  have hop : N < ‖L‖ := by
+    by_contra hnot
+    have hle : ‖L‖ ≤ N := le_of_not_gt hnot
+    have hmul : ‖L‖ * ‖d‖ ≤ N * ‖d‖ :=
+      mul_le_mul_of_nonneg_right hle (norm_nonneg d)
+    exact (not_lt_of_ge hmul) hprod
   exact ⟨t, ht₀t, htT, a, ha, by simpa [L] using hop⟩
 
 /--
