@@ -23,12 +23,24 @@ assert d["axes"]["dt"]["exact_representability_checked"] is True
 
 for axis in ["grid", "dt", "physical_time"]:
     assert len(d["axes"][axis]["records"]) == 3
+    print(f"[{axis}]", flush=True)
     for rec in d["axes"][axis]["records"]:
         assert rec["certification_nodes_are_held_out_from_training"] is True
         assert rec["same_frozen_schedule_all_amplitudes"] is True
         assert rec["predictive_endpoint_rel_error_vs_direct"] < 2e-6
         assert rec["predictive_residual_to_true_correction_integral_ratio"] < 0.15
         assert rec["numerical_triangle_ratio"] <= 1.05
+        print(
+            "  "
+            f"grid={rec['grid']} dt={rec['dt']:.3e} steps={rec['steps']} "
+            f"T={rec['physical_time']:.3e} "
+            f"pred={rec['predictive_endpoint_rel_error_vs_direct']:.6e} "
+            f"true={rec['true_bridge_rel_error_vs_direct']:.6e} "
+            f"res/direct={rec['quadrature_residual_integral_rel_direct']:.6e} "
+            f"res/correction={rec['predictive_residual_to_true_correction_integral_ratio']:.6e} "
+            f"direct_norm={rec['direct_endpoint_delta_metric_norm']:.12e}",
+            flush=True,
+        )
 
 for value in d["promotion_guardrails"].values():
     assert value is True
