@@ -4,6 +4,8 @@ This file is the top-level goal and acceptance specification for this repository
 
 All research direction, numerical experiments, Lean formalization, handoff notes, and claim language in this repository are subordinate to this document.
 
+`SPEC.md` is the subordinate normative research/implementation specification for the current primary `R^3`, unforced, axisymmetric-with-swirl breakdown track. Read `SPEC.md` after this file before changing the physical equations, sign conventions, axis regularity, reconstruction rules, candidate-data invariants, or numerical-to-proof promotion language. `SPEC.md` does not replace the official Clay acceptance criterion and must be revised if it conflicts with this file or the official problem statement.
+
 ## Ultimate target
 
 The ultimate target is a rigorous resolution of the Clay Mathematics Institute Millennium Prize problem for the three-dimensional incompressible Navier--Stokes equations, in the sense of the official Fefferman problem statement.
@@ -33,7 +35,9 @@ Within the breakdown side, prefer the stronger target
 
 whenever the route can support it. An unforced finite-time breakdown result that otherwise satisfies the relevant Clay hypotheses is preferred over a forced construction. This preference does not weaken or alter the official acceptance criterion: every final claim must still be checked directly against the exact Clay statement.
 
-The project may change attack direction if a rigorous A/B route becomes stronger than the breakdown route, but such a change should be recorded explicitly in this file and in `HANDOFF.md`.
+The current concrete research specification in `SPEC.md` narrows the main working track further to an `R^3`, `f = 0`, axisymmetric-with-swirl candidate program. That narrower choice is a research strategy, not a redefinition of Clay C/D.
+
+The project may change attack direction if a rigorous A/B route becomes stronger than the breakdown route, but such a change should be recorded explicitly in this file, `SPEC.md`, and `HANDOFF.md`.
 
 ## What counts as progress but not completion
 
@@ -63,6 +67,8 @@ In particular:
 - a finite cylindrical Hou computation is not automatically an `R^3` or periodic-box Clay construction;
 - periodic-image effects, radial-wall effects, truncation, and whole-space limits must remain separate until a rigorous transfer is proved;
 - a discrete numerical map must not be identified with a continuum solution map without an explicit convergence theorem strong enough for the promoted claim.
+
+For the current `R^3` breakdown track, `SPEC.md` fixes the working coordinate/sign conventions, normalized axisymmetric system, physical measure, axis regularity, 3D Cartesian reconstruction, and candidate-data audit invariants.
 
 ## Breakdown-side final gate
 
