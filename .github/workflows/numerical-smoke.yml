@@ -42,6 +42,7 @@ jobs:
             src/core/mns2_full_holomorphic_pilot_v1.1.py \
             src/core/mns2_full_holomorphic_adjoint_v1.2.py \
             src/bridge/mns2_path_correction_pod_bridge_v2.11.py \
+            tests/data/generate_mns2_synthetic_seed_v2_2.py \
             tests/test_v211_repro.py
 
       - name: Audit historical runtime stack
