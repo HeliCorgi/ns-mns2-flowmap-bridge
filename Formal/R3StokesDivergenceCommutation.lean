@@ -20,7 +20,7 @@ theorem r3NormalizedDivergenceFrequencyAux_stokes
      r3StokesScalarLpTop_ae hν ht]
     with ξ h1 h2 h3 h4 h5
   rw [h1, h3, h2, h4, h5]
-  simp only [r3NormalizedDivergencePointwise, Pi.smul_apply, smul_eq_mul]
+  simp only [r3NormalizedDivergencePointwise, Pi.smul_apply', smul_eq_mul]
   ring
 
 end
