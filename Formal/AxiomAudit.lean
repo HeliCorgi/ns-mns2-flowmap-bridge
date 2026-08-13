@@ -1,6 +1,7 @@
 import Formal.NavierStokesTimeBridge
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
+import Formal.TerminalFlowMapAmplification
 import Formal.MildSolutionSemantics
 import Formal.MildFlowMapBridge
 import Formal.MildZeroUniqueness
@@ -36,6 +37,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.FlowMapContinuationPackage.directional_fderiv_unbounded_of_nonextendible
 #print axioms MNS2.FlowMapUniformRestartPackage.continuation_of_uniform_endpoint_bound
 #print axioms MNS2.FlowMapUniformRestartPackage.directional_fderiv_unbounded_of_nonextendible
+#print axioms MNS2.FlowMapUniformRestartPackage.terminal_directional_fderiv_unbounded_of_nonextendible
+#print axioms MNS2.FlowMapUniformRestartPackage.eventually_arbitrarily_large_directional_fderiv
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_nonnegative
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_zero_eq_initial
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_endpoint_equation
