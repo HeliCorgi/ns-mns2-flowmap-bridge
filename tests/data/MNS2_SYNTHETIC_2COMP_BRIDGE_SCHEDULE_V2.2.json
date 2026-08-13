@@ -1,10 +1,24 @@
 {
-  "seed_sha256": "a1663158f6cb39f93be446c101d329255416f4a7e68398eba367ed38fcea8912",
+  "seed_generator": "tests/data/generate_mns2_synthetic_seed_v2_2.py",
+  "legacy_archived_seed_sha256": "a1663158f6cb39f93be446c101d329255416f4a7e68398eba367ed38fcea8912",
+  "seed_contract": {
+    "nr": 32,
+    "nz": 64,
+    "r_min": 0.015625,
+    "r_max": 0.984375,
+    "z_min": 0.0078125,
+    "z_max": 0.9921875,
+    "Gamma_linf": 0.6488057619110187,
+    "omega1_linf": 0.09566715496739389,
+    "Gamma_0_0": 0.0014205310214978671,
+    "omega1_0_0": 0.09566715496739389,
+    "absolute_tolerance": 1e-13
+  },
   "frozen_schedule": {
     "alpha_r": 100.0,
     "alpha_z": 100.0,
     "eps_g": 1e-06,
     "eps_o": 1e-06
   },
-  "provenance": "shared conservative synthetic schedule for all initial-data paths"
+  "provenance": "shared conservative synthetic schedule; seed is regenerated from source-controlled analytic formulas and checked by cross-version numerical contracts plus end-to-end v2.11 regression gates"
 }

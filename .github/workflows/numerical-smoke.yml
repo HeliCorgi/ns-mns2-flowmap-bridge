@@ -1,0 +1,52 @@
+name: MNS-2 numerical reproducibility
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "src/core/**"
+      - "src/bridge/**"
+      - "tests/data/**"
+      - "tests/test_v211_repro.py"
+      - "requirements.txt"
+      - ".github/workflows/numerical-smoke.yml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "src/core/**"
+      - "src/bridge/**"
+      - "tests/data/**"
+      - "tests/test_v211_repro.py"
+      - "requirements.txt"
+      - ".github/workflows/numerical-smoke.yml"
+  workflow_dispatch:
+
+jobs:
+  v211-repro-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile numerical stack
+        run: |
+          python -m py_compile \
+            src/core/mns2_conservative_lf_weno7_holomorphic_v1.0.py \
+            src/core/mns2_conservative_lf_weno7_holomorphic_v1.1.py \
+            src/core/mns2_full_holomorphic_pilot_v1.1.py \
+            src/core/mns2_full_holomorphic_adjoint_v1.2.py \
+            src/bridge/mns2_path_correction_pod_bridge_v2.11.py \
+            tests/data/generate_mns2_synthetic_seed_v2_2.py \
+            tests/test_v211_repro.py
+
+      - name: Audit historical runtime stack
+        run: python src/bridge/mns2_path_correction_pod_bridge_v2.11.py --audit-stack
+
+      - name: Reproduce v2.11 reduced bridge gates
+        run: python tests/test_v211_repro.py
