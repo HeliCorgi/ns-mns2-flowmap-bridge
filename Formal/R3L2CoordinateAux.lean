@@ -1,4 +1,5 @@
 import Formal.R3L2ScalarAux
+import Formal.R3NormalizedFrequencyLpTop
 
 namespace MNS2
 
