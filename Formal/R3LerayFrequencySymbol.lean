@@ -88,8 +88,8 @@ theorem r3LeraySymbol_self
   have hproj : (ℝ ∙ ξ : Submodule ℝ R3).starProjection ξ = ξ :=
     (Submodule.starProjection_eq_self_iff
       (K := (ℝ ∙ ξ : Submodule ℝ R3)) (v := ξ)).2 hspan
-  rw [r3LeraySymbol,
-    Submodule.starProjection_orthogonal_val, hproj, sub_self]
+  change (ℝ ∙ ξ : Submodule ℝ R3)ᗮ.starProjection ξ = 0
+  rw [Submodule.starProjection_orthogonal_val, hproj, sub_self]
 
 /--
 Explicit physical formula for the three-dimensional Leray symbol:
@@ -102,8 +102,9 @@ theorem r3LeraySymbol_apply
     (ξ v : R3) :
     r3LeraySymbol ξ v =
       v - (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ := by
-  rw [r3LeraySymbol,
-    Submodule.starProjection_orthogonal_val,
+  change (ℝ ∙ ξ : Submodule ℝ R3)ᗮ.starProjection v =
+    v - (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ
+  rw [Submodule.starProjection_orthogonal_val,
     Submodule.starProjection_singleton]
 
 end
