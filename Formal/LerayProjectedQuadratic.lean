@@ -61,7 +61,7 @@ theorem LerayProjectedQuadraticContract.quadraticDerivative_mem
     (C : LerayProjectedQuadraticContract V) (u v : V) :
     quadraticDerivative C.projectedConvection u v ∈ C.solenoidal := by
   rw [quadraticDerivative_apply]
-  exact C.solenoidal.add
+  exact C.solenoidal.add_mem
     (C.projectedConvection_mem u v)
     (C.projectedConvection_mem v u)
 
@@ -94,7 +94,7 @@ theorem LerayProjectedQuadraticContract.fderiv_mildKernel_nonlinearity_mem
     (C : LerayProjectedQuadraticContract V)
     (H : ℝ → V →L[ℝ] V) (u v : V) :
     (fderiv ℝ (C.mildKernel H).nonlinearity u) v ∈ C.solenoidal := by
-  rw [show (C.mildKernel H).nonlinearity = quadraticDiagonal C.projectedConvection by rfl]
+  change (fderiv ℝ (quadraticDiagonal C.projectedConvection) u) v ∈ C.solenoidal
   rw [fderiv_quadraticDiagonal]
   exact C.quadraticDerivative_mem u v
 
