@@ -6,6 +6,8 @@ This repository contains numerical experiments and Lean 4 formalization for the 
 
 `PROJECT_GOAL.md` is the top-level goal and acceptance specification for this repository. Read it before choosing a research direction or promoting a result.
 
+`SPEC.md` is the subordinate normative research/implementation specification for the current primary `R^3`, unforced, axisymmetric-with-swirl breakdown track. After `PROJECT_GOAL.md`, read `SPEC.md` before changing physical equations, sign conventions, axis regularity, 3D reconstruction, candidate-data invariants, numerical domains, or promotion language. If `SPEC.md` conflicts with `PROJECT_GOAL.md` or the official Clay statement, the higher-level target controls.
+
 The ultimate target is a rigorous resolution of one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D. The current primary attack is the breakdown side (C/D), with an unforced construction `f = 0` preferred when the mathematics supports it.
 
 All local theorem scopes, numerical milestones, handoff notes, and candidate mechanisms are subordinate to that target. A result in a different domain, reduced model, finite cylinder, discrete map, or conditional functional-analytic setting is an intermediate result unless a rigorous chain connects it to the exact official Clay hypotheses.
@@ -111,6 +113,8 @@ When touching the numerical stack, preserve the project conventions unless a cha
 - clustered singular subspaces rather than individual singular-vector identities through degeneracy;
 - no per-path or per-amplitude schedule retuning when comparing path integrals.
 
+For any candidate promoted toward the current `R^3` track, additionally satisfy the physical equations, `2π r dr dz` measure, axis regularity, Cartesian reconstruction, provenance, convergence, and candidate-certificate requirements in `SPEC.md`.
+
 ## Hou production wall-vorticity gate
 
 The current v1.1 full holomorphic pilot is **not** a Hou-production no-slip wall-vorticity discretization. Before any longer-time result is promoted as a Hou production reproduction, Hou late-state validation, or resolved Hou singular regime, the numerical stack must implement and audit the transformed wall conditions described in Hou 2022, Section 2, equations (2.3)--(2.5), including
@@ -133,6 +137,7 @@ Synthetic or analytic seeds are not Hou late-state evidence. Do not label them a
 Every mathematical PR should state:
 
 - which Clay statement, if any, the work is intended to support, or that it is infrastructure only;
+- whether the current `SPEC.md` applies and, if not, which track/domain differs;
 - the mathematical claim;
 - the exact new assumptions;
 - the Lean theorem(s) or numerical artifact(s) implementing it;
@@ -140,4 +145,4 @@ Every mathematical PR should state:
 - whether it changes any numerical/runtime behavior;
 - CI status.
 
-Use `PROJECT_GOAL.md` as the project-level acceptance boundary and `FORMAL_SCOPE.md` as the current Lean theorem/claim boundary.
+Use `PROJECT_GOAL.md` as the project-level acceptance boundary, `SPEC.md` as the current physical/numerical research contract, and `FORMAL_SCOPE.md` as the current Lean theorem/claim boundary.
