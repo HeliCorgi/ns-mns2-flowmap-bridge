@@ -38,6 +38,7 @@ for key in [
     "synthetic_seed_not_Hou_late_state",
     "no_discrete_to_continuum_promotion",
     "residual_integral_is_quadrature_estimate_not_rigorous_enclosure",
+    "correction_relative_error_reported_separately_from_direct_endpoint_error",
 ]:
     assert inv[key] is True
 
@@ -47,6 +48,8 @@ assert f["true_bridge_rel_error_vs_direct"] < 2e-8
 assert f["predictive_endpoint_rel_error_vs_direct"] < 3e-8
 assert f["predictive_vs_true_integral_rel_direct"] < 3e-8
 assert f["quadrature_residual_integral_rel_direct"] < 6e-8
+assert f["quadrature_true_correction_norm_integral_abs"] > 1e-7
+assert f["predictive_residual_to_true_correction_integral_ratio"] < 0.02
 assert f["numerical_triangle_ratio"] <= 1.05
 assert f["predictive_quadrature_drift_from_previous"] < 1e-8
 
