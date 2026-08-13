@@ -10,6 +10,7 @@ import Formal.QuadraticMildTangentRealization
 import Formal.QuadraticMildCoherentFamilyAdapter
 import Formal.LerayProjectedQuadratic
 import Formal.R3LerayFrequencySymbol
+import Formal.R3StokesFrequencySymbol
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -72,6 +73,14 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3LeraySymbol_zero
 #print axioms MNS2.r3LeraySymbol_self
 #print axioms MNS2.r3LeraySymbol_apply
+#print axioms MNS2.r3StokesDecayRate_nonneg
+#print axioms MNS2.r3StokesScalar_le_one
+#print axioms MNS2.r3StokesFrequencySymbol_zero_time
+#print axioms MNS2.r3StokesFrequencySymbol_add_time
+#print axioms MNS2.r3StokesFrequencySymbol_mem
+#print axioms MNS2.r3StokesFrequencySymbol_commutes_leray
+#print axioms MNS2.norm_r3StokesFrequencySymbol_le
+#print axioms MNS2.r3StokesLerayFrequencySymbol_mem
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
