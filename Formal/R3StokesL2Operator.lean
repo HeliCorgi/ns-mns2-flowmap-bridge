@@ -67,8 +67,8 @@ Multiplication by a fixed complex `L∞` scalar field as a continuous linear map
 `L²(R³; ℂ³)`.
 
 This is intentionally bundled directly from mathlib's heterogeneous `Lp` scalar multiplication,
-rather than through `ContinuousLinearMap.holderL`.  The latter exposes its result exponent as a
-`semiOutParam`, which is fragile for the concrete `∞ · 2 → 2` specialization.  Mathlib's direct
+rather than through `ContinuousLinearMap.holderL`. The latter exposes its result exponent as a
+`semiOutParam`, which is fragile for the concrete `∞ · 2 → 2` specialization. Mathlib's direct
 `Lp` scalar-multiplication API exists precisely to avoid those unnecessary typeclass constraints.
 -/
 def r3L2ScalarMultiplier
@@ -113,7 +113,7 @@ theorem r3StokesL2FrequencyMultiplier_ae
     ((r3StokesScalarLpTop hν ht • f : R3L2Velocity) : R3 → R3C) =ᵐ[volume]
       fun ξ => r3StokesScalarComplex ν t ξ • f ξ
   filter_upwards
-    [Lp.coeFn_lpSMul (r3StokesScalarLpTop hν ht) f,
+    [Lp.coeFn_lpSMul (r := (2 : ℝ≥0∞)) (r3StokesScalarLpTop hν ht) f,
       r3StokesScalarLpTop_ae hν ht]
     with ξ hmul hscalar
   rw [hmul, hscalar]
