@@ -2,11 +2,13 @@
 
 Last updated: 2026-08-13 (JST)
 
-This file is the short-form continuation point for future GPT/Codex/Claude sessions. Read `PROJECT_GOAL.md` first, then this file together with `AGENTS.md` and `FORMAL_SCOPE.md` before changing claims or formal statements.
+This file is the short-form continuation point for future GPT/Codex/Claude sessions. Read `PROJECT_GOAL.md` first, then `SPEC.md`, then this file together with `AGENTS.md` and `FORMAL_SCOPE.md` before changing claims, physical equations, numerical promotion rules, or formal statements.
 
 ## Governing project target
 
 `PROJECT_GOAL.md` is the repository's top-level specification.
+
+`SPEC.md` is the subordinate normative research/implementation contract for the current primary `R^3`, `f = 0`, axisymmetric-with-swirl breakdown track. It fixes the working physical equations, sign conventions, axis regularity, 3D reconstruction, physical measure, candidate-data invariants, and numerical-to-proof promotion ladder. If it conflicts with the official Clay/Fefferman statement or `PROJECT_GOAL.md`, the higher-level target controls.
 
 Ultimate acceptance target: rigorously establish one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D with the exact official hypotheses and domain.
 
@@ -85,7 +87,7 @@ The next useful formal direction is to move from the generic quadratic mild kern
 
 High-value targets include:
 
-1. an explicit function-space contract for the intended Clay domain;
+1. an explicit function-space contract for the intended Clay domain, consistent with `SPEC.md` for the current `R^3` track;
 2. a concrete projected convection operator interface with physical three-dimensional incompressibility preserved;
 3. a residual/error theorem for approximate tangent reconstruction;
 4. eventual instantiation of the abstract `H` and `Q` with genuine Stokes/Leray objects once the required mathlib infrastructure and analytic hypotheses are available.
@@ -107,6 +109,8 @@ Key numerical facts already established in the broader project:
 - full-operator low rank is not assumed; the more plausible reduced object is the pathwise tangent correction, and any POD/SVD reconstruction requires a residual certificate before promotion.
 
 Planned numerical continuation is a modal/reduced tangent bridge with explicit truncation, path quadrature, tail, and path-order diagnostics before any continuum or Clay claim.
+
+For promotion toward the current `R^3` primary track, apply every relevant physical/reconstruction/candidate-data gate in `SPEC.md` in addition to the numerical-stack-specific gates below.
 
 ## External exclusion / no-go registry — mandatory preflight
 
@@ -170,8 +174,8 @@ The workflow is configured to run Lean CI for every pull request to `main`, so f
 
 A short prompt should be enough:
 
-`@GitHub ns-mns2-flowmap-bridge の PROJECT_GOAL.md、HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
+`@GitHub ns-mns2-flowmap-bridge の PROJECT_GOAL.md、SPEC.md、HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
 
-If continuing the formal track, proceed from the concrete Navier--Stokes / reduced-tangent certification obligations above.
+If continuing the formal track, proceed from the concrete Navier--Stokes / reduced-tangent certification obligations above while respecting the physical `R^3` contract in `SPEC.md`.
 
-If switching back to the numerical track, resume from the reduced/modal tangent bridge, preflight against the external Fable5 registry, and preserve all Clay-domain and continuum-promotion guardrails above.
+If switching back to the numerical track, resume from the reduced/modal tangent bridge, preflight against the external Fable5 registry, and preserve all `SPEC.md`, Clay-domain, and continuum-promotion guardrails above.
