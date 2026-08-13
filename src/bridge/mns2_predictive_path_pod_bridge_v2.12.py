@@ -125,6 +125,7 @@ def main():
             pred_int = v.zeros(y0)
             true_int = v.zeros(y0)
             residual_q = 0.0
+            correction_norm_q = 0.0
             coeff_int = np.zeros(args.rank)
             node_records = []
 
@@ -137,6 +138,9 @@ def main():
                 # Certification-only truth evaluation happens after prediction is fixed.
                 g_true = v.jvp_at(P, y0, float(lam), args.dt, args.steps, frozen)
                 true_int = v.add(true_int, v.scale(g_true, float(wt)))
+                true_correction = v.sub(g_true, g0)
+                correction_norm = P.metric_norm(true_correction)
+                correction_norm_q += float(wt) * correction_norm
                 res = v.sub(g_true, q_pred)
                 rn = P.metric_norm(res)
                 residual_q += float(wt) * rn
@@ -145,7 +149,11 @@ def main():
                         "lambda": float(lam),
                         "weight": float(wt),
                         "predicted_coefficients": coeff,
+                        "true_correction_norm": float(correction_norm),
                         "certification_residual_norm": float(rn),
+                        "residual_to_true_correction_ratio": float(
+                            rn / max(correction_norm, 1e-300)
+                        ),
                     }
                 )
 
@@ -154,6 +162,7 @@ def main():
             pred_true_abs = P.metric_norm(v.sub(pred_int, true_int))
             pred_true_rel = pred_true_abs / max(direct_norm, 1e-300)
             bound_rel = residual_q / max(direct_norm, 1e-300)
+            residual_to_correction = residual_q / max(correction_norm_q, 1e-300)
             drift = None if prev_pred is None else v.rel(P, pred_int, prev_pred)
             records.append(
                 {
@@ -165,6 +174,10 @@ def main():
                     "predictive_vs_true_integral_rel_direct": float(pred_true_rel),
                     "quadrature_residual_integral_abs": float(residual_q),
                     "quadrature_residual_integral_rel_direct": float(bound_rel),
+                    "quadrature_true_correction_norm_integral_abs": float(correction_norm_q),
+                    "predictive_residual_to_true_correction_integral_ratio": float(
+                        residual_to_correction
+                    ),
                     "numerical_triangle_ratio": float(pred_true_abs / max(residual_q, 1e-300)),
                     "predictive_quadrature_drift_from_previous": drift,
                     "integrated_predicted_coefficients": coeff_int.tolist(),
@@ -197,6 +210,7 @@ def main():
             "coefficient_model": "PCHIP with exact c(0)=0 anchor",
             "rank": args.rank,
             "direct_endpoint_delta_metric_norm": float(direct_norm),
+            "zero_reference_tangent_metric_norm": float(P.metric_norm(g0)),
             "records": records,
             "final_record": records[-1],
             "important_invariants": {
@@ -208,6 +222,7 @@ def main():
                 "synthetic_seed_not_Hou_late_state": True,
                 "no_discrete_to_continuum_promotion": True,
                 "residual_integral_is_quadrature_estimate_not_rigorous_enclosure": True,
+                "correction_relative_error_reported_separately_from_direct_endpoint_error": True,
             },
         }
         if not held_out:
