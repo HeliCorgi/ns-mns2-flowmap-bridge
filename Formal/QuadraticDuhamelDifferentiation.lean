@@ -53,9 +53,9 @@ theorem quadraticDuhamelIntegrand_hasFDerivAt
         (fun x : V => quadraticDiagonal Q (U x s))
         ((quadraticDerivative Q (U x₀ s)).comp (J s))
         x₀ := by
-    simpa only [Function.comp_apply] using
+    simpa only [Function.comp_def] using
       ((hasFDerivAt_quadraticDiagonal Q (U x₀ s)).comp x₀ hU)
-  simpa only [Function.comp_apply] using
+  simpa only [Function.comp_def] using
     ((H (t - s)).hasFDerivAt.comp x₀ hquad)
 
 /--
