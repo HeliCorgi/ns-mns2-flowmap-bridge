@@ -49,13 +49,13 @@ theorem quadraticDuhamelIntegrand_hasFDerivAt
       x₀ := by
   unfold quadraticDuhamelIntegrand quadraticDuhamelDerivativeIntegrand
   exact (H (t - s)).hasFDerivAt.comp x₀
-    ((hasFDerivAt_quadraticDiagonal Q).comp x₀ hU)
+    ((hasFDerivAt_quadraticDiagonal Q (U x₀ s)).comp x₀ hU)
 
 /--
 Differentiate the quadratic Duhamel interval integral with respect to initial data.
 
 The hard analytic interchange is discharged by mathlib's
-`hasFDerivAt_integral_of_dominated_loc_of_lip_interval`.  Its domination hypotheses
+`hasFDerivAt_integral_of_dominated_loc_of_lip_interval`. Its domination hypotheses
 are kept explicit here: a common initial-data neighborhood, measurability/integrability,
 a locally uniform Lipschitz majorant, and an integrable scalar bound.
 
@@ -156,8 +156,13 @@ theorem quadraticMildRHSAtTime_hasFDerivAt_of_dominated
   have hint := quadraticDuhamelIntegral_hasFDerivAt_of_dominated
     H Q t U x₀ J N hN bound
     hF_meas hF_int hF'_meas h_lip hbound hUdiff
-  simpa [quadraticMildRHSAtTime, quadraticMildRHSDerivativeAtTime] using
-    ((H t).hasFDerivAt.sub hint.2)
+  change HasFDerivAt
+    (fun x : V =>
+      H t x - ∫ s in (0 : ℝ)..t, quadraticDuhamelIntegrand H Q t U x s)
+    (H t - ∫ s in (0 : ℝ)..t,
+      quadraticDuhamelDerivativeIntegrand H Q t U x₀ J s)
+    x₀
+  exact (H t).hasFDerivAt.sub hint.2
 
 end QuadraticDuhamelDifferentiation
 
