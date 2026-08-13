@@ -76,13 +76,12 @@ def r3StokesL2FrequencyMultiplier
     {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t) :
     R3L2Velocity →L[ℂ] R3L2Velocity := by
   letI : ENNReal.HolderTriple (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞) := ⟨by simp⟩
-  let H :
-      Lp ℂ (⊤ : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
-        Lp R3C (2 : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
-          Lp R3C (2 : ℝ≥0∞) (volume : Measure R3) :=
-    complexScalarActionR3C.holderL
-      (volume : Measure R3) (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞)
-  exact H (r3StokesScalarLpTop hν ht)
+  exact (complexScalarActionR3C.holderL
+    (μ := (volume : Measure R3))
+    (p := (⊤ : ℝ≥0∞))
+    (q := (2 : ℝ≥0∞))
+    (r := (2 : ℝ≥0∞)))
+      (r3StokesScalarLpTop hν ht)
 
 /-- Exact almost-everywhere pointwise realization of the bundled Fourier-side Stokes multiplier. -/
 theorem r3StokesL2FrequencyMultiplier_ae
