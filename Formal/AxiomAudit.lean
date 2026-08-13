@@ -1,4 +1,5 @@
 import Formal.NavierStokesTimeBridge
+import Formal.FlowMapNonextendibilityCriterion
 import Formal.MildSolutionSemantics
 import Formal.MildFlowMapBridge
 import Formal.MildZeroUniqueness
@@ -29,6 +30,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.affine_bridge_at_time
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.radial_bridge_at_time
 #print axioms MNS2.NavierStokesTimeBridgeAdapter.radial_bridge_at_time_of_zero_fixed
+#print axioms MNS2.FlowMapContinuationPackage.endpoint_norm_le_of_radial_directional_bound
+#print axioms MNS2.FlowMapContinuationPackage.directional_fderiv_unbounded_of_nonextendible
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_nonnegative
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_zero_eq_initial
 #print axioms MNS2.MildEvolutionKernel.evolvesAt_endpoint_equation
