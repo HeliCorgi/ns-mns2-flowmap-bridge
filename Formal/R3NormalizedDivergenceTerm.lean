@@ -21,7 +21,7 @@ theorem r3NormalizedDivergenceTermAux_ae (i : Fin 3) (f : R3L2Velocity) :
      r3L2CoordinateAux_ae i f,
      r3NormalizedFrequencyCoordinateLpTop_ae i]
     with ξ hmul hcoord hm
-  simpa [hcoord, hm] using hmul
+  simpa [r3NormalizedDivergenceTermAux, hcoord, hm] using hmul
 
 end
 
