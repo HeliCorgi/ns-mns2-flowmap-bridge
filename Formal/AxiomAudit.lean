@@ -7,6 +7,7 @@ import Formal.QuadraticLinearizedMild
 import Formal.QuadraticMildTangentAdapter
 import Formal.QuadraticMildFixedPointDerivative
 import Formal.QuadraticMildTangentRealization
+import Formal.QuadraticMildCoherentFamilyAdapter
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -55,6 +56,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.quadraticMild_fixedPoint_direction_equation_of_local_certificate
 #print axioms MNS2.quadraticMildTangentEvolvesAt_of_dominated_fixedPoint_family
 #print axioms MNS2.quadraticMildTangentEvolvesAt_of_local_fixedPoint_family
+#print axioms MNS2.QuadraticMildC1CoherentFamilyAdapter.fderiv_realizes_linearized_mild
+#print axioms MNS2.QuadraticMildC1CoherentFamilyAdapter.radial_bridge_with_derived_tangent_semantics
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
