@@ -10,7 +10,7 @@ open scoped Interval ContDiff BigOperators
 A finite-rank path-tangent approximation with a fixed reference vector `ell` and
 scalar coefficient functions `a i` multiplying fixed vectors `phi i`.
 
-This is the abstract form used by POD/modal reduced bridges.  It does not assert
+This is the abstract form used by POD/modal reduced bridges. It does not assert
 that the chosen basis is accurate or that the coefficients can be predicted cheaply.
 -/
 def finiteRankPath
@@ -32,7 +32,7 @@ theorem finiteRankPath_intervalIntegrable
   have hcont : Continuous (finiteRankPath ell a phi) := by
     unfold finiteRankPath
     fun_prop
-  exact hcont.intervalIntegrable
+  exact hcont.intervalIntegrable (μ := volume)
 
 /--
 The integral of a finite-rank path is the fixed reference plus the same basis vectors
@@ -49,16 +49,19 @@ theorem intervalIntegral_finiteRankPath
   unfold finiteRankPath
   rw [intervalIntegral.integral_add]
   · simp only [intervalIntegral.integral_const, sub_zero, one_smul]
-    rw [intervalIntegral.integral_finset_sum]
-    · congr 1
-      funext i
+    rw [intervalIntegral.integral_finsetSum]
+    · apply Finset.sum_congr rfl
+      intro i hi
       rw [intervalIntegral.integral_smul_const]
     · intro i hi
-      exact ((ha i).smul continuous_const).intervalIntegrable
-  · exact continuous_const.intervalIntegrable
+      have hterm : Continuous (fun s : ℝ => (a i s) • phi i) := by
+        exact (ha i).smul continuous_const
+      exact hterm.intervalIntegrable (μ := volume)
+  · have hconst : Continuous (fun _ : ℝ => ell) := continuous_const
+    exact hconst.intervalIntegrable (μ := volume)
   · have hsum : Continuous (fun s : ℝ => ∑ i, (a i s) • phi i) := by
       fun_prop
-    exact hsum.intervalIntegrable
+    exact hsum.intervalIntegrable (μ := volume)
 
 /--
 Finite-rank specialization of the radial reduced-bridge residual certificate.
