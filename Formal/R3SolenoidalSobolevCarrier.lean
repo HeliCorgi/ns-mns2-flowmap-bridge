@@ -47,6 +47,20 @@ theorem norm_r3NormalizedFrequencyCoordinate_le_one (i : Fin 3) (ξ : R3) :
     abs_div, abs_of_pos (r3FrequencyL1Scale_pos ξ)]
   exact (div_le_one (r3FrequencyL1Scale_pos ξ)).2 (abs_r3_coordinate_le_scale i ξ)
 
+def r3NormalizedFrequencyCoordinateLpTop (i : Fin 3) :
+    Lp ℂ ⊤ (volume : Measure R3) :=
+  (memLp_top_of_bound
+      (continuous_r3NormalizedFrequencyCoordinate i).aestronglyMeasurable
+      1
+      (ae_of_all _ fun ξ => norm_r3NormalizedFrequencyCoordinate_le_one i ξ)).toLp
+    (r3NormalizedFrequencyCoordinate i)
+
+theorem r3NormalizedFrequencyCoordinateLpTop_ae (i : Fin 3) :
+    r3NormalizedFrequencyCoordinateLpTop i =ᵐ[volume]
+      r3NormalizedFrequencyCoordinate i := by
+  unfold r3NormalizedFrequencyCoordinateLpTop
+  exact MemLp.coeFn_toLp _
+
 end
 
 end MNS2
