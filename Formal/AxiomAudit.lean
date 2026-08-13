@@ -9,6 +9,7 @@ import Formal.QuadraticMildFixedPointDerivative
 import Formal.QuadraticMildTangentRealization
 import Formal.QuadraticMildCoherentFamilyAdapter
 import Formal.LerayProjectedQuadratic
+import Formal.R3LerayFrequencySymbol
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -63,6 +64,14 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.LerayProjectedQuadraticContract.projectedConvection_mem
 #print axioms MNS2.LerayProjectedQuadraticContract.quadraticDerivative_mem
 #print axioms MNS2.LerayProjectedQuadraticContract.fderiv_mildKernel_nonlinearity_mem
+#print axioms MNS2.mem_r3SolenoidalFiber_iff_inner
+#print axioms MNS2.r3LeraySymbol_mem
+#print axioms MNS2.inner_r3LeraySymbol_eq_zero
+#print axioms MNS2.r3LeraySymbol_idempotent
+#print axioms MNS2.norm_r3LeraySymbol_le
+#print axioms MNS2.r3LeraySymbol_zero
+#print axioms MNS2.r3LeraySymbol_self
+#print axioms MNS2.r3LeraySymbol_apply
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
