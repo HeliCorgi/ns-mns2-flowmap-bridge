@@ -21,7 +21,7 @@ theorem r3NormalizedDivergenceFrequencyAux_stokes
     with ξ h1 h2 h3 h4 h5
   rw [h1, h3, h2, h4, h5]
   simp only [r3NormalizedDivergencePointwise, WithLp.ofLp_smul,
-    Pi.smul_apply', smul_eq_mul]
+    Pi.smul_apply, smul_eq_mul]
   ring
 
 end
