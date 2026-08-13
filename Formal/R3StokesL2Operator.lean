@@ -75,6 +75,7 @@ bounded continuous linear operator on a complete function space.
 def r3StokesL2FrequencyMultiplier
     {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t) :
     R3L2Velocity →L[ℂ] R3L2Velocity := by
+  letI : ENNReal.HolderTriple (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞) := ⟨by simp⟩
   let H :
       Lp ℂ (⊤ : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
         Lp R3C (2 : ℝ≥0∞) (volume : Measure R3) →L[ℂ]
