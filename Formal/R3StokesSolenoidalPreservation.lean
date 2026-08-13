@@ -15,7 +15,7 @@ theorem r3StokesL2Operator_mem_solenoidal
     simpa [r3L2SolenoidalSubmodule, r3NormalizedDivergenceL2OperatorAux] using hf
   change r3NormalizedDivergenceFrequencyAux (𝓕 (r3StokesL2Operator hν ht f)) = 0
   rw [fourier_r3StokesL2Operator hν ht f,
-    r3NormalizedDivergenceFrequencyAux_stokes hν ht f, hf0]
+    r3NormalizedDivergenceFrequencyAux_stokes hν ht (𝓕 f), hf0]
   simp
 
 end
