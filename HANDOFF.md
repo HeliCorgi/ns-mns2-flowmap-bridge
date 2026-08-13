@@ -1,154 +1,229 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-13 (JST)
+Last updated: 2026-08-13 (JST), after merged PR #35.
 
-This file is the short-form continuation point for future GPT/Codex/Claude sessions. Read `PROJECT_GOAL.md` first, then `SPEC.md`, then this file together with `AGENTS.md` and `FORMAL_SCOPE.md` before changing claims, physical equations, numerical promotion rules, or formal statements.
+This file is the short-form continuation point for future GPT/Codex/Claude sessions.
+
+Read, in order:
+
+1. `PROJECT_GOAL.md` — top-level acceptance target;
+2. `SPEC.md` — normative contract for the current primary `R^3`, `f = 0`, axisymmetric-with-swirl breakdown track;
+3. `AGENTS.md` — repository rules and claim hygiene;
+4. `FORMAL_SCOPE.md` — exact Lean theorem boundary;
+5. this handoff;
+6. the latest GitHub `main`, open PRs, and Lean CI.
+
+## Source-of-truth rule
+
+Progress notes can drift. For **research constraints and claim boundaries**, `PROJECT_GOAL.md`, `SPEC.md`, and `AGENTS.md` control. For the **actual formal frontier**, the current `main` branch, the contents of `Formal/`, the latest PR, and its CI are the source of truth.
+
+Do not infer the current theorem frontier from an old conversation or an old PR number list without checking GitHub.
 
 ## Governing project target
 
-`PROJECT_GOAL.md` is the repository's top-level specification.
-
-`SPEC.md` is the subordinate normative research/implementation contract for the current primary `R^3`, `f = 0`, axisymmetric-with-swirl breakdown track. It fixes the working physical equations, sign conventions, axis regularity, 3D reconstruction, physical measure, candidate-data invariants, and numerical-to-proof promotion ladder. If it conflicts with the official Clay/Fefferman statement or `PROJECT_GOAL.md`, the higher-level target controls.
-
 Ultimate acceptance target: rigorously establish one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D with the exact official hypotheses and domain.
 
-Current primary attack: the breakdown side (C/D), with an unforced route `f = 0` preferred when supportable. Hou-cylinder, MNS-2, flow-map, mild-solution, POD/SVD, and Lean bridge results are intermediate infrastructure or candidate evidence until a rigorous chain reaches an exact Clay statement.
+Current primary attack: the breakdown side (C/D), with an unforced route `f = 0` preferred when supportable. The working research specialization in `SPEC.md` is physical three-dimensional `R^3`, axisymmetric with swirl. Hou-cylinder numerics, MNS-2, flow-map identities, mild-solution semantics, POD/SVD reductions, and Lean theorems are intermediate infrastructure unless a rigorous chain reaches an exact Clay statement.
 
-## Current frontier
+## Current formal frontier
 
-The formal frontier now includes the mild-solution semantic and quadratic-nonlinearity layers through merged PR #15:
+The merged formal stack now contains four distinct layers.
 
-- PR #12: `Formalize the mild-solution Duhamel semantics`
-- PR #13: `Connect the radial flow-map bridge to mild Duhamel endpoints`
-- PR #14: `Derive the zero-fixed bridge condition from mild uniqueness`
-- PR #15: `Formalize the derivative of a quadratic mild nonlinearity`
-- PR #16: `Link the Fable5 exclusion registry`
+### 1. Exact flow-map bridge
 
-The repository now has the following theorem/interface ladder:
+The repository proves the Banach-valued affine-path identity
 
-1. `Formal/Bridge.lean` — algebraic endpoint telescoping only.
-2. `Formal/FlowMapFTC.lean` — Banach-valued path FTC.
-3. `Formal/FlowMapChainRule.lean` — derives the affine path derivative and fixed tangent direction.
-4. `Formal/FlowMapOperatorContinuity.lean` — derives tangent continuity from operator-valued continuity.
-5. `Formal/FlowMapContDiffOne.lean` — obtains the bridge from a global `C¹` map.
-6. `Formal/FlowMapLocalContDiff.lean` — localizes to an open admissible data domain.
-7. `Formal/PDEBridgeAdapter.lean` — packages the analytic bridge with an abstract fixed-time PDE semantic relation.
-8. `Formal/NavierStokesTimeBridge.lean` — packages certified time slices using an externally supplied time-indexed Navier–Stokes semantic relation.
-9. `Formal/MildSolutionSemantics.lean` — represents a Banach-valued Duhamel equation with mathlib interval integrals.
-10. `Formal/MildFlowMapBridge.lean` — connects certified flow-map reconstruction to mild endpoint witnesses.
-11. `Formal/MildZeroUniqueness.lean` — derives the zero-fixed endpoint condition from explicit mild uniqueness assumptions.
-12. `Formal/QuadraticMildNonlinearity.lean` — formalizes `B(u)=Q(u,u)` and `DB(u)[v]=Q(u,v)+Q(v,u)` for a continuous bilinear map.
+`∫₀¹ (DS(x + s d))[d] ds = S(x + d) - S(x)`
 
-CI also contains proof-hole and local-axiom guardrails, and `Formal/AxiomAudit.lean` prints axiom dependencies of the strongest current theorems.
-
-## Exact mathematical bridge currently formalized
-
-For an open admissible set `U`, a fixed-time map `S`, and a path
-
-`γ(s) = x + s d`, `s ∈ [0,1]`,
-
-if `S` is `C¹` on `U` and the full path stays in `U`, then
-
-`∫₀¹ (DS(x + s d))[d] ds = S(x + d) - S(x)`.
-
-Radially,
+under an open admissible domain, `C¹` regularity, and path inclusion. The radial specialization is
 
 `∫₀¹ (DS(s d))[d] ds = S(d) - S(0)`.
 
-If a separate argument proves `S(0) = 0`, then
+The tangent is always the fixed, unnormalized direction `d`.
 
-`S(d) = ∫₀¹ (DS(s d))[d] ds`.
+Key files:
 
-The path tangent is always the fixed, unnormalized direction `d`.
+- `Formal/Bridge.lean`
+- `Formal/FlowMapFTC.lean`
+- `Formal/FlowMapChainRule.lean`
+- `Formal/FlowMapOperatorContinuity.lean`
+- `Formal/FlowMapContDiffOne.lean`
+- `Formal/FlowMapLocalContDiff.lean`
+- `Formal/PDEBridgeAdapter.lean`
+- `Formal/NavierStokesTimeBridge.lean`
 
-Do not replace it by `s • d`, a normalized direction, or an arbitrary amplitude tangent.
+### 2. Abstract mild and tangent semantics
 
-## Current Navier–Stokes / mild interface
+The repository formalizes a Banach-valued Duhamel relation
 
-`Formal/NavierStokesTimeBridge.lean` is parameterized by an externally supplied relation of the form
+`u(t) = H(t)u₀ - ∫₀ᵗ H(t-s) B(u(s)) ds`
 
-`NSEvolvesAt : ℝ → X → Y → Prop`.
+with existential endpoint witnesses rather than hidden positive-time uniqueness.
 
-The time-indexed adapter carries only certified nonnegative time slices. At each certified time it must provide an open admissible initial-data domain, a time-indexed state map, `C¹` dependence on the certified domain, and proof that the state map realizes the semantic relation.
+For a continuous bilinear `Q`, the quadratic diagonal and derivative are formalized:
 
-`Formal/MildSolutionSemantics.lean` supplies a concrete abstract Duhamel-shaped relation
+`B(u) = Q(u,u)`
 
-`u(t) = H(t)u₀ - ∫₀ᵗ H(t-s) B(u(s)) ds`,
+`DB(u)[v] = Q(u,v) + Q(v,u)`.
 
-with endpoint existence existential in a witnessing trajectory rather than silently assuming uniqueness.
+The formal stack also differentiates the parameterized quadratic Duhamel term under explicit dominated-differentiation hypotheses, identifies the derivative of a quadratic mild fixed point by uniqueness of the Fréchet derivative, expands the resulting directional equation into the linearized mild equation, and packages this into derived tangent/coherent-family semantics.
 
-`Formal/MildFlowMapBridge.lean` connects this mild relation to the radial flow-map identity. `Formal/MildZeroUniqueness.lean` isolates the uniqueness hypothesis needed to derive `stateMap t 0 = 0`. `Formal/QuadraticMildNonlinearity.lean` formalizes the derivative of a quadratic diagonal `B(u)=Q(u,u)`.
+Key files:
 
-This remains an interface/functional-analysis layer. It does not yet construct the actual three-dimensional Stokes semigroup, Leray projection, admissible Clay-domain solution theory, or a singular solution.
+- `Formal/MildSolutionSemantics.lean`
+- `Formal/MildFlowMapBridge.lean`
+- `Formal/MildZeroUniqueness.lean`
+- `Formal/QuadraticMildNonlinearity.lean`
+- `Formal/QuadraticLinearizedMild.lean`
+- `Formal/QuadraticMildTangentAdapter.lean`
+- `Formal/QuadraticDuhamelDifferentiation.lean`
+- `Formal/QuadraticMildFixedPointDerivative.lean`
+- `Formal/QuadraticMildTangentRealization.lean`
+- `Formal/QuadraticMildCoherentFamilyAdapter.lean`
+
+The representative derived tangent equation has the intended form
+
+`J(t)h = H(t)h - ∫₀ᵗ H(t-s) (Q(u(s), J(s)h) + Q(J(s)h, u(s))) ds`
+
+under the explicit hypotheses carried by the formal certificates.
+
+### 3. Leray-projected quadratic operator contract
+
+Merged PR #33 added `Formal/LerayProjectedQuadratic.lean`.
+
+`LerayProjectedQuadraticContract` separates:
+
+- a certified solenoidal submodule;
+- a continuous linear Leray map;
+- a raw continuous bilinear convection map;
+- the projected continuous bilinear map used by the mild kernel.
+
+Lean derives, from the contract fields:
+
+- idempotence of the Leray map;
+- projected bilinear outputs are solenoidal;
+- the quadratic diagonal is solenoidal;
+- the exact quadratic derivative is solenoidal;
+- the derivative of the packaged mild nonlinearity remains solenoidal.
+
+This is still an operator contract. It does **not** identify the Banach carrier with a concrete function space on `R^3`, nor does it construct physical `P div(u ⊗ v)`.
+
+### 4. Concrete physical `R^3` frequency-fiber symbols
+
+Merged PR #34 added `Formal/R3LerayFrequencySymbol.lean`.
+
+For `R3 := EuclideanSpace ℝ (Fin 3)`, the solenoidal frequency fiber is
+
+`(span ξ)⊥`,
+
+and `r3LeraySymbol ξ` is the orthogonal projection onto that plane. Lean proves:
+
+- `v` is in the fiber iff `inner ξ v = 0`;
+- every projected vector is transverse;
+- already-transverse vectors are fixed;
+- idempotence;
+- norm contraction;
+- identity at zero frequency;
+- annihilation of the longitudinal vector `ξ`;
+- the explicit formula
+
+`P(ξ)v = v - ((ξ·v)/|ξ|²) ξ`.
+
+Merged PR #35 added `Formal/R3StokesFrequencySymbol.lean`.
+
+Using the pinned mathlib Fourier convention
+
+`widehat(Δf)(ξ) = -(2π)^2 |ξ|^2 widehat(f)(ξ)`,
+
+the scalar heat/Stokes factor is
+
+`exp(-(2π)^2 ν t |ξ|^2)`.
+
+Lean proves at the frequency-fiber level:
+
+- nonnegative decay rate for `ν ≥ 0`;
+- positivity and forward-time bound by one;
+- identity at time zero and zero frequency;
+- exact semigroup law;
+- preservation of the solenoidal fiber;
+- exact commutation with the Leray symbol;
+- pointwise norm contraction;
+- the combined Stokes--Leray symbol lands in the transverse fiber.
+
+These are genuine physical three-dimensional **frequency-fiber** statements. They are not yet a Fourier-transform lift to a PDE function space.
+
+## What is still not formalized
+
+The repository still does **not** prove or construct:
+
+- a Clay A/B/C/D theorem;
+- a blow-up counterexample;
+- global smoothness or global existence for arbitrary 3D data;
+- a closed-form general solution;
+- a concrete divergence-free Banach solution space on `R^3` carrying the full mild theory;
+- a bounded function-space Leray projector obtained by lifting the matrix-valued frequency symbol;
+- a bounded function-space Stokes semigroup obtained by lifting the scalar frequency symbol;
+- the physical bilinear convection operator `div(u ⊗ v)` and its Leray projection in the chosen spaces;
+- local existence/uniqueness for the concrete `R^3` mild equation;
+- `C¹` dependence of that concrete solution map on an admissible open domain;
+- continuation of a `C¹` solution map through a possible singular time;
+- a rigorous finite-cylinder-to-`R^3` or periodic Clay-domain transfer;
+- discrete-to-continuum promotion of the numerical MNS-2 bridge without an explicit convergence theorem.
 
 ## Next formal step
 
-The next useful formal direction is to move from the generic quadratic mild kernel toward a concrete Navier--Stokes adapter without smuggling in existence or global regularity.
+The next high-value task is the **function-space lift**.
 
-High-value targets include:
+Preferred order:
 
-1. an explicit function-space contract for the intended Clay domain, consistent with `SPEC.md` for the current `R^3` track;
-2. a concrete projected convection operator interface with physical three-dimensional incompressibility preserved;
-3. a residual/error theorem for approximate tangent reconstruction;
-4. eventual instantiation of the abstract `H` and `Q` with genuine Stokes/Leray objects once the required mathlib infrastructure and analytic hypotheses are available.
+1. choose and formalize a concrete `R^3` function-space carrier compatible with the intended local mild theory;
+2. lift the scalar Stokes symbol first, because mathlib has scalar Fourier-multiplier infrastructure;
+3. prove the semigroup/contraction properties on that carrier;
+4. lift the Leray symbol carefully as a matrix/operator-valued multiplier — do not silently treat it as a scalar multiplier;
+5. construct the physical projected convection mapping between the required spaces;
+6. instantiate `MildEvolutionKernel` with those concrete objects;
+7. only then attack local existence, uniqueness, and `C¹` solution-map dependence.
 
-Do not identify a finite-cylinder Hou operator with the Clay `R^3` or periodic-box problem unless a rigorous domain-transfer result has been proved.
+If the concrete function-space lift becomes blocked by missing mathlib infrastructure, isolate the missing theorem/API as a formal contract rather than smuggling the desired boundedness in as an unlabelled assumption.
 
 ## Numerical/research track
 
-The numerical MNS-2 bridge work is distinct from the Lean continuum theorem.
+The numerical MNS-2 bridge remains separate from the continuum Lean theorem. Exact finite-dimensional path identities, reduced tangent reconstruction, POD/SVD, or synthetic Hou-like data are not continuum Navier--Stokes proofs.
 
-Key numerical facts already established in the broader project:
-
-- conservative cylindrical transport variables use `U = u^θ/r`, `Ω = ω^θ/r`, `ψ = ψ^θ/r`, `Γ = r² U = r u^θ`;
-- tangent direction for amplitude-path reconstruction is fixed and unnormalized;
-- v2.2 synthetic flow-map path-independence tests passed for radial, Gamma-first, Omega-first, and closed-rectangle paths under a single frozen schedule;
-- finite-dimensional coordinate-path reconstruction is exact for the frozen discrete map;
-- a continuum promotion still requires convergence of solution maps and pathwise tangent actions on a common time interval;
-- a real provenanced Hou late-state handoff seed is still missing; synthetic seeds are not late-state evidence;
-- full-operator low rank is not assumed; the more plausible reduced object is the pathwise tangent correction, and any POD/SVD reconstruction requires a residual certificate before promotion.
-
-Planned numerical continuation is a modal/reduced tangent bridge with explicit truncation, path quadrature, tail, and path-order diagnostics before any continuum or Clay claim.
-
-For promotion toward the current `R^3` primary track, apply every relevant physical/reconstruction/candidate-data gate in `SPEC.md` in addition to the numerical-stack-specific gates below.
+Continuum promotion requires explicit convergence of the relevant solution maps and pathwise tangent actions on a common time interval. Finite-cylinder Hou behavior is not an `R^3` or periodic Clay construction without a rigorous domain-transfer theorem.
 
 ## External exclusion / no-go registry — mandatory preflight
 
 Before opening a new singularity mechanism, ansatz family, shadowing route, numerical promotion argument, or whole-space interpretation, cross-check the read-only Fable5 registry:
 
 - root: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/tree/fable5-mainline`
-- recorded binding verdicts: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/research_notes/verification_sprint_v1/VERDICTS.md`
+- binding verdicts: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/research_notes/verification_sprint_v1/VERDICTS.md`
 - numerical/whole-space audit: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/FABLE5_NEXT_TASK_AUDIT.md`
 - equation audit: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/docs/equation_audit.md`
 - external research rules: `https://github.com/HeliCorgi/ns-singularity-certificate-lab/blob/fable5-mainline/AGENTS.md`
 
 Operational rule:
 
-- `KILLED` / `REJECTED` means do not spend search budget there again unless the new route explicitly identifies the hypothesis that differs and explains why the recorded binding obstruction no longer applies.
-- `CONDITIONAL` means preserve the exact condition; do not silently promote it to a live unconditional mechanism.
-- For numerical work, inherit the relevant Fable5 stability/CFL, all-step gate, resolution, whole-space, provenance, domain/truncation, and independent-reproduction requirements before promotion.
-- Do not use formulas marked `未確認`, `不整合`, or `誤り` in the external equation audit as implementation premises.
-- Treat `ns-singularity-certificate-lab` as read-only provenance by default. Do not modify it unless the user explicitly requests changes in that repository.
-
-This external registry is specifically meant to stop future sessions from rediscovering exploration spaces that have already been killed or from forgetting the conditions on routes that only survived conditionally.
+- `KILLED` / `REJECTED`: do not reopen unless the new route explicitly identifies a hypothesis escape from the recorded obstruction;
+- `CONDITIONAL`: preserve the exact condition;
+- do not use formulas marked `未確認`, `不整合`, or `誤り` as implementation premises;
+- treat `ns-singularity-certificate-lab` as read-only provenance unless the user explicitly requests edits there.
 
 ## Hard guardrails
 
 Never claim any of the following unless a new proof actually establishes it:
 
 - the Clay Navier–Stokes problem is solved;
-- global smoothness or global existence for arbitrary 3D data;
-- a blow-up counterexample;
-- a closed-form general solution;
-- continuation of a `C¹` solution map through a possible singular time;
-- discrete MNS-2 bridge convergence to the continuum without an explicit convergence theorem;
-- numerical path-independence as proof of continuum Navier–Stokes regularity or blow-up;
-- synthetic Hou-like data as provenanced Hou late-state evidence;
-- finite-cylinder Hou behavior as an `R^3` or periodic-box Clay construction without a rigorous transfer.
+- a blow-up counterexample exists;
+- arbitrary 3D global regularity is proved;
+- a discrete bridge has converged to the continuum without an explicit convergence theorem;
+- numerical path-independence proves regularity or blow-up;
+- finite-cylinder Hou dynamics have been promoted to an official Clay domain without transfer;
+- a frequency-fiber multiplier has automatically become a bounded PDE function-space operator.
 
-Keep these error classes separate:
+Keep separate:
 
-- exact path-integral identity;
+- exact analytic identity;
 - quadrature error;
 - low-rank/modal truncation error;
 - PDE discretization error;
@@ -156,26 +231,16 @@ Keep these error classes separate:
 - domain-transfer error;
 - model/provenance scope.
 
-## Lean proof hygiene
+## Lean proof hygiene and GitHub workflow
 
-The repository CI rejects proof holes and local proof-bypassing declarations under `Formal/`. Do not introduce `sorry`, `admit`, local `axiom`, or source-level `opaque` declarations to make CI green.
+CI rejects `sorry`, `admit`, local `axiom`, and source-level `opaque` declarations under `Formal/`. `Formal/AxiomAudit.lean` prints axiom dependencies of the strongest formal theorems.
 
-The axiom audit currently expects ordinary mathlib/Lean foundational dependencies such as `propext`, `Classical.choice`, and `Quot.sound`; these are not locally introduced Navier–Stokes assumptions.
+Branch protection is not the merge gate in practice; **green Lean CI is the manual merge gate**.
 
-## GitHub workflow
+Before resuming work, inspect the latest `main`, open PRs, and Actions result.
 
-Repository: `HeliCorgi/ns-mns2-flowmap-bridge`
+## Resume prompt
 
-Branch/ruleset protection is not enforced for this private repository under the current GitHub account plan. Treat green Lean CI as a manual merge gate.
+A short continuation prompt should be enough:
 
-The workflow is configured to run Lean CI for every pull request to `main`, so future sessions should inspect the latest PR and its Actions result before merging.
-
-## How to resume in a new project chat
-
-A short prompt should be enough:
-
-`@GitHub ns-mns2-flowmap-bridge の PROJECT_GOAL.md、SPEC.md、HANDOFF.md、AGENTS.md、FORMAL_SCOPE.md を読んで、Fable5 exclusion registry も照合して、最新PRとCIを確認して続きから。`
-
-If continuing the formal track, proceed from the concrete Navier--Stokes / reduced-tangent certification obligations above while respecting the physical `R^3` contract in `SPEC.md`.
-
-If switching back to the numerical track, resume from the reduced/modal tangent bridge, preflight against the external Fable5 registry, and preserve all `SPEC.md`, Clay-domain, and continuum-promotion guardrails above.
+`@GitHub ns-mns2-flowmap-bridge の PROJECT_GOAL.md、SPEC.md、AGENTS.md、FORMAL_SCOPE.md、HANDOFF.md を読んで、Fable5 registry と最新main/PR/CIを照合して続きから。古い進捗記述より実コードを優先して。`
