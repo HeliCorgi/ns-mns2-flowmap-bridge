@@ -1,15 +1,34 @@
 #!/usr/bin/env python3
+import hashlib
 import json
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
+import numpy as np
+
 repo = Path(__file__).resolve().parents[1]
 runner = repo / "src" / "bridge" / "mns2_path_correction_pod_bridge_v2.11.py"
 seed = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_SEED_V2.2.npz"
 meta = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_META_V2.2.json"
 schedule = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_SCHEDULE_V2.2.json"
+
+
+def canonical_seed_content_hash(path: Path) -> str:
+    d = np.load(path)
+    h = hashlib.sha256()
+    for key in sorted(d.files):
+        a = np.ascontiguousarray(d[key])
+        h.update(key.encode() + b"\0")
+        h.update(a.dtype.str.encode() + b"\0")
+        h.update(str(a.shape).encode() + b"\0")
+        h.update(a.tobytes())
+    return h.hexdigest()
+
+
+content_hash = canonical_seed_content_hash(seed)
+print("seed canonical content sha256:", content_hash, flush=True)
 
 with tempfile.TemporaryDirectory(prefix="mns2_v211_ci_") as td:
     out = Path(td) / "v211"
