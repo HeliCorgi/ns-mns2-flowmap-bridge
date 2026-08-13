@@ -10,7 +10,7 @@ import numpy as np
 
 repo = Path(__file__).resolve().parents[1]
 runner = repo / "src" / "bridge" / "mns2_path_correction_pod_bridge_v2.11.py"
-seed = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_SEED_V2.2.npz"
+generator = repo / "tests" / "data" / "generate_mns2_synthetic_seed_v2_2.py"
 meta = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_META_V2.2.json"
 schedule = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_SCHEDULE_V2.2.json"
 
@@ -23,15 +23,21 @@ def canonical_seed_content_hash(path: Path) -> str:
         h.update(key.encode() + b"\0")
         h.update(a.dtype.str.encode() + b"\0")
         h.update(str(a.shape).encode() + b"\0")
-        h.update(a.tobytes())
+        h.update(a.tobytes(order="C"))
     return h.hexdigest()
 
 
-content_hash = canonical_seed_content_hash(seed)
-print("seed canonical content sha256:", content_hash, flush=True)
-
 with tempfile.TemporaryDirectory(prefix="mns2_v211_ci_") as td:
-    out = Path(td) / "v211"
+    td = Path(td)
+    seed = td / "MNS2_SYNTHETIC_2COMP_BRIDGE_SEED_V2.2.npz"
+    out = td / "v211"
+
+    subprocess.run([sys.executable, str(generator), str(seed)], check=True)
+    expected_content_hash = json.loads(schedule.read_text())["seed_content_sha256"]
+    content_hash = canonical_seed_content_hash(seed)
+    print("seed canonical content sha256:", content_hash, flush=True)
+    assert content_hash == expected_content_hash
+
     subprocess.run([
         sys.executable, str(runner), str(seed), str(meta), str(schedule),
         "--out", str(out),
