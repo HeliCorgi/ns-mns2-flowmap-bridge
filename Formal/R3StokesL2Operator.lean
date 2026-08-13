@@ -15,8 +15,8 @@ abbrev R3C := EuclideanSpace ℂ (Fin 3)
 /--
 The first concrete bundled function-space carrier for the physical `R³` formal PDE layer.
 
-It is the complexified velocity space `L²(R³; ℂ³)`.  Complexification is used because mathlib's
-Plancherel/Fourier `L²` equivalence is formulated over complex-valued target spaces.  No claim is
+It is the complexified velocity space `L²(R³; ℂ³)`. Complexification is used because mathlib's
+Plancherel/Fourier `L²` equivalence is formulated over complex-valued target spaces. No claim is
 made here that this is already the final local-wellposedness carrier for Navier--Stokes.
 -/
 abbrev R3L2Velocity := Lp (α := R3) R3C 2 (volume : Measure R3)
@@ -62,9 +62,35 @@ theorem r3StokesScalarLpTop_ae
   unfold r3StokesScalarLpTop
   exact MemLp.coeFn_toLp _
 
-/-- Scalar multiplication on the complex three-component velocity fiber as a continuous bilinear map. -/
-def complexScalarActionR3C : ℂ →L[ℂ] R3C →L[ℂ] R3C :=
-  ContinuousLinearMap.lsmul ℂ ℂ
+/--
+Multiplication by a fixed complex `L∞` scalar field as a continuous linear map on
+`L²(R³; ℂ³)`.
+
+This is intentionally bundled directly from mathlib's heterogeneous `Lp` scalar multiplication,
+rather than through `ContinuousLinearMap.holderL`.  The latter exposes its result exponent as a
+`semiOutParam`, which is fragile for the concrete `∞ · 2 → 2` specialization.  Mathlib's direct
+`Lp` scalar-multiplication API exists precisely to avoid those unnecessary typeclass constraints.
+-/
+def r3L2ScalarMultiplier
+    (m : Lp ℂ ⊤ (volume : Measure R3)) :
+    R3L2Velocity →L[ℂ] R3L2Velocity := by
+  letI : ENNReal.HolderTriple (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞) := ⟨by simp⟩
+  let L : R3L2Velocity →ₗ[ℂ] R3L2Velocity :=
+    { toFun := fun f => (m • f : R3L2Velocity)
+      map_add' := by
+        intro f g
+        exact Lp.add_smul m f g
+      map_smul' := by
+        intro c f
+        exact (Lp.smul_comm c m f).symm }
+  exact L.mkContinuous ‖m‖ (fun f => Lp.norm_smul_le m f)
+
+/-- The direct scalar-multiplier CLM has the expected underlying `Lp` action. -/
+@[simp]
+theorem r3L2ScalarMultiplier_apply
+    (m : Lp ℂ ⊤ (volume : Measure R3)) (f : R3L2Velocity) :
+    r3L2ScalarMultiplier m f = (m • f : R3L2Velocity) := by
+  rfl
 
 /--
 The Stokes multiplier acting on the bundled Fourier-side space `L²(R³; ℂ³)`.
@@ -74,29 +100,23 @@ bounded continuous linear operator on a complete function space.
 -/
 def r3StokesL2FrequencyMultiplier
     {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t) :
-    R3L2Velocity →L[ℂ] R3L2Velocity := by
-  letI : ENNReal.HolderTriple (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞) := ⟨by simp⟩
-  exact (complexScalarActionR3C.holderL
-    (μ := (volume : Measure R3))
-    (p := (⊤ : ℝ≥0∞))
-    (q := (2 : ℝ≥0∞))
-    (r := (2 : ℝ≥0∞)))
-      (r3StokesScalarLpTop hν ht)
+    R3L2Velocity →L[ℂ] R3L2Velocity :=
+  r3L2ScalarMultiplier (r3StokesScalarLpTop hν ht)
 
 /-- Exact almost-everywhere pointwise realization of the bundled Fourier-side Stokes multiplier. -/
 theorem r3StokesL2FrequencyMultiplier_ae
     {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t) (f : R3L2Velocity) :
     r3StokesL2FrequencyMultiplier hν ht f =ᵐ[volume]
       fun ξ => r3StokesScalarComplex ν t ξ • f ξ := by
+  letI : ENNReal.HolderTriple (⊤ : ℝ≥0∞) (2 : ℝ≥0∞) (2 : ℝ≥0∞) := ⟨by simp⟩
   change
-    complexScalarActionR3C.holder 2 (r3StokesScalarLpTop hν ht) f =ᵐ[volume]
+    ((r3StokesScalarLpTop hν ht • f : R3L2Velocity) : R3 → R3C) =ᵐ[volume]
       fun ξ => r3StokesScalarComplex ν t ξ • f ξ
   filter_upwards
-    [complexScalarActionR3C.coeFn_holder (r3StokesScalarLpTop hν ht) f,
+    [Lp.coeFn_lpSMul (r3StokesScalarLpTop hν ht) f,
       r3StokesScalarLpTop_ae hν ht]
-    with ξ hholder hscalar
-  rw [hholder, hscalar]
-  rfl
+    with ξ hmul hscalar
+  rw [hmul, hscalar]
 
 /--
 The physical-space `L²(R³; ℂ³)` Stokes operator, defined by Fourier conjugation of the bounded
