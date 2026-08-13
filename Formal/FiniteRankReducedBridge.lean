@@ -32,7 +32,7 @@ theorem finiteRankPath_intervalIntegrable
   have hcont : Continuous (finiteRankPath ell a phi) := by
     unfold finiteRankPath
     fun_prop
-  exact hcont.intervalIntegrable (μ := volume)
+  exact hcont.intervalIntegrable (μ := volume) (0 : ℝ) 1
 
 /--
 The integral of a finite-rank path is the fixed reference plus the same basis vectors
@@ -50,18 +50,22 @@ theorem intervalIntegral_finiteRankPath
   rw [intervalIntegral.integral_add]
   · simp only [intervalIntegral.integral_const, sub_zero, one_smul]
     rw [intervalIntegral.integral_finsetSum]
-    · apply Finset.sum_congr rfl
-      intro i hi
-      rw [intervalIntegral.integral_smul_const]
+    · have hsum :
+          (∑ i, ∫ s in (0 : ℝ)..1, (a i s) • phi i) =
+            ∑ i, (∫ s in (0 : ℝ)..1, a i s) • phi i := by
+        apply Finset.sum_congr rfl
+        intro i hi
+        rw [intervalIntegral.integral_smul_const]
+      rw [hsum]
     · intro i hi
       have hterm : Continuous (fun s : ℝ => (a i s) • phi i) := by
         exact (ha i).smul continuous_const
-      exact hterm.intervalIntegrable (μ := volume)
+      exact hterm.intervalIntegrable (μ := volume) (0 : ℝ) 1
   · have hconst : Continuous (fun _ : ℝ => ell) := continuous_const
-    exact hconst.intervalIntegrable (μ := volume)
+    exact hconst.intervalIntegrable (μ := volume) (0 : ℝ) 1
   · have hsum : Continuous (fun s : ℝ => ∑ i, (a i s) • phi i) := by
       fun_prop
-    exact hsum.intervalIntegrable (μ := volume)
+    exact hsum.intervalIntegrable (μ := volume) (0 : ℝ) 1
 
 /--
 Finite-rank specialization of the radial reduced-bridge residual certificate.
