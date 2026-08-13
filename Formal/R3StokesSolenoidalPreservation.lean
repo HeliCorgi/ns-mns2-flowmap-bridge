@@ -13,9 +13,8 @@ theorem r3StokesL2Operator_mem_solenoidal
     r3StokesL2Operator hν ht f ∈ r3L2SolenoidalSubmodule := by
   have hf0 : r3NormalizedDivergenceFrequencyAux (𝓕 f) = 0 := by
     simpa [r3L2SolenoidalSubmodule, r3NormalizedDivergenceL2OperatorAux] using hf
-  change r3NormalizedDivergenceL2OperatorAux (r3StokesL2Operator hν ht f) = 0
-  rw [r3NormalizedDivergenceL2OperatorAux, ContinuousLinearMap.comp_apply,
-    fourier_r3StokesL2Operator,
+  change r3NormalizedDivergenceFrequencyAux (𝓕 (r3StokesL2Operator hν ht f)) = 0
+  rw [fourier_r3StokesL2Operator hν ht f,
     r3NormalizedDivergenceFrequencyAux_stokes hν ht f, hf0]
   simp
 
