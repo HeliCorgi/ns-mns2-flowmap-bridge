@@ -3,6 +3,7 @@ import Formal.MildSolutionSemantics
 import Formal.MildFlowMapBridge
 import Formal.MildZeroUniqueness
 import Formal.QuadraticMildNonlinearity
+import Formal.QuadraticLinearizedMild
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -35,6 +36,10 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.hasFDerivAt_quadraticDiagonal
 #print axioms MNS2.fderiv_quadraticDiagonal
 #print axioms MNS2.MildEvolutionKernel.ofQuadratic_zero_evolvesAt_zero
+#print axioms MNS2.quadraticLinearizedMild_equation_at_time_expanded
+#print axioms MNS2.quadraticMildTangentEvolvesAt_nonnegative
+#print axioms MNS2.quadraticMildTangentEvolvesAt_zero_eq_initial
+#print axioms MNS2.quadraticMildTangent_zero_evolvesAt_zero
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
