@@ -88,7 +88,7 @@ theorem r3LeraySymbol_self
   have hproj : (ℝ ∙ ξ : Submodule ℝ R3).starProjection ξ = ξ :=
     (Submodule.starProjection_eq_self_iff
       (K := (ℝ ∙ ξ : Submodule ℝ R3)) (v := ξ)).2 hspan
-  rw [r3LeraySymbol, r3SolenoidalFiber,
+  rw [r3LeraySymbol,
     Submodule.starProjection_orthogonal_val, hproj, sub_self]
 
 /--
@@ -102,7 +102,7 @@ theorem r3LeraySymbol_apply
     (ξ v : R3) :
     r3LeraySymbol ξ v =
       v - (inner ℝ ξ v / ‖ξ‖ ^ 2) • ξ := by
-  rw [r3LeraySymbol, r3SolenoidalFiber,
+  rw [r3LeraySymbol,
     Submodule.starProjection_orthogonal_val,
     Submodule.starProjection_singleton]
 
