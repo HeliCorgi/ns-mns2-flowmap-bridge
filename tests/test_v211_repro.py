@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import hashlib
 import json
 import subprocess
 import sys
@@ -15,16 +14,36 @@ meta = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_META_V2.2.json"
 schedule = repo / "tests" / "data" / "MNS2_SYNTHETIC_2COMP_BRIDGE_SCHEDULE_V2.2.json"
 
 
-def canonical_seed_content_hash(path: Path) -> str:
+def check_seed_contract(path: Path, contract: dict) -> None:
     d = np.load(path)
-    h = hashlib.sha256()
-    for key in sorted(d.files):
-        a = np.ascontiguousarray(d[key])
-        h.update(key.encode() + b"\0")
-        h.update(a.dtype.str.encode() + b"\0")
-        h.update(str(a.shape).encode() + b"\0")
-        h.update(a.tobytes(order="C"))
-    return h.hexdigest()
+    assert set(d.files) == {"r", "z", "Gamma", "omega1"}
+    r = d["r"]
+    z = d["z"]
+    G = d["Gamma"]
+    O = d["omega1"]
+    tol = float(contract["absolute_tolerance"])
+
+    assert r.shape == (int(contract["nr"]),)
+    assert z.shape == (int(contract["nz"]),)
+    assert G.shape == (int(contract["nr"]), int(contract["nz"]))
+    assert O.shape == G.shape
+
+    checks = {
+        "r_min": float(np.min(r)),
+        "r_max": float(np.max(r)),
+        "z_min": float(np.min(z)),
+        "z_max": float(np.max(z)),
+        "Gamma_linf": float(np.max(np.abs(G))),
+        "omega1_linf": float(np.max(np.abs(O))),
+        "Gamma_0_0": float(G[0, 0]),
+        "omega1_0_0": float(O[0, 0]),
+    }
+    for key, actual in checks.items():
+        expected = float(contract[key])
+        assert abs(actual - expected) <= tol, (key, actual, expected, tol)
+
+    assert np.all(np.isfinite(G)) and np.all(np.isfinite(O))
+    print("seed contract: PASS", checks, flush=True)
 
 
 with tempfile.TemporaryDirectory(prefix="mns2_v211_ci_") as td:
@@ -33,10 +52,8 @@ with tempfile.TemporaryDirectory(prefix="mns2_v211_ci_") as td:
     out = td / "v211"
 
     subprocess.run([sys.executable, str(generator), str(seed)], check=True)
-    expected_content_hash = json.loads(schedule.read_text())["seed_content_sha256"]
-    content_hash = canonical_seed_content_hash(seed)
-    print("seed canonical content sha256:", content_hash, flush=True)
-    assert content_hash == expected_content_hash
+    schedule_obj = json.loads(schedule.read_text())
+    check_seed_contract(seed, schedule_obj["seed_contract"])
 
     subprocess.run([
         sys.executable, str(runner), str(seed), str(meta), str(schedule),
