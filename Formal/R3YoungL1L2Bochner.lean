@@ -22,7 +22,10 @@ theorem norm_r3L2Translate (y : R3) (g : R3L2Velocity) :
 theorem continuous_r3L2Translate (g : R3L2Velocity) :
     Continuous (fun y : R3 => r3L2Translate y g) := by
   unfold r3L2Translate
-  fun_prop
+  have hneg : Continuous (fun y : R3 => -y) := continuous_neg
+  have hmk : Continuous (fun y : R3 => DomAddAct.mk (-y)) :=
+    DomAddAct.continuous_mk.comp hneg
+  exact hmk.vadd continuous_const
 
 /--
 The `L²`-valued Young integrand `f(y) τ_y g`, with `τ_y g(x) = g(x-y)`.
@@ -45,7 +48,10 @@ theorem continuous_r3YoungL2Integrand
     (f : R3SchwartzScalar) (g : R3L2Velocity) :
     Continuous (fun y : R3 => r3YoungL2Integrand f g y) := by
   unfold r3YoungL2Integrand
-  fun_prop
+  have hf : Continuous (fun y : R3 => f y) := f.continuous
+  have hg : Continuous (fun y : R3 => r3L2Translate y g) :=
+    continuous_r3L2Translate g
+  exact hf.smul hg
 
 /-- The `L²`-valued Young integrand is Bochner integrable for a Schwartz scalar input. -/
 theorem integrable_r3YoungL2Integrand
@@ -82,9 +88,9 @@ theorem norm_r3YoungConvolutionL2_le
     _ ≤ ∫ y : R3, ‖r3YoungL2Integrand f g y‖ :=
       norm_integral_le_integral_norm _
     _ = ∫ y : R3, ‖f y‖ * ‖g‖ := by
-      apply integral_congr
-      intro y
-      exact norm_r3YoungL2Integrand f g y
+      apply integral_congr_ae
+      exact Filter.Eventually.of_forall fun y =>
+        norm_r3YoungL2Integrand f g y
     _ = (∫ y : R3, ‖f y‖) * ‖g‖ := by
       rw [integral_mul_const]
 
