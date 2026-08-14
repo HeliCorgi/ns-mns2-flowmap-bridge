@@ -232,6 +232,19 @@ repo には abstract quadratic mild / tangent / continuation bridge はすでに
 - `docs/reports/` — 進捗レポ
 - `failcases/` — proof / numerical inference failcase 集
 
+## References and external formalizations
+
+この repo の最終 target と formalization の cross-check には、少なくとも次を参照している。
+
+- Clay Mathematics Institute, **Navier–Stokes Equation** — 公式 Millennium Prize problem page。最終的な acceptance criterion はこの公式 statement / Fefferman problem description を優先する。<https://www.claymath.org/millennium/navier-stokes-equation/>
+- Charles L. Fefferman, **Existence and Smoothness of the Navier–Stokes Equation** — Clay の公式 problem description。A/B/C/D の仮定・domain・decay・energy 条件の基準。
+- Robert Joseph George, **Formalization of the Millennium Prize Problem Statements in Lean 4**, version 2.0.0 (2026-07-11), `lean-dojo/LeanMillenniumPrizeProblems`, Apache-2.0. この repo では Clay/Fefferman statement の mechanized cross-check として参照しており、現時点では source code を vendoring していない。<https://github.com/lean-dojo/LeanMillenniumPrizeProblems>
+- **Mathlib** — Fourier transform、`Lp`、Hilbert-space projection、Euclidean-space infrastructure の基盤。この repo は `lake-manifest.json` / Lake configuration で revision を固定する。
+
+`LeanMillenniumPrizeProblems` との declaration-level の対応、`R3LerayL2Operator.lean` との非重複部分、Apache-2.0 の再利用方針、将来の semantic promotion obligations は [`docs/formal/LEAN_MILLENNIUM_ALIGNMENT.md`](docs/formal/LEAN_MILLENNIUM_ALIGNMENT.md) に整理している。
+
+外部 source code を将来コピー・改変して配布する場合は、README 上の citation だけで済ませず、その PR で applicable copyright / attribution notices、Apache-2.0 license 条件、変更表示を保持する。
+
 ## Claim discipline
 
 現状サポートされるラベルは
