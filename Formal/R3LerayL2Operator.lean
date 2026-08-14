@@ -5,6 +5,18 @@ namespace MNS2
 
 noncomputable section
 
+/-!
+`Submodule.starProjection` is available once Lean can synthesize
+`CompleteSpace r3L2SolenoidalSubmodule`.  The repository already proves that completeness in
+`r3HsSolenoidalVelocity_complete`, but that declaration is a theorem rather than a typeclass
+instance.  Install the same fact locally so mathlib can derive
+`Submodule.HasOrthogonalProjection` without changing the global instance graph.
+-/
+local instance r3L2SolenoidalSubmodule_completeSpace :
+    CompleteSpace r3L2SolenoidalSubmodule := by
+  change CompleteSpace r3NormalizedDivergenceL2OperatorAux.ker
+  infer_instance
+
 /--
 The physical-space Leray projector on `L²(R³; ℂ³)`, defined as the orthogonal projection onto the
 closed solenoidal submodule already constructed from normalized Fourier divergence.
