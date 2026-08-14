@@ -39,9 +39,11 @@ closed solenoidal L² carrier
         ↓
 physical-space L² Leray projector
         ↓
-Fourier-side solenoidal projector      ← いまここ
+Fourier-side solenoidal projector
         ↓
-pointwise matrix multiplier P(ξ)       ← 次
+complex pointwise Leray symbol on R3C  ← いまここ
+        ↓
+a.e. L² matrix-multiplier realization  ← 次
         ↓
 projected convection / actual mild NS
         ↓
@@ -57,16 +59,17 @@ local theory / continuation bridge
 - solenoidal carrier 上に制限した Stokes operator
 - `L²(R³; ℂ³)` 上の bounded orthogonal Leray projector
 - その projector の range / fixed-point / idempotence / contraction
+- physical-space Leray projector と frequency-side orthogonal projector の Plancherel conjugacy
 
-現在の作業 frontier は、physical-space Leray projector を Plancherel Fourier transform で frequency-side projector に移す bridge。
+現在の作業 frontier は、既存の real-valued fiber symbol を、実際の Fourier carrier `R3C = ℂ³` に載せた complex-linear Leray symbolへ移す部分。
 
-まだ未完なのは、frequency-side の抽象 orthogonal projector を、各周波数での explicit matrix symbol
+その次に、frequency-side の抽象 orthogonal projector を各周波数での explicit matrix symbol
 
 ```text
 P(ξ) = I - (ξ ⊗ ξ) / |ξ|²
 ```
 
-と almost everywhere で同一視する部分。その後に projected convection を実際の `R³` function-space operator として組む。
+と almost everywhere で同一視する。その後に projected convection を実際の `R³` function-space operator として組む。
 
 ## 主要な式はどこ？
 
@@ -98,7 +101,7 @@ L²_σ(R³) = ker(D_norm ∘ 𝓕)
 
 ### 2. Leray projector の pointwise symbol
 
-[`Formal/R3LerayFrequencySymbol.lean`](Formal/R3LerayFrequencySymbol.lean) に
+[`Formal/R3LerayFrequencySymbol.lean`](Formal/R3LerayFrequencySymbol.lean) に real fiber 版
 
 ```text
 P(ξ)v = v - ((ξ · v) / |ξ|²) ξ
@@ -106,13 +109,21 @@ P(ξ)v = v - ((ξ · v) / |ξ|²) ξ
 
 を証明済み。
 
-つまり matrix notation では
+現在は [`Formal/R3LerayComplexFiberSymbol.lean`](Formal/R3LerayComplexFiberSymbol.lean) で、実際の Fourier velocity fiber `R3C = ℂ³` に対する complex-linear 版
+
+```text
+P_C(ξ)v = v - (⟪ξ_C, v⟫ / ‖ξ_C‖²) ξ_C
+```
+
+を構成している。`ξ_C` は real frequency `ξ` の coordinatewise complex embedding。
+
+matrix notation では引き続き
 
 ```text
 P(ξ) = I - (ξ ⊗ ξ) / |ξ|².
 ```
 
-`ξ = 0` では identity になるよう Lean 側の定義と整合している。
+`ξ = 0` では identity になるよう定義と整合させる。
 
 ### 3. Stokes / heat semigroup
 
@@ -164,25 +175,21 @@ P_L² u = u       if u ∈ L²_σ
 
 ### 5. Fourier bridge
 
-現在の branch / PR で作業中なのが
-
-[`Formal/R3LerayFourierBridge.lean`](Formal/R3LerayFourierBridge.lean)。
-
-狙っている theorem は
+[`Formal/R3LerayFourierBridge.lean`](Formal/R3LerayFourierBridge.lean) で
 
 ```text
 𝓕(P_L² u) = P_freq(𝓕u)
 ```
 
-で、physical-space orthogonal projector と frequency-side orthogonal projector を Plancherel Fourier transform で conjugate する。
+を証明し、physical-space orthogonal projector と frequency-side orthogonal projector を Plancherel Fourier transform で conjugate している。
 
-その次に必要なのが
+残る主要 bridge は
 
 ```text
-P_freq f(ξ) = P(ξ) f(ξ)    a.e. ξ,
+P_freq f(ξ) = P_C(ξ) f(ξ)    a.e. ξ,
 ```
 
-つまり abstract Hilbert projection と上の explicit Leray matrix symbol の一致。
+つまり abstract Hilbert projection と explicit complex Leray matrix symbol の一致。
 
 ## Navier–Stokes 本体との距離
 
