@@ -1,5 +1,6 @@
 import Mathlib.MeasureTheory.Function.LpSpace.DomAct.Continuous
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.Topology.CompactOpen
 import Formal.R3H2WeightedConvolutionKernel
 
 namespace MNS2
@@ -8,24 +9,42 @@ open MeasureTheory
 
 noncomputable section
 
-/-- Translation of an `R³` `L²` velocity field by `y`, represented inside the domain-action API.
-The sign is chosen so that the underlying representative is `x ↦ g (x - y)`. -/
+/-- The physical translation map `x ↦ x - y` as a continuous self-map of `R³`. -/
+def r3TranslationMap (y : R3) : C(R3, R3) where
+  toFun x := x - y
+  continuous_toFun := continuous_id.sub continuous_const
+
+/-- The family `y ↦ (x ↦ x-y)` is continuous in the compact-open topology. -/
+theorem continuous_r3TranslationMap :
+    Continuous (fun y : R3 => r3TranslationMap y) := by
+  apply ContinuousMap.continuous_of_continuous_uncurry
+  change Continuous (fun p : R3 × R3 => p.2 - p.1)
+  exact continuous_snd.sub continuous_fst
+
+/-- Physical translations preserve Lebesgue volume on `R³`. -/
+theorem measurePreserving_r3TranslationMap (y : R3) :
+    MeasurePreserving (r3TranslationMap y) volume volume := by
+  simpa [r3TranslationMap] using
+    (measurePreserving_sub_right (volume : Measure R3) y)
+
+/-- Translation of an `R³` `L²` velocity field by `y`, defined directly through composition with
+the measure-preserving physical translation `x ↦ x-y`. -/
 def r3L2Translate (y : R3) (g : R3L2Velocity) : R3L2Velocity :=
-  DomAddAct.mk (-y) +ᵥ g
+  Lp.compMeasurePreserving (r3TranslationMap y)
+    (measurePreserving_r3TranslationMap y) g
 
 @[simp]
 theorem norm_r3L2Translate (y : R3) (g : R3L2Velocity) :
     ‖r3L2Translate y g‖ = ‖g‖ := by
-  simp [r3L2Translate]
+  exact Lp.norm_compMeasurePreserving g (measurePreserving_r3TranslationMap y)
 
 /-- The `L²` translation orbit is continuous in the translation parameter. -/
 theorem continuous_r3L2Translate (g : R3L2Velocity) :
     Continuous (fun y : R3 => r3L2Translate y g) := by
   unfold r3L2Translate
-  have hneg : Continuous (fun y : R3 => -y) := continuous_neg
-  have hmk : Continuous (fun y : R3 => DomAddAct.mk (-y)) :=
-    DomAddAct.continuous_mk.comp hneg
-  exact hmk.vadd continuous_const
+  have hg : Continuous (fun _ : R3 => g) := continuous_const
+  exact hg.compMeasurePreservingLp continuous_r3TranslationMap
+    (fun y => measurePreserving_r3TranslationMap y) (by simp)
 
 /--
 The `L²`-valued Young integrand `f(y) τ_y g`, with `τ_y g(x) = g(x-y)`.
