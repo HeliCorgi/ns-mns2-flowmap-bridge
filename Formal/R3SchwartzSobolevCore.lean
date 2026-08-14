@@ -25,12 +25,14 @@ carrier.  The stored coordinate is exactly `J^s f` in `L²`.
 def r3SchwartzToHsCLM (s : ℝ) :
     R3SchwartzVelocity →L[ℂ] R3HsVelocity s :=
   (SchwartzMap.toLpCLM ℂ R3C 2 (volume : Measure R3)).comp
-    (SchwartzMap.fourierMultiplierCLM R3C (r3SobolevWeightComplex s))
+    (SchwartzMap.fourierMultiplierCLM R3C
+      (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))))
 
 @[simp]
 theorem r3SchwartzToHsCLM_apply (s : ℝ) (f : R3SchwartzVelocity) :
     r3SchwartzToHsCLM s f =
-      (SchwartzMap.fourierMultiplierCLM R3C (r3SobolevWeightComplex s) f).toLp 2 := by
+      (SchwartzMap.fourierMultiplierCLM R3C
+        (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))) f).toLp 2 := by
   rfl
 
 /--
@@ -46,7 +48,7 @@ theorem besselPotential_schwartz_eq_r3SchwartzToHs_coordinate
       (F := R3C)
       (g := fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2)))
       (by fun_prop) f
-  simpa [r3L2ToTemperedCLM, r3SchwartzToHsCLM, r3SobolevWeightComplex,
+  simpa [r3L2ToTemperedCLM, r3SchwartzToHsCLM,
     TemperedDistribution.besselPotential] using h
 
 /-- Decoding the canonical `H^s` coordinate recovers the original Schwartz field exactly in `𝓢'`. -/
