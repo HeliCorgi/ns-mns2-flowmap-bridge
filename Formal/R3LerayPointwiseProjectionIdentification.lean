@@ -57,9 +57,13 @@ theorem inner_sub_r3LerayPointwiseL2_eq_zero
           (f ξ - r3LeraySymbolComplex ξ (f ξ))
           (g ξ) = 0 := by
     filter_upwards [ae_mem_r3ComplexSolenoidalFiber_of_frequency_solenoidal hg] with ξ hgξ
-    simpa [r3LeraySymbolComplex] using
-      (Submodule.starProjection_inner_eq_zero
-        (K := r3ComplexSolenoidalFiber ξ) (f ξ) (g ξ) hgξ)
+    change
+      inner ℂ
+        (f ξ - (r3ComplexSolenoidalFiber ξ).starProjection (f ξ))
+        (g ξ) = 0
+    exact
+      Submodule.starProjection_inner_eq_zero
+        (K := r3ComplexSolenoidalFiber ξ) (f ξ) (g ξ) hgξ
   calc
     ∫ ξ : R3, inner ℂ ((f - r3LerayPointwiseL2 f) ξ) (g ξ) ∂volume =
         ∫ ξ : R3, inner ℂ (f ξ - r3LeraySymbolComplex ξ (f ξ)) (g ξ) ∂volume := by
@@ -94,8 +98,20 @@ theorem fourier_r3LerayL2Operator_ae
     (f : R3L2Velocity) :
     𝓕 (r3LerayL2Operator f) =ᵐ[volume]
       fun ξ => r3LeraySymbolComplex ξ ((𝓕 f) ξ) := by
-  rw [fourier_r3LerayL2Operator]
-  exact r3LerayL2FrequencyOperator_ae (𝓕 f)
+  change
+    ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) (r3LerayL2Operator f) : R3 → R3C) =ᵐ[volume]
+      fun ξ =>
+        r3LeraySymbolComplex ξ
+          (((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f) ξ)
+  have hFourier :
+      (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) (r3LerayL2Operator f) =
+        r3LerayL2FrequencyOperator
+          ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f) := by
+    exact fourier_r3LerayL2Operator f
+  rw [hFourier]
+  exact
+    r3LerayL2FrequencyOperator_ae
+      ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f)
 
 end
 
