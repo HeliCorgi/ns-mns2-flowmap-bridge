@@ -15,6 +15,7 @@ def r3SobolevWeightComplex (s : ℝ) (ξ : R3) : ℂ :=
 /-- The Bessel weight has temperate growth for every real Sobolev order. -/
 theorem r3SobolevWeightComplex_hasTemperateGrowth (s : ℝ) :
     (r3SobolevWeightComplex s).HasTemperateGrowth := by
+  unfold r3SobolevWeightComplex
   fun_prop
 
 /--
@@ -42,8 +43,9 @@ theorem besselPotential_schwartz_eq_r3SchwartzToHs_coordinate
       r3L2ToTemperedCLM (r3SchwartzToHsCLM s f) := by
   have h :=
     TemperedDistribution.fourierMultiplierCLM_toTemperedDistributionCLM_eq
-      (F := R3C) (g := r3SobolevWeightComplex s)
-      (r3SobolevWeightComplex_hasTemperateGrowth s) f
+      (F := R3C)
+      (g := fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2)))
+      (by fun_prop) f
   simpa [r3L2ToTemperedCLM, r3SchwartzToHsCLM, r3SobolevWeightComplex,
     TemperedDistribution.besselPotential] using h
 
