@@ -48,11 +48,20 @@ theorem map_r3L2SolenoidalSubmodule_fourier :
   · rintro ⟨f, hf, rfl⟩
     exact (fourier_mem_r3L2FrequencySolenoidalSubmodule_iff f).2 hf
   · intro hg
-    refine ⟨𝓕⁻ g, ?_, ?_⟩
-    · apply (fourier_mem_r3L2FrequencySolenoidalSubmodule_iff (𝓕⁻ g)).1
-      simpa using hg
-    · simpa only using
-        (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).apply_symm_apply g
+    refine ⟨(MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).symm g, ?_, ?_⟩
+    · apply
+        (fourier_mem_r3L2FrequencySolenoidalSubmodule_iff
+          ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).symm g)).1
+      change
+        (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C)
+            ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).symm g) ∈
+          r3L2FrequencySolenoidalSubmodule
+      rw [(MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).apply_symm_apply]
+      exact hg
+    · change
+        (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C)
+            ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).symm g) = g
+      exact (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).apply_symm_apply g
 
 /-- Orthogonal projection onto the frequency-side normalized-divergence kernel. -/
 def r3LerayL2FrequencyOperator : R3L2Velocity →L[ℂ] R3L2Velocity :=
@@ -69,10 +78,15 @@ orthogonal projector onto the frequency-side divergence-free kernel. -/
 theorem fourier_r3LerayL2Operator (f : R3L2Velocity) :
     𝓕 (r3LerayL2Operator f) =
       r3LerayL2FrequencyOperator (𝓕 f) := by
+  change
+    (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) (r3LerayL2Operator f) =
+      r3LerayL2FrequencyOperator
+        ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f)
   have h :=
     Submodule.starProjection_map_apply
       (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C)
-      r3L2SolenoidalSubmodule (𝓕 f)
+      r3L2SolenoidalSubmodule
+      ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f)
   simpa [map_r3L2SolenoidalSubmodule_fourier,
     r3LerayL2Operator, r3LerayL2FrequencyOperator] using h.symm
 
