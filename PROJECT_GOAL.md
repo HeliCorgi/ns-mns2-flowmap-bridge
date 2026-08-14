@@ -14,6 +14,13 @@ Authoritative external target:
 
 - Clay Millennium problem page: `https://www.claymath.org/millennium/navier-stokes-equation/`
 
+Non-authoritative mechanized statement cross-check:
+
+- `https://github.com/lean-dojo/LeanMillenniumPrizeProblems`
+- local comparison/provenance note: [`docs/formal/LEAN_MILLENNIUM_ALIGNMENT.md`](docs/formal/LEAN_MILLENNIUM_ALIGNMENT.md)
+
+The Lean Millennium repository is useful for checking the shape of the formal A/B/C/D endpoint propositions, but it does not replace the official Clay/Fefferman statement. If the two ever disagree, the official statement controls. No source from that repository is currently vendored here.
+
 A final project-level success must establish one of the official statement classes A/B/C/D, with all hypotheses and domain conditions matched exactly rather than approximately or heuristically.
 
 Operationally:
