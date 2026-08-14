@@ -17,6 +17,7 @@ import Formal.R3LerayFrequencySymbol
 import Formal.R3StokesFrequencySymbol
 import Formal.R3StokesL2Operator
 import Formal.R3LerayL2Operator
+import Formal.R3LerayFourierBridge
 import Formal.R3SobolevCarrier
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
@@ -108,6 +109,10 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3LerayL2Operator_idempotent
 #print axioms MNS2.norm_r3LerayL2Operator_apply_le
 #print axioms MNS2.norm_r3LerayL2Operator_le_one
+#print axioms MNS2.fourier_mem_r3L2FrequencySolenoidalSubmodule_iff
+#print axioms MNS2.map_r3L2SolenoidalSubmodule_fourier
+#print axioms MNS2.r3LerayL2FrequencyOperator_mem_solenoidal
+#print axioms MNS2.fourier_r3LerayL2Operator
 #print axioms MNS2.besselPotential_r3HsToTempered_eq_coordinate
 #print axioms MNS2.r3HsToTempered_memSobolev
 #print axioms MNS2.r3HmToTempered_memSobolev
