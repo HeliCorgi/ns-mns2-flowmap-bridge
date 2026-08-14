@@ -96,13 +96,10 @@ theorem r3LerayL2FrequencyOperator_ae
 /-- The physical `L²` Leray projector has the expected explicit complex Fourier multiplier almost everywhere. -/
 theorem fourier_r3LerayL2Operator_ae
     (f : R3L2Velocity) :
-    𝓕 (r3LerayL2Operator f) =ᵐ[volume]
-      fun ξ => r3LeraySymbolComplex ξ ((𝓕 f) ξ) := by
-  change
     ((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) (r3LerayL2Operator f) : R3 → R3C) =ᵐ[volume]
       fun ξ =>
         r3LeraySymbolComplex ξ
-          (((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f) ξ)
+          (((MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) f) ξ) := by
   have hFourier :
       (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C) (r3LerayL2Operator f) =
         r3LerayL2FrequencyOperator
