@@ -27,17 +27,19 @@ theorem norm_r3SchwartzToHsCLM_eq_frequencyCoordinate
     ‖r3SchwartzToHsCLM s f‖ =
       ‖(r3SchwartzSobolevFrequencyCoordinate s f).toLp 2 (volume : Measure R3)‖ := by
   rw [r3SchwartzToHsCLM_apply]
+  let h : R3SchwartzVelocity :=
+    SchwartzMap.fourierMultiplierCLM R3C
+      (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))) f
+  change ‖h.toLp 2 (volume : Measure R3)‖ =
+    ‖(r3SchwartzSobolevFrequencyCoordinate s f).toLp 2 (volume : Measure R3)‖
   calc
-    ‖(SchwartzMap.fourierMultiplierCLM R3C
-        (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))) f).toLp 2‖ =
-        ‖𝓕 ((SchwartzMap.fourierMultiplierCLM R3C
-          (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))) f).toLp 2)‖ := by
+    ‖h.toLp 2 (volume : Measure R3)‖ = ‖𝓕 (h.toLp 2 (volume : Measure R3))‖ := by
       symm
       exact Lp.norm_fourier_eq _
-    _ = ‖(𝓕 (SchwartzMap.fourierMultiplierCLM R3C
-          (fun ξ : R3 => Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (s / 2))) f)).toLp 2‖ := by
+    _ = ‖(𝓕 h).toLp 2 (volume : Measure R3)‖ := by
       rw [SchwartzMap.toLp_fourier_eq]
-    _ = ‖(r3SchwartzSobolevFrequencyCoordinate s f).toLp 2‖ := by
+    _ = ‖(r3SchwartzSobolevFrequencyCoordinate s f).toLp 2 (volume : Measure R3)‖ := by
+      dsimp [h]
       rw [fourier_r3SchwartzBesselCoordinate]
 
 /-- The order-two Bessel weight is pointwise dominated by the order-three Bessel weight. -/
@@ -46,19 +48,22 @@ theorem norm_r3SobolevWeight_two_le_three (ξ : R3) :
       ‖Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ ((3 : ℝ) / 2))‖ := by
   have hbase : 1 ≤ 1 + ‖ξ‖ ^ 2 := by
     nlinarith [sq_nonneg ‖ξ‖]
-  have hrpow :
-      (1 + ‖ξ‖ ^ 2) ^ ((2 : ℝ) / 2) ≤
-        (1 + ‖ξ‖ ^ 2) ^ ((3 : ℝ) / 2) := by
-    exact Real.rpow_le_rpow_of_exponent_le hbase (by norm_num)
-  simpa [Real.norm_of_nonneg (by positivity)] using hrpow
+  have hnonneg : 0 ≤ 1 + ‖ξ‖ ^ 2 := le_trans (by norm_num) hbase
+  have h2nonneg : 0 ≤ (1 + ‖ξ‖ ^ 2) ^ ((2 : ℝ) / 2) :=
+    Real.rpow_nonneg hnonneg _
+  have h3nonneg : 0 ≤ (1 + ‖ξ‖ ^ 2) ^ ((3 : ℝ) / 2) :=
+    Real.rpow_nonneg hnonneg _
+  rw [Complex.norm_of_nonneg h2nonneg, Complex.norm_of_nonneg h3nonneg]
+  exact Real.rpow_le_rpow_of_exponent_le hbase (by norm_num)
 
 /-- Pointwise domination of the weighted Fourier representatives at orders two and three. -/
 theorem norm_r3SchwartzSobolevFrequencyCoordinate_two_le_three
     (f : R3SchwartzVelocity) (ξ : R3) :
     ‖r3SchwartzSobolevFrequencyCoordinate 2 f ξ‖ ≤
       ‖r3SchwartzSobolevFrequencyCoordinate 3 f ξ‖ := by
-  simp only [r3SchwartzSobolevFrequencyCoordinate, SchwartzMap.smulLeftCLM_apply,
-    norm_smul]
+  unfold r3SchwartzSobolevFrequencyCoordinate
+  rw [SchwartzMap.smulLeftCLM_apply_apply (by fun_prop),
+    SchwartzMap.smulLeftCLM_apply_apply (by fun_prop), norm_smul, norm_smul]
   exact mul_le_mul_of_nonneg_right (norm_r3SobolevWeight_two_le_three ξ)
     (norm_nonneg (𝓕 f ξ))
 
