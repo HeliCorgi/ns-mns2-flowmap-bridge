@@ -39,7 +39,7 @@ theorem r3H2InverseBesselWeightComplex_memLp :
         ((1 : ℝ) + ‖ξ‖ ^ 2) ^ (-2 : ℝ) =
           (((1 : ℝ) + ‖ξ‖ ^ 2)⁻¹) ^ 2 := by
       rw [show (-2 : ℝ) = -(2 : ℝ) by norm_num,
-        Real.rpow_neg_eq_inv_rpow, Real.rpow_natCast]
+        Real.rpow_neg_eq_inv_rpow]
     have hnegOne :
         ((1 : ℝ) + ‖ξ‖ ^ 2) ^ (-1 : ℝ) =
           ((1 : ℝ) + ‖ξ‖ ^ 2)⁻¹ := by
