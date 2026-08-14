@@ -15,6 +15,7 @@ theorem inner_r3FrequencyVectorComplex_eq_rawDivergencePointwise
       r3RawDivergencePointwise ξ v := by
   rw [PiLp.inner_apply, Fin.sum_univ_three]
   simp [r3FrequencyVectorComplex, r3RawDivergencePointwise]
+  ring
 
 /--
 Membership in the complex transverse fiber is equivalent to vanishing raw Fourier divergence.
