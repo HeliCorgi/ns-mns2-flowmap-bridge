@@ -51,7 +51,8 @@ theorem map_r3L2SolenoidalSubmodule_fourier :
     refine ⟨𝓕⁻ g, ?_, ?_⟩
     · apply (fourier_mem_r3L2FrequencySolenoidalSubmodule_iff (𝓕⁻ g)).1
       simpa using hg
-    · simp
+    · simpa only using
+        (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C).apply_symm_apply g
 
 /-- Orthogonal projection onto the frequency-side normalized-divergence kernel. -/
 def r3LerayL2FrequencyOperator : R3L2Velocity →L[ℂ] R3L2Velocity :=
@@ -72,8 +73,8 @@ theorem fourier_r3LerayL2Operator (f : R3L2Velocity) :
     Submodule.starProjection_map_apply
       (MeasureTheory.Lp.fourierTransformₗᵢ R3 R3C)
       r3L2SolenoidalSubmodule (𝓕 f)
-  rw [map_r3L2SolenoidalSubmodule_fourier] at h
-  simpa [r3LerayL2Operator, r3LerayL2FrequencyOperator] using h.symm
+  simpa [map_r3L2SolenoidalSubmodule_fourier,
+    r3LerayL2Operator, r3LerayL2FrequencyOperator] using h.symm
 
 end
 
