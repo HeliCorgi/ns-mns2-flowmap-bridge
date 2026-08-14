@@ -8,7 +8,7 @@ noncomputable section
 theorem one_le_r3H2BesselWeight (ξ : R3) :
     1 ≤ r3H2BesselWeight ξ := by
   unfold r3H2BesselWeight
-  positivity
+  nlinarith [sq_nonneg ‖ξ‖]
 
 /--
 Pointwise frequency kernel for a scalar factor acting on a complexified velocity factor.
