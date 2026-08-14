@@ -15,24 +15,21 @@ noncomputable section
 def r3H2InverseBesselWeightComplex (ξ : R3) : ℂ :=
   Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ))
 
-/-- The inverse order-two Bessel weight is continuous. -/
-theorem continuous_r3H2InverseBesselWeightComplex :
-    Continuous r3H2InverseBesselWeightComplex := by
-  unfold r3H2InverseBesselWeightComplex
-  fun_prop
-
 /-- In dimension three, the inverse order-two Bessel weight belongs to `L²`. -/
 theorem r3H2InverseBesselWeightComplex_memLp :
     MemLp r3H2InverseBesselWeightComplex 2 (volume : Measure R3) := by
   have hreal :
       MemLp (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)) 2 (volume : Measure R3) := by
     constructor
-    · exact (by fun_prop : Continuous (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ))).aestronglyMeasurable
+    · have hg :
+          (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)).HasTemperateGrowth := by
+        fun_prop
+      exact hg.1.continuous.aestronglyMeasurable
     · rw [eLpNorm_lt_top_iff_lintegral_rpow_enorm_lt_top (by norm_num) (by norm_num)]
       suffices h :
           (∫⁻ ξ : R3, ENNReal.ofReal ‖(1 + ‖ξ‖ ^ 2) ^ (-2 : ℝ)‖) < ⊤ from by
         norm_cast
-        simp_rw [ENNReal.ofReal_norm] at h
+        simp_rw [ofReal_norm] at h
         simp_rw [← enorm_pow]
         convert h
         rw [← Real.rpow_mul_natCast (by positivity)]
@@ -61,11 +58,14 @@ theorem r3H2InverseBesselWeightComplex_mul_weight_two (ξ : R3) :
     r3H2InverseBesselWeightComplex ξ * r3SobolevWeightComplex 2 ξ = 1 := by
   unfold r3H2InverseBesselWeightComplex r3SobolevWeightComplex
   have hbase : 0 < (1 : ℝ) + ‖ξ‖ ^ 2 := by positivity
-  norm_num
+  change Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)) *
+      Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ ((2 : ℝ) / 2)) = Complex.ofReal 1
   rw [← Complex.ofReal_mul]
   congr 1
-  rw [← Real.rpow_add hbase]
-  norm_num
+  have htwo : (2 : ℝ) / 2 = 1 := by norm_num
+  rw [htwo, Real.rpow_one]
+  have hneg : (-1 : ℝ) = -(1 : ℝ) := by norm_num
+  rw [hneg, Real.rpow_neg_eq_inv_rpow, Real.rpow_one, inv_mul_cancel₀ hbase.ne']
 
 /-- Multiplying an order-two weighted scalar Schwartz field by the inverse weight recovers it. -/
 theorem r3H2InverseBesselWeightComplex_smul_weightedScalar
@@ -73,8 +73,7 @@ theorem r3H2InverseBesselWeightComplex_smul_weightedScalar
     r3H2InverseBesselWeightComplex ξ • r3H2WeightedScalarSchwartz a ξ = a ξ := by
   rw [r3H2WeightedScalarSchwartz,
     SchwartzMap.smulLeftCLM_apply_apply (r3SobolevWeightComplex_hasTemperateGrowth 2)]
-  change (r3H2InverseBesselWeightComplex ξ * r3SobolevWeightComplex 2 ξ) * a ξ = a ξ
-  rw [r3H2InverseBesselWeightComplex_mul_weight_two]
+  rw [smul_smul, r3H2InverseBesselWeightComplex_mul_weight_two]
   simp
 
 /--
@@ -83,15 +82,13 @@ Bessel weight in `L²`.  Hölder's `2 · 2 → 1` multiplication is provided dir
 heterogeneous `Lp` scalar multiplication.
 -/
 def r3H2ScalarL1Reconstruction (a : R3SchwartzScalar) :
-    Lp ℂ 1 (volume : Measure R3) := by
-  letI : ENNReal.HolderTriple (2 : ℝ≥0∞) (2 : ℝ≥0∞) (1 : ℝ≥0∞) := ⟨by norm_num⟩
-  exact r3H2InverseBesselWeightL2 •
+    Lp ℂ 1 (volume : Measure R3) :=
+  r3H2InverseBesselWeightL2 •
     (r3H2WeightedScalarSchwartz a).toLp 2 (volume : Measure R3)
 
 /-- The `L¹` reconstruction agrees almost everywhere with the original scalar Schwartz field. -/
 theorem r3H2ScalarL1Reconstruction_ae (a : R3SchwartzScalar) :
     r3H2ScalarL1Reconstruction a =ᵐ[volume] a := by
-  letI : ENNReal.HolderTriple (2 : ℝ≥0∞) (2 : ℝ≥0∞) (1 : ℝ≥0∞) := ⟨by norm_num⟩
   unfold r3H2ScalarL1Reconstruction
   filter_upwards [
     r3H2InverseBesselWeightL2_ae,
@@ -99,7 +96,7 @@ theorem r3H2ScalarL1Reconstruction_ae (a : R3SchwartzScalar) :
     Lp.coeFn_lpSMul (r := (1 : ℝ≥0∞)) r3H2InverseBesselWeightL2
       ((r3H2WeightedScalarSchwartz a).toLp 2 (volume : Measure R3))]
     with ξ hinv hweight hsmul
-  rw [hsmul, hinv, hweight]
+  rw [hsmul, Pi.smul_apply', hinv, hweight]
   exact r3H2InverseBesselWeightComplex_smul_weightedScalar a ξ
 
 /-- Cauchy--Schwarz in `Lp` form for the inverse-weight reconstruction. -/
@@ -107,7 +104,6 @@ theorem norm_r3H2ScalarL1Reconstruction_le (a : R3SchwartzScalar) :
     ‖r3H2ScalarL1Reconstruction a‖ ≤
       ‖r3H2InverseBesselWeightL2‖ *
         ‖(r3H2WeightedScalarSchwartz a).toLp 2 (volume : Measure R3)‖ := by
-  letI : ENNReal.HolderTriple (2 : ℝ≥0∞) (2 : ℝ≥0∞) (1 : ℝ≥0∞) := ⟨by norm_num⟩
   unfold r3H2ScalarL1Reconstruction
   exact Lp.norm_smul_le _ _
 
