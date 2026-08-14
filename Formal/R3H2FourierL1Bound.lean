@@ -20,27 +20,32 @@ theorem r3H2InverseBesselWeightComplex_memLp :
     MemLp r3H2InverseBesselWeightComplex 2 (volume : Measure R3) := by
   have hreal :
       MemLp (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)) 2 (volume : Measure R3) := by
-    constructor
-    · have hg :
-          (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)).HasTemperateGrowth := by
-        fun_prop
-      exact hg.1.continuous.aestronglyMeasurable
-    · rw [eLpNorm_lt_top_iff_lintegral_rpow_enorm_lt_top (by norm_num) (by norm_num)]
-      suffices h :
-          (∫⁻ ξ : R3, ENNReal.ofReal ‖(1 + ‖ξ‖ ^ 2) ^ (-2 : ℝ)‖) < ⊤ from by
-        norm_cast
-        simp_rw [ofReal_norm] at h
-        simp_rw [← enorm_pow]
-        convert h
-        rw [← Real.rpow_mul_natCast (by positivity)]
-        norm_num
-      have hdim : (Module.finrank ℝ R3 : ℝ) < 4 := by
-        norm_num [R3]
-      apply ((integrable_rpow_neg_one_add_norm_sq (μ := (volume : Measure R3)) hdim).congr _).lintegral_lt_top
-      filter_upwards with ξ
-      rw [Real.norm_eq_abs, abs_eq_self.mpr (by positivity)]
-      congr 1
-      norm_num
+    have hg :
+        (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ)).HasTemperateGrowth := by
+      fun_prop
+    have hmeas :
+        AEStronglyMeasurable
+          (fun ξ : R3 => (1 + ‖ξ‖ ^ 2) ^ (-1 : ℝ))
+          (volume : Measure R3) :=
+      hg.1.continuous.aestronglyMeasurable
+    rw [memLp_two_iff_integrable_sq hmeas]
+    have hdim : (Module.finrank ℝ R3 : ℝ) < 4 := by
+      norm_num [R3]
+    refine (integrable_rpow_neg_one_add_norm_sq
+      (μ := (volume : Measure R3)) hdim).congr ?_
+    filter_upwards with ξ
+    have hbase : 0 < (1 : ℝ) + ‖ξ‖ ^ 2 := by positivity
+    have hnegTwo :
+        ((1 : ℝ) + ‖ξ‖ ^ 2) ^ (-2 : ℝ) =
+          (((1 : ℝ) + ‖ξ‖ ^ 2)⁻¹) ^ 2 := by
+      rw [show (-2 : ℝ) = -(2 : ℝ) by norm_num,
+        Real.rpow_neg_eq_inv_rpow, Real.rpow_natCast]
+    have hnegOne :
+        ((1 : ℝ) + ‖ξ‖ ^ 2) ^ (-1 : ℝ) =
+          ((1 : ℝ) + ‖ξ‖ ^ 2)⁻¹ := by
+      rw [show (-1 : ℝ) = -(1 : ℝ) by norm_num,
+        Real.rpow_neg_eq_inv_rpow, Real.rpow_one]
+    rw [show (-(4 : ℝ) / 2) = (-2 : ℝ) by norm_num, hnegTwo, hnegOne]
   exact hreal.ofReal
 
 /-- The inverse order-two Bessel weight bundled as an `L²` scalar field. -/
