@@ -39,7 +39,15 @@ theorem norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_scalarM
           MemLp.coeFn_toLp (memLp_r3H2LeftScalarMajorant a b),
           MemLp.coeFn_toLp (memLp_r3H2RightScalarMajorant a b)]
         with ξ hweighted hadd hleft hright
-      rw [hweighted, hadd, hleft, hright]
+      have hleft' :
+          (r3H2LeftScalarMajorantL2 a b : R3 → ℝ) ξ =
+            r3H2LeftScalarMajorant a b ξ := by
+        simpa [r3H2LeftScalarMajorantL2] using hleft
+      have hright' :
+          (r3H2RightScalarMajorantL2 a b : R3 → ℝ) ξ =
+            r3H2RightScalarMajorant a b ξ := by
+        simpa [r3H2RightScalarMajorantL2] using hright
+      rw [hweighted, hadd, hleft', hright']
       rw [Real.norm_of_nonneg
         (add_nonneg (r3H2LeftScalarMajorant_nonneg a b ξ)
           (r3H2RightScalarMajorant_nonneg a b ξ))]
@@ -101,14 +109,15 @@ theorem norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFa
             ‖(r3H2WeightedVelocitySchwartz
                 (𝓕 (r3SchwartzCoordinateDerivative i v))).toLp
                 2 (volume : Measure R3)‖) := by
-      apply mul_le_mul_of_nonneg_left _ (by norm_num)
-      exact add_le_add
-        (norm_r3H2LeftScalarMajorantL2_le
-          (𝓕 (r3SchwartzCoordinate i u))
-          (𝓕 (r3SchwartzCoordinateDerivative i v)))
-        (norm_r3H2RightScalarMajorantL2_le
-          (𝓕 (r3SchwartzCoordinate i u))
-          (𝓕 (r3SchwartzCoordinateDerivative i v)))
+      exact mul_le_mul_of_nonneg_left
+        (add_le_add
+          (norm_r3H2LeftScalarMajorantL2_le
+            (𝓕 (r3SchwartzCoordinate i u))
+            (𝓕 (r3SchwartzCoordinateDerivative i v)))
+          (norm_r3H2RightScalarMajorantL2_le
+            (𝓕 (r3SchwartzCoordinate i u))
+            (𝓕 (r3SchwartzCoordinateDerivative i v))))
+        (by norm_num)
 
 end
 
