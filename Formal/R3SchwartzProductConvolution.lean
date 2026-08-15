@@ -14,10 +14,10 @@ theorem r3Schwartz_fourier_fourier_apply
     {F : Type*} [NormedAddCommGroup F] [NormedSpace ℂ F] [CompleteSpace F]
     (f : SchwartzMap R3 F) (ξ : R3) :
     (𝓕 (𝓕 f)) ξ = f (-ξ) := by
-  have h : (𝓕⁻ (𝓕 f) : SchwartzMap R3 F) = f := by
+  have hξ : (𝓕⁻ (𝓕 f) : SchwartzMap R3 F) (-ξ) = f (-ξ) := by
     simp
-  have hξ := congrArg (fun g : SchwartzMap R3 F => g (-ξ)) h
-  simpa [SchwartzMap.fourierInv_apply_eq] using hξ
+  rw [SchwartzMap.fourierInv_apply_eq] at hξ
+  simpa using hξ
 
 /-- Exact product--convolution identity on `R³` Schwartz fields for an arbitrary continuous
 complex-bilinear fiber map. -/
@@ -72,7 +72,13 @@ theorem fourier_r3SchwartzConvectionTerm_apply_eq_integral
           (𝓕 (r3SchwartzCoordinateDerivative i v)) η := by
   rw [fourier_r3SchwartzConvectionTerm_eq_convolution]
   rw [SchwartzMap.convolution_apply]
-  rfl
+  simpa using
+    (MeasureTheory.convolution_eq_swap
+      (L := ContinuousLinearMap.lsmul ℂ ℂ : ℂ →L[ℂ] R3C →L[ℂ] R3C)
+      (f := fun η : R3 => (𝓕 (r3SchwartzCoordinate i u)) η)
+      (g := fun η : R3 => (𝓕 (r3SchwartzCoordinateDerivative i v)) η)
+      (μ := (volume : Measure R3))
+      (x := ξ))
 
 end
 
