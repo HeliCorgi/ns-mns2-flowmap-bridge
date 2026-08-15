@@ -122,7 +122,7 @@ theorem norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFa
         norm_r3H2RightScalarMajorantL2_le
           (𝓕 (r3SchwartzCoordinate i u))
           (𝓕 (r3SchwartzCoordinateDerivative i v))
-      nlinarith
+      exact mul_le_mul_of_nonneg_left (add_le_add hleft hright) (by norm_num)
 
 end
 
