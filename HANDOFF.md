@@ -1,12 +1,12 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-15 18:57 JST.
+Last updated: 2026-08-15 19:20 JST.
 
 This is the short-form continuation point for future GPT/Codex sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
 ## Resume protocol
 
-Read `docs/GPT_WORKFLOW.md` and follow it. In short, read in order:
+Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 
 1. `PROJECT_GOAL.md`;
 2. `SPEC.md`;
@@ -16,189 +16,174 @@ Read `docs/GPT_WORKFLOW.md` and follow it. In short, read in order:
 6. `docs/LEAN_CI_OPERATIONS.md`;
 7. current GitHub `main`, relevant `Formal/` files, open PRs, and latest Lean CI.
 
-For research constraints and claim boundaries, the governing specifications control. For the actual formal frontier, current theorem statements and repository state control. If this handoff is stale, update it after inspecting the code.
+Current code and theorem statements override stale prose.
 
-## Current repository state
+## Repository / CI state
 
-Current `main` before this handoff sync was:
+- PR #77 (`Cut hosted Lean CI usage and add cache`) is merged.
+- Its corrected Lean run #243 (`31876755438`) completed successfully.
+- PR #78 (`Gpt handoff protocol`) is merged.
+- Its Lean run #244 (`31877304381`) completed successfully.
+- At the last check there were no open PRs.
+- Automatic full Lean builds on pushes to `main` are disabled.
+- PR-to-`main` Lean checks remain, with concurrency cancellation and `.lake`/mathlib caching.
+- Local/self-hosted Lean is the preferred compiler path; hosted Actions are a scarce fallback.
 
-`d5846f8618a65af52b5c8a5d61f101e67502ceb7`
+`main` before this handoff update was `31fbb516a43ed7fa2ade5e4ecebea51f33a1befe`.
 
-which merged **PR #78 — `Gpt handoff protocol`**.
+## Project claim boundary
 
-Latest merged mathematical PR remains **#76 — `Bundle H2 norm fields in real L2`**.
+Ultimate target: an exact official Clay/Fefferman Navier–Stokes A/B/C/D statement.
 
-CI migration **PR #77 — `Cut hosted Lean CI usage and add cache`** is merged. Its replacement Lean run **#243** (`31876755438`) completed successfully after committing `lake-manifest.json` for the pinned dependency graph.
+Current physical research specialization remains the `R^3`, preferably unforced `f = 0`, axisymmetric-with-swirl breakdown track governed by `SPEC.md`.
 
-Documentation PR **#78** also completed Lean run **#244** (`31877304381`) successfully and is merged.
-
-At the last check there were **no open pull requests**.
-
-The active hosted-CI policy is now:
-
-- PRs to `main` emit the Lean required check;
-- automatic full Lean rebuilds on pushes to `main` are disabled;
-- superseded PR runs are cancelled;
-- `leanprover/lean-action@v1` restores/saves `.lake` and uses the mathlib cache;
-- local/self-hosted Lean is the preferred normal compiler path;
-- `workflow_dispatch` remains available.
-
-See `docs/LEAN_CI_OPERATIONS.md`.
-
-## Governing project target
-
-Ultimate acceptance target: rigorously establish one of the official Clay/Fefferman Navier--Stokes statements A/B/C/D with the exact official hypotheses and domain.
-
-Current primary physical research track: breakdown side (C/D), preferably unforced `f = 0` when mathematically supportable, with the `R^3` axisymmetric-with-swirl specialization governed by `SPEC.md`.
-
-No current Lean theorem is a Clay result.
+No current Lean theorem is a Clay result. Do not claim global regularity, blow-up, local well-posedness of the full concrete `R^3` problem, finite-cylinder transfer, or discrete-to-continuum promotion unless separately proved.
 
 ## Current formal target
 
-The active near-term theorem target is:
+The active near-term target is
 
 `R3SchwartzConvectionTermSobolevEstimate 3`
 
 from `Formal/R3SchwartzConvectionSobolevReduction.lean`.
 
-The existing reduction converts the one-coordinate convection estimate into the full summed convection estimate once the one-coordinate bound is available.
+Once the one-coordinate term estimate is proved, the existing `.to_convection` reduction supplies the full summed convection estimate with the factor-three summation loss.
 
-## Completed infrastructure for the current H³ → H² convection track
+## Merged infrastructure already available
 
-### Exact product/convolution representation
+The merged stack contains:
 
-`Formal/R3SchwartzProductConvolution.lean` proves the exact Fourier convolution formula for each physical convection summand.
+- exact Fourier product/convolution representation for `uᵢ ∂ᵢv`;
+- order-two Bessel-weight geometry and the pointwise H² frequency majorant;
+- named ordinary scalar majorants `r3H2LeftScalarMajorant` and `r3H2RightScalarMajorant`;
+- real bundled `L¹ * L² → L²` / `L² * L¹ → L²` Young estimates;
+- norm-field `L²` bundles and bundled Young candidates from merged PR #76;
+- H³-side Fourier `L¹`/`L²` estimates for coordinates and coordinate derivatives;
+- genuine function-space `L²(R³; ℂ³)` Stokes and Leray operators.
 
-### H² weight geometry and pointwise frequency majorant
+Relevant files include:
 
-The additive Bessel-weight stack includes:
-
-- `Formal/R3H2BesselWeightGeometry.lean`;
-- `Formal/R3H2WeightedConvolutionKernel.lean`;
-- `Formal/R3H2AdditiveConvolutionWeight.lean`;
-- `Formal/R3H2YoungWeightedBridge.lean`;
-- `Formal/R3SchwartzConvectionH2FrequencyMajorant.lean`.
-
-It bounds the H²-weighted Fourier norm of one convection summand by two scalar convolution-type integrals.
-
-### Ordinary scalar majorants
-
-`Formal/R3SchwartzConvectionScalarMajorants.lean` defines:
-
-- `r3H2LeftScalarMajorant`;
-- `r3H2RightScalarMajorant`.
-
-Lean proves the integrands are integrable, the majorants are nonnegative, and they are exactly ordinary real scalar convolutions of the relevant pointwise norm fields.
-
-### Real Young Bochner estimates
-
-`Formal/R3YoungRealL1L2Bochner.lean` defines the real `L²(R³)` Young construction and proves:
-
-- translation is norm preserving and continuous;
-- the `L²`-valued integrand is Bochner integrable for continuous real `L¹` data;
-- `L¹ * L² → L²` Young;
-- an argument-order `L² * L¹ → L²` wrapper and bound.
-
-### Norm-field L² bundles
-
-Merged #76 added `Formal/R3SchwartzNormFieldL2.lean`, defining:
-
-- `r3SchwartzScalarNormL2`;
-- `r3SchwartzVelocityNormL2`;
-- `r3H2LeftMajorantYoungL2`;
-- `r3H2RightMajorantYoungL2`.
-
-Lean proves the norm-field bundles agree a.e. with the literal pointwise norms, preserve the corresponding `L²` norms, and the two bundled Young candidates satisfy the expected Young bounds.
-
-### H³-side Fourier estimates already available
-
-Relevant existing files include:
-
-- `Formal/R3H2FourierL1Bound.lean`;
-- `Formal/R3H2VelocityFourierL1Bound.lean`;
+- `Formal/R3SchwartzProductConvolution.lean`;
+- `Formal/R3SchwartzConvectionH2FrequencyMajorant.lean`;
+- `Formal/R3SchwartzConvectionScalarMajorants.lean`;
+- `Formal/R3YoungRealL1L2Bochner.lean`;
+- `Formal/R3SchwartzNormFieldL2.lean`;
 - `Formal/R3H2CoordinateFourierBounds.lean`;
-- `Formal/R3H3DerivativeWeightGeometry.lean`;
-- `Formal/R3SchwartzDerivativeFrequencyBound.lean`;
-- `Formal/R3SchwartzDerivativeH3LpBounds.lean`.
+- `Formal/R3SchwartzDerivativeH3LpBounds.lean`;
+- `Formal/R3StokesL2Operator.lean`;
+- `Formal/R3LerayL2Operator.lean`.
 
-These supply the H³-side `L¹`/`L²` factors intended for the final convection estimate.
+## Active unverified working branch
 
-## Exact next analytic gate
+Branch:
 
-The missing theorem is an a.e. representative/Fubini identification between the **ordinary pointwise scalar convolutions** and the **bundled `L²` Bochner Young candidates**.
+`r3-young-real-set-integral-bridge`
 
-In shorthand, the project still needs to justify
+Latest branch commit at the time of this handoff:
 
-`r3H2LeftScalarMajorant a b  ≈ representative of r3H2LeftMajorantYoungL2 a b`
+`38cb22387b2576c80b4d886c8d0e1ed99b13e67e`
 
-and
+This branch is intentionally **not opened as a PR yet** because the current ChatGPT runtime has no local Lean/Lake binary and hosted Actions should not be used as an interactive compiler while quota is scarce. No workflow run was associated with the branch head at the last check.
 
-`r3H2RightScalarMajorant a b ≈ representative of r3H2RightMajorantYoungL2 a b`
+The branch is **candidate code only until a pinned local/self-hosted Lean build accepts it**.
 
-in the appropriate almost-everywhere sense.
+### Candidate files on the working branch
 
-### Do not assume
+`Formal/R3YoungRealSetIntegralBridge.lean`
 
-Do **not** silently identify these objects because their formulas look similar. `L²` elements are equivalence classes, the Bochner convolution is bundled, and the pointwise majorants are ordinary integrals. The bridge needs an actual Lean theorem using representative identities plus Fubini/Bochner-integral machinery, or an equivalent direct `L²` argument.
+Drafts the missing representative/Fubini bridge using actual mathlib APIs:
 
-Pinned mathlib `Mathlib/Analysis/Convolution.lean` explicitly still lists general `L^p` convolution measurability/existence results as TODOs, so do not assume a ready-made generic Young-convolution theorem is present.
+- a.e. representative of `r3L2RealTranslate`;
+- a.e. representative of `r3RealYoungL1L2Integrand`;
+- finite-set integral identity for the bundled Young convolution via `L2.inner_indicatorConstLp_one` and `integral_inner`;
+- transport of an explicit `L²` representative through translations;
+- finite-measure product integrability for a continuous uniformly bounded kernel;
+- Fubini swap via `integral_integral_swap`;
+- local integrability of the ordinary scalar convolution;
+- a.e. uniqueness via `ae_eq_of_forall_setIntegral_eq_of_sigmaFinite`.
 
-This is the immediate proof frontier.
+The intended generic conclusion is
 
-## Intended next sequence
+`r3RealYoungL1L2Convolution f g =ᵐ convolution f g₀`
 
-1. prove the representative/Fubini bridge for the real Young convolution, or an equivalent direct `L²` theorem for the ordinary scalar convolution;
-2. specialize it to the left and right H² scalar majorants;
-3. obtain `L²` bounds for both ordinary majorants from the bundled Young estimates;
-4. insert the existing H³ Fourier `L¹`/`L²` bounds;
+when `g =ᵐ g₀`, `f` is continuous/integrable, and `g₀` is continuous and uniformly bounded.
+
+`Formal/R3YoungRealConvolutionCommutativity.lean`
+
+Drafts the real scalar convolution commutativity helper needed for the left majorant orientation.
+
+`Formal/R3SchwartzMajorantYoungRepresentative.lean`
+
+Drafts the two specializations
+
+- `coeFn_r3H2RightMajorantYoungL2_eq_scalarMajorant`;
+- `coeFn_r3H2LeftMajorantYoungL2_eq_scalarMajorant`.
+
+These are the exact a.e. identifications that were missing after PR #76.
+
+`Formal/R3SchwartzScalarMajorantL2.lean`
+
+Drafts:
+
+- `MemLp` proofs for both ordinary scalar majorants;
+- canonical `L²` bundles for them;
+- equality of those bundles with the existing Young candidates;
+- transfer of the existing Young norm bounds to the ordinary majorants.
+
+`Formal/R3SchwartzConvectionH2L2Majorant.lean`
+
+Drafts the lift from the pointwise H² frequency majorant to an `L²` norm estimate for one physical convection summand, first in terms of the two scalar-majorant `L²` norms and then in terms of the four Young factors.
+
+## Exact proof frontier after the branch draft
+
+Do not assume the branch compiles. The next action is **not** to add more mathematics blindly. First run the pinned targeted builds locally/self-hosted, in dependency order:
+
+```bash
+bash scripts/lean-ci-local.sh Formal.R3YoungRealSetIntegralBridge
+bash scripts/lean-ci-local.sh Formal.R3YoungRealConvolutionCommutativity
+bash scripts/lean-ci-local.sh Formal.R3SchwartzMajorantYoungRepresentative
+bash scripts/lean-ci-local.sh Formal.R3SchwartzScalarMajorantL2
+bash scripts/lean-ci-local.sh Formal.R3SchwartzConvectionH2L2Majorant
+```
+
+Fix compiler errors locally without opening a PR merely to obtain compiler feedback.
+
+Likely syntax/inference hotspots to inspect first if Lean fails:
+
+- `L2.inner_indicatorConstLp_one` inference;
+- `integral_inner` orientation;
+- `Lp.coeFn_compMeasurePreserving` / translated a.e. equality transport;
+- `integral_integral_swap` with the restricted first measure;
+- `ae_eq_of_forall_setIntegral_eq_of_sigmaFinite` local-integrability arguments;
+- `ContinuousLinearMap.mul_apply'` simplification;
+- `change`/definitional reduction of the left/right Young candidates;
+- `Lp.coeFn_add` and `MemLp.coeFn_toLp` rewrites in the final H² `L²` lift.
+
+The mathlib APIs named above were checked against pinned mathlib `v4.32.1`, but theorem application syntax remains unverified until Lean runs.
+
+## After the working branch is green
+
+Then continue in this order:
+
+1. merge/land the representative and ordinary-majorant `L²` bridge;
+2. combine `Formal/R3SchwartzConvectionH2L2Majorant.lean` with the existing H³ coordinate/derivative Fourier estimates;
+3. handle the small commutation/bookkeeping gap between `𝓕 (r3SchwartzCoordinate i u)` and the coordinate of `𝓕 u` if it is not already available under a reusable theorem;
+4. obtain a uniform constant over `i : Fin 3` (a finite sum/max of the nonnegative derivative-frequency constants is sufficient if no sharper unit-coordinate lemma is used);
 5. prove `R3SchwartzConvectionTermSobolevEstimate 3`;
-6. use the existing reduction to prove the full `R3SchwartzConvectionSobolevEstimate 3`;
-7. only after that connect the estimate to the projected quadratic/mild operator layer.
+6. invoke the existing reduction for the full `R3SchwartzConvectionSobolevEstimate 3`;
+7. only then connect the resulting nonlinear estimate to the projected quadratic / mild-theory layer.
 
-## Concrete function-space progress already completed
-
-Do not regress to the old statement that only frequency-fiber Stokes/Leray objects exist.
-
-The repository now has genuine bundled `L²(R³; ℂ³)` infrastructure:
-
-- `Formal/R3StokesL2Operator.lean` constructs a Fourier-conjugated bounded Stokes operator;
-- `Formal/R3LerayL2Operator.lean` constructs the orthogonal `L²` Leray projector onto the closed solenoidal submodule;
-- later bridge files establish relevant Fourier/pointwise identifications and solenoidal preservation.
-
-What is still missing is not “any function-space lift”; the current blocker is the nonlinear Sobolev mapping estimate and the subsequent concrete mild-theory instantiation.
-
-## Hard nonclaims
-
-The repository still does **not** establish:
-
-- Clay A/B/C/D;
-- a Navier--Stokes blow-up counterexample;
-- arbitrary 3D global regularity;
-- a closed-form general solution;
-- `R3SchwartzConvectionTermSobolevEstimate 3`;
-- a complete local-wellposedness/C¹ solution-map theorem for the concrete `R^3` Navier--Stokes mild problem;
-- finite-cylinder-to-Clay-domain transfer;
-- discrete-to-continuum promotion of MNS-2 numerics.
-
-## External no-go preflight
-
-Before opening a new singularity mechanism or numerical promotion route, cross-check the read-only Fable5 registry named in `AGENTS.md`. Do not reopen `KILLED`/`REJECTED` routes without an explicit hypothesis escape, and preserve exact conditions on `CONDITIONAL` routes.
-
-This preflight is mainly for new physical/singularity mechanisms. It is not a substitute for the current function-space analytic proof work.
-
-## Lean and GitHub guardrails
+## Nonclaims / guardrails
 
 - no `sorry`;
 - no `admit`;
 - no new local `axiom`;
 - no source-level `opaque` proof hiding;
-- prefer mathlib APIs;
+- do not report the working branch as proved before Lean verification;
 - do not merge an ungreen mathematical PR;
 - do not auto-merge unless the user explicitly asks;
-- do not use hosted Actions as an interactive compiler while quota is scarce;
-- read exact CI logs before attempting a fix.
-
-The current ChatGPT execution environment has no local `lean`/`lake` binary. Therefore, a new mathematical change should be kept narrow and must not be reported as proved until reproduced by a local/self-hosted/pinned Lean build.
+- do not silently identify ordinary convolution with bundled Bochner convolution;
+- do not spend hosted Actions as an interactive compiler while quota is scarce.
 
 ## Minimal continuation prompt
 
