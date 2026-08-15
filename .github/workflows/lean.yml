@@ -1,8 +1,10 @@
 name: Lean 4 formalization
 
 on:
+  # Avoid immediately paying for the same full Lean build again after merging an
+  # already-green PR to main. Keep the legacy direct-work branch covered.
   push:
-    branches: ["main", "lean4-formalization"]
+    branches: ["lean4-formalization"]
     paths:
       - "Formal/**"
       - "lakefile.lean"
@@ -18,6 +20,12 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+
+# A new push to the same PR makes its previous build obsolete. Cancelling that
+# run prevents hosted minutes from being spent on a result that cannot be merged.
+concurrency:
+  group: lean-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -40,37 +48,14 @@ jobs:
             exit 1
           fi
 
-      - name: Install Elan and pinned Lean toolchain
-        shell: bash
-        run: |
-          set -euxo pipefail
-
-          # elan-init downloads the Elan release tarball from GitHub Releases.
-          # Treat transient 5xx/network failures as infrastructure noise rather
-          # than immediately failing the formalization build.
-          for attempt in 1 2 3 4 5; do
-            if curl --retry 3 --retry-all-errors --retry-delay 2 \
-                https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y; then
-              break
-            fi
-
-            if [ "$attempt" -eq 5 ]; then
-              echo "ERROR: Elan installation failed after ${attempt} attempts." >&2
-              exit 1
-            fi
-
-            sleep $((attempt * 5))
-          done
-
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          "$HOME/.elan/bin/lean" --version
-          "$HOME/.elan/bin/lake" --version
-
-      - name: Resolve Lake dependencies
-        run: lake update
-
-      - name: Fetch mathlib cache
-        run: lake exe cache get
-
-      - name: Build formalization and print axiom audit
-        run: lake build
+      # lean-action reads lean-toolchain, obtains the mathlib cache, runs the
+      # same default `lake build`, and caches `.lake` for compatible later runs.
+      - name: Build with cached Lean and Lake state
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: true
