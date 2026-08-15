@@ -6,7 +6,7 @@ import Formal.R3YoungRealL1L2Bochner
 namespace MNS2
 
 open MeasureTheory
-open scoped InnerProductSpace
+open scoped ENNReal InnerProductSpace
 
 noncomputable section
 
@@ -162,60 +162,28 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_pointwise_of_ae_of_bound
     _ = ∫ x in s, ∫ y : R3, f y * g₀ (x - y) :=
       integral_setIntegral_swap_r3RealYoungKernel hfi hg₀ C hC hs hμs
 
-/-- The ordinary real scalar convolution is a.e. strongly measurable for continuous factors. -/
-theorem aestronglyMeasurable_r3RealScalarConvolution
-    {f g₀ : R3 → ℝ} (hf : Continuous f) (hg₀ : Continuous g₀) :
-    AEStronglyMeasurable
-      (MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
-        (volume : Measure R3))
-      (volume : Measure R3) := by
-  have hjoint :
-      AEStronglyMeasurable
-        (fun z : R3 × R3 => f z.2 * g₀ (z.1 - z.2))
-        ((volume : Measure R3).prod (volume : Measure R3)) :=
-    ((hf.comp continuous_snd).mul
-      (hg₀.comp (continuous_fst.sub continuous_snd))).aestronglyMeasurable
-  simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using
-    hjoint.integral_prod_right'
-
-/-- Uniform pointwise bound for the ordinary real convolution when the second factor is bounded. -/
-theorem norm_r3RealScalarConvolution_le_of_bound
-    {f : R3 → ℝ} (hfi : Integrable f)
-    {g₀ : R3 → ℝ} (C : ℝ) (hC : ∀ x : R3, ‖g₀ x‖ ≤ C)
-    (x : R3) :
-    ‖MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
-        (volume : Measure R3) x‖ ≤
-      (∫ y : R3, ‖f y‖) * C := by
-  calc
-    ‖MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
-        (volume : Measure R3) x‖ ≤
-        ∫ y : R3, ‖f y‖ * C := by
-      unfold MeasureTheory.convolution
-      apply norm_integral_le_of_norm_le (hfi.norm.mul_const C)
-      filter_upwards with y
-      rw [ContinuousLinearMap.mul_apply', norm_mul]
-      exact mul_le_mul_of_nonneg_left (hC (x - y)) (norm_nonneg (f y))
-    _ = (∫ y : R3, ‖f y‖) * C := by
-      rw [integral_mul_const]
-
 /--
 The ordinary bounded-kernel convolution is locally integrable on every measurable finite-measure
 set. This supplies the second local-integrability hypothesis for set-integral uniqueness.
 -/
 theorem integrableOn_r3RealScalarConvolution_of_bound
-    {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
+    {f : R3 → ℝ} (hfi : Integrable f)
     {g₀ : R3 → ℝ} (hg₀ : Continuous g₀)
     (C : ℝ) (hC : ∀ x : R3, ‖g₀ x‖ ≤ C)
-    {s : Set R3} (hμs : (volume : Measure R3) s ≠ ∞) :
+    {s : Set R3} (hs : MeasurableSet s)
+    (hμs : (volume : Measure R3) s ≠ ∞) :
     IntegrableOn
       (MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
         (volume : Measure R3))
       s (volume : Measure R3) := by
-  refine IntegrableOn.of_bound (lt_top_iff_ne_top.2 hμs)
-    (aestronglyMeasurable_r3RealScalarConvolution hf hg₀).restrict
-    ((∫ y : R3, ‖f y‖) * C) ?_
-  exact Filter.Eventually.of_forall fun x =>
-    norm_r3RealScalarConvolution_le_of_bound hfi C hC x
+  have hprod :=
+    integrable_r3RealYoungKernel_restrict_prod hfi hg₀ C hC hs hμs
+  have hout :
+      Integrable
+        (fun x : R3 => ∫ y : R3, f y * g₀ (x - y))
+        ((volume : Measure R3).restrict s) :=
+    hprod.integral_prod_left
+  simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using hout
 
 /--
 A continuous integrable real `L¹` factor convolved with a continuous uniformly bounded concrete
@@ -237,9 +205,9 @@ theorem coeFn_r3RealYoungL1L2Convolution_eq_convolution_of_ae_of_bound
   · intro s _hs hμs
     exact integrableOn_Lp_of_measure_ne_top
       (r3RealYoungL1L2Convolution f g) fact_one_le_two_ennreal.elim hμs.ne
-  · intro s _hs hμs
+  · intro s hs hμs
     exact integrableOn_r3RealScalarConvolution_of_bound
-      hf hfi hg₀ C hC hμs.ne
+      hfi hg₀ C hC hs hμs.ne
   · intro s hs hμs
     simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using
       (setIntegral_r3RealYoungL1L2Convolution_eq_pointwise_of_ae_of_bound
