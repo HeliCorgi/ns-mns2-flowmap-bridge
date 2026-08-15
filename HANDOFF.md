@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-15 18:25 JST.
+Last updated: 2026-08-15 18:57 JST.
 
 This is the short-form continuation point for future GPT/Codex sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -20,41 +20,30 @@ For research constraints and claim boundaries, the governing specifications cont
 
 ## Current repository state
 
-Latest merged mathematical PR: **#76 — `Bundle H2 norm fields in real L2`**.
+Current `main` before this handoff sync was:
 
-`main` at the start of the current CI transition is `b9a67a3289cc06b53a035c3d171e6c0f301a2b9a`.
+`d5846f8618a65af52b5c8a5d61f101e67502ceb7`
 
-Open CI-infrastructure PR: **#77 — `Cut hosted Lean CI usage and add cache`**.
+which merged **PR #78 — `Gpt handoff protocol`**.
 
-PR #77 head at the last check:
+Latest merged mathematical PR remains **#76 — `Bundle H2 norm fields in real L2`**.
 
-`546c946668c1e52f48cbe220ae0001b4a777930d`
+CI migration **PR #77 — `Cut hosted Lean CI usage and add cache`** is merged. Its replacement Lean run **#243** (`31876755438`) completed successfully after committing `lake-manifest.json` for the pinned dependency graph.
 
-Its first official `leanprover/lean-action@v1` run (#242) failed before compilation because the repository had no committed `lake-manifest.json`. The PR was then updated with a manifest matching pinned mathlib `v4.32.1`. Replacement run **#243** (`31876755438`) was `in_progress` at the time this handoff was written. Check GitHub for the current result; do not assume it passed.
+Documentation PR **#78** also completed Lean run **#244** (`31877304381`) successfully and is merged.
 
-The intended #77 policy is:
+At the last check there were **no open pull requests**.
 
-- no automatic full Lean rebuild on push to `main`;
-- PR-to-`main` required Lean check remains;
+The active hosted-CI policy is now:
+
+- PRs to `main` emit the Lean required check;
+- automatic full Lean rebuilds on pushes to `main` are disabled;
 - superseded PR runs are cancelled;
-- official lean-action restores/saves `.lake` and uses the mathlib cache;
-- local/self-hosted Lean becomes the normal compiler path.
+- `leanprover/lean-action@v1` restores/saves `.lake` and uses the mathlib cache;
+- local/self-hosted Lean is the preferred normal compiler path;
+- `workflow_dispatch` remains available.
 
 See `docs/LEAN_CI_OPERATIONS.md`.
-
-## Documentation transition
-
-A separate branch **`gpt-handoff-protocol`** was prepared from the #77 head so that documentation work does not push another commit to #77 and consume another hosted PR build.
-
-That branch updates/creates:
-
-- `AGENTS.md`;
-- `FORMAL_SCOPE.md`;
-- `HANDOFF.md`;
-- `docs/GPT_WORKFLOW.md`;
-- `docs/LEAN_CI_OPERATIONS.md`.
-
-Do not open a PR for this documentation branch while hosted minutes are scarce unless the user intentionally wants to spend the required PR check. Once the #77 workflow policy is safely integrated, move these documentation changes onto `main` using a path that does not unnecessarily trigger another full hosted Lean build.
 
 ## Governing project target
 
@@ -101,8 +90,6 @@ It bounds the H²-weighted Fourier norm of one convection summand by two scalar 
 
 Lean proves the integrands are integrable, the majorants are nonnegative, and they are exactly ordinary real scalar convolutions of the relevant pointwise norm fields.
 
-The pointwise one-coordinate H² bound is rewritten in terms of these names.
-
 ### Real Young Bochner estimates
 
 `Formal/R3YoungRealL1L2Bochner.lean` defines the real `L²(R³)` Young construction and proves:
@@ -114,9 +101,7 @@ The pointwise one-coordinate H² bound is rewritten in terms of these names.
 
 ### Norm-field L² bundles
 
-Merged #76 added `Formal/R3SchwartzNormFieldL2.lean`.
-
-It defines:
+Merged #76 added `Formal/R3SchwartzNormFieldL2.lean`, defining:
 
 - `r3SchwartzScalarNormL2`;
 - `r3SchwartzVelocityNormL2`;
@@ -144,7 +129,7 @@ The missing theorem is an a.e. representative/Fubini identification between the 
 
 In shorthand, the project still needs to justify
 
-`r3H2LeftScalarMajorant a b  ≈  representative of r3H2LeftMajorantYoungL2 a b`
+`r3H2LeftScalarMajorant a b  ≈ representative of r3H2LeftMajorantYoungL2 a b`
 
 and
 
@@ -156,11 +141,13 @@ in the appropriate almost-everywhere sense.
 
 Do **not** silently identify these objects because their formulas look similar. `L²` elements are equivalence classes, the Bochner convolution is bundled, and the pointwise majorants are ordinary integrals. The bridge needs an actual Lean theorem using representative identities plus Fubini/Bochner-integral machinery, or an equivalent direct `L²` argument.
 
+Pinned mathlib `Mathlib/Analysis/Convolution.lean` explicitly still lists general `L^p` convolution measurability/existence results as TODOs, so do not assume a ready-made generic Young-convolution theorem is present.
+
 This is the immediate proof frontier.
 
 ## Intended next sequence
 
-1. prove the representative/Fubini bridge for the real Young convolution;
+1. prove the representative/Fubini bridge for the real Young convolution, or an equivalent direct `L²` theorem for the ordinary scalar convolution;
 2. specialize it to the left and right H² scalar majorants;
 3. obtain `L²` bounds for both ordinary majorants from the bundled Young estimates;
 4. insert the existing H³ Fourier `L¹`/`L²` bounds;
@@ -210,6 +197,8 @@ This preflight is mainly for new physical/singularity mechanisms. It is not a su
 - do not auto-merge unless the user explicitly asks;
 - do not use hosted Actions as an interactive compiler while quota is scarce;
 - read exact CI logs before attempting a fix.
+
+The current ChatGPT execution environment has no local `lean`/`lake` binary. Therefore, a new mathematical change should be kept narrow and must not be reported as proved until reproduced by a local/self-hosted/pinned Lean build.
 
 ## Minimal continuation prompt
 
