@@ -91,7 +91,8 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated_of_ae
     simpa [r3TranslationMap, Function.comp_def] using
       (measurePreserving_r3TranslationMap y).quasiMeasurePreserving.ae_eq hg
   exact setIntegral_congr_ae hs
-    (hshift.mono fun x hx _ => by rw [hx])
+    (hshift.mono fun x hx _ => by
+      simpa using congrArg (fun t : ℝ => f y * t) hx)
 
 /--
 On a finite-measure output set, an integrable scalar factor times a continuous uniformly bounded
@@ -183,7 +184,11 @@ theorem integrableOn_r3RealScalarConvolution_of_bound
         (fun x : R3 => ∫ y : R3, f y * g₀ (x - y))
         ((volume : Measure R3).restrict s) :=
     hprod.integral_prod_left
-  simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using hout
+  change Integrable
+    (fun x : R3 =>
+      ∫ y : R3, (ContinuousLinearMap.mul ℝ ℝ) (f y) (g₀ (x - y)))
+    ((volume : Measure R3).restrict s)
+  simpa only [ContinuousLinearMap.mul_apply'] using hout
 
 /--
 A continuous integrable real `L¹` factor convolved with a continuous uniformly bounded concrete
