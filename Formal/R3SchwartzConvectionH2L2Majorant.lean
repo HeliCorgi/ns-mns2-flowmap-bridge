@@ -92,37 +92,19 @@ theorem norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFa
             ‖(r3H2WeightedVelocitySchwartz
                 (𝓕 (r3SchwartzCoordinateDerivative i v))).toLp
                 2 (volume : Measure R3)‖) := by
-  calc
-    ‖(r3H2WeightedVelocitySchwartz
-        (𝓕 (r3SchwartzConvectionTerm i u v))).toLp
-          2 (volume : Measure R3)‖ ≤
-        2 *
-          (‖r3H2LeftScalarMajorantL2
-              (𝓕 (r3SchwartzCoordinate i u))
-              (𝓕 (r3SchwartzCoordinateDerivative i v))‖ +
-            ‖r3H2RightScalarMajorantL2
-              (𝓕 (r3SchwartzCoordinate i u))
-              (𝓕 (r3SchwartzCoordinateDerivative i v))‖) :=
-      norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_scalarMajorants
-        i u v
-    _ ≤ 2 *
-        (‖(r3H2WeightedScalarSchwartz
-              (𝓕 (r3SchwartzCoordinate i u))).toLp
-              2 (volume : Measure R3)‖ *
-            (∫ ξ : R3, ‖(𝓕 (r3SchwartzCoordinateDerivative i v)) ξ‖) +
-          (∫ ξ : R3, ‖(𝓕 (r3SchwartzCoordinate i u)) ξ‖) *
-            ‖(r3H2WeightedVelocitySchwartz
-                (𝓕 (r3SchwartzCoordinateDerivative i v))).toLp
-                2 (volume : Measure R3)‖) := by
-      have hleft :=
-        norm_r3H2LeftScalarMajorantL2_le
-          (𝓕 (r3SchwartzCoordinate i u))
-          (𝓕 (r3SchwartzCoordinateDerivative i v))
-      have hright :=
-        norm_r3H2RightScalarMajorantL2_le
-          (𝓕 (r3SchwartzCoordinate i u))
-          (𝓕 (r3SchwartzCoordinateDerivative i v))
-      exact mul_le_mul_of_nonneg_left (add_le_add hleft hright) (by norm_num)
+  have hmajorant :=
+    norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_scalarMajorants
+      i u v
+  have hleft :=
+    norm_r3H2LeftScalarMajorantL2_le
+      (𝓕 (r3SchwartzCoordinate i u))
+      (𝓕 (r3SchwartzCoordinateDerivative i v))
+  have hright :=
+    norm_r3H2RightScalarMajorantL2_le
+      (𝓕 (r3SchwartzCoordinate i u))
+      (𝓕 (r3SchwartzCoordinateDerivative i v))
+  have hsum := add_le_add hleft hright
+  exact hmajorant.trans (mul_le_mul_of_nonneg_left hsum (by norm_num))
 
 end
 
