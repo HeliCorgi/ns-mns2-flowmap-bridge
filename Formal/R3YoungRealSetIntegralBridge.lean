@@ -1,3 +1,4 @@
+import Mathlib.MeasureTheory.Function.AEEqOfIntegral
 import Mathlib.MeasureTheory.Function.L2Space
 import Mathlib.MeasureTheory.Integral.Prod
 import Formal.R3YoungRealL1L2Bochner
@@ -39,10 +40,6 @@ theorem coeFn_r3RealYoungL1L2Integrand
 /--
 Finite-set integrals of the bundled `L¹ * L²` Young convolution can be unfolded into the
 corresponding iterated scalar integral.
-
-This deliberately stops before swapping the two scalar integrals.  That Fubini step, together
-with a concrete representative for the `L²` factor, is the next bridge needed to identify the
-bundled Young convolution with the ordinary pointwise convolution almost everywhere.
 -/
 theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated
     {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
@@ -74,7 +71,7 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated
 
 /--
 The same finite-set identity with an explicitly supplied pointwise representative of the `L²`
-factor.  Translation preserves null sets, so an a.e. representative identity for `g` may be
+factor. Translation preserves null sets, so an a.e. representative identity for `g` may be
 transported through every physical translate `x ↦ x-y`.
 -/
 theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated_of_ae
@@ -98,7 +95,7 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated_of_ae
 
 /--
 On a finite-measure output set, an integrable scalar factor times a continuous uniformly bounded
-translated kernel is integrable on the product space.  This is the exact Fubini hypothesis needed
+translated kernel is integrable on the product space. This is the exact Fubini hypothesis needed
 for the concrete Schwartz norm fields used later.
 -/
 theorem integrable_r3RealYoungKernel_restrict_prod
@@ -130,9 +127,7 @@ theorem integrable_r3RealYoungKernel_restrict_prod
     Filter.Eventually.of_forall fun z => hC (z.1 - z.2)
   exact hbase.mul_bdd hkernelMeas hkernelBound
 
-/--
-Fubini swap for the bounded concrete representative used in the real Young bridge.
--/
+/-- Fubini swap for the bounded concrete representative used in the real Young bridge. -/
 theorem integral_setIntegral_swap_r3RealYoungKernel
     {f : R3 → ℝ} (hfi : Integrable f)
     {g₀ : R3 → ℝ} (hg₀ : Continuous g₀)
@@ -149,7 +144,6 @@ theorem integral_setIntegral_swap_r3RealYoungKernel
 /--
 Finite-set integrals of the bundled Young convolution equal finite-set integrals of the literal
 pointwise convolution whenever the chosen `L²` representative is continuous and uniformly bounded.
-This is the form needed by the later a.e.-uniqueness step.
 -/
 theorem setIntegral_r3RealYoungL1L2Convolution_eq_pointwise_of_ae_of_bound
     {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
@@ -167,6 +161,89 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_pointwise_of_ae_of_bound
         hf hfi g hg hs hμs
     _ = ∫ x in s, ∫ y : R3, f y * g₀ (x - y) :=
       integral_setIntegral_swap_r3RealYoungKernel hfi hg₀ C hC hs hμs
+
+/-- The ordinary real scalar convolution is a.e. strongly measurable for continuous factors. -/
+theorem aestronglyMeasurable_r3RealScalarConvolution
+    {f g₀ : R3 → ℝ} (hf : Continuous f) (hg₀ : Continuous g₀) :
+    AEStronglyMeasurable
+      (MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
+        (volume : Measure R3))
+      (volume : Measure R3) := by
+  have hjoint :
+      AEStronglyMeasurable
+        (fun z : R3 × R3 => f z.2 * g₀ (z.1 - z.2))
+        ((volume : Measure R3).prod (volume : Measure R3)) :=
+    ((hf.comp continuous_snd).mul
+      (hg₀.comp (continuous_fst.sub continuous_snd))).aestronglyMeasurable
+  simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using
+    hjoint.integral_prod_right'
+
+/-- Uniform pointwise bound for the ordinary real convolution when the second factor is bounded. -/
+theorem norm_r3RealScalarConvolution_le_of_bound
+    {f : R3 → ℝ} (hfi : Integrable f)
+    {g₀ : R3 → ℝ} (C : ℝ) (hC : ∀ x : R3, ‖g₀ x‖ ≤ C)
+    (x : R3) :
+    ‖MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
+        (volume : Measure R3) x‖ ≤
+      (∫ y : R3, ‖f y‖) * C := by
+  calc
+    ‖MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
+        (volume : Measure R3) x‖ ≤
+        ∫ y : R3, ‖f y‖ * C := by
+      unfold MeasureTheory.convolution
+      apply norm_integral_le_of_norm_le (hfi.norm.mul_const C)
+      filter_upwards with y
+      rw [ContinuousLinearMap.mul_apply', norm_mul]
+      exact mul_le_mul_of_nonneg_left (hC (x - y)) (norm_nonneg (f y))
+    _ = (∫ y : R3, ‖f y‖) * C := by
+      rw [integral_mul_const]
+
+/--
+The ordinary bounded-kernel convolution is locally integrable on every measurable finite-measure
+set. This supplies the second local-integrability hypothesis for set-integral uniqueness.
+-/
+theorem integrableOn_r3RealScalarConvolution_of_bound
+    {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
+    {g₀ : R3 → ℝ} (hg₀ : Continuous g₀)
+    (C : ℝ) (hC : ∀ x : R3, ‖g₀ x‖ ≤ C)
+    {s : Set R3} (hμs : (volume : Measure R3) s ≠ ∞) :
+    IntegrableOn
+      (MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
+        (volume : Measure R3))
+      s (volume : Measure R3) := by
+  refine IntegrableOn.of_bound (lt_top_iff_ne_top.2 hμs)
+    (aestronglyMeasurable_r3RealScalarConvolution hf hg₀).restrict
+    ((∫ y : R3, ‖f y‖) * C) ?_
+  exact Filter.Eventually.of_forall fun x =>
+    norm_r3RealScalarConvolution_le_of_bound hfi C hC x
+
+/--
+A continuous integrable real `L¹` factor convolved with a continuous uniformly bounded concrete
+representative of a real `L²` class is represented almost everywhere by the bundled Bochner Young
+convolution.
+
+This is the generic representative/Fubini bridge required by the Schwartz H² majorants. It does
+not itself assert any new Navier--Stokes estimate.
+-/
+theorem coeFn_r3RealYoungL1L2Convolution_eq_convolution_of_ae_of_bound
+    {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
+    (g : R3L2RealScalar) {g₀ : R3 → ℝ}
+    (hg : (g : R3 → ℝ) =ᵐ[(volume : Measure R3)] g₀)
+    (hg₀ : Continuous g₀) (C : ℝ) (hC : ∀ x : R3, ‖g₀ x‖ ≤ C) :
+    (r3RealYoungL1L2Convolution f g : R3 → ℝ) =ᵐ[(volume : Measure R3)]
+      MeasureTheory.convolution f g₀ (ContinuousLinearMap.mul ℝ ℝ)
+        (volume : Measure R3) := by
+  apply ae_eq_of_forall_setIntegral_eq_of_sigmaFinite
+  · intro s _hs hμs
+    exact integrableOn_Lp_of_measure_ne_top
+      (r3RealYoungL1L2Convolution f g) fact_one_le_two_ennreal.elim hμs.ne
+  · intro s _hs hμs
+    exact integrableOn_r3RealScalarConvolution_of_bound
+      hf hfi hg₀ C hC hμs.ne
+  · intro s hs hμs
+    simpa [MeasureTheory.convolution, ContinuousLinearMap.mul_apply'] using
+      (setIntegral_r3RealYoungL1L2Convolution_eq_pointwise_of_ae_of_bound
+        hf hfi g hg hg₀ C hC hs hμs.ne)
 
 end
 
