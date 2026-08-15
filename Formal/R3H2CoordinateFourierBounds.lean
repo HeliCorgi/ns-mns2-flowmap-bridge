@@ -14,6 +14,22 @@ theorem norm_r3SchwartzCoordinate_le
   rw [r3SchwartzCoordinate_apply]
   exact PiLp.norm_apply_le (f ξ) i
 
+/-- Fourier transform commutes with extraction of a fixed velocity coordinate. -/
+theorem fourier_r3SchwartzCoordinate_eq
+    (i : Fin 3) (f : R3SchwartzVelocity) :
+    𝓕 (r3SchwartzCoordinate i f) = r3SchwartzCoordinate i (𝓕 f) := by
+  ext ξ
+  change
+    (𝓕 (fun x : R3 => f x i)) ξ =
+      (𝓕 (fun x : R3 => f x)) ξ i
+  rw [Real.fourier_eq, Real.fourier_eq]
+  change
+    (∫ x : R3, 𝐞 (-⟪x, ξ⟫) • r3CoordinateFiberAux i (f x)) =
+      r3CoordinateFiberAux i (∫ x : R3, 𝐞 (-⟪x, ξ⟫) • f x)
+  rw [← (r3CoordinateFiberAux i).integral_comp_comm
+    ((Real.fourierIntegral_convergent_iff ξ).2 f.integrable)]
+  simp
+
 /-- The `L¹` norm of one Schwartz velocity coordinate is dominated by the vector-valued `L¹` norm. -/
 theorem integral_norm_r3SchwartzCoordinate_le
     (i : Fin 3) (f : R3SchwartzVelocity) :
@@ -32,6 +48,15 @@ theorem integral_norm_r3SchwartzCoordinate_fourier_le_H3
       ‖r3H2InverseBesselWeightL2‖ * ‖r3SchwartzToHsCLM 3 f‖ := by
   exact (integral_norm_r3SchwartzCoordinate_le i (𝓕 f)).trans
     (integral_norm_fourier_r3SchwartzVelocity_le_H3 f)
+
+/-- The literal Fourier transform of one physical coordinate has the same H³-controlled `L¹`
+bound, using Fourier/coordinate commutation. -/
+theorem integral_norm_fourier_r3SchwartzCoordinate_le_H3
+    (i : Fin 3) (f : R3SchwartzVelocity) :
+    (∫ ξ : R3, ‖(𝓕 (r3SchwartzCoordinate i f)) ξ‖) ≤
+      ‖r3H2InverseBesselWeightL2‖ * ‖r3SchwartzToHsCLM 3 f‖ := by
+  rw [fourier_r3SchwartzCoordinate_eq]
+  exact integral_norm_r3SchwartzCoordinate_fourier_le_H3 i f
 
 /-- Order-two weighting preserves the coordinate-versus-vector pointwise norm domination. -/
 theorem norm_r3H2WeightedScalarSchwartz_coordinate_le_velocity
@@ -68,6 +93,16 @@ theorem norm_r3H2WeightedScalarSchwartz_coordinate_fourier_toLp_le_H3
       ‖r3SchwartzToHsCLM 3 f‖ := by
   exact (norm_r3H2WeightedScalarSchwartz_coordinate_toLp_le i (𝓕 f)).trans
     (norm_r3H2WeightedVelocitySchwartz_fourier_toLp_le_H3 f)
+
+/-- The literal Fourier transform of one physical coordinate has the same H³-controlled weighted
+`L²` bound, using Fourier/coordinate commutation. -/
+theorem norm_r3H2WeightedScalarSchwartz_fourier_coordinate_toLp_le_H3
+    (i : Fin 3) (f : R3SchwartzVelocity) :
+    ‖(r3H2WeightedScalarSchwartz (𝓕 (r3SchwartzCoordinate i f))).toLp
+        2 (volume : Measure R3)‖ ≤
+      ‖r3SchwartzToHsCLM 3 f‖ := by
+  rw [fourier_r3SchwartzCoordinate_eq]
+  exact norm_r3H2WeightedScalarSchwartz_coordinate_fourier_toLp_le_H3 i f
 
 end
 
