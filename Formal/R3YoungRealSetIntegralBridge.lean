@@ -71,6 +71,30 @@ theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated
       exact setIntegral_congr_ae hs
         ((coeFn_r3RealYoungL1L2Integrand f g y).mono fun x hx _ => hx)
 
+/--
+The same finite-set identity with an explicitly supplied pointwise representative of the `L²`
+factor.  Translation preserves null sets, so an a.e. representative identity for `g` may be
+transported through every physical translate `x ↦ x-y`.
+-/
+theorem setIntegral_r3RealYoungL1L2Convolution_eq_iterated_of_ae
+    {f : R3 → ℝ} (hf : Continuous f) (hfi : Integrable f)
+    (g : R3L2RealScalar) {g₀ : R3 → ℝ}
+    (hg : (g : R3 → ℝ) =ᵐ[(volume : Measure R3)] g₀)
+    {s : Set R3} (hs : MeasurableSet s)
+    (hμs : (volume : Measure R3) s ≠ ∞) :
+    (∫ x in s, (r3RealYoungL1L2Convolution f g) x) =
+      ∫ y : R3, ∫ x in s, f y * g₀ (x - y) := by
+  rw [setIntegral_r3RealYoungL1L2Convolution_eq_iterated hf hfi g hs hμs]
+  apply integral_congr_ae
+  filter_upwards with y
+  have hshift :
+      (fun x : R3 => g (x - y)) =ᵐ[(volume : Measure R3)]
+        (fun x : R3 => g₀ (x - y)) := by
+    simpa [r3TranslationMap, Function.comp_def] using
+      (measurePreserving_r3TranslationMap y).quasiMeasurePreserving.ae_eq hg
+  exact setIntegral_congr_ae hs
+    (hshift.mono fun x hx _ => by rw [hx])
+
 end
 
 end MNS2
