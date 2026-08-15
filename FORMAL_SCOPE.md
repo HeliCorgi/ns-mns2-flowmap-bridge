@@ -1,6 +1,6 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-15 (JST), after merged PR #76. PR #77 is CI infrastructure only and does not change the theorem boundary.
+Last synchronized: 2026-08-16 (JST), after merged PR #79.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -183,8 +183,6 @@ Lean proves their integrands are integrable, both majorants are nonnegative, and
 - `L¹ * L² → L²` Young bound;
 - an argument-order wrapper for the `L² * L¹ → L²` use case with the corresponding norm estimate.
 
-These are bundled `L²` estimates. They do not by themselves identify the bundled convolution with the ordinary pointwise scalar convolution used in the majorants.
-
 ### Norm-field `L²` bundling
 
 `Formal/R3SchwartzNormFieldL2.lean` defines canonical `L²` bundles of the pointwise norm fields of scalar- and velocity-valued Schwartz functions:
@@ -192,18 +190,42 @@ These are bundled `L²` estimates. They do not by themselves identify the bundle
 - `r3SchwartzScalarNormL2`;
 - `r3SchwartzVelocityNormL2`.
 
-Lean proves:
+It also defines the bundled Young candidates
 
-- their representatives agree a.e. with the literal pointwise norm fields;
-- taking pointwise norm preserves the corresponding `L²` norm;
-- the left and right H² majorants have canonical bundled Young candidates
-  - `r3H2LeftMajorantYoungL2`;
-  - `r3H2RightMajorantYoungL2`;
-- those candidates satisfy the expected `L² * L¹ → L²` and `L¹ * L² → L²` bounds.
+- `r3H2LeftMajorantYoungL2`;
+- `r3H2RightMajorantYoungL2`;
+
+and proves their expected Young norm bounds.
+
+### Representative/Fubini bridge — closed by merged PR #79
+
+The previously explicit gap between ordinary scalar convolution and the bundled Young construction is now formalized on green `main`.
+
+Relevant merged files include:
+
+- `Formal/R3YoungRealSetIntegralBridge.lean`;
+- `Formal/R3YoungRealConvolutionCommutativity.lean`;
+- `Formal/R3SchwartzMajorantYoungRepresentative.lean`;
+- `Formal/R3SchwartzScalarMajorantL2.lean`;
+- `Formal/R3SchwartzConvectionH2L2Majorant.lean`.
+
+In particular, Lean now proves the required a.e. representative identifications for the two concrete majorants, packages the ordinary majorants in `L²`, transfers the Young norm estimates to them, and lifts the pointwise H² frequency majorant to the bundled estimate
+
+`norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`.
+
+Therefore the old invariant warning against silently identifying
+
+- `r3H2LeftScalarMajorant`, `r3H2RightScalarMajorant`
+
+with
+
+- `r3H2LeftMajorantYoungL2`, `r3H2RightMajorantYoungL2`
+
+has been discharged for these concrete objects by explicit theorems. The general proof discipline remains: analogous identifications elsewhere still require explicit representative/Fubini results.
 
 ### Existing H³ Fourier bounds
 
-The repository also contains the Fourier `L¹`/`L²` control and derivative-weight infrastructure needed after the convolution identification closes, including:
+The repository contains the Fourier `L¹`/`L²` control and derivative-weight infrastructure needed to close the one-coordinate estimate, including:
 
 - `Formal/R3H2FourierL1Bound.lean`
 - `Formal/R3H2VelocityFourierL1Bound.lean`
@@ -212,27 +234,31 @@ The repository also contains the Fourier `L¹`/`L²` control and derivative-weig
 - `Formal/R3SchwartzDerivativeFrequencyBound.lean`
 - `Formal/R3SchwartzDerivativeH3LpBounds.lean`
 
-These supply the H³-side factors that are intended to feed the final one-coordinate H² convection estimate.
+These supply H³ control of the velocity-coordinate and coordinate-derivative factors, including the explicit derivative-frequency constant `r3CoordinateDerivativeFrequencyConstant i`.
 
-## 6. Exact current analytic gate
+## 6. Exact current analytic gate on green `main`
 
-The following identification is **not yet formalized**:
+`R3SchwartzConvectionTermSobolevEstimate 3` is **not yet proved**.
 
-`ordinary scalar convolution majorant = bundled Bochner Young convolution representative`
+After PR #79, the remaining near-term work is no longer the ordinary-convolution/Bochner representative identification. The green-main gate is now to combine
 
-more concretely, the ordinary pointwise fields represented by
+- `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`;
+- the existing H³ weighted-`L²` coordinate estimate;
+- the existing H³ Fourier-`L¹` coordinate estimate;
+- the existing H³ weighted-`L²` coordinate-derivative estimate;
+- the existing H³ Fourier-`L¹` coordinate-derivative estimate;
 
-- `r3H2LeftScalarMajorant a b`;
-- `r3H2RightScalarMajorant a b`
+and discharge the bookkeeping between
 
-have not yet been proved a.e. equal to the representatives of
+`𝓕 (r3SchwartzCoordinate i u)`
 
-- `r3H2LeftMajorantYoungL2 a b`;
-- `r3H2RightMajorantYoungL2 a b`.
+and
 
-This requires a representative/Fubini identification theorem (or an equivalent direct `L²` proof). Do **not** close this gap with `rfl`, `simpa`, or an informal appeal to the two formulas looking the same.
+`r3SchwartzCoordinate i (𝓕 u)`.
 
-Until this gate is discharged, the repository does not prove `R3SchwartzConvectionTermSobolevEstimate 3`.
+A reusable Fourier/coordinate commutation theorem is the smallest natural bridge if mathlib does not already expose the exact specialization in the required form.
+
+After the per-coordinate H³→H² estimate is established, choose any explicit uniform nonnegative constant over `i : Fin 3` (a finite sum or maximum is sufficient) and package `R3SchwartzConvectionTermSobolevEstimate 3`.
 
 ## 7. What is still not formalized
 
@@ -244,23 +270,26 @@ The Lean development does **not** currently establish:
 - a closed-form general solution;
 - continuation of a `C¹` solution map through a singular time;
 - `R3SchwartzConvectionTermSobolevEstimate 3`;
-- the full concrete `H³ → H²` convection estimate until the scalar-convolution identification is closed;
+- the full `R3SchwartzConvectionSobolevEstimate 3`;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
 - a rigorous finite-cylinder Hou to official Clay-domain transfer;
 - convergence of the MNS-2 discrete/reduced bridge to a continuum Navier--Stokes bridge.
 
+Unverified feature-branch drafts are not part of this theorem boundary until accepted by the pinned Lean gate and landed on `main`.
+
 ## 8. Remaining near-term formal obligations
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. prove the a.e. representative identification between the ordinary scalar convolution majorants and the bundled real Young convolutions;
-2. use the bundled Young estimates to obtain `L²` bounds for both majorants;
-3. insert the existing H³ Fourier `L¹`/`L²` bounds;
-4. prove `R3SchwartzConvectionTermSobolevEstimate 3`;
-5. use the existing reduction to obtain the full `R3SchwartzConvectionSobolevEstimate 3`;
-6. only then connect the estimate to the projected quadratic/mild operator layer.
+1. prove/reuse the Fourier-coordinate commutation needed to apply the H³ coordinate estimates to the exact Young factors from PR #79;
+2. combine the four H³ Fourier factor bounds with `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`;
+3. rewrite the resulting frequency-side bound as the canonical physical H² Sobolev norm;
+4. obtain a uniform constant over `i : Fin 3`;
+5. prove `R3SchwartzConvectionTermSobolevEstimate 3`;
+6. use the existing reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`;
+7. only then connect the estimate to the projected quadratic/mild operator layer.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
