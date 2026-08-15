@@ -1,6 +1,6 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-13 (JST), after merged PR #35.
+Last synchronized: 2026-08-15 (JST), after merged PR #76. PR #77 is CI infrastructure only and does not change the theorem boundary.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -24,7 +24,7 @@ The radial specialization is
 
 The tangent is the fixed, unnormalized direction `d`.
 
-Formal files:
+Key files:
 
 - `Formal/Bridge.lean`
 - `Formal/FlowMapFTC.lean`
@@ -37,7 +37,7 @@ Formal files:
 
 `PDEBridgeAdapter` and `NavierStokesTimeBridge` package the analytic bridge with externally supplied PDE semantic relations. They do not themselves construct Navier--Stokes evolution.
 
-## 2. Mild-solution semantics
+## 2. Mild-solution and tangent semantics
 
 `Formal/MildSolutionSemantics.lean` defines a Banach-space mild kernel with time-indexed continuous linear evolution `H(t)` and nonlinearity `B`.
 
@@ -47,28 +47,22 @@ A trajectory satisfies the Duhamel equation
 
 with explicit continuity, initial-value, and interval-integrability requirements.
 
-Endpoint evolution is existential in a witnessing trajectory. Positive-time uniqueness is not hidden in the definition.
-
-`Formal/MildFlowMapBridge.lean` connects certified flow-map slices to mild endpoint witnesses. `Formal/MildZeroUniqueness.lean` derives zero-fixed endpoint behavior only under explicit endpoint/trajectory uniqueness assumptions.
-
-## 3. Quadratic nonlinearity and linearized mild semantics
-
 For a continuous bilinear map
 
 `Q : V →L[ℝ] V →L[ℝ] V`,
 
-`Formal/QuadraticMildNonlinearity.lean` defines
-
-`B(u) = Q(u,u)`
-
-and proves
+`Formal/QuadraticMildNonlinearity.lean` defines `B(u) = Q(u,u)` and proves
 
 `DB(u)[v] = Q(u,v) + Q(v,u)`.
 
-The later formal stack establishes the linearized mild semantics and derives tangent identities from differentiable quadratic mild fixed-point families under explicit dominated-differentiation hypotheses.
+The later quadratic stack differentiates parameterized Duhamel terms under explicit domination hypotheses and derives the representative tangent equation
 
-Relevant files:
+`J(t)h = H(t)h - ∫₀ᵗ H(t-s) (Q(u(s), J(s)h) + Q(J(s)h, u(s))) ds`.
 
+Relevant files include:
+
+- `Formal/MildFlowMapBridge.lean`
+- `Formal/MildZeroUniqueness.lean`
 - `Formal/QuadraticLinearizedMild.lean`
 - `Formal/QuadraticMildTangentAdapter.lean`
 - `Formal/QuadraticDuhamelDifferentiation.lean`
@@ -76,99 +70,171 @@ Relevant files:
 - `Formal/QuadraticMildTangentRealization.lean`
 - `Formal/QuadraticMildCoherentFamilyAdapter.lean`
 
-A representative derived directional equation is
+These remain abstract Banach-space results until instantiated by a concrete Navier--Stokes PDE layer.
 
-`J(t)h = H(t)h - ∫₀ᵗ H(t-s) (Q(u(s), J(s)h) + Q(J(s)h, u(s))) ds`,
+## 3. Leray-projected quadratic operator contract
 
-subject to the concrete hypotheses encoded in the formal certificates.
+`Formal/LerayProjectedQuadratic.lean` defines `LerayProjectedQuadraticContract` with a certified solenoidal submodule, a continuous linear Leray map, a raw continuous bilinear convection map, and the corresponding projected bilinear map.
 
-These theorems remain abstract Banach-space results. They do not construct the concrete Navier--Stokes solution family whose derivative is `J`.
+Lean derives Leray idempotence, solenoidal range properties, solenoidality of the quadratic diagonal and derivative, and compatibility with the packaged mild nonlinearity.
 
-## 4. Leray-projected quadratic operator contract
+This is still an abstract operator contract; it is distinct from the later concrete `R^3` function-space constructions.
 
-`Formal/LerayProjectedQuadratic.lean` defines `LerayProjectedQuadraticContract` with:
+## 4. Concrete `R^3` frequency and `L²` operator layer
 
-- a certified solenoidal submodule;
-- a continuous linear Leray map;
-- a raw continuous bilinear convection map;
-- a projected continuous bilinear map;
-- exact identification of projected convection with Leray applied to raw convection;
-- range-in-solenoidal and fixed-on-solenoidal properties.
+The repository now goes substantially beyond the old frequency-fiber-only boundary.
 
-Lean derives:
+### Frequency symbols
 
-- Leray idempotence;
-- projected bilinear outputs are solenoidal;
-- the quadratic diagonal is solenoidal;
-- the quadratic derivative is solenoidal;
-- the derivative of the packaged mild nonlinearity is solenoidal.
+`Formal/R3LerayFrequencySymbol.lean` defines the pointwise real Leray projection on the transverse frequency fiber and proves the expected projection, transversality, explicit formula, and norm bounds.
 
-This is an operator-level contract, not yet the physical `R^3` function-space Leray projector or `P div(u ⊗ v)`.
-
-## 5. Concrete `R^3` Leray frequency symbol
-
-`Formal/R3LerayFrequencySymbol.lean` sets
-
-`R3 := EuclideanSpace ℝ (Fin 3)`
-
-and defines the solenoidal fiber at frequency `ξ` as
-
-`(ℝ ∙ ξ)ᗮ`.
-
-`r3LeraySymbol ξ` is the orthogonal projection onto that plane.
-
-Lean proves:
-
-- `v` lies in the solenoidal fiber iff `inner ℝ ξ v = 0`;
-- every projected vector is transverse;
-- transverse vectors are fixed;
-- idempotence;
-- norm non-expansion;
-- zero-frequency identity;
-- `P(ξ)ξ = 0`;
-- the explicit formula
-
-`P(ξ)v = v - (inner ℝ ξ v / ‖ξ‖^2) • ξ`.
-
-This is the real matrix action underlying the Fourier Leray multiplier at one physical three-dimensional frequency. It is **not yet** a bounded operator on a bundled `R^3` PDE function space.
-
-## 6. Concrete `R^3` Stokes/heat frequency symbol
-
-`Formal/R3StokesFrequencySymbol.lean` follows the pinned mathlib Fourier convention
-
-`widehat(Δf)(ξ) = -(2π)^2 |ξ|^2 widehat(f)(ξ)`.
-
-It defines the scalar viscosity decay factor
+`Formal/R3StokesFrequencySymbol.lean` defines the scalar Stokes factor
 
 `exp(-(2π)^2 ν t |ξ|^2)`
 
-and the corresponding scalar continuous-linear operator on the three-dimensional velocity fiber.
+under the pinned mathlib Fourier convention and proves forward-time contraction and semigroup facts at frequency level.
+
+### Bundled `L²(R³; ℂ³)` Stokes operator
+
+`Formal/R3StokesL2Operator.lean` defines
+
+`R3L2Velocity := Lp (α := R3) R3C 2 (volume : Measure R3)`
+
+and constructs:
+
+- a bundled `L∞` scalar Stokes multiplier;
+- the corresponding continuous linear map on Fourier-side `L²`;
+- the physical-space Stokes operator by Fourier conjugation;
+- exact Fourier realization;
+- identity at time zero.
+
+This is a genuine bounded function-space Stokes operator. It is not by itself a full Navier--Stokes semigroup/mild-theory instantiation.
+
+### Bundled `L²` Leray operator
+
+The solenoidal carrier stack culminates in `Formal/R3LerayL2Operator.lean`, which defines the physical-space `L²(R³; ℂ³)` Leray projector as orthogonal projection onto the closed solenoidal submodule.
 
 Lean proves:
 
-- nonnegative decay rate when `ν ≥ 0`;
-- strict positivity of the scalar factor;
-- factor `≤ 1` for `ν,t ≥ 0`;
-- identity at time zero;
-- identity at zero frequency;
-- exact time-semigroup law;
-- preservation of the solenoidal fiber;
-- exact commutation with `r3LeraySymbol`;
-- pointwise norm contraction for forward time;
-- the combined Stokes--Leray frequency symbol lands in the solenoidal fiber.
+- every projected output is solenoidal;
+- already-solenoidal fields are fixed;
+- idempotence;
+- exact range identification;
+- pointwise operator norm non-expansion;
+- operator norm at most one.
 
-This is again a frequency-fiber theorem, not yet a function-space Stokes semigroup.
+The later Fourier bridge files identify the relevant frequency-space realization. This removes the old blocker that the project had only a frequency-fiber Leray symbol.
 
-## 7. Reduced/finite-rank bridge infrastructure
+Relevant files include:
 
-The repository also contains reduced tangent/residual infrastructure in:
+- `Formal/R3SobolevCarrier.lean`
+- `Formal/R3SolenoidalSobolevCarrier.lean`
+- `Formal/R3ClosedSolenoidalCarrier.lean`
+- `Formal/R3SolenoidalCarrierCompleteness.lean`
+- `Formal/R3LerayL2Operator.lean`
+- `Formal/R3LerayFourierBridge.lean`
+- `Formal/R3LerayPointwiseL2.lean`
+- `Formal/R3LerayPointwiseProjectionIdentification.lean`
+- `Formal/R3StokesL2Operator.lean`
+- `Formal/R3StokesSolenoidalPreservation.lean`
+- `Formal/R3StokesSolenoidalOperator.lean`
 
-- `Formal/ReducedBridgeResidual.lean`
-- `Formal/FiniteRankReducedBridge.lean`
+## 5. Current Schwartz convection/Sobolev track
 
-These theorems separate exact bridge identities from approximation error and do not provide discrete-to-continuum promotion by themselves.
+The current active formal target is the one-coordinate `H³ → H²` convection estimate needed by
 
-## What is not formalized
+`R3SchwartzConvectionTermSobolevEstimate 3`
+
+in `Formal/R3SchwartzConvectionSobolevReduction.lean`.
+
+Once that one-coordinate estimate is proved, the existing reduction gives the full summed convection estimate with the finite-dimensional coordinate factor.
+
+### Exact Fourier product/convolution bridge
+
+`Formal/R3SchwartzProductConvolution.lean` proves the exact Fourier convolution formula for a Schwartz convection summand. In particular, the transformed term is represented as an ordinary convolution integral of one coordinate field with one coordinate derivative field.
+
+### H² Bessel-weight geometry and pointwise majorant
+
+The following files build the weighted frequency estimate:
+
+- `Formal/R3H2BesselWeightGeometry.lean`
+- `Formal/R3H2WeightedConvolutionKernel.lean`
+- `Formal/R3H2AdditiveConvolutionWeight.lean`
+- `Formal/R3H2YoungWeightedBridge.lean`
+- `Formal/R3SchwartzConvectionH2FrequencyMajorant.lean`
+
+They yield a pointwise H²-frequency bound for one convection summand by two scalar integral majorants.
+
+### Named ordinary scalar majorants
+
+`Formal/R3SchwartzConvectionScalarMajorants.lean` defines
+
+- `r3H2LeftScalarMajorant`;
+- `r3H2RightScalarMajorant`.
+
+Lean proves their integrands are integrable, both majorants are nonnegative, and each is exactly an ordinary real scalar convolution of the relevant pointwise norm fields. It also rewrites the one-coordinate H² pointwise bound using these two names.
+
+### Real Young `L¹/L²` Bochner bridge
+
+`Formal/R3YoungRealL1L2Bochner.lean` defines a real-valued `L²(R³)` carrier and an `L²`-valued Bochner convolution based on translation. It proves:
+
+- continuity and isometry of translation;
+- Bochner integrability for a continuous real `L¹` factor;
+- `L¹ * L² → L²` Young bound;
+- an argument-order wrapper for the `L² * L¹ → L²` use case with the corresponding norm estimate.
+
+These are bundled `L²` estimates. They do not by themselves identify the bundled convolution with the ordinary pointwise scalar convolution used in the majorants.
+
+### Norm-field `L²` bundling
+
+`Formal/R3SchwartzNormFieldL2.lean` defines canonical `L²` bundles of the pointwise norm fields of scalar- and velocity-valued Schwartz functions:
+
+- `r3SchwartzScalarNormL2`;
+- `r3SchwartzVelocityNormL2`.
+
+Lean proves:
+
+- their representatives agree a.e. with the literal pointwise norm fields;
+- taking pointwise norm preserves the corresponding `L²` norm;
+- the left and right H² majorants have canonical bundled Young candidates
+  - `r3H2LeftMajorantYoungL2`;
+  - `r3H2RightMajorantYoungL2`;
+- those candidates satisfy the expected `L² * L¹ → L²` and `L¹ * L² → L²` bounds.
+
+### Existing H³ Fourier bounds
+
+The repository also contains the Fourier `L¹`/`L²` control and derivative-weight infrastructure needed after the convolution identification closes, including:
+
+- `Formal/R3H2FourierL1Bound.lean`
+- `Formal/R3H2VelocityFourierL1Bound.lean`
+- `Formal/R3H2CoordinateFourierBounds.lean`
+- `Formal/R3H3DerivativeWeightGeometry.lean`
+- `Formal/R3SchwartzDerivativeFrequencyBound.lean`
+- `Formal/R3SchwartzDerivativeH3LpBounds.lean`
+
+These supply the H³-side factors that are intended to feed the final one-coordinate H² convection estimate.
+
+## 6. Exact current analytic gate
+
+The following identification is **not yet formalized**:
+
+`ordinary scalar convolution majorant = bundled Bochner Young convolution representative`
+
+more concretely, the ordinary pointwise fields represented by
+
+- `r3H2LeftScalarMajorant a b`;
+- `r3H2RightScalarMajorant a b`
+
+have not yet been proved a.e. equal to the representatives of
+
+- `r3H2LeftMajorantYoungL2 a b`;
+- `r3H2RightMajorantYoungL2 a b`.
+
+This requires a representative/Fubini identification theorem (or an equivalent direct `L²` proof). Do **not** close this gap with `rfl`, `simpa`, or an informal appeal to the two formulas looking the same.
+
+Until this gate is discharged, the repository does not prove `R3SchwartzConvectionTermSobolevEstimate 3`.
+
+## 7. What is still not formalized
 
 The Lean development does **not** currently establish:
 
@@ -177,50 +243,37 @@ The Lean development does **not** currently establish:
 - a blow-up counterexample;
 - a closed-form general solution;
 - continuation of a `C¹` solution map through a singular time;
-- a concrete divergence-free Banach solution space on physical `R^3` carrying the full mild equation;
-- a bounded function-space Stokes semigroup obtained by Fourier lifting the scalar frequency symbol;
-- a bounded function-space Leray projector obtained by lifting the matrix/operator-valued frequency symbol;
-- the physical convection map `div(u ⊗ v)` with the mapping estimates required by the selected mild theory;
-- the concrete projected quadratic term `P div(u ⊗ v)` on the selected spaces;
-- local existence and uniqueness for that concrete `R^3` mild equation;
-- an open admissible initial-data domain with `C¹` solution-map dependence;
+- `R3SchwartzConvectionTermSobolevEstimate 3`;
+- the full concrete `H³ → H²` convection estimate until the scalar-convolution identification is closed;
+- a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
+- local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
+- an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
 - a rigorous finite-cylinder Hou to official Clay-domain transfer;
 - convergence of the MNS-2 discrete/reduced bridge to a continuum Navier--Stokes bridge.
 
-## Remaining Navier--Stokes obligations
+## 8. Remaining near-term formal obligations
 
-A concrete PDE layer must still supply, in order:
+For the current Schwartz/Sobolev route, the intended order is:
 
-1. a specific physical `R^3` function-space carrier compatible with the intended local mild theory;
-2. viscosity assumptions, normally `ν > 0`;
-3. a genuine function-space Stokes/heat operator obtained from the scalar frequency symbol or an equivalent construction;
-4. a genuine function-space Leray projector corresponding to the matrix-valued symbol;
-5. the physical bilinear convection map and the estimates required to make its Leray projection well-defined between the selected spaces;
-6. proof that these objects instantiate the existing `MildEvolutionKernel`/quadratic interfaces with the intended PDE meaning;
-7. local existence and, when a single-valued state map is used, uniqueness;
-8. an open admissible-data domain and `C¹` dependence of the fixed-time solution map;
-9. path inclusion in that domain;
-10. zero-data evolution when endpoint reconstruction uses `S(0)=0`;
-11. for any breakdown-side claim, a separate rigorous argument matching the exact Clay C/D hypotheses and official domain.
+1. prove the a.e. representative identification between the ordinary scalar convolution majorants and the bundled real Young convolutions;
+2. use the bundled Young estimates to obtain `L²` bounds for both majorants;
+3. insert the existing H³ Fourier `L¹`/`L²` bounds;
+4. prove `R3SchwartzConvectionTermSobolevEstimate 3`;
+5. use the existing reduction to obtain the full `R3SchwartzConvectionSobolevEstimate 3`;
+6. only then connect the estimate to the projected quadratic/mild operator layer.
 
-Only after items 1--10 are discharged may the flow-map bridge be interpreted as a concrete continuum Navier--Stokes solution-map theorem. Only after the separate final Clay gate may a Clay-level result be claimed.
+A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
-## Important implementation boundary for the next step
-
-Mathlib has scalar Fourier-multiplier infrastructure that may support the Stokes lift. The Leray symbol is matrix/operator-valued, so a scalar multiplier API must **not** be used as if it automatically handled the Leray projector.
-
-If the required function-space lift is unavailable in current mathlib, expose the missing boundedness/multiplier theorem as an explicit contract or prove the needed infrastructure. Do not bury it inside a semantic adapter.
-
-## Numerical and domain scope
+## 9. Numerical and domain scope
 
 Finite-dimensional path identities, POD/SVD reductions, modal tangent reconstruction, and synthetic Hou-like data remain numerical/reduction tools only.
 
 A continuum promotion requires explicit convergence of solution maps and pathwise tangent actions on a common time interval. A finite-cylinder Hou computation is not an official `R^3` or periodic Clay-domain computation without a rigorous transfer theorem.
 
-## Audit policy
+## 10. Audit policy
 
-CI rejects proof holes and local proof-bypassing declarations under `Formal/`, including `sorry`, `admit`, local `axiom`, and source-level `opaque` declarations.
+The formal source gate rejects `sorry`, `admit`, local `axiom`, and source-level `opaque` declarations under `Formal/`.
 
-`Formal/AxiomAudit.lean` prints axiom dependencies of the strongest formal theorems into the Lean build log.
+`Formal/AxiomAudit.lean` prints axiom dependencies of selected strong formal theorems into the Lean build log.
 
-Green Lean CI is the repository's manual formal merge gate.
+The intended verification policy is documented in `docs/LEAN_CI_OPERATIONS.md`. Green Lean verification remains the merge gate for mathematical PRs, whether the computation is GitHub-hosted, self-hosted, or locally reproduced according to the repository policy.

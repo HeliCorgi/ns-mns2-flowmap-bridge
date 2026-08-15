@@ -2,6 +2,31 @@
 
 This repository contains numerical experiments and Lean 4 formalization for the MNS-2 flow-map bridge program.
 
+## GPT-first operating contract
+
+This repository is expected to be developed primarily through repeated GPT/Codex sessions. Chat history is not a durable source of truth.
+
+Every new agent/session must execute the resume protocol in `docs/GPT_WORKFLOW.md` before choosing a task or modifying code. At minimum, read `PROJECT_GOAL.md`, `SPEC.md`, this file, `FORMAL_SCOPE.md`, `HANDOFF.md`, and `docs/LEAN_CI_OPERATIONS.md`, then inspect the current GitHub `main`, open PRs, relevant `Formal/` files, and latest Lean CI state.
+
+When progress prose disagrees with actual code, current theorem statements and repository state control the formal frontier. Update stale handoff/scope documentation rather than reasoning from an old conversation.
+
+At the end of a substantial session, update `HANDOFF.md` when the formal frontier, open PR, known blocker, or next theorem changed. Record exact theorem and file names, the next smallest gate, and any tempting but still-unproved identification that a later agent must not assume.
+
+## CI cost policy
+
+GitHub-hosted Lean Actions are a scarce final/status-check resource, not the normal interactive compiler.
+
+- Prefer local incremental Lean builds through `scripts/lean-ci-local.sh`.
+- Build the smallest relevant target while developing, then run the local full gate.
+- If the current GPT environment has no Lean/Lake runtime, do not compensate with repeated speculative PR commits merely to use hosted Actions as a compiler.
+- Preserve `.lake` and mathlib caches where the runner model allows it.
+- Keep per-PR cancellation of superseded builds.
+- Do not re-enable automatic full Lean builds on pushes to `main` without explicit user approval.
+- If hosted quota is exhausted, continue with local or self-hosted verification; do not weaken the proof gate.
+- Do not casually change workflow triggers, required-check names, or the pinned dependency manifest.
+
+See `docs/LEAN_CI_OPERATIONS.md` for the operational details and the current CI migration state.
+
 ## Governing project goal
 
 `PROJECT_GOAL.md` is the top-level goal and acceptance specification for this repository. Read it before choosing a research direction or promoting a result.
@@ -70,6 +95,7 @@ For a radial path `s ↦ s • d`, the derivative with respect to `s` is exactly
 - If a theorem is only algebraic endpoint cancellation, do not describe it as an analytic FTC theorem.
 - Keep assumptions explicit in theorem statements or immediately documented above them.
 - Do not weaken assumptions in prose after proving a theorem under stronger assumptions.
+- Do not identify ordinary pointwise convolution with an `L²`-valued Bochner convolution until an explicit a.e. representative/Fubini theorem proves the identification.
 
 The CI safety gate scans `Formal/**/*.lean` for proof holes and local axiom-like declarations before running `lake build`.
 
@@ -145,4 +171,4 @@ Every mathematical PR should state:
 - whether it changes any numerical/runtime behavior;
 - CI status.
 
-Use `PROJECT_GOAL.md` as the project-level acceptance boundary, `SPEC.md` as the current physical/numerical research contract, and `FORMAL_SCOPE.md` as the current Lean theorem/claim boundary.
+Use `PROJECT_GOAL.md` as the project-level acceptance boundary, `SPEC.md` as the current physical/numerical research contract, `FORMAL_SCOPE.md` as the current Lean theorem/claim boundary, and `docs/GPT_WORKFLOW.md` as the repeat-session execution protocol.
