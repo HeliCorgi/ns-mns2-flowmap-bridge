@@ -74,7 +74,7 @@ theorem fourier_r3SchwartzConvectionTerm_apply_eq_integral
   rw [SchwartzMap.convolution_apply]
   simpa using
     (MeasureTheory.convolution_eq_swap
-      (L := ContinuousLinearMap.lsmul ℂ ℂ : ℂ →L[ℂ] R3C →L[ℂ] R3C)
+      (L := (ContinuousLinearMap.lsmul ℂ ℂ : ℂ →L[ℂ] R3C →L[ℂ] R3C))
       (f := fun η : R3 => (𝓕 (r3SchwartzCoordinate i u)) η)
       (g := fun η : R3 => (𝓕 (r3SchwartzCoordinateDerivative i v)) η)
       (μ := (volume : Measure R3))
