@@ -76,11 +76,11 @@ Branch:
 
 `r3-schwartz-convection-h3-closure`
 
-Latest branch commit at this handoff:
+Latest Lean-code commit at this handoff:
 
 `a1c36f9216d8efaddbe1c31c45abdfcb43833e03`
 
-The branch is two commits ahead of `main` and has no associated workflow run. It is intentionally **not opened as a PR yet** because this ChatGPT runtime has no Lean/Lake binary and hosted Actions should not be used as an interactive compiler.
+Two Lean-code commits on this branch are followed by documentation synchronization commits. The branch has no associated workflow run. It is intentionally **not opened as a PR yet** because this ChatGPT runtime has no Lean/Lake binary and hosted Actions should not be used as an interactive compiler.
 
 The branch is **candidate code only until a pinned local/self-hosted Lean build accepts it**.
 
