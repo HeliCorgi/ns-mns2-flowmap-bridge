@@ -23,7 +23,7 @@ theorem fourier_r3SchwartzCoordinateDerivative_eq
     𝓕 (r3SchwartzCoordinateDerivative i v) =
       (2 * Real.pi * Complex.I) •
         SchwartzMap.smulLeftCLM R3C
-          (inner ℝ · r3CoordinateDirection i) (𝓕 v) := by
+          (fun ξ : R3 => inner ℝ ξ (r3CoordinateDirection i)) (𝓕 v) := by
   simpa [r3SchwartzCoordinateDerivative] using
     (SchwartzMap.fourier_lineDerivOp_eq v (r3CoordinateDirection i))
 
@@ -74,6 +74,12 @@ theorem norm_r3H2WeightedVelocitySchwartz_fourier_coordinateDerivative_le
         ‖r3SchwartzSobolevFrequencyCoordinate 3 v ξ‖ := by
       unfold r3SchwartzSobolevFrequencyCoordinate
       rw [SchwartzMap.smulLeftCLM_apply_apply (by fun_prop), norm_smul]
+      change
+        r3CoordinateDerivativeFrequencyConstant i *
+            (‖Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ ((3 : ℝ) / 2))‖ * ‖(𝓕 v) ξ‖) =
+          r3CoordinateDerivativeFrequencyConstant i *
+            (‖Complex.ofReal ((1 + ‖ξ‖ ^ 2) ^ ((3 : ℝ) / 2))‖ * ‖(𝓕 v) ξ‖)
+      rfl
 
 end
 
