@@ -23,7 +23,10 @@ theorem fourier_r3SchwartzCoordinate_eq
     (𝓕 (fun x : R3 => f x i)) ξ =
       (𝓕 (fun x : R3 => f x)) ξ i
   rw [Real.fourier_eq, Real.fourier_eq]
-  simpa only [Circle.smul_def, r3CoordinateFiberAux, map_smul] using
+  have hcoord : ∀ v : R3C, r3CoordinateFiberAux i v = v i := by
+    intro v
+    rfl
+  simpa only [Circle.smul_def, map_smul, hcoord] using
     (r3CoordinateFiberAux i).integral_comp_comm
       ((Real.fourierIntegral_convergent_iff ξ).2 f.integrable)
 
