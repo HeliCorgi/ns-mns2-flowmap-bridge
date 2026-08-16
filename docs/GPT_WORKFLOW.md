@@ -1,6 +1,6 @@
 # GPT-first repository workflow
 
-This repository is expected to be developed primarily through repeated GPT/Codex sessions. This document is the operational contract for resuming, changing, checking, and handing off work without relying on chat history.
+This repository is expected to be developed primarily through repeated ChatGPT/GPT sessions. This document is the operational contract for resuming, changing, checking, and handing off work without relying on chat history.
 
 ## 1. Mandatory resume protocol
 
@@ -17,8 +17,10 @@ Then inspect GitHub:
 
 7. current `main` HEAD;
 8. current contents of the relevant files under `Formal/`;
-9. open PRs, especially the newest mathematical or CI PR;
-10. the newest Lean CI result associated with the relevant head commit.
+9. open PRs, especially the newest mathematical or verification-related PR;
+10. the newest Lean verification evidence associated with the relevant commit, preferring a ChatGPT-connected external Lean runner result and using GitHub-hosted CI only when it was deliberately run.
+
+If no Lean result exists for the relevant commit/toolchain, mark the code as unverified. Do not infer proof validity from a stale CI result, an old conversation, or a similar-looking source file.
 
 Do not treat an old conversation, old PR description, or stale handoff sentence as stronger evidence than the repository itself.
 
@@ -47,7 +49,7 @@ Before writing a new theorem or proof:
 5. state what the result does **not** prove;
 6. avoid introducing a semantic adapter when the missing item is really an analytic estimate or identification theorem.
 
-Never silently replace a difficult equality by a suggestive analogy. In particular, ordinary pointwise convolution and an `L²`-valued Bochner convolution are not interchangeable until an a.e. representative/Fubini identification is proved.
+Never silently replace a difficult equality by a suggestive analogy. In particular, ordinary pointwise convolution and an `L²`-valued Bochner convolution are not interchangeable unless an explicit representative/Fubini theorem identifies the concrete objects in question.
 
 ## 4. Lean proof discipline
 
@@ -65,26 +67,34 @@ A successful targeted build is evidence only for that target and its dependency 
 
 ## 5. Lean development workflow
 
-GitHub-hosted Actions are a scarce fallback resource, not the normal interactive compiler.
+The normal interactive compiler is a **ChatGPT-connected external Lean runner**, not GitHub Actions and not a required local Lean installation.
+
+The external runner may be exposed through an API, MCP server, custom GPT Action, or another ChatGPT-accessible tool, but it must satisfy the verification contract in `docs/LEAN_CI_OPERATIONS.md`.
 
 Preferred order while developing:
 
-1. use local Lean with the pinned toolchain;
-2. run the proof-hole/local-axiom scan;
-3. build the smallest relevant target, for example:
+1. resolve the exact repository commit/branch being checked and read `lean-toolchain`, `lakefile.lean`, and `lake-manifest.json`;
+2. send or synchronize the smallest relevant repository state to the external runner without changing the pinned dependency graph;
+3. run the proof-hole/local-axiom/proof-hiding source scan;
+4. build the smallest relevant target, for example the external-runner equivalent of:
 
    `bash scripts/lean-ci-local.sh Formal.R3SchwartzNormFieldL2`
 
-4. iterate locally until the target is green;
-5. run the local full gate:
+5. feed the exact Lean diagnostics back into the same ChatGPT session and iterate on the proof until the targeted module is green;
+6. after the targeted development is green, run the external-runner equivalent of the full gate:
 
    `bash scripts/lean-ci-local.sh`
 
-6. only then use a GitHub PR check when a hosted or self-hosted status check is actually needed.
+7. record the runner, commit/ref, pinned toolchain, target/command, and result in the session handoff when the formal frontier changes;
+8. use GitHub-hosted Actions only when an intentionally spent hosted status check or independent final confirmation is actually required.
 
-If the current ChatGPT execution environment has no Lean/Lake binary, do **not** use a series of trial PR commits merely to make GitHub Actions act as the compiler. Prefer a user/local/self-hosted build or isolate the smallest possible change before consuming hosted CI.
+A runner result is not valid evidence if it used a different repository revision, a different Lean/mathlib dependency graph, or an isolated snippet that omits required project dependencies.
 
-See `docs/LEAN_CI_OPERATIONS.md` for the current CI migration state and fallback commands.
+If the current ChatGPT session has no external Lean runner connected, do **not** compensate by pushing trial commits to consume GitHub Actions. Keep candidate code explicitly unverified until a conforming external runner, local reproduction, or deliberately approved hosted check accepts it.
+
+Local Lean and self-hosted execution remain acceptable reproduction/fallback paths, but they are no longer the required normal interactive path.
+
+See `docs/LEAN_CI_OPERATIONS.md` for the runner contract, evidence requirements, and fallbacks.
 
 ## 6. GitHub change protocol
 
@@ -94,31 +104,36 @@ For normal mathematical work:
 - keep each PR focused on one analytic or formal bridge;
 - do not merge an ungreen mathematical PR;
 - do not auto-merge unless the user explicitly asks;
-- include scope, claim, assumptions, nonclaims, runtime impact, and CI state in the PR body;
+- include scope, claim, assumptions, nonclaims, runtime impact, and Lean verification state in the PR body;
+- identify whether the accepted gate came from the external runner, local/self-hosted reproduction, or GitHub-hosted CI;
 - avoid unrelated cleanup in a mathematical PR;
 - do not modify workflow triggers casually.
 
-For documentation-only maintenance while hosted CI is scarce, avoid opening a PR that would trigger an expensive required Lean build unless that check is intentionally being spent. A prepared branch may be kept without a PR until the CI policy permits a cheap merge path.
+Do not open or update a PR merely to obtain Lean diagnostics from GitHub Actions. During hosted-quota exhaustion, a branch may remain without a PR until the proof is externally verified and opening the PR is useful for review or integration.
 
-## 7. CI cost policy
+For documentation-only maintenance while hosted CI is scarce, prefer a prepared branch without a PR if opening the PR would trigger an unnecessary required Lean build.
 
-Treat GitHub-hosted Lean minutes as scarce.
+## 7. Verification cost policy
 
+Treat GitHub-hosted Lean minutes as a scarce optional resource.
+
+- The ChatGPT-connected external Lean runner is the preferred interactive verification path.
 - Do not re-enable automatic full Lean builds on `main` pushes without explicit user approval.
-- Use `concurrency.cancel-in-progress: true` for PR builds so superseded runs stop.
-- Preserve `.lake`/mathlib caches when using hosted or self-hosted runners.
-- Prefer local incremental builds for proof development.
-- If hosted quota is exhausted, continue by local or self-hosted verification rather than weakening the proof gate.
-- A cache is only a performance optimization; `lake build` still determines what must be rebuilt.
+- Do not use speculative PR commits as a remote REPL/compiler loop.
+- Preserve caches on any runner where the cache does not weaken revision/toolchain identity.
+- Prefer targeted builds during iteration and a full pinned gate only after the target is green.
+- If hosted quota is exhausted, continue through the external runner or another explicitly identified non-hosted reproduction path rather than weakening the proof gate.
+- A cache is only a performance optimization; Lean/Lake still determines what must be rebuilt.
 
 ## 8. Session-end handoff protocol
 
-At the end of a substantial work session, update `HANDOFF.md` when the current frontier changed. The handoff should contain concrete symbols, not only prose.
+At the end of a substantial work session, update `HANDOFF.md` when the current frontier or verification state changed. The handoff should contain concrete symbols, not only prose.
 
 Record:
 
 - current `main` or relevant branch/PR;
-- latest known Lean CI state;
+- latest known Lean verification state;
+- for the latest meaningful verification: runner/provider, exact commit/ref, pinned toolchain, target/full-gate scope, and pass/fail status;
 - current target theorem;
 - newly established theorem names and file names;
 - exact remaining gate;
@@ -132,6 +147,12 @@ Use a shape like:
 Current target:
   R3SchwartzConvectionTermSobolevEstimate 3
 
+Latest Lean verification:
+  runner: <external runner / local / hosted>
+  revision: <exact commit>
+  scope: <target or full gate>
+  result: <pass/fail>
+
 Completed infrastructure:
   <exact theorem/file list>
 
@@ -142,24 +163,18 @@ Do not assume:
   <important tempting but unproved identification>
 ```
 
-`FORMAL_SCOPE.md` should be synchronized less frequently, when the theorem boundary materially changes. `HANDOFF.md` should be the lightweight file updated at ordinary milestones.
+`FORMAL_SCOPE.md` should be synchronized less frequently, when the theorem boundary materially changes. `HANDOFF.md` should be the lightweight file updated at ordinary milestones and whenever the verification mechanism/status materially changes.
 
 ## 9. Current formal-development invariant
 
-The current H³-to-H² convection track must not silently identify the ordinary scalar majorants
+Merged PR #79 explicitly closed the representative/Fubini identification for the two concrete H² scalar majorants, and merged PR #80 closed the Fourier-coordinate/H³ factor bookkeeping used by the current one-coordinate convection estimate.
 
-- `r3H2LeftScalarMajorant`;
-- `r3H2RightScalarMajorant`
+Do not generalize either result beyond the exact proved objects. In particular, analogous ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit representative/Fubini results, and the per-coordinate H³→H² estimate does not by itself prove the uniform `Fin 3` convection theorem.
 
-with the bundled Young candidates
-
-- `r3H2LeftMajorantYoungL2`;
-- `r3H2RightMajorantYoungL2`.
-
-`Formal/R3SchwartzConvectionScalarMajorants.lean` gives the ordinary pointwise convolutions. `Formal/R3SchwartzNormFieldL2.lean` gives the `L²` bundles and Young bounds. The representative/Fubini bridge between them remains a separate analytic obligation until a Lean theorem proves it.
+The current near-term formal gate is to obtain an explicit uniform nonnegative constant over `i : Fin 3`, then prove `R3SchwartzConvectionTermSobolevEstimate 3`, followed by the existing `.to_convection` reduction.
 
 ## 10. Minimal resume prompt
 
 A short user prompt should be sufficient:
 
-`@GitHub ns-mns2-flowmap-bridge を GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/CI と HANDOFF.md を照合して続きから。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。Lean の反復検証は ChatGPT 接続の外部 runner を使い、GitHub Actions は明示的に必要な場合だけ使って。`
