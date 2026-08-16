@@ -1,6 +1,6 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-16 (JST), after merged PR #79.
+Last synchronized: 2026-08-16 (JST), after merged PR #80.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -141,13 +141,13 @@ Relevant files include:
 
 ## 5. Current Schwartz convection/Sobolev track
 
-The current active formal target is the one-coordinate `H³ → H²` convection estimate needed by
+The current active formal target is
 
 `R3SchwartzConvectionTermSobolevEstimate 3`
 
 in `Formal/R3SchwartzConvectionSobolevReduction.lean`.
 
-Once that one-coordinate estimate is proved, the existing reduction gives the full summed convection estimate with the finite-dimensional coordinate factor.
+The one-coordinate H³→H² estimate feeding this target is now proved. The remaining near-term task is to make its coordinate-dependent constant uniform over `i : Fin 3` and package the theorem expected by the existing reduction.
 
 ### Exact Fourier product/convolution bridge
 
@@ -199,7 +199,7 @@ and proves their expected Young norm bounds.
 
 ### Representative/Fubini bridge — closed by merged PR #79
 
-The previously explicit gap between ordinary scalar convolution and the bundled Young construction is now formalized on green `main`.
+The previously explicit gap between ordinary scalar convolution and the bundled Young construction is formalized on green `main`.
 
 Relevant merged files include:
 
@@ -209,7 +209,7 @@ Relevant merged files include:
 - `Formal/R3SchwartzScalarMajorantL2.lean`;
 - `Formal/R3SchwartzConvectionH2L2Majorant.lean`.
 
-In particular, Lean now proves the required a.e. representative identifications for the two concrete majorants, packages the ordinary majorants in `L²`, transfers the Young norm estimates to them, and lifts the pointwise H² frequency majorant to the bundled estimate
+In particular, Lean proves the required a.e. representative identifications for the two concrete majorants, packages the ordinary majorants in `L²`, transfers the Young norm estimates to them, and lifts the pointwise H² frequency majorant to the bundled estimate
 
 `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`.
 
@@ -223,42 +223,47 @@ with
 
 has been discharged for these concrete objects by explicit theorems. The general proof discipline remains: analogous identifications elsewhere still require explicit representative/Fubini results.
 
-### Existing H³ Fourier bounds
+### H³ Fourier-coordinate and convection closure — closed by merged PR #80
 
-The repository contains the Fourier `L¹`/`L²` control and derivative-weight infrastructure needed to close the one-coordinate estimate, including:
+Merged PR #80 adds and verifies the coordinate/Fourier bookkeeping and the per-coordinate H³→H² estimate.
 
-- `Formal/R3H2FourierL1Bound.lean`
-- `Formal/R3H2VelocityFourierL1Bound.lean`
-- `Formal/R3H2CoordinateFourierBounds.lean`
-- `Formal/R3H3DerivativeWeightGeometry.lean`
-- `Formal/R3SchwartzDerivativeFrequencyBound.lean`
-- `Formal/R3SchwartzDerivativeH3LpBounds.lean`
+`Formal/R3H2CoordinateFourierBounds.lean` proves, among other results:
 
-These supply H³ control of the velocity-coordinate and coordinate-derivative factors, including the explicit derivative-frequency constant `r3CoordinateDerivativeFrequencyConstant i`.
+- `fourier_r3SchwartzCoordinate_eq`;
+- `integral_norm_fourier_r3SchwartzCoordinate_le_H3`;
+- `norm_r3H2WeightedScalarSchwartz_fourier_coordinate_toLp_le_H3`.
+
+In particular,
+
+`𝓕 (r3SchwartzCoordinate i f) = r3SchwartzCoordinate i (𝓕 f)`
+
+is no longer an open bookkeeping obligation.
+
+`Formal/R3SchwartzConvectionH3Closure.lean` proves:
+
+- `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_H3`;
+- `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3`.
+
+The physical H² estimate for one coordinate has the explicit bound
+
+`‖r3SchwartzToHsCLM 2 (r3SchwartzConvectionTerm i u v)‖`
+
+`≤ 4 * ‖r3H2InverseBesselWeightL2‖ * r3CoordinateDerivativeFrequencyConstant i * ‖r3SchwartzToHsCLM 3 u‖ * ‖r3SchwartzToHsCLM 3 v‖`.
+
+The only coordinate dependence in this bound is the already formalized nonnegative derivative-frequency constant `r3CoordinateDerivativeFrequencyConstant i`.
 
 ## 6. Exact current analytic gate on green `main`
 
 `R3SchwartzConvectionTermSobolevEstimate 3` is **not yet proved**.
 
-After PR #79, the remaining near-term work is no longer the ordinary-convolution/Bochner representative identification. The green-main gate is now to combine
+The per-coordinate estimate needed to build it is now green on `main`. The next gate is purely finite-dimensional packaging:
 
-- `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`;
-- the existing H³ weighted-`L²` coordinate estimate;
-- the existing H³ Fourier-`L¹` coordinate estimate;
-- the existing H³ weighted-`L²` coordinate-derivative estimate;
-- the existing H³ Fourier-`L¹` coordinate-derivative estimate;
+1. choose an explicit nonnegative constant `C` that uniformly dominates `r3CoordinateDerivativeFrequencyConstant i` for every `i : Fin 3` — a finite sum or finite maximum is sufficient; no sharp constant is required;
+2. combine that uniform domination with `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3`;
+3. package the resulting statement as `R3SchwartzConvectionTermSobolevEstimate 3` with the exact parameter/order conventions expected by `Formal/R3SchwartzConvectionSobolevReduction.lean`;
+4. invoke the existing `.to_convection` reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`.
 
-and discharge the bookkeeping between
-
-`𝓕 (r3SchwartzCoordinate i u)`
-
-and
-
-`r3SchwartzCoordinate i (𝓕 u)`.
-
-A reusable Fourier/coordinate commutation theorem is the smallest natural bridge if mathlib does not already expose the exact specialization in the required form.
-
-After the per-coordinate H³→H² estimate is established, choose any explicit uniform nonnegative constant over `i : Fin 3` (a finite sum or maximum is sufficient) and package `R3SchwartzConvectionTermSobolevEstimate 3`.
+Do not add a new analytic assumption merely to hide the finite `Fin 3` bound.
 
 ## 7. What is still not formalized
 
@@ -283,13 +288,10 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. prove/reuse the Fourier-coordinate commutation needed to apply the H³ coordinate estimates to the exact Young factors from PR #79;
-2. combine the four H³ Fourier factor bounds with `norm_r3H2WeightedVelocitySchwartz_fourier_convectionTerm_toLp_le_YoungFactors`;
-3. rewrite the resulting frequency-side bound as the canonical physical H² Sobolev norm;
-4. obtain a uniform constant over `i : Fin 3`;
-5. prove `R3SchwartzConvectionTermSobolevEstimate 3`;
-6. use the existing reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`;
-7. only then connect the estimate to the projected quadratic/mild operator layer.
+1. obtain a uniform nonnegative constant over `i : Fin 3` dominating `r3CoordinateDerivativeFrequencyConstant i`;
+2. prove `R3SchwartzConvectionTermSobolevEstimate 3` from the merged per-coordinate theorem `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3`;
+3. use the existing reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`;
+4. only then connect the estimate to the projected quadratic/mild operator layer.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
@@ -305,4 +307,4 @@ The formal source gate rejects `sorry`, `admit`, local `axiom`, and source-level
 
 `Formal/AxiomAudit.lean` prints axiom dependencies of selected strong formal theorems into the Lean build log.
 
-The intended verification policy is documented in `docs/LEAN_CI_OPERATIONS.md`. Green Lean verification remains the merge gate for mathematical PRs, whether the computation is GitHub-hosted, self-hosted, or locally reproduced according to the repository policy.
+The intended verification policy is documented in `docs/LEAN_CI_OPERATIONS.md`. Green Lean verification remains the merge gate for mathematical PRs. The preferred interactive path is now a ChatGPT-connected external Lean runner that reproduces the pinned repository gate; local/self-hosted or deliberately spent GitHub-hosted checks remain valid reproduction/final-confirmation paths when they check the exact relevant revision and toolchain.
