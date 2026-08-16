@@ -26,7 +26,7 @@ theorem fourier_r3SchwartzCoordinate_eq
   have hcoord : ∀ v : R3C, r3CoordinateFiberAux i v = v i := by
     intro v
     rfl
-  simpa only [Circle.smul_def, map_smul, hcoord] using
+  simpa only [Circle.smul_def, map_smul, PiLp.smul_apply, hcoord] using
     (r3CoordinateFiberAux i).integral_comp_comm
       ((Real.fourierIntegral_convergent_iff ξ).2 f.integrable)
 
