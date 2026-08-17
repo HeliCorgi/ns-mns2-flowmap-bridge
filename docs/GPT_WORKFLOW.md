@@ -197,6 +197,19 @@ with the existing literal `r3ProjectedSchwartzConvectionL2`. That exact commit
 passed the local pinned source scan and full gate (8739 jobs), without GitHub
 Actions.
 
+Commit `7ab4091eefeaf2d25b73824b9ec2941088876844` closes the positive-elapsed-time,
+positive-viscosity `H² → H³` Stokes smoothing gate.
+`Formal/R3StokesH2H3Smoothing.lean` constructs the genuine multiplier
+
+`r3StokesH2ToH3Operator : R3HsVelocity 2 →L[ℂ] R3HsVelocity 3`,
+
+proves its Fourier realization and explicit operator bound by
+`1 + (sqrt ((2π)² ν τ))⁻¹`, and proves interval integrability of that scalar majorant near
+`τ = 0`. It also constructs the genuine `J⁻³` reconstruction `r3H3ToL2Operator`, proves exact
+physical-`L²` and tempered-decoder compatibility with `r3StokesL2Operator`, and proves the
+order-three Leray and solenoidal compatibility statements. That exact commit passed the local
+pinned targeted and full gates (8740 jobs) without GitHub Actions.
+
 Do not generalize these results beyond the exact proved objects. In particular, analogous
 ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit
 representative/Fubini results. The completed map is a result about the complex Bessel-coordinate
@@ -207,15 +220,16 @@ all `H³` inputs and does not construct the physical real-valued restriction.
 order-dependent decoder. Never use that definitional equality to assert a physical `H³ → H²`
 inclusion or an `H² → H³` smoothing bound.
 
-The current near-term formal gate is positive-elapsed-time, positive-viscosity `H² → H³` Stokes
-smoothing with multiplier `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`, exact decoder and
-Leray compatibility, an explicit `O(1 + (ν τ)^(-1/2))` (or sharper) bound, and local
-time-integrability. No such bounded smoothing exists at `τ = 0` or `ν = 0`. The following gate
-is a two-space Duhamel interface. The existing same-space `LerayProjectedQuadraticContract V`
-cannot accept this two-space map without additional structure or a genuinely same-space estimate.
+The positive-time `H² → H³` smoothing gate is closed only through the explicit multiplier and
+order-aware decoder theorems; it does not extend to `τ = 0` or `ν = 0`. The current near-term gate
+is an endpoint-safe two-space Duhamel interface joining the completed
+`H³ × H³ → H²` projected convection map to the positive-time `H² → H³` Stokes map. It must prove
+strong measurability and Bochner interval-integrability of the actual integrand, not merely reuse
+the scalar-majorant integrability theorem. The existing same-space `MildEvolutionKernel V` and
+`LerayProjectedQuadraticContract V` cannot express this chain without additional structure.
 
 ## 10. Minimal resume prompt
 
 A short user prompt should be sufficient:
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。Lean の反復検証は ChatGPT 接続の外部 runner を使い、GitHub Actions は明示的に必要な場合だけ使って。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。正経過時間・ν>0 の genuine H²→H³ Stokes smoothing は完了済み。次は H³×H³→H² projected convection と H²→H³ smoothing を結ぶ endpoint-safe two-space Duhamel contract、actual integrand の Bochner integrability、same-space H³ linear evolution。Lean はローカルで反復し、GitHub Actions は使わない。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`

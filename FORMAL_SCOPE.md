@@ -1,7 +1,7 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-17 (JST), after local full verification of commit
-`2127757807768709d1ac19a0ec6f760c48a973cc`.
+Last synchronized: 2026-08-18 (JST), after local full verification of commit
+`7ab4091eefeaf2d25b73824b9ec2941088876844`.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -348,26 +348,63 @@ mild equation supplies its own minus sign.
 The new audited theorems depend only on the standard foundations reported by
 the rest of this development (`propext`, `Classical.choice`, and `Quot.sound`).
 
+### Positive-time H²-to-H³ Stokes smoothing — closed
+
+`Formal/R3StokesH2H3Smoothing.lean` defines, for strictly positive viscosity `ν` and positive
+elapsed time `τ`, the genuine stored-coordinate map
+
+`r3StokesH2ToH3Operator : R3HsVelocity 2 →L[ℂ] R3HsVelocity 3`.
+
+It is Fourier conjugation of multiplication by
+
+`(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`,
+
+rather than a retyping through the phantom Sobolev-order alias. Lean proves
+`fourier_r3StokesH2ToH3Operator`, `norm_r3StokesH2ToH3Operator_apply_le`, and
+`norm_r3StokesH2ToH3Operator_le`. The explicit bound is
+
+`1 + (sqrt ((2π)² ν τ))⁻¹`,
+
+and `intervalIntegrable_r3StokesH2H3TimeKernel` proves that this scalar majorant is
+interval-integrable on `[0,T]` for every `T ≥ 0`.
+
+The same module constructs the genuine inverse-order-three reconstruction
+
+`r3H3ToL2Operator : R3HsVelocity 3 →L[ℂ] R3L2Velocity`
+
+and proves `r3L2ToTempered_r3H3ToL2Operator`. The identities
+`r3H3ToL2Operator_r3StokesH2ToH3Operator` and
+`r3HsToTempered_r3StokesH2ToH3Operator` identify the reconstructed output exactly with the
+existing physical `L²` Stokes operator applied to `r3H2ToL2Operator` of the input.
+
+The module also defines the order-aware `r3LerayH3Operator`, proves its physical `L²` decoder
+semantics, proves `r3StokesH2ToH3Operator_commutes_leray`, and proves stored-coordinate and
+reconstructed physical-`L²` solenoidal preservation. These statements fix the order-three and
+cross-order meanings through explicit multipliers and decoders, not through definitional equality
+of the carrier aliases.
+
+The new audited theorems depend only on the standard foundations reported by this development
+(`propext`, `Classical.choice`, and `Quot.sound`).
+
 ## 6. Exact current analytic gate
 
-The density, bounded-extension, and order-aware projected-convection bridges
-are closed. The next analytic gate is the smoothing layer:
+The density, bounded-extension, projected-convection, and positive-time smoothing layers are
+closed. The next analytic gate is a two-space mild/Duhamel layer:
 
-1. for strictly positive viscosity `ν` and positive elapsed time `τ`, construct
-   the genuine `H² → H³` Stokes coordinate multiplier
-   `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`;
-2. prove its Fourier realization, compatibility with the existing physical
-   `L²` Stokes operator under the order-two/order-three decoders, an explicit
-   `O(1 + (ν τ)^(-1/2))` (or sharper) norm bound, and local time-integrability
-   near `τ = 0`;
-3. prove the required Leray/solenoidal compatibility;
-4. introduce a two-space mild/Duhamel contract, or prove a genuinely
-   same-space estimate, before connecting the result to the existing abstract
-   flow-map layer.
+1. formulate a contract with strong state space `X = H³`, nonlinear-output space `Y = H²`, a
+   continuous bilinear map `X × X → Y`, same-space linear evolution on `X`, and positive-time
+   smoothing `Y → X`;
+2. totalize or otherwise handle the cross-space Stokes factor at the measure-zero endpoint
+   `τ = t - s = 0` without asserting a bounded `H² → H³` map there;
+3. prove strong measurability and Bochner interval-integrability of the actual Duhamel integrand,
+   together with the estimate obtained from `r3StokesH2H3TimeKernel` and
+   `norm_r3ProjectedConvectionH3ToH2_apply_le`;
+4. instantiate the contract with the concrete complex Bessel-coordinate operators before attempting
+   a fixed-point, local-wellposedness, or flow-map theorem.
 
-The same-order `r3StokesL2Operator` cannot be retyped through the phantom
-Sobolev alias to manufacture `H² → H³` smoothing. Such smoothing is unavailable
-at elapsed time zero and at zero viscosity.
+The current same-space `MildEvolutionKernel V` and `LerayProjectedQuadraticContract V` do not
+express this `X × X → Y → X` chain. The proved interval integrability of the scalar majorant alone
+does not establish measurability or integrability of the operator-valued Duhamel integrand.
 
 ## 7. What is still not formalized
 
@@ -384,8 +421,12 @@ The Lean development does **not** currently establish:
   (in particular, Fourier conjugate symmetry has not been proved);
 - a theorem that the Leray symbol maps Schwartz space to itself;
 - pressure reconstruction for the completed projected map;
-- a positive-time `H² → H³` Stokes smoothing estimate and locally integrable
-  Duhamel kernel bound;
+- an endpoint-safe two-space Duhamel operator with a proved strongly measurable and Bochner
+  interval-integrable integrand;
+- a concrete same-space `H³` linear evolution package with all semantics needed by the new
+  two-space mild contract;
+- a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
+  expected);
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
@@ -398,13 +439,13 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing and
-   prove its time-singular bound is locally integrable;
-2. prove its exact decoder and Leray/solenoidal compatibility;
-3. formulate the required two-space Duhamel contract, while separately
-   constructing the physical real-valued carrier restriction;
-4. only then connect the concrete projected operator to the mild-theory and
-   flow-map interfaces.
+1. formulate the endpoint-safe two-space Duhamel contract and prove actual integrand
+   measurability, interval-integrability, and the resulting norm estimate;
+2. instantiate it with `r3ProjectedConvectionH3ToH2`, `r3StokesH2ToH3Operator`, and an honestly
+   interpreted same-space `H³` Stokes evolution;
+3. separately construct the physical real-valued/conjugate-symmetric carrier restriction;
+4. only then prove the required fixed-point/local-wellposedness statements and connect the concrete
+   evolution to the mild-theory and flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 

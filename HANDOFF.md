@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-17 JST.
+Last updated: 2026-08-18 JST.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -30,7 +30,7 @@ Current code and theorem statements override stale prose.
   (`31924077773`). Its Git tree is identical to merge commit `710709c...`; the merge SHA itself has
   no separately attached run.
 - Before this continuation, local and GitHub `main` were
-  `1a326087748e8b4794e31fe94d941382eaeba7f1`, with no open PRs.
+  `f6bb133cf10f5a9b96594f10c742a1aa5c6cfe68`, with no open PRs.
 - Proof commit `6ecfcda51d74b456b538def2577c52a403a0ff88` passed targeted builds of
   `Formal.R3SchwartzConvectionSobolevEstimate` and `Formal.AxiomAudit`.
 - Commit `213495284f14c08d60936fa12a5260688124aa3f`, which adds only synchronized documentation on
@@ -41,6 +41,10 @@ Current code and theorem statements override stale prose.
 - Proof commit `2127757807768709d1ac19a0ec6f760c48a973cc` closes the order-aware `H²` Leray and
   projected-convection gate. It passed targeted bridge/projected/AxiomAudit builds and the local
   pinned source scan plus full `Formal.+` gate (8739 jobs).
+- Proof commit `7ab4091eefeaf2d25b73824b9ec2941088876844` closes the positive-time `H² → H³`
+  Stokes-smoothing gate. It passed targeted builds of `Formal.R3StokesH2H3Smoothing` and
+  `Formal.AxiomAudit`, followed by the local pinned source scan and full `Formal.+` gate
+  (8740 jobs).
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -108,6 +112,30 @@ order-two tempered decoder and that it intertwines `r3LerayH2Operator` with the 
 It has the inherited operator and pointwise bounds, stored-coordinate and reconstructed-`L²`
 solenoidality, and exact Schwartz decoder agreement with the existing literal
 `r3ProjectedSchwartzConvectionL2`.
+
+The positive-elapsed-time, positive-viscosity smoothing target is now closed as well.
+`Formal/R3StokesH2H3Smoothing.lean` constructs the nontrivial complex Bessel-coordinate map
+
+`r3StokesH2ToH3Operator : R3HsVelocity 2 →L[ℂ] R3HsVelocity 3`
+
+for `ν > 0` and `τ > 0`. Its Fourier multiplier is exactly
+
+`(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`.
+
+Lean proves the application and operator-norm bounds with the explicit majorant
+
+`r3StokesH2H3TimeKernel ν τ = 1 + (sqrt ((2π)² ν τ))⁻¹`,
+
+and proves that this scalar majorant is interval-integrable on `[0,T]` for every `T ≥ 0`.
+The new genuine reconstruction
+
+`r3H3ToL2Operator : R3HsVelocity 3 →L[ℂ] R3L2Velocity`
+
+implements `J⁻³`. Reconstruction of the smoothed coordinate is exactly the existing physical
+`L²` Stokes evolution of the reconstructed order-two input, both in `L²` and after embedding in
+tempered distributions. The file also supplies order-three Leray decoder semantics, exact
+order-two/order-three Leray intertwining, and stored-coordinate and reconstructed-`L²`
+solenoidal preservation.
 
 ## Merged infrastructure through PR #80
 
@@ -211,34 +239,37 @@ the alias equality as a physical `H³ → H²` inclusion or as a smoothing theor
 
 ## Exact next Lean gate
 
-Do not reopen the Fourier-coordinate or representative/Fubini work unless the current source actually regresses.
+Do not reopen the completed convolution, bounded-extension, Leray, or positive-time smoothing
+work unless current source regresses.
 
-The next smallest mathematical task is no longer density, bounded extension, or Leray projection.
-It is positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing:
+The next smallest mathematical task is a genuine two-space Duhamel interface joining
 
-1. construct the stored-coordinate multiplier
-   `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)` for `ν > 0` and `τ > 0`;
-2. prove its Fourier realization and exact order-two/order-three decoder compatibility with the
-   existing physical `L²` Stokes operator;
-3. prove an explicit `O(1 + (ν τ)^(-1/2))` (or sharper) norm bound, local time-integrability near
-   `τ = 0`, and Leray/solenoidal compatibility;
-4. use a two-space Duhamel contract (or prove a genuine same-space bound) before connecting this to
-   the abstract mild/flow-map layer.
+- the strong state space `X = R3HsVelocity 3`;
+- the nonlinear-output space `Y = R3HsVelocity 2`;
+- `r3ProjectedConvectionH3ToH2 : X →L[ℂ] X →L[ℂ] Y`; and
+- positive-elapsed-time `r3StokesH2ToH3Operator : Y →L[ℂ] X`.
 
-Do not retype `r3StokesL2Operator` through the phantom alias: no bounded `H² → H³` smoothing exists
-at elapsed time zero or at zero viscosity. The current `LerayProjectedQuadraticContract V` is a same-space
-`V × V → V` interface and cannot directly consume the new two-space map.
+The interface must handle the endpoint `τ = t - s = 0` without pretending that a bounded
+`H² → H³` operator exists there, prove strong measurability and Bochner interval-integrability
+of the actual Duhamel integrand, and derive its norm estimate from the proved locally integrable
+scalar majorant. It must also provide the same-space `H³` linear evolution needed for the initial
+term with honest decoder/semigroup semantics before instantiating the abstract mild layer.
+
+The current `MildEvolutionKernel V` and `LerayProjectedQuadraticContract V` are same-space
+interfaces. They cannot consume an `X × X → Y` nonlinearity followed by a positive-time
+`Y → X` smoothing map without this additional structure. Completing that interface still does
+not by itself prove a fixed point, local well-posedness, or a Clay statement.
 
 ## Latest Lean verification
 
 ```text
-runner: local Windows process via Elan / Git Bash
-revision: 2127757807768709d1ac19a0ec6f760c48a973cc
+runner: local Windows PowerShell process via Elan
+revision: 7ab4091eefeaf2d25b73824b9ec2941088876844
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
-target scope: Formal.R3H2LerayBridge + Formal.R3ProjectedSobolevConvection — pass
+target scope: Formal.R3StokesH2H3Smoothing — pass
 axiom scope: Formal.AxiomAudit — pass
-full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8739 jobs)
+full scope: pinned PowerShell equivalent of scripts/lean-ci-local.sh / Formal.+ — pass (8740 jobs)
 GitHub Actions: not invoked for this proof
 ```
 
@@ -282,12 +313,18 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - the completed map is a complex Bessel-coordinate extension; arbitrary-`H³` decoder equality with
   a separately defined distributional product is not yet proved;
 - the projected map does not yet supply a physical real-valued/conjugate-symmetric restriction,
-  a two-space Stokes/Duhamel map, pressure reconstruction, or concrete local well-posedness;
+  a two-space Duhamel contract, pressure reconstruction, or concrete local well-posedness;
+- the proved `H² → H³` Stokes operator requires `ν > 0` and positive elapsed time; no bounded
+  cross-space operator is supplied at `τ = 0` or `ν = 0`;
+- interval integrability of `r3StokesH2H3TimeKernel` is a scalar-majorant theorem, not yet a proof
+  that an endpoint-totalized operator-valued Duhamel integrand is strongly measurable or Bochner
+  integrable;
 - do not claim that the nonsmooth-at-zero Leray symbol maps Schwartz space to itself; the proved
   core comparison is in `L²` and tempered distributions;
-- do not use the phantom Sobolev-order alias as an `H³ → H²` inclusion or `H² → H³` smoothing map;
+- do not use the phantom Sobolev-order alias itself as an inclusion or smoothing theorem; the
+  positive-time result is justified by its explicit multiplier and decoder theorems;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートはν>0・正経過時間の genuine H²→H³ Stokes smoothing、その decoder/Leray 互換性、局所可積分な t⁻¹/² 型 bound、その後の two-space Duhamel contract。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。正経過時間・ν>0 の genuine H²→H³ Stokes smoothing は完了済み。次は H³×H³→H² projected convection と H²→H³ smoothing を結ぶ endpoint-safe two-space Duhamel contract、actual integrand の Bochner integrability、same-space H³ linear evolution。Lean はローカルで反復し、GitHub Actions は使わない。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`

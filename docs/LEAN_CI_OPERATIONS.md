@@ -173,6 +173,13 @@ revision, passed targeted builds of `Formal.R3H2LerayBridge`,
 source scan and full `Formal.+` gate (8739 jobs). The new audited theorems again report only
 `propext`, `Classical.choice`, and `Quot.sound`.
 
+The positive-time `H² → H³` Stokes-smoothing gate was likewise developed without GitHub Actions.
+Local Windows/Elan verification of commit `7ab4091eefeaf2d25b73824b9ec2941088876844`, with
+Lean 4.32.1 and mathlib revision `520045ab14e26149ee970e2e617ca04b09bde5d6`, passed the
+targeted builds of `Formal.R3StokesH2H3Smoothing` and `Formal.AxiomAudit`, followed by the pinned
+forbidden-source scan and full `Formal.+` gate (8740 jobs). The new audited theorems report only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
 Those results are evidence only for the exact revisions and trees identified above. Future
 interactive development should use a conforming external runner or local reproduction rather than
 consuming hosted quota.
