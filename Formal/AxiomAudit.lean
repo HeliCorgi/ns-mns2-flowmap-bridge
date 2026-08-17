@@ -23,6 +23,7 @@ import Formal.R3SobolevCarrier
 import Formal.R3SchwartzConvectionSobolevEstimate
 import Formal.R3SobolevConvectionExtension
 import Formal.R3ProjectedSobolevConvection
+import Formal.R3StokesH2H3Smoothing
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -145,6 +146,15 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3H2ToL2Operator_r3ProjectedConvectionH3ToH2_mem_solenoidal
 #print axioms MNS2.r3HsToTempered_r3ProjectedConvectionH3ToH2
 #print axioms MNS2.r3HsToTempered_r3ProjectedConvectionH3ToH2_schwartz
+#print axioms MNS2.norm_r3StokesH2ToH3Operator_le
+#print axioms MNS2.intervalIntegrable_r3StokesH2H3TimeKernel
+#print axioms MNS2.r3L2ToTempered_r3H3ToL2Operator
+#print axioms MNS2.r3H3ToL2Operator_r3StokesH2ToH3Operator
+#print axioms MNS2.r3HsToTempered_r3StokesH2ToH3Operator
+#print axioms MNS2.r3HsToTempered_r3LerayH3Operator
+#print axioms MNS2.r3StokesH2ToH3Operator_commutes_leray
+#print axioms MNS2.r3StokesH2ToH3Operator_mem_solenoidal
+#print axioms MNS2.r3StokesL2Operator_r3H2ToL2Operator_mem_solenoidal
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
