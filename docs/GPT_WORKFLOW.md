@@ -184,22 +184,35 @@ Schwartz inputs, the global bilinear norm bound, and uniqueness among
 continuous complex-bilinear maps with those dense-core values. That exact
 commit passed the local pinned full gate.
 
+Commit `2127757807768709d1ac19a0ec6f760c48a973cc` closes the order-aware
+`H²` Leray and projected-convection gate. It constructs the genuine bounded
+`J⁻²` reconstruction `r3H2ToL2Operator`, proves exact order-two decoder and
+physical-`L²` Leray commutation, and defines
+
+`r3ProjectedConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`.
+
+The new map has the inherited operator/pointwise norm bounds, its physical
+`L²` reconstruction is solenoidal, and its decoder agrees on Schwartz inputs
+with the existing literal `r3ProjectedSchwartzConvectionL2`. That exact commit
+passed the local pinned source scan and full gate (8739 jobs), without GitHub
+Actions.
+
 Do not generalize these results beyond the exact proved objects. In particular, analogous
 ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit
 representative/Fubini results. The completed map is a result about the complex Bessel-coordinate
 model; it does not identify its decoded value with a separately defined distributional product for
-all `H³` inputs and does not construct the physical real-valued/solenoidal restriction.
+all `H³` inputs and does not construct the physical real-valued restriction.
 
 `R3HsVelocity s` has the same underlying `L²` type for every order, with semantics supplied by the
 order-dependent decoder. Never use that definitional equality to assert a physical `H³ → H²`
 inclusion or an `H² → H³` smoothing bound.
 
-The current near-term formal gate is an order-aware Leray operator on the stored `H²` Bessel
-coordinate, its exact Schwartz/decoder compatibility, and the resulting projected
-`H³ × H³ → H²` map. The following gate is positive-elapsed-time, positive-viscosity `H² → H³` Stokes
-smoothing with its time-singular locally integrable bound and a two-space Duhamel interface. The
-existing same-space `LerayProjectedQuadraticContract V` cannot accept this two-space map without
-additional structure or a genuinely same-space estimate.
+The current near-term formal gate is positive-elapsed-time, positive-viscosity `H² → H³` Stokes
+smoothing with multiplier `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`, exact decoder and
+Leray compatibility, an explicit `O(1 + (ν τ)^(-1/2))` (or sharper) bound, and local
+time-integrability. No such bounded smoothing exists at `τ = 0` or `ν = 0`. The following gate
+is a two-space Duhamel interface. The existing same-space `LerayProjectedQuadraticContract V`
+cannot accept this two-space map without additional structure or a genuinely same-space estimate.
 
 ## 10. Minimal resume prompt
 

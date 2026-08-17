@@ -1,7 +1,7 @@
 # Formal scope and theorem boundary
 
 Last synchronized: 2026-08-17 (JST), after local full verification of commit
-`5eb29848eea0529bf557c68a599e78317090f522`.
+`2127757807768709d1ac19a0ec6f760c48a973cc`.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -313,33 +313,61 @@ distributional product for every `H³` pair has not been proved.
 
 The Sobolev-order parameter of `R3HsVelocity` is currently phantom at the Lean
 type level: orders two and three share the same underlying `L²` coordinate
-type, while their decoders differ.  No physical `H³ → H²` inclusion, Leray
-map, or smoothing estimate may therefore be justified by definitional
+type, while their decoders differ.  No physical `H³ → H²` inclusion or
+`H² → H³` smoothing estimate may therefore be justified by definitional
 equality of these aliases.
+
+### Order-aware H² Leray bridge and projected convection — closed
+
+`Formal/R3H2LerayBridge.lean` defines the bounded physical `L²`
+reconstruction
+
+`r3H2ToL2Operator : R3HsVelocity 2 →L[ℂ] R3L2Velocity`
+
+by the genuine inverse Bessel multiplier `J⁻²`. It proves:
+
+- `r3L2ToTempered_r3H2ToL2Operator` for every stored order-two coordinate;
+- exact recovery of `f.toLp 2` on canonical Schwartz coordinates;
+- `r3H2ToL2Operator_commutes_leray`;
+- `r3HsToTempered_r3LerayH2Operator`, identifying the decoded coordinate
+  projection with the existing physical `L²` Leray projector.
+
+Thus `r3LerayH2Operator` has order-two physical semantics fixed by proved
+decoder and commutation theorems, not by the phantom alias equality.
+
+`Formal/R3ProjectedSobolevConvection.lean` defines
+
+`r3ProjectedConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`
+
+and proves the inherited operator and pointwise norm bounds, stored-coordinate
+and reconstructed physical-`L²` solenoidality, the general decoder formula,
+and exact Schwartz decoder agreement with the existing literal
+`r3ProjectedSchwartzConvectionL2`. The sign is `+P((u · ∇)v)`; the existing
+mild equation supplies its own minus sign.
+
+The new audited theorems depend only on the standard foundations reported by
+the rest of this development (`propext`, `Classical.choice`, and `Quot.sound`).
 
 ## 6. Exact current analytic gate
 
-The density/bounded-extension bridge is closed.  The next analytic gate is the
-order-aware projected and smoothing layer:
+The density, bounded-extension, and order-aware projected-convection bridges
+are closed. The next analytic gate is the smoothing layer:
 
-1. define the Leray action on the stored `H²` Bessel coordinate and prove its
-   exact compatibility with canonical Schwartz inputs and the order-two
-   decoder;
-2. compose that operator with `r3ConvectionH3ToH2` to obtain a projected
-   `H³ × H³ → H²` bilinear map with the inherited bound;
-3. construct the positive-elapsed-time, positive-viscosity Stokes smoothing operator
-   `H² → H³`, including the additional one-order Bessel-weight ratio, a
-   time-singular norm bound, and the local time-integrability needed by a
-   Duhamel integral;
+1. for strictly positive viscosity `ν` and positive elapsed time `τ`, construct
+   the genuine `H² → H³` Stokes coordinate multiplier
+   `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)`;
+2. prove its Fourier realization, compatibility with the existing physical
+   `L²` Stokes operator under the order-two/order-three decoders, an explicit
+   `O(1 + (ν τ)^(-1/2))` (or sharper) norm bound, and local time-integrability
+   near `τ = 0`;
+3. prove the required Leray/solenoidal compatibility;
 4. introduce a two-space mild/Duhamel contract, or prove a genuinely
    same-space estimate, before connecting the result to the existing abstract
    flow-map layer.
 
-The existing unweighted physical-`L²` projected Schwartz object is not, without
-a Bessel/Leray commutation theorem, the required projection of the stored `H²`
-coordinate.  Likewise, the same-order `r3StokesL2Operator` cannot be retyped
-through the phantom Sobolev alias to manufacture `H² → H³` smoothing.  Such
-smoothing is unavailable at elapsed time zero (and at zero viscosity).
+The same-order `r3StokesL2Operator` cannot be retyped through the phantom
+Sobolev alias to manufacture `H² → H³` smoothing. Such smoothing is unavailable
+at elapsed time zero and at zero viscosity.
 
 ## 7. What is still not formalized
 
@@ -352,10 +380,10 @@ The Lean development does **not** currently establish:
 - continuation of a `C¹` solution map through a singular time;
 - equality, for arbitrary completed `H³` inputs, between the decoded extension
   and a separately constructed distributional convection product;
-- a physical real-valued and solenoidal restriction of the completed
-  convection map;
-- an order-two Bessel-coordinate Leray compatibility theorem and the resulting
-  projected `H³ × H³ → H²` map;
+- a physical real-valued restriction of the completed projected convection map
+  (in particular, Fourier conjugate symmetry has not been proved);
+- a theorem that the Leray symbol maps Schwartz space to itself;
+- pressure reconstruction for the completed projected map;
 - a positive-time `H² → H³` Stokes smoothing estimate and locally integrable
   Duhamel kernel bound;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
@@ -370,15 +398,12 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. construct the order-aware `H²` Bessel-coordinate Leray action and its exact
-   Schwartz/decoder compatibility theorem;
-2. obtain the projected `H³ × H³ → H²` map without confusing the weighted
-   coordinate with the existing unweighted `L²` object;
-3. construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing and
+1. construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing and
    prove its time-singular bound is locally integrable;
-4. formulate the required two-space Duhamel contract, while separately
-   constructing the physical real-valued and solenoidal carrier restrictions;
-5. only then connect the concrete projected operator to the mild-theory and
+2. prove its exact decoder and Leray/solenoidal compatibility;
+3. formulate the required two-space Duhamel contract, while separately
+   constructing the physical real-valued carrier restriction;
+4. only then connect the concrete projected operator to the mild-theory and
    flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.

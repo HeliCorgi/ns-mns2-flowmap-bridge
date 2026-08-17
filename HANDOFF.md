@@ -29,11 +29,8 @@ Current code and theorem statements override stale prose.
 - PR #81 head `18c64b80b6eebb95a4344dec5811fc024b963377` passed hosted Lean run #257
   (`31924077773`). Its Git tree is identical to merge commit `710709c...`; the merge SHA itself has
   no separately attached run.
-- Before this continuation, GitHub `main` was
-  `6aab33d2d3d895260285a1cac60afa7cfce4d294` and there were no open PRs.
-- The mathematical proof and synchronized handoff were fast-forwarded directly to `main` through
-  commit `213495284f14c08d60936fa12a5260688124aa3f`, without opening a PR. There were still no open
-  PRs after integration.
+- Before this continuation, local and GitHub `main` were
+  `1a326087748e8b4794e31fe94d941382eaeba7f1`, with no open PRs.
 - Proof commit `6ecfcda51d74b456b538def2577c52a403a0ff88` passed targeted builds of
   `Formal.R3SchwartzConvectionSobolevEstimate` and `Formal.AxiomAudit`.
 - Commit `213495284f14c08d60936fa12a5260688124aa3f`, which adds only synchronized documentation on
@@ -41,6 +38,11 @@ Current code and theorem statements override stale prose.
 - Proof commit `5eb29848eea0529bf557c68a599e78317090f522` closes the weighted-density and
   bounded-extension gate. It passed targeted density/extension/AxiomAudit builds and the local
   pinned source scan plus full `Formal.+` gate (8737 jobs).
+- Proof commit `2127757807768709d1ac19a0ec6f760c48a973cc` closes the order-aware `H²` Leray and
+  projected-convection gate. It passed targeted bridge/projected/AxiomAudit builds and the local
+  pinned source scan plus full `Formal.+` gate (8739 jobs).
+- This continuation's proof and synchronized documentation were integrated by direct fast-forward
+  to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
 - Automatic full Lean builds on pushes to `main` remain disabled.
 - Opening a PR to `main` currently starts the hosted Lean workflow, so a no-Actions integration must
@@ -91,6 +93,21 @@ Bessel-coordinate map
 Here “completed” means that the codomain and domains are the existing complete `L²`
 Bessel-coordinate models. It does not mean that Lean constructed a separate topological
 `Completion` of Schwartz space.
+
+The order-aware Leray/projected-convection target is now closed as well. The new bounded
+reconstruction
+
+`r3H2ToL2Operator : R3HsVelocity 2 →L[ℂ] R3L2Velocity`
+
+implements the actual `J⁻²` Fourier multiplier. Lean proves that it represents exactly the
+order-two tempered decoder and that it intertwines `r3LerayH2Operator` with the existing physical
+`r3LerayL2Operator`. The resulting complex bilinear map is
+
+`r3ProjectedConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`.
+
+It has the inherited operator and pointwise bounds, stored-coordinate and reconstructed-`L²`
+solenoidality, and exact Schwartz decoder agreement with the existing literal
+`r3ProjectedSchwartzConvectionL2`.
 
 ## Merged infrastructure through PR #80
 
@@ -196,34 +213,32 @@ the alias equality as a physical `H³ → H²` inclusion or as a smoothing theor
 
 Do not reopen the Fourier-coordinate or representative/Fubini work unless the current source actually regresses.
 
-The next smallest mathematical task is no longer density or bounded extension. It is the
-order-aware `H²` Leray bridge:
+The next smallest mathematical task is no longer density, bounded extension, or Leray projection.
+It is positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing:
 
-1. define the Leray action on the stored order-two Bessel coordinate;
-2. prove exact canonical-Schwartz and order-two decoder compatibility, including the required
-   scalar-Bessel/Leray commutation;
-3. compose it with `r3ConvectionH3ToH2` and inherit the `H³ × H³ → H²` bound;
-4. separately construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing, its
-   one-order Bessel-weight ratio, time-singular norm estimate, and local time-integrability;
-5. use a two-space Duhamel contract (or prove a genuine same-space bound) before connecting this to
+1. construct the stored-coordinate multiplier
+   `(1 + ‖ξ‖²)^(1/2) * exp(-(2π)² ν τ ‖ξ‖²)` for `ν > 0` and `τ > 0`;
+2. prove its Fourier realization and exact order-two/order-three decoder compatibility with the
+   existing physical `L²` Stokes operator;
+3. prove an explicit `O(1 + (ν τ)^(-1/2))` (or sharper) norm bound, local time-integrability near
+   `τ = 0`, and Leray/solenoidal compatibility;
+4. use a two-space Duhamel contract (or prove a genuine same-space bound) before connecting this to
    the abstract mild/flow-map layer.
 
-Do not identify the desired weighted `H²` projection with the existing unweighted physical-`L²`
-`r3ProjectedSchwartzConvectionL2` without the commutation/decoder theorem. Do not retype
-`r3StokesL2Operator` through the phantom alias: no bounded `H² → H³` smoothing exists at elapsed
-time zero or at zero viscosity. The current `LerayProjectedQuadraticContract V` is a same-space
+Do not retype `r3StokesL2Operator` through the phantom alias: no bounded `H² → H³` smoothing exists
+at elapsed time zero or at zero viscosity. The current `LerayProjectedQuadraticContract V` is a same-space
 `V × V → V` interface and cannot directly consume the new two-space map.
 
 ## Latest Lean verification
 
 ```text
 runner: local Windows process via Elan / Git Bash
-revision: 5eb29848eea0529bf557c68a599e78317090f522
+revision: 2127757807768709d1ac19a0ec6f760c48a973cc
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
-target scope: Formal.R3SchwartzSobolevDensity + Formal.R3SobolevConvectionExtension — pass
+target scope: Formal.R3H2LerayBridge + Formal.R3ProjectedSobolevConvection — pass
 axiom scope: Formal.AxiomAudit — pass
-full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8737 jobs)
+full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8739 jobs)
 GitHub Actions: not invoked for this proof
 ```
 
@@ -266,11 +281,13 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - do not auto-merge unless the user explicitly asks;
 - the completed map is a complex Bessel-coordinate extension; arbitrary-`H³` decoder equality with
   a separately defined distributional product is not yet proved;
-- it does not yet supply a physical real-valued restriction, an order-aware solenoidal/Leray
-  package, a two-space Stokes/Duhamel map, or concrete local well-posedness;
+- the projected map does not yet supply a physical real-valued/conjugate-symmetric restriction,
+  a two-space Stokes/Duhamel map, pressure reconstruction, or concrete local well-posedness;
+- do not claim that the nonsmooth-at-zero Leray symbol maps Schwartz space to itself; the proved
+  core comparison is in `L²` and tempered distributions;
 - do not use the phantom Sobolev-order alias as an `H³ → H²` inclusion or `H² → H³` smoothing map;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートは completed H³×H³→H² 対流写像に対する order-aware H² Leray bridge、その後の正時間 H²→H³ Stokes smoothing と two-space Duhamel contract。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートはν>0・正経過時間の genuine H²→H³ Stokes smoothing、その decoder/Leray 互換性、局所可積分な t⁻¹/² 型 bound、その後の two-space Duhamel contract。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`

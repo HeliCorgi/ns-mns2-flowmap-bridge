@@ -165,6 +165,14 @@ Local Windows/Elan verification of commit
 `Formal.AxiomAudit`, followed by the pinned source scan and full `Formal.+` gate (8737 jobs).
 The new audited theorems report only `propext`, `Classical.choice`, and `Quot.sound`.
 
+The order-aware `H²` Leray and projected-convection gate was also developed without GitHub
+Actions. Local Windows/Elan verification of commit
+`2127757807768709d1ac19a0ec6f760c48a973cc`, with the same Lean 4.32.1 toolchain and mathlib
+revision, passed targeted builds of `Formal.R3H2LerayBridge`,
+`Formal.R3ProjectedSobolevConvection`, and `Formal.AxiomAudit`, followed by the pinned forbidden
+source scan and full `Formal.+` gate (8739 jobs). The new audited theorems again report only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
 Those results are evidence only for the exact revisions and trees identified above. Future
 interactive development should use a conforming external runner or local reproduction rather than
 consuming hosted quota.
