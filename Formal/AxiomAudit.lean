@@ -20,6 +20,7 @@ import Formal.R3LerayL2Operator
 import Formal.R3LerayFourierBridge
 import Formal.R3LerayComplexFiberSymbol
 import Formal.R3SobolevCarrier
+import Formal.R3SchwartzConvectionSobolevEstimate
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -127,6 +128,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3HsToTempered_memSobolev
 #print axioms MNS2.r3HmToTempered_memSobolev
 #print axioms MNS2.r3StrongSobolevOrder_three
+#print axioms MNS2.r3SchwartzConvectionTermSobolevEstimate_three
+#print axioms MNS2.r3SchwartzConvectionSobolevEstimate_three
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
