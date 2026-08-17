@@ -31,11 +31,13 @@ Current code and theorem statements override stale prose.
   no separately attached run.
 - At session resume, `main` was `710709c34b8ee564b071e71fd27313be4cc383a6` and there were no
   open PRs.
-- The current mathematical work is on `agent/r3-schwartz-convection-h3-estimate`; code commit
-  `6ecfcda51d74b456b538def2577c52a403a0ff88` passed the local pinned source scan and full
-  `Formal.+` gate (8735 jobs).
-- The same commit also passed targeted builds of
+- The mathematical proof and synchronized handoff were fast-forwarded directly to `main` through
+  commit `213495284f14c08d60936fa12a5260688124aa3f`, without opening a PR. There were still no open
+  PRs after integration.
+- Proof commit `6ecfcda51d74b456b538def2577c52a403a0ff88` passed targeted builds of
   `Formal.R3SchwartzConvectionSobolevEstimate` and `Formal.AxiomAudit`.
+- Commit `213495284f14c08d60936fa12a5260688124aa3f`, which adds only synchronized documentation on
+  top of that proof, passed the local pinned source scan and full `Formal.+` gate (8735 jobs).
 - No GitHub Action was started or rerun for the new mathematical proof.
 - Automatic full Lean builds on pushes to `main` remain disabled.
 - Opening a PR to `main` currently starts the hosted Lean workflow, so a no-Actions integration must
@@ -172,7 +174,7 @@ sequence without proving independence of that choice and the required density/co
 
 ```text
 runner: local Windows process via Elan / Git Bash
-revision: 6ecfcda51d74b456b538def2577c52a403a0ff88
+revision: 213495284f14c08d60936fa12a5260688124aa3f
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
 target scope: Formal.R3SchwartzConvectionSobolevEstimate — pass
