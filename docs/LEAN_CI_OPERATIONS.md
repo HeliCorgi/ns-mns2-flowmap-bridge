@@ -146,7 +146,20 @@ PR #77 (`Cut hosted Lean CI usage and add cache`) is merged and established the 
 
 The latest mathematical hosted check before this workflow switch was PR #80 head `8f31dea042a72381e92bbf4cdeb1370525ba6d7b`, Lean run #256 (`31920218959`), which completed successfully before merge commit `73cf3b276179aedb0e830d2d46c3246b269c1f7f` landed on `main`.
 
-That successful historical run remains evidence for the exact PR #80 head it checked. Future interactive development should use the external runner rather than consuming hosted quota.
+PR #81 then merged the external-runner workflow documentation as main commit
+`710709c34b8ee564b071e71fd27313be4cc383a6`. Its head
+`18c64b80b6eebb95a4344dec5811fc024b963377` passed hosted Lean run #257
+(`31924077773`); the head and merge commit have the same Git tree, while the merge SHA itself has no
+separate run attached.
+
+The next mathematical gate was developed without GitHub Actions. Local Windows/Elan verification
+of commit `6ecfcda51d74b456b538def2577c52a403a0ff88`, under
+`leanprover/lean4:v4.32.1` and the committed manifest, passed the source scan, targeted module,
+axiom audit, and full `Formal.+` gate (8735 jobs).
+
+Those results are evidence only for the exact revisions and trees identified above. Future
+interactive development should use a conforming external runner or local reproduction rather than
+consuming hosted quota.
 
 Always inspect current repository/verification state rather than assuming this historical state is still current. `HANDOFF.md` records the latest known transition point, but exact Git contents and exact runner evidence are authoritative.
 

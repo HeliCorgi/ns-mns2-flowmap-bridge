@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-16 JST.
+Last updated: 2026-08-17 JST.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -24,28 +24,38 @@ Current code and theorem statements override stale prose.
 - PR #78 (`Gpt handoff protocol`) is merged.
 - PR #79 (`R3 young real set integral bridge`) is merged.
 - PR #80 (`Close R3 Schwartz H3-to-H2 convection factors`) is merged.
-- PR #80 head `8f31dea042a72381e92bbf4cdeb1370525ba6d7b` passed Lean run #256 (`31920218959`). The hosted run completed successfully before merge.
-- Current `main` HEAD at this handoff is merge commit `73cf3b276179aedb0e830d2d46c3246b269c1f7f`.
-- At the latest check there are no open PRs.
+- PR #81 (`Agent/chatgpt external lean workflow`) is merged as
+  `710709c34b8ee564b071e71fd27313be4cc383a6`.
+- PR #81 head `18c64b80b6eebb95a4344dec5811fc024b963377` passed hosted Lean run #257
+  (`31924077773`). Its Git tree is identical to merge commit `710709c...`; the merge SHA itself has
+  no separately attached run.
+- At session resume, `main` was `710709c34b8ee564b071e71fd27313be4cc383a6` and there were no
+  open PRs.
+- The current mathematical work is on `agent/r3-schwartz-convection-h3-estimate`; code commit
+  `6ecfcda51d74b456b538def2577c52a403a0ff88` passed the local pinned source scan and full
+  `Formal.+` gate (8735 jobs).
+- The same commit also passed targeted builds of
+  `Formal.R3SchwartzConvectionSobolevEstimate` and `Formal.AxiomAudit`.
+- No GitHub Action was started or rerun for the new mathematical proof.
 - Automatic full Lean builds on pushes to `main` remain disabled.
-- PR-to-`main` hosted Lean checks may remain configured, but GitHub-hosted Actions are no longer the normal interactive compiler.
+- Opening a PR to `main` currently starts the hosted Lean workflow, so a no-Actions integration must
+  not use a PR merely as a merge vehicle.
 - The preferred interactive path is now **ChatGPT -> external Lean runner -> exact diagnostics -> ChatGPT iteration** under the contract in `docs/LEAN_CI_OPERATIONS.md`.
 - Local/self-hosted execution remains a valid reproduction/fallback path.
 - GitHub-hosted Actions should be used only for deliberately spent status/final-confirmation checks or when repository integration policy explicitly requires one.
 
-## Workflow migration branch
+## Local Lean status in this workspace
 
-Prepared documentation branch:
+The VS Code Lean extension, Elan shims, and pinned Lean 4.32.1 toolchain are installed locally. The
+only environment issue found was an unset `ELAN_HOME`. The tested PowerShell setup is:
 
-`agent/chatgpt-external-lean-workflow`
+```powershell
+$env:ELAN_HOME = Join-Path $env:USERPROFILE '.elan'
+```
 
-This branch changes the operational contract from local/self-hosted-first plus scarce hosted fallback to a ChatGPT-connected external Lean runner as the standard interactive verification path. It also synchronizes stale PR #80 handoff/formal-scope text.
-
-No PR is opened for this documentation branch at this handoff because opening a PR may trigger a hosted Lean check while hosted quota is exhausted. Integrate it later through an explicitly chosen cheap/non-hosted path.
-
-The workflow documents are provider-agnostic: an external runner may be exposed through API, MCP, custom GPT Action, or another ChatGPT-accessible execution tool, but it must reproduce the pinned repository/toolchain gate and return exact diagnostics.
-
-Important operational status: this specific ChatGPT runtime does **not yet have a conforming external Lean runner tool connected**. The workflow migration is documented, but new Lean proof changes remain unverified until such a runner is connected or another conforming reproduction path is deliberately used.
+With that process-local setting, `lean --version`, `lake --version`, targeted builds, the axiom
+audit, and the full gate all run locally. The extension provides the IDE/LSP integration; the actual
+verification is performed by the local Elan-selected Lean compiler and kernel.
 
 ## Project claim boundary
 
@@ -55,17 +65,21 @@ Current physical research specialization remains the `R^3`, preferably unforced 
 
 No current Lean theorem is a Clay result. Do not claim global regularity, blow-up, local well-posedness of the full concrete `R^3` problem, finite-cylinder transfer, or discrete-to-continuum promotion unless separately proved.
 
-## Current formal target
+## Completed formal target
 
-The active near-term target remains
+The previous near-term target
 
 `R3SchwartzConvectionTermSobolevEstimate 3`
 
-from `Formal/R3SchwartzConvectionSobolevReduction.lean`.
+is now proved as `r3SchwartzConvectionTermSobolevEstimate_three` in
+`Formal/R3SchwartzConvectionSobolevEstimate.lean`.
 
-Its definition requires one explicit `C : ℝ`, `0 ≤ C`, uniformly valid for every `i : Fin 3`, followed by the one-coordinate H² estimate with the two H³ input norms.
+The same file proves `r3SchwartzConvectionSobolevEstimate_three`, obtaining the full
+`R3SchwartzConvectionSobolevEstimate 3` through the existing `.to_convection` reduction and its
+documented factor-three summation loss.
 
-Once this theorem is proved, the existing `.to_convection` reduction supplies `R3SchwartzConvectionSobolevEstimate 3` with the factor-three summation loss.
+The new active target is the density/bounded-extension step from this Schwartz-core estimate to a
+completed Bessel-coordinate `H³ × H³ → H²` bilinear convection map.
 
 ## Merged infrastructure through PR #80
 
@@ -116,23 +130,61 @@ Also already available:
 
 `r3CoordinateDerivativeFrequencyConstant_nonneg (i : Fin 3)`.
 
+### Uniform finite-coordinate closure — locally verified commit `6ecfcda...`
+
+`Formal/R3SchwartzConvectionSobolevEstimate.lean` adds:
+
+- `r3UniformCoordinateDerivativeFrequencyConstant`;
+- `r3UniformCoordinateDerivativeFrequencyConstant_nonneg`;
+- `r3CoordinateDerivativeFrequencyConstant_le_uniform`;
+- `r3SchwartzConvectionH3Constant`;
+- `r3SchwartzConvectionH3Constant_nonneg`;
+- `r3SchwartzConvectionTermSobolevEstimate_three`;
+- `r3SchwartzConvectionSobolevEstimate_three`.
+
+The uniform derivative constant is the finite sum over `Fin 3`. Each coordinate constant is
+nonnegative, so every summand is bounded by that sum. The common per-term witness is
+
+`4 * ‖r3H2InverseBesselWeightL2‖ * r3UniformCoordinateDerivativeFrequencyConstant`.
+
+`Formal/AxiomAudit.lean` now prints the axiom dependencies of both final estimate theorems. They
+use only the standard mathlib foundations reported by the rest of this development (`propext`,
+`Classical.choice`, and `Quot.sound`).
+
 ## Exact next Lean gate
 
 Do not reopen the Fourier-coordinate or representative/Fubini work unless the current source actually regresses.
 
-The next smallest mathematical task is finite-dimensional constant packaging:
+The next smallest mathematical task is no longer finite-dimensional constant packaging. It is the
+completion bridge:
 
-1. define or choose an explicit uniform nonnegative constant over `i : Fin 3` dominating `r3CoordinateDerivativeFrequencyConstant i`;
-2. a finite sum or finite maximum is sufficient; sharpness is irrelevant;
-3. use `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3` plus the uniform domination to prove `R3SchwartzConvectionTermSobolevEstimate 3` with the exact definition in `Formal/R3SchwartzConvectionSobolevReduction.lean`;
-4. then invoke `.to_convection` for `R3SchwartzConvectionSobolevEstimate 3`;
-5. only after that move to the projected quadratic / mild-theory layer.
+1. prove the density/extension facts required to promote the bounded Schwartz-core bilinear map;
+2. construct a continuous bilinear map on the completed Bessel-coordinate carriers with type
+   corresponding to `H³ × H³ → H²`;
+3. prove exact agreement with `r3SchwartzConvection` on canonical Schwartz inputs;
+4. only then construct the real-valued/solenoidal restriction and compose with the concrete Leray
+   projector for the projected quadratic / mild-theory layer.
 
-A natural non-sharp candidate is to dominate each coordinate constant by a finite `Finset.univ` sum of the nonnegative constants, then absorb the common factor `4 * ‖r3H2InverseBesselWeightL2‖` into the witness `C`.
+Do not define the completed map by choosing an arbitrary Schwartz representative or approximating
+sequence without proving independence of that choice and the required density/continuity result.
 
-## External-runner verification protocol for the next proof
+## Latest Lean verification
 
-Once a conforming ChatGPT-accessible Lean runner is connected, use it as the interactive compiler.
+```text
+runner: local Windows process via Elan / Git Bash
+revision: 6ecfcda51d74b456b538def2577c52a403a0ff88
+toolchain: leanprover/lean4:v4.32.1
+dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
+target scope: Formal.R3SchwartzConvectionSobolevEstimate — pass
+axiom scope: Formal.AxiomAudit — pass
+full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8735 jobs)
+GitHub Actions: not invoked for this proof
+```
+
+## Runner protocol for the next proof
+
+Use a conforming ChatGPT-accessible Lean runner when connected; otherwise use the tested local
+Elan path above. In either case, preserve the same pinned-revision evidence contract.
 
 For each candidate change, record:
 
@@ -166,9 +218,10 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - do not report candidate code as proved before a conforming pinned Lean verification accepts it;
 - do not merge an ungreen mathematical PR;
 - do not auto-merge unless the user explicitly asks;
-- the merged H³→H² per-coordinate theorem does not yet supply the uniform `Fin 3` witness required by `R3SchwartzConvectionTermSobolevEstimate 3`;
+- the proved Schwartz-core estimate does not yet supply a map on the completed Sobolev carriers;
+- it does not yet supply the real-valued, solenoidal, or Leray-projected quadratic map;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。Lean の反復検証は ChatGPT 接続の外部 runner を使い、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートは Schwartz 核の H³×H³→H² 対流評価を completed Sobolev carrier へ延長する density/bounded-extension bridge。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`

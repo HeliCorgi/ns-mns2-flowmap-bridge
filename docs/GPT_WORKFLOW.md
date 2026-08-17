@@ -145,7 +145,7 @@ Use a shape like:
 
 ```text
 Current target:
-  R3SchwartzConvectionTermSobolevEstimate 3
+  <exact smallest open theorem or construction>
 
 Latest Lean verification:
   runner: <external runner / local / hosted>
@@ -169,9 +169,20 @@ Do not assume:
 
 Merged PR #79 explicitly closed the representative/Fubini identification for the two concrete H² scalar majorants, and merged PR #80 closed the Fourier-coordinate/H³ factor bookkeeping used by the current one-coordinate convection estimate.
 
-Do not generalize either result beyond the exact proved objects. In particular, analogous ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit representative/Fubini results, and the per-coordinate H³→H² estimate does not by itself prove the uniform `Fin 3` convection theorem.
+Commit `6ecfcda51d74b456b538def2577c52a403a0ff88` closes the remaining finite `Fin 3`
+packaging with an explicit nonnegative sum witness and proves both
+`R3SchwartzConvectionTermSobolevEstimate 3` and
+`R3SchwartzConvectionSobolevEstimate 3`. That commit passed the local pinned full gate.
 
-The current near-term formal gate is to obtain an explicit uniform nonnegative constant over `i : Fin 3`, then prove `R3SchwartzConvectionTermSobolevEstimate 3`, followed by the existing `.to_convection` reduction.
+Do not generalize these results beyond the exact proved objects. In particular, analogous
+ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit
+representative/Fubini results, and the Schwartz-core `H³ × H³ → H²` estimate does not by itself
+construct a bilinear map on completed Sobolev carriers.
+
+The current near-term formal gate is the density/bounded-extension step from the Schwartz core to
+the completed Bessel-coordinate `H³ × H³ → H²` carriers, including exact agreement on canonical
+Schwartz inputs. Real-valued, solenoidal, Leray-projected, and mild-theory packaging comes only
+after that extension is constructed.
 
 ## 10. Minimal resume prompt
 

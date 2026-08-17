@@ -1,6 +1,7 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-16 (JST), after merged PR #80.
+Last synchronized: 2026-08-17 (JST), after local full verification of commit
+`6ecfcda51d74b456b538def2577c52a403a0ff88`.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -141,13 +142,19 @@ Relevant files include:
 
 ## 5. Current Schwartz convection/Sobolev track
 
-The current active formal target is
+The Schwartz-core estimates
 
-`R3SchwartzConvectionTermSobolevEstimate 3`
+- `R3SchwartzConvectionTermSobolevEstimate 3`, and
+- `R3SchwartzConvectionSobolevEstimate 3`
 
-in `Formal/R3SchwartzConvectionSobolevReduction.lean`.
+are now proved in `Formal/R3SchwartzConvectionSobolevEstimate.lean`, using a
+finite uniform majorant for the three coordinate-derivative constants.
 
-The one-coordinate H³→H² estimate feeding this target is now proved. The remaining near-term task is to make its coordinate-dependent constant uniform over `i : Fin 3` and package the theorem expected by the existing reduction.
+The current active target is the completion bridge: construct the bounded
+H³ × H³ → H² convection map on the completed Bessel-coordinate carriers by
+density, and prove that it agrees with the established formula on Schwartz
+inputs.  Real-valued, solenoidal, and Leray-projected packaging remains a
+later gate.
 
 ### Exact Fourier product/convolution bridge
 
@@ -252,18 +259,39 @@ The physical H² estimate for one coordinate has the explicit bound
 
 The only coordinate dependence in this bound is the already formalized nonnegative derivative-frequency constant `r3CoordinateDerivativeFrequencyConstant i`.
 
-## 6. Exact current analytic gate on green `main`
+### Uniform coordinate packaging and full convection estimate — closed
 
-`R3SchwartzConvectionTermSobolevEstimate 3` is **not yet proved**.
+`Formal/R3SchwartzConvectionSobolevEstimate.lean` now defines the explicit finite majorant
 
-The per-coordinate estimate needed to build it is now green on `main`. The next gate is purely finite-dimensional packaging:
+`r3UniformCoordinateDerivativeFrequencyConstant`
 
-1. choose an explicit nonnegative constant `C` that uniformly dominates `r3CoordinateDerivativeFrequencyConstant i` for every `i : Fin 3` — a finite sum or finite maximum is sufficient; no sharp constant is required;
-2. combine that uniform domination with `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3`;
-3. package the resulting statement as `R3SchwartzConvectionTermSobolevEstimate 3` with the exact parameter/order conventions expected by `Formal/R3SchwartzConvectionSobolevReduction.lean`;
-4. invoke the existing `.to_convection` reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`.
+as the sum of the three nonnegative coordinate constants and proves:
 
-Do not add a new analytic assumption merely to hide the finite `Fin 3` bound.
+- `r3UniformCoordinateDerivativeFrequencyConstant_nonneg`;
+- `r3CoordinateDerivativeFrequencyConstant_le_uniform`;
+- `r3SchwartzConvectionH3Constant_nonneg`;
+- `r3SchwartzConvectionTermSobolevEstimate_three`;
+- `r3SchwartzConvectionSobolevEstimate_three`.
+
+Thus both `R3SchwartzConvectionTermSobolevEstimate 3` and
+`R3SchwartzConvectionSobolevEstimate 3` are proved on the Schwartz core. The full estimate carries
+the already documented factor-three summation loss from `.to_convection`; no new analytic
+assumption is introduced by the finite packaging.
+
+## 6. Exact current analytic gate
+
+The next gate is no longer the pointwise/Fourier estimate or the finite `Fin 3` packaging. It is the
+completion step from the Schwartz core to the Bessel-coordinate Sobolev carriers:
+
+1. prove the density/extension facts needed to extend the bounded Schwartz-core bilinear map;
+2. construct a well-defined continuous bilinear convection map
+   `H³(R³; C³) × H³(R³; C³) → H²(R³; C³)` on the completed carriers;
+3. prove that the extension agrees with `r3SchwartzConvection` on canonical Schwartz inputs;
+4. only after that, address the real-valued/solenoidal restriction and compose with the concrete
+   Leray projector for the projected quadratic/mild layer.
+
+The proved core estimate alone does not authorize identifying an arbitrary `H³` coordinate with a
+Schwartz representative or defining the extension by an unproved choice of approximating sequence.
 
 ## 7. What is still not formalized
 
@@ -274,8 +302,9 @@ The Lean development does **not** currently establish:
 - a blow-up counterexample;
 - a closed-form general solution;
 - continuation of a `C¹` solution map through a singular time;
-- `R3SchwartzConvectionTermSobolevEstimate 3`;
-- the full `R3SchwartzConvectionSobolevEstimate 3`;
+- a density/extension theorem promoting the Schwartz-core convection estimate to the completed
+  `H³ × H³ → H²` Bessel-coordinate carriers;
+- a real-valued and solenoidal restriction of that completed convection map;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
@@ -288,10 +317,12 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. obtain a uniform nonnegative constant over `i : Fin 3` dominating `r3CoordinateDerivativeFrequencyConstant i`;
-2. prove `R3SchwartzConvectionTermSobolevEstimate 3` from the merged per-coordinate theorem `norm_r3SchwartzToHsCLM_two_convectionTerm_le_H3`;
-3. use the existing reduction to obtain `R3SchwartzConvectionSobolevEstimate 3`;
-4. only then connect the estimate to the projected quadratic/mild operator layer.
+1. establish density and a bounded-bilinear extension from the Schwartz core to the completed
+   `H³ × H³ → H²` carriers;
+2. prove exact agreement of the extension with the existing Schwartz convection term;
+3. construct the physically real and solenoidal restriction required by the Navier--Stokes layer;
+4. compose it with the concrete Leray projector and connect that projected quadratic operator to
+   the existing mild-theory interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
