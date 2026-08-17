@@ -1,7 +1,7 @@
 # Formal scope and theorem boundary
 
 Last synchronized: 2026-08-17 (JST), after local full verification of commit
-`6ecfcda51d74b456b538def2577c52a403a0ff88`.
+`5eb29848eea0529bf557c68a599e78317090f522`.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -150,11 +150,13 @@ The Schwartz-core estimates
 are now proved in `Formal/R3SchwartzConvectionSobolevEstimate.lean`, using a
 finite uniform majorant for the three coordinate-derivative constants.
 
-The current active target is the completion bridge: construct the bounded
-H³ × H³ → H² convection map on the completed Bessel-coordinate carriers by
-density, and prove that it agrees with the established formula on Schwartz
-inputs.  Real-valued, solenoidal, and Leray-projected packaging remains a
-later gate.
+That estimate has now been promoted, by density, to a bounded complex-bilinear
+`H³ × H³ → H²` map on the complete Bessel-coordinate carriers.  The result is
+an extension of the exact Schwartz formula, with an explicit norm bound and a
+uniqueness theorem.  It is not a construction of a separate topological
+completion of Schwartz space: `R3HsVelocity s` is the existing complete `L²`
+Bessel-coordinate model whose physical meaning is supplied by its
+order-dependent decoder.
 
 ### Exact Fourier product/convolution bridge
 
@@ -275,23 +277,69 @@ as the sum of the three nonnegative coordinate constants and proves:
 
 Thus both `R3SchwartzConvectionTermSobolevEstimate 3` and
 `R3SchwartzConvectionSobolevEstimate 3` are proved on the Schwartz core. The full estimate carries
-the already documented factor-three summation loss from `.to_convection`; no new analytic
-assumption is introduced by the finite packaging.
+the same documented factor-three triangle-inequality loss as `.to_convection`, now through an
+exported direct sum bound; no new analytic assumption is introduced by the finite packaging.
+
+### Dense Bessel-coordinate extension — closed
+
+`Formal/R3SchwartzSobolevDensity.lean` proves that the order-`s` Bessel
+multiplier on Schwartz fields is onto, using the inverse-order multiplier, and
+then combines this with mathlib's density of Schwartz fields in `L²` to prove
+
+`r3SchwartzToHsCLM_denseRange (s : ℝ)`.
+
+This is a dense-range statement into the complete Bessel-coordinate model. It
+does not assert that the native Schwartz Fréchet topology is the topology
+induced by one `H^s` norm.
+
+`Formal/R3SobolevConvectionExtension.lean` uses the proved core estimate and
+`LinearMap.extendOfNorm` in the second and then the first variable. It defines
+
+`r3ConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`
+
+and proves:
+
+- `r3ConvectionH3ToH2_apply_schwartz`;
+- `r3HsToTempered_r3ConvectionH3ToH2_schwartz`;
+- `norm_r3ConvectionH3ToH2_le`;
+- `norm_r3ConvectionH3ToH2_apply_le`;
+- `r3ConvectionH3ToH2_unique`.
+
+Thus the completed coordinate map agrees exactly with physical convection on
+canonical Schwartz inputs and is the unique continuous complex-bilinear map
+with those dense-core values.  The decoder agreement theorem is intentionally
+limited to Schwartz inputs; equality with an independently defined
+distributional product for every `H³` pair has not been proved.
+
+The Sobolev-order parameter of `R3HsVelocity` is currently phantom at the Lean
+type level: orders two and three share the same underlying `L²` coordinate
+type, while their decoders differ.  No physical `H³ → H²` inclusion, Leray
+map, or smoothing estimate may therefore be justified by definitional
+equality of these aliases.
 
 ## 6. Exact current analytic gate
 
-The next gate is no longer the pointwise/Fourier estimate or the finite `Fin 3` packaging. It is the
-completion step from the Schwartz core to the Bessel-coordinate Sobolev carriers:
+The density/bounded-extension bridge is closed.  The next analytic gate is the
+order-aware projected and smoothing layer:
 
-1. prove the density/extension facts needed to extend the bounded Schwartz-core bilinear map;
-2. construct a well-defined continuous bilinear convection map
-   `H³(R³; C³) × H³(R³; C³) → H²(R³; C³)` on the completed carriers;
-3. prove that the extension agrees with `r3SchwartzConvection` on canonical Schwartz inputs;
-4. only after that, address the real-valued/solenoidal restriction and compose with the concrete
-   Leray projector for the projected quadratic/mild layer.
+1. define the Leray action on the stored `H²` Bessel coordinate and prove its
+   exact compatibility with canonical Schwartz inputs and the order-two
+   decoder;
+2. compose that operator with `r3ConvectionH3ToH2` to obtain a projected
+   `H³ × H³ → H²` bilinear map with the inherited bound;
+3. construct the positive-elapsed-time, positive-viscosity Stokes smoothing operator
+   `H² → H³`, including the additional one-order Bessel-weight ratio, a
+   time-singular norm bound, and the local time-integrability needed by a
+   Duhamel integral;
+4. introduce a two-space mild/Duhamel contract, or prove a genuinely
+   same-space estimate, before connecting the result to the existing abstract
+   flow-map layer.
 
-The proved core estimate alone does not authorize identifying an arbitrary `H³` coordinate with a
-Schwartz representative or defining the extension by an unproved choice of approximating sequence.
+The existing unweighted physical-`L²` projected Schwartz object is not, without
+a Bessel/Leray commutation theorem, the required projection of the stored `H²`
+coordinate.  Likewise, the same-order `r3StokesL2Operator` cannot be retyped
+through the phantom Sobolev alias to manufacture `H² → H³` smoothing.  Such
+smoothing is unavailable at elapsed time zero (and at zero viscosity).
 
 ## 7. What is still not formalized
 
@@ -302,9 +350,14 @@ The Lean development does **not** currently establish:
 - a blow-up counterexample;
 - a closed-form general solution;
 - continuation of a `C¹` solution map through a singular time;
-- a density/extension theorem promoting the Schwartz-core convection estimate to the completed
-  `H³ × H³ → H²` Bessel-coordinate carriers;
-- a real-valued and solenoidal restriction of that completed convection map;
+- equality, for arbitrary completed `H³` inputs, between the decoded extension
+  and a separately constructed distributional convection product;
+- a physical real-valued and solenoidal restriction of the completed
+  convection map;
+- an order-two Bessel-coordinate Leray compatibility theorem and the resulting
+  projected `H³ × H³ → H²` map;
+- a positive-time `H² → H³` Stokes smoothing estimate and locally integrable
+  Duhamel kernel bound;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
@@ -317,12 +370,16 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. establish density and a bounded-bilinear extension from the Schwartz core to the completed
-   `H³ × H³ → H²` carriers;
-2. prove exact agreement of the extension with the existing Schwartz convection term;
-3. construct the physically real and solenoidal restriction required by the Navier--Stokes layer;
-4. compose it with the concrete Leray projector and connect that projected quadratic operator to
-   the existing mild-theory interfaces.
+1. construct the order-aware `H²` Bessel-coordinate Leray action and its exact
+   Schwartz/decoder compatibility theorem;
+2. obtain the projected `H³ × H³ → H²` map without confusing the weighted
+   coordinate with the existing unweighted `L²` object;
+3. construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing and
+   prove its time-singular bound is locally integrable;
+4. formulate the required two-space Duhamel contract, while separately
+   constructing the physical real-valued and solenoidal carrier restrictions;
+5. only then connect the concrete projected operator to the mild-theory and
+   flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 

@@ -157,6 +157,14 @@ of commit `6ecfcda51d74b456b538def2577c52a403a0ff88`, under
 `leanprover/lean4:v4.32.1` and the committed manifest, passed the source scan, targeted module,
 axiom audit, and full `Formal.+` gate (8735 jobs).
 
+The weighted-density and completed-convection gate was likewise developed without GitHub Actions.
+Local Windows/Elan verification of commit
+`5eb29848eea0529bf557c68a599e78317090f522`, with mathlib revision
+`520045ab14e26149ee970e2e617ca04b09bde5d6`, passed targeted builds of
+`Formal.R3SchwartzSobolevDensity`, `Formal.R3SobolevConvectionExtension`, and
+`Formal.AxiomAudit`, followed by the pinned source scan and full `Formal.+` gate (8737 jobs).
+The new audited theorems report only `propext`, `Classical.choice`, and `Quot.sound`.
+
 Those results are evidence only for the exact revisions and trees identified above. Future
 interactive development should use a conforming external runner or local reproduction rather than
 consuming hosted quota.

@@ -16,8 +16,10 @@ At the end of a substantial session, update `HANDOFF.md` when the formal frontie
 
 GitHub-hosted Lean Actions are a scarce final/status-check resource, not the normal interactive compiler.
 
-- Prefer local incremental Lean builds through `scripts/lean-ci-local.sh`.
-- Build the smallest relevant target while developing, then run the local full gate.
+- Prefer a conforming ChatGPT-connected external Lean runner when available; a local incremental
+  run through `scripts/lean-ci-local.sh` is a fully valid reproduction/fallback path.
+- Build the smallest relevant target while developing, then run the pinned full gate on the same
+  runner path.
 - If the current GPT environment has no Lean/Lake runtime, do not compensate with repeated speculative PR commits merely to use hosted Actions as a compiler.
 - Preserve `.lake` and mathlib caches where the runner model allows it.
 - Keep per-PR cancellation of superseded builds.

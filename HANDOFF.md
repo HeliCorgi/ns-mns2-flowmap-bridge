@@ -29,8 +29,8 @@ Current code and theorem statements override stale prose.
 - PR #81 head `18c64b80b6eebb95a4344dec5811fc024b963377` passed hosted Lean run #257
   (`31924077773`). Its Git tree is identical to merge commit `710709c...`; the merge SHA itself has
   no separately attached run.
-- At session resume, `main` was `710709c34b8ee564b071e71fd27313be4cc383a6` and there were no
-  open PRs.
+- Before this continuation, GitHub `main` was
+  `6aab33d2d3d895260285a1cac60afa7cfce4d294` and there were no open PRs.
 - The mathematical proof and synchronized handoff were fast-forwarded directly to `main` through
   commit `213495284f14c08d60936fa12a5260688124aa3f`, without opening a PR. There were still no open
   PRs after integration.
@@ -38,6 +38,9 @@ Current code and theorem statements override stale prose.
   `Formal.R3SchwartzConvectionSobolevEstimate` and `Formal.AxiomAudit`.
 - Commit `213495284f14c08d60936fa12a5260688124aa3f`, which adds only synchronized documentation on
   top of that proof, passed the local pinned source scan and full `Formal.+` gate (8735 jobs).
+- Proof commit `5eb29848eea0529bf557c68a599e78317090f522` closes the weighted-density and
+  bounded-extension gate. It passed targeted density/extension/AxiomAudit builds and the local
+  pinned source scan plus full `Formal.+` gate (8737 jobs).
 - No GitHub Action was started or rerun for the new mathematical proof.
 - Automatic full Lean builds on pushes to `main` remain disabled.
 - Opening a PR to `main` currently starts the hosted Lean workflow, so a no-Actions integration must
@@ -77,11 +80,17 @@ is now proved as `r3SchwartzConvectionTermSobolevEstimate_three` in
 `Formal/R3SchwartzConvectionSobolevEstimate.lean`.
 
 The same file proves `r3SchwartzConvectionSobolevEstimate_three`, obtaining the full
-`R3SchwartzConvectionSobolevEstimate 3` through the existing `.to_convection` reduction and its
-documented factor-three summation loss.
+`R3SchwartzConvectionSobolevEstimate 3` through an exported direct sum estimate with the same
+documented factor-three triangle-inequality loss as the existing `.to_convection` reduction.
 
-The new active target is the density/bounded-extension step from this Schwartz-core estimate to a
-completed Bessel-coordinate `H³ × H³ → H²` bilinear convection map.
+That density/bounded-extension target is now also closed. The completed object is the complex
+Bessel-coordinate map
+
+`r3ConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`.
+
+Here “completed” means that the codomain and domains are the existing complete `L²`
+Bessel-coordinate models. It does not mean that Lean constructed a separate topological
+`Completion` of Schwartz space.
 
 ## Merged infrastructure through PR #80
 
@@ -153,33 +162,68 @@ nonnegative, so every summand is bounded by that sum. The common per-term witnes
 use only the standard mathlib foundations reported by the rest of this development (`propext`,
 `Classical.choice`, and `Quot.sound`).
 
+### Weighted density and completed convection — locally verified commit `5eb2984...`
+
+`Formal/R3SchwartzSobolevDensity.lean` proves:
+
+- `r3SobolevWeightComplex_mul_neg`;
+- `r3SchwartzBesselMultiplier_inverse_apply`;
+- `r3SchwartzBesselMultiplier_surjective`;
+- `r3SchwartzToHsCLM_denseRange`.
+
+The proof uses the inverse-order Bessel multiplier on Schwartz fields and mathlib's dense range of
+the canonical Schwartz-to-`L²` map. Do not strengthen this to an inducing/dense-embedding claim for
+the native Schwartz Fréchet topology.
+
+`Formal/R3SobolevConvectionExtension.lean` applies `LinearMap.extendOfNorm` first in the second
+input and then in the first input. It proves:
+
+- `r3ConvectionH3ToH2_apply_schwartz`;
+- `r3HsToTempered_r3ConvectionH3ToH2_schwartz`;
+- `norm_r3ConvectionH3ToH2_le`;
+- `norm_r3ConvectionH3ToH2_apply_le`;
+- `r3ConvectionH3ToH2_unique`.
+
+The bounds force both dense-core maps to vanish on the appropriate kernels, so the extensions are
+well-defined and do not choose Schwartz representatives or approximating sequences. The axiom
+audit reports only `propext`, `Classical.choice`, and `Quot.sound` for the new audited theorems.
+
+`R3HsVelocity s` currently has a phantom order parameter and is definitionally the same `L²`
+coordinate type for every `s`. Its physical meaning is fixed by `r3HsToTemperedCLM s`. Never use
+the alias equality as a physical `H³ → H²` inclusion or as a smoothing theorem.
+
 ## Exact next Lean gate
 
 Do not reopen the Fourier-coordinate or representative/Fubini work unless the current source actually regresses.
 
-The next smallest mathematical task is no longer finite-dimensional constant packaging. It is the
-completion bridge:
+The next smallest mathematical task is no longer density or bounded extension. It is the
+order-aware `H²` Leray bridge:
 
-1. prove the density/extension facts required to promote the bounded Schwartz-core bilinear map;
-2. construct a continuous bilinear map on the completed Bessel-coordinate carriers with type
-   corresponding to `H³ × H³ → H²`;
-3. prove exact agreement with `r3SchwartzConvection` on canonical Schwartz inputs;
-4. only then construct the real-valued/solenoidal restriction and compose with the concrete Leray
-   projector for the projected quadratic / mild-theory layer.
+1. define the Leray action on the stored order-two Bessel coordinate;
+2. prove exact canonical-Schwartz and order-two decoder compatibility, including the required
+   scalar-Bessel/Leray commutation;
+3. compose it with `r3ConvectionH3ToH2` and inherit the `H³ × H³ → H²` bound;
+4. separately construct positive-elapsed-time, positive-viscosity `H² → H³` Stokes smoothing, its
+   one-order Bessel-weight ratio, time-singular norm estimate, and local time-integrability;
+5. use a two-space Duhamel contract (or prove a genuine same-space bound) before connecting this to
+   the abstract mild/flow-map layer.
 
-Do not define the completed map by choosing an arbitrary Schwartz representative or approximating
-sequence without proving independence of that choice and the required density/continuity result.
+Do not identify the desired weighted `H²` projection with the existing unweighted physical-`L²`
+`r3ProjectedSchwartzConvectionL2` without the commutation/decoder theorem. Do not retype
+`r3StokesL2Operator` through the phantom alias: no bounded `H² → H³` smoothing exists at elapsed
+time zero or at zero viscosity. The current `LerayProjectedQuadraticContract V` is a same-space
+`V × V → V` interface and cannot directly consume the new two-space map.
 
 ## Latest Lean verification
 
 ```text
 runner: local Windows process via Elan / Git Bash
-revision: 213495284f14c08d60936fa12a5260688124aa3f
+revision: 5eb29848eea0529bf557c68a599e78317090f522
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
-target scope: Formal.R3SchwartzConvectionSobolevEstimate — pass
+target scope: Formal.R3SchwartzSobolevDensity + Formal.R3SobolevConvectionExtension — pass
 axiom scope: Formal.AxiomAudit — pass
-full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8735 jobs)
+full scope: scripts/lean-ci-local.sh / Formal.+ — pass (8737 jobs)
 GitHub Actions: not invoked for this proof
 ```
 
@@ -220,10 +264,13 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - do not report candidate code as proved before a conforming pinned Lean verification accepts it;
 - do not merge an ungreen mathematical PR;
 - do not auto-merge unless the user explicitly asks;
-- the proved Schwartz-core estimate does not yet supply a map on the completed Sobolev carriers;
-- it does not yet supply the real-valued, solenoidal, or Leray-projected quadratic map;
+- the completed map is a complex Bessel-coordinate extension; arbitrary-`H³` decoder equality with
+  a separately defined distributional product is not yet proved;
+- it does not yet supply a physical real-valued restriction, an order-aware solenoidal/Leray
+  package, a two-space Stokes/Duhamel map, or concrete local well-posedness;
+- do not use the phantom Sobolev-order alias as an `H³ → H²` inclusion or `H² → H³` smoothing map;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートは Schwartz 核の H³×H³→H² 対流評価を completed Sobolev carrier へ延長する density/bounded-extension bridge。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`
+`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。現在の次ゲートは completed H³×H³→H² 対流写像に対する order-aware H² Leray bridge、その後の正時間 H²→H³ Stokes smoothing と two-space Duhamel contract。Lean はローカルまたは接続済み外部 runner で反復し、GitHub Actions は明示的に必要な場合だけ使って。古い会話より実コードを優先して。`

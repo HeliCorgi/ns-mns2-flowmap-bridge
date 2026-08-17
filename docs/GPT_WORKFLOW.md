@@ -174,15 +174,32 @@ packaging with an explicit nonnegative sum witness and proves both
 `R3SchwartzConvectionTermSobolevEstimate 3` and
 `R3SchwartzConvectionSobolevEstimate 3`. That commit passed the local pinned full gate.
 
+Commit `5eb29848eea0529bf557c68a599e78317090f522` closes the next density and
+bounded-extension gate. It proves `r3SchwartzToHsCLM_denseRange`, constructs
+
+`r3ConvectionH3ToH2 : R3HsVelocity 3 →L[ℂ] R3HsVelocity 3 →L[ℂ] R3HsVelocity 2`,
+
+and proves exact Schwartz-core agreement, order-two decoder agreement on
+Schwartz inputs, the global bilinear norm bound, and uniqueness among
+continuous complex-bilinear maps with those dense-core values. That exact
+commit passed the local pinned full gate.
+
 Do not generalize these results beyond the exact proved objects. In particular, analogous
 ordinary-convolution versus bundled-Bochner identifications elsewhere still require explicit
-representative/Fubini results, and the Schwartz-core `H³ × H³ → H²` estimate does not by itself
-construct a bilinear map on completed Sobolev carriers.
+representative/Fubini results. The completed map is a result about the complex Bessel-coordinate
+model; it does not identify its decoded value with a separately defined distributional product for
+all `H³` inputs and does not construct the physical real-valued/solenoidal restriction.
 
-The current near-term formal gate is the density/bounded-extension step from the Schwartz core to
-the completed Bessel-coordinate `H³ × H³ → H²` carriers, including exact agreement on canonical
-Schwartz inputs. Real-valued, solenoidal, Leray-projected, and mild-theory packaging comes only
-after that extension is constructed.
+`R3HsVelocity s` has the same underlying `L²` type for every order, with semantics supplied by the
+order-dependent decoder. Never use that definitional equality to assert a physical `H³ → H²`
+inclusion or an `H² → H³` smoothing bound.
+
+The current near-term formal gate is an order-aware Leray operator on the stored `H²` Bessel
+coordinate, its exact Schwartz/decoder compatibility, and the resulting projected
+`H³ × H³ → H²` map. The following gate is positive-elapsed-time, positive-viscosity `H² → H³` Stokes
+smoothing with its time-singular locally integrable bound and a two-space Duhamel interface. The
+existing same-space `LerayProjectedQuadraticContract V` cannot accept this two-space map without
+additional structure or a genuinely same-space estimate.
 
 ## 10. Minimal resume prompt
 
