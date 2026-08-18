@@ -31,6 +31,7 @@ import Formal.EndpointSafeTwoSpacePicard
 import Formal.R3EndpointSafeProjectedLocalExistence
 import Formal.R3ConjugationReflection
 import Formal.R3FourierConjugationBridge
+import Formal.R3StokesConjugationEquivariance
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -185,6 +186,10 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.fourier_r3SchwartzConjCLM
 #print axioms MNS2.fourier_r3L2Conj
 #print axioms MNS2.isR3RealVelocity_iff_fourier_conjugateSymmetric
+#print axioms MNS2.r3L2Conj_of_fourier_realEven
+#print axioms MNS2.r3L2Conj_r3StokesL2Operator
+#print axioms MNS2.r3L2Conj_r3StokesH3Evolution
+#print axioms MNS2.r3L2Conj_r3StokesH2ToH3Operator
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed

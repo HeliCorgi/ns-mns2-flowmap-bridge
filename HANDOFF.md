@@ -354,7 +354,10 @@ reviewer's brief) — `docs/gates/BH_PROFILE_TASTE_REPORT.md`,
   rate of swirl-poor localized families). Deferred; do not start without a fresh decision.
 
 **Resume point: return to the Lean program (next gate below — operator realness
-preservation), per the frozen plan.**
+preservation), per the frozen plan. Standing decision (2026-08-19, user-approved): once the
+continuation criterion is closed on the Lean side, the BH branch reopens — i.e. the
+quantitative no-swirl rigidity question and the K12 decision from
+`docs/gates/BH_PROFILE_TASTE_REPORT.md` become the next Stage-A item at that point.**
 
 ## Exact next Lean gate
 
@@ -390,17 +393,24 @@ intertwining `fourier_r3L2Conj` (`𝓕 (r3L2Conj g) = r3L2Reflect (r3L2Conj (�
 equivalence `isR3RealVelocity_iff_fourier_conjugateSymmetric`. Do not re-prove these.
 
 The next smallest mathematical task is **realness preservation of the concrete operators**
-(FORMAL_SCOPE section 6, next gate 1). Prove commutation with `r3L2Conj` for, in increasing
-order of difficulty:
+(FORMAL_SCOPE section 6, next gate 1). Slice 1 is **closed** (2026-08-19,
+`Formal/R3StokesConjugationEquivariance.lean`, full gate 8748 jobs, axiom audit standard):
+the generic theorems `reflect_conj_of_realEven_multiplier` (frequency side) and
+`r3L2Conj_of_fourier_realEven` (physical side, via the Plancherel bridge and injectivity)
+plus symbol realness/evenness give
+`r3L2Conj_r3StokesL2Operator`, `r3L2Conj_r3StokesH3Evolution`,
+`r3L2Conj_r3StokesH2ToH3Operator`, and the `IsR3RealVelocity` preservation corollaries.
+Reuse `r3L2Conj_of_fourier_realEven` for every further scalar-multiplier operator
+(including the Bessel weights / decoders if needed).
 
-1. the Stokes evolution: `r3StokesScalarComplex ν t ξ = exp (-(2π)² ν |ξ|² t)` is real-valued
-   and even in `ξ`, so the frequency multiplier commutes with `r3L2Reflect ∘ r3L2Conj`; push
-   through `fourier_r3StokesL2Operator` and the bridge to get
-   `r3L2Conj (r3StokesL2Operator … g) = r3StokesL2Operator … (r3L2Conj g)`, then the same for
-   `r3StokesH3Evolution` and `r3StokesH2ToH3Operator` (whose extra factor
-   `(1 + ‖ξ‖²)^(1/2)` is likewise real and even);
+Remaining slices, in order:
+
 2. the Leray projector: the fiber symbol `P(ξ) = I - (ξ ⊗ ξ)/|ξ|²` is a real matrix, even in
-   `ξ`, so it commutes with fiber conjugation; conclude for `r3LerayL2Operator` and its
+   `ξ`; here the multiplier is matrix-valued, so the generic scalar lemma does not apply
+   verbatim — prove the fiber-level commutation `r3CConj (P_C(ξ) v) = P_C(-ξ) (r3CConj v)`
+   (realness + evenness of the matrix) and push through the frequency identification
+   (`R3LerayPointwiseProjectionIdentification` / `r3LerayFourierBridge`) to get
+   `r3L2Conj (r3LerayL2Operator g) = r3LerayL2Operator (r3L2Conj g)`, then the
    order-two/order-three variants;
 3. the projected convection `r3ProjectedConvectionH3ToH2`: conjugation equivariance on the
    Schwartz core (the convection term is a real bilinear expression in the fields), then
