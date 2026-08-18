@@ -66,6 +66,9 @@ Current code and theorem statements override stale prose.
   (`Formal/R3ConjugationReflection.lean`, with five new `Formal/AxiomAudit.lean` prints) is
   committed directly on `main` after local verification: full `Formal.+` gate pass
   (8746 jobs), pinned source scan clean, axiom audit standard.
+- The Plancherel reality bridge (`Formal/R3FourierConjugationBridge.lean`, with four new
+  `Formal/AxiomAudit.lean` prints) is committed directly on `main` after local verification:
+  full `Formal.+` gate pass (8747 jobs), pinned source scan clean, axiom audit standard.
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -284,43 +287,54 @@ involutions `r3L2Conj` (pointwise conjugation, `→L[ℝ]`) and `r3L2Reflect` (c
 `IsR3ConjugateSymmetricVelocity` with algebraic closure, closedness, and the a.e.
 characterization `isR3RealVelocity_iff_im_ae`. Do not redefine these structures.
 
-The next smallest mathematical task is the **Plancherel reality bridge**
-(FORMAL_SCOPE section 6, next gate 1):
+The Plancherel reality bridge demanded by the previous handoff is closed by
+`Formal/R3FourierConjugationBridge.lean`: the Schwartz involutions `r3SchwartzConjCLM` /
+`r3SchwartzReflectCLM`, the pointwise identity `r3Fourier_conj_eq`
+(`𝓕 (conj ∘ f) ξ = conj (𝓕 f (-ξ))`), the `toLp` compatibility lemmas, the exact `L²`
+intertwining `fourier_r3L2Conj` (`𝓕 (r3L2Conj g) = r3L2Reflect (r3L2Conj (𝓕 g))`), and the
+equivalence `isR3RealVelocity_iff_fourier_conjugateSymmetric`. Do not re-prove these.
 
-1. prove the pointwise Schwartz-level identity `𝓕 (conj ∘ f) ξ = conj (𝓕 f (-ξ))` (conjugate
-   the Fourier integral through the `ℝ`-linear isometry `r3CConj`, using
-   `ContinuousLinearMap.integral_comp_comm`-style commutation and the sign flip of the
-   character);
-2. lift it to `Lp.fourierTransformₗᵢ R3 R3C` via `SchwartzMap.toLp_fourier_eq`, Schwartz
-   density in `L²`, and continuity of `r3L2Conj`, `r3L2Reflect`, and the transform
-   (`DenseRange.equalizer` on the two continuous `ℝ`-linear compositions);
-3. conclude `IsR3RealVelocity g ↔ IsR3ConjugateSymmetricVelocity (fourierTransformₗᵢ g)`.
+The next smallest mathematical task is **realness preservation of the concrete operators**
+(FORMAL_SCOPE section 6, next gate 1). Prove commutation with `r3L2Conj` for, in increasing
+order of difficulty:
 
-After the bridge: realness preservation of the concrete operators (real even Stokes symbol,
-real Leray matrix, conjugation equivariance of the projected convection), then realness of the
-local mild solution for real data (the real ball trajectories form a closed nonempty
-Picard-invariant subset, so the fixed point lies in it). Then the quantitative horizon /
-unrestricted uniqueness / continuation strengthening feeding the breakdown track.
+1. the Stokes evolution: `r3StokesScalarComplex ν t ξ = exp (-(2π)² ν |ξ|² t)` is real-valued
+   and even in `ξ`, so the frequency multiplier commutes with `r3L2Reflect ∘ r3L2Conj`; push
+   through `fourier_r3StokesL2Operator` and the bridge to get
+   `r3L2Conj (r3StokesL2Operator … g) = r3StokesL2Operator … (r3L2Conj g)`, then the same for
+   `r3StokesH3Evolution` and `r3StokesH2ToH3Operator` (whose extra factor
+   `(1 + ‖ξ‖²)^(1/2)` is likewise real and even);
+2. the Leray projector: the fiber symbol `P(ξ) = I - (ξ ⊗ ξ)/|ξ|²` is a real matrix, even in
+   `ξ`, so it commutes with fiber conjugation; conclude for `r3LerayL2Operator` and its
+   order-two/order-three variants;
+3. the projected convection `r3ProjectedConvectionH3ToH2`: conjugation equivariance on the
+   Schwartz core (the convection term is a real bilinear expression in the fields), then
+   extend by density exactly as the bounded-extension layer does.
 
-The closed layers stay in the complex carrier. Nothing yet connects the predicates to the
-Fourier transform or to the concrete operators, and no physical (real-valued)
+After that: realness of the local mild solution for real data — the real ball trajectories
+form a closed nonempty Picard-invariant subset of `C(Icc 0 T, X)`, so the fixed point lies in
+it, promoting `r3EndpointSafeProjected_exists_localMildSolution` to a physical statement.
+Then the quantitative horizon / unrestricted uniqueness / continuation strengthening feeding
+the breakdown track.
+
+The closed layers are statements about the complex carrier and the `L²` Fourier transform. No
+concrete operator has been proved to preserve realness, and no physical (real-valued)
 local-wellposedness, pressure reconstruction, or Clay statement is available.
 
 ## Latest Lean verification
 
 ```text
 runner: local Windows (Git Bash) process via Elan
-revision: working tree of the conjugation/reflection proof commit on main
-  (new: Formal/R3ConjugationReflection.lean; extended Formal/AxiomAudit.lean)
+revision: working tree of the Plancherel reality-bridge proof commit on main
+  (new: Formal/R3FourierConjugationBridge.lean; extended Formal/AxiomAudit.lean)
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
-target scope: lake env lean Formal/R3ConjugationReflection.lean — pass, no warnings
-full scope: lake build (Formal.+ default target) — pass (8746 jobs)
+target scope: lake env lean Formal/R3FourierConjugationBridge.lean — pass, no warnings
+full scope: lake build (Formal.+ default target) — pass (8747 jobs)
 source scan: pinned sorry/admit/axiom/opaque scan over Formal/ — clean
-axiom scope: Formal.AxiomAudit — pass; the five new audited theorems
-  (r3L2Reflect_r3L2Conj, isR3RealVelocity_iff_im_ae,
-   isR3ConjugateSymmetricVelocity_iff_reflect_eq_conj,
-   isClosed_setOf_isR3RealVelocity, isClosed_setOf_isR3ConjugateSymmetricVelocity)
+axiom scope: Formal.AxiomAudit — pass; the four new audited theorems
+  (r3Fourier_conj_eq, fourier_r3SchwartzConjCLM, fourier_r3L2Conj,
+   isR3RealVelocity_iff_fourier_conjugateSymmetric)
   depend only on propext, Classical.choice, Quot.sound
 GitHub Actions: not invoked (quota exhausted; hosted runs banned)
 ```
@@ -378,9 +392,9 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
   positive-time result is justified by its explicit multiplier and decoder theorems;
 - the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
   physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
-- `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are carrier-level predicates only; no
-  theorem yet relates them through the Fourier transform, and no concrete operator has been
-  proved to preserve them;
+- `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are now related through the Plancherel
+  `L²` Fourier transform, but no concrete Stokes/Leray/convection operator has been proved to
+  preserve either predicate, and no mild solution has been proved real;
 - its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
   produced horizon; do not cite it as unconditional uniqueness;
 - the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`
@@ -389,4 +403,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract(PR #82)、Picard fixed-point layer(局所存在+ball 一意性)、conjugation/reflection reality-predicate layer(r3CConj・r3L2Conj・r3L2Reflect・IsR3RealVelocity・IsR3ConjugateSymmetricVelocity、ローカル 8746 jobs green)まで main に完了済み。次は Plancherel reality bridge: Schwartz レベルで 𝓕(conj ∘ f)(ξ) = conj(𝓕 f (-ξ)) を証明し、SchwartzMap.toLp_fourier_eq と密度・連続性(DenseRange.equalizer)で Lp.fourierTransformₗᵢ へ持ち上げ、IsR3RealVelocity g ↔ IsR3ConjugateSymmetricVelocity (𝓕 g) を得る。その後は具体 operator の realness 保存(実偶 Stokes symbol・実 Leray 行列・projected convection の共役同変性)→ real 初期値の mild 解の realness(closed invariant subset 論法)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract(PR #82)、Picard fixed-point layer(局所存在+ball 一意性)、conjugation/reflection reality predicates、Plancherel reality bridge(r3Fourier_conj_eq・fourier_r3L2Conj・isR3RealVelocity_iff_fourier_conjugateSymmetric、ローカル 8747 jobs green)まで main に完了済み。次は具体 operator の realness 保存: (1) Stokes(symbol exp(-(2π)²ν|ξ|²t) は実かつ偶 → fourier_r3StokesL2Operator と bridge 経由で r3L2Conj と可換、H3Evolution と H2ToH3 も同様)、(2) Leray(実行列 P(ξ) = I - ξ⊗ξ/|ξ|² は偶)、(3) projected convection(Schwartz core での共役同変性 → 密度で拡張)。その後 real 初期値の mild 解の realness(閉かつ Picard 不変な部分集合に不動点が入る論法)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
