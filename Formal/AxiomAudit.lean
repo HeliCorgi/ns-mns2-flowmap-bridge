@@ -38,6 +38,8 @@ import Formal.R3RealLocalMildSolution
 import Formal.R3QuantitativeLifespan
 import Formal.EndpointSafeTwoSpaceRestart
 import Formal.EndpointSafeTwoSpaceUniqueness
+import Formal.EndpointSafeTwoSpaceConcatenation
+import Formal.R3MildContinuation
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -238,6 +240,18 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.IsMildSolutionOn.unique
 #print axioms MNS2.r3EndpointSafeProjectedMildSolution_unique
 #print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity
+
+-- Maximal continuation layer: the concatenation identity (converse of restart), the
+-- antitone explicit lifespan, the uniform-step extension of norm-bounded solutions, and
+-- the blow-up dichotomy for the certified-horizon set.
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.IsMildSolutionOn.concat
+#print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.concat
+#print axioms MNS2.r3MildSmallnessThreshold_antitone
+#print axioms MNS2.r3MildLifespan_antitone
+#print axioms MNS2.r3EndpointSafeProjected_exists_extension_of_bounded
+#print axioms MNS2.r3MildHorizons_nonempty
+#print axioms MNS2.r3EndpointSafeProjected_horizons_unbounded_of_uniform_bound
+#print axioms MNS2.r3EndpointSafeProjected_blowup_dichotomy
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed

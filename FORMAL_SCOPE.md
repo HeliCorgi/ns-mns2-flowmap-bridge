@@ -526,18 +526,26 @@ solutions with the same datum agree on their common horizon with **no ball restr
 mild solution with physically real datum is pointwise physically real
 (`IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity`), with no ball hypothesis.
 
+The maximal-continuation layer is closed in blow-up–dichotomy form (2026-08-19,
+`Formal/EndpointSafeTwoSpaceConcatenation.lean`, `Formal/R3MildContinuation.lean`): the
+concatenation identity (converse of restart), antitonicity of the explicit lifespan in the
+datum norm, the uniform-step extension of norm-bounded mild solutions, and the dichotomy
+`r3EndpointSafeProjected_blowup_dichotomy` — either arbitrarily long horizons carry mild
+solutions, or the certified solution norms escape every ball.
+
 The next analytic gates, in intended order:
 
-1. **maximal continuation**: the concatenation lemma (converse of restart), the
-   uniform-step extension by the explicit lifespan (needs antitonicity of `r3MildLifespan`
-   in the datum norm), and the blow-up criterion `T* < ∞ ⇒ ‖u t‖ → ∞`, connected to the
-   existing `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
+1. optional refinement of the continuation layer: the canonical glued maximal trajectory
+   `u* : [0, T*) → H³` (choice + unrestricted uniqueness) and the pointwise restatement
+   `T* < ∞ ⇒ limsup ‖u* t‖ = ∞`, connected to the existing
+   `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
 2. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
    `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
 
-The fixed-point layer, the reality gate, the quantitative lifespan, and the uniqueness
-layer are all local statements on the Bessel-coordinate carrier. Continuation, pressure
-reconstruction, and every Clay-level statement remain open.
+The fixed-point layer, the reality gate, the quantitative lifespan, the uniqueness layer,
+and the continuation dichotomy are all statements on the Bessel-coordinate carrier. The
+glued maximal trajectory, pressure reconstruction, and every Clay-level statement remain
+open.
 
 ## 7. What is still not formalized
 
@@ -554,7 +562,9 @@ The Lean development does **not** currently establish:
 - pressure reconstruction for the completed projected map;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
-- any continuation/maximal-interval theorem;
+- a canonical glued maximal trajectory `u* : [0, T*) → H³` with the pointwise blow-up
+  statement `T* < ∞ ⇒ limsup ‖u* t‖ = ∞` (the certified-horizon blow-up **dichotomy** is
+  formalized; the trajectory-level restatement is not);
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - a connection of the new concrete local mild solutions to the abstract `MildEvolutionKernel` /
   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces;
@@ -582,8 +592,10 @@ For the current Schwartz/Sobolev route, the intended order is:
 5. strengthen the local theory: ~~quantitative horizon~~ (closed by
    `Formal/R3QuantitativeLifespan.lean`), ~~unrestricted uniqueness~~ (closed by
    `Formal/EndpointSafeTwoSpaceRestart.lean` + `Formal/EndpointSafeTwoSpaceUniqueness.lean`),
-   then continuation, and connect the concrete evolution to the mild-theory and flow-map
-   interfaces.
+   ~~continuation in blow-up–dichotomy form~~ (closed by
+   `Formal/EndpointSafeTwoSpaceConcatenation.lean` + `Formal/R3MildContinuation.lean`),
+   then the glued maximal trajectory, and connect the concrete evolution to the
+   mild-theory and flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
