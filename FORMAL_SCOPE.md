@@ -1,7 +1,8 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-18 (JST), after local full verification of commit
-`7ab4091eefeaf2d25b73824b9ec2941088876844`.
+Last synchronized: 2026-08-18 (JST), after local full verification of merged `main`
+`03ea967` (merge of PR #82; `Formal/` tree identical to proof commit
+`4f8ae0d66c65cd5458bc49b13c4e6b015e318b4d`), full `Formal.+` gate pass with 8743 jobs.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -388,23 +389,42 @@ The new audited theorems depend only on the standard foundations reported by thi
 
 ## 6. Exact current analytic gate
 
-The density, bounded-extension, projected-convection, and positive-time smoothing layers are
-closed. The next analytic gate is a two-space mild/Duhamel layer:
+The density, bounded-extension, projected-convection, positive-time smoothing, and endpoint-safe
+two-space Duhamel layers are closed. PR #82 (`Formal/EndpointSafeTwoSpaceDuhamel.lean`,
+`Formal/R3StokesH3Evolution.lean`, `Formal/R3EndpointSafeProjectedDuhamel.lean`) establishes:
 
-1. formulate a contract with strong state space `X = H³`, nonlinear-output space `Y = H²`, a
-   continuous bilinear map `X × X → Y`, same-space linear evolution on `X`, and positive-time
-   smoothing `Y → X`;
-2. totalize or otherwise handle the cross-space Stokes factor at the measure-zero endpoint
-   `τ = t - s = 0` without asserting a bounded `H² → H³` map there;
-3. prove strong measurability and Bochner interval-integrability of the actual Duhamel integrand,
-   together with the estimate obtained from `r3StokesH2H3TimeKernel` and
-   `norm_r3ProjectedConvectionH3ToH2_apply_le`;
-4. instantiate the contract with the concrete complex Bessel-coordinate operators before attempting
-   a fixed-point, local-wellposedness, or flow-map theorem.
+- the bundled `EndpointSafeTwoSpaceDuhamelContract 𝕜 X Y` with same-space `linearEvolution`
+  (identity at zero, honest nonnegative-time semigroup law, jointly continuous action),
+  positive-elapsed-time smoothing `Y → X`, continuous bilinear source `X →L X →L Y`, and a
+  locally interval-integrable nonnegative scalar smoothing majorant;
+- endpoint totalization by the zero operator at `τ ≤ 0`, with no fictitious bounded `H² → H³`
+  operator at `τ = 0`;
+- strong measurability and Bochner interval-integrability of the **actual vector-valued**
+  Duhamel integrand for every trajectory continuous on the compact forward interval, plus the
+  pointwise and integral norm estimates;
+- the mild predicates `IsMildAt` / `IsMildSolutionOn`, whose integrability clause excludes the
+  totalized-integral loophole;
+- the concrete instantiation `r3EndpointSafeProjectedDuhamelContract` on
+  `X = R3HsVelocity 3`, `Y = R3HsVelocity 2` with `r3ProjectedConvectionH3ToH2`,
+  `r3StokesH2ToH3Operator`, `r3StokesH3Evolution`, and `r3StokesH2H3TimeKernel`, together with
+  the concrete predicate `IsR3EndpointSafeProjectedMildSolutionOn`.
 
-The current same-space `MildEvolutionKernel V` and `LerayProjectedQuadraticContract V` do not
-express this `X × X → Y → X` chain. The proved interval integrability of the scalar majorant alone
-does not establish measurability or integrability of the operator-valued Duhamel integrand.
+The next analytic gate is the fixed-point layer for exactly this contract:
+
+1. prove time-continuity of the endpoint-safe Duhamel integral for a bounded continuous
+   trajectory (via the reversed kernel representation and uniform continuity on the compact
+   interval);
+2. define the Picard map on continuous trajectories over `[0, T]`, prove closed-ball invariance
+   and the contraction estimate from the bilinear splitting
+   `Q u u - Q v v = Q u (u - v) + Q (u - v) v`;
+3. obtain, for sufficiently small `T > 0`, existence of a mild solution in the sense of
+   `IsMildSolutionOn`, and its uniqueness among trajectories staying in the certified ball;
+4. instantiate on the concrete `R^3` carriers to obtain local existence and ball-uniqueness for
+   `IsR3EndpointSafeProjectedMildSolutionOn`.
+
+This fixed-point layer lives entirely in the complex Bessel-coordinate carrier. The physical
+real-valued/conjugate-symmetric restriction remains a separate obligation and is still required
+before any physical Navier–Stokes local-wellposedness language is used.
 
 ## 7. What is still not formalized
 
@@ -421,12 +441,10 @@ The Lean development does **not** currently establish:
   (in particular, Fourier conjugate symmetry has not been proved);
 - a theorem that the Leray symbol maps Schwartz space to itself;
 - pressure reconstruction for the completed projected map;
-- an endpoint-safe two-space Duhamel operator with a proved strongly measurable and Bochner
-  interval-integrable integrand;
-- a concrete same-space `H³` linear evolution package with all semantics needed by the new
-  two-space mild contract;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
+- time-continuity of the endpoint-safe Duhamel integral, a Picard/fixed-point construction, or
+  any existence theorem for the mild predicates introduced by PR #82;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
@@ -439,13 +457,16 @@ Unverified feature-branch drafts are not part of this theorem boundary until acc
 
 For the current Schwartz/Sobolev route, the intended order is:
 
-1. formulate the endpoint-safe two-space Duhamel contract and prove actual integrand
-   measurability, interval-integrability, and the resulting norm estimate;
-2. instantiate it with `r3ProjectedConvectionH3ToH2`, `r3StokesH2ToH3Operator`, and an honestly
-   interpreted same-space `H³` Stokes evolution;
-3. separately construct the physical real-valued/conjugate-symmetric carrier restriction;
-4. only then prove the required fixed-point/local-wellposedness statements and connect the concrete
-   evolution to the mild-theory and flow-map interfaces.
+1. ~~formulate the endpoint-safe two-space Duhamel contract and prove actual integrand
+   measurability, interval-integrability, and the resulting norm estimate~~ — closed by PR #82;
+2. ~~instantiate it with `r3ProjectedConvectionH3ToH2`, `r3StokesH2ToH3Operator`, and an honestly
+   interpreted same-space `H³` Stokes evolution~~ — closed by PR #82;
+3. prove the fixed-point/local-existence statements for the endpoint-safe two-space contract in
+   the complex Bessel-coordinate carrier (see section 6), with uniqueness at least in the
+   certified ball;
+4. separately construct the physical real-valued/conjugate-symmetric carrier restriction; only
+   after both may physical local-wellposedness language be used, and only then connect the
+   concrete evolution to the mild-theory and flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 

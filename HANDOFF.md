@@ -45,6 +45,18 @@ Current code and theorem statements override stale prose.
   Stokes-smoothing gate. It passed targeted builds of `Formal.R3StokesH2H3Smoothing` and
   `Formal.AxiomAudit`, followed by the local pinned source scan and full `Formal.+` gate
   (8740 jobs).
+- PR #82 (`Formalize endpoint-safe projected Duhamel on R^3`, proof commit
+  `4f8ae0d66c65cd5458bc49b13c4e6b015e318b4d`) is merged as `03ea967`. Its hosted Lean run
+  `32112489718` failed after 6 seconds because the GitHub Actions quota is exhausted; the hosted
+  run is **not** the verification evidence for this merge.
+- The verification evidence for `main = 03ea967` is local: the merge tree is identical to
+  `4f8ae0d` (`git rev-parse <sha>^{tree}` both `d6c5424...`), and the full `Formal.+` gate
+  (`lake exe cache get && lake build`) passed locally on that exact tree with 8743 jobs,
+  including `Formal.AxiomAudit` (standard axioms only: `propext`, `Classical.choice`,
+  `Quot.sound`).
+- GitHub Actions quota is exhausted; hosted runs must not be used at all for the foreseeable
+  future. All verification is local (Elan-pinned toolchain), and integration to `main` is by
+  direct fast-forward push without opening a PR.
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -239,38 +251,46 @@ the alias equality as a physical `H³ → H²` inclusion or as a smoothing theor
 
 ## Exact next Lean gate
 
-Do not reopen the completed convolution, bounded-extension, Leray, or positive-time smoothing
-work unless current source regresses.
+Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing, or
+endpoint-safe two-space Duhamel work unless current source regresses.
 
-The next smallest mathematical task is a genuine two-space Duhamel interface joining
+The two-space Duhamel interface demanded by the previous handoff is closed by PR #82:
+`EndpointSafeTwoSpaceDuhamelContract`, actual-integrand strong measurability and Bochner
+interval-integrability, the quantitative bounds, the `IsMildAt` / `IsMildSolutionOn` predicates,
+the same-space `r3StokesH3Evolution`, and the concrete
+`r3EndpointSafeProjectedDuhamelContract` with `IsR3EndpointSafeProjectedMildSolutionOn` are all
+on `main` and locally verified.
 
-- the strong state space `X = R3HsVelocity 3`;
-- the nonlinear-output space `Y = R3HsVelocity 2`;
-- `r3ProjectedConvectionH3ToH2 : X →L[ℂ] X →L[ℂ] Y`; and
-- positive-elapsed-time `r3StokesH2ToH3Operator : Y →L[ℂ] X`.
+The next smallest mathematical task is the **Picard fixed-point layer** for exactly that
+contract, in the complex Bessel-coordinate carrier:
 
-The interface must handle the endpoint `τ = t - s = 0` without pretending that a bounded
-`H² → H³` operator exists there, prove strong measurability and Bochner interval-integrability
-of the actual Duhamel integrand, and derive its norm estimate from the proved locally integrable
-scalar majorant. It must also provide the same-space `H³` linear evolution needed for the initial
-term with honest decoder/semigroup semantics before instantiating the abstract mild layer.
+1. time-continuity of `t ↦ ∫ s in 0..t, duhamelIntegrand t u s` for a trajectory continuous on
+   `[0, T]`, via the reversed representation `∫ τ in 0..t, endpointSafeSmoothing τ (Q (u (t-τ)) (u (t-τ)))`
+   (`intervalIntegral.integral_comp_sub_left`), uniform continuity of the trajectory, and
+   continuity of the primitive `K(t) = ∫₀ᵗ k̃`;
+2. the Picard map on `C(Icc 0 T, X)` (extend trajectories by `Set.IccExtend`), closed-ball
+   invariance `‖u₀‖-controlled`, and the contraction estimate from
+   `Q u u - Q v v = Q u (u-v) + Q (u-v) v`;
+3. Banach fixed point (`ContractingWith`) on the complete closed ball, giving for small `T > 0`
+   a mild solution in the sense of `IsMildSolutionOn` and uniqueness among ball trajectories;
+4. concrete instantiation: local existence + ball uniqueness for
+   `IsR3EndpointSafeProjectedMildSolutionOn hnu T u0 u`, with `M = 1` from
+   `norm_r3StokesH3Evolution_le_one`.
 
-The current `MildEvolutionKernel V` and `LerayProjectedQuadraticContract V` are same-space
-interfaces. They cannot consume an `X × X → Y` nonlinearity followed by a positive-time
-`Y → X` smoothing map without this additional structure. Completing that interface still does
-not by itself prove a fixed point, local well-posedness, or a Clay statement.
+This layer stays in the complex carrier. It does not by itself give physical (real-valued)
+local well-posedness, pressure reconstruction, or any Clay statement; the
+real-valued/conjugate-symmetric restriction remains a separate later gate.
 
 ## Latest Lean verification
 
 ```text
-runner: local Windows PowerShell process via Elan
-revision: 7ab4091eefeaf2d25b73824b9ec2941088876844
+runner: local Windows (Git Bash) process via Elan
+revision: main merge 03ea967 (tree identical to proof commit 4f8ae0d6)
 toolchain: leanprover/lean4:v4.32.1
-dependency manifest: committed lake-manifest.json; mathlib 520045ab14e26149ee970e2e617ca04b09bde5d6
-target scope: Formal.R3StokesH2H3Smoothing — pass
-axiom scope: Formal.AxiomAudit — pass
-full scope: pinned PowerShell equivalent of scripts/lean-ci-local.sh / Formal.+ — pass (8740 jobs)
-GitHub Actions: not invoked for this proof
+dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
+full scope: lake exe cache get && lake build — pass (8743 jobs)
+axiom scope: Formal.AxiomAudit — pass (propext, Classical.choice, Quot.sound only)
+GitHub Actions: PR #82 hosted run 32112489718 failed in 6s on exhausted quota; not evidence
 ```
 
 ## Runner protocol for the next proof
@@ -327,4 +347,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`@GitHub ns-mns2-flowmap-bridge を docs/GPT_WORKFLOW.md の resume protocol どおり確認して、最新 main/PR/Lean verification と HANDOFF.md を照合して続きから。正経過時間・ν>0 の genuine H²→H³ Stokes smoothing は完了済み。次は H³×H³→H² projected convection と H²→H³ smoothing を結ぶ endpoint-safe two-space Duhamel contract、actual integrand の Bochner integrability、same-space H³ linear evolution。Lean はローカルで反復し、GitHub Actions は使わない。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。endpoint-safe two-space Duhamel contract・actual integrand の Bochner integrability・same-space H³ evolution・具体 R³ mild 述語は PR #82 で完了済み(main、ローカル 8743 jobs green)。次は同 contract の Picard fixed-point layer: Duhamel 積分の時間連続性 → C(Icc 0 T, X) 上の Picard 写像と縮小評価 → 小さい T>0 での mild 解の存在と ball 一意性 → 具体 R³ instantiation。complex carrier のままで良い(実数値制限は別ゲート)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
