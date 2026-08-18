@@ -334,6 +334,25 @@ Fourth pass (2026-08-19): debts settled, map frozen, dominant-balance inversion 
   excavation. The one recorded research question for later: do Bragg–Hawthorne profiles
   compatible with `σ = α`, `O(1)` circulation, and the wedge exponents exist?
 
+Fifth pass (2026-08-19): BH-profile taste pass (one bounded pass, per the external
+reviewer's brief) — `docs/gates/BH_PROFILE_TASTE_REPORT.md`,
+`experiments/bh_taste_exponents.py`. **Verdict: YELLOW.**
+
+- Gate A: Gavrilov / Constantin–La–Vicol verified (localized steady Euler cores with swirl
+  exist at fixed swirl fraction); Jiu–Xin rigidity verified at search level (compactly
+  supported axisymmetric no-swirl steady Euler ⇒ 0).
+- Gate B: fixed-profile scaling is a double no-go (`σ = γ` and `Γ → ∞`; circulation-tuned
+  variant gives `γ = α`).
+- Gates C/D: in core variables the swirl enters Grad–Shafranov at `O(ε²)`; a regular
+  `ε → 0` family would converge to a nontrivial localized no-swirl flow — dead by
+  rigidity. **Any admissible family must be singular**; existence unconstructed.
+- Gate E: residual hierarchy formally perturbative in the interior; closed-streamline
+  secular (Prandtl–Batchelor-type) argument obstructs `α ≥ 1/2` (homogenized `Γ` ⇒
+  `F̂′ → 0` ⇒ swirl decoupling ⇒ no-swirl rigidity again). Proposed conditional K12
+  (report-only, NOT applied to the frozen map): quasi-static interior needs `α < 1/2`.
+- Smallest missing theorem: **quantitative no-swirl rigidity** (the forced degeneration
+  rate of swirl-poor localized families). Deferred; do not start without a fresh decision.
+
 **Resume point: return to the Lean program (next gate below — operator realness
 preservation), per the frozen plan.**
 
