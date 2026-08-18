@@ -1,5 +1,6 @@
 import Formal.R3StokesConjugationEquivariance
 import Formal.R3LerayPointwiseProjectionIdentification
+import Formal.R3H2LerayBridge
 
 /-!
 # Conjugation equivariance of the Leray projector
@@ -120,6 +121,26 @@ theorem IsR3RealVelocity.leray {g : R3L2Velocity} (hg : IsR3RealVelocity g) :
     IsR3RealVelocity (r3LerayL2Operator g) := by
   unfold IsR3RealVelocity at *
   rw [r3L2Conj_r3LerayL2Operator, hg]
+
+/-- The order-two Leray projector commutes with pointwise conjugation. -/
+theorem r3L2Conj_r3LerayH2Operator (g : R3HsVelocity 2) :
+    r3L2Conj (r3LerayH2Operator g) = r3LerayH2Operator (r3L2Conj g) :=
+  r3L2Conj_r3LerayL2Operator g
+
+/-- The order-three Leray projector commutes with pointwise conjugation. -/
+theorem r3L2Conj_r3LerayH3Operator (g : R3HsVelocity 3) :
+    r3L2Conj (r3LerayH3Operator g) = r3LerayH3Operator (r3L2Conj g) :=
+  r3L2Conj_r3LerayL2Operator g
+
+/-- The order-two Leray projector preserves physically real coordinates. -/
+theorem IsR3RealVelocity.lerayH2 {g : R3HsVelocity 2} (hg : IsR3RealVelocity g) :
+    IsR3RealVelocity (r3LerayH2Operator g) :=
+  hg.leray
+
+/-- The order-three Leray projector preserves physically real coordinates. -/
+theorem IsR3RealVelocity.lerayH3 {g : R3HsVelocity 3} (hg : IsR3RealVelocity g) :
+    IsR3RealVelocity (r3LerayH3Operator g) :=
+  hg.leray
 
 end
 

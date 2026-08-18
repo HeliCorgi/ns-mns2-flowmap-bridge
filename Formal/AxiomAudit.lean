@@ -196,6 +196,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3L2Conj_r3LerayL2Operator
 #print axioms MNS2.IsR3RealVelocity.leray
 #print axioms MNS2.IsR3RealVelocity.stokesH3
+#print axioms MNS2.r3L2Conj_r3LerayH2Operator
+#print axioms MNS2.r3L2Conj_r3LerayH3Operator
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
