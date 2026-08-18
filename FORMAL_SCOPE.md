@@ -1,10 +1,11 @@
 # Formal scope and theorem boundary
 
 Last synchronized: 2026-08-18 (JST), after local full verification of the Picard
-local-existence layer (`Formal/EndpointSafeTwoSpacePicard.lean`,
-`Formal/R3EndpointSafeProjectedLocalExistence.lean`) on top of merged PR #82: full `Formal.+`
-gate pass with 8745 jobs, axiom audit standard (`propext`, `Classical.choice`, `Quot.sound`),
-pinned source scan clean.
+local-existence layer and the conjugation/reflection reality-predicate layer
+(`Formal/EndpointSafeTwoSpacePicard.lean`, `Formal/R3EndpointSafeProjectedLocalExistence.lean`,
+`Formal/R3ConjugationReflection.lean`) on top of merged PR #82: full `Formal.+` gate pass with
+8746 jobs, axiom audit standard (`propext`, `Classical.choice`, `Quot.sound`), pinned source
+scan clean.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -438,20 +439,45 @@ order-three Bessel coordinate `u₀`, a horizon `0 < T ≤ 1` and a trajectory s
 `IsR3EndpointSafeProjectedMildSolutionOn hnu T u₀ u` with the `‖u₀‖ + 1` ball bound and
 ball uniqueness. The required contractivity is `norm_r3StokesH3Evolution_apply_le`.
 
+The first slice of the reality gate is also closed. `Formal/R3ConjugationReflection.lean`
+supplies, on the shared `L²` Bessel-coordinate carrier (hence for every `R3HsVelocity s`):
+
+- `r3CConj : R3C ≃ₗᵢ[ℝ] R3C`, coordinatewise fiber conjugation, with
+  `r3CConj_eq_self_iff` (fixed points = componentwise-real vectors);
+- `r3L2Conj : R3L2Velocity →L[ℝ] R3L2Velocity`, pointwise carrier conjugation — a
+  norm-preserving continuous involution;
+- `r3L2Reflect : R3L2Velocity →L[ℂ] R3L2Velocity`, composition with `x ↦ -x` — a
+  norm-preserving continuous involution commuting with conjugation
+  (`r3L2Reflect_r3L2Conj`);
+- the predicates `IsR3RealVelocity` (`r3L2Conj g = g`, characterized a.e. by
+  `isR3RealVelocity_iff_im_ae`) and `IsR3ConjugateSymmetricVelocity`
+  (`r3L2Reflect (r3L2Conj g) = g`, the exact `L²` form of `û (-ξ) = conj (û ξ)`), both closed
+  under addition, real scalars, negation, subtraction, and reflection, both cutting out closed
+  subsets of the carrier.
+
 The next analytic gates, in intended order:
 
-1. the physical real-valued/conjugate-symmetric carrier restriction (Fourier conjugate
-   symmetry of the projected convection and of the Stokes maps, and a real mild carrier);
-2. quantitative strengthening of the local theory: an explicit horizon lower bound in terms of
+1. the Plancherel reality bridge: `Lp.fourierTransformₗᵢ` intertwines `r3L2Conj` with
+   `r3L2Reflect ∘ r3L2Conj`, hence a coordinate is physically real iff its `L²` Fourier
+   transform is conjugate-symmetric (route: prove the pointwise identity
+   `𝓕 (conj ∘ f) ξ = conj (𝓕 f (-ξ))` on Schwartz functions, then extend by
+   `SchwartzMap.toLp_fourier_eq`, density, and continuity of all four operators);
+2. realness preservation of the concrete operators: real even symbols for the Stokes
+   multiplier and `r3StokesH2ToH3Operator`, the real Leray matrix symbol, and conjugation
+   equivariance of the projected convection; then realness of the local mild solution for real
+   initial data (the real trajectories in the certified ball form a closed nonempty
+   Picard-invariant subset, so the fixed point lies in it);
+3. quantitative strengthening of the local theory: an explicit horizon lower bound in terms of
    `‖u₀‖`, uniqueness without the ball restriction (Gronwall-type), and a continuation /
    maximal-interval criterion connecting to the existing
    `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
-3. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
+4. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
    `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
 
-The whole fixed-point layer lives in the complex Bessel-coordinate carrier. The physical
-real-valued restriction remains open and is still required before any physical Navier–Stokes
-local-wellposedness language is used.
+The fixed-point layer and the reality predicates live in the complex Bessel-coordinate
+carrier. No statement yet connects the predicates to the Fourier transform or to the concrete
+operators, and physical Navier–Stokes local-wellposedness language remains off-limits until
+gates 1–2 close.
 
 ## 7. What is still not formalized
 
@@ -464,8 +490,10 @@ The Lean development does **not** currently establish:
 - continuation of a `C¹` solution map through a singular time;
 - equality, for arbitrary completed `H³` inputs, between the decoded extension
   and a separately constructed distributional convection product;
-- a physical real-valued restriction of the completed projected convection map
-  (in particular, Fourier conjugate symmetry has not been proved);
+- a physical real-valued restriction of the completed projected convection map or of the local
+  mild solutions (the reality predicates exist, but no Plancherel bridge between physical
+  realness and Fourier-side conjugate symmetry, and no operator-preservation theorem, has been
+  proved);
 - a theorem that the Leray symbol maps Schwartz space to itself;
 - pressure reconstruction for the completed projected map;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
