@@ -24,6 +24,9 @@ import Formal.R3SchwartzConvectionSobolevEstimate
 import Formal.R3SobolevConvectionExtension
 import Formal.R3ProjectedSobolevConvection
 import Formal.R3StokesH2H3Smoothing
+import Formal.EndpointSafeTwoSpaceDuhamel
+import Formal.R3StokesH3Evolution
+import Formal.R3EndpointSafeProjectedDuhamel
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -155,6 +158,16 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3StokesH2ToH3Operator_commutes_leray
 #print axioms MNS2.r3StokesH2ToH3Operator_mem_solenoidal
 #print axioms MNS2.r3StokesL2Operator_r3H2ToL2Operator_mem_solenoidal
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.intervalIntegrable_duhamelIntegrand_of_continuousOn
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.isMildAt_zero_iff
+#print axioms MNS2.r3StokesH3Evolution_add
+#print axioms MNS2.continuous_r3StokesH3Evolution_action
+#print axioms MNS2.r3H3ToL2Operator_r3StokesH3Evolution
+#print axioms MNS2.r3StokesH2ToH3Operator_add_nnreal
+#print axioms MNS2.aestronglyMeasurable_r3EndpointSafeProjectedDuhamelIntegrand
+#print axioms MNS2.intervalIntegrable_r3EndpointSafeProjectedDuhamelIntegrand
+#print axioms MNS2.norm_integral_r3EndpointSafeProjectedDuhamelIntegrand_le
+#print axioms MNS2.r3EndpointSafeProjectedMild_equation_at_time
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
