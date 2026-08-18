@@ -35,6 +35,7 @@ import Formal.R3StokesConjugationEquivariance
 import Formal.R3LerayConjugationEquivariance
 import Formal.R3ConvectionConjugationEquivariance
 import Formal.R3RealLocalMildSolution
+import Formal.R3QuantitativeLifespan
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -208,6 +209,20 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.IsR3RealVelocity.projectedConvection
 #print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.r3L2Conj_comp
 #print axioms MNS2.r3EndpointSafeProjected_exists_realLocalMildSolution
+
+-- Explicit quantitative lifespan: given-horizon Picard, closed-form kernel mass
+-- `K(T) = T + √T/(π√ν)`, the explicit lifespan `T₀ = (δ/(1+(π√ν)⁻¹+δ))²`, and the
+-- quantitative existence theorems on the explicit horizon (complex + real data).
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.exists_isMildSolutionOn_of_kernelPrimitive_lt
+#print axioms MNS2.r3MildSmallnessThreshold_pos
+#print axioms MNS2.r3MildSmallnessThreshold_le_one
+#print axioms MNS2.r3MildLifespan_pos
+#print axioms MNS2.r3MildLifespan_le_one
+#print axioms MNS2.r3EndpointSafeProjected_kernelPrimitive_eq
+#print axioms MNS2.endpointSafe_lifespan_sq_add_lt
+#print axioms MNS2.r3EndpointSafeProjected_kernelPrimitive_mildLifespan_lt
+#print axioms MNS2.r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan
+#print axioms MNS2.r3EndpointSafeProjected_exists_realMildSolutionOn_mildLifespan
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed

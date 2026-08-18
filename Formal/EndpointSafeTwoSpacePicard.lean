@@ -712,16 +712,17 @@ section Existence
 variable [CompleteSpace X]
 
 /--
-Local-in-time existence with closed-ball uniqueness for the endpoint-safe two-space mild
-equation, for any contract whose same-space linear evolution is contractive.
-
-The produced horizon satisfies `0 < T ≤ 1`.  The mild solution stays in the closed ball of
-radius `‖u₀‖ + 1`, and any mild solution on the same horizon staying in that ball agrees with
-it there.  Nothing is claimed outside `[0, T]`, and no uniqueness is claimed outside the ball.
+Quantitative form of the local existence theorem: **any** horizon whose cumulative smoothing
+mass lies below the explicit `‖u₀‖`-threshold carries a mild solution with the ball bound
+and ball uniqueness.  This is the entry point for explicit lifespan bounds.
 -/
-theorem exists_pos_time_isMildSolutionOn
-    (hcontr : ∀ (t : ℝ≥0) (x : X), ‖C.linearEvolution t x‖ ≤ ‖x‖) (u₀ : X) :
-    ∃ T : ℝ, 0 < T ∧ T ≤ 1 ∧ ∃ u : ℝ → X,
+theorem exists_isMildSolutionOn_of_kernelPrimitive_lt
+    (hcontr : ∀ (t : ℝ≥0) (x : X), ‖C.linearEvolution t x‖ ≤ ‖x‖) (u₀ : X) {T : ℝ}
+    (hTpos : 0 < T)
+    (hKTδ : C.kernelPrimitive T <
+      min (1 / (‖C.bilinear‖ * (‖u₀‖ + 1) ^ 2 + 1))
+        (1 / (2 * (‖C.bilinear‖ * (2 * (‖u₀‖ + 1)) + 1)))) :
+    ∃ u : ℝ → X,
       C.IsMildSolutionOn T u₀ u ∧
       (∀ t ∈ Icc (0 : ℝ) T, ‖u t‖ ≤ ‖u₀‖ + 1) ∧
       ∀ v : ℝ → X, C.IsMildSolutionOn T u₀ v →
@@ -732,13 +733,6 @@ theorem exists_pos_time_isMildSolutionOn
   have hR0 : 0 ≤ R := by positivity
   set δ : ℝ := min (1 / (‖C.bilinear‖ * R ^ 2 + 1)) (1 / (2 * (‖C.bilinear‖ * (2 * R) + 1)))
     with hδdef
-  have hδpos : 0 < δ := by
-    apply lt_min
-    · apply div_pos one_pos
-      positivity
-    · apply div_pos one_pos
-      positivity
-  obtain ⟨T, hTpos, hT1, hKTδ⟩ := C.exists_pos_time_kernelPrimitive_lt one_pos hδpos
   have hT0 : (0 : ℝ) ≤ T := hTpos.le
   have hKT0 : 0 ≤ C.kernelPrimitive T := C.kernelPrimitive_nonneg hT0
   -- ball invariance constant
@@ -837,7 +831,7 @@ theorem exists_pos_time_isMildSolutionOn
       · have h := hueq t ht
         rw [← htnn, Real.coe_toNNReal t ht.1]
         simpa only [duhamelIntegral] using h
-  refine ⟨T, hTpos, hT1, u, hmild, fun t ht => (hunorm t ht).trans_eq rfl, ?_⟩
+  refine ⟨u, hmild, fun t ht => (hunorm t ht).trans_eq rfl, ?_⟩
   -- ball uniqueness
   intro v hv hvball t ht
   have hvcont : ContinuousOn v (Icc (0 : ℝ) T) := hv.2.1
@@ -881,6 +875,33 @@ theorem exists_pos_time_isMildSolutionOn
     v t = fv ⟨t, ht⟩ := rfl
     _ = fstar.1 ⟨t, ht⟩ := by rw [hfveqval]
     _ = u t := (huval t ht).symm
+
+/--
+Local-in-time existence with closed-ball uniqueness for the endpoint-safe two-space mild
+equation, for any contract whose same-space linear evolution is contractive.
+
+The produced horizon satisfies `0 < T ≤ 1`.  The mild solution stays in the closed ball of
+radius `‖u₀‖ + 1`, and any mild solution on the same horizon staying in that ball agrees with
+it there.  Nothing is claimed outside `[0, T]`, and no uniqueness is claimed outside the ball.
+-/
+theorem exists_pos_time_isMildSolutionOn
+    (hcontr : ∀ (t : ℝ≥0) (x : X), ‖C.linearEvolution t x‖ ≤ ‖x‖) (u₀ : X) :
+    ∃ T : ℝ, 0 < T ∧ T ≤ 1 ∧ ∃ u : ℝ → X,
+      C.IsMildSolutionOn T u₀ u ∧
+      (∀ t ∈ Icc (0 : ℝ) T, ‖u t‖ ≤ ‖u₀‖ + 1) ∧
+      ∀ v : ℝ → X, C.IsMildSolutionOn T u₀ v →
+        (∀ t ∈ Icc (0 : ℝ) T, ‖v t‖ ≤ ‖u₀‖ + 1) →
+        ∀ t ∈ Icc (0 : ℝ) T, v t = u t := by
+  have hδpos : 0 < min (1 / (‖C.bilinear‖ * (‖u₀‖ + 1) ^ 2 + 1))
+      (1 / (2 * (‖C.bilinear‖ * (2 * (‖u₀‖ + 1)) + 1))) := by
+    apply lt_min
+    · apply div_pos one_pos
+      positivity
+    · apply div_pos one_pos
+      positivity
+  obtain ⟨T, hTpos, hT1, hKTδ⟩ := C.exists_pos_time_kernelPrimitive_lt one_pos hδpos
+  obtain ⟨u, hu⟩ := C.exists_isMildSolutionOn_of_kernelPrimitive_lt hcontr u₀ hTpos hKTδ
+  exact ⟨T, hTpos, hT1, u, hu⟩
 
 end Existence
 

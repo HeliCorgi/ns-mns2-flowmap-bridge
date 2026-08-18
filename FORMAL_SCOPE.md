@@ -474,7 +474,7 @@ proves:
   `IsR3RealVelocity g ↔ IsR3ConjugateSymmetricVelocity (𝓕 g)`, with the reverse direction from
   injectivity of the Plancherel isometry.
 
-The operator-realness gate is partially closed (2026-08-19):
+The operator-realness gate is closed (2026-08-19):
 `Formal/R3StokesConjugationEquivariance.lean` proves the generic statement that a Fourier
 multiplier realized a.e. by a real, even scalar symbol commutes with `r3L2Conj` (via the
 frequency-side commutation with `r3L2Reflect ∘ r3L2Conj`, the Plancherel bridge, and
@@ -495,25 +495,43 @@ triple-conjugated bilinear map identified with `r3ConvectionH3ToH2` by dense-cor
 uniqueness, and the projected-convection equivariance with its `IsR3RealVelocity`
 corollary. **Every concrete operator of the mild theory is now conjugation-equivariant.**
 
+The physically real local mild solution is closed (2026-08-19,
+`Formal/R3RealLocalMildSolution.lean`): conjugation equivariance of the endpoint-safe Duhamel
+integrand, the conjugated trajectory of a mild solution with real datum is again a mild
+solution (conjugation passes through the Bochner interval integral by
+`ContinuousLinearMap.intervalIntegral_comp_comm`), and ball uniqueness pins it to the
+original — `r3EndpointSafeProjected_exists_realLocalMildSolution` gives, for real data, a
+mild solution that is pointwise physically real on the certified horizon.
+
+The explicit quantitative lifespan is closed (2026-08-19,
+`Formal/R3QuantitativeLifespan.lean`, with the abstract Picard layer refactored so that
+`exists_isMildSolutionOn_of_kernelPrimitive_lt` accepts **any** horizon satisfying the
+kernel-mass smallness, the old existential theorem now being a corollary):
+
+- closed-form kernel mass `r3EndpointSafeProjected_kernelPrimitive_eq`:
+  `K(T) = T + √T/(π√ν)` for `T ≥ 0`;
+- the explicit lifespan `r3MildLifespan nu r = (δ(r)/(1 + (π√ν)⁻¹ + δ(r)))²` with
+  `δ(r) = r3MildSmallnessThreshold r`, positivity, `≤ 1`, and `K(T₀) < δ`;
+- `r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan` and
+  `r3EndpointSafeProjected_exists_realMildSolutionOn_mildLifespan`: existence, ball bound,
+  ball uniqueness (and pointwise realness for real data) on the explicit horizon
+  `T₀(ν, ‖u₀‖)`.
+
 The next analytic gates, in intended order:
 
-1. realness of the local mild solution for real data (uniqueness route: the conjugated
-   trajectory is also a ball mild solution, so ball-uniqueness pins it to the original);
-2. realness of the local mild solution for real initial data: the real trajectories in the
-   certified ball form a closed nonempty Picard-invariant subset, so the fixed point lies in
-   it; this promotes `r3EndpointSafeProjected_exists_localMildSolution` to a physical
-   real-valued statement;
-3. quantitative strengthening of the local theory: an explicit horizon lower bound in terms of
-   `‖u₀‖`, uniqueness without the ball restriction (Gronwall-type), and a continuation /
-   maximal-interval criterion connecting to the existing
-   `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
+1. a mild **restart identity** (a mild solution restarted at `s` solves the shifted mild
+   equation with datum `u s`) — the shared enabling lemma for gates 2 and 3;
+2. **unrestricted uniqueness** on a common horizon (remove the ball restriction;
+   Gronwall-type or stepwise-smallness patching);
+3. **maximal continuation**: unique maximal mild solution with
+   `T* < ∞ ⇒ ‖u t‖ → ∞`, seeded by the explicit lifespan `r3MildLifespan` and connected to
+   the existing `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
 4. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
    `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
 
-The fixed-point layer, the reality predicates, and the Plancherel bridge are all statements
-about the complex Bessel-coordinate carrier and the `L²` Fourier transform. No concrete
-Stokes/Leray/convection operator has been proved to preserve realness, and physical
-Navier–Stokes local-wellposedness language remains off-limits until gates 1–2 close.
+The fixed-point layer, the reality gate, and the quantitative lifespan are all local
+statements on the Bessel-coordinate carrier. Unrestricted uniqueness, continuation, pressure
+reconstruction, and every Clay-level statement remain open.
 
 ## 7. What is still not formalized
 
@@ -526,16 +544,12 @@ The Lean development does **not** currently establish:
 - continuation of a `C¹` solution map through a singular time;
 - equality, for arbitrary completed `H³` inputs, between the decoded extension
   and a separately constructed distributional convection product;
-- a physical real-valued restriction of the completed projected convection map or of the local
-  mild solutions (the reality predicates and the Plancherel bridge between physical realness
-  and Fourier-side conjugate symmetry exist, but no concrete operator has been proved to
-  preserve either predicate);
 - a theorem that the Leray symbol maps Schwartz space to itself;
 - pressure reconstruction for the completed projected map;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
-- uniqueness of the local mild solution outside the certified `‖u₀‖ + 1` ball, an explicit
-  quantitative horizon lower bound, or any continuation/maximal-interval theorem;
+- uniqueness of the local mild solution outside the certified `‖u₀‖ + 1` ball, or any
+  continuation/maximal-interval theorem;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - a connection of the new concrete local mild solutions to the abstract `MildEvolutionKernel` /
   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces;
@@ -557,9 +571,11 @@ For the current Schwartz/Sobolev route, the intended order is:
    the complex Bessel-coordinate carrier, with uniqueness at least in the certified ball~~ —
    closed by `Formal/EndpointSafeTwoSpacePicard.lean` and
    `Formal/R3EndpointSafeProjectedLocalExistence.lean`;
-4. construct the physical real-valued/conjugate-symmetric carrier restriction; only after it may
-   physical local-wellposedness language be used;
-5. strengthen the local theory (quantitative horizon, unrestricted uniqueness, continuation) and
+4. ~~construct the physical real-valued/conjugate-symmetric carrier restriction~~ — closed by
+   the conjugation/reflection, Plancherel-bridge, operator-equivariance, and
+   `Formal/R3RealLocalMildSolution.lean` slices;
+5. strengthen the local theory: ~~quantitative horizon~~ (closed by
+   `Formal/R3QuantitativeLifespan.lean`), then unrestricted uniqueness and continuation, and
    connect the concrete evolution to the mild-theory and flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.

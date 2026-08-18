@@ -69,6 +69,17 @@ Current code and theorem statements override stale prose.
 - The Plancherel reality bridge (`Formal/R3FourierConjugationBridge.lean`, with four new
   `Formal/AxiomAudit.lean` prints) is committed directly on `main` after local verification:
   full `Formal.+` gate pass (8747 jobs), pinned source scan clean, axiom audit standard.
+- The operator-realness slices (`Formal/R3StokesConjugationEquivariance.lean`,
+  `Formal/R3LerayConjugationEquivariance.lean`,
+  `Formal/R3ConvectionConjugationEquivariance.lean`) and the physically real local mild
+  solution (`Formal/R3RealLocalMildSolution.lean`) are committed directly on `main` after
+  local verification: full `Formal.+` gate passes (8748 → 8751 jobs), pinned source scans
+  clean, axiom audit standard.
+- The explicit quantitative lifespan (`Formal/R3QuantitativeLifespan.lean`, plus the
+  statement-preserving refactor of `Formal/EndpointSafeTwoSpacePicard.lean` extracting
+  `exists_isMildSolutionOn_of_kernelPrimitive_lt`, with ten new `Formal/AxiomAudit.lean`
+  prints) is committed directly on `main` after local verification: full `Formal.+` gate
+  pass (8752 jobs), pinned source scan clean, axiom audit standard.
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -428,45 +439,62 @@ integral), and — by the ball-uniqueness clause, with **no new fixed point** �
 `u0`, a horizon `0 < T ≤ 1` and a mild solution that is **physically real at every
 certified time**, with the ball bound and ball uniqueness.
 
-The next smallest mathematical tasks, in order:
+**The explicit quantitative lifespan is closed** (2026-08-19,
+`Formal/R3QuantitativeLifespan.lean` + refactor of `Formal/EndpointSafeTwoSpacePicard.lean`):
 
-1. **quantitative lifespan**: make the horizon explicit — the abstract existence proof
-   chooses `T` with `kernelPrimitive T < δ(‖u0‖)`; the concrete kernel primitive is
-   explicit (`K(T) = T + 2√T/((2π)√ν)` up to the stored constants), so a computable lower
-   bound `T ≥ T₀(ν, ‖u0‖)` is extractable; restate existence with it;
-2. **unconditional uniqueness** on the horizon (Gronwall-type, removing the ball
-   restriction) — optional but cheap to attempt after 1;
-3. **continuation criterion**: from the quantitative lifespan, if a mild solution cannot be
-   extended past `T* < ∞` then `limsup_{t→T*} ‖u t‖ = ∞` (restart argument), stated
-   against `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` where they
-   fit;
-4. on continuation close, the **BH branch reopens** (standing decision; quantitative
+- abstract layer: `exists_isMildSolutionOn_of_kernelPrimitive_lt` — existence + ball bound +
+  ball uniqueness on **any** given horizon `T > 0` with
+  `kernelPrimitive T < δ(‖u₀‖) = min (1/(‖B‖(R)²+1)) (1/(2(‖B‖·2R+1)))`, `R = ‖u₀‖+1`;
+  the old existential `exists_pos_time_isMildSolutionOn` is now a corollary (statement
+  unchanged);
+- closed-form kernel mass: `r3EndpointSafeProjected_kernelPrimitive_eq` —
+  `K(T) = T + √T/(π√ν)` for `T ≥ 0` (via `integral_rpow` at exponent `-1/2` and
+  `√((2π)²ν) = 2π√ν`);
+- explicit lifespan: `r3MildLifespan nu r = (δ(r)/(1 + (π√ν)⁻¹ + δ(r)))²` with
+  `r3MildLifespan_pos`, `r3MildLifespan_le_one`, and the key inequality
+  `r3EndpointSafeProjected_kernelPrimitive_mildLifespan_lt` (`K(T₀) < δ`, algebra:
+  `K(T₀) = √T₀(√T₀ + c)` and `√T₀ = δ/(1+c+δ) ≤ δ < 1+δ`);
+- quantitative existence: `r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan`
+  (complex carrier) and `r3EndpointSafeProjected_exists_realMildSolutionOn_mildLifespan`
+  (physically real data ⇒ pointwise-real solution), both on the explicit horizon
+  `T₀(ν, ‖u₀‖)` depending only on the viscosity and the initial-datum norm.
+
+The next smallest mathematical tasks, in order (per the endorsed 3-gate plan):
+
+1. **unrestricted uniqueness** on a common horizon (remove the ball restriction):
+   Gronwall-type or stepwise-smallness patching; the enabling lemma is a **mild restart
+   identity** (a mild solution restarted at time `s` is a mild solution of the shifted
+   equation with datum `u s`), which is shared with task 2 — build it first;
+2. **maximal continuation**: unique maximal mild solution on `[0, T*)` with
+   `T* < ∞ ⇒ ‖u t‖_{H³} → ∞` (restart argument seeded by the explicit lifespan
+   `r3MildLifespan`, which is bounded below on bounded-norm data), stated against
+   `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` where they fit;
+3. on continuation close, the **BH branch reopens** (standing decision; quantitative
    no-swirl rigidity + K12, see `docs/gates/BH_PROFILE_TASTE_REPORT.md`).
 
-After that: realness of the local mild solution for real data — the real ball trajectories
-form a closed nonempty Picard-invariant subset of `C(Icc 0 T, X)`, so the fixed point lies in
-it, promoting `r3EndpointSafeProjected_exists_localMildSolution` to a physical statement.
-Then the quantitative horizon / unrestricted uniqueness / continuation strengthening feeding
-the breakdown track.
-
-The closed layers are statements about the complex carrier and the `L²` Fourier transform. No
-concrete operator has been proved to preserve realness, and no physical (real-valued)
-local-wellposedness, pressure reconstruction, or Clay statement is available.
+The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
+via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
+continuation criterion, and no Clay statement is available yet.
 
 ## Latest Lean verification
 
 ```text
 runner: local Windows (Git Bash) process via Elan
-revision: working tree of the Plancherel reality-bridge proof commit on main
-  (new: Formal/R3FourierConjugationBridge.lean; extended Formal/AxiomAudit.lean)
+revision: working tree of the quantitative-lifespan commit on main
+  (new: Formal/R3QuantitativeLifespan.lean; refactored: Formal/EndpointSafeTwoSpacePicard.lean
+   — exists_isMildSolutionOn_of_kernelPrimitive_lt extracted, old theorem statement unchanged;
+   extended: Formal/AxiomAudit.lean)
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
-target scope: lake env lean Formal/R3FourierConjugationBridge.lean — pass, no warnings
-full scope: lake build (Formal.+ default target) — pass (8747 jobs)
-source scan: pinned sorry/admit/axiom/opaque scan over Formal/ — clean
-axiom scope: Formal.AxiomAudit — pass; the four new audited theorems
-  (r3Fourier_conj_eq, fourier_r3SchwartzConjCLM, fourier_r3L2Conj,
-   isR3RealVelocity_iff_fourier_conjugateSymmetric)
+target scope: lake build Formal.R3QuantitativeLifespan — pass
+full scope: lake build (Formal.+ default target) — pass (8752 jobs)
+source scan: pinned sorry/admit/axiom/opaque scan over changed files — clean
+axiom scope: Formal.AxiomAudit — pass; all ten new audited declarations
+  (exists_isMildSolutionOn_of_kernelPrimitive_lt, r3MildSmallnessThreshold_pos/_le_one,
+   r3MildLifespan_pos/_le_one, r3EndpointSafeProjected_kernelPrimitive_eq,
+   endpointSafe_lifespan_sq_add_lt, r3EndpointSafeProjected_kernelPrimitive_mildLifespan_lt,
+   r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan,
+   r3EndpointSafeProjected_exists_realMildSolutionOn_mildLifespan)
   depend only on propext, Classical.choice, Quot.sound
 GitHub Actions: not invoked (quota exhausted; hosted runs banned)
 ```
@@ -528,14 +556,15 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
   `L²` Fourier transform; every concrete operator of the mild theory is
   conjugation-equivariant and realness-preserving; and the local mild solution is proved
   physically real for physically real data on its certified horizon and ball. Still
-  missing: a quantitative lifespan bound, unconditional uniqueness, any continuation /
-  maximal-interval theorem, pressure reconstruction, and any Clay statement;
+  missing: unconditional uniqueness, any continuation / maximal-interval theorem, pressure
+  reconstruction, and any Clay statement;
 - its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
   produced horizon; do not cite it as unconditional uniqueness;
-- the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`
-  and no continuation/maximal-interval theorem is available yet;
+- the horizon is now explicit (`r3MildLifespan nu ‖u₀‖ = (δ/(1+(π√ν)⁻¹+δ))²`, positive and
+  `≤ 1`), but no continuation/maximal-interval theorem is available yet; do not present the
+  explicit lifespan as a global or maximal statement;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract、Picard fixed-point layer、reality predicates、Plancherel bridge、そして operator realness の Stokes スライス(R3StokesConjugationEquivariance: 汎用 real-even multiplier 定理 + StokesL2/H3Evolution/H2ToH3 の r3L2Conj 可換 + IsR3RealVelocity 保存)と Leray スライス(R3LerayConjugationEquivariance: fiber symbol の共役同変性・偶性 + 行列 multiplier 汎用定理 + r3LerayL2Operator の可換)まで main に完了済み。次は (1) order-two/three Leray 変種(r3LerayH2Operator・r3LerayH3Operator)の同変性、(2) projected convection r3ProjectedConvectionH3ToH2 の共役同変性(Schwartz core で示して密度拡張)、(3) real 初期値の mild 解の realness(実軌道の閉 Picard 不変部分集合に不動点が入る論法)、(4) continuation criterion。continuation クローズ後は BH branch(定量的 no-swirl 剛性、docs/gates/BH_PROFILE_TASTE_REPORT.md)を再開する standing decision あり。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract、Picard fixed-point layer、reality gate 一式(conjugation/reflection、Plancherel bridge、全 operator の共役同変性)、real local mild solution(R3RealLocalMildSolution)、そして explicit quantitative lifespan(R3QuantitativeLifespan: K(T)=T+√T/(π√ν) の閉形式、T₀=(δ/(1+(π√ν)⁻¹+δ))²、複素+実データの定量的存在定理;抽象側は exists_isMildSolutionOn_of_kernelPrimitive_lt に分離済み)まで main に完了済み。次は 3 連ゲートの残り 2 つ: (1) mild restart identity(時刻 s で再スタートした mild 解が shifted mild 方程式を満たす補題 — uniqueness と continuation の共有基盤なので最初に作る)、(2) unrestricted uniqueness(ball 制限の除去; Gronwall 型または stepwise smallness patching)、(3) maximal continuation(一意極大解、T*<∞ ⇒ ‖u t‖→∞; r3MildLifespan が norm 有界データで下に有界なことを restart に使う; FlowMapNonextendibilityCriterion / UniformRestartContinuation に接続)。continuation クローズ後は BH branch(定量的 no-swirl 剛性、docs/gates/BH_PROFILE_TASTE_REPORT.md)を再開する standing decision あり。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
