@@ -403,18 +403,38 @@ plus symbol realness/evenness give
 Reuse `r3L2Conj_of_fourier_realEven` for every further scalar-multiplier operator
 (including the Bessel weights / decoders if needed).
 
-Remaining slices, in order:
+**The operator-realness gate is now FULLY closed** (2026-08-19). Slice 2
+(`Formal/R3LerayConjugationEquivariance.lean`): fiber-level conjugation equivariance and
+evenness of the complex Leray symbol, the matrix-multiplier generalization of the generic
+equivariance theorems, `r3L2Conj_r3LerayL2Operator` plus the definitionally-equal order-two/
+order-three variants, and the `IsR3RealVelocity` corollaries. Slice 3
+(`Formal/R3ConvectionConjugationEquivariance.lean`): carrier antilinearity `r3L2Conj_smul`;
+conjugation equivariance of real even Schwartz Fourier multipliers and hence of the Bessel
+coordinate map (`r3L2Conj_r3SchwartzToHsCLM`); conjugation equivariance of the Schwartz
+convection (via `fderiv` commuting with the real-linear fiber conjugation); the
+triple-conjugated bilinear map `r3ConjugatedConvectionH3ToH2` (ℂ-bilinear again by three
+conjugations), shown equal to `r3ConvectionH3ToH2` by the dense-core uniqueness theorem;
+hence `r3L2Conj_r3ConvectionH3ToH2`, `r3L2Conj_r3ProjectedConvectionH3ToH2`, and
+`IsR3RealVelocity.projectedConvection`.
 
-2. the Leray projector: the fiber symbol `P(ξ) = I - (ξ ⊗ ξ)/|ξ|²` is a real matrix, even in
-   `ξ`; here the multiplier is matrix-valued, so the generic scalar lemma does not apply
-   verbatim — prove the fiber-level commutation `r3CConj (P_C(ξ) v) = P_C(-ξ) (r3CConj v)`
-   (realness + evenness of the matrix) and push through the frequency identification
-   (`R3LerayPointwiseProjectionIdentification` / `r3LerayFourierBridge`) to get
-   `r3L2Conj (r3LerayL2Operator g) = r3LerayL2Operator (r3L2Conj g)`, then the
-   order-two/order-three variants;
-3. the projected convection `r3ProjectedConvectionH3ToH2`: conjugation equivariance on the
-   Schwartz core (the convection term is a real bilinear expression in the fields), then
-   extend by density exactly as the bounded-extension layer does.
+The next smallest mathematical task is the **real local mild solution** — and it needs no
+new fixed point. Route: given `IsR3RealVelocity u0`, take the solution `u` produced by
+`r3EndpointSafeProjected_exists_localMildSolution` and show `v t := r3L2Conj (u t)` is also
+a mild solution on the same horizon staying in the same ball:
+
+- `v` is continuous (conj is a continuous involution) and stays in the ball
+  (`norm_r3L2Conj`);
+- conj of the mild equation: `H t u0` is fixed (`r3L2Conj_r3StokesH3Evolution` + `hu0`),
+  the integrand transforms by `r3L2Conj_r3StokesH2ToH3Operator` +
+  `r3L2Conj_r3ProjectedConvectionH3ToH2` into the integrand of `v`, and conj passes through
+  the interval Bochner integral because `r3L2Conj` is a continuous `ℝ`-linear map
+  (`ContinuousLinearMap.intervalIntegral_comp_comm`); the integrability clause transports
+  the same way;
+- the ball-uniqueness clause of the existence theorem then gives `v = u` on the horizon,
+  i.e. `IsR3RealVelocity (u t)` for all certified `t`.
+
+After that: quantitative lifespan/unconditional uniqueness, then the continuation
+criterion; on continuation close, the BH branch reopens (standing decision).
 
 After that: realness of the local mild solution for real data — the real ball trajectories
 form a closed nonempty Picard-invariant subset of `C(Icc 0 T, X)`, so the fixed point lies in
@@ -498,11 +518,11 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
   physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
 - `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are related through the Plancherel
-  `L²` Fourier transform, and the Stokes evolutions (`r3StokesL2Operator`,
-  `r3StokesH3Evolution`, `r3StokesH2ToH3Operator`) and the `L²` Leray projector
-  (`r3LerayL2Operator`) are proved conjugation-equivariant and realness-preserving; the
-  order-two/order-three Leray variants and the projected convection are not yet covered,
-  and no mild solution has been proved real;
+  `L²` Fourier transform, and every concrete operator of the mild theory — the Stokes
+  evolutions, the `L²`/order-two/order-three Leray projectors, and the completed and
+  projected convection — is proved conjugation-equivariant and realness-preserving; **no
+  mild solution has yet been proved real** (that is the next gate, by the uniqueness route
+  recorded above);
 - its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
   produced horizon; do not cite it as unconditional uniqueness;
 - the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`

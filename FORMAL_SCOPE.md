@@ -486,11 +486,19 @@ the `L²` Leray projector through its a.e. fiber realization
 (`r3LerayL2FrequencyOperator_ae`), giving `r3L2Conj_r3LerayL2Operator` and
 `IsR3RealVelocity.leray`.
 
+`Formal/R3LerayConjugationEquivariance.lean` further proves the matrix-multiplier
+equivariance theorems and `r3L2Conj_r3LerayL2Operator` (with the order-two/order-three
+variants), and `Formal/R3ConvectionConjugationEquivariance.lean` closes the gate: carrier
+antilinearity, conjugation equivariance of real even Schwartz Fourier multipliers and of the
+Bessel coordinate map, conjugation equivariance of the Schwartz convection, the
+triple-conjugated bilinear map identified with `r3ConvectionH3ToH2` by dense-core
+uniqueness, and the projected-convection equivariance with its `IsR3RealVelocity`
+corollary. **Every concrete operator of the mild theory is now conjugation-equivariant.**
+
 The next analytic gates, in intended order:
 
-1. remaining realness slices: the order-two/order-three Leray variants
-   (`r3LerayH2Operator`, `r3LerayH3Operator`) and conjugation equivariance of the projected
-   convection `r3ProjectedConvectionH3ToH2` (Schwartz core, then density);
+1. realness of the local mild solution for real data (uniqueness route: the conjugated
+   trajectory is also a ball mild solution, so ball-uniqueness pins it to the original);
 2. realness of the local mild solution for real initial data: the real trajectories in the
    certified ball form a closed nonempty Picard-invariant subset, so the fixed point lies in
    it; this promotes `r3EndpointSafeProjected_exists_localMildSolution` to a physical
