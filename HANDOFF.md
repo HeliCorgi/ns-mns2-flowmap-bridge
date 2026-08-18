@@ -261,6 +261,26 @@ audit reports only `propext`, `Classical.choice`, and `Quot.sound` for the new a
 coordinate type for every `s`. Its physical meaning is fixed by `r3HsToTemperedCLM s`. Never use
 the alias equality as a physical `H³ → H²` inclusion or as a smoothing theorem.
 
+## Stage-A candidate gate campaign (2026-08-18)
+
+The necessary-condition gate battery was pre-registered and run at literature level against
+the fixed-ν Hou NS candidate (arXiv:2107.06509). Outcome: **route killed at candidate
+level** — the candidate's own `‖u‖_∞ ~ (T−t)^{−1/2}` one-scale scaling is Type I, excluded
+for axisymmetric NS by CSTY 2008/2009 + KNSS 2009. See
+`docs/gates/BARKER_GATE_PREREGISTRATION_2026-08-18.md`,
+`docs/gates/STAGE_A_LITERATURE_VERDICT_2026-08-18.md`, and the registry entry
+`ns-singularity-certificate-lab/docs/candidates/HOU_FIXED_NU_TYPE1_NS_CANDIDATE_KILL_AUDIT_2026-08-18.md`.
+
+Consequences for planning:
+
+- the Lean program below is candidate-independent and continues unchanged;
+- the abstract Chen–Hou-style skeleton (Stage B) remains the right 4/10 → 5/10 target, but
+  its concrete instantiation must wait for a Type II-compatible or non-axisymmetric
+  candidate;
+- any future (N)-level candidate run in this repo should target the live escape hatch first:
+  converged measurement of `√(T−t)·‖u‖_{L∞}` growth, plus the standing gates G1–G7 with
+  null/positive controls, before any formalization is spent on it.
+
 ## Exact next Lean gate
 
 Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing,
