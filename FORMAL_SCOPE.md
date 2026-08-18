@@ -517,20 +517,26 @@ kernel-mass smallness, the old existential theorem now being a corollary):
   ball uniqueness (and pointwise realness for real data) on the explicit horizon
   `T₀(ν, ‖u₀‖)`.
 
+The mild restart identity and unrestricted uniqueness are closed (2026-08-19,
+`Formal/EndpointSafeTwoSpaceRestart.lean`, `Formal/EndpointSafeTwoSpaceUniqueness.lean`):
+a mild solution restarted at a certified time solves the shifted mild equation
+(`IsMildSolutionOn.restart`, via `smoothing_coherent` and integrand translation); two mild
+solutions with the same datum agree on their common horizon with **no ball restriction**
+(`IsMildSolutionOn.unique`, contraction step + restart patching + Archimedes); and every
+mild solution with physically real datum is pointwise physically real
+(`IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity`), with no ball hypothesis.
+
 The next analytic gates, in intended order:
 
-1. a mild **restart identity** (a mild solution restarted at `s` solves the shifted mild
-   equation with datum `u s`) — the shared enabling lemma for gates 2 and 3;
-2. **unrestricted uniqueness** on a common horizon (remove the ball restriction;
-   Gronwall-type or stepwise-smallness patching);
-3. **maximal continuation**: unique maximal mild solution with
-   `T* < ∞ ⇒ ‖u t‖ → ∞`, seeded by the explicit lifespan `r3MildLifespan` and connected to
-   the existing `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
-4. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
+1. **maximal continuation**: the concatenation lemma (converse of restart), the
+   uniform-step extension by the explicit lifespan (needs antitonicity of `r3MildLifespan`
+   in the datum norm), and the blow-up criterion `T* < ∞ ⇒ ‖u t‖ → ∞`, connected to the
+   existing `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
+2. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
    `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
 
-The fixed-point layer, the reality gate, and the quantitative lifespan are all local
-statements on the Bessel-coordinate carrier. Unrestricted uniqueness, continuation, pressure
+The fixed-point layer, the reality gate, the quantitative lifespan, and the uniqueness
+layer are all local statements on the Bessel-coordinate carrier. Continuation, pressure
 reconstruction, and every Clay-level statement remain open.
 
 ## 7. What is still not formalized
@@ -548,8 +554,7 @@ The Lean development does **not** currently establish:
 - pressure reconstruction for the completed projected map;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
-- uniqueness of the local mild solution outside the certified `‖u₀‖ + 1` ball, or any
-  continuation/maximal-interval theorem;
+- any continuation/maximal-interval theorem;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
 - a connection of the new concrete local mild solutions to the abstract `MildEvolutionKernel` /
   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces;
@@ -575,8 +580,10 @@ For the current Schwartz/Sobolev route, the intended order is:
    the conjugation/reflection, Plancherel-bridge, operator-equivariance, and
    `Formal/R3RealLocalMildSolution.lean` slices;
 5. strengthen the local theory: ~~quantitative horizon~~ (closed by
-   `Formal/R3QuantitativeLifespan.lean`), then unrestricted uniqueness and continuation, and
-   connect the concrete evolution to the mild-theory and flow-map interfaces.
+   `Formal/R3QuantitativeLifespan.lean`), ~~unrestricted uniqueness~~ (closed by
+   `Formal/EndpointSafeTwoSpaceRestart.lean` + `Formal/EndpointSafeTwoSpaceUniqueness.lean`),
+   then continuation, and connect the concrete evolution to the mild-theory and flow-map
+   interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 

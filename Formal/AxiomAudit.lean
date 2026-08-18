@@ -36,6 +36,8 @@ import Formal.R3LerayConjugationEquivariance
 import Formal.R3ConvectionConjugationEquivariance
 import Formal.R3RealLocalMildSolution
 import Formal.R3QuantitativeLifespan
+import Formal.EndpointSafeTwoSpaceRestart
+import Formal.EndpointSafeTwoSpaceUniqueness
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -223,6 +225,19 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3EndpointSafeProjected_kernelPrimitive_mildLifespan_lt
 #print axioms MNS2.r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan
 #print axioms MNS2.r3EndpointSafeProjected_exists_realMildSolutionOn_mildLifespan
+
+-- Mild restart identity and unrestricted uniqueness: a mild solution restarted at a
+-- certified time solves the shifted problem; two mild solutions with the same datum agree
+-- on their common horizon (no ball restriction); consequently every mild solution with
+-- physically real datum is pointwise physically real.
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.duhamelIntegrand_comp_add_left
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.IsMildSolutionOn.restart
+#print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.restart
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.IsMildSolutionOn.mono
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.isMildSolutionOn_eq_of_contraction
+#print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.IsMildSolutionOn.unique
+#print axioms MNS2.r3EndpointSafeProjectedMildSolution_unique
+#print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
