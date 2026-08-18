@@ -474,13 +474,23 @@ proves:
   `IsR3RealVelocity g ↔ IsR3ConjugateSymmetricVelocity (𝓕 g)`, with the reverse direction from
   injectivity of the Plancherel isometry.
 
+The operator-realness gate is partially closed (2026-08-19):
+`Formal/R3StokesConjugationEquivariance.lean` proves the generic statement that a Fourier
+multiplier realized a.e. by a real, even scalar symbol commutes with `r3L2Conj` (via the
+frequency-side commutation with `r3L2Reflect ∘ r3L2Conj`, the Plancherel bridge, and
+injectivity), and applies it to `r3StokesL2Operator`, `r3StokesH3Evolution`, and
+`r3StokesH2ToH3Operator`, with `IsR3RealVelocity` preservation corollaries
+(`.stokesL2`, `.stokesH3`, `.stokesH2ToH3`). `Formal/R3LerayConjugationEquivariance.lean`
+extends this to conjugation-equivariant, even **matrix-valued** symbols and applies it to
+the `L²` Leray projector through its a.e. fiber realization
+(`r3LerayL2FrequencyOperator_ae`), giving `r3L2Conj_r3LerayL2Operator` and
+`IsR3RealVelocity.leray`.
+
 The next analytic gates, in intended order:
 
-1. realness preservation of the concrete operators: real even symbols for the Stokes
-   multiplier and `r3StokesH2ToH3Operator`, the real Leray matrix symbol
-   `P(ξ) = I - (ξ ⊗ ξ)/|ξ|²`, and conjugation equivariance of the projected convection —
-   each stated as commutation with `r3L2Conj` (equivalently, with
-   `r3L2Reflect ∘ r3L2Conj` on the frequency side, now that the bridge is available);
+1. remaining realness slices: the order-two/order-three Leray variants
+   (`r3LerayH2Operator`, `r3LerayH3Operator`) and conjugation equivariance of the projected
+   convection `r3ProjectedConvectionH3ToH2` (Schwartz core, then density);
 2. realness of the local mild solution for real initial data: the real trajectories in the
    certified ball form a closed nonempty Picard-invariant subset, so the fixed point lies in
    it; this promotes `r3EndpointSafeProjected_exists_localMildSolution` to a physical

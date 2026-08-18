@@ -140,6 +140,13 @@ theorem IsR3RealVelocity.stokesL2 {ν t : ℝ} (hν : 0 ≤ ν) (ht : 0 ≤ t)
   unfold IsR3RealVelocity at *
   rw [r3L2Conj_r3StokesL2Operator, hg]
 
+/-- The same-space order-three Stokes evolution preserves physically real coordinates. -/
+theorem IsR3RealVelocity.stokesH3 {nu : ℝ} (hnu : 0 ≤ nu) (t : ℝ≥0)
+    {g : R3HsVelocity 3} (hg : IsR3RealVelocity g) :
+    IsR3RealVelocity (r3StokesH3Evolution hnu t g) := by
+  unfold IsR3RealVelocity at *
+  rw [r3L2Conj_r3StokesH3Evolution, hg]
+
 /-- The `H² → H³` smoothing operator preserves physically real coordinates. -/
 theorem IsR3RealVelocity.stokesH2ToH3 {nu tau : ℝ} (hnu : 0 < nu) (htau : 0 < tau)
     {g : R3HsVelocity 2} (hg : IsR3RealVelocity g) :

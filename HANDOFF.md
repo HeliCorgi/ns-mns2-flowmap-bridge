@@ -497,9 +497,12 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
   positive-time result is justified by its explicit multiplier and decoder theorems;
 - the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
   physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
-- `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are now related through the Plancherel
-  `L²` Fourier transform, but no concrete Stokes/Leray/convection operator has been proved to
-  preserve either predicate, and no mild solution has been proved real;
+- `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are related through the Plancherel
+  `L²` Fourier transform, and the Stokes evolutions (`r3StokesL2Operator`,
+  `r3StokesH3Evolution`, `r3StokesH2ToH3Operator`) and the `L²` Leray projector
+  (`r3LerayL2Operator`) are proved conjugation-equivariant and realness-preserving; the
+  order-two/order-three Leray variants and the projected convection are not yet covered,
+  and no mild solution has been proved real;
 - its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
   produced horizon; do not cite it as unconditional uniqueness;
 - the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`
@@ -508,4 +511,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract(PR #82)、Picard fixed-point layer(局所存在+ball 一意性)、conjugation/reflection reality predicates、Plancherel reality bridge(r3Fourier_conj_eq・fourier_r3L2Conj・isR3RealVelocity_iff_fourier_conjugateSymmetric、ローカル 8747 jobs green)まで main に完了済み。次は具体 operator の realness 保存: (1) Stokes(symbol exp(-(2π)²ν|ξ|²t) は実かつ偶 → fourier_r3StokesL2Operator と bridge 経由で r3L2Conj と可換、H3Evolution と H2ToH3 も同様)、(2) Leray(実行列 P(ξ) = I - ξ⊗ξ/|ξ|² は偶)、(3) projected convection(Schwartz core での共役同変性 → 密度で拡張)。その後 real 初期値の mild 解の realness(閉かつ Picard 不変な部分集合に不動点が入る論法)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。Duhamel contract、Picard fixed-point layer、reality predicates、Plancherel bridge、そして operator realness の Stokes スライス(R3StokesConjugationEquivariance: 汎用 real-even multiplier 定理 + StokesL2/H3Evolution/H2ToH3 の r3L2Conj 可換 + IsR3RealVelocity 保存)と Leray スライス(R3LerayConjugationEquivariance: fiber symbol の共役同変性・偶性 + 行列 multiplier 汎用定理 + r3LerayL2Operator の可換)まで main に完了済み。次は (1) order-two/three Leray 変種(r3LerayH2Operator・r3LerayH3Operator)の同変性、(2) projected convection r3ProjectedConvectionH3ToH2 の共役同変性(Schwartz core で示して密度拡張)、(3) real 初期値の mild 解の realness(実軌道の閉 Picard 不変部分集合に不動点が入る論法)、(4) continuation criterion。continuation クローズ後は BH branch(定量的 no-swirl 剛性、docs/gates/BH_PROFILE_TASTE_REPORT.md)を再開する standing decision あり。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
