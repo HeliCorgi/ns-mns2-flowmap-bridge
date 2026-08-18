@@ -271,15 +271,29 @@ for axisymmetric NS by CSTY 2008/2009 + KNSS 2009. See
 `docs/gates/STAGE_A_LITERATURE_VERDICT_2026-08-18.md`, and the registry entry
 `ns-singularity-certificate-lab/docs/candidates/HOU_FIXED_NU_TYPE1_NS_CANDIDATE_KILL_AUDIT_2026-08-18.md`.
 
+Second pass (same date): the two-scale literature gate and the Type II survival map are
+done — `docs/gates/TWO_SCALE_LITERATURE_GATE_2026-08-18.md`,
+`docs/gates/TYPE2_SURVIVAL_MAP_2026-08-18.md`, figure `docs/gates/type2_survival_map.png`
+(generator `experiments/type2_survival_map.py`), registry entry
+`ns-singularity-certificate-lab/docs/candidates/HOU_HUANG_TWO_SCALE_NS_ROUTE_STATUS_2026-08-18.md`.
+Outcome: the Hou–Huang two-scale scenarios are Clay-inadmissible (Euler / degenerate ν) and
+their standard-ν NS transfer died in the authors' own test (max-vorticity growth < 2); the
+survival map nevertheless leaves a **nonempty open window** — `γ ∈ (1/2, 1)`,
+`α ∈ (max(2γ/3, 2γ−1), γ)` for a core carrying the `L³` divergence, with sub-parabolic ring
+collapse dead and swirl-dominated cores forced into ≥3-region structures.
+
 Consequences for planning:
 
 - the Lean program below is candidate-independent and continues unchanged;
 - the abstract Chen–Hou-style skeleton (Stage B) remains the right 4/10 → 5/10 target, but
-  its concrete instantiation must wait for a Type II-compatible or non-axisymmetric
-  candidate;
-- any future (N)-level candidate run in this repo should target the live escape hatch first:
-  converged measurement of `√(T−t)·‖u‖_{L∞}` growth, plus the standing gates G1–G7 with
-  null/positive controls, before any formalization is spent on it.
+  its concrete instantiation must wait for a candidate **inside the survival window**;
+- the admission test for any future (N)-level candidate is now fixed: fitted `(γ, α, ρ)`
+  with confidence intervals inside the open window, converged `√(T−t)·‖u‖_{L∞} → ∞`, and
+  gates G1–G7 with null/positive controls;
+- next theory increment for the map (cheap): tabulate the exact hypotheses of the
+  `|u| ≤ C/r` exclusion family and the slightly-supercritical / Type II refinements
+  ([V1]/[V2] in the map document) — they can only shrink the window near its `γ = 1/2`
+  edge.
 
 ## Exact next Lean gate
 
