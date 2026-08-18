@@ -60,11 +60,15 @@ case `ρ = α`), inner scale `ℓ ~ τ^α` (`α ≥ ρ`, thickness ≤ radius), 
 
 ## 4. Derived cuts
 
-- **[D1] Sub-parabolic ring collapse is dead: `ρ ≥ 1/2`.**
-  A fixed point `x₀`, `|x₀| = d`, is visited by the ring at time-distance
-  `τ_visit = d^{1/ρ}`. If `ρ < 1/2` then `d^{1/ρ} < d²` for small `d`, so the visit lies
-  inside `Q_d(x₀, T*)`, where [H8] bounds `|u| ≤ C/d`; but the ring amplitude there is
-  `d^{−γ/ρ}`, forcing `γ ≤ ρ < 1/2`, contradicting [H2].
+- **[D1] — WITHDRAWN 2026-08-19.** The original argument ("sub-parabolic ring collapse
+  `ρ < 1/2` is dead via CKN parabolic cylinders") contained an unsound step: ε-regularity
+  at a regular point does not supply a scale-invariant `|u| ≤ C/d` bound with a uniform
+  constant at the visited scale. See
+  [`D1_ADVERSARIAL_AUDIT_2026-08-19.md`](D1_ADVERSARIAL_AUDIT_2026-08-19.md). Replacement:
+  **[D1′] (conditional)** — under the transport hypothesis (structure advected by the flow
+  plus viscous spreading), `ρ ≥ min(1−γ, 1/2)`. The on-axis blob window is unaffected
+  (a non-translating core); the ring corridor constraint weakens from `ρ ≥ 1/2` to the
+  conditional [D1′] form.
 - **[D2] A swirl-dominated core cannot carry the critical-norm divergence.**
   If the sup is carried by `u_θ` at radius `R ~ τ^ρ`, [H7] gives `γ ≤ ρ`. Then [B3] would
   need `ρ + 2α < 3γ ≤ 3ρ`, i.e. `α < ρ`, contradicting `α ≥ ρ`. Hence a swirl-dominated

@@ -108,9 +108,9 @@ for s in ("left", "bottom"):
 ax.tick_params(colors=INK_MUTED)
 ax.grid(color="#eef0f3", lw=0.8, zorder=0)
 fig.text(0.01, 0.012,
-         "Derivation: docs/gates/TYPE2_SURVIVAL_MAP_2026-08-18.md  |  "
-         "swirl-dominated ≥3-region corridor not shown (see doc §4[D5])"
-         "  |  2026-08-18",
+         "Derivation: TYPE2_SURVIVAL_MAP_2026-08-18.md + TYPE2_KILL_TABLE_2026-08-19.md "
+         "(D1 withdrawn, see D1_ADVERSARIAL_AUDIT)  |  ring corridor & ≥3-region "
+         "scenarios doc-side only  |  rev. 2026-08-19",
          fontsize=8, color=INK_MUTED)
 
 out = Path(__file__).resolve().parents[1] / "docs" / "gates" / "type2_survival_map.png"

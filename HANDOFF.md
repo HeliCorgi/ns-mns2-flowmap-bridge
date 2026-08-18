@@ -295,6 +295,27 @@ Consequences for planning:
   ([V1]/[V2] in the map document) — they can only shrink the window near its `γ = 1/2`
   edge.
 
+Third pass (2026-08-19): adversarial audit + kill table —
+`docs/gates/D1_ADVERSARIAL_AUDIT_2026-08-19.md`, `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`.
+Outcomes:
+
+- **[D1] withdrawn** (the `ρ < 1/2` CKN-cylinder kill was unsound: ε-regularity gives no
+  uniform scale-invariant bound at the visited scale); replaced by the conditional transport
+  cut [D1′] `ρ ≥ min(1−γ, 1/2)`; the on-axis blob window is unaffected; corrections
+  propagated to the map document, figure footnote, and the lab registry entry;
+- CSTY-II verified verbatim (arXiv:0709.4230): `|v| ≤ C_* r^{−1+ε}|t|^{−ε/2}` ⇒ regular,
+  `C_*` arbitrary — inside the blob window its violation is automatic (no new cut); for
+  rings it forces `γ > ρ` or a mesoscale violation region;
+- conditional swirl razor (K9, unverified family): if `|u_θ| ≤ C r^{−d}` (`d < 1`) implies
+  regularity, then the core swirl exponent is pinned to `σ = α` exactly — an
+  amplitude-subdominant core carrying `O(1)` circulation `Γ`;
+- **dimension answer**: after all currently-verified cuts, `S_survive` = a 2-D open wedge
+  (blob) + a 3-D conditional slab (ring, `γ < 1` for core-carried `L³`) + the ≥3-region
+  corridor — not a curve, not empty;
+- **verification debts** (the next cheap theory items): K4 (KNSS exact `|v| ≤ C/r` form),
+  K9 (exact swirl-component criteria), K10 (full-text extraction of Seregin
+  arXiv:2402.13229, revised 2026-08 — the area is actively moving).
+
 ## Exact next Lean gate
 
 Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing,
