@@ -35,9 +35,10 @@ ax.set_facecolor(SURFACE)
 # Dead background (everything starts dead; the open window is drawn on top).
 ax.fill_between([0.40, 1.15], 0.20, 1.15, color=DEAD_FILL, zorder=0)
 
-# Survival window: 1/2 < g < 1, max(2g/3, 2g-1) < a < g.
+# Survival window (rev. 2026-08-19, K11 added):
+# 1/2 < g < 1, max(1-g, 2g/3, 2g-1) < a < g.
 gw = np.linspace(0.5, 1.0, 400)
-lower = np.maximum(2 * gw / 3, 2 * gw - 1)
+lower = np.maximum.reduce([2 * gw / 3, 2 * gw - 1, 1 - gw])
 upper = gw
 ax.fill_between(gw, lower, upper, where=upper > lower, color=OPEN_FILL,
                 alpha=0.85, zorder=2, linewidth=0)
@@ -48,6 +49,11 @@ ax.plot(g, 2 * g / 3, color=INK_MUTED, lw=2, zorder=3)
 gd = np.linspace(0.5, 1.15, 300)
 ax.plot(gd, 2 * gd - 1, color=INK_MUTED, lw=2, ls=(0, (5, 3)), zorder=3)
 ax.axvline(0.5, color=INK_MUTED, lw=2, zorder=3)
+# K11 balance cut: alpha = 1 - gamma (binding piece emphasized on gamma in [1/2, 3/5]).
+ge = np.linspace(0.40, 0.80, 200)
+ax.plot(ge, 1 - ge, color=INK_MUTED, lw=1.4, ls=(0, (2, 2)), zorder=3)
+gee = np.linspace(0.5, 0.6, 60)
+ax.plot(gee, 1 - gee, color="#7a4d9a", lw=3, zorder=4)
 
 # Hatch the dead side of the Type I wall for emphasis.
 ax.fill_between([0.40, 0.5], 0.20, 1.15, facecolor="none",
@@ -72,12 +78,22 @@ ax.text(1.02, 0.655, r"$\alpha=2\gamma/3$", fontsize=10, color=INK_MUTED,
         rotation=25, zorder=4)
 ax.text(0.905, 0.755, r"$\alpha=2\gamma-1$", fontsize=10, color=INK_MUTED,
         rotation=52, zorder=4)
+ax.annotate("KILLED: unbalanced $\\partial_t u$\n(K11 balance / energy-flux)",
+            xy=(0.557, 0.415), xytext=(0.545, 0.245), fontsize=9, color=INK,
+            ha="center", arrowprops=dict(arrowstyle="->", color=INK_MUTED, lw=1.2),
+            zorder=5)
+ax.annotate("Euler-balance edge $\\gamma+\\alpha=1$:\n"
+            "= Seregin 2402.13229 class (conditional\nexclusion pressure), "
+            "$\\gamma\\in(1/2,3/5]$",
+            xy=(0.552, 0.448), xytext=(0.795, 0.225), fontsize=9, color="#4a2d63",
+            ha="center", arrowprops=dict(arrowstyle="->", color="#7a4d9a", lw=1.4),
+            zorder=5)
 
 # Reference points.
 ax.plot([0.5], [0.5], marker="o", ms=9, mfc="#b3423a", mec=SURFACE, mew=1.5,
         zorder=5)
 ax.annotate("Hou 2107.06509 (one-scale):\n$\\gamma=1/2$, Type I — killed",
-            xy=(0.5, 0.5), xytext=(0.565, 0.30), fontsize=9, color=INK,
+            xy=(0.5, 0.5), xytext=(0.408, 0.335), fontsize=9, color=INK,
             arrowprops=dict(arrowstyle="-", color=INK_MUTED, lw=1), zorder=5)
 ax.plot([0.5], [1.0], marker="s", ms=8, mfc="#8a8f98", mec=SURFACE, mew=1.5,
         zorder=5)
@@ -108,9 +124,8 @@ for s in ("left", "bottom"):
 ax.tick_params(colors=INK_MUTED)
 ax.grid(color="#eef0f3", lw=0.8, zorder=0)
 fig.text(0.01, 0.012,
-         "Derivation: TYPE2_SURVIVAL_MAP_2026-08-18.md + TYPE2_KILL_TABLE_2026-08-19.md "
-         "(D1 withdrawn, see D1_ADVERSARIAL_AUDIT)  |  ring corridor & ≥3-region "
-         "scenarios doc-side only  |  rev. 2026-08-19",
+         "Derivation: TYPE2_KILL_TABLE + DOMINANT_BALANCE_INVERSION (2026-08-19; "
+         "D1 withdrawn per audit)  |  ring/multi-region cases doc-side",
          fontsize=8, color=INK_MUTED)
 
 out = Path(__file__).resolve().parents[1] / "docs" / "gates" / "type2_survival_map.png"

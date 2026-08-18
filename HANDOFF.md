@@ -316,6 +316,27 @@ Outcomes:
   K9 (exact swirl-component criteria), K10 (full-text extraction of Seregin
   arXiv:2402.13229, revised 2026-08 — the area is actively moving).
 
+Fourth pass (2026-08-19): debts settled, map frozen, dominant-balance inversion done —
+`docs/gates/DOMINANT_BALANCE_INVERSION_2026-08-19.md` and updated kill table / figure.
+
+- K4 retired (non-load-bearing; verified K3 covers the map's uses); K9 paid
+  (Chen–Fang–Zhang weighted swirl criterion; the `σ = α` core razor holds at the `L^∞`
+  endpoint); K10 paid — **Seregin's Euler-scaling Type II class maps exactly onto the
+  `γ + α = 1` edge, `γ ∈ (1/2, 3/5)`**, with conditional exclusion pressure there.
+- New cut **K11: `γ + α ≥ 1`** (term balance and energy-flux derivations agree). Frozen
+  window: `{1/2 < γ < 1, max(1−γ, 2γ/3, 2γ−1) ≤ α < γ}`.
+- Balance classification: edge = generalized self-similar Euler (contested); interior =
+  quasi-static steady-Euler (Bragg–Hawthorne) cores, slowly modulated; heat balance,
+  `∂ₜ`-dominant dynamics, and convection–diffusion-balanced `L³`-carrying cores are all
+  impossible in the wedge. Every survivor is asymptotically inviscid (`Re_core → ∞`).
+- Deferred by plan (do NOT start yet): N-level harness, Stage B modulation/trapping
+  formalization, new ansatz generation, non-axisymmetric pivot, further literature
+  excavation. The one recorded research question for later: do Bragg–Hawthorne profiles
+  compatible with `σ = α`, `O(1)` circulation, and the wedge exponents exist?
+
+**Resume point: return to the Lean program (next gate below — operator realness
+preservation), per the frozen plan.**
+
 ## Exact next Lean gate
 
 Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing,

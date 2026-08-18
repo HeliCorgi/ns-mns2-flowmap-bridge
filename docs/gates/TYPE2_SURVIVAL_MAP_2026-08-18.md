@@ -123,3 +123,15 @@ structure of [D2] that it does not have.
   registered for the one-scale kill.
 - Next theory increment for the map: tabulate [V1]/[V2] with exact hypotheses (this can
   only shrink region 1 near its `γ = 1/2` edge and refine the corridor).
+
+## 7. Freeze note (2026-08-19)
+
+Verification debts settled (K4 retired, K9 paid via the Chen–Fang–Zhang weighted swirl
+criterion, K10 paid via full-text extraction of Seregin arXiv:2402.13229), and the
+dominant-balance pass added the cut **K11: `γ + α ≥ 1`** (double-derived). The frozen
+window is `{1/2 < γ < 1, max(1−γ, 2γ/3, 2γ−1) ≤ α < γ}`; its lower edge `γ + α = 1`
+(`γ ∈ (1/2, 3/5]`) is exactly Seregin's Euler-scaling Type II class and is under
+conditional exclusion pressure; the interior demands quasi-static steady-Euler
+(Bragg–Hawthorne) cores. See `TYPE2_KILL_TABLE_2026-08-19.md` and
+`DOMINANT_BALANCE_INVERSION_2026-08-19.md`. The map is frozen apart from footnote-level
+residues recorded in the kill table.
