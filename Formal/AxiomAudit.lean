@@ -29,6 +29,7 @@ import Formal.R3StokesH3Evolution
 import Formal.R3EndpointSafeProjectedDuhamel
 import Formal.EndpointSafeTwoSpacePicard
 import Formal.R3EndpointSafeProjectedLocalExistence
+import Formal.R3ConjugationReflection
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -174,6 +175,11 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.EndpointSafeTwoSpaceDuhamelContract.exists_pos_time_isMildSolutionOn
 #print axioms MNS2.r3EndpointSafeProjected_exists_localMildSolution
 #print axioms MNS2.r3EndpointSafeProjected_localMildSolution_equation
+#print axioms MNS2.r3L2Reflect_r3L2Conj
+#print axioms MNS2.isR3RealVelocity_iff_im_ae
+#print axioms MNS2.isR3ConjugateSymmetricVelocity_iff_reflect_eq_conj
+#print axioms MNS2.isClosed_setOf_isR3RealVelocity
+#print axioms MNS2.isClosed_setOf_isR3ConjugateSymmetricVelocity
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed
