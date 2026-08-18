@@ -1,8 +1,10 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-18 (JST), after local full verification of merged `main`
-`03ea967` (merge of PR #82; `Formal/` tree identical to proof commit
-`4f8ae0d66c65cd5458bc49b13c4e6b015e318b4d`), full `Formal.+` gate pass with 8743 jobs.
+Last synchronized: 2026-08-18 (JST), after local full verification of the Picard
+local-existence layer (`Formal/EndpointSafeTwoSpacePicard.lean`,
+`Formal/R3EndpointSafeProjectedLocalExistence.lean`) on top of merged PR #82: full `Formal.+`
+gate pass with 8745 jobs, axiom audit standard (`propext`, `Classical.choice`, `Quot.sound`),
+pinned source scan clean.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -409,22 +411,47 @@ two-space Duhamel layers are closed. PR #82 (`Formal/EndpointSafeTwoSpaceDuhamel
   `r3StokesH2ToH3Operator`, `r3StokesH3Evolution`, and `r3StokesH2H3TimeKernel`, together with
   the concrete predicate `IsR3EndpointSafeProjectedMildSolutionOn`.
 
-The next analytic gate is the fixed-point layer for exactly this contract:
+The Picard fixed-point layer for exactly this contract is now also closed.
+`Formal/EndpointSafeTwoSpacePicard.lean` proves, for an arbitrary contract:
 
-1. prove time-continuity of the endpoint-safe Duhamel integral for a bounded continuous
-   trajectory (via the reversed kernel representation and uniform continuity on the compact
-   interval);
-2. define the Picard map on continuous trajectories over `[0, T]`, prove closed-ball invariance
-   and the contraction estimate from the bilinear splitting
-   `Q u u - Q v v = Q u (u - v) + Q (u - v) v`;
-3. obtain, for sufficiently small `T > 0`, existence of a mild solution in the sense of
-   `IsMildSolutionOn`, and its uniqueness among trajectories staying in the certified ball;
-4. instantiate on the concrete `R^3` carriers to obtain local existence and ball-uniqueness for
-   `IsR3EndpointSafeProjectedMildSolutionOn`.
+- nonnegativity, monotonicity, continuity, and small-time smallness of the cumulative
+  smoothing mass `kernelPrimitive`;
+- the exact reversed elapsed-time representation of the endpoint-safe Duhamel integral
+  (`integral_duhamelIntegrand_eq_reversed`, via `intervalIntegral.integral_comp_sub_left`);
+- quantitative Duhamel bounds: size (`norm_duhamelIntegral_le`), trajectory difference
+  (`norm_duhamelIntegral_sub_le`, from the bilinear splitting
+  `Q u u - Q v v = Q u (u - v) + Q (u - v) v`), and final-time difference
+  (`norm_duhamelIntegral_time_sub_le`);
+- time-continuity of the Duhamel integral on the compact horizon
+  (`continuousOn_duhamelIntegral`), by uniform continuity of the trajectory — no dominated
+  convergence over the moving singular kernel is needed in the reversed variable;
+- the Picard map on `C(Icc 0 T, X)` (`picardMap`, trajectories extended by `Set.IccExtend`),
+  closed-ball invariance under a contractive linear evolution (`norm_picardMap_le`), and the
+  contraction estimate (`dist_picardMap_le`);
+- the Banach fixed point on the complete closed ball of radius `‖u₀‖ + 1`:
+  `exists_pos_time_isMildSolutionOn` produces `0 < T ≤ 1` and a trajectory `u` with
+  `IsMildSolutionOn T u₀ u`, staying in the ball, unique among ball-valued mild solutions.
 
-This fixed-point layer lives entirely in the complex Bessel-coordinate carrier. The physical
-real-valued/conjugate-symmetric restriction remains a separate obligation and is still required
-before any physical Navier–Stokes local-wellposedness language is used.
+`Formal/R3EndpointSafeProjectedLocalExistence.lean` instantiates this on the concrete carriers:
+`r3EndpointSafeProjected_exists_localMildSolution` gives, for every `ν > 0` and every
+order-three Bessel coordinate `u₀`, a horizon `0 < T ≤ 1` and a trajectory satisfying
+`IsR3EndpointSafeProjectedMildSolutionOn hnu T u₀ u` with the `‖u₀‖ + 1` ball bound and
+ball uniqueness. The required contractivity is `norm_r3StokesH3Evolution_apply_le`.
+
+The next analytic gates, in intended order:
+
+1. the physical real-valued/conjugate-symmetric carrier restriction (Fourier conjugate
+   symmetry of the projected convection and of the Stokes maps, and a real mild carrier);
+2. quantitative strengthening of the local theory: an explicit horizon lower bound in terms of
+   `‖u₀‖`, uniqueness without the ball restriction (Gronwall-type), and a continuation /
+   maximal-interval criterion connecting to the existing
+   `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` layers;
+3. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
+   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
+
+The whole fixed-point layer lives in the complex Bessel-coordinate carrier. The physical
+real-valued restriction remains open and is still required before any physical Navier–Stokes
+local-wellposedness language is used.
 
 ## 7. What is still not formalized
 
@@ -443,10 +470,11 @@ The Lean development does **not** currently establish:
 - pressure reconstruction for the completed projected map;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
-- time-continuity of the endpoint-safe Duhamel integral, a Picard/fixed-point construction, or
-  any existence theorem for the mild predicates introduced by PR #82;
+- uniqueness of the local mild solution outside the certified `‖u₀‖ + 1` ball, an explicit
+  quantitative horizon lower bound, or any continuation/maximal-interval theorem;
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
-- local existence and uniqueness for the fully concrete `R^3` mild equation used by the flow-map program;
+- a connection of the new concrete local mild solutions to the abstract `MildEvolutionKernel` /
+  `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
 - a rigorous finite-cylinder Hou to official Clay-domain transfer;
 - convergence of the MNS-2 discrete/reduced bridge to a continuum Navier--Stokes bridge.
@@ -461,12 +489,14 @@ For the current Schwartz/Sobolev route, the intended order is:
    measurability, interval-integrability, and the resulting norm estimate~~ — closed by PR #82;
 2. ~~instantiate it with `r3ProjectedConvectionH3ToH2`, `r3StokesH2ToH3Operator`, and an honestly
    interpreted same-space `H³` Stokes evolution~~ — closed by PR #82;
-3. prove the fixed-point/local-existence statements for the endpoint-safe two-space contract in
-   the complex Bessel-coordinate carrier (see section 6), with uniqueness at least in the
-   certified ball;
-4. separately construct the physical real-valued/conjugate-symmetric carrier restriction; only
-   after both may physical local-wellposedness language be used, and only then connect the
-   concrete evolution to the mild-theory and flow-map interfaces.
+3. ~~prove the fixed-point/local-existence statements for the endpoint-safe two-space contract in
+   the complex Bessel-coordinate carrier, with uniqueness at least in the certified ball~~ —
+   closed by `Formal/EndpointSafeTwoSpacePicard.lean` and
+   `Formal/R3EndpointSafeProjectedLocalExistence.lean`;
+4. construct the physical real-valued/conjugate-symmetric carrier restriction; only after it may
+   physical local-wellposedness language be used;
+5. strengthen the local theory (quantitative horizon, unrestricted uniqueness, continuation) and
+   connect the concrete evolution to the mild-theory and flow-map interfaces.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 

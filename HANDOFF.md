@@ -57,6 +57,11 @@ Current code and theorem statements override stale prose.
 - GitHub Actions quota is exhausted; hosted runs must not be used at all for the foreseeable
   future. All verification is local (Elan-pinned toolchain), and integration to `main` is by
   direct fast-forward push without opening a PR.
+- The Picard fixed-point / local-existence layer
+  (`Formal/EndpointSafeTwoSpacePicard.lean`, `Formal/R3EndpointSafeProjectedLocalExistence.lean`,
+  with new `Formal/AxiomAudit.lean` prints) is committed directly on `main` after this
+  continuation's local verification: full `Formal.+` gate pass (8745 jobs), pinned source scan
+  clean, axiom audit standard for all four new audited theorems.
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -251,46 +256,60 @@ the alias equality as a physical `H³ → H²` inclusion or as a smoothing theor
 
 ## Exact next Lean gate
 
-Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing, or
-endpoint-safe two-space Duhamel work unless current source regresses.
+Do not reopen the completed convolution, bounded-extension, Leray, positive-time smoothing,
+endpoint-safe two-space Duhamel, or Picard local-existence work unless current source regresses.
 
-The two-space Duhamel interface demanded by the previous handoff is closed by PR #82:
-`EndpointSafeTwoSpaceDuhamelContract`, actual-integrand strong measurability and Bochner
-interval-integrability, the quantitative bounds, the `IsMildAt` / `IsMildSolutionOn` predicates,
-the same-space `r3StokesH3Evolution`, and the concrete
-`r3EndpointSafeProjectedDuhamelContract` with `IsR3EndpointSafeProjectedMildSolutionOn` are all
-on `main` and locally verified.
+The Picard fixed-point layer demanded by the previous handoff is closed on `main`:
 
-The next smallest mathematical task is the **Picard fixed-point layer** for exactly that
-contract, in the complex Bessel-coordinate carrier:
+- `Formal/EndpointSafeTwoSpacePicard.lean` — cumulative smoothing mass (`kernelPrimitive`)
+  with monotonicity/continuity/small-time smallness; exact reversed elapsed-time
+  representation of the Duhamel integral; quantitative size/difference/time-difference bounds;
+  `continuousOn_duhamelIntegral`; the Picard map on `C(Icc 0 T, X)` with ball invariance and
+  contraction; `exists_pos_time_isMildSolutionOn` (existence on some `0 < T ≤ 1`, trajectory in
+  the closed `‖u₀‖ + 1` ball, uniqueness among ball-valued mild solutions).
+- `Formal/R3EndpointSafeProjectedLocalExistence.lean` —
+  `r3EndpointSafeProjected_exists_localMildSolution`: for every `ν > 0` and order-three Bessel
+  coordinate `u₀`, local existence + ball uniqueness for
+  `IsR3EndpointSafeProjectedMildSolutionOn hnu T u₀ u`, plus the unfolded mild-equation form
+  `r3EndpointSafeProjected_localMildSolution_equation`.
 
-1. time-continuity of `t ↦ ∫ s in 0..t, duhamelIntegrand t u s` for a trajectory continuous on
-   `[0, T]`, via the reversed representation `∫ τ in 0..t, endpointSafeSmoothing τ (Q (u (t-τ)) (u (t-τ)))`
-   (`intervalIntegral.integral_comp_sub_left`), uniform continuity of the trajectory, and
-   continuity of the primitive `K(t) = ∫₀ᵗ k̃`;
-2. the Picard map on `C(Icc 0 T, X)` (extend trajectories by `Set.IccExtend`), closed-ball
-   invariance `‖u₀‖-controlled`, and the contraction estimate from
-   `Q u u - Q v v = Q u (u-v) + Q (u-v) v`;
-3. Banach fixed point (`ContractingWith`) on the complete closed ball, giving for small `T > 0`
-   a mild solution in the sense of `IsMildSolutionOn` and uniqueness among ball trajectories;
-4. concrete instantiation: local existence + ball uniqueness for
-   `IsR3EndpointSafeProjectedMildSolutionOn hnu T u0 u`, with `M = 1` from
-   `norm_r3StokesH3Evolution_le_one`.
+The next smallest mathematical task is the **physical real-valued/conjugate-symmetric carrier
+restriction** (FORMAL_SCOPE section 8 item 4):
 
-This layer stays in the complex carrier. It does not by itself give physical (real-valued)
-local well-posedness, pressure reconstruction, or any Clay statement; the
-real-valued/conjugate-symmetric restriction remains a separate later gate.
+1. define the conjugation/reality structure on the Fourier carrier `R3C = ℂ³` and the physical
+   realness predicate (`û(-ξ) = conj û(ξ)` a.e.) on the `L²` Bessel coordinates;
+2. prove that the concrete operators preserve realness: the Stokes multiplier (real symbol),
+   `r3StokesH2ToH3Operator`, the Leray projector / complex Leray fiber symbol (real matrix
+   `P(ξ)`), and the projected convection of real fields;
+3. conclude that the Picard iteration and hence the local mild solution of a real initial
+   coordinate stays real, giving the physical restriction of
+   `r3EndpointSafeProjected_exists_localMildSolution`.
+
+After that (or in parallel if the reality layer stalls): quantitative horizon lower bound in
+terms of `‖u₀‖`, unrestricted uniqueness (Gronwall), and the continuation/maximal-interval
+criterion feeding the existing `FlowMapNonextendibilityCriterion` / breakdown track.
+
+The closed layer stays in the complex carrier. It does not by itself give physical (real-valued)
+local well-posedness, pressure reconstruction, or any Clay statement.
 
 ## Latest Lean verification
 
 ```text
 runner: local Windows (Git Bash) process via Elan
-revision: main merge 03ea967 (tree identical to proof commit 4f8ae0d6)
+revision: working tree of the Picard local-existence proof commit on main
+  (new: Formal/EndpointSafeTwoSpacePicard.lean,
+   Formal/R3EndpointSafeProjectedLocalExistence.lean; extended Formal/AxiomAudit.lean)
 toolchain: leanprover/lean4:v4.32.1
 dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
-full scope: lake exe cache get && lake build — pass (8743 jobs)
-axiom scope: Formal.AxiomAudit — pass (propext, Classical.choice, Quot.sound only)
-GitHub Actions: PR #82 hosted run 32112489718 failed in 6s on exhausted quota; not evidence
+target scope: lake build Formal.R3EndpointSafeProjectedLocalExistence — pass
+full scope: lake build (Formal.+ default target) — pass (8745 jobs)
+source scan: pinned sorry/admit/axiom/opaque scan over Formal/ — clean
+axiom scope: Formal.AxiomAudit — pass; the four new audited theorems
+  (continuousOn_duhamelIntegral, exists_pos_time_isMildSolutionOn,
+   r3EndpointSafeProjected_exists_localMildSolution,
+   r3EndpointSafeProjected_localMildSolution_equation)
+  depend only on propext, Classical.choice, Quot.sound
+GitHub Actions: not invoked (quota exhausted; hosted runs banned)
 ```
 
 ## Runner protocol for the next proof
@@ -343,8 +362,14 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
   core comparison is in `L²` and tempered distributions;
 - do not use the phantom Sobolev-order alias itself as an inclusion or smoothing theorem; the
   positive-time result is justified by its explicit multiplier and decoder theorems;
+- the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
+  physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
+- its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
+  produced horizon; do not cite it as unconditional uniqueness;
+- the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`
+  and no continuation/maximal-interval theorem is available yet;
 - do not spend hosted Actions as an interactive compiler while quota is scarce/exhausted.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。endpoint-safe two-space Duhamel contract・actual integrand の Bochner integrability・same-space H³ evolution・具体 R³ mild 述語は PR #82 で完了済み(main、ローカル 8743 jobs green)。次は同 contract の Picard fixed-point layer: Duhamel 積分の時間連続性 → C(Icc 0 T, X) 上の Picard 写像と縮小評価 → 小さい T>0 での mild 解の存在と ball 一意性 → 具体 R³ instantiation。complex carrier のままで良い(実数値制限は別ゲート)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。endpoint-safe two-space Duhamel contract(PR #82)と Picard fixed-point layer(EndpointSafeTwoSpacePicard / R3EndpointSafeProjectedLocalExistence、ローカル 8745 jobs green)は完了済み: 複素 Bessel carrier での R³ projected mild 方程式の局所存在+ball 一意性まで main にある。次は physical real-valued/conjugate-symmetric restriction: R3C 上の共役構造と realness 述語(û(-ξ) = conj û(ξ) a.e.)→ Stokes multiplier・H²→H³ smoothing・Leray projector・projected convection の realness 保存 → real 初期値の局所 mild 解が real に留まること。その後は quantitative horizon・無条件一意性(Gronwall)・continuation criterion。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
