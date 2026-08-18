@@ -34,6 +34,7 @@ import Formal.R3FourierConjugationBridge
 import Formal.R3StokesConjugationEquivariance
 import Formal.R3LerayConjugationEquivariance
 import Formal.R3ConvectionConjugationEquivariance
+import Formal.R3RealLocalMildSolution
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -205,6 +206,8 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3L2Conj_r3ConvectionH3ToH2
 #print axioms MNS2.r3L2Conj_r3ProjectedConvectionH3ToH2
 #print axioms MNS2.IsR3RealVelocity.projectedConvection
+#print axioms MNS2.IsR3EndpointSafeProjectedMildSolutionOn.r3L2Conj_comp
+#print axioms MNS2.r3EndpointSafeProjected_exists_realLocalMildSolution
 #print axioms MNS2.interval_integral_approximation_error_bound
 #print axioms MNS2.radial_reduced_bridge_error_bound
 #print axioms MNS2.radial_reduced_endpoint_error_bound_of_zero_fixed

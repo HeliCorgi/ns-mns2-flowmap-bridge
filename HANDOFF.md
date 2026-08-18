@@ -417,24 +417,31 @@ conjugations), shown equal to `r3ConvectionH3ToH2` by the dense-core uniqueness 
 hence `r3L2Conj_r3ConvectionH3ToH2`, `r3L2Conj_r3ProjectedConvectionH3ToH2`, and
 `IsR3RealVelocity.projectedConvection`.
 
-The next smallest mathematical task is the **real local mild solution** — and it needs no
-new fixed point. Route: given `IsR3RealVelocity u0`, take the solution `u` produced by
-`r3EndpointSafeProjected_exists_localMildSolution` and show `v t := r3L2Conj (u t)` is also
-a mild solution on the same horizon staying in the same ball:
+**The real local mild solution is closed** (2026-08-19,
+`Formal/R3RealLocalMildSolution.lean`): conjugation equivariance of the endpoint-safe
+Duhamel integrand (`r3L2Conj_r3EndpointSafeProjectedDuhamelIntegrand`), the conjugated
+trajectory of a mild solution with real datum is again a mild solution
+(`IsR3EndpointSafeProjectedMildSolutionOn.r3L2Conj_comp`, using
+`ContinuousLinearMap.intervalIntegral_comp_comm` to pass conj through the Bochner
+integral), and — by the ball-uniqueness clause, with **no new fixed point** —
+`r3EndpointSafeProjected_exists_realLocalMildSolution`: for `ν > 0` and physically real
+`u0`, a horizon `0 < T ≤ 1` and a mild solution that is **physically real at every
+certified time**, with the ball bound and ball uniqueness.
 
-- `v` is continuous (conj is a continuous involution) and stays in the ball
-  (`norm_r3L2Conj`);
-- conj of the mild equation: `H t u0` is fixed (`r3L2Conj_r3StokesH3Evolution` + `hu0`),
-  the integrand transforms by `r3L2Conj_r3StokesH2ToH3Operator` +
-  `r3L2Conj_r3ProjectedConvectionH3ToH2` into the integrand of `v`, and conj passes through
-  the interval Bochner integral because `r3L2Conj` is a continuous `ℝ`-linear map
-  (`ContinuousLinearMap.intervalIntegral_comp_comm`); the integrability clause transports
-  the same way;
-- the ball-uniqueness clause of the existence theorem then gives `v = u` on the horizon,
-  i.e. `IsR3RealVelocity (u t)` for all certified `t`.
+The next smallest mathematical tasks, in order:
 
-After that: quantitative lifespan/unconditional uniqueness, then the continuation
-criterion; on continuation close, the BH branch reopens (standing decision).
+1. **quantitative lifespan**: make the horizon explicit — the abstract existence proof
+   chooses `T` with `kernelPrimitive T < δ(‖u0‖)`; the concrete kernel primitive is
+   explicit (`K(T) = T + 2√T/((2π)√ν)` up to the stored constants), so a computable lower
+   bound `T ≥ T₀(ν, ‖u0‖)` is extractable; restate existence with it;
+2. **unconditional uniqueness** on the horizon (Gronwall-type, removing the ball
+   restriction) — optional but cheap to attempt after 1;
+3. **continuation criterion**: from the quantitative lifespan, if a mild solution cannot be
+   extended past `T* < ∞` then `limsup_{t→T*} ‖u t‖ = ∞` (restart argument), stated
+   against `FlowMapNonextendibilityCriterion` / `UniformRestartContinuation` where they
+   fit;
+4. on continuation close, the **BH branch reopens** (standing decision; quantitative
+   no-swirl rigidity + K12, see `docs/gates/BH_PROFILE_TASTE_REPORT.md`).
 
 After that: realness of the local mild solution for real data — the real ball trajectories
 form a closed nonempty Picard-invariant subset of `C(Icc 0 T, X)`, so the fixed point lies in
@@ -518,11 +525,11 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
   physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
 - `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are related through the Plancherel
-  `L²` Fourier transform, and every concrete operator of the mild theory — the Stokes
-  evolutions, the `L²`/order-two/order-three Leray projectors, and the completed and
-  projected convection — is proved conjugation-equivariant and realness-preserving; **no
-  mild solution has yet been proved real** (that is the next gate, by the uniqueness route
-  recorded above);
+  `L²` Fourier transform; every concrete operator of the mild theory is
+  conjugation-equivariant and realness-preserving; and the local mild solution is proved
+  physically real for physically real data on its certified horizon and ball. Still
+  missing: a quantitative lifespan bound, unconditional uniqueness, any continuation /
+  maximal-interval theorem, pressure reconstruction, and any Clay statement;
 - its uniqueness clause holds only among trajectories in the certified `‖u₀‖ + 1` ball on the
   produced horizon; do not cite it as unconditional uniqueness;
 - the produced horizon is existential with `0 < T ≤ 1`; no quantitative lower bound in `‖u₀‖`
