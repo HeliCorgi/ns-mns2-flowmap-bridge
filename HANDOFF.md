@@ -567,19 +567,40 @@ full; verdict **YELLOW, content inverted twice**):
   `s = 1/2`; wide-aspect corridor = SURVIVING FAMILY (conditional); Scope B
   (non-localizable) open and decisive; stagnant-axis structural fact proved [H].
 
+**The (★_geo) geometry gate is closed — Outcome A, θ = 1, sharp** (2026-08-19,
+`docs/gates/BH_GEO_SWIRL_AGGREGATION_2026-08-19.md`; erratum appended to the P0 probe;
+verdicts **GEO-RESTRICT / YELLOW-RED / CAP: DO NOT START**):
+
+- **THEOREM [H, Scope A]**: on every regular closed poloidal streamline (`A > 0`) of a
+  `p = p(ψ)` steady axisymmetric Euler flow, `s_level ≥ δ(ψ)/157` and
+  `α/r_min² ≥ 1/42`; globally `s(u) ≥ (1/157)·δ_geo(u)` with
+  `δ_geo = ⟨r_min(ψ)/r_max(ψ)⟩_{E_pol}` (barycentric; aggregation lossless). Convexity
+  hypothesis retired; ω-machinery off the critical path (one-parameter elliptic-orbit
+  rigidity: `s_level` is *determined* by `δ`); θ = 1 sharp at level scale [H], flow
+  scale [C] (shell family sits exactly on the bound);
+- frozen substitution: pure-geometry Prop G (`E = 2γ − α > 1/2` on the whole wedge, no
+  contradiction from Euler alone) strictly separated from Prop V [C] (under the
+  unpromoted V1 viscous premise the interior blob wedge empties; exact threshold θ < 4,
+  correcting "θ ≤ 2"); **nobody may cite this as "blob dead"** — Scope A + V1 gates;
+- **ring corollary [C, single-sourced, unverified]**: thin ring ⇒ δ(ψ) → 1 uniformly ⇒
+  s ≥ c > 0, contradicting `s_ring → 0` — viscosity-free, θ-independent; contradicts
+  the recorded "ring corridor has no rigidity kill";
+- armed falsifier P6 (A↔σ dictionary, one number, [C-num]); sharp constant at σ*
+  uncomputed (cosmetic).
+
 The next smallest tasks, in order:
 
-1. **(★_geo) aggregation**: upgrade the per-streamline aspect bound to a global theorem
-   and fix θ in `s ≥ c·(r_min/r_max)^θ` (algebraic; machinery in hand: CLOSURE identity,
-   first integral `sinθ = (r/W)(λr²/2+K)`, level densities `M ≡ π/2`, `R+Θ = 2Z`; no
-   continuation lemma, no literature needed). θ ≥ 1/2 ⇒ interior blob wedge empties [C];
-2. deliberately deferred: the separatrix continuation lemma (settles (★), not the
-   branch); necessity of `u·∇p = 0` for compact support (Scope B, decisive but
-   open-ended); Jiu–Xin primary hypothesis class + `σ(A_H) = 0` for general `M`
-   (bundle as literature errands); ζ-averaging / K12″ (audit §7.6); K9 two-scale debt at
-   the next freeze review;
-3. optional formal refinement: canonical glued maximal trajectory `u*` + pointwise
-   `limsup` restatement; mild-theory / flow-map interface adapters (not blockers).
+1. **verify and scope-freeze the ring corollary** (geometry-gate report §8/next-task):
+   uniformity of δ(ψ) → 1 on a thin-ring core; uniform pinning via the graph rigidity;
+   exact consumed-hypothesis list (Scope A, leading-order Euler, K3 `γ > ρ`,
+   single-valued `A`). Algebraic; no continuation lemma, no literature, no viscous
+   premise. The only object that could move a map-level scope statement without [C] NS
+   assumptions;
+2. bundled literature errand (not a pass): Jiu–Xin primary hypothesis class + whether
+   necessity of `u·∇p = 0` (Scope B) is known; plus the P6 dictionary number;
+3. deliberately deferred: separatrix continuation lemma; ζ-averaging / K12″ (audit
+   §7.6); K9 two-scale debt at the next freeze review; optional formal refinement
+   (glued maximal trajectory u*; interface adapters — not blockers).
 
 The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
 via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
@@ -680,4 +701,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(CHAIN CLOSED TO CONTINUATION; 残りは Clay semantic promotion 5 edges — docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: (★) P0 probe 完了(docs/gates/BH_SWIRL_FRACTION_PROBE_2026-08-19.md、verdict YELLOW・内容二重反転)。既知構成は s = 1/2 − (21/16)δ² に釘付け [H](コア swirl 比 1/3 は4経路で強制)だが、同じ解を Hill 型 separatrix まで延長して薄シェルで切ると σ ≃ 0.82√(A_H−A) → 0 の明示的候補族 [C: 延長補題1つ] — **(★) は素の形では NO の公算**。しかし実現族は r_min/R ~ s、厚み ~ s² で凍結内部 wedge 全域の粘性カットオフ √(ντ) 未満 [C] — **(★) は枝の判定から切り離され**、判定対象は **(★_geo): localizable クラス上 s(u) ≥ c·(r_min/r_max)^θ**(θ=1/5 は per-streamline で証明済み; θ≥1/2 なら内部 blob wedge が空になる; 明示族は θ=1)。次の最小タスク: **(★_geo) の aggregation** — per-streamline アスペクト下界を大域定理に格上げして θ を確定(代数のみ; 道具は手元: CLOSURE 恒等式、first integral sinθ=(r/W)(λr²/2+K)、level densities M≡π/2、R+Θ=2Z; 延長補題・文献不要)。意図的後回し: separatrix 延長補題((★)を決めるが枝は決めない)、u·∇p=0 の必要性(Scope B、決定的だが open-ended)、Jiu–Xin 一次仮説類+一般 M での σ(A_H)=0(文献 errand として束ねる)、ζ-averaging / K12″、K9 two-scale debt(次回 freeze review)。数値 simulation・新 ansatz・K12 promotion・map 編集は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(CHAIN CLOSED TO CONTINUATION; 残りは Clay semantic promotion 5 edges)。研究側: **(★_geo) geometry gate 閉鎖 — Outcome A、θ=1、sharp**(docs/gates/BH_GEO_SWIRL_AGGREGATION_2026-08-19.md; verdicts GEO-RESTRICT / YELLOW-RED / CAP: DO NOT START)。定理 [H, Scope A]: p=p(ψ) の定常軸対称 Euler の各正則閉流線(A>0)で s_level ≥ δ(ψ)/157、α/r_min² ≥ 1/42; 大域では s(u) ≥ (1/157)·δ_geo、δ_geo = ⟨r_min(ψ)/r_max(ψ)⟩_{E_pol}(重心版、集約無損失)。単一パラメタ楕円軌道剛性により s_level は δ に決定され、凸性仮説と ω 機構は不要化。凍結代入は Prop G(純幾何: E = 2γ−α > 1/2 が wedge 全域、Euler 単独では矛盾なし)と Prop V [C](未昇格 V1 粘性前提下で内部 blob wedge が空; 正確な閾値は θ<4)を厳密分離 — 「blob 死亡」と引用してはならない(Scope A + V1 条件付き)。**次の単一タスク: ring corollary の検証と scope-freeze** — 薄リングでは δ(ψ)→1 一様 ⇒ s ≥ c > 0 が s_ring→0 と矛盾(粘性不要・θ 非依存、ただし single-sourced [C])。確認事項: δ(ψ)→1 の一様性、graph 剛性経由の一様 pinning、消費仮説リスト(Scope A、leading-order Euler、K3 γ>ρ、単価 A)。次点(束ねる文献 errand): Jiu–Xin 一次仮説類 + u·∇p=0 必要性(Scope B)の既知性 + P6 dictionary 数値。意図的後回し: separatrix 延長補題、ζ-averaging / K12″、K9 two-scale debt(次回 freeze review)。数値 simulation・新 ansatz・K12 promotion・map 編集・CAP 開始は行わない(CAP 再訪条件: Scope B が開く / ring corollary が検証で落ちる / P6 が単一パラメタ還元を反証)。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`

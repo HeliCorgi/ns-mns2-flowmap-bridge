@@ -171,3 +171,18 @@ class (bundle as a literature errand).
 - No map edits, no K12 change, no new ansatz, no Lean changes. The audit's §6 decision
   rule ("`s → 0` ⇒ YELLOW-GREEN") is superseded by §5 of this report at report level;
   the frozen survival map is unchanged.
+
+## Erratum (2026-08-19, geometry-gate pass — see `BH_GEO_SWIRL_AGGREGATION_2026-08-19.md`)
+
+Appended, not silently repaired:
+
+1. §5's "θ = 1/5 (all that is proved today)" and "θ ≥ 1/2 would empty the interior blob
+   wedge" were written in the **reciprocal** (`ρ_a`) exponent convention; in the mandated
+   convention (`s ≥ c·δ_geo^θ`, `δ_geo = r_min/r_max`) they read θ = 5 and θ ≤ 2
+   respectively. Both are **superseded**: the geometry-gate pass proved θ = 1 (sharp),
+   and the exact wedge-emptying threshold under the [C] viscous premise is θ < 4.
+2. §4's classification-row rate "`ρ_a ≳ ε_loc^{−2/3}` [H under convexity]" is vacuous
+   (the geometry-gate theorem gives `ε_loc² = α/r_min² ≥ 1/42` universally) and is
+   replaced by the linear, hypothesis-free `ρ_a ≥ 1/(157·s)` on Scope A.
+3. §1/§5's "(★) is decoupled..." framing stands, but the decision object (★_geo) is now
+   **answered** (Outcome A, θ = 1) rather than open.
