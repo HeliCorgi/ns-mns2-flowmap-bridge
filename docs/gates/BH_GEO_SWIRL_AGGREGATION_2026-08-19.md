@@ -221,6 +221,24 @@ scope statement without invoking [C] NS assumptions. Runner-up (bundled literatu
 errand, not a pass): Jiu–Xin's primary hypothesis class + whether necessity of
 `u·∇p = 0` is known.
 
+## Erratum (2026-08-19, ring audit — see `BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md`)
+
+Appended, not silently repaired (riders R2 + P2 + P12 of the ring-audit authorization):
+
+1. **§8's ring-corollary sentence is WITHDRAWN as stated** ("s ≥ c > 0" for the global
+   flow): on `S_ring` the core energy share is `τ^{ρ+2α−2γ} → 0`, so the global
+   `δ_geo(u)` is far-field-dominated. The certified replacement is the
+   **amplitude/circulation form** (ring-audit §7): on the top-speed level,
+   `r_min ≤ √3·Γ₀/‖u‖_∞·(1+o(1))`, whence `ρ ≥ γ` for a contained one-scale ring —
+   contradiction with K3/K6. The ring kill itself is thereby *strengthened*
+   (compactness-free, `1/157`-free), not weakened.
+2. §2's first-integral constant is `k = −P′/2 = (A′−B′)/2`, not `A′/2` (they agree only
+   when `B′ ≡ 0`). Harmless per level (k is a per-level constant); **the armed P6
+   falsifier is built on this dictionary and must be re-derived before it is evaluated —
+   as printed it could fire spuriously.**
+3. Notation: this file's `α` (per-streamline swirl constant, `α/r_min² ≥ 1/42`) is NOT
+   the survival map's `α` (core-scale exponent); read it as `α_g`.
+
 ## Debts and failures (recorded, unrepaired)
 
 Sharp constant at `σ*` uncomputed (cosmetic); `s_level ≤ Cδ` upper bound not fully

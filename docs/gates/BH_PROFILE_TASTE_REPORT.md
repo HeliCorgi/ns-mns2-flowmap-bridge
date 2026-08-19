@@ -153,6 +153,16 @@ uniform localization — by Gates C/D such a family must be singular, and the na
 of the forced degeneration is exactly the free-boundary constitutive tangency that makes
 their constructions localizable.
 
+## 9bis. Erratum (2026-08-19, ring audit P3 — appended, not silently repaired)
+
+§3's equation `−Δ*ψ = ∂_ψ(F²/2 + r²P(ψ))` is the **MHD Grad–Shafranov** form. For
+hydrodynamic steady axisymmetric Euler the correct identity is
+`Δ*ψ = r²B′(ψ) − FF′(ψ)` with `B = p + |u|²/2` the Bernoulli head — i.e. this file's
+`P(ψ)` must be read as `−B(ψ)`, **not** as the pressure. Consequences: (i) the frozen
+branch does **not** covertly assume CLV-localizability (`p = p(ψ)` is a genuinely
+stronger, added hypothesis — load-bearing for the 2026-08-19 ring audit's scope ruling);
+(ii) the `O(ε²)` structure of the swirl term and Gates C/D are unaffected.
+
 ## 10. Effect on S_survive
 
 **None to the frozen map** (stop rule respected). Two report-level annotations for the next

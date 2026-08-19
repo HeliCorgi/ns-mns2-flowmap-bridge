@@ -588,19 +588,42 @@ verdicts **GEO-RESTRICT / YELLOW-RED / CAP: DO NOT START**):
 - armed falsifier P6 (A↔σ dictionary, one number, [C-num]); sharp constant at σ*
   uncomputed (cosmetic).
 
-The next smallest tasks, in order:
+**The ring corollary is verified and the scope freeze is executed** (2026-08-19,
+`docs/gates/BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md`; verdicts
+**RING-ONE-SCALE-KILL / YELLOW-RED / NEXT: MULTI-REGION AUDIT**; map annotation
+authorized and appended to `TYPE2_KILL_TABLE_2026-08-19.md` with riders R1–R4):
 
-1. **verify and scope-freeze the ring corollary** (geometry-gate report §8/next-task):
-   uniformity of δ(ψ) → 1 on a thin-ring core; uniform pinning via the graph rigidity;
-   exact consumed-hypothesis list (Scope A, leading-order Euler, K3 `γ > ρ`,
-   single-valued `A`). Algebraic; no continuation lemma, no literature, no viscous
-   premise. The only object that could move a map-level scope statement without [C] NS
-   assumptions;
-2. bundled literature errand (not a pass): Jiu–Xin primary hypothesis class + whether
-   necessity of `u·∇p = 0` (Scope B) is known; plus the P6 dictionary number;
-3. deliberately deferred: separatrix continuation lemma; ζ-averaging / K12″ (audit
-   §7.6); K9 two-scale debt at the next freeze review; optional formal refinement
-   (glued maximal trajectory u*; interface adapters — not blockers).
+- **certified kill (amplitude/circulation form, cheaper than the energy route)**: Scope-A
+  top-speed level has `r_min ≤ √3·Γ₀/‖u‖_∞·(1+o(1))` (thin-endpoint pinning
+  `u_θ² = |u|²/3`, three independent derivations) ⟹ contained one-scale ring forces
+  `ρ ≥ γ` — contradiction with K3 *and* (via `ρ+2α ≥ 3γ`) K6; doubly sourced,
+  viscosity-free, compactness-free, non-vacuous (`(0.6, 0.42, 0.45)` ∈ S_ring killed);
+- **exact map wording (nothing broader)**: "one-scale localizable ring branch excluded by
+  swirl-geometry pinning";
+- **Scope B is a GAP, not an exit** [H, witness-backed]: Hill's spherical vortex is a
+  steady axisymmetric Euler flow with `s_level ≡ 0` — the geometry-gate conclusion is
+  false outside Scope A; `p = p(ψ)` is added and not removable. Sharp open question:
+  must a *localized* steady axisymmetric Euler core with swirl satisfy the eikonal
+  overdetermination `|∇ψ|² + F² = 2A(ψ)r²`?
+- **"blob dies too" REFUTED**: Scope A relocates the swirl sup to the axis-grazing
+  tongue tip (`r_min ≲ τ^γ`), where `Γ = O(1)` saturates; K9's `σ ≤ α` is a
+  sup-location premise, not a theorem there — blob unchanged, still V1-conditional; new
+  K9 debt (P6) logged in the map annotation;
+- errata appended (not silently repaired): geometry-gate §8 global-`s` sentence
+  withdrawn (amplitude form replaces it), `k = −P′/2` (P6 falsifier must be re-derived
+  before evaluation), `α_g` notation; taste report §3 is the MHD GS form (`P = −B`).
+
+The single next branch (task-mandated, exactly one):
+
+1. **MULTI-REGION AUDIT**: the mesoscale/≥3-region corridor with the burden now
+   quantified — the mesoscale must carry asymptotically all `E_pol` *and* be
+   axis-grazing (Prop G/V's object); process the new K9 swirl-sup-location debt (P6);
+   check escape-vs-K5/K6 compatibility (old audit §8.4). Runner-up recorded, not
+   scheduled: Scope-B reconnaissance (the gate's own revisit trigger).
+2. deliberately deferred: separatrix continuation lemma; ζ-averaging / K12″; Jiu–Xin
+   primary class + P6 dictionary re-derivation (bundled literature errand); K9/K12
+   debts at the next freeze review; optional formal refinement (glued maximal
+   trajectory u*; interface adapters — not blockers).
 
 The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
 via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
@@ -701,4 +724,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(CHAIN CLOSED TO CONTINUATION; 残りは Clay semantic promotion 5 edges)。研究側: **(★_geo) geometry gate 閉鎖 — Outcome A、θ=1、sharp**(docs/gates/BH_GEO_SWIRL_AGGREGATION_2026-08-19.md; verdicts GEO-RESTRICT / YELLOW-RED / CAP: DO NOT START)。定理 [H, Scope A]: p=p(ψ) の定常軸対称 Euler の各正則閉流線(A>0)で s_level ≥ δ(ψ)/157、α/r_min² ≥ 1/42; 大域では s(u) ≥ (1/157)·δ_geo、δ_geo = ⟨r_min(ψ)/r_max(ψ)⟩_{E_pol}(重心版、集約無損失)。単一パラメタ楕円軌道剛性により s_level は δ に決定され、凸性仮説と ω 機構は不要化。凍結代入は Prop G(純幾何: E = 2γ−α > 1/2 が wedge 全域、Euler 単独では矛盾なし)と Prop V [C](未昇格 V1 粘性前提下で内部 blob wedge が空; 正確な閾値は θ<4)を厳密分離 — 「blob 死亡」と引用してはならない(Scope A + V1 条件付き)。**次の単一タスク: ring corollary の検証と scope-freeze** — 薄リングでは δ(ψ)→1 一様 ⇒ s ≥ c > 0 が s_ring→0 と矛盾(粘性不要・θ 非依存、ただし single-sourced [C])。確認事項: δ(ψ)→1 の一様性、graph 剛性経由の一様 pinning、消費仮説リスト(Scope A、leading-order Euler、K3 γ>ρ、単価 A)。次点(束ねる文献 errand): Jiu–Xin 一次仮説類 + u·∇p=0 必要性(Scope B)の既知性 + P6 dictionary 数値。意図的後回し: separatrix 延長補題、ζ-averaging / K12″、K9 two-scale debt(次回 freeze review)。数値 simulation・新 ansatz・K12 promotion・map 編集・CAP 開始は行わない(CAP 再訪条件: Scope B が開く / ring corollary が検証で落ちる / P6 が単一パラメタ還元を反証)。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側: **ring corollary 検証済み・scope freeze 実行済み**(docs/gates/BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md; verdicts RING-ONE-SCALE-KILL / YELLOW-RED / NEXT: MULTI-REGION AUDIT; kill table に許可済み注釈「one-scale localizable ring branch excluded by swirl-geometry pinning」+ R1–R4 追記済み)。確定した kill は振幅形: Scope-A の top-speed level で r_min ≤ √3·Γ₀/‖u‖_∞(1+o(1))(薄端点 pinning u_θ²=|u|²/3、3独立導出)⇒ contained one-scale ring は ρ ≥ γ ⇒ K3 と K6 の両方に矛盾(粘性不要・compactness 不要・非空 witness (0.6,0.42,0.45))。**Scope B は GAP であり exit ではない**(Hill 球渦が証人: Scope A 外で定理の結論は偽; p=p(ψ) は added で除去不能)。鋭い未解決問題: 局在した swirl 付き定常軸対称 Euler コアは eikonal 過剰決定 |∇ψ|²+F²=2A(ψ)r² を満たさねばならないか?「blob も死ぬ」は REFUTED(swirl sup は axis-grazing tongue 先端に移動可能、K9 の σ≤α は sup-location 前提 — blob は V1 条件付きのまま; K9 debt P6 を map 注釈に記録)。正誤表追記済み: geometry gate §8 の global-s 文は撤回(振幅形が代替)、k = −P′/2(P6 falsifier は評価前に再導出必須)、taste report §3 は MHD GS 形(P = −B)。**次の単一ブランチ: MULTI-REGION AUDIT** — mesoscale/≥3-region 回廊、負担は定量化済み(mesoscale が漸近的に全 E_pol を担い且つ axis-grazing であることを強制される)、K9 sup-location debt (P6) の処理、escape-vs-K5/K6 整合。次点(記録のみ・未スケジュール): Scope-B reconnaissance。意図的後回し: separatrix 延長補題、ζ-averaging / K12″、Jiu–Xin 一次仮説類+P6 辞書再導出(文献 errand)、形式側任意課題。数値 simulation・新 ansatz・V1/K12 promotion・CAP 開始は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`

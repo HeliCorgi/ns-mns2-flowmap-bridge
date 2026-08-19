@@ -75,3 +75,28 @@ admissibility; independent first-hand read of Seregin's conditions (1.3)/(2.3)/(
 **The map is now frozen** except for these footnotes; see
 `DOMINANT_BALANCE_INVERSION_2026-08-19.md` for the balance-level refinement (K11) and the
 dominant-balance classification of the frozen wedge.
+
+## Annotation 2026-08-19 (authorized by `BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md`)
+
+> **one-scale localizable ring branch excluded by swirl-geometry pinning**
+
+Riders (required by the authorization, all in this edit):
+
+- **R1 (one-scale definition, previously implicit in the ring rows):** the one-scale ring
+  branch means: the top-speed / energy-carrying poloidal levels are contained in a tube of
+  minor scale `ℓ ~ τ^α` at radius `R ~ τ^ρ` (`ρ < α`), with a τ-independent constant, and
+  the energy fill `∫|u|² ≍ ‖u‖_∞² · Rℓ²` holds. K5/K6's printed cuts are exactly these
+  two bounds; without them `S_ring` is undefined. An inward energy-carrying tongue exits
+  this class (→ mesoscale / ≥3-region corridor).
+- **R4 (provenance relabel, survival set unchanged):** the `S_ring` constraint printed as
+  "`ρ < γ (K3)`" is sourced as **`ρ ≤ γ` [K3] + `ρ ≠ γ` [K6 ∧ `ρ ≤ α`]** (K3's exponent
+  arithmetic alone gives strictness only for `ρ ≤ 1/2`).
+- Scope of the exclusion (exact): Scope-A (CLV-localizable, `p = p(ψ)`) one-scale ring
+  only; viscosity-free, compactness-free, doubly sourced (K6 and K3). **Not covered:**
+  the blob (`ρ = α`, unchanged, V1-conditional), the mesoscale / ≥3-region corridor
+  (burden transferred: the mesoscale must carry asymptotically all poloidal energy and be
+  axis-grazing), Scope-B rings (`p` not a streamline function — a GAP inside the frozen
+  class, witness Hill's spherical vortex for the scope statement), the `γ+α = 1` edge.
+- New footnote-level debt (P6): K9's blob-row `σ ≤ α` half uses a swirl-sup-*location*
+  premise (`r ≍ ℓ`); Scope-A structure can relocate the swirl sup to an axis-grazing
+  tongue tip `r_min ≲ τ^γ`. Feeds the multi-region audit; blob row unchanged.
