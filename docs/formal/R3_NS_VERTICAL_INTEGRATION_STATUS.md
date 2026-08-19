@@ -1,0 +1,163 @@
+# R³ Navier–Stokes vertical integration status
+
+Date: 2026-08-19 (JST). One bounded audit pass over the theorem dependency chain on `main`
+(baseline commits: explicit lifespan `6d5e541` → restart/uniqueness `e8b7144` →
+continuation/blow-up dichotomy `77f3832`; full local `Formal.+` gate 8756 jobs green;
+`Formal/AxiomAudit.lean` standard axioms only: `propext`, `Classical.choice`, `Quot.sound`).
+
+Purpose: the repository must tell the truth about which edges of the chain from the concrete
+`R³` operators to the local mild theory are **proved theorems**, which are documentation
+artifacts, and which are genuinely open. Progress is measured by remaining disconnected
+edges to the final Navier–Stokes statement, not by auxiliary theorem count.
+
+Classification legend (each edge gets exactly one):
+
+- `THEOREM-CLOSED` — proved on `main`, audited, standard axioms.
+- `SEMANTICALLY-CLOSED-BUT-DOC-STALE` — proved, but public docs said otherwise (fixed this pass).
+- `OPTIONAL-PRESENTATION-EDGE` — provable restatement/packaging; not a mathematical gap.
+- `OPEN-REQUIRED-FOR-CLAY` — a genuine remaining implication needed before any Clay-level claim.
+- `OPEN-RESEARCH-BRANCH` — open mathematics; the research program itself.
+- `DEAD / RETIRED` — intentionally abandoned.
+
+## 1. The closed vertical chain
+
+Every edge below is `THEOREM-CLOSED` on `main` (declaration names are the audit anchors;
+all appear in `Formal/AxiomAudit.lean`).
+
+```text
+R³ Fourier / Bessel-coordinate carrier
+  R3, R3C, R3L2Velocity, R3HsVelocity s   (phantom-order abbrev; Bessel coordinate J^s u)
+        ↓
+Stokes evolution + positive-time smoothing
+  r3StokesL2Operator; r3StokesH3Evolution (+ norm_r3StokesH3Evolution_apply_le, contractive);
+  r3StokesH2ToH3Operator (ν>0, τ>0) + majorant r3StokesH2H3TimeKernel
+  (+ intervalIntegrable_r3StokesH2H3TimeKernel)
+        ↓
+Leray projection at every order in play
+  r3LerayL2Operator (orthogonal projection, a.e. matrix symbol P(ξ) = I − ξξᵀ/|ξ|² via
+  r3LerayL2FrequencyOperator_ae); r3LerayH2Operator; r3LerayH3Operator
+        ↓
+Projected convection
+  r3ProjectedConvectionH3ToH2 : H³ →L H³ →L H² (bounded bilinear;
+  norm_r3ProjectedConvectionH3ToH2_apply_le; solenoidal range; Schwartz-core identification
+  r3ProjectedConvectionH3ToH2_apply_schwartz; dense-core uniqueness r3ConvectionH3ToH2_unique)
+        ↓
+Endpoint-safe two-space Duhamel contract
+  EndpointSafeTwoSpaceDuhamelContract (X = H³, Y = H²; no fictitious τ = 0 smoothing;
+  integrability clause excludes the totalized-integral loophole);
+  concrete instance r3EndpointSafeProjectedDuhamelContract;
+  predicate IsR3EndpointSafeProjectedMildSolutionOn
+        ↓
+Picard local existence (ball form + quantitative form)
+  exists_pos_time_isMildSolutionOn;
+  exists_isMildSolutionOn_of_kernelPrimitive_lt (existence on ANY horizon with K(T) < δ(‖u₀‖))
+        ↓
+Concrete local existence
+  r3EndpointSafeProjected_exists_localMildSolution (0 < T ≤ 1, ball bound, ball uniqueness)
+        ↓
+Reality gate (full operator equivariance) + real local solution
+  r3L2Conj / r3L2Reflect / IsR3RealVelocity; Plancherel bridge fourier_r3L2Conj;
+  isR3RealVelocity_iff_fourier_conjugateSymmetric;
+  r3L2Conj_r3StokesH3Evolution / _r3StokesH2ToH3Operator / _r3LerayL2Operator /
+  _r3ProjectedConvectionH3ToH2;
+  r3EndpointSafeProjected_exists_realLocalMildSolution
+        ↓
+Explicit quantitative lifespan
+  r3EndpointSafeProjected_kernelPrimitive_eq  (K(T) = T + √T/(π√ν), closed form);
+  r3MildSmallnessThreshold, r3MildLifespan T₀ = (δ/(1+(π√ν)⁻¹+δ))², 0 < T₀ ≤ 1;
+  r3EndpointSafeProjected_exists_mildSolutionOn_mildLifespan (+ _realMildSolutionOn_)
+        ↓
+Mild restart identity
+  IsMildSolutionOn.restart; IsR3EndpointSafeProjectedMildSolutionOn.restart
+        ↓
+Unrestricted uniqueness (+ unconditional realness)
+  IsMildSolutionOn.unique; r3EndpointSafeProjectedMildSolution_unique (no ball restriction);
+  IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity (every mild solution with real
+  datum is pointwise real)
+        ↓
+Concatenation
+  IsMildSolutionOn.concat; IsR3EndpointSafeProjectedMildSolutionOn.concat
+        ↓
+Continuation / blow-up dichotomy
+  r3MildLifespan_antitone; r3EndpointSafeProjected_exists_extension_of_bounded;
+  r3MildHorizons (+ _nonempty);
+  r3EndpointSafeProjected_horizons_unbounded_of_uniform_bound;
+  r3EndpointSafeProjected_blowup_dichotomy
+  (either arbitrarily long certified horizons exist, or certified solution norms escape
+  every ball)
+```
+
+Doc-status note: until this pass, `README.md` still described the complex Leray symbol /
+a.e. matrix realization / projected convection as the working frontier. Those edges are
+`SEMANTICALLY-CLOSED-BUT-DOC-STALE` → README synchronized in this commit. No mathematical
+gap was found in the chain above during this audit; declarations were read, not inferred
+from file names.
+
+## 2. Remaining edges
+
+### Bucket A — required before any Clay-level promotion (`OPEN-REQUIRED-FOR-CLAY`)
+
+These are the **5 semantic promotion edges** between the closed chain and the official
+Clay/Fefferman statement shape (cross-checked against
+`docs/formal/LEAN_MILLENNIUM_ALIGNMENT.md`; the official statement controls):
+
+1. **Coordinate incompressibility semantics** — the Fourier/`L²` solenoidal condition
+   (`r3L2SolenoidalSubmodule` membership) implies the physical-coordinate divergence-free
+   condition of the endpoint statement, under sufficient regularity.
+2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
+   implies the coordinate momentum equation with an explicit pressure (pressure
+   reconstruction). Nothing about pressure is formalized today.
+3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
+   `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
+   coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
+   converse embedding for the intended data. The general decoder equality for arbitrary
+   `H³` inputs against a separately defined distributional product is also still open
+   (`FORMAL_SCOPE.md` §7).
+4. **Energy semantics** — the carrier norms/estimates imply the finite-energy predicate of
+   the endpoint statement.
+5. **Breakdown-statement transfer** — a verified breakdown theorem on the concrete solution
+   class implies the official whole-space breakdown proposition, including the quantifier
+   structure over viscosity (the official statement quantifies over `ν`; a single-`ν`
+   candidate needs a rigorous viscosity-scaling bridge) and the `f = 0` specialization.
+
+These must be **semantic promotion theorems**, not definitional adapters
+(`LEAN_MILLENNIUM_ALIGNMENT.md` rule).
+
+### Bucket B — useful presentation/integration, not current bottleneck (`OPTIONAL-PRESENTATION-EDGE`)
+
+1. One canonical theorem chaining the whole local theory (existence + realness + explicit
+   horizon + uniqueness + extension in a single statement).
+2. The canonical glued maximal trajectory `u* : [0, T*) → H³` (choice + unrestricted
+   uniqueness make the certified family coherent) and the pointwise restatement
+   `T* < ∞ ⇒ limsup_{t→T*} ‖u* t‖ = ∞` of the proved horizon dichotomy. Becomes Bucket A
+   only if the final chosen breakdown statement is phrased through a maximal solution.
+3. Adapter to the legacy abstract `MildEvolutionKernel` / `LerayProjectedQuadraticContract`
+   flow-map interfaces (`FlowMapNonextendibilityCriterion`, `UniformRestartContinuation`).
+   Nothing downstream currently consumes it.
+4. README dependency graph upkeep.
+
+None of these may preempt the research bottleneck.
+
+### Bucket C — research bottleneck (`OPEN-RESEARCH-BRANCH`)
+
+**BH / small-swirl localized steady-Euler degeneration** (Type-II window, interior
+quasi-static branch): quantitative no-swirl rigidity rate and the K12 decision. See
+`docs/gates/BH_PROFILE_TASTE_REPORT.md` (YELLOW baseline) and this turn's
+`docs/gates/BH_QUANTITATIVE_RIGIDITY_K12_AUDIT.md`.
+
+### Retired within this lane (`DEAD / RETIRED`)
+
+- Hosted GitHub Actions as a verification path (quota; local Elan-pinned gate is the
+  evidence contract).
+- K4 as a load-bearing kill (superseded by K3); [D1] (withdrawn, replaced by conditional
+  [D1′]); fixed-profile BH rescaling (double no-go, taste report §4).
+
+## 3. Verdict
+
+**`CHAIN CLOSED TO CONTINUATION`** — additionally, the audit found the public docs stale
+rather than the mathematics open (`DOCUMENTATION WAS STALE, MATHEMATICS CLOSED` applies to
+the README frontier; fixed in this commit).
+
+Exact missing-edge count to the official Clay statement class: **5 required semantic
+edges** (Bucket A above), plus the open research branch (Bucket C). Bucket B contains no
+mathematical gaps.

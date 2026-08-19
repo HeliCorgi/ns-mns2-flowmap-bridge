@@ -1,6 +1,16 @@
-# STATUS — 2026-08-12
+# STATUS — 2026-08-19
 
-## いま通ってるやつ
+## Formal (Lean) frontier
+
+`R³` operator 層 → projected convection → endpoint-safe mild equation → local existence →
+real local solution → explicit lifespan → unrestricted uniqueness → restart/concatenation →
+continuation blow-up dichotomy まで定理として閉鎖(8756 jobs green、標準3公理のみ)。
+定理依存連鎖と残存 edge は
+[`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`](docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。
+canonical maximal trajectory / pointwise limsup 形、pressure reconstruction、Clay への
+semantic promotion(5 edges)は未着手。研究側は BH / Type-II 候補問題に復帰。
+
+## いま通ってるやつ(数値側)
 
 - conservative LF-WENO7 holomorphic transport: discrete structure / JVP regressionあり
 - full holomorphic pilot: PASS on synthetic controls

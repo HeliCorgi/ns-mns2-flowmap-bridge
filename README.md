@@ -28,48 +28,43 @@ S_T(c(1)) - S_T(c(0)) = ∫ DS_T(c(s))[c'(s)] ds
 
 ## 現在の formal frontier
 
-現時点の流れはだいたい
+`R³` の具体的な operator 層から局所理論までの縦の連鎖は **すべて定理として閉じている**
+(local `Formal.+` gate 8756 jobs green、`Formal/AxiomAudit.lean` は標準3公理のみ):
 
 ```text
-frequency-fiber algebra
+explicit R³ operators (Stokes evolution / H²→H³ smoothing / Leray at L², H², H³)
         ↓
-L²(R³; ℂ³) Stokes operator
+projected convection  (r3ProjectedConvectionH3ToH2)
         ↓
-closed solenoidal L² carrier
+concrete endpoint-safe mild equation  (r3EndpointSafeProjectedDuhamelContract)
         ↓
-physical-space L² Leray projector
+local existence  (Picard, ball uniqueness)
         ↓
-Fourier-side solenoidal projector
+real local solution  (reality gate: 全 operator の共役同変性 + 実データ ⇒ 実解)
         ↓
-complex pointwise Leray symbol on R3C  ← いまここ
+explicit lifespan  (K(T) = T + √T/(π√ν) 閉形式、T₀ = (δ/(1+(π√ν)⁻¹+δ))²)
         ↓
-a.e. L² matrix-multiplier realization  ← 次
+unrestricted uniqueness  (ball 制限なし; 実データの任意の mild 解は無条件に実)
         ↓
-projected convection / actual mild NS
+restart / concatenation
         ↓
-local theory / continuation bridge
+continuation blow-up dichotomy
+  (認証地平線が非有界か、解ノルムがあらゆる球を脱出するかの二択)
 ```
 
-まで来ている。
+定理単位の依存連鎖・edge 分類・残存 edge は
+[`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`](docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)
+に固定してある。
 
-すでに formalized 済みなのは、
+**まだ無いもの(正確に):**
 
-- Stokes / heat の pointwise Fourier symbol と `L²(R³; ℂ³)` operator
-- normalized Fourier divergence と closed solenoidal kernel
-- solenoidal carrier 上に制限した Stokes operator
-- `L²(R³; ℂ³)` 上の bounded orthogonal Leray projector
-- その projector の range / fixed-point / idempotence / contraction
-- physical-space Leray projector と frequency-side orthogonal projector の Plancherel conjugacy
+- canonical maximal trajectory `u* : [0, T*) → H³` と pointwise
+  `limsup_{t→T*} ‖u*‖ = ∞` 形の定理(dichotomy は証明済み、trajectory-level 言い換えは未構成);
+- pressure reconstruction と Clay statement 形への semantic promotion(5 edges、上記文書 Bucket A);
+- Clay A/B/C/D の解決(なし)。
 
-現在の作業 frontier は、既存の real-valued fiber symbol を、実際の Fourier carrier `R3C = ℂ³` に載せた complex-linear Leray symbolへ移す部分。
-
-その次に、frequency-side の抽象 orthogonal projector を各周波数での explicit matrix symbol
-
-```text
-P(ξ) = I - (ξ ⊗ ξ) / |ξ|²
-```
-
-と almost everywhere で同一視する。その後に projected convection を実際の `R³` function-space operator として組む。
+研究側は Type-II / BH candidate 問題
+([`docs/gates/BH_PROFILE_TASTE_REPORT.md`](docs/gates/BH_PROFILE_TASTE_REPORT.md))に復帰している。
 
 ## 主要な式はどこ？
 
@@ -109,13 +104,13 @@ P(ξ)v = v - ((ξ · v) / |ξ|²) ξ
 
 を証明済み。
 
-現在は [`Formal/R3LerayComplexFiberSymbol.lean`](Formal/R3LerayComplexFiberSymbol.lean) で、実際の Fourier velocity fiber `R3C = ℂ³` に対する complex-linear 版
+[`Formal/R3LerayComplexFiberSymbol.lean`](Formal/R3LerayComplexFiberSymbol.lean) は、実際の Fourier velocity fiber `R3C = ℂ³` に対する complex-linear 版
 
 ```text
 P_C(ξ)v = v - (⟪ξ_C, v⟫ / ‖ξ_C‖²) ξ_C
 ```
 
-を構成している。`ξ_C` は real frequency `ξ` の coordinatewise complex embedding。
+を証明済み(`ξ_C` は real frequency `ξ` の coordinatewise complex embedding)。
 
 matrix notation では引き続き
 
@@ -183,13 +178,13 @@ P_L² u = u       if u ∈ L²_σ
 
 を証明し、physical-space orthogonal projector と frequency-side orthogonal projector を Plancherel Fourier transform で conjugate している。
 
-残る主要 bridge は
+abstract Hilbert projection と explicit complex Leray matrix symbol の a.e. 一致
 
 ```text
-P_freq f(ξ) = P_C(ξ) f(ξ)    a.e. ξ,
+P_freq f(ξ) = P_C(ξ) f(ξ)    a.e. ξ
 ```
 
-つまり abstract Hilbert projection と explicit complex Leray matrix symbol の一致。
+も証明済み(`r3LerayL2FrequencyOperator_ae`)。
 
 ## Navier–Stokes 本体との距離
 
