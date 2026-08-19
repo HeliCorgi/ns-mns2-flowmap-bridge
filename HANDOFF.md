@@ -89,8 +89,11 @@ Current code and theorem statements override stale prose.
   (`Formal/EndpointSafeTwoSpaceConcatenation.lean`, `Formal/R3MildContinuation.lean`, with
   eight new `Formal/AxiomAudit.lean` prints) is committed directly on `main` after local
   verification: full `Formal.+` gate pass (8756 jobs), pinned source scan clean, axiom
-  audit standard. This completes the endorsed 3-gate plan; the BH-branch standing decision
-  is now active.
+  audit standard (commit `77f3832`). This completes the endorsed 3-gate plan.
+- The vertical-integration audit (`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`,
+  README/STATUS frontier synchronization) is commit `7c6c8d8`; the BH reopen pass
+  (`docs/gates/BH_QUANTITATIVE_RIGIDITY_K12_AUDIT.md`) follows it. Docs-only commits; no
+  Lean source touched; the 8756-job gate remains the verification baseline.
 - This continuation's proof and synchronized documentation were integrated by direct fast-forward
   to `main`, without opening a PR; the verified `Formal/` tree is exactly the proof commit above.
 - No GitHub Action was started or rerun for the new mathematical proof.
@@ -524,18 +527,38 @@ if-lambda trajectory fails because `rw` sees the unreduced application — inser
 `assumption` when the needed equality is in context, so prefer explicit `congrArg` when a
 following tactic expects remaining goals.
 
+**The 2026-08-19 vertical-integration audit + BH reopen pass is complete** (multi-agent
+adversarial pass; deliverables `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md` and
+`docs/gates/BH_QUANTITATIVE_RIGIDITY_K12_AUDIT.md`; README/STATUS synchronized):
+
+- vertical integration verdict: **CHAIN CLOSED TO CONTINUATION** (README was stale, the
+  mathematics was closed); 5 required semantic edges remain to the official Clay
+  statement (Bucket A of the status doc);
+- BH verdict: **YELLOW** (grade unchanged, content replaced). The baseline power-vs-log
+  dichotomy is retired as ill-posed; the smallest missing theorem is now the
+  **swirl-fraction gap (★)**: for compactly supported axisymmetric steady Euler flows,
+  is `inf s(u) > 0`, `s(u) = ∫|u_θ|²/∫|u_pol|²`? (`inf s > 0` ⇒ RED for blob *and*
+  ring; a family with `s → 0` ⇒ YELLOW-GREEN.) One new hard result: the exact
+  momentum-flux identity `∫u_r² + ∫u_θ² = 2∫u_z²` for localized steady axisymmetric
+  Euler [H], equivalent form of (★). K12: **KEEP CONDITIONAL** (route (F) closed for
+  `α > 1/2` up to a separatrix-sliver caveat; route (P) narrowed but open; `α = 1/2` is
+  a grey line; ring corridor untouched — planar rigidity is false). Report-level
+  annotations K12′/K12″ recorded; frozen map unchanged; K9 two-scale verification debt
+  logged.
+
 The next smallest tasks, in order:
 
-1. **BH branch reopen** (standing decision now active — the continuation criterion is
-   closed): quantitative no-swirl rigidity + the K12 decision, see
-   `docs/gates/BH_PROFILE_TASTE_REPORT.md`;
-2. optional formal refinement of the continuation layer: construct the canonical glued
-   maximal trajectory `u* : [0, T*) → H³` (choice + unrestricted uniqueness make the
-   family coherent) and restate the dichotomy pointwise
-   (`T* < ∞ ⇒ limsup ‖u* t‖ = ∞`), connecting to `FlowMapNonextendibilityCriterion` /
-   `UniformRestartContinuation`;
-3. connection of the concrete evolution to the abstract `MildEvolutionKernel` /
-   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
+1. **first probe of (★)** (bounded, literature + algebra, no numerics): compute the
+   swirl energy fraction `s(u)` for Gavrilov's explicit solution and the
+   Constantin–La–Vicol Thm 2/3 families — the first upper bound on `inf s`;
+2. the **ζ-averaging lead** (`ζ = ω_θ/r` obeys the same streamline-averaged diffusion;
+   would force `P̂′ → const` on `α ≥ 1/2` and narrow route (P)) and the **axis-Dirichlet
+   route K12″** (Γ → 0 ⇒ σ > α ⇒ direct K9 violation) — both [C], see audit §7.6;
+3. at the next freeze review: the **K9 two-scale debt** (audit §8.1) and whether escapes
+   E2/E3 are compatible with K5/K6 bookkeeping (audit §8.4);
+4. optional formal refinement of the continuation layer: canonical glued maximal
+   trajectory `u*` + pointwise `limsup` restatement; then the mild-theory / flow-map
+   interface adapters (Bucket B of the status doc — not blockers).
 
 The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
 via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
@@ -636,4 +659,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。ローカル理論の 3 連ゲートは完了: explicit quantitative lifespan(R3QuantitativeLifespan)、mild restart identity + unrestricted uniqueness + 無条件実数性(EndpointSafeTwoSpaceRestart / EndpointSafeTwoSpaceUniqueness)、maximal continuation の blow-up dichotomy 形(EndpointSafeTwoSpaceConcatenation: concat 補題; R3MildContinuation: r3MildLifespan_antitone、uniform-step extension、r3MildHorizons、r3EndpointSafeProjected_blowup_dichotomy)まで main に統合済み。standing decision により **BH branch を再開**: docs/gates/BH_PROFILE_TASTE_REPORT.md の YELLOW 判定を起点に、(1) 最小欠落定理 = 定量的 no-swirl 剛性(Jiu–Xin 型の rigidity を ε² GS 構造に定量化)の攻略プラン策定、(2) K12(α<1/2 report-only)の採否決定、(3) 生存窓 {1/2<γ<1, max(1−γ,2γ/3,2γ−1)≤α<γ} との突合せ。形式側の任意課題(後回し可): canonical glued maximal trajectory u*:[0,T*)→H³ と pointwise limsup 形への言い換え、FlowMapNonextendibilityCriterion / UniformRestartContinuation への接続、MildEvolutionKernel 系インターフェース接続。Lean 注意: ℝ≥0 匿名コンストラクタ下の rw は motive が壊れる(congr 1 + exact / congrArg / positiveSmoothing_congr_apply を使う)、if-ラムダ適用形は show でベータ簡約してから rw、congr 1 は文脈の assumption で全ゴールを閉じることがある、contract 定理の dot 記法は C を明示的に渡す(hu.restart C hs)。Lean はローカルで反復し、GitHub Actions は一切使わない(quota 枯渇)。green 後は成果物を main に fast-forward 統合して。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: ローカル理論の縦連鎖は continuation blow-up dichotomy まで閉鎖済み(vertical integration verdict: CHAIN CLOSED TO CONTINUATION; 残りは Clay への semantic promotion 5 edges — docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: BH 再開パス完了、verdict YELLOW 据え置き(docs/gates/BH_QUANTITATIVE_RIGIDITY_K12_AUDIT.md)。旧 power-vs-log 二分法は ill-posed として退役、最小欠落定理は swirl-fraction gap (★): compactly supported axisymmetric steady Euler で s(u)=∫|u_θ|²/∫|u_pol|² の inf は正か?(inf s>0 ⇒ blob も ring も RED; s→0 の族の構成 ⇒ YELLOW-GREEN)。確定済みの hard result: ∫u_r²+∫u_θ²=2∫u_z²(局在定常軸対称 Euler の運動量流恒等式 [H]、(★) の等価形)。K12 は KEEP CONDITIONAL(α>1/2 で route F 閉鎖(separatrix sliver 注意付き)、route P は狭まるが開、α=1/2 は灰色線、ring は平面剛性が偽なので対象外; K12′/K12″ は report-level 注釈のみ、凍結 map 不変)。次の最小タスク: (★) の first probe — Gavrilov と Constantin–La–Vicol Thm 2/3 の明示解に対して s(u) を計算(文献+代数のみ、数値計算不要)して inf s の初の上界を得る。次点: ζ=ω_θ/r 平均化リード(P̂′→const を α≥1/2 で強制するか)と K12″(axis-Dirichlet: Γ→0 ⇒ σ>α ⇒ K9 直接違反)の精査、次回 freeze review で K9 two-scale debt(audit §8.1)。GitHub Actions は一切使わない(quota 枯渇)。docs 変更は照合後 main に直接 push。古い会話より実コードを優先して。`
