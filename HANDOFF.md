@@ -546,19 +546,40 @@ adversarial pass; deliverables `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md
   annotations K12′/K12″ recorded; frozen map unchanged; K9 two-scale verification debt
   logged.
 
+**The (★) P0 probe is complete** (2026-08-19,
+`docs/gates/BH_SWIRL_FRACTION_PROBE_2026-08-19.md`; Gavrilov + CLV primary texts read in
+full; verdict **YELLOW, content inverted twice**):
+
+- published constructions pinned: `σ(A) = 1/2 − (21/32)A`, `s = 1/2 − (21/16)δ²` [H]
+  (core swirl fraction 1/3 forced four ways, incl. CLV (52) [V]);
+- but the corrected range is `(0, 1/2]`: continuing the same solution to its Hill-type
+  separatrix and cutting a thin shell there gives an explicit candidate family with
+  `σ ≃ 0.82√(A_H − A) → 0` [C on one continuation lemma] — **(★) as stated is likely
+  answered NO** (`inf s = 0` over the naked A_NS);
+- **but the branch does not go GREEN**: the realizing family (`r_min/R ~ s`, sheet
+  thickness `~ s²`) is below the viscous cutoff `√(ντ)` on the whole interior blob
+  wedge [C] — **(★) is decoupled from the branch verdict**; the decision object is now
+  **(★_geo): `s(u) ≥ c·(r_min/r_max)^θ`** on the localizable class (θ = 1/5 proved
+  per-streamline; θ ≥ 1/2 would empty the interior blob wedge; the explicit family sits
+  at θ = 1);
+- A_NS minimally defined (A1–A5; no normalization needed; a priori `q ≤ 2`);
+  CLV F → 0 classified: F ≡ 0 dead [H, redundant vs Jiu–Xin]; radially thin pinned at
+  `s = 1/2`; wide-aspect corridor = SURVIVING FAMILY (conditional); Scope B
+  (non-localizable) open and decisive; stagnant-axis structural fact proved [H].
+
 The next smallest tasks, in order:
 
-1. **first probe of (★)** (bounded, literature + algebra, no numerics): compute the
-   swirl energy fraction `s(u)` for Gavrilov's explicit solution and the
-   Constantin–La–Vicol Thm 2/3 families — the first upper bound on `inf s`;
-2. the **ζ-averaging lead** (`ζ = ω_θ/r` obeys the same streamline-averaged diffusion;
-   would force `P̂′ → const` on `α ≥ 1/2` and narrow route (P)) and the **axis-Dirichlet
-   route K12″** (Γ → 0 ⇒ σ > α ⇒ direct K9 violation) — both [C], see audit §7.6;
-3. at the next freeze review: the **K9 two-scale debt** (audit §8.1) and whether escapes
-   E2/E3 are compatible with K5/K6 bookkeeping (audit §8.4);
-4. optional formal refinement of the continuation layer: canonical glued maximal
-   trajectory `u*` + pointwise `limsup` restatement; then the mild-theory / flow-map
-   interface adapters (Bucket B of the status doc — not blockers).
+1. **(★_geo) aggregation**: upgrade the per-streamline aspect bound to a global theorem
+   and fix θ in `s ≥ c·(r_min/r_max)^θ` (algebraic; machinery in hand: CLOSURE identity,
+   first integral `sinθ = (r/W)(λr²/2+K)`, level densities `M ≡ π/2`, `R+Θ = 2Z`; no
+   continuation lemma, no literature needed). θ ≥ 1/2 ⇒ interior blob wedge empties [C];
+2. deliberately deferred: the separatrix continuation lemma (settles (★), not the
+   branch); necessity of `u·∇p = 0` for compact support (Scope B, decisive but
+   open-ended); Jiu–Xin primary hypothesis class + `σ(A_H) = 0` for general `M`
+   (bundle as literature errands); ζ-averaging / K12″ (audit §7.6); K9 two-scale debt at
+   the next freeze review;
+3. optional formal refinement: canonical glued maximal trajectory `u*` + pointwise
+   `limsup` restatement; mild-theory / flow-map interface adapters (not blockers).
 
 The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
 via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
@@ -659,4 +680,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: ローカル理論の縦連鎖は continuation blow-up dichotomy まで閉鎖済み(vertical integration verdict: CHAIN CLOSED TO CONTINUATION; 残りは Clay への semantic promotion 5 edges — docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: BH 再開パス完了、verdict YELLOW 据え置き(docs/gates/BH_QUANTITATIVE_RIGIDITY_K12_AUDIT.md)。旧 power-vs-log 二分法は ill-posed として退役、最小欠落定理は swirl-fraction gap (★): compactly supported axisymmetric steady Euler で s(u)=∫|u_θ|²/∫|u_pol|² の inf は正か?(inf s>0 ⇒ blob も ring も RED; s→0 の族の構成 ⇒ YELLOW-GREEN)。確定済みの hard result: ∫u_r²+∫u_θ²=2∫u_z²(局在定常軸対称 Euler の運動量流恒等式 [H]、(★) の等価形)。K12 は KEEP CONDITIONAL(α>1/2 で route F 閉鎖(separatrix sliver 注意付き)、route P は狭まるが開、α=1/2 は灰色線、ring は平面剛性が偽なので対象外; K12′/K12″ は report-level 注釈のみ、凍結 map 不変)。次の最小タスク: (★) の first probe — Gavrilov と Constantin–La–Vicol Thm 2/3 の明示解に対して s(u) を計算(文献+代数のみ、数値計算不要)して inf s の初の上界を得る。次点: ζ=ω_θ/r 平均化リード(P̂′→const を α≥1/2 で強制するか)と K12″(axis-Dirichlet: Γ→0 ⇒ σ>α ⇒ K9 直接違反)の精査、次回 freeze review で K9 two-scale debt(audit §8.1)。GitHub Actions は一切使わない(quota 枯渇)。docs 変更は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(CHAIN CLOSED TO CONTINUATION; 残りは Clay semantic promotion 5 edges — docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: (★) P0 probe 完了(docs/gates/BH_SWIRL_FRACTION_PROBE_2026-08-19.md、verdict YELLOW・内容二重反転)。既知構成は s = 1/2 − (21/16)δ² に釘付け [H](コア swirl 比 1/3 は4経路で強制)だが、同じ解を Hill 型 separatrix まで延長して薄シェルで切ると σ ≃ 0.82√(A_H−A) → 0 の明示的候補族 [C: 延長補題1つ] — **(★) は素の形では NO の公算**。しかし実現族は r_min/R ~ s、厚み ~ s² で凍結内部 wedge 全域の粘性カットオフ √(ντ) 未満 [C] — **(★) は枝の判定から切り離され**、判定対象は **(★_geo): localizable クラス上 s(u) ≥ c·(r_min/r_max)^θ**(θ=1/5 は per-streamline で証明済み; θ≥1/2 なら内部 blob wedge が空になる; 明示族は θ=1)。次の最小タスク: **(★_geo) の aggregation** — per-streamline アスペクト下界を大域定理に格上げして θ を確定(代数のみ; 道具は手元: CLOSURE 恒等式、first integral sinθ=(r/W)(λr²/2+K)、level densities M≡π/2、R+Θ=2Z; 延長補題・文献不要)。意図的後回し: separatrix 延長補題((★)を決めるが枝は決めない)、u·∇p=0 の必要性(Scope B、決定的だが open-ended)、Jiu–Xin 一次仮説類+一般 M での σ(A_H)=0(文献 errand として束ねる)、ζ-averaging / K12″、K9 two-scale debt(次回 freeze review)。数値 simulation・新 ansatz・K12 promotion・map 編集は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
