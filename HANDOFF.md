@@ -668,19 +668,45 @@ from arXiv:0709.3599 full text):
   `M3 ∩ {γ₂ < γ}` mod (E)+(P)); elongated-filament one-region M3 (P5, cleanest K4′
   target); K5-not-scale-invariant legend (P7); K2 row corrections.
 
+**The constant-exclusion pass is complete** (2026-08-20,
+`docs/gates/BH_CONSTANT_EXCLUSION_ROW_2026-08-20.md`; ruling PARTIAL — better than
+either hoped-for outcome):
+
+- **branch (a) is RETIRED, not open** [D, row R-A]: KNSS Lemma 6.1 nowhere requires
+  `C = 1`; re-centring the zoom on the Γ-saturated level (amplitude corollary,
+  `C = √42`) keeps the axis at bounded rescaled distance — the limit is axisymmetric
+  with a Γ-saturated core, for **every** Scope-A blob, B2 included. Branch (a) was an
+  exact-maximizer artifact. (Boost-the-original refuted, R-NEG1; constants cannot be
+  excluded by any scale-invariant estimate at an axisym singularity — Ożański–Palasek
+  — but re-centring makes that moot, R-NEG2);
+- **everything reduces to ONE literature-named open object (OO)**: nonzero bounded
+  ancient mild axisymmetric NS solution with `Γ ∈ L^∞`, `Γ ≢ 0` (the survey's "most
+  difficult remaining case");
+- **certified primary conditional row R-B1 [V+C]**: Lei–Zhang JFA 2011 Thm 1.2
+  (bounded weak ancient + `r|v_θ|` bounded + **stream function BMO** ⟹ `v ≡ 0`).
+  Every hypothesis transfers FREE (Γ is exactly scale-invariant under the Prop-6.1
+  zoom — new unconditional row K4‴) except **BMO of the boosted limit's stream
+  function** — one hypothesis, one logarithm of slack over the (Q)-form. If
+  discharged: **the tie face AND B2's Γ-saturated blob die — no Type-I, no viscosity,
+  no Scope-A geometry**;
+- (E) ⟹ (Q) holds but needs **(E⁺)** (adds C¹-exhaustiveness near the zoom centre);
+  escalation: charging (E⁺) kills the tie face at the same strength as `γ₂ < γ`;
+- freeze-review queue extended: K4′ amend to (E⁺); new rows K4″ [C] and K4‴ [D]; P7
+  legend (`Γ ∈ L^p, p<∞` non-descending); KNSS implicit-(6.16) footnote; negative
+  rows; branch wording ("M3 tie face and B2 reduce to one object (OO)").
+
 The single next branch (exactly one):
 
-1. **TIE-FACE CONSTANT-EXCLUDING ROW** (critic-designated, one bounded fetch-and-verify
-   pass): the `γ₂ = γ` face's ancient limit is pinned to a bounded ancient 2.5-D
-   swirl-free NS solution equal to a nonzero constant (Type-II amplitude-normalized).
-   Search post-KNSS axisymmetric/2.5-D Liouville results replacing the Type-I rate with
-   Γ- or local-energy-based hypotheses (Seregin ancient-solution notes; Lei–Zhang
-   Γ-criteria; KNSS follow-ups). Deliverable in kill-table row form. **Stop rule: if no
-   such statement exists first-hand, print the face as the branch's named open object
-   and stand down to B2's V1 — do not derive in-house.**
-2. then **FREEZE REVIEW** — the (now larger) agenda: multi-region audit §9 items 1–8 +
-   this pass's K4/K4′/P5/P7/K2 items. Holds the pen on the frozen map; user sees the
-   agenda before execution.
+1. **FAR-FIELD POLOIDAL LEDGER (in-house Biot–Savart, critic-designated)**: extend the
+   geometry gate's poloidal ledger to the deviation field `u_pol − b_τ` on
+   `R₀τ^γ ≤ |x−x̃_k| ≤ R_kτ^γ` (τ-uniform `C`, under (E⁺)); read off whether it
+   delivers `r|w_pol| ≤ C` (⟹ R-B2), `ψ_w/r ∈ BMO` (⟹ R-B1, cheaper — one log of
+   slack), or neither. An estimate on our own flow, not a rigidity theorem — the
+   no-in-house-Liouville rule is not tripped. **Do not stand down to B2's V1** (V1 is
+   unpromoted and now the more expensive route).
+2. then **FREEZE REVIEW** — the accumulated agenda (multi-region audit §9 items 1–8 +
+   K4/K4′/K4″/K4‴/P5/P7/K2 + this pass's §4 items). Holds the pen on the frozen map;
+   user sees the agenda before execution.
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
