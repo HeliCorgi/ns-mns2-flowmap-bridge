@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-20 JST.
+Last updated: 2026-08-21 JST.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -741,20 +741,53 @@ general clause — δ_T itself REFUTED**, three independent routes):
 - freeze queue extended with **F9–F14** ((E⁺⁺) re-worded to the κ-form actually
   consumed, F12; `R₀` constant mismatch, F14).
 
+**The (COH) winding pass is complete** (2026-08-21,
+`docs/gates/BH_COH_WINDING_2026-08-21.md`; 3 analysts + 2 independent verifiers +
+critic, outcome (ii) **unanimous and provenance-clean**):
+
+- **(COH) not discharged at any radius; the winding form is RETIRED as a discharge
+  vehicle** (structural + input starvation — residence, confinement, fold count,
+  material preimage — but NOT proved impossible); (E⁺⁺) stays [C]; R-B2′ unchanged;
+- **headline [D]: the INCREMENT/LEVEL GAP — the frozen (COH) "iff" is WRONG.**
+  Budget and winding routes bound only `|κ̂(t) − κ̂₀|`; (E⁺⁺) needs `|κ̂(t)| ≤ C`;
+  on the ancient limit there is no anchor, and the dictionary's only level bound at
+  neck radii is the contour form `|κ̂| ≤ CR` — exactly (NECK) level. `θ_coh ≥ 2ρ`
+  is **necessary but NOT sufficient**. The debt splits into TWO objects:
+  **(COH-Δ)** (coherence, as printed) + **(ANCH)** (level/erasure for `κ̂`, carried
+  only by T4 since there is no bulk sink — R-NEG4 re-verified by a fifth route);
+- persistence ruled explicitly: "(NECK)-level `κ̂` present initially and
+  persisting" is neither excluded nor forced (the adversary's "forced below ρ*"
+  refuted); it does not re-open R-B2 (already conditional on (E⁺⁺)) but enlarges
+  what a discharge must deliver;
+- method facts to [C-dict]: exact winding identity (second viscous term cancels ⟹
+  T4-only ledger confirmed); osc hint vacuous (`min(Γ₀, rτ^{−γ}) = Γ₀` identically
+  on the neck — zero exponent); exponent equivalence (power-for-power with the
+  production budget; R-NEG3 by a second route); **no Lagrangian localization**
+  (Eulerian transfer licensed only on the turnover horizon — circular; F18);
+- cumulative-free edge real but inert: `TV_s(θ)` is an unassigned Lagrangian
+  geometric quantity with no maximum principle — sign-coherence debt converted to
+  geometric debt, same size;
+- freeze queue extended **F15–F20** (F16 = correction to frozen text: F11
+  superseded; R-NEG5/R-NEG6; T4 = named unassigned input, sole carrier of (ANCH);
+  witnesses W4/W6, renumber W5).
+
 The single next branch (exactly one):
 
-1. **(COH) AT ONE RADIUS, BY THE WINDING FORM** (critic-designated): on a material
-   meridional loop, `|κ_pol(t) − κ₀| ≤ osc_loop(Γ)·TV_s(θ(t))`, `θ̇ = Γ/r²`. Bound
-   `TV_s(θ)` and `osc_loop(Γ)` at a labelled neck radius `τ^ρ` from
-   dictionary-assigned quantities only; compare `T_coh` against the threshold
-   `τ^{2ρ}`. Outcome (i): `θ_coh ≥ 2ρ` throughout ⟹ (E⁺⁺) discharged in-house,
-   chain [C] → [C-dict], R-B2′ conditional only on (P)+(N-Γ); outcome (ii): the
-   bound needs the material residence time at a labelled radius ⟹ print (COH) as
-   frozen and escalate to the freeze review. No V1 stand-down; no in-house
-   Liouville.
-2. then **FREEZE REVIEW** — the accumulated agenda (multi-region audit §9 + M3×KNSS
-   §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck-budget F9–F14). Holds the
-   pen on the frozen map; user sees the agenda before execution.
+1. **FREEZE REVIEW** (standing order, now REINFORCED — this pass produced a
+   correction to frozen text (F16), which is review business by the multiregion
+   precedent; a T4 estimate cannot be honestly commissioned first because it
+   consumes the unassigned neck gradient scale `ℓ`). Full accumulated agenda:
+   multi-region audit §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8
+   + neck-budget F9–F14 + winding F15–F20. **One decisive question for the
+   (E⁺⁺)/(NECK) branch: does the frozen dictionary assign the neck a poloidal
+   level bound on `κ̂`, or decline?** Fork (α) assigns ⟹ (ANCH) [C-dict], branch
+   reduces to (COH-Δ), next = coherence estimate with stated anchor. Fork (β)
+   declines ⟹ (NECK) printed as standing dictionary-extension request with two
+   named unassigned inputs (`θ_coh`, `ℓ`); cheapest in-house move afterwards = the
+   level route (`ω_θ/r` maximum principle), only after the review supplies
+   `sup(ω_θ/r)` or declines it too. Holds the pen on the frozen map; **user sees
+   the agenda before execution**. No V1 stand-down; no in-house Liouville at
+   either fork.
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
@@ -859,4 +892,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側の現在地: Scope-A 準静的側は re-centred KNSS 5.3 ルート(R-B2′)一本に収束 — 条件は (E⁺⁺)[C] + (P)[C] + (N-Γ)[C-dict]。**neck ω_θ-budget 完了**(docs/gates/BH_NECK_OMEGA_BUDGET_2026-08-20.md; 裁定 outcome (b) 一般条項 — **δ_T は3経路で反証、恒久除去(F10)**)。確立: 正確な収支恒等式(2-D 保存形 + Kelvin/winding の二重導出; stretching は 2-D 圧縮欠損と恒等相殺; **粘性は無符号の境界流束 T4 のみ、bulk sink 不在(R-NEG4)**; 生成は振動制御 |∮(Γ²/r³)dr| ≤ ½osc(Γ²)(r₁⁻²−r₂⁻²)、両向き δ-フリー)。**未割当指数はコヒーレンス時間 (COH)**: (E⁺⁺) ⟺ θ_coh(ρ) ≥ 2ρ(ρ ∈ [(γ+α)/2, γ]; turnover ρ+γ は余裕でクリア(ν-フリー)、viscous 2ρ は正確に限界、lifetime 1 は K11 により neck 全域で失敗 — γ+α≥1 ⟺ neck 全体が √(ντ) 内)。full-lifetime horizon では budget は S_blob 全域で空虚(R-NEG3; 両 wedge 反証、W3 = R* = τ^{(1−2γ)/3} の truncated sheet)。**タグ: (E⁺⁺) は [C] のまま**(両 analyst の (a) 判定は未放電の粘性入力に依存; (c) ではない — W3 は negation witness のみ)。**次の単一ブランチ: (COH) を1半径で winding form により導出/反証** — |κ_pol(t)−κ₀| ≤ osc_loop(Γ)·TV_s(θ)、θ̇ = Γ/r²; TV_s(θ) と osc_loop(Γ) を辞書割当量のみで押さえ T_coh を τ^{2ρ} と比較。(i) θ_coh ≥ 2ρ 全域 ⟹ (E⁺⁺) 自前放電、chain [C]→[C-dict]、R-B2′ は (P)+(N-Γ) のみ条件; (ii) 材料滞在時間が必要(辞書は |u_r| を下から押さえない)⟹ (COH) を frozen として印字し freeze review へ。その後 **FREEZE REVIEW**(multi-region §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck F9–F14; 凍結 map にペンを入れるパスなので実行前にユーザーが agenda を確認)。意図的後回し: intra-core β_v 枝、K8/K10 multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、Scope-B reconnaissance、形式側任意課題。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側の現在地: Scope-A 準静的側は re-centred KNSS 5.3 ルート(R-B2′)一本に収束 — 条件は (E⁺⁺)[C] + (P)[C] + (N-Γ)[C-dict]。neck ω_θ-budget(BH_NECK_OMEGA_BUDGET_2026-08-20.md)で δ_T 反証・T4 唯一粘性項・R-NEG3/R-NEG4 確立、閾値 θ_coh(ρ) ≥ 2ρ を印字。**(COH) winding pass 完了**(docs/gates/BH_COH_WINDING_2026-08-21.md; 3 analysts + 2 verifiers + critic、outcome (ii) 全会一致・provenance クリーン)。主発見 [D]: **increment/level ギャップ — 凍結 (COH) の iff は誤り**(budget/winding は |κ̂(t)−κ̂₀| しか押さえない; (E⁺⁺) は |κ̂(t)| ≤ C を要求; ancient limit にアンカー無し; 辞書の唯一の level bound は contour 形 |κ̂| ≤ CR = ちょうど (NECK) レベル)。θ_coh ≥ 2ρ は**必要だが十分でない**。債務は2オブジェクトに分裂: **(COH-Δ)**(コヒーレンス指数、従来通り)+ **(ANCH)**(κ̂ の level/erasure 文 — bulk sink 不在ゆえ担い手は T4 のみ)。winding form は放電手段として退役(構造的 + 入力飢餓; 不可能性定理は無し)。osc ヒント空虚(neck 上 min(Γ₀, rτ^{−γ}) = Γ₀ 恒等)、Lagrangian 局在ゼロ(Euler 転送は turnover horizon のみで循環; F18)、persistence は排除も強制もされない。凍結 queue F15–F20 追加(F16 = 凍結文言の訂正、F11 差替え; R-NEG5/R-NEG6; T4 = named unassigned input; W5 renumber)。**次の単一ブランチ: FREEZE REVIEW(強化された standing order — F16 が凍結文言訂正なので review 案件; T4 見積りは未割当 ℓ を消費するため先行できない)**。全累積 agenda: multi-region §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck F9–F14 + winding F15–F20。(E⁺⁺)/(NECK) 枝の決定質問1つ: **凍結辞書は neck に poloidal level bound(dyadic annulus 上の κ̂)を割り当てるか、拒むか** — fork (α) 割当 ⟹ (ANCH) [C-dict]、枝は (COH-Δ) のみに縮約、次 = anchor 明示のコヒーレンス見積り; fork (β) 拒否 ⟹ (NECK) を2つの named unassigned inputs(θ_coh, ℓ)付き standing dictionary-extension request として印字、以後の最安手 = level route(ω_θ/r 最大値原理; review が sup(ω_θ/r) を供給または拒否した後にのみ)。凍結 map にペンを入れるパスなので**実行前にユーザーが agenda を確認**。意図的後回し: intra-core β_v 枝、K8/K10 multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、Scope-B reconnaissance、形式側任意課題。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
