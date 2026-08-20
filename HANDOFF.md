@@ -613,17 +613,51 @@ authorized and appended to `TYPE2_KILL_TABLE_2026-08-19.md` with riders R1–R4)
   withdrawn (amplitude form replaces it), `k = −P′/2` (P6 falsifier must be re-derived
   before evaluation), `α_g` notation; taste report §3 is the MHD GS form (`P = −B`).
 
-The single next branch (task-mandated, exactly one):
+**The multi-region audit is complete** (2026-08-20,
+`docs/gates/BH_MULTIREGION_AUDIT_2026-08-20.md`; per-class verdicts **M2 RESTRICTED (no
+independent members — "not a ring branch") · M3 OPEN · B2 RESTRICTED**; BH
+**YELLOW-RED held**; next branch **FREEZE REVIEW**):
 
-1. **MULTI-REGION AUDIT**: the mesoscale/≥3-region corridor with the burden now
-   quantified — the mesoscale must carry asymptotically all `E_pol` *and* be
-   axis-grazing (Prop G/V's object); process the new K9 swirl-sup-location debt (P6);
-   check escape-vs-K5/K6 compatibility (old audit §8.4). Runner-up recorded, not
-   scheduled: Scope-B reconnaissance (the gate's own revisit trigger).
-2. deliberately deferred: separatrix continuation lemma; ζ-averaging / K12″; Jiu–Xin
-   primary class + P6 dictionary re-derivation (bundled literature errand); K9/K12
-   debts at the next freeze review; optional formal refinement (glued maximal
-   trajectory u*; interface adapters — not blockers).
+- K3 is a covering condition (concave min; middle-ε gap witness); K9 reduces to
+  Γ-saturation and is a **trichotomy** in the saturation scale (`β_v = α` printed /
+  `β_v ∈ (α,γ]` intra-core, unanalysed / `β_v < α` separate region); the map's `σ` is
+  ill-posed for on-axis cores (`σ_core` vs `σ_sup`; in Scope A `σ_sup = γ` always);
+- amplitude gate on multi-region flows: the second scale is **capped** (`ρ_T ≥ γ`),
+  not pinned; every Scope-A blob is two-scale in the tongue sense; the tongue's energy
+  share `→ 0` so **V1 does not bite it**; the Gate-C sacrifice is selected: uniform
+  `C¹` fails at rate `1/ε`;
+- **the interlock (highest value)**: amplitude-gate silence ⟺ K3 middle-ε gap ⟺ M3's
+  swirl-dominated core — one object, covered exactly by the **retired row K4** (KNSS
+  `|v| ≤ C/r`), whose retirement rationale is FALSE (`ρ=σ=γ` violates K3 for every ε
+  yet obeys `|u| ≤ C/r`). **M3's blocking question = does KNSS bite the Γ-saturated
+  core?** Only a freeze decision can re-arm a retired row;
+- **P6 falsifier RESOLVED: PASS** (symbolic; `k` cancels; corrected
+  `X = (1/3)(1−7σ²/16)`, test number `21/64 = 21/64`; retired: `23/32`, `0.5391`;
+  residual [V?]: the `δ_probe = ℓ/R` reading);
+- literature: Jiu–Xin verbatim abstract secured [V] (C¹, finite energy + constant far
+  field; **no "no swirl" in the abstract** — body must carry it, debt sharper, not
+  paid); **DVEP (arXiv:2005.04380, ARMA 2021) = Scope-B witness at weak regularity**
+  (compactly supported, axisym-with-swirl, piecewise smooth, explicitly not
+  localizable) — necessity of `p = p(ψ)` is false without a regularity hypothesis;
+  the geometry gate's §10 trigger **as worded is met** (freeze review must fire or
+  amend to primary-class wording); Peralta-Salas–Slobodeanu 2026: analytic localizable
+  ⟹ axisymmetric (overdetermination reading confirmed);
+- corrections queued for the freeze review: Prop G/V carry the far-field erratum
+  (repair: per-level + Markov inside core energy, `E = 2γ−α` stands in weakened form);
+  `S_blob` boundary `α > 2γ−1` strict; [D2] "≥3-regions" over-count (min 2).
+
+The single next branch (exactly one):
+
+1. **FREEZE REVIEW** — execute/decide the 8-item agenda of the audit's §9 (σ legend;
+   K9 trichotomy; [D2] premise; Prop G/V repair; P6 numbers; **K4 re-arm or
+   survive-because-retired print**; `S_blob` boundary; §10 trigger fire-or-amend).
+   This is the pass that holds the pen on the frozen map; the user should see the
+   agenda before execution. Runner-up (recorded, not scheduled): Scope-B
+   reconnaissance — cheaper after the freeze fixes the trigger wording.
+2. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
+   tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
+   separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
+   (glued maximal trajectory u*; interface adapters — not blockers).
 
 The closed layers are local statements on the Bessel-coordinate carrier (complex, and real
 via the conjugation gate). No pressure reconstruction, no unconditional uniqueness, no
@@ -724,4 +758,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側: **ring corollary 検証済み・scope freeze 実行済み**(docs/gates/BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md; verdicts RING-ONE-SCALE-KILL / YELLOW-RED / NEXT: MULTI-REGION AUDIT; kill table に許可済み注釈「one-scale localizable ring branch excluded by swirl-geometry pinning」+ R1–R4 追記済み)。確定した kill は振幅形: Scope-A の top-speed level で r_min ≤ √3·Γ₀/‖u‖_∞(1+o(1))(薄端点 pinning u_θ²=|u|²/3、3独立導出)⇒ contained one-scale ring は ρ ≥ γ ⇒ K3 と K6 の両方に矛盾(粘性不要・compactness 不要・非空 witness (0.6,0.42,0.45))。**Scope B は GAP であり exit ではない**(Hill 球渦が証人: Scope A 外で定理の結論は偽; p=p(ψ) は added で除去不能)。鋭い未解決問題: 局在した swirl 付き定常軸対称 Euler コアは eikonal 過剰決定 |∇ψ|²+F²=2A(ψ)r² を満たさねばならないか?「blob も死ぬ」は REFUTED(swirl sup は axis-grazing tongue 先端に移動可能、K9 の σ≤α は sup-location 前提 — blob は V1 条件付きのまま; K9 debt P6 を map 注釈に記録)。正誤表追記済み: geometry gate §8 の global-s 文は撤回(振幅形が代替)、k = −P′/2(P6 falsifier は評価前に再導出必須)、taste report §3 は MHD GS 形(P = −B)。**次の単一ブランチ: MULTI-REGION AUDIT** — mesoscale/≥3-region 回廊、負担は定量化済み(mesoscale が漸近的に全 E_pol を担い且つ axis-grazing であることを強制される)、K9 sup-location debt (P6) の処理、escape-vs-K5/K6 整合。次点(記録のみ・未スケジュール): Scope-B reconnaissance。意図的後回し: separatrix 延長補題、ζ-averaging / K12″、Jiu–Xin 一次仮説類+P6 辞書再導出(文献 errand)、形式側任意課題。数値 simulation・新 ansatz・V1/K12 promotion・CAP 開始は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側: **multi-region audit 完了**(docs/gates/BH_MULTIREGION_AUDIT_2026-08-20.md; M2 RESTRICTED(独自メンバーなし)/ M3 OPEN / B2 RESTRICTED; BH YELLOW-RED 維持)。要点: K9 は Γ-飽和トリコトミー(β_v = α / (α,γ] 未解析 / <α)で map の σ は on-axis コアで ill-posed(Scope A では σ_sup = γ 恒等)、振幅ゲートの第2スケールは capped(ρ_T ≥ γ)で全 Scope-A blob は tongue 的 two-scale(tongue のエネルギー比 →0 なので V1 は噛まない)、**interlock: 振幅ゲート沈黙域 ⟺ K3 中間-ε ギャップ ⟺ M3 swirl-dominated core = 単一対象で、退役行 K4(KNSS |v|≤C/r)がそれを正確に覆う(退役根拠は偽: ρ=σ=γ は全 ε で K3 違反かつ |u|≤C/r)** — M3 の blocking question は「KNSS は Γ-飽和コアに噛むか」。P6 falsifier は**記号的 PASS**(k は消える、X = (1/3)(1−7σ²/16)、21/64 = 21/64; 23/32 と 0.5391 は退役)。文献: Jiu–Xin 逐語 abstract 確保(「no swirl」が abstract に無い — 本文が担うはず、debt 未払いで先鋭化)、**DVEP(arXiv:2005.04380)= 弱正則性の Scope-B 証人(コンパクト台・swirl 付き・piecewise smooth・明示的に non-localizable)** — p=p(ψ) の必要性は正則性仮定なしには偽、geometry gate §10 トリガーは文言上「met」(freeze review で fire か primary-class 文言への修正が必須)。Prop G/V は far-field 欠陥を継承(per-level+core 内 Markov で修復可、E = 2γ−α は弱形で存続)。**次の単一ブランチ: FREEZE REVIEW** — audit §9 の 8 項目 agenda(σ 凡例 / K9 トリコトミー / [D2] 前提+最小2領域 / Prop G/V 修復 / P6 数値差替え / **K4 再武装 or「retired ゆえに回廊生存」明記** / S_blob 境界 α>2γ−1 / §10 トリガー処置)。凍結 map にペンを入れるパスなので、実行前にユーザーが agenda を確認すること。次点(記録のみ): Scope-B reconnaissance。意図的後回し: intra-core β_v 枝、K8/K10 の multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、形式側任意課題。数値・新 ansatz・V1/K12 promotion・CAP は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
