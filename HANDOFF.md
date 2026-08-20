@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-18 JST.
+Last updated: 2026-08-20 JST.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -717,19 +717,44 @@ dictionary** (2026-08-20, `docs/gates/BH_BIOT_SAVART_LEDGER_2026-08-20.md`, tag 
   `r|u_pol| ≲ 1` is exterior-tail only (F5); tongue `‖ω‖` not chargeable to the
   poloidal kernel (F6); freeze queue F1–F8 with exact wordings.
 
+**The neck ω_θ-budget is complete** (2026-08-20,
+`docs/gates/BH_NECK_OMEGA_BUDGET_2026-08-20.md`; ruling: **outcome (b) in its
+general clause — δ_T itself REFUTED**, three independent routes):
+
+- the exact budget identity is established, twice-derived (2-D conservation form +
+  Kelvin/winding): stretching = 2-D compressibility defect, cancels identically;
+  **viscosity is a pure boundary flux with no sign (T4)** — the claimed bulk sink
+  `−ν∫ω_θ/r²` does not exist (R-NEG4); production is oscillation-controlled,
+  `|∮(Γ²/r³)dr| ≤ ½ osc_R(Γ²)(r₁^{−2}−r₂^{−2})`, δ-free in both tongue orientations;
+- **δ_T is permanently removed from the branch** (F10) — not the missing exponent;
+- **the missing exponent is a coherence time (COH)**: (E⁺⁺) ⟺ `θ_coh(ρ) ≥ 2ρ` on
+  `ρ ∈ [(γ+α)/2, γ]`; below threshold (NECK) is reachable at damage rate
+  `R = τ^{ρ−γ}`. Reference horizons: turnover `ρ+γ` (clears, ν-free), viscous `2ρ`
+  (exactly marginal), lifetime `1` (fails everywhere on the neck — K11 `γ+α ≥ 1`
+  says precisely that the whole neck is inside `√(ντ)`);
+- with the full-lifetime horizon the budget is **vacuous on all of S_blob**
+  (R-NEG3): both proposed exponent wedges refuted (`α+3γ<2` empty under K11;
+  `γ+3α<2` outer-endpoint-only — W3 truncated sheet at `R* = τ^{(1−2γ)/3}`);
+- **tag: (E⁺⁺) stays [C]**; both analyst outcome-(a) verdicts rested on undischarged
+  viscous inputs; not ruled (c) — W3 is a negation witness only; (NECK) refined to
+  any dyadic-annulus sheet at `R ≤ min(R*, R_k)`;
+- freeze queue extended with **F9–F14** ((E⁺⁺) re-worded to the κ-form actually
+  consumed, F12; `R₀` constant mismatch, F14).
+
 The single next branch (exactly one):
 
-1. **DYNAMICAL ω_θ-BUDGET ON THE NECK** (critic-designated): run
-   `D(ω_θ/r)/Dt = (1/r⁴)∂_z(Γ²) + ν(Δ + (2/r)∂_r)(ω_θ/r)` along the sub-saturated
-   neck (`r ∈ [√42Γ₀τ^γ, τ^{(γ+α)/2}]`, local eddy time, dictionary quantities only;
-   at the tip this independently reproduces `κ_tip ≲ τ^{ρ_T−γ}` — found consistency).
-   Outcome (a): production bounded by the core's own `ω_θ` ⟹ **(E⁺⁺) discharged
-   in-house**, chain tag [C] → [C-dict], R-B2′ conditional only on (P)+(N-Γ);
-   outcome (b): needs `δ_T` ⟹ print `δ_T` as a dictionary-extension request and
-   (NECK) as the branch's named open object. No V1 stand-down; no in-house Liouville.
+1. **(COH) AT ONE RADIUS, BY THE WINDING FORM** (critic-designated): on a material
+   meridional loop, `|κ_pol(t) − κ₀| ≤ osc_loop(Γ)·TV_s(θ(t))`, `θ̇ = Γ/r²`. Bound
+   `TV_s(θ)` and `osc_loop(Γ)` at a labelled neck radius `τ^ρ` from
+   dictionary-assigned quantities only; compare `T_coh` against the threshold
+   `τ^{2ρ}`. Outcome (i): `θ_coh ≥ 2ρ` throughout ⟹ (E⁺⁺) discharged in-house,
+   chain [C] → [C-dict], R-B2′ conditional only on (P)+(N-Γ); outcome (ii): the
+   bound needs the material residence time at a labelled radius ⟹ print (COH) as
+   frozen and escalate to the freeze review. No V1 stand-down; no in-house
+   Liouville.
 2. then **FREEZE REVIEW** — the accumulated agenda (multi-region audit §9 + M3×KNSS
-   §4 + constant-exclusion §4 + this pass's F1–F8). Holds the pen on the frozen map;
-   user sees the agenda before execution.
+   §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck-budget F9–F14). Holds the
+   pen on the frozen map; user sees the agenda before execution.
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
@@ -834,4 +859,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側: **multi-region audit 完了**(docs/gates/BH_MULTIREGION_AUDIT_2026-08-20.md; M2 RESTRICTED(独自メンバーなし)/ M3 OPEN / B2 RESTRICTED; BH YELLOW-RED 維持)。要点: K9 は Γ-飽和トリコトミー(β_v = α / (α,γ] 未解析 / <α)で map の σ は on-axis コアで ill-posed(Scope A では σ_sup = γ 恒等)、振幅ゲートの第2スケールは capped(ρ_T ≥ γ)で全 Scope-A blob は tongue 的 two-scale(tongue のエネルギー比 →0 なので V1 は噛まない)、**interlock: 振幅ゲート沈黙域 ⟺ K3 中間-ε ギャップ ⟺ M3 swirl-dominated core = 単一対象で、退役行 K4(KNSS |v|≤C/r)がそれを正確に覆う(退役根拠は偽: ρ=σ=γ は全 ε で K3 違反かつ |u|≤C/r)** — M3 の blocking question は「KNSS は Γ-飽和コアに噛むか」。P6 falsifier は**記号的 PASS**(k は消える、X = (1/3)(1−7σ²/16)、21/64 = 21/64; 23/32 と 0.5391 は退役)。文献: Jiu–Xin 逐語 abstract 確保(「no swirl」が abstract に無い — 本文が担うはず、debt 未払いで先鋭化)、**DVEP(arXiv:2005.04380)= 弱正則性の Scope-B 証人(コンパクト台・swirl 付き・piecewise smooth・明示的に non-localizable)** — p=p(ψ) の必要性は正則性仮定なしには偽、geometry gate §10 トリガーは文言上「met」(freeze review で fire か primary-class 文言への修正が必須)。Prop G/V は far-field 欠陥を継承(per-level+core 内 Markov で修復可、E = 2γ−α は弱形で存続)。**次の単一ブランチ: FREEZE REVIEW** — audit §9 の 8 項目 agenda(σ 凡例 / K9 トリコトミー / [D2] 前提+最小2領域 / Prop G/V 修復 / P6 数値差替え / **K4 再武装 or「retired ゆえに回廊生存」明記** / S_blob 境界 α>2γ−1 / §10 トリガー処置)。凍結 map にペンを入れるパスなので、実行前にユーザーが agenda を確認すること。次点(記録のみ): Scope-B reconnaissance。意図的後回し: intra-core β_v 枝、K8/K10 の multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、形式側任意課題。数値・新 ansatz・V1/K12 promotion・CAP は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側の現在地: Scope-A 準静的側は re-centred KNSS 5.3 ルート(R-B2′)一本に収束 — 条件は (E⁺⁺)[C] + (P)[C] + (N-Γ)[C-dict]。**neck ω_θ-budget 完了**(docs/gates/BH_NECK_OMEGA_BUDGET_2026-08-20.md; 裁定 outcome (b) 一般条項 — **δ_T は3経路で反証、恒久除去(F10)**)。確立: 正確な収支恒等式(2-D 保存形 + Kelvin/winding の二重導出; stretching は 2-D 圧縮欠損と恒等相殺; **粘性は無符号の境界流束 T4 のみ、bulk sink 不在(R-NEG4)**; 生成は振動制御 |∮(Γ²/r³)dr| ≤ ½osc(Γ²)(r₁⁻²−r₂⁻²)、両向き δ-フリー)。**未割当指数はコヒーレンス時間 (COH)**: (E⁺⁺) ⟺ θ_coh(ρ) ≥ 2ρ(ρ ∈ [(γ+α)/2, γ]; turnover ρ+γ は余裕でクリア(ν-フリー)、viscous 2ρ は正確に限界、lifetime 1 は K11 により neck 全域で失敗 — γ+α≥1 ⟺ neck 全体が √(ντ) 内)。full-lifetime horizon では budget は S_blob 全域で空虚(R-NEG3; 両 wedge 反証、W3 = R* = τ^{(1−2γ)/3} の truncated sheet)。**タグ: (E⁺⁺) は [C] のまま**(両 analyst の (a) 判定は未放電の粘性入力に依存; (c) ではない — W3 は negation witness のみ)。**次の単一ブランチ: (COH) を1半径で winding form により導出/反証** — |κ_pol(t)−κ₀| ≤ osc_loop(Γ)·TV_s(θ)、θ̇ = Γ/r²; TV_s(θ) と osc_loop(Γ) を辞書割当量のみで押さえ T_coh を τ^{2ρ} と比較。(i) θ_coh ≥ 2ρ 全域 ⟹ (E⁺⁺) 自前放電、chain [C]→[C-dict]、R-B2′ は (P)+(N-Γ) のみ条件; (ii) 材料滞在時間が必要(辞書は |u_r| を下から押さえない)⟹ (COH) を frozen として印字し freeze review へ。その後 **FREEZE REVIEW**(multi-region §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck F9–F14; 凍結 map にペンを入れるパスなので実行前にユーザーが agenda を確認)。意図的後回し: intra-core β_v 枝、K8/K10 multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、Scope-B reconnaissance、形式側任意課題。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
