@@ -695,17 +695,40 @@ either hoped-for outcome):
   legend (`Γ ∈ L^p, p<∞` non-descending); KNSS implicit-(6.16) footnote; negative
   rows; branch wording ("M3 tie face and B2 reduce to one object (OO)").
 
+**The Biot–Savart deviation ledger is complete — R-B2 DISCHARGED on the frozen
+dictionary** (2026-08-20, `docs/gates/BH_BIOT_SAVART_LEDGER_2026-08-20.md`, tag [C]):
+
+- `r_y|w_pol| ≤ C` τ-uniform on the receding ball `R₀ ≤ |y| ≤ R_k = ε₀τ^{(β−γ)/2}`
+  (β = finest non-local gradient exponent: α for B2, ρ₂ for the tie face) ⟹
+  `|w| ≤ C/r` globally on the re-centred ancient limit ⟹ **KNSS Thm 5.3 ⟹ w ≡ 0 ⟹
+  Γ ≡ 0 — contradiction with the Γ-saturated core ⟹ M3 tie face AND B2's Γ-saturated
+  blob excluded** (no Type-I, no viscosity, no energy, no Scope-A geometry, no V1);
+- conditionals: **(E⁺⁺)** [C] (the tongue's `ω_θ` content is the core's — its recorded
+  vorticity excess is `∇Γ`-generated `ω_r/ω_z`, invisible to the poloidal kernel) +
+  (P) [C] + (N-Γ) [C-dict]. The kill routes through **KNSS 5.3, not Lei–Zhang**;
+  R-B1's "one log of slack" REFUTED (BMO-stream ⟺ `w ∈ BMO^{-1}`, zero logarithms);
+- **the debt is localized, not erased**: the single remaining substantive conditional
+  is one exponent — the named negation witness **(NECK)** (poloidal shear layer of
+  amplitude order riding the tongue's sub-saturated stretch; defeats both rows at rate
+  R; dictionary-extension, inadmissible as a class member; exactly what (E⁺⁺)
+  excludes);
+- kernel formula sheet [H] established (monopole absent in far zone; axis-straddling
+  2-D window empty; `b_τ` axial by derivation); corrections queued: gate's
+  `r|u_pol| ≲ 1` is exterior-tail only (F5); tongue `‖ω‖` not chargeable to the
+  poloidal kernel (F6); freeze queue F1–F8 with exact wordings.
+
 The single next branch (exactly one):
 
-1. **FAR-FIELD POLOIDAL LEDGER (in-house Biot–Savart, critic-designated)**: extend the
-   geometry gate's poloidal ledger to the deviation field `u_pol − b_τ` on
-   `R₀τ^γ ≤ |x−x̃_k| ≤ R_kτ^γ` (τ-uniform `C`, under (E⁺)); read off whether it
-   delivers `r|w_pol| ≤ C` (⟹ R-B2), `ψ_w/r ∈ BMO` (⟹ R-B1, cheaper — one log of
-   slack), or neither. An estimate on our own flow, not a rigidity theorem — the
-   no-in-house-Liouville rule is not tripped. **Do not stand down to B2's V1** (V1 is
-   unpromoted and now the more expensive route).
-2. then **FREEZE REVIEW** — the accumulated agenda (multi-region audit §9 items 1–8 +
-   K4/K4′/K4″/K4‴/P5/P7/K2 + this pass's §4 items). Holds the pen on the frozen map;
+1. **DYNAMICAL ω_θ-BUDGET ON THE NECK** (critic-designated): run
+   `D(ω_θ/r)/Dt = (1/r⁴)∂_z(Γ²) + ν(Δ + (2/r)∂_r)(ω_θ/r)` along the sub-saturated
+   neck (`r ∈ [√42Γ₀τ^γ, τ^{(γ+α)/2}]`, local eddy time, dictionary quantities only;
+   at the tip this independently reproduces `κ_tip ≲ τ^{ρ_T−γ}` — found consistency).
+   Outcome (a): production bounded by the core's own `ω_θ` ⟹ **(E⁺⁺) discharged
+   in-house**, chain tag [C] → [C-dict], R-B2′ conditional only on (P)+(N-Γ);
+   outcome (b): needs `δ_T` ⟹ print `δ_T` as a dictionary-extension request and
+   (NECK) as the branch's named open object. No V1 stand-down; no in-house Liouville.
+2. then **FREEZE REVIEW** — the accumulated agenda (multi-region audit §9 + M3×KNSS
+   §4 + constant-exclusion §4 + this pass's F1–F8). Holds the pen on the frozen map;
    user sees the agenda before execution.
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
