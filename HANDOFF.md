@@ -771,23 +771,46 @@ critic, outcome (ii) **unanimous and provenance-clean**):
   superseded; R-NEG5/R-NEG6; T4 = named unassigned input, sole carrier of (ANCH);
   witnesses W4/W6, renumber W5).
 
-The single next branch (exactly one):
+**The FREEZE REVIEW is EXECUTED** (2026-08-21, user's fork-(β) adjudication
+received verbatim and applied; master record
+`docs/gates/FREEZE_REVIEW_2026-08-21.md` (31-row adjudication table) + authorized
+annotation A1–A20 appended to `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`; both
+audited by a 3-lens Opus workflow — adjudication fidelity / source consistency /
+completeness — all blockers and errors fixed before commit):
 
-1. **FREEZE REVIEW** (standing order, now REINFORCED — this pass produced a
-   correction to frozen text (F16), which is review business by the multiregion
-   precedent; a T4 estimate cannot be honestly commissioned first because it
-   consumes the unassigned neck gradient scale `ℓ`). Full accumulated agenda:
-   multi-region audit §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8
-   + neck-budget F9–F14 + winding F15–F20. **One decisive question for the
-   (E⁺⁺)/(NECK) branch: does the frozen dictionary assign the neck a poloidal
-   level bound on `κ̂`, or decline?** Fork (α) assigns ⟹ (ANCH) [C-dict], branch
-   reduces to (COH-Δ), next = coherence estimate with stated anchor. Fork (β)
-   declines ⟹ (NECK) printed as standing dictionary-extension request with two
-   named unassigned inputs (`θ_coh`, `ℓ`); cheapest in-house move afterwards = the
-   level route (`ω_θ/r` maximum principle), only after the review supplies
-   `sup(ω_θ/r)` or declines it too. Holds the pen on the frozen map; **user sees
-   the agenda before execution**. No V1 stand-down; no in-house Liouville at
-   either fork.
+- **fork (β)**: the frozen dictionary **declines** the neck poloidal level bound,
+  `sup(ω_θ/r)`, and `ℓ_neck` — nothing was invented at the review;
+- adopted: σ_core/σ_sup split (A1); K9 saturation-scale trichotomy, `β_v ∈ (α,γ]`
+  an open debt (A2); K6 [D2] "≥2 regions" under power-law `L³` (A3); Prop G/V
+  per-level+Markov repair (A4); P6 `7/16`/`21/64` symbolic PASS + residual [V?]
+  (A5); **K4 restored [V]** with the zoom-route-only rider and an explicit
+  no-corridor-coverage clause (A6); `S_blob` `α > 2γ−1` strict (A7); §10 trigger
+  amended in its Scope-B limb only — `A_NS`-internal witnesses; DVEP no fire (A8);
+  K4′ [(E⁺)+(P)] (A9); K4″ ≡ R-B1 demoted to redundant confirmation (A10); K4‴
+  (A11); P5 corollary-only (A12); P7 (A13); K2 correction (A14); **R-B2′ primary
+  row [C]** with the full chain incl. `v = b·e_z` (A15); **(E⁺⁺) = (COH-Δ) +
+  (ANCH)** κ-form + symbol legend (A16); ledger F5–F8 (A17); R-NEG1–R-NEG6
+  (A18); winding retirements + `ℓ_neck` ≠ ledger-`β` disambiguation (A19);
+  residuals incl. W6→W5 renumber, F15-conflict resolution, `R₀`-as-two-objects
+  (A20);
+- **post-freeze frontier (frozen)**: M2 RESTRICTED · M3 RESTRICTED · Scope-A
+  quasi-static = **B2 alone**, killed by R-B2′ [C] on (COH-Δ)+(ANCH)+(P)
+  (+(N-Γ) [C-dict]); (NECK) = standing dictionary-extension request (`θ_coh`,
+  `ℓ_neck`); **all three in-house vehicles retired/blocked** (budget/winding;
+  level route; T4-with-a-sign). BH **YELLOW-RED maintained**; no CAP trigger.
+
+The next branch is the **user's choice** (no default asserted; freeze-review
+record §7):
+
+1. **Scope-B reconnaissance** — the recorded runner-up, strictly cheaper now that
+   the §10 trigger wording is fixed (A8): survey what exists outside
+   `p = p(ψ)`-localizability at weak regularity (DVEP-adjacent literature), no
+   theorem attempts.
+2. **Return to the formal (Lean) side** — the 5 Clay semantic-promotion edges
+   (Bucket A of `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`) and/or the
+   glued maximal trajectory `u*` with pointwise `limsup ‖u*‖ = ∞`.
+3. Deliberately deferred list unchanged (intra-core `β_v` branch; K8/K10 on
+   multi-region tuples; Jiu–Xin body; separatrix lemma; ζ-averaging / K12″).
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
@@ -892,4 +915,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges)。研究側の現在地: Scope-A 準静的側は re-centred KNSS 5.3 ルート(R-B2′)一本に収束 — 条件は (E⁺⁺)[C] + (P)[C] + (N-Γ)[C-dict]。neck ω_θ-budget(BH_NECK_OMEGA_BUDGET_2026-08-20.md)で δ_T 反証・T4 唯一粘性項・R-NEG3/R-NEG4 確立、閾値 θ_coh(ρ) ≥ 2ρ を印字。**(COH) winding pass 完了**(docs/gates/BH_COH_WINDING_2026-08-21.md; 3 analysts + 2 verifiers + critic、outcome (ii) 全会一致・provenance クリーン)。主発見 [D]: **increment/level ギャップ — 凍結 (COH) の iff は誤り**(budget/winding は |κ̂(t)−κ̂₀| しか押さえない; (E⁺⁺) は |κ̂(t)| ≤ C を要求; ancient limit にアンカー無し; 辞書の唯一の level bound は contour 形 |κ̂| ≤ CR = ちょうど (NECK) レベル)。θ_coh ≥ 2ρ は**必要だが十分でない**。債務は2オブジェクトに分裂: **(COH-Δ)**(コヒーレンス指数、従来通り)+ **(ANCH)**(κ̂ の level/erasure 文 — bulk sink 不在ゆえ担い手は T4 のみ)。winding form は放電手段として退役(構造的 + 入力飢餓; 不可能性定理は無し)。osc ヒント空虚(neck 上 min(Γ₀, rτ^{−γ}) = Γ₀ 恒等)、Lagrangian 局在ゼロ(Euler 転送は turnover horizon のみで循環; F18)、persistence は排除も強制もされない。凍結 queue F15–F20 追加(F16 = 凍結文言の訂正、F11 差替え; R-NEG5/R-NEG6; T4 = named unassigned input; W5 renumber)。**次の単一ブランチ: FREEZE REVIEW(強化された standing order — F16 が凍結文言訂正なので review 案件; T4 見積りは未割当 ℓ を消費するため先行できない)**。全累積 agenda: multi-region §9 + M3×KNSS §4 + constant-exclusion §4 + Biot–Savart F1–F8 + neck F9–F14 + winding F15–F20。(E⁺⁺)/(NECK) 枝の決定質問1つ: **凍結辞書は neck に poloidal level bound(dyadic annulus 上の κ̂)を割り当てるか、拒むか** — fork (α) 割当 ⟹ (ANCH) [C-dict]、枝は (COH-Δ) のみに縮約、次 = anchor 明示のコヒーレンス見積り; fork (β) 拒否 ⟹ (NECK) を2つの named unassigned inputs(θ_coh, ℓ)付き standing dictionary-extension request として印字、以後の最安手 = level route(ω_θ/r 最大値原理; review が sup(ω_θ/r) を供給または拒否した後にのみ)。凍結 map にペンを入れるパスなので**実行前にユーザーが agenda を確認**。意図的後回し: intra-core β_v 枝、K8/K10 multi-region 適用、Jiu–Xin 本文、separatrix 補題、ζ-averaging / K12″、Scope-B reconnaissance、形式側任意課題。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges、Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**次はユーザー選択(デフォルト無し)**: (1) Scope-B reconnaissance(記録済み次点; trigger 文言修正済みで安価; p=p(ψ)-localizability 外の文献調査、定理試行なし)、(2) Lean 形式側へ復帰(Clay semantic promotion 5 edges / glued maximal trajectory u*)、(3) 意図的後回しリスト(intra-core β_v 枝、K8/K10 multi-region、Jiu–Xin 本文、separatrix 補題、ζ-averaging/K12″)。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
