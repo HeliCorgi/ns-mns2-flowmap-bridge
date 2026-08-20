@@ -646,15 +646,42 @@ independent members — "not a ring branch") · M3 OPEN · B2 RESTRICTED**; BH
   (repair: per-level + Markov inside core energy, `E = 2γ−α` stands in weakened form);
   `S_blob` boundary `α > 2γ−1` strict; [D2] "≥3-regions" over-count (min 2).
 
+**The M3 × KNSS gate is answered** (2026-08-20,
+`docs/gates/BH_M3_KNSS_GATE_2026-08-20.md`; the K4 verification debt is PAID first-hand
+from arXiv:0709.3599 full text):
+
+- **Answer: NO** — frozen M3 (`γ₂ ≤ γ`) does not imply KNSS's global `|v| ≤ C/r`; the
+  defeating member is the **amplitude-tie face `γ₂ = γ`**, whose ancient limit contains
+  a non-decaying plateau = KNSS's own `u = b(t)` obstruction (their receding-axis
+  branch is Type-I-only [V]);
+- **but `M3 ∩ {γ₂ < γ}` DIES** [D, Scope-A-free, viscosity-free, conditional on (E)
+  dictionary-exhaustiveness + (P) class transfer]: the L³ carrier's `C/r` violation
+  escapes the `τ^γ` zoom, Prop 6.1 is amplitude-normalized and **rate-free (Type II is
+  the enabler, not the obstruction)**, Thm 5.3 kills the limit;
+- the tie face has `(γ, α₂) ∈ S_blob` by pure exponent arithmetic — **it is a B2 point
+  wearing a Γ-saturated sub-core**: M3 moves **OPEN → RESTRICTED (no independent
+  members)**; **the Scope-A open set contracts to B2 alone** (blockers: V1 [C] +
+  quantitative rigidity rate);
+- map queue additions (freeze review): K4 restore [V] with Thm 6.1 + rider
+  (`K₄ ∩ M3 = ∅` — K4 never applies to the unzoomed flow); new conditional row K4′
+  ("amplitude-normalized ancient limit decays like 1/r ⟹ regular", kills
+  `M3 ∩ {γ₂ < γ}` mod (E)+(P)); elongated-filament one-region M3 (P5, cleanest K4′
+  target); K5-not-scale-invariant legend (P7); K2 row corrections.
+
 The single next branch (exactly one):
 
-1. **FREEZE REVIEW** — execute/decide the 8-item agenda of the audit's §9 (σ legend;
-   K9 trichotomy; [D2] premise; Prop G/V repair; P6 numbers; **K4 re-arm or
-   survive-because-retired print**; `S_blob` boundary; §10 trigger fire-or-amend).
-   This is the pass that holds the pen on the frozen map; the user should see the
-   agenda before execution. Runner-up (recorded, not scheduled): Scope-B
-   reconnaissance — cheaper after the freeze fixes the trigger wording.
-2. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
+1. **TIE-FACE CONSTANT-EXCLUDING ROW** (critic-designated, one bounded fetch-and-verify
+   pass): the `γ₂ = γ` face's ancient limit is pinned to a bounded ancient 2.5-D
+   swirl-free NS solution equal to a nonzero constant (Type-II amplitude-normalized).
+   Search post-KNSS axisymmetric/2.5-D Liouville results replacing the Type-I rate with
+   Γ- or local-energy-based hypotheses (Seregin ancient-solution notes; Lei–Zhang
+   Γ-criteria; KNSS follow-ups). Deliverable in kill-table row form. **Stop rule: if no
+   such statement exists first-hand, print the face as the branch's named open object
+   and stand down to B2's V1 — do not derive in-house.**
+2. then **FREEZE REVIEW** — the (now larger) agenda: multi-region audit §9 items 1–8 +
+   this pass's K4/K4′/P5/P7/K2 items. Holds the pen on the frozen map; user sees the
+   agenda before execution.
+3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
    (glued maximal trajectory u*; interface adapters — not blockers).
