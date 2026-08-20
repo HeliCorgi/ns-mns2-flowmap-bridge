@@ -799,18 +799,55 @@ completeness — all blockers and errors fixed before commit):
   `ℓ_neck`); **all three in-house vehicles retired/blocked** (budget/winding;
   level route; T4-with-a-sign). BH **YELLOW-RED maintained**; no CAP trigger.
 
-The next branch is the **user's choice** (no default asserted; freeze-review
-record §7):
+**The Scope-B reconnaissance is complete** (2026-08-21,
+`docs/gates/BH_SCOPEB_RECON_2026-08-21.md`; 3 analysts + verifier + critic, all
+decisive sources fetched first-hand; **record-only — F21–F29 are PROPOSED, not
+executed**):
 
-1. **Scope-B reconnaissance** — the recorded runner-up, strictly cheaper now that
-   the §10 trigger wording is fixed (A8): survey what exists outside
-   `p = p(ψ)`-localizability at weak regularity (DVEP-adjacent literature), no
-   theorem attempts.
-2. **Return to the formal (Lean) side** — the 5 Clay semantic-promotion edges
-   (Bucket A of `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`) and/or the
-   glued maximal trajectory `u*` with pointwise `limsup ‖u*‖ = ∞`.
+- **trigger ruling (T-c) OPEN — no fire, twice over**: DVEP (arXiv:2005.04380,
+  read in full) fails `A_NS` (A1) — the velocity jump is structurally essential
+  (Neumann `c > 0` forces `|u|² = c` inside vs 0 outside; solid torus, piecewise
+  `C^s`, not `C⁰(R³)`) — **and** its non-localizability is **asserted, never
+  proved** (4 `localiz` hits, no lemma/location of failure). The forcing
+  direction is **empty in 3D**: all three papers with localizability as their
+  subject (CLV 1903.11699; Peralta-Salas–Slobodeanu 2606.13462 — NEW, localizable
+  + analytic ⟹ axisymmetric; Sato–Abe 2608.11547 — NEW) *assume* it. Canonical
+  open question printed (recon §1); A8 stands, no gate revisit, no CAP;
+- **scope classification (critic-ruled)**: every K-row, K4′/K4″/K4‴, R-NEG1–6,
+  `S_blob`, and the tie-face merge are **SCOPE-FREE**; Scope-A enters only via
+  the geometry gate's elliptic-orbit rigidity (per-level bounds, amplitude
+  corollary, amplitude gate, Prop G/V, M2 dissolution, **R-B2′'s re-centring
+  anchor on B2**); (E⁺⁺)/(NECK)/θ_coh/ℓ_neck/T4/W1–W5 are **undefined, not
+  open, in Scope B**; per-level bound is **FALSE** outside Scope A (Hill) — no
+  weakening route;
+- **Scope-B landscape**: `S_blob` unchanged; **one-scale ring and M2 REOPEN**;
+  M3 `γ₂<γ` still dies (K4′ scope-free); **B2 unkilled in Scope B**; cheapest
+  missing object = **(SB-ANCH)** (scope-free re-centring anchor — K9 gives
+  existence of a Γ-saturated region, not co-location; no substitute recorded);
+- **defects found in our own frozen text** (repairs proposed, not executed):
+  F22 — R-B2′'s "no Scope-A geometry" clause is **false of its anchor** (three
+  documents; on B2 the row is Scope-A-gated; on M3 `γ₂<γ` it is scope-free);
+  F24 — A8 patched the trigger but the gate's verdict sentence ("a single
+  non-localizable localized steady flow would restore YELLOW immediately") was
+  left regularity-free; F23 — the DVEP recording overstates ("explicitly
+  non-localizable" → "authors assert, no proof").
+
+The single next branch (critic-designated, recon §8):
+
+1. **R-B2′ ANCHOR-INDEPENDENCE AUDIT** (classification, repo docs only; no
+   literature, no numerics, no proof attempts): can any *already-recorded*
+   scope-free object substitute for the Scope-A amplitude corollary as the
+   re-centring anchor? Outcomes: (a) substitute exists ⟹ R-B2′ scope-free on B2,
+   F22 wording-only, B2 dies in Scope B too; (b) none (expected) ⟹ F22
+   substantive, (SB-ANCH) = named primary Scope-B gap, B2 recorded unkilled in
+   Scope B; (c) the chain consumes the anchor more than once ⟹ escalate —
+   conditionality list incomplete as printed; program decision for the user.
+2. Then a second freeze-review round for F21–F29 (+ the audit's outcome) — user
+   sees the agenda first, as always.
 3. Deliberately deferred list unchanged (intra-core `β_v` branch; K8/K10 on
-   multi-region tuples; Jiu–Xin body; separatrix lemma; ζ-averaging / K12″).
+   multi-region tuples; Jiu–Xin body — paywalled, CLV surrogate recorded;
+   separatrix lemma; ζ-averaging / K12″; formal-side options: Clay 5 edges,
+   glued `u*`).
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
@@ -915,4 +952,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges、Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**次はユーザー選択(デフォルト無し)**: (1) Scope-B reconnaissance(記録済み次点; trigger 文言修正済みで安価; p=p(ψ)-localizability 外の文献調査、定理試行なし)、(2) Lean 形式側へ復帰(Clay semantic promotion 5 edges / glued maximal trajectory u*)、(3) 意図的後回しリスト(intra-core β_v 枝、K8/K10 multi-region、Jiu–Xin 本文、separatrix 補題、ζ-averaging/K12″)。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges、Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**Scope-B reconnaissance 完了**(docs/gates/BH_SCOPEB_RECON_2026-08-21.md; record-only、F21–F29 は proposed 未実行): trigger 裁定 **(T-c) OPEN・二重不発**(DVEP は A_NS の (A1) を構造的に破る + 非局所化可能性は**主張のみで無証明**; 3D で localizability を強制する定理は皆無 — 主題とする3論文は全て仮定する側)。scope 分類: 全 K 行 / R-NEG / S_blob は **SCOPE-FREE**、Scope-A は geometry gate の楕円軌道剛性経由のみ((E⁺⁺)/(NECK)/θ_coh/ℓ_neck/T4 は Scope B では **undefined**; per-level bound は Scope A 外で**偽**(Hill)— 弱体化経路なし)。Scope-B landscape: S_blob 不変、**one-scale ring と M2 は再開**、M3 γ₂<γ は死んだまま(K4′ scope-free)、**B2 は Scope B で未 kill**、最安欠落 = **(SB-ANCH)**(scope-free な re-centring anchor; K9 は存在のみで co-location を与えない)。自前凍結文の欠陥発見: **F22 = R-B2′ の「no Scope-A geometry」条項はアンカーについて偽**(3文書; B2 上では Scope-A-gated)、F24 = gate 判定文の未修正残置、F23 = DVEP 記録の過大表現。**次の単一ブランチ: R-B2′ anchor-independence audit**(repo 内分類のみ; fork (a) 代替あり ⟹ B2 は Scope B でも死ぬ / (b) 無し(予想)⟹ (SB-ANCH) が主 Scope-B gap、B2 は Scope B 未 kill と記録 / (c) アンカー多重消費 ⟹ 条件リスト不完全でユーザー判断へ)。その後 F21–F29 + audit 結果の第2回 freeze review(実行前にユーザーが agenda 確認)。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
