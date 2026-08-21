@@ -132,12 +132,32 @@ Clay/Fefferman statement shape (cross-checked against
    - **Residues, recorded under edge 3 (initial-data class semantics):**
      (i) the **decoder-to-hypothesis bridge** — deriving the two `L¹` frequency
      hypotheses (and the a.e.-representative hypothesis
-     `g =ᵐ coeFn (𝓕 u)`) from the Bessel `H³` carrier through the decoder;
-     (ii) the **a.e. identification** `r3PhysicalRepresentative g =ᵐ u` of the explicit
-     representative with the `L²` element itself — for `L²` data this needs an
+     `g =ᵐ coeFn (𝓕 u)`) from the Bessel `H³` carrier through the decoder —
+     **CLOSED 2026-08-21 as edge 3a, see below**;
+     (ii) = **edge 3b**: the **a.e. identification** of the explicit pointwise
+     inverse-Fourier *integral* with the `L²` decode — for `L²` data this needs an
      `L¹ ∩ L²` inversion-consistency layer that the pinned mathlib does not currently
      provide (checked: `Analysis/Fourier/Inversion.lean` is `L¹`-only;
-     `Analysis/Fourier/LpSpace.lean` has no `L¹ ∩ L²` coeFn compatibility).
+     `Analysis/Fourier/LpSpace.lean` has no `L¹ ∩ L²` coeFn compatibility). Open.
+   - **Edge 3a: `THEOREM-CLOSED` (2026-08-21)** —
+     `Formal/R3DecoderFrequencyBridge.lean`: the decoded frequency data
+     `r3DecodedFrequency 3 f = (1+‖ξ‖²)^(-3/2) • 𝓕 f` of **any** `L²` Bessel
+     coordinate satisfies both edge-1b hypotheses
+     (`integrable_r3DecodedFrequency`, `integrable_weighted_r3DecodedFrequency`;
+     Cauchy–Schwarz + Japanese bracket, `finrank 3 < 6` and `3 < 4` — order `3` is
+     the honest threshold, not slack). The word "decoder" is earned by theorem:
+     the weight equals the carrier's decoder symbol
+     (`r3InverseBesselWeight_eq_sobolevWeight`) and the `L²`-level decode
+     `r3Decoded3PhysicalVelocity` agrees with the repository's
+     tempered-distribution decoder `r3HsToTemperedCLM 3`
+     (`r3L2ToTempered_r3Decoded3PhysicalVelocity`, reusing
+     `R3StokesH2H3Smoothing`'s `r3H3ToL2Operator`). Coordinate solenoidality
+     transfers to the decode (`r3Decoded3PhysicalVelocity_mem_solenoidal`);
+     capstone `r3DecodedFrequency_incompressible` (+ Leray non-vacuity witness)
+     delivers edge 1b with every hypothesis discharged from the decoder. No rapid
+     decay claimed; the phantom equality never used as an embedding. Edge 3
+     proper (the `SmoothRapidDecayInitial`-shaped class semantics) and edge 3b
+     remain open.
 2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
    implies the coordinate momentum equation with an explicit pressure (pressure
    reconstruction). Nothing about pressure is formalized today.
@@ -205,3 +225,9 @@ form** — 1b `THEOREM-CLOSED` (`Formal/R3ClassicalIncompressibility.lean`, full
 jobs, standard axioms). The remaining required edges are **2, 3, 4, 5**, with edge 3
 enlarged by two named residues from 1b: the decoder-to-hypothesis bridge and the
 `L¹ ∩ L²` a.e. identification of the explicit representative with the `L²` element.
+
+Update 2026-08-21 (third pass): **edge 3a (the decoder-to-hypothesis bridge) is
+`THEOREM-CLOSED`** (`Formal/R3DecoderFrequencyBridge.lean`, full gate 8759 jobs, all
+seven audited declarations standard axioms, incl. the tempered-decoder identification
+`r3L2ToTempered_r3Decoded3PhysicalVelocity`). The remaining required edges are **2,
+3 (proper: `SmoothRapidDecayInitial`-shaped class semantics + edge 3b), 4, 5**.

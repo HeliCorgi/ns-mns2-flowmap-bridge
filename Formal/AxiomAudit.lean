@@ -1,6 +1,7 @@
 import Formal.NavierStokesTimeBridge
 import Formal.R3CoordinateIncompressibility
 import Formal.R3ClassicalIncompressibility
+import Formal.R3DecoderFrequencyBridge
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
 import Formal.TerminalFlowMapAmplification
@@ -279,3 +280,17 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3ClassicalDivergence_r3PhysicalRepresentative
 #print axioms MNS2.r3PhysicalRepresentative_incompressible_of_mem_solenoidal
 #print axioms MNS2.r3PhysicalRepresentative_hypotheses_nonvacuous
+
+-- Bessel decoder -> edge-1b frequency hypotheses (Clay semantic edge 3a): the decoded
+-- frequency data of an H^3 Bessel coordinate satisfies both explicit L^1 hypotheses of
+-- edge 1b (Cauchy-Schwarz against the order-three inverse Bessel weight in dimension
+-- three), is a.e. the Fourier transform of the L^2-level physical decode, coordinate
+-- solenoidality transfers to the decode, and the capstone discharges every edge-1b
+-- hypothesis from the decoder.
+#print axioms MNS2.integrable_r3DecodedFrequency
+#print axioms MNS2.integrable_weighted_r3DecodedFrequency
+#print axioms MNS2.r3DecodedFrequency_ae_coeFn_fourier
+#print axioms MNS2.r3Decoded3PhysicalVelocity_mem_solenoidal
+#print axioms MNS2.r3DecodedFrequency_incompressible
+#print axioms MNS2.r3L2ToTempered_r3Decoded3PhysicalVelocity
+#print axioms MNS2.r3DecodedFrequency_incompressible_leray
