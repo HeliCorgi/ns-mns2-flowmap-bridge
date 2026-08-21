@@ -300,3 +300,195 @@ Scope-A quasi-static = **B2 alone**, killed by R-B2′ [C] conditional on
 `sup(ω_θ/r)`, and `ℓ_neck`; all three in-house vehicles are retired or blocked
 (budget/winding by F15–F18; the level route and T4-with-a-sign by the fork-(β)
 declinations). BH verdict **YELLOW-RED maintained**; no CAP trigger.
+*(This frontier block is superseded by the round-2 closing block below —
+Annotation 2026-08-21 (round 2), B2/B11.)*
+
+## Annotation 2026-08-21 (round 2; authorized by `FREEZE_REVIEW_2_2026-08-21.md`, user's amended adjudication)
+
+Executes the Scope-B reconnaissance queue F21–F29
+(`BH_SCOPEB_RECON_2026-08-21.md`) and the anchor-audit queue F30–F36 + C6
+(`BH_RB2_ANCHOR_AUDIT_2026-08-21.md`), with the user's amendments on
+F21/F29/F31/F33/C6. Master record: `FREEZE_REVIEW_2_2026-08-21.md`.
+
+**B1 (scope legend — F21 as amended).** The **theorem/arithmetic content** of
+every row K1–K11, K4′–K4‴ and of R-NEG1–R-NEG6 is **SCOPE-FREE** (no profile
+equation consumed in the statement or its arithmetic; K8 keeps its `[C on (T)]`
+tag; K4 scope-free *as a statement*); `S_blob` is unchanged in Scope B. This
+does **not** declare every row's *applicability* settled in Scope B: (P),
+K8-on-multi-region-tuples, and the intra-core `β_v ∈ (α,γ]` limb remain
+**unresolved** (recon §4). Scope-A dependence enters the map only through the
+geometry gate's one-parameter elliptic-orbit rigidity and its corollaries, and
+through the **exhaustiveness step** (B2 below).
+
+**B2 (R-B2′ scope rider + target partition + frontier narrowing — F33;
+supersedes F22 and the "no Scope-A geometry" clause as printed in A15 /
+FREEZE_REVIEW §3 **and §5** / constant-exclusion §2 / ledger §1).** In A15 read
+"no Scope-A geometry" as "**no Scope-A aggregation machinery**" (`δ_geo`,
+`1/157`, θ, convexity), and "the Γ-saturated level (amplitude corollary)" as
+"the **amplitude**-saturated level" (the corollary caps `Γ(L)`; it does not
+bound it below). The row's target, partitioned by the co-location exponent
+`β_v` (B13):
+- **(T1)** tie face (`ρ₁ = σ₁ = γ₁ = γ` by class definition): anchor
+  definitional; **R-B2′ scope-free there**, modulo (E⁺⁺)/(P); (N-Γ)
+  definitionally discharged **[C-dict], per B11**;
+- **(T2)** `B2 ∩ {β_v = γ}` ("a B2 point wearing a Γ-saturated sub-core"): in
+  Scope A the anchor is derived from the amplitude corollary; **granting
+  membership (i.e. `β_v = γ` as a class clause), the row's machinery is
+  scope-free** — the basis of the frontier's "[C] target" phrasing; in Scope B
+  this sub-class has **no defining clause in the corpus — undefined, not
+  merely anchorless**;
+- **(T3)** `B2 ∩ {β_v < γ}` (incl. K9's razor limb `β_v = α`): **empty in
+  Scope A by the amplitude corollary; live and never claimed in Scope B** —
+  R-B2′ has no zoom centre there. *(This narrows A2's `β_v ∈ (α,γ]` open debt
+  **in Scope A** to its endpoint `β_v = γ`; the limb stays fully open in Scope
+  B — its home as (SB-ANCH), B6/B13.)*
+**The Scope-A gate is the exhaustiveness step** — "every Scope-A blob is
+two-scale in the tongue sense" (multiregion §2), i.e. every Scope-A B2
+candidate *enters* the Γ-saturated realization — **not the zoom**. Frontier
+sentences reading "Scope-A quasi-static = B2 alone, killed by R-B2′" are
+**replaced** by: "Scope-A quasi-static = B2; **its Γ-saturated realization is
+the target of R-B2′ [C]**; Scope A supplies the exhaustiveness theorem that
+every Scope-A B2 candidate enters that realization."
+
+**B3 (DVEP recording corrected — F23; supersedes the DVEP clauses of A8's
+rationale and multiregion §6.2).** DVEP (arXiv:2005.04380): the **authors
+assert** non-localizability (abstract; §1 "not localizable in general");
+**no proof is located in the paper** and no failure point is identified. DVEP
+is an *asserted*, not a verified, Scope-B witness. A8's rationale clause
+"`p = p(ψ)` necessity is false without regularity hypotheses" is replaced by
+(recon C10): "**no necessity proof exists at any regularity; the authors
+assert non-necessity at weak regularity without proof.**" A8's ruling is
+unaffected (it turns on `A_NS` membership: the velocity jump is structurally
+forced — Neumann `c > 0`).
+
+**B4 (gate verdict sentence patched — F24; supersedes
+BH_GEO_SWIRL_AGGREGATION l.203–204 as printed).** The BH-verdict sentence now
+reads: "a single non-localizable localized steady flow **inside the primary
+class `A_NS`** would restore YELLOW immediately." Trigger (A8) and verdict now
+agree; DVEP meets neither.
+
+**B5 (trigger status — F25).** "Trigger status at the 2026-08-21
+reconnaissance — **(T-c)** = the OPEN verdict label (introduced in
+`BH_SCOPEB_RECON_2026-08-21.md` §1) for the geometry-gate §10 CAP-revisit
+trigger's **Scope-B limb as amended in A8**: **OPEN, no fire.** Its two
+sub-limbs (localizability shown non-necessary inside `A_NS` / a
+non-localizable witness inside `A_NS`) are both unmet; neither is unreachable.
+Reasons: DVEP outside `A_NS` by (A1), and DVEP's non-localizability unproved
+in-paper. The forcing direction is empty in 3D (all three papers with
+localizability as their subject assume it). No CAP fire. Next mandatory
+re-check: whenever a `C¹` compactly-supported non-localizable 3D witness, or
+any regularity ⟹ localizability theorem, is published." *(Label hygiene:
+(T-c) is unrelated to the target classes (T1)/(T2)/(T3) of B2, to K8's
+hypothesis (T), and to the budget term T4.)*
+
+**B6 ((SB-ANCH)-final — F32, cited by F26).** Supersedes recon §4's one-line
+form. **(SB-ANCH):** ∃ `c, c′ > 0` τ-uniform and, along `τ_k → 0`, points
+`x_k` with **(H1)** `|u_θ(x_k,t_k)| ≥ c‖u(t_k)‖_∞` (sup-swirl saturation) and
+**(H2)** `|Γ(x_k,t_k)| ≥ c′Γ₀` at the same point (co-located Γ-saturation).
+`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`. The distance clause
+`dist(x, axis) ≤ CΓ₀/‖u‖_∞` is derivable from (H1) + Γ-max [D] and is
+**deleted as a hypothesis**. Single equivalent form: the scope-free envelope
+`Γ(r) ≤ min(Γ₀, r‖u‖_∞)` is attained within a constant at its corner
+`r = Γ₀/‖u‖_∞` — i.e. **`β_v = γ` in the sense of B13**. Scope A supplies (H1)
+with `c = 1/√42`, and (H2) only on `ρ_T = γ`. **Rider (load-bearing): granting
+(SB-ANCH) does NOT transplant R-B2′ to Scope B** — it supplies a level, not a
+labelled region; the ledger's tip/solenoid rows and (E⁺⁺)/(NECK) need a
+poloidal-exponent and thickness assignment (the labelled-region /
+exhaustiveness side), a separate and independent requirement.
+**Standing Scope-B open question (print form, F26's first half, recon §1
+verbatim):** *"Does there exist `u ∈ C¹(R³)`, axisymmetric with swirl,
+non-trivial, solving steady Euler distributionally with `u ∈ L²`,
+`p ∈ L¹_loc` and `liminf_{R→∞} ∫_{R≤|x|≤2R}(|u|²+|p|) = 0`, such that
+`u·∇p ≢ 0` (equivalently `u·∇|u|² ≢ 0`)?"*
+
+**B7 (literature ledger — F27).** arXiv:2606.13462 (Peralta-Salas–Slobodeanu
+2026: localizable + analytic ⟹ axisymmetric — converse direction; corroborates
+Scope-A ring topology) and arXiv:2608.11547 (Sato–Abe 2026: assumes
+`p = p(ψ)`) added. Legend: "three papers take localizability as their subject;
+all three assume it."
+
+**B8 (debts — F28).** Jiu–Xin CMP 287 (2009) body: **paywalled, never read**;
+usable surrogate = CLV's verbatim citation ("must vanish identically if the
+swirl F vanishes") + DVEP's citation ("axisymmetric stationary Euler flows of
+compact support without swirl do not exist [8]"); the unqualified gloss cannot
+be used without the **no-swirl qualifier**. DVEP's (A4)/(L) check: exterior
+pressure is a nonzero constant; the repair (`p → p + const` gauge) is
+cost-free — discharged [D].
+
+**B9 (Scope-B legends — F29 as amended).** (E⁺⁺)/(COH-Δ)/(ANCH-κ)/(NECK)/
+`θ_coh`/`ℓ_neck`/T4/W1–W5 are **undefined, not open, in Scope B**. The
+per-level swirl-fraction bound is **FALSE outside Scope A** (Hill) — no
+Scope-B analogue can be a weakening. Direction legend: `σ_sup = γ` and the
+forced tongue are Scope-A *escape* structures; their loss in Scope B
+strengthens K9's `σ ≤ α` half and K6's [D2] **as a loss-of-escape statement
+only — this is NOT a proof of any new kill** (user's rider). *(Recon §4's
+"K9's `σ = α` razor" is superseded by A2's trichotomy — the strengthened
+object is the `σ ≤ α` half.)*
+
+**B10 (A15 transparency — F30).** R-B2′'s printed conditionality list is to be
+read as: (E⁺⁺) = (COH-Δ)+(ANCH-κ), (P), (N-Γ)[B11], **plus the imported
+layer**: `(E⁺)` = (E) + C¹-exhaustiveness within `τ^{(γ+β)/2}` of the zoom
+centre (A16 legend; **not** the ledger ball radius `R₀` — a distinct object,
+per A20) and the `frozen dictionary [C-dict]` (the ledger chain's first input,
+ledger §1) — previously listed by reference only.
+
+**B11 ((N-Γ) status split — F31 as strengthened by the user).** (N-Γ) is
+**not** blanket [C-dict]. Split by the tip exponent:
+- on **(T1) / `ρ_T = γ`**: discharged **[C-dict]** (definitional / saturation
+  at the anchor scale);
+- on **`ρ_T > γ`**: **[C] — discharge unsupplied**, even in Scope A: the
+  second scale is capped (`ρ_T ≥ γ`), not pinned (multiregion §2), and Γ's
+  exact scale invariance (A11) puts the centre's rescaled
+  `Γ ≍ τ^{ρ_T−γ} → 0` there. The constant-exclusion §1 phrase "dischargeable
+  from τ-uniform saturation" is superseded on this branch — **as are the
+  unqualified `[C-dict]` tags printed on-map in A15's chain line and A16's
+  legend entry for (N-Γ), and FREEZE_REVIEW (round 1) §5's "…plus (N-Γ) at
+  [C-dict]": all are to be read as (N-Γ)[B11 split].**
+This split is printed to prevent conditionality inflation at future audits.
+
+**B12 (naming — F34, user's choice).** The κ̂-level/erasure statement inside
+(E⁺⁺) is renamed **(ANCH-κ)** everywhere it is printed on-map: **A15's row
+list** (`(E⁺⁺) = (COH-Δ) + (ANCH)`), **A16's decomposition**, **A19's "sole
+carrier of (ANCH)"** (the T4 legend, adopting F20), and the round-1 closing
+block (already superseded wholesale). R-NEG6's "it is not an anchor" refers to
+`κ̂ ≤ τ^{2ρ−γ−α}`, not to (ANCH-κ), and needs no rename. FREEZE_REVIEW
+(round 1) §5's "the conditional frontier is now exactly three named objects:
+(COH-Δ), (ANCH) … plus (N-Γ) at [C-dict]" is **superseded twice over** (this
+rename + B11's split). The Scope-B re-centring-anchor gap keeps the name
+**(SB-ANCH)**. The two are unrelated objects.
+
+**B13 (`β_v` legend — F35 as amended).** `β_v` = the co-location /
+saturation-scale exponent (joins `σ_core`/`σ_sup`, A1/A2): the exponent of the
+radius at which `Γ` attains `≍ Γ₀` relative to the amplitude scale.
+**`β_v = γ` means the τ-uniform constant-attainment of the envelope
+`Γ(r) ≤ min(Γ₀, r‖u‖_∞)` at its corner `r = Γ₀/‖u‖_∞` — NOT a bare exponent
+equality.** (This is what makes B6's "single equivalent form" safe.)
+
+**B14 (internal consistency — F36 + C6 as fixed by the user).** Fork-(c)
+operative definition, frozen: **fork (c) fires ⟺ an UNLISTED, INDEPENDENT,
+IRREDUCIBLE Scope-A input is discovered.** Multiplicity of anchor
+*appearances* does not fire it — downstream usages derived from the same input
+are not new conditions (of the audit's four anchor-touch sites, one is
+irreducible: the zoom-centre selection — **which is the anchor itself, listed,
+not unlisted: fork (c) does not fire**, audit §3). Recon §8's wording
+("consumes the anchor more than once") is **superseded**. Doc pointer
+corrected: B2/K9/amplitude-gate structural content lives in
+`BH_MULTIREGION_AUDIT_2026-08-20.md` §§1–3 + kill-table annotations A1–A3, not
+in `BH_SWIRL_FRACTION_PROBE_2026-08-19.md`.
+
+**Post-round-2 frontier (frozen; supersedes the round-1 closing block):**
+M2 RESTRICTED (no independent members) · M3 RESTRICTED (`γ₂ < γ` dies by K4′
+[(E⁺)+(P)]; tie face merges into B2) · **Scope-A quasi-static = B2; its
+Γ-saturated realization is the target of R-B2′ [C]** on
+(E⁺⁺) = (COH-Δ)+(ANCH-κ), (P), (N-Γ)[B11 split] (+ imported layer: (E⁺),
+frozen dictionary [C-dict] — B10), with the exhaustiveness step as the Scope-A
+gate; (NECK) = standing dictionary-extension request (`θ_coh`, `ℓ_neck`);
+fork (β) — the dictionary declines the neck level bound, `sup(ω_θ/r)`, and
+`ℓ_neck`; all three in-house vehicles retired/blocked (budget/winding by
+F15–F18; level route and T4-with-a-sign by the fork-(β) declinations) ·
+**Scope B: B2 UNKILLED**; first named gap **(SB-ANCH) ⟺ `β_v = γ` (τ-uniform
+corner attainment, B13)**, with the B6 rider that (SB-ANCH) alone does not
+transplant R-B2′; one-scale ring and M2 reopen in Scope B; **M3 `γ₂ < γ`: K4′
+transports as a scope-free statement, the kill stays conditional on
+(E⁺)+(P), and (P)'s Scope-B status is unresolved (B1)**; trigger (T-c) OPEN
+(B5) · BH verdict **YELLOW-RED maintained**; no CAP trigger.

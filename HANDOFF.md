@@ -860,17 +860,44 @@ record-only — F30–F36 proposed, not executed):
 - **new debt (C5/F31)**: (N-Γ)'s printed discharge route is not supplied by the
   anchor on the `ρ_T > γ` sub-branch, even in Scope A.
 
-The single next branch (exactly one):
+**FREEZE REVIEW ROUND 2 is EXECUTED** (2026-08-21, user's amended adjudication
+— F21/F29/F31/F33/C6 amended, rest adopted as proposed; master record
+`docs/gates/FREEZE_REVIEW_2_2026-08-21.md` + annotation **B1–B14** appended to
+the kill table; 3-lens audit run before commit, all ERRORs fixed — incl. the
+F26 open-question omission, the (E⁺)-gloss conflation, the (T-c) label
+binding, and the round-1 §5 supersession):
 
-1. **SECOND FREEZE-REVIEW ROUND over F21–F36** — holds the pen on the frozen
-   map; **user sees the agenda before execution** (F33 changes what the map
-   claims: the frontier's "B2 alone, killed by R-B2′" must carry the
-   Γ-saturated qualifier). Agenda: F21–F29 (Scope-B recon) + F30–F36 (anchor
-   audit) + C6 (fork-(c) wording reconciliation, program decision).
-2. Deliberately deferred list unchanged (intra-core `β_v ∈ (α,γ]` limb — now
-   doubly relevant as (SB-ANCH)'s home; K8/K10 on multi-region tuples; Jiu–Xin
-   body — paywalled, CLV surrogate recorded; separatrix lemma; ζ-averaging /
-   K12″; formal-side options: Clay 5 edges, glued `u*`).
+- **the map's kill claim is narrowed to accuracy (F33/B2)**: frontier replaced
+  — "Scope-A quasi-static = B2; **its Γ-saturated realization is the target of
+  R-B2′ [C]**"; the Scope-A gate is the **exhaustiveness step**, not the zoom;
+  target partition (T1) tie face scope-free / (T2) `B2∩{β_v=γ}` — machinery
+  scope-free granted membership, undefined in Scope B / (T3) `β_v<γ` empty in
+  Scope A (narrows A2's debt there to the endpoint), never claimed in Scope B;
+- **(N-Γ) split (F31/B11)**: tie face / `ρ_T = γ` → [C-dict]; `ρ_T > γ` →
+  **[C], discharge unsupplied** (blanket [C-dict] tags in A15/A16/round-1 §5
+  superseded);
+- **(ANCH) → (ANCH-κ)** renamed (B12); **`β_v` legend** = τ-uniform corner
+  attainment, not bare exponent equality (B13); **fork-(c) frozen** = unlisted
+  ∧ independent ∧ irreducible Scope-A input — does not fire (B14/C6);
+- Scope B frozen: **B2 UNKILLED**; (SB-ANCH) = (H1)∧(H2) with the canonical
+  open question printed verbatim (B6); the **non-transplant rider**
+  ((SB-ANCH) alone does not port R-B2′ — labelled-region/exhaustiveness
+  separate) printed three times; trigger (T-c) OPEN with re-check condition
+  (B5); DVEP recording corrected (B3); gate verdict sentence patched with the
+  `A_NS` qualifier (B4).
+
+Next branch — **user's choice** (round-2 record §6; no default, nothing
+commissioned):
+
+1. **Formal (Lean) side**: the 5 Clay semantic-promotion edges (Bucket A of
+   `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`) and/or the glued
+   maximal trajectory `u*` with pointwise `limsup ‖u*‖ = ∞`.
+2. Deliberately deferred list (the `β_v ∈ (α,γ]` limb is (SB-ANCH)'s home but
+   theorem-shaped — needs explicit commissioning; K8/K10 on multi-region
+   tuples; Jiu–Xin body — paywalled, CLV surrogate recorded; separatrix lemma;
+   ζ-averaging / K12″).
+3. Literature watch per B5's re-check condition (a `C¹` non-localizable
+   witness or a regularity ⟹ localizability theorem re-opens the trigger).
 3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
    tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
    separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
@@ -975,4 +1002,4 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges、Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**Scope-B reconnaissance 完了**(docs/gates/BH_SCOPEB_RECON_2026-08-21.md; record-only、F21–F29 は proposed 未実行): trigger 裁定 **(T-c) OPEN・二重不発**(DVEP は A_NS の (A1) を構造的に破る + 非局所化可能性は**主張のみで無証明**; 3D で localizability を強制する定理は皆無 — 主題とする3論文は全て仮定する側)。scope 分類: 全 K 行 / R-NEG / S_blob は **SCOPE-FREE**、Scope-A は geometry gate の楕円軌道剛性経由のみ((E⁺⁺)/(NECK)/θ_coh/ℓ_neck/T4 は Scope B では **undefined**; per-level bound は Scope A 外で**偽**(Hill)— 弱体化経路なし)。Scope-B landscape: S_blob 不変、**one-scale ring と M2 は再開**、M3 γ₂<γ は死んだまま(K4′ scope-free)、**B2 は Scope B で未 kill**、最安欠落 = **(SB-ANCH)**(scope-free な re-centring anchor; K9 は存在のみで co-location を与えない)。自前凍結文の欠陥発見: **F22 = R-B2′ の「no Scope-A geometry」条項はアンカーについて偽**(3文書; B2 上では Scope-A-gated)、F24 = gate 判定文の未修正残置、F23 = DVEP 記録の過大表現。**R-B2′ anchor-independence audit 完了**(docs/gates/BH_RB2_ANCHOR_AUDIT_2026-08-21.md; **fork (b)** — scope-free 代替なし、(SB-ANCH) = 名前付き主 Scope-B gap、**B2 は Scope B で未 kill と記録**; (c) は operative test(unlisted 消費)では不発、ただし recon §8 の印字文言では発火していた — C6 として次 agenda に搭載)。要点: 真の Scope-A gate は zoom でなく**網羅性ステップ**(「全 Scope-A blob は two-scale」)で、R-B2′ は `B2 ∩ {β_v = γ}` 上では既に scope-free(Scope B が失うのは「その部分類 = B2」という定理); (SB-ANCH) が付与されても level ≠ labelled region で R-B2′ は Scope B で statable にならない; **(SB-ANCH)-final = (H1) sup-swirl 飽和 ∧ (H2) 同一点 Γ-飽和**(距離節は Γ-max から導出可能で削除; 単一同値形: 包絡線 `Γ(r) ≤ min(Γ₀, r‖u‖_∞)` の角での定数付き達成 ⟺ `β_v = γ` τ-一様 = A2 の未解析中間肢の上端); 連鎖は定数不可知(√42 は5箇所全てアンカー継承); target 分割 (T1) tie face scope-free / (T2) Scope B で undefined / (T3) Scope A で空・Scope B で未主張(frontier 行に Γ-saturated 限定詞が必要); 新債務 F31 = (N-Γ) の印字放電経路は ρ_T > γ 枝では Scope A でも未供給。**次の単一ブランチ: F21–F36 + C6 の第2回 FREEZE REVIEW(実行前にユーザーが agenda 確認 — F33 は map の主張自体を変える)**。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み(残りは Clay semantic promotion 5 edges、Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**Scope-B reconnaissance 完了**(docs/gates/BH_SCOPEB_RECON_2026-08-21.md; record-only、F21–F29 は proposed 未実行): trigger 裁定 **(T-c) OPEN・二重不発**(DVEP は A_NS の (A1) を構造的に破る + 非局所化可能性は**主張のみで無証明**; 3D で localizability を強制する定理は皆無 — 主題とする3論文は全て仮定する側)。scope 分類: 全 K 行 / R-NEG / S_blob は **SCOPE-FREE**、Scope-A は geometry gate の楕円軌道剛性経由のみ((E⁺⁺)/(NECK)/θ_coh/ℓ_neck/T4 は Scope B では **undefined**; per-level bound は Scope A 外で**偽**(Hill)— 弱体化経路なし)。Scope-B landscape: S_blob 不変、**one-scale ring と M2 は再開**、M3 γ₂<γ は死んだまま(K4′ scope-free)、**B2 は Scope B で未 kill**、最安欠落 = **(SB-ANCH)**(scope-free な re-centring anchor; K9 は存在のみで co-location を与えない)。自前凍結文の欠陥発見: **F22 = R-B2′ の「no Scope-A geometry」条項はアンカーについて偽**(3文書; B2 上では Scope-A-gated)、F24 = gate 判定文の未修正残置、F23 = DVEP 記録の過大表現。**R-B2′ anchor-independence audit 完了**(docs/gates/BH_RB2_ANCHOR_AUDIT_2026-08-21.md; **fork (b)** — scope-free 代替なし、(SB-ANCH) = 名前付き主 Scope-B gap、**B2 は Scope B で未 kill と記録**; (c) は operative test(unlisted 消費)では不発、ただし recon §8 の印字文言では発火していた — C6 として次 agenda に搭載)。要点: 真の Scope-A gate は zoom でなく**網羅性ステップ**(「全 Scope-A blob は two-scale」)で、R-B2′ は `B2 ∩ {β_v = γ}` 上では既に scope-free(Scope B が失うのは「その部分類 = B2」という定理); (SB-ANCH) が付与されても level ≠ labelled region で R-B2′ は Scope B で statable にならない; **(SB-ANCH)-final = (H1) sup-swirl 飽和 ∧ (H2) 同一点 Γ-飽和**(距離節は Γ-max から導出可能で削除; 単一同値形: 包絡線 `Γ(r) ≤ min(Γ₀, r‖u‖_∞)` の角での定数付き達成 ⟺ `β_v = γ` τ-一様 = A2 の未解析中間肢の上端); 連鎖は定数不可知(√42 は5箇所全てアンカー継承); target 分割 (T1) tie face scope-free / (T2) Scope B で undefined / (T3) Scope A で空・Scope B で未主張(frontier 行に Γ-saturated 限定詞が必要); 新債務 F31 = (N-Γ) の印字放電経路は ρ_T > γ 枝では Scope A でも未供給。**第2回 FREEZE REVIEW 実行済み**(2026-08-21、ユーザー修正裁定 F21/F29/F31/F33/C6 適用; master record = docs/gates/FREEZE_REVIEW_2_2026-08-21.md + kill table annotation **B1–B14**; 3-lens 監査で全 ERROR 修正済み)。frontier 差し替え: 「**Scope-A quasi-static = B2; その Γ-saturated realization が R-B2′ [C] の対象**」(Scope-A gate = 網羅性ステップ; 旧「B2 alone, killed by R-B2′」撤回)。R-B2′ 条件 = (E⁺⁺) = (COH-Δ)+**(ANCH-κ)** + (P) + **(N-Γ)[B11 split: tie face/ρ_T=γ → [C-dict]、ρ_T>γ → [C] 放電未供給]**(+ imported layer: (E⁺)、frozen dictionary [C-dict] — B10)。Scope B: **B2 UNKILLED**、(SB-ANCH) = (H1)∧(H2)(距離節削除; β_v = γ の τ-一様 corner attainment、B13)+ 正準 open question 逐語印字(B6)+ **非移植 rider**(SB-ANCH 単独では R-B2′ を Scope B に運べない)。fork-(c) 凍結 = unlisted ∧ independent ∧ irreducible(不発、B14)。trigger (T-c) OPEN + 再チェック条件(B5)。**次はユーザー選択(デフォルト無し)**: (1) Lean 形式側(Clay semantic promotion 5 edges / glued u*)、(2) 後回しリスト(β_v ∈ (α,γ] 肢 = (SB-ANCH) の home、ただし定理形で要明示発注)、(3) B5 条件による文献 watch。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
