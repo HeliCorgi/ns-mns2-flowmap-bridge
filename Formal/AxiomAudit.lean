@@ -1,5 +1,6 @@
 import Formal.NavierStokesTimeBridge
 import Formal.R3CoordinateIncompressibility
+import Formal.R3ClassicalIncompressibility
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
 import Formal.TerminalFlowMapAmplification
@@ -266,3 +267,15 @@ into the Lean build log so that unexpected dependencies are visible during revie
 -- derivatives of its components) vanishes; no phantom Sobolev order consumed.
 #print axioms MNS2.r3TemperedDivergence_apply
 #print axioms MNS2.r3TemperedDivergence_eq_zero_of_mem_solenoidal
+
+-- Coordinate incompressibility semantics, classical half (Clay semantic-promotion edge 1b):
+-- the explicit inverse-Fourier-integral physical representative is C^1 under explicit
+-- frequency-side L^1 hypotheses, differentiable everywhere with an explicit derivative,
+-- and its classical divergence vanishes at every point for solenoidal data; hypotheses
+-- witnessed non-vacuous by Schwartz profiles.
+#print axioms MNS2.contDiff_one_r3PhysicalRepresentative
+#print axioms MNS2.hasFDerivAt_r3PhysicalRepresentative
+#print axioms MNS2.r3RepresentativeDeriv_div_eq_zero
+#print axioms MNS2.r3ClassicalDivergence_r3PhysicalRepresentative
+#print axioms MNS2.r3PhysicalRepresentative_incompressible_of_mem_solenoidal
+#print axioms MNS2.r3PhysicalRepresentative_hypotheses_nonvacuous

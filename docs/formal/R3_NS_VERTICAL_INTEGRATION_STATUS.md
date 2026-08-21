@@ -114,11 +114,30 @@ Clay/Fefferman statement shape (cross-checked against
      used as a physical inclusion; proof route: Plancherel
      `Lp.fourier_toTemperedDistribution_eq` + Schwartz derivative↔multiplier exchange + the
      a.e. vanishing of the raw frequency divergence).
-   - **1b (classical pointwise half): still `OPEN-REQUIRED-FOR-CLAY`** — the endpoint
-     statement's divergence is classical (spatial derivatives of a differentiable
-     representative); promoting 1a to it needs a `C¹`-representative layer (e.g. Fourier
-     inversion under explicit `L¹` frequency hypotheses, or
-     distributional-plus-continuity ⟹ classical). Not attempted this pass.
+   - **1b (classical pointwise half): `THEOREM-CLOSED` in explicit-hypothesis form
+     (2026-08-21)** — `Formal/R3ClassicalIncompressibility.lean`: the physical
+     representative is exhibited explicitly as the inverse Fourier integral
+     `r3PhysicalRepresentative g = 𝓕⁻ g`; under the explicit frequency-side `L¹`
+     hypotheses `Integrable g` and `Integrable (fun ξ => ‖ξ‖ * ‖g ξ‖)` it is `C¹`
+     (`contDiff_one_r3PhysicalRepresentative`), differentiable at every point with the
+     explicit Fourier-integral derivative (`hasFDerivAt_r3PhysicalRepresentative` /
+     `r3RepresentativeDeriv` — the `fderiv` in the divergence is genuine, not
+     junk-valued), and its classical divergence
+     `r3ClassicalDivergence U x = ∑ i, (fderiv ℝ U x (eᵢ)) i` vanishes at every point
+     (`r3ClassicalDivergence_r3PhysicalRepresentative`; membership form
+     `r3PhysicalRepresentative_incompressible_of_mem_solenoidal`). Hypotheses witnessed
+     non-vacuous by Schwartz profiles
+     (`r3PhysicalRepresentative_hypotheses_nonvacuous`). Audited, standard axioms; no
+     phantom Sobolev order used as a physical inclusion.
+   - **Residues, recorded under edge 3 (initial-data class semantics):**
+     (i) the **decoder-to-hypothesis bridge** — deriving the two `L¹` frequency
+     hypotheses (and the a.e.-representative hypothesis
+     `g =ᵐ coeFn (𝓕 u)`) from the Bessel `H³` carrier through the decoder;
+     (ii) the **a.e. identification** `r3PhysicalRepresentative g =ᵐ u` of the explicit
+     representative with the `L²` element itself — for `L²` data this needs an
+     `L¹ ∩ L²` inversion-consistency layer that the pinned mathlib does not currently
+     provide (checked: `Analysis/Fourier/Inversion.lean` is `L¹`-only;
+     `Analysis/Fourier/LpSpace.lean` has no `L¹ ∩ L²` coeFn compatibility).
 2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
    implies the coordinate momentum equation with an explicit pressure (pressure
    reconstruction). Nothing about pressure is formalized today.
@@ -180,3 +199,9 @@ mathematical gaps.
 Update 2026-08-21: edge 1 is split; its distributional half (1a) is `THEOREM-CLOSED`
 (`Formal/R3CoordinateIncompressibility.lean`, full gate 8757 jobs, standard axioms). The
 required-edge count stays 5, with edge 1 narrowed to its classical-pointwise half (1b).
+
+Update 2026-08-21 (second pass): **edge 1 is now fully closed in explicit-hypothesis
+form** — 1b `THEOREM-CLOSED` (`Formal/R3ClassicalIncompressibility.lean`, full gate 8758
+jobs, standard axioms). The remaining required edges are **2, 3, 4, 5**, with edge 3
+enlarged by two named residues from 1b: the decoder-to-hypothesis bridge and the
+`L¹ ∩ L²` a.e. identification of the explicit representative with the `L²` element.
