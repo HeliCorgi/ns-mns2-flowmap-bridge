@@ -1,4 +1,5 @@
 import Formal.NavierStokesTimeBridge
+import Formal.R3CoordinateIncompressibility
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
 import Formal.TerminalFlowMapAmplification
@@ -258,3 +259,10 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.intervalIntegral_finiteRankPath
 #print axioms MNS2.radial_finiteRank_bridge_error_bound
 #print axioms MNS2.radial_finiteRank_endpoint_error_bound_of_zero_fixed
+
+-- Coordinate incompressibility semantics (Clay semantic-promotion edge 1, distributional
+-- half): a Fourier-side solenoidal L² velocity represents a physical tempered distribution
+-- whose physical-coordinate divergence (the sum of the distributional coordinate partial
+-- derivatives of its components) vanishes; no phantom Sobolev order consumed.
+#print axioms MNS2.r3TemperedDivergence_apply
+#print axioms MNS2.r3TemperedDivergence_eq_zero_of_mem_solenoidal

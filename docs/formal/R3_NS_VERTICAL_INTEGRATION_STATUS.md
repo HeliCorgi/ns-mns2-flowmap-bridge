@@ -104,6 +104,21 @@ Clay/Fefferman statement shape (cross-checked against
 1. **Coordinate incompressibility semantics** — the Fourier/`L²` solenoidal condition
    (`r3L2SolenoidalSubmodule` membership) implies the physical-coordinate divergence-free
    condition of the endpoint statement, under sufficient regularity.
+   **SPLIT (2026-08-21):**
+   - **1a (distributional half): `THEOREM-CLOSED`** — `Formal/R3CoordinateIncompressibility.lean`:
+     `r3TemperedDivergence` (the physical-coordinate divergence of an `R3C`-valued tempered
+     distribution, `∑ᵢ ∂_{eᵢ}` of the components via mathlib's distributional derivative) and
+     `r3TemperedDivergence_eq_zero_of_mem_solenoidal` (solenoidal-submodule membership ⟹ the
+     `L²`-embedded physical distribution `r3L2ToTemperedCLM u` is divergence-free), audited,
+     standard axioms, **hypothesis-free** (no regularity consumed, no phantom Sobolev order
+     used as a physical inclusion; proof route: Plancherel
+     `Lp.fourier_toTemperedDistribution_eq` + Schwartz derivative↔multiplier exchange + the
+     a.e. vanishing of the raw frequency divergence).
+   - **1b (classical pointwise half): still `OPEN-REQUIRED-FOR-CLAY`** — the endpoint
+     statement's divergence is classical (spatial derivatives of a differentiable
+     representative); promoting 1a to it needs a `C¹`-representative layer (e.g. Fourier
+     inversion under explicit `L¹` frequency hypotheses, or
+     distributional-plus-continuity ⟹ classical). Not attempted this pass.
 2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
    implies the coordinate momentum equation with an explicit pressure (pressure
    reconstruction). Nothing about pressure is formalized today.
@@ -161,3 +176,7 @@ the README frontier; fixed in this commit).
 Exact missing-edge count to the official Clay statement class: **5 required semantic
 edges** (Bucket A above), plus the open research branch (Bucket C). Bucket B contains no
 mathematical gaps.
+
+Update 2026-08-21: edge 1 is split; its distributional half (1a) is `THEOREM-CLOSED`
+(`Formal/R3CoordinateIncompressibility.lean`, full gate 8757 jobs, standard axioms). The
+required-edge count stays 5, with edge 1 narrowed to its classical-pointwise half (1b).
