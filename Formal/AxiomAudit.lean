@@ -2,6 +2,7 @@ import Formal.NavierStokesTimeBridge
 import Formal.R3CoordinateIncompressibility
 import Formal.R3ClassicalIncompressibility
 import Formal.R3DecoderFrequencyBridge
+import Formal.R3InversionConsistency
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
 import Formal.TerminalFlowMapAmplification
@@ -294,3 +295,12 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3DecodedFrequency_incompressible
 #print axioms MNS2.r3L2ToTempered_r3Decoded3PhysicalVelocity
 #print axioms MNS2.r3DecodedFrequency_incompressible_leray
+
+-- Inversion consistency (Clay semantic edge 3b): the pointwise inverse-Fourier-integral
+-- representative of the decoded frequency data agrees a.e. with the L^2-level decode
+-- (Schwartz pairing on both sides + a.e. uniqueness against smooth compactly supported
+-- test functions; no general L^1-cap-L^2 inversion library).
+#print axioms MNS2.integral_smul_r3PhysicalRepresentative
+#print axioms MNS2.integral_smul_r3Decoded3PhysicalVelocity
+#print axioms MNS2.r3PhysicalRepresentative_ae_r3Decoded3PhysicalVelocity
+#print axioms MNS2.r3DecodedFrequency_incompressible_ae_decoder

@@ -135,10 +135,27 @@ Clay/Fefferman statement shape (cross-checked against
      `g =ᵐ coeFn (𝓕 u)`) from the Bessel `H³` carrier through the decoder —
      **CLOSED 2026-08-21 as edge 3a, see below**;
      (ii) = **edge 3b**: the **a.e. identification** of the explicit pointwise
-     inverse-Fourier *integral* with the `L²` decode — for `L²` data this needs an
-     `L¹ ∩ L²` inversion-consistency layer that the pinned mathlib does not currently
-     provide (checked: `Analysis/Fourier/Inversion.lean` is `L¹`-only;
-     `Analysis/Fourier/LpSpace.lean` has no `L¹ ∩ L²` coeFn compatibility). Open.
+     inverse-Fourier *integral* with the `L²` decode — **CLOSED 2026-08-22, see
+     below** (the general `L¹ ∩ L²` layer is still absent from mathlib; the closure
+     is the instance needed here, via Schwartz pairing, not a general library).
+   - **Edge 3b: `THEOREM-CLOSED` (2026-08-22)** —
+     `Formal/R3InversionConsistency.lean`:
+     `r3PhysicalRepresentative_ae_r3Decoded3PhysicalVelocity` proves
+     `r3PhysicalRepresentative (r3DecodedFrequency 3 f) =ᵐ[volume]
+     coeFn (r3Decoded3PhysicalVelocity f)` for **every** `L²` Bessel coordinate
+     `f` (no solenoidality needed), at order `3`. Scope: the `L¹ ∩ L²`
+     inversion-consistency **instance needed here** — no general inversion
+     library is built. Route: both sides are paired against smooth compactly
+     supported test functions (`L¹` multiplication formula
+     `VectorFourier.integral_fourierIntegral_smul_eq_flip` on the pointwise
+     side; `Lp.toTemperedDistribution_apply` +
+     `Lp.fourierInv_toTemperedDistribution_eq` +
+     `TemperedDistribution.fourierInv_apply` on the `L²` side) and the a.e.
+     equality follows from `ae_eq_of_integral_contDiff_smul_eq`. Bundled
+     consequence `r3DecodedFrequency_incompressible_ae_decoder`: for a
+     solenoidal coordinate, the `C¹`, everywhere classically divergence-free
+     explicit representative is an a.e. representative of the `L²` decode,
+     whose tempered embedding is exactly the carrier's Bessel decoder.
    - **Edge 3a: `THEOREM-CLOSED` (2026-08-21)** —
      `Formal/R3DecoderFrequencyBridge.lean`: the decoded frequency data
      `r3DecodedFrequency 3 f = (1+‖ξ‖²)^(-3/2) • 𝓕 f` of **any** `L²` Bessel
@@ -156,8 +173,8 @@ Clay/Fefferman statement shape (cross-checked against
      capstone `r3DecodedFrequency_incompressible` (+ Leray non-vacuity witness)
      delivers edge 1b with every hypothesis discharged from the decoder. No rapid
      decay claimed; the phantom equality never used as an embedding. Edge 3
-     proper (the `SmoothRapidDecayInitial`-shaped class semantics) and edge 3b
-     remain open.
+     proper (the `SmoothRapidDecayInitial`-shaped class semantics) remains
+     open; edge 3b is closed separately (2026-08-22, above).
 2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
    implies the coordinate momentum equation with an explicit pressure (pressure
    reconstruction). Nothing about pressure is formalized today.
@@ -231,3 +248,8 @@ Update 2026-08-21 (third pass): **edge 3a (the decoder-to-hypothesis bridge) is
 seven audited declarations standard axioms, incl. the tempered-decoder identification
 `r3L2ToTempered_r3Decoded3PhysicalVelocity`). The remaining required edges are **2,
 3 (proper: `SmoothRapidDecayInitial`-shaped class semantics + edge 3b), 4, 5**.
+
+Update 2026-08-22: **edge 3b is `THEOREM-CLOSED`**
+(`Formal/R3InversionConsistency.lean`, full gate 8760 jobs, all four audited
+declarations standard axioms). The remaining required edges are **2, 3 (proper:
+`SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.

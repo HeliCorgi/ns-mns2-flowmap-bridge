@@ -33,10 +33,11 @@ word "decoder" by theorem, not by naming:
 The definitional equality `R3HsVelocity 3 = R3L2Velocity` is nowhere used as a physical
 Sobolev embedding: the coordinate `f` is never itself treated as the physical velocity;
 every physical object passes through the explicit inverse Bessel multiplier. No rapid
-decay is claimed anywhere. NOT claimed (edge 3b, deliberately untouched): the a.e.
-identification of the pointwise inverse-Fourier *integral*
+decay is claimed anywhere. Not claimed *in this file* (edge 3b): the a.e. identification
+of the pointwise inverse-Fourier *integral*
 `r3PhysicalRepresentative (r3DecodedFrequency 3 f)` with the `L²` decode
-`r3Decoded3PhysicalVelocity f` — the `L¹ ∩ L²` inversion-consistency layer.
+`r3Decoded3PhysicalVelocity f` — closed separately in `Formal/R3InversionConsistency.lean`
+(`r3PhysicalRepresentative_ae_r3Decoded3PhysicalVelocity`).
 -/
 
 namespace MNS2
