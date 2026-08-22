@@ -45,6 +45,7 @@ import Formal.EndpointSafeTwoSpaceRestart
 import Formal.EndpointSafeTwoSpaceUniqueness
 import Formal.EndpointSafeTwoSpaceConcatenation
 import Formal.R3ConvectionSourceIdentification
+import Formal.R3ProjectedMomentumDuhamelInfrastructure
 import Formal.R3MildContinuation
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
@@ -332,3 +333,19 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3HelmholtzPressure_gradient_decodedConvection
 #print axioms MNS2.exists_r3DecodedConvectionL2_ne_zero
 #print axioms MNS2.exists_r3ConvectionH3ToH2_ne_zero
+
+-- Duhamel differentiation infrastructure towards the projected momentum equation (Clay
+-- semantic edge 2b-ii.a, infrastructure pass; the momentum equation itself is NOT proved
+-- and the lemmas below are not verified to be sufficient for it): the decoded Laplacian
+-- multiplier and its
+-- identification with the distributional Laplacian, its commutations with the Stokes flow
+-- and the H2-to-H3 smoothing, the Stokes generator identity in pairing form and its
+-- integrated (FTC) form, the Duhamel-triangle Fubini swap, and the decoded mild identity.
+#print axioms MNS2.r3L2ToTempered_r3H3LaplacianL2Operator
+#print axioms MNS2.r3H3LaplacianL2Operator_stokes
+#print axioms MNS2.r3H3LaplacianL2Operator_smoothing
+#print axioms MNS2.hasDerivAt_inner_r3StokesL2Path
+#print axioms MNS2.integral_inner_r3StokesL2Path
+#print axioms MNS2.integral_triangle_swap
+#print axioms MNS2.r3MildDecodedVelocity_duhamel
+#print axioms MNS2.r3HelmholtzPressure_gradient_trajectoryConvection

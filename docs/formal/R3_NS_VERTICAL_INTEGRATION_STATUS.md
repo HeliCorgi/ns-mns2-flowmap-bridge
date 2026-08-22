@@ -226,7 +226,37 @@ Clay/Fefferman statement shape (cross-checked against
      time dependence, differentiation of the Duhamel formula, and the mild→strong
      coordinate momentum equation assembling `∂ₜu − νΔu + (u·∇)u + ∇p = 0` with the
      edge-2a pressure witness at the edge-2b-i-identified source (with `v := u` and the
-     edge-3a solenoidality). Not attempted.
+     edge-3a solenoidality). **The momentum equation is NOT proved.**
+     **Infrastructure pass 2026-08-22 (`Formal/R3ProjectedMomentumDuhamelInfrastructure.lean`)** —
+     the analytic machinery for the mild→momentum passage is proved and audited, but the
+     assembly is not:
+     * `r3H3LaplacianL2Operator` — the decoded Laplacian as the explicit bounded
+       multiplier `Δ̂·J⁻³` (`Δ̂(ξ) = −(2π)²‖ξ‖²`), **proved to be the genuine
+       distributional Laplacian** `∑ᵢ ∂ᵢ∂ᵢ` of the order-three decode
+       (`r3L2ToTempered_r3H3LaplacianL2Operator`) — the operator earns the name `Δ`;
+     * its commutations with the Stokes flow (`r3H3LaplacianL2Operator_stokes`) and with
+       the `H²→H³` smoothing operator (`r3H3LaplacianL2Operator_smoothing`);
+     * the **Stokes generator identity in pairing form**
+       (`hasDerivAt_inner_r3StokesL2Path`) and its integrated FTC form
+       (`integral_inner_r3StokesL2Path`);
+     * the **Duhamel-triangle Fubini swap** (`integral_triangle_swap`);
+     * the **decoded mild identity** (`r3MildDecodedVelocity_duhamel`) and the record
+       that the decoded Duhamel source is the edge-2b-i identified convection
+       (`r3MildConvectionSource_eq`), with the edge-2a pressure witness instantiated at
+       it (`r3HelmholtzPressure_gradient_trajectoryConvection`).
+     **Explicitly still open (named): edge `2b-ii.a-assembly`** — the fundamental
+     integral identity `U t = U 0 + ∫₀ᵗ (νΔ(u σ) − P((U·∇)U)(σ)) dσ` and the strong
+     `L²`-valued time derivative `∂ₜU = νΔU − P((U·∇)U)` at interior times.  Each
+     ingredient listed above is individually machine-checked, but **none of them is
+     consumed by any theorem** (only `Formal/AxiomAudit.lean` imports the module), and
+     **the ingredient list is not verified to be sufficient**: the assembly was attempted
+     in this pass, hit repeated Lean elaboration timeouts, and was **removed rather than
+     shipped unverified**.  Steps known to be still missing include commuting `νΔ` past
+     the Duhamel interval integral, the integrability and joint-continuity inputs of
+     `integral_triangle_swap` for the flowed source on the triangle, and the
+     pairing-to-`L²` separation plus Bochner FTC-2 for the strong derivative.  Beyond it,
+     2b-ii.b (the unprojected equation with the pressure term, requiring `v := u` and
+     solenoidality) remains untouched.
 3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
    `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
    coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
@@ -324,3 +354,13 @@ at **8762 jobs**; the 2b-i audit block now carries **nine** declarations, all st
 axioms.  The witness is not divergence-free and does not address the projected source.
 The required-edge count is unchanged at 4: **2b-ii, 3 (proper:
 `SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.
+
+Update 2026-08-22 (fifth pass): an **infrastructure pass for edge 2b-ii.a** landed
+(`Formal/R3ProjectedMomentumDuhamelInfrastructure.lean`, full gate **8763 jobs**, eight audited
+declarations standard axioms, zero warnings).  It proves the decoded Laplacian and its
+identification with the distributional Laplacian, the Laplacian/heat commutations, the
+Stokes generator identity and its FTC form, the Duhamel-triangle Fubini swap, and the
+decoded mild identity.  **No momentum equation is claimed**: the assembly (integral
+identity + FTC-2) is named and left open.  This pass closes **no** edge and adds no
+consumer: it is an infrastructure deposit whose sufficiency for the 2b-ii.a assembly is
+unproved.  The required-edge count is unchanged at 4: **2b-ii, 3 (proper), 4, 5**.
