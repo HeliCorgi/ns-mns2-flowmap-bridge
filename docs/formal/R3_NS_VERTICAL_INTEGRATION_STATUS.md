@@ -177,7 +177,23 @@ Clay/Fefferman statement shape (cross-checked against
      open; edge 3b is closed separately (2026-08-22, above).
 2. **Momentum-equation semantics with a pressure witness** — the projected mild equation
    implies the coordinate momentum equation with an explicit pressure (pressure
-   reconstruction). Nothing about pressure is formalized today.
+   reconstruction).
+   **SPLIT (2026-08-22):**
+   - **2a (generic Helmholtz pressure reconstruction): `THEOREM-CLOSED`** —
+     `Formal/R3HelmholtzPressure.lean`: for **every** `L²` source `F`, the explicit
+     pressure tempered distribution `r3HelmholtzPressure F` (inverse Fourier transform
+     of the `(-(2πi))⁻¹·(ξ·𝓕F)/‖ξ‖²` profile, split `L¹`-on-ball ⊕ `L²`-exterior)
+     satisfies `∇p = -(I-P)F` componentwise in `𝓢'`
+     (`r3HelmholtzPressure_gradient`), hypothesis-free, with the Leray complement's
+     a.e. frequency realization (`fourier_r3LerayComplementL2_ae`), the supporting
+     integrability facts, and a non-vacuity witness
+     (`exists_r3LerayComplementL2_ne_zero`: the complement is not identically zero).
+     Audited, standard axioms; no phantom Sobolev order; sign matches the NS
+     convention (`∇p = -(I-P)((u·∇)u)` shape).
+   - **2b (momentum-equation semantics proper): still `OPEN-REQUIRED-FOR-CLAY`** —
+     identifying the source with the Navier–Stokes nonlinearity `(u·∇)u` on the
+     solution class, time dependence, and the mild→strong coordinate momentum
+     equation with this pressure witness. Not attempted.
 3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
    `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
    coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
@@ -253,3 +269,8 @@ Update 2026-08-22: **edge 3b is `THEOREM-CLOSED`**
 (`Formal/R3InversionConsistency.lean`, full gate 8760 jobs, all four audited
 declarations standard axioms). The remaining required edges are **2, 3 (proper:
 `SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.
+
+Update 2026-08-22 (second pass): **edge 2a (generic Helmholtz pressure reconstruction)
+is `THEOREM-CLOSED`** (`Formal/R3HelmholtzPressure.lean`, full gate 8761 jobs, all five
+audited declarations standard axioms, incl. the non-vacuity witness). The remaining
+required edges are **2b (momentum-equation semantics proper), 3 (proper), 4, 5**.

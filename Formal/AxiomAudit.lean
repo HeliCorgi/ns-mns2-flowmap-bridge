@@ -3,6 +3,7 @@ import Formal.R3CoordinateIncompressibility
 import Formal.R3ClassicalIncompressibility
 import Formal.R3DecoderFrequencyBridge
 import Formal.R3InversionConsistency
+import Formal.R3HelmholtzPressure
 import Formal.FlowMapNonextendibilityCriterion
 import Formal.UniformRestartContinuation
 import Formal.TerminalFlowMapAmplification
@@ -304,3 +305,13 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.integral_smul_r3Decoded3PhysicalVelocity
 #print axioms MNS2.r3PhysicalRepresentative_ae_r3Decoded3PhysicalVelocity
 #print axioms MNS2.r3DecodedFrequency_incompressible_ae_decoder
+
+-- Generic Helmholtz pressure reconstruction (Clay semantic edge 2a): for every L^2
+-- source, the explicit pressure tempered distribution (inverse Fourier transform of the
+-- low/high split of the divergence-over-|xi|^2 profile) satisfies grad p = -(I-P)F
+-- componentwise in Schwartz'; supporting integrability and frequency-realization facts.
+#print axioms MNS2.integrable_r3PressureFrequencyLow
+#print axioms MNS2.memLp_two_r3PressureFrequencyHigh
+#print axioms MNS2.fourier_r3LerayComplementL2_ae
+#print axioms MNS2.r3HelmholtzPressure_gradient
+#print axioms MNS2.exists_r3LerayComplementL2_ne_zero
