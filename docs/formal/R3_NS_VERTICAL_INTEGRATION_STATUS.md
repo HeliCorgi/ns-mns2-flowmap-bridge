@@ -190,10 +190,34 @@ Clay/Fefferman statement shape (cross-checked against
      (`exists_r3LerayComplementL2_ne_zero`: the complement is not identically zero).
      Audited, standard axioms; no phantom Sobolev order; sign matches the NS
      convention (`∇p = -(I-P)((u·∇)u)` shape).
-   - **2b (momentum-equation semantics proper): still `OPEN-REQUIRED-FOR-CLAY`** —
-     identifying the source with the Navier–Stokes nonlinearity `(u·∇)u` on the
-     solution class, time dependence, and the mild→strong coordinate momentum
-     equation with this pressure witness. Not attempted.
+   - **2b-i (general `H³` convection source identification): `THEOREM-CLOSED`
+     (2026-08-22)** — `Formal/R3ConvectionSourceIdentification.lean`: for **every** pair
+     of order-three Bessel coordinates `u, v`, hypothesis-free, the genuine `J⁻²`
+     multiplier decode of the completed coordinate operator equals the literal pointwise
+     convection of the decoded physical representatives,
+     `r3H2ToL2Operator (r3ConvectionH3ToH2 u v) = r3DecodedConvectionL2 u v`
+     (`r3H2ToL2Operator_r3ConvectionH3ToH2`), where
+     `r3DecodedConvectionL2 u v = ∑ᵢ (U_u)ᵢ ∂ᵢU_v` is built pointwise from edge-1b's
+     explicit derivative of `U_f = 𝓕⁻(r3DecodedFrequency 3 f)` and equals the genuine
+     `fderiv` (`r3DecodedConvectionPointwise_eq_fderiv`).  Route: exact Fourier inversion
+     on the Schwartz core + continuity in each slot (bounded `2πiξᵢJ⁻³` multiplier
+     operators in the derivative slot; quantitative Cauchy–Schwarz decoder `L¹` bound
+     `∫‖J⁻³·𝓕f‖ ≤ ‖J⁻³‖_{L²}‖f‖` for the Lipschitz estimate in the velocity slot).
+     Projected corollary `r3H2ToL2Operator_r3ProjectedConvectionH3ToH2 =
+     r3LerayL2Operator ((U·∇)V)`, the Leray-complement difference identity, and the
+     edge-2a pressure gradient instantiated at that source
+     (`r3HelmholtzPressure_gradient_decodedConvection`).  **Scope: this fixes the
+     semantics of the convection *operator* from which the Duhamel integrand is built;
+     it says nothing about the mild solution's time dependence, and it is not an
+     identification of the Duhamel integrand along a solution.  No non-vacuity witness
+     is shipped for this edge (unlike 2a): nothing yet proves
+     `r3DecodedConvectionL2 u v ≠ 0` for any `u, v`.**  No phantom Sobolev order
+     consumed; no rapid decay claimed.
+   - **2b-ii (momentum-equation semantics proper): still `OPEN-REQUIRED-FOR-CLAY`** —
+     time dependence, differentiation of the Duhamel formula, and the mild→strong
+     coordinate momentum equation assembling `∂ₜu − νΔu + (u·∇)u + ∇p = 0` with the
+     edge-2a pressure witness at the edge-2b-i-identified source (with `v := u` and the
+     edge-3a solenoidality). Not attempted.
 3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
    `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
    coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
@@ -274,3 +298,10 @@ Update 2026-08-22 (second pass): **edge 2a (generic Helmholtz pressure reconstru
 is `THEOREM-CLOSED`** (`Formal/R3HelmholtzPressure.lean`, full gate 8761 jobs, all five
 audited declarations standard axioms, incl. the non-vacuity witness). The remaining
 required edges are **2b (momentum-equation semantics proper), 3 (proper), 4, 5**.
+
+Update 2026-08-22 (third pass): **edge 2b-i (general `H³` convection source
+identification) is `THEOREM-CLOSED`** (`Formal/R3ConvectionSourceIdentification.lean`,
+full gate 8762 jobs, all seven audited declarations standard axioms; **no non-vacuity
+witness shipped for this edge** — to be added). The required-edge count stays 4, with
+edge 2b narrowed to 2b-ii. The remaining required edges are **2b-ii, 3 (proper:
+`SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.

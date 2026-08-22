@@ -44,6 +44,7 @@ import Formal.R3QuantitativeLifespan
 import Formal.EndpointSafeTwoSpaceRestart
 import Formal.EndpointSafeTwoSpaceUniqueness
 import Formal.EndpointSafeTwoSpaceConcatenation
+import Formal.R3ConvectionSourceIdentification
 import Formal.R3MildContinuation
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
@@ -315,3 +316,17 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.fourier_r3LerayComplementL2_ae
 #print axioms MNS2.r3HelmholtzPressure_gradient
 #print axioms MNS2.exists_r3LerayComplementL2_ne_zero
+
+-- General H^3 convection source identification (Clay semantic edge 2b-i): the genuine
+-- J^-2 decode of the completed coordinate convection operator equals, for all order-three
+-- coordinates, the pointwise convection (U.grad)V of the decoded physical representatives
+-- built from the explicit derivative; projected corollary P((U.grad)V); quantitative
+-- Cauchy-Schwarz decoder L^1 bound; generic L^1-cap-L^2 inversion consistency; and the
+-- edge-2a pressure gradient instantiated at the identified convection source.
+#print axioms MNS2.integral_norm_r3DecodedFrequency_le
+#print axioms MNS2.r3PhysicalRepresentative_ae_fourierInv
+#print axioms MNS2.r3DecodedDerivativeL2Operator_ae_deriv
+#print axioms MNS2.r3DecodedConvectionL2_schwartz
+#print axioms MNS2.r3H2ToL2Operator_r3ConvectionH3ToH2
+#print axioms MNS2.r3H2ToL2Operator_r3ProjectedConvectionH3ToH2
+#print axioms MNS2.r3HelmholtzPressure_gradient_decodedConvection
