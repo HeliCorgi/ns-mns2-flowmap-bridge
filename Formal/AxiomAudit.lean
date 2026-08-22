@@ -330,3 +330,5 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3H2ToL2Operator_r3ConvectionH3ToH2
 #print axioms MNS2.r3H2ToL2Operator_r3ProjectedConvectionH3ToH2
 #print axioms MNS2.r3HelmholtzPressure_gradient_decodedConvection
+#print axioms MNS2.exists_r3DecodedConvectionL2_ne_zero
+#print axioms MNS2.exists_r3ConvectionH3ToH2_ne_zero

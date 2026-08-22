@@ -772,6 +772,193 @@ theorem r3HelmholtzPressure_gradient_decodedConvection
           𝓢'(R3, R3C))) :=
   r3HelmholtzPressure_gradient (r3DecodedConvectionL2 u v) j
 
+/-! ## Non-vacuity witness
+
+The identification is not the trivial identity `0 = 0`: a concrete smooth bump field
+(complexified, pointing in the `e₀` direction) has nonzero decoded convection.  The
+argument needs no derivative evaluation: if the convection `½∂₀(b²) • e₀` vanished
+identically, the square of the bump would be constant along the `e₀`-axis, contradicting
+`b = 1` at the centre and `b = 0` outside the support. -/
+
+/-- The witness bump: plateau of radius one, support of radius two, centred at the
+origin. -/
+def r3ConvectionWitnessBump : ContDiffBump (0 : R3) := ⟨1, 2, one_pos, one_lt_two⟩
+
+/-- The complexified witness bump has compact support. -/
+theorem r3ConvectionWitnessBump_hasCompactSupport :
+    HasCompactSupport (fun x : R3 => ((r3ConvectionWitnessBump x : ℝ) : ℂ)) :=
+  HasCompactSupport.comp_left (g := fun r : ℝ => (r : ℂ))
+    r3ConvectionWitnessBump.hasCompactSupport rfl
+
+/-- The complexified witness bump is smooth. -/
+theorem contDiff_r3ConvectionWitnessBumpC :
+    ContDiff ℝ ∞ (fun x : R3 => ((r3ConvectionWitnessBump x : ℝ) : ℂ)) :=
+  Complex.ofRealCLM.contDiff.comp r3ConvectionWitnessBump.contDiff
+
+/-- The complexified witness bump as a scalar Schwartz function. -/
+def r3ConvectionWitnessScalar : 𝓢(R3, ℂ) :=
+  r3ConvectionWitnessBump_hasCompactSupport.toSchwartzMap
+    contDiff_r3ConvectionWitnessBumpC
+
+/-- The witness velocity field: the bump profile in the `e₀` direction. -/
+def r3ConvectionWitnessField : R3SchwartzVelocity :=
+  r3ConvectionWitnessScalar.postcompCLM
+    (ContinuousLinearMap.toSpanSingleton ℂ
+      (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C))
+
+theorem r3ConvectionWitnessField_apply (x : R3) :
+    r3ConvectionWitnessField x =
+      ((r3ConvectionWitnessBump x : ℝ) : ℂ) •
+        (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) := rfl
+
+/-- The full Fréchet derivative of the witness field, through the scalar chain rule. -/
+theorem hasFDerivAt_r3ConvectionWitnessField (x : R3) :
+    HasFDerivAt (⇑r3ConvectionWitnessField)
+      (((ContinuousLinearMap.toSpanSingleton ℂ
+          (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C)).restrictScalars ℝ) ∘L
+        (Complex.ofRealCLM ∘L fderiv ℝ (⇑r3ConvectionWitnessBump) x)) x := by
+  have hb : HasFDerivAt (⇑r3ConvectionWitnessBump)
+      (fderiv ℝ (⇑r3ConvectionWitnessBump) x) x :=
+    ((r3ConvectionWitnessBump.contDiff (n := 1)).differentiable one_ne_zero x).hasFDerivAt
+  have hreal : HasFDerivAt (fun x : R3 => ((r3ConvectionWitnessBump x : ℝ) : ℂ))
+      (Complex.ofRealCLM ∘L fderiv ℝ (⇑r3ConvectionWitnessBump) x) x :=
+    Complex.ofRealCLM.hasFDerivAt.comp x hb
+  exact ((ContinuousLinearMap.toSpanSingleton ℂ
+    (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C)).restrictScalars
+      ℝ).hasFDerivAt.comp x hreal
+
+/-- If the witness convection vanished at every point, the directional derivative
+product `b · ∂₀b` would vanish everywhere. -/
+theorem r3ConvectionWitness_pointwise_product {x : R3}
+    (hx : r3SchwartzConvection r3ConvectionWitnessField r3ConvectionWitnessField x = 0) :
+    (r3ConvectionWitnessBump x : ℝ) *
+      fderiv ℝ (⇑r3ConvectionWitnessBump) x (r3CoordinateDirection 0) = 0 := by
+  rw [r3SchwartzConvection_apply] at hx
+  have hderiv : ∀ i : Fin 3, r3SchwartzCoordinateDerivative i r3ConvectionWitnessField x =
+      (((fderiv ℝ (⇑r3ConvectionWitnessBump) x (r3CoordinateDirection i) : ℝ) : ℂ)) •
+        (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) := by
+    intro i
+    show fderiv ℝ (⇑r3ConvectionWitnessField) x (r3CoordinateDirection i) = _
+    rw [(hasFDerivAt_r3ConvectionWitnessField x).fderiv]
+    rfl
+  have hcomp : ∀ i : Fin 3, r3ConvectionWitnessField x i =
+      ((r3ConvectionWitnessBump x : ℝ) : ℂ) *
+        ((EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) i) := by
+    intro i
+    rw [r3ConvectionWitnessField_apply]
+    simp
+  rw [Fin.sum_univ_three, hderiv 0, hderiv 1, hderiv 2, hcomp 0, hcomp 1, hcomp 2] at hx
+  have h1 : ((EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) (1 : Fin 3)) = 0 := by
+    simp
+  have h2 : ((EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) (2 : Fin 3)) = 0 := by
+    simp
+  have h0 : ((EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) (0 : Fin 3)) = 1 := by
+    simp
+  rw [h0, h1, h2] at hx
+  simp only [mul_one, mul_zero, zero_mul, zero_smul, add_zero, smul_smul] at hx
+  have hsingle : (EuclideanSpace.single (0 : Fin 3) (1 : ℂ) : R3C) ≠ 0 := by
+    intro h
+    have := congrArg (fun v : R3C => v 0) h
+    simp at this
+  have hscalar : ((r3ConvectionWitnessBump x : ℝ) : ℂ) *
+      (((fderiv ℝ (⇑r3ConvectionWitnessBump) x (r3CoordinateDirection 0) : ℝ) : ℂ)) = 0 :=
+    (smul_eq_zero.mp hx).resolve_right hsingle
+  have : (((r3ConvectionWitnessBump x : ℝ) *
+      fderiv ℝ (⇑r3ConvectionWitnessBump) x (r3CoordinateDirection 0) : ℝ) : ℂ) = 0 := by
+    push_cast
+    exact hscalar
+  exact_mod_cast this
+
+/-- **Non-vacuity witness for edge 2b-i**: the identified convection source is not
+identically zero — there are order-three coordinates with nonzero `(U·∇)V`. -/
+theorem exists_r3DecodedConvectionL2_ne_zero :
+    ∃ u v : R3HsVelocity 3, r3DecodedConvectionL2 u v ≠ 0 := by
+  refine ⟨r3SchwartzToHsCLM 3 r3ConvectionWitnessField,
+    r3SchwartzToHsCLM 3 r3ConvectionWitnessField, fun hzero => ?_⟩
+  rw [r3DecodedConvectionL2_schwartz] at hzero
+  -- The Lp class vanishing forces a.e. vanishing of the continuous convection field.
+  have hae : ⇑(r3SchwartzConvection r3ConvectionWitnessField r3ConvectionWitnessField)
+      =ᵐ[volume] (fun _ : R3 => (0 : R3C)) := by
+    have h1 := (r3SchwartzConvection r3ConvectionWitnessField
+      r3ConvectionWitnessField).coeFn_toLp 2 (volume : Measure R3)
+    rw [hzero] at h1
+    filter_upwards [h1, Lp.coeFn_zero R3C 2 (volume : Measure R3)] with y hy hz
+    rw [← hy]
+    exact hz
+  -- Continuity upgrades a.e. vanishing to everywhere vanishing.
+  have hall : ∀ x : R3,
+      r3SchwartzConvection r3ConvectionWitnessField r3ConvectionWitnessField x = 0 := by
+    intro x
+    by_contra hx
+    have hopen : IsOpen {y : R3 |
+        r3SchwartzConvection r3ConvectionWitnessField r3ConvectionWitnessField y ≠ 0} :=
+      isOpen_ne.preimage (r3SchwartzConvection r3ConvectionWitnessField
+        r3ConvectionWitnessField).continuous
+    obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hopen x hx
+    have hnull : volume {y : R3 |
+        r3SchwartzConvection r3ConvectionWitnessField r3ConvectionWitnessField y ≠ 0} = 0 :=
+      MeasureTheory.ae_iff.mp hae
+    exact absurd (measure_mono_null hball hnull)
+      (Metric.measure_ball_pos volume x hε).ne'
+  -- The product `b · ∂₀b = ½ ∂₀(b²)` vanishes everywhere; integrate along the axis.
+  have hprod : ∀ x : R3, (r3ConvectionWitnessBump x : ℝ) *
+      fderiv ℝ (⇑r3ConvectionWitnessBump) x (r3CoordinateDirection 0) = 0 := fun x =>
+    r3ConvectionWitness_pointwise_product (hall x)
+  set d : R3 := r3CoordinateDirection 0 with hd
+  have hbdiff : Differentiable ℝ (⇑r3ConvectionWitnessBump) :=
+    (r3ConvectionWitnessBump.contDiff (n := 1)).differentiable one_ne_zero
+  have hline : ∀ t : ℝ, HasDerivAt (fun s : ℝ => s • d) d t := by
+    intro t
+    have h := (hasDerivAt_id t).smul_const d
+    rwa [one_smul] at h
+  have hB : ∀ t : ℝ, HasDerivAt
+      (fun s : ℝ => r3ConvectionWitnessBump (s • d) * r3ConvectionWitnessBump (s • d))
+      (2 * (r3ConvectionWitnessBump (t • d) *
+        fderiv ℝ (⇑r3ConvectionWitnessBump) (t • d) d)) t := by
+    intro t
+    have hcomp := (hbdiff (t • d)).hasFDerivAt.comp_hasDerivAt t (hline t)
+    have hmul := hcomp.mul hcomp
+    have h2 : 2 * (r3ConvectionWitnessBump (t • d) *
+        fderiv ℝ (⇑r3ConvectionWitnessBump) (t • d) d) =
+        (fderiv ℝ (⇑r3ConvectionWitnessBump) (t • d)) d *
+            ((⇑r3ConvectionWitnessBump ∘ fun s : ℝ => s • d) t) +
+          ((⇑r3ConvectionWitnessBump ∘ fun s : ℝ => s • d) t) *
+            (fderiv ℝ (⇑r3ConvectionWitnessBump) (t • d)) d := by
+      simp only [Function.comp_apply]
+      ring
+    rw [h2]
+    exact hmul
+  have hconst := is_const_of_deriv_eq_zero
+    (f := fun s : ℝ =>
+      r3ConvectionWitnessBump (s • d) * r3ConvectionWitnessBump (s • d))
+    (fun t => ((hB t).differentiableAt))
+    (fun t => by
+      rw [(hB t).deriv]
+      rw [hprod (t • d)]
+      ring) 0 2
+  have hnormd : ‖d‖ = 1 := by
+    rw [hd]
+    rw [r3CoordinateDirection_eq_stdBasis]
+    simp [r3StdBasis]
+  have hcenter : r3ConvectionWitnessBump ((0 : ℝ) • d) = 1 := by
+    rw [zero_smul]
+    exact r3ConvectionWitnessBump.one_of_mem_closedBall
+      (by simp [r3ConvectionWitnessBump])
+  have houter : r3ConvectionWitnessBump ((2 : ℝ) • d) = 0 := by
+    refine r3ConvectionWitnessBump.zero_of_le_dist ?_
+    rw [dist_zero_right, norm_smul, hnormd]
+    simp [r3ConvectionWitnessBump]
+  rw [hcenter, houter, mul_zero, mul_one] at hconst
+  exact one_ne_zero hconst
+
+/-- Through the identification, the completed coordinate convection operator itself is
+nontrivial: the witness pair has nonzero coordinate output as well (its decode is the
+nonzero identified source), so the identification theorem is not the identity `0 = 0`. -/
+theorem exists_r3ConvectionH3ToH2_ne_zero :
+    ∃ u v : R3HsVelocity 3, r3ConvectionH3ToH2 u v ≠ 0 := by
+  obtain ⟨u, v, huv⟩ := exists_r3DecodedConvectionL2_ne_zero
+  exact ⟨u, v, fun h => huv (by rw [← r3H2ToL2Operator_r3ConvectionH3ToH2, h, map_zero])⟩
+
 end
 
 end MNS2

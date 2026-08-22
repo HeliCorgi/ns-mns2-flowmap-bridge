@@ -206,12 +206,21 @@ Clay/Fefferman statement shape (cross-checked against
      Projected corollary `r3H2ToL2Operator_r3ProjectedConvectionH3ToH2 =
      r3LerayL2Operator ((U·∇)V)`, the Leray-complement difference identity, and the
      edge-2a pressure gradient instantiated at that source
-     (`r3HelmholtzPressure_gradient_decodedConvection`).  **Scope: this fixes the
-     semantics of the convection *operator* from which the Duhamel integrand is built;
-     it says nothing about the mild solution's time dependence, and it is not an
-     identification of the Duhamel integrand along a solution.  No non-vacuity witness
-     is shipped for this edge (unlike 2a): nothing yet proves
-     `r3DecodedConvectionL2 u v ≠ 0` for any `u, v`.**  No phantom Sobolev order
+     (`r3HelmholtzPressure_gradient_decodedConvection`).  **Non-vacuity witness**
+     (`exists_r3DecodedConvectionL2_ne_zero`): `∃ u v : R3HsVelocity 3,
+     r3DecodedConvectionL2 u v ≠ 0`, witnessed by `u = v = r3SchwartzToHsCLM 3 W` with
+     `W = b • e₀` the complexified `ContDiffBump` (centre `0`, `rIn = 1`, `rOut = 2`)
+     pointing in the `e₀` direction; route: the Schwartz base case
+     `r3DecodedConvectionL2_schwartz` (independent of the main theorem — no
+     circularity), `Lp`-vanishing upgraded to everywhere-vanishing by continuity, then
+     `b·∂₀b ≡ 0` contradicting `b(0)² = b(2e₀)²` via `is_const_of_deriv_eq_zero`.
+     Combined with the identification this also gives
+     `exists_r3ConvectionH3ToH2_ne_zero`.  **Scope: this fixes the semantics of the
+     convection *operator* from which the Duhamel integrand is built; it says nothing
+     about the mild solution's time dependence, and it is not an identification of the
+     Duhamel integrand along a solution.  The witness field is *not* divergence-free,
+     and nothing is yet proved about solenoidal `u, v` or about the projected source
+     `r3LerayL2Operator (r3DecodedConvectionL2 u v) ≠ 0`.**  No phantom Sobolev order
      consumed; no rapid decay claimed.
    - **2b-ii (momentum-equation semantics proper): still `OPEN-REQUIRED-FOR-CLAY`** —
      time dependence, differentiation of the Duhamel formula, and the mild→strong
@@ -302,6 +311,16 @@ required edges are **2b (momentum-equation semantics proper), 3 (proper), 4, 5**
 Update 2026-08-22 (third pass): **edge 2b-i (general `H³` convection source
 identification) is `THEOREM-CLOSED`** (`Formal/R3ConvectionSourceIdentification.lean`,
 full gate 8762 jobs, all seven audited declarations standard axioms; **no non-vacuity
-witness shipped for this edge** — to be added). The required-edge count stays 4, with
+witness shipped for this edge** — added in the fourth pass below). The required-edge count stays 4, with
 edge 2b narrowed to 2b-ii. The remaining required edges are **2b-ii, 3 (proper:
+`SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.
+
+Update 2026-08-22 (fourth pass): the edge-2b-i **non-vacuity witness is shipped**,
+retiring the debt recorded in the third pass — `exists_r3DecodedConvectionL2_ne_zero`
+(`Formal/R3ConvectionSourceIdentification.lean`): a complexified `ContDiffBump` velocity
+field along `e₀` gives `∃ u v : R3HsVelocity 3, r3DecodedConvectionL2 u v ≠ 0`, hence via
+the identification `exists_r3ConvectionH3ToH2_ne_zero`.  No new module, so the gate stays
+at **8762 jobs**; the 2b-i audit block now carries **nine** declarations, all standard
+axioms.  The witness is not divergence-free and does not address the projected source.
+The required-edge count is unchanged at 4: **2b-ii, 3 (proper:
 `SmoothRapidDecayInitial`-shaped class semantics), 4, 5**.
