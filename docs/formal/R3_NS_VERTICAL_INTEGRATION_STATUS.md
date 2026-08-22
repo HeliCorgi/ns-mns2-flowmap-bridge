@@ -244,19 +244,44 @@ Clay/Fefferman statement shape (cross-checked against
        that the decoded Duhamel source is the edge-2b-i identified convection
        (`r3MildConvectionSource_eq`), with the edge-2a pressure witness instantiated at
        it (`r3HelmholtzPressure_gradient_trajectoryConvection`).
-     **Explicitly still open (named): edge `2b-ii.a-assembly`** — the fundamental
-     integral identity `U t = U 0 + ∫₀ᵗ (νΔ(u σ) − P((U·∇)U)(σ)) dσ` and the strong
-     `L²`-valued time derivative `∂ₜU = νΔU − P((U·∇)U)` at interior times.  Each
-     ingredient listed above is individually machine-checked, but **none of them is
-     consumed by any theorem** (only `Formal/AxiomAudit.lean` imports the module), and
-     **the ingredient list is not verified to be sufficient**: the assembly was attempted
-     in this pass, hit repeated Lean elaboration timeouts, and was **removed rather than
-     shipped unverified**.  Steps known to be still missing include commuting `νΔ` past
-     the Duhamel interval integral, the integrability and joint-continuity inputs of
-     `integral_triangle_swap` for the flowed source on the triangle, and the
-     pairing-to-`L²` separation plus Bochner FTC-2 for the strong derivative.  Beyond it,
-     2b-ii.b (the unprojected equation with the pressure term, requiring `v := u` and
-     solenoidality) remains untouched.
+     **Edge `2b-ii.a` (projected momentum equation): `THEOREM-CLOSED` (2026-08-23,
+     `Formal/R3ProjectedMomentumEquation.lean`)** — the assembly named open by the
+     infrastructure pass is proved, and the infrastructure now has a consumer:
+     * `r3MildDecodedVelocity_eq_integral` — the **fundamental integral identity**
+       `U t = U 0 + ∫₀ᵗ (ν • Δ(u σ) − P((U·∇)U)(σ)) dσ` in `L²` for every
+       `t ∈ Icc 0 T`, with `U s = r3H3ToL2Operator (u s)`;
+     * `r3EndpointSafeProjectedMild_momentum` — the **projected momentum equation**: for
+       every `t ∈ Ioo 0 T`, `HasDerivAt (fun s => r3H3ToL2Operator (u s))
+       (ν • r3H3LaplacianL2Operator (u t) − r3LerayL2Operator
+       (r3DecodedConvectionL2 (u t) (u t))) t`, i.e. `∂ₜU = νΔU − P((U·∇)U)` with a
+       **strong `L²`-valued** time derivative, `Δ` the decoded Laplacian proved
+       distributional in the infrastructure pass
+       (`r3L2ToTempered_r3H3LaplacianL2Operator`), and the nonlinearity **literally** the
+       edge-2b-i identified `P((U·∇)U)` (`r3MildConvectionSource_eq`).
+     Route (five stages): continuity of the momentum source along the trajectory; the
+     scalar pairing identity against an arbitrary `L²` test vector, built from the
+     decoded mild identity, `integral_inner_r3StokesL2Path` (once for the linear term,
+     once per convection slice), the ν-free Laplacian recombination of the coordinate
+     mild identity (Stokes commutation on the linear term; smoothing commutation with
+     endpoint-null-set a.e. treatment on the Duhamel term), and
+     `integral_triangle_swap`; pairing separation by `ext_inner_left`; Bochner FTC-2 on
+     the interior.  **Hypotheses are exactly** `0 < ν`,
+     `IsR3EndpointSafeProjectedMildSolutionOn hnu T u₀ u`, `t ∈ Ioo 0 T` — the literally
+     identical predicate produced by `r3EndpointSafeProjected_exists_localMildSolution`,
+     and the shipped composition corollary
+     (`exists_r3EndpointSafeProjectedMild_momentum`) exhibits certified mild solutions
+     satisfying the momentum equation for every `ν > 0` and every datum.  *Recorded
+     debt: nothing proves the derivative is ever nonzero.*  **Still not claimed here:**
+     no pressure term; no unprojected equation; no classical pointwise time derivative
+     beyond the `L²`-valued one; no derivative at `t = 0` or `t = T`; solenoidality and
+     reality of `u` are neither used nor asserted, so this is the *projected* equation
+     on the complex Bessel-coordinate carrier, not yet a Navier–Stokes statement.
+   - **2b-ii.b (unprojected momentum equation with pressure): still
+     `OPEN-REQUIRED-FOR-CLAY`** — assembling `∂ₜu − νΔu + (u·∇)u + ∇p = 0` from the
+     projected equation, the edge-2a pressure witness at the identified source
+     (`r3HelmholtzPressure_gradient_trajectoryConvection`, still unconsumed by any
+     theorem), `v := u`, and the edge-3a solenoidality.  Edge 2b-ii — and hence edge 2b
+     — stays `OPEN-REQUIRED-FOR-CLAY` until 2b-ii.b lands.  Not attempted.
 3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
    `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
    coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
@@ -364,3 +389,12 @@ decoded mild identity.  **No momentum equation is claimed**: the assembly (integ
 identity + FTC-2) is named and left open.  This pass closes **no** edge and adds no
 consumer: it is an infrastructure deposit whose sufficiency for the 2b-ii.a assembly is
 unproved.  The required-edge count is unchanged at 4: **2b-ii, 3 (proper), 4, 5**.
+
+Update 2026-08-23 (sixth pass): **edge 2b-ii.a is `THEOREM-CLOSED`**
+(`Formal/R3ProjectedMomentumEquation.lean`, full gate **8764 jobs**, six audited
+declarations — the five commissioned stages plus the existence-composition corollary —
+standard axioms, zero warnings).  The fifth pass's infrastructure deposit now has a
+consumer, and its sufficiency for the assembly is no longer conjectural.  **This closes
+no whole required edge**: 2b-ii remains open through **2b-ii.b** (unprojected equation +
+pressure + `v := u` + solenoidality).  The required-edge count is unchanged at 4:
+**2b-ii, 3 (proper), 4, 5**.

@@ -43,18 +43,17 @@ sufficient for that passage; what is proved here is exactly:
   convection of the decoded representatives; `r3HelmholtzPressure_gradient_trajectoryConvection`
   instantiates the edge-2a pressure witness at that source.
 
-**NOT proved in this pass (honest scope).**  The final assembly — the fundamental integral
-identity `U t = U 0 + ∫₀ᵗ (νΔ(u σ) − P((U·∇)U)(σ)) dσ` and the strong `L²`-valued time
-derivative `∂ₜU = νΔU − P((U·∇)U)` at interior times — is **not** in this file, and is
-recorded as the open item `edge 2b-ii.a-assembly` rather than claimed.  Each lemma above
-is individually machine-checked, but **none of them is consumed by any theorem** and the
-list is **not** verified to be sufficient for the assembly: the assembly was attempted in
-this pass, hit repeated Lean elaboration timeouts, and was removed rather than shipped
-unverified.  Steps known to be still missing include commuting `νΔ` past the Duhamel
-interval integral, the integrability and joint-continuity inputs of
-`integral_triangle_swap` for the flowed source on the triangle, and the pairing-to-`L²`
-separation plus Bochner FTC-2 for the strong derivative.  Also not claimed, per
-commission: classical pointwise time derivatives, global smoothness, the unprojected
+**Scope of this file.**  The final assembly — the fundamental integral identity and the
+strong `L²`-valued time derivative — is **not** in this file: at the time of this file's
+pass it was attempted, hit repeated Lean elaboration timeouts, and was removed rather
+than shipped unverified.  It has since been completed in
+`Formal/R3ProjectedMomentumEquation.lean` (edge 2b-ii.a-assembly), which consumes the
+commutations, the generator identity in its integrated form, the triangle swap and the
+decoded mild identity.  Two items above remain unconsumed by any theorem:
+`r3L2ToTempered_r3H3LaplacianL2Operator` is cited to earn the name `Δ` but not used in
+the assembly, and `r3HelmholtzPressure_gradient_trajectoryConvection` is the edge-2a
+pressure witness reserved for edge 2b-ii.b.  Not claimed in either file: classical
+pointwise time derivatives beyond the `L²`-valued one, global smoothness, the unprojected
 equation with pressure (edge 2b-ii.b), and edges 3/4/5.
 
 No phantom Sobolev inclusion is used: every physical object passes through the explicit

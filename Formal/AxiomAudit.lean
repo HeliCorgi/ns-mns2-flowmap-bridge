@@ -46,6 +46,7 @@ import Formal.EndpointSafeTwoSpaceUniqueness
 import Formal.EndpointSafeTwoSpaceConcatenation
 import Formal.R3ConvectionSourceIdentification
 import Formal.R3ProjectedMomentumDuhamelInfrastructure
+import Formal.R3ProjectedMomentumEquation
 import Formal.R3MildContinuation
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
@@ -335,9 +336,12 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.exists_r3ConvectionH3ToH2_ne_zero
 
 -- Duhamel differentiation infrastructure towards the projected momentum equation (Clay
--- semantic edge 2b-ii.a, infrastructure pass; the momentum equation itself is NOT proved
--- and the lemmas below are not verified to be sufficient for it): the decoded Laplacian
--- multiplier and its
+-- semantic edge 2b-ii.a, infrastructure pass; the momentum equation itself is proved in
+-- the assembly pass audited below, which consumes the commutations,
+-- integral_inner_r3StokesL2Path, integral_triangle_swap and
+-- r3MildDecodedVelocity_duhamel; r3L2ToTempered_r3H3LaplacianL2Operator and
+-- r3HelmholtzPressure_gradient_trajectoryConvection remain unconsumed by any theorem):
+-- the decoded Laplacian multiplier and its
 -- identification with the distributional Laplacian, its commutations with the Stokes flow
 -- and the H2-to-H3 smoothing, the Stokes generator identity in pairing form and its
 -- integrated (FTC) form, the Duhamel-triangle Fubini swap, and the decoded mild identity.
@@ -349,3 +353,14 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.integral_triangle_swap
 #print axioms MNS2.r3MildDecodedVelocity_duhamel
 #print axioms MNS2.r3HelmholtzPressure_gradient_trajectoryConvection
+
+-- The projected momentum equation (Clay semantic edge 2b-ii.a-assembly): along an
+-- endpoint-safe projected mild solution, the decoded physical velocity satisfies the
+-- fundamental integral identity and, at interior times, the strong L2-valued derivative
+-- d/dt U = nu Delta U - P((U.grad)U), with the edge-2b-i identified nonlinearity.
+#print axioms MNS2.continuousOn_r3MildMomentumIntegrand
+#print axioms MNS2.inner_r3MildDecodedVelocity_eq_integral
+#print axioms MNS2.r3MildDecodedVelocity_eq_integral
+#print axioms MNS2.hasDerivAt_r3MildDecodedVelocity
+#print axioms MNS2.r3EndpointSafeProjectedMild_momentum
+#print axioms MNS2.exists_r3EndpointSafeProjectedMild_momentum
