@@ -276,20 +276,74 @@ Clay/Fefferman statement shape (cross-checked against
      beyond the `L²`-valued one; no derivative at `t = 0` or `t = T`; solenoidality and
      reality of `u` are neither used nor asserted, so this is the *projected* equation
      on the complex Bessel-coordinate carrier, not yet a Navier–Stokes statement.
-   - **2b-ii.b (unprojected momentum equation with pressure): still
-     `OPEN-REQUIRED-FOR-CLAY`** — assembling `∂ₜu − νΔu + (u·∇)u + ∇p = 0` from the
-     projected equation, the edge-2a pressure witness at the identified source
-     (`r3HelmholtzPressure_gradient_trajectoryConvection`, still unconsumed by any
-     theorem), `v := u`, and the edge-3a solenoidality.  Edge 2b-ii — and hence edge 2b
-     — stays `OPEN-REQUIRED-FOR-CLAY` until 2b-ii.b lands.  Not attempted.
+   - **2b-ii.b (unprojected momentum equation with pressure): `THEOREM-CLOSED`
+     (2026-08-23, `Formal/R3NavierStokesEquation.lean`)** — a pure composition pass over
+     2a + 2b-i + 2b-ii.a + 1a + 3a; no pressure theory rebuilt, no Helmholtz
+     generalization, no abstract PDE hierarchy.
+     * `postcomp_r3LerayL2Operator_eq` — the **Helmholtz completion of the Leray
+       projection**: for every `L²` source `F` and every `j`,
+       `embed(P F)ⱼ = embed(F)ⱼ + ∂ⱼ (r3HelmholtzPressure F)` in `𝓢'`.  This
+       **consumes** the edge-2a witness `r3HelmholtzPressure_gradient` (the previously
+       recorded "unconsumed" instantiations
+       `r3HelmholtzPressure_gradient_decodedConvection` /
+       `…_trajectoryConvection` are superseded as records; the general form is what
+       the capstone uses).  Sign independently re-derived in review.
+     * `r3EndpointSafeProjectedMild_mem_solenoidal` — **solenoidality propagates**:
+       with `u₀ ∈ r3L2SolenoidalSubmodule`, `u t ∈ r3L2SolenoidalSubmodule` for every
+       `t ∈ Icc 0 T`.  Kernel-of-CLM argument over the mild identity: the Duhamel
+       integrand is a flowed projected convection for `s < t` (hence solenoidal) and
+       `0` for `s ≥ t`; the normalized-divergence CLM passes through the interval
+       integral using the predicate's own integrability clause.  **This is the only
+       new mathematical content in the file.**
+     * `r3H3ToL2Operator_mem_solenoidal_of_mem` — decode preservation (edge-3a
+       restated for the bounded multiplier decoder).
+     * `r3EndpointSafeProjectedMild_navierStokes` — **capstone**: for `0 < ν`,
+       `IsR3EndpointSafeProjectedMildSolutionOn hnu T u₀ u`, `u₀` solenoidal and
+       `t ∈ Ioo 0 T`, the decoded physical velocity `U s = r3H3ToL2Operator (u s)`
+       (i) has the strong `L²`-valued derivative `νΔU − P((U·∇)U)` (2b-ii.a),
+       (ii) satisfies componentwise in `𝓢'`, with
+       `p := r3HelmholtzPressure ((U·∇)U)`, the **unprojected momentum equation**
+       `∂ₜU − νΔU + (U·∇)U + ∇p = 0`, and (iii) has vanishing distributional
+       physical-coordinate divergence (edge 1a).  Composition corollary
+       `exists_r3EndpointSafeProjectedMild_navierStokes` (exporting the full capstone
+       conclusion) over `r3EndpointSafeProjected_exists_localMildSolution` (literally
+       the same predicate) for every `ν > 0` and every solenoidal datum.
+     **Scope (unchanged caveats):** componentwise in `𝓢'(R3,ℂ)` in space and
+     strong-`L²` in time — *not* a classical pointwise solution; interior times of a
+     **local** certified horizon only (no `t = 0`, no `t = T`, no global time); on the
+     **complex** Bessel-coordinate carrier — realness is neither used nor asserted
+     (the coordinate-level realness theorem `…isR3RealVelocity` exists but is not
+     invoked, and realness of the *decoded* field is not transported); the pressure is
+     the edge-2a witness, determined only up to additive harmonic terms, with no
+     regularity or decay claimed; `Δ` and `(U·∇)U` are the operators identified by
+     `r3L2ToTempered_r3H3LaplacianL2Operator` and edges 2b-i/3b — cited, not inlined
+     into the statement.  Nothing is proved to be nonzero (2b-ii.a's recorded debt
+     persists).  **No Clay-level claim.**
+
+   **⇒ Edge `2b-ii` `THEOREM-CLOSED`; ⇒ EDGE `2B` `THEOREM-CLOSED` (2b-i + 2b-ii.a +
+   2b-ii.b); ⇒ ledger item 2 (momentum-equation semantics with a pressure witness)
+   `THEOREM-CLOSED` in full (2a + 2b).**  Remaining required edges: **3 proper
+   (`SmoothRapidDecayInitial`-shaped initial-data class semantics), 4 (energy — see the
+   `PARTIAL` status below), 5 (breakdown transfer)**.
 3. **Initial-data class semantics** — the Bessel-coordinate `H³` carrier is a phantom-order
    `L²` abbrev; a Clay-grade statement needs the decoder-level implication from the
    coordinate class to actual smoothness/decay (`SmoothRapidDecayInitial`-shaped), and the
    converse embedding for the intended data. The general decoder equality for arbitrary
    `H³` inputs against a separately defined distributional product is also still open
    (`FORMAL_SCOPE.md` §7).
-4. **Energy semantics** — the carrier norms/estimates imply the finite-energy predicate of
-   the endpoint statement.
+4. **Energy semantics** — **`PARTIAL` (pointwise-in-time closed 2026-08-23,
+   `Formal/R3FiniteEnergy.lean`; uniform-in-time `OPEN-REQUIRED-FOR-CLAY`).**  For
+   **every** `L²` velocity field the pointwise norm is square-integrable
+   (`integrable_norm_sq_r3L2`) and the energy integral equals the squared carrier norm
+   (`integral_norm_sq_r3L2`); hence the decoded physical velocity of every order-three
+   Bessel coordinate has finite kinetic energy `∫‖U(x)‖²dx = ‖U‖² < ∞`
+   (`r3DecodedVelocity_finiteEnergy`), recorded along mild solutions at every time
+   (`r3MildDecodedVelocity_finiteEnergy`).  **Still open:** the endpoint predicate is a
+   **uniform-in-time** bound on `[0,∞)` (`LEAN_MILLENNIUM_ALIGNMENT.md`; Fefferman (A));
+   no uniform constant, **no energy inequality and no dissipation identity** are proved,
+   and the local-uniform version on a certified horizon would additionally need the
+   decoder operator-norm bound (`‖r3H3ToL2Operator‖ ≤ 1`, not yet in the repository)
+   applied to the existence theorem's ball clause.
 5. **Breakdown-statement transfer** — a verified breakdown theorem on the concrete solution
    class implies the official whole-space breakdown proposition, including the quantifier
    structure over viscosity (the official statement quantifies over `ν`; a single-`ν`
@@ -398,3 +452,20 @@ consumer, and its sufficiency for the assembly is no longer conjectural.  **This
 no whole required edge**: 2b-ii remains open through **2b-ii.b** (unprojected equation +
 pressure + `v := u` + solenoidality).  The required-edge count is unchanged at 4:
 **2b-ii, 3 (proper), 4, 5**.
+
+Update 2026-08-23 (seventh pass): **edge 2b-ii.b `THEOREM-CLOSED`**
+(`Formal/R3NavierStokesEquation.lean`), closing **2b-ii and hence edge 2b and ledger
+item 2 in full**.  First time the repository states and machine-checks the
+**incompressible NS equation itself** (unprojected, with explicit pressure, plus
+distributional incompressibility) along a certified mild solution — in
+`𝓢'`-componentwise / strong-`L²`-in-time / interior-local-time / complex-carrier
+semantics.  In the same pass, **edge 4 moved to `PARTIAL`**
+(`Formal/R3FiniteEnergy.lean`): finite energy at every time with the energy identity;
+the uniform-in-time endpoint predicate stays open.  Full gate **8766 jobs**; the eight
+new audited declarations are standard-axioms-only.  **Stage-9 Gate A: PARTIAL-PASS
+(distributional/local/complex)** — the NS PDE is machine-checked in `𝓢'`-componentwise
+space × strong-`L²` time semantics at interior times of a local horizon; Gate A is
+**not** satisfied at Clay grade: realness of the decoded field (cheapest named gap: no
+lemma transports `IsR3RealVelocity` through `r3H3ToL2Operator`), classical `C^∞`
+semantics, global time, and pressure regularity remain unproved.  Required edges after
+this pass: **3 proper, 4-uniform, 5**.

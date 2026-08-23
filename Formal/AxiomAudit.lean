@@ -47,6 +47,8 @@ import Formal.EndpointSafeTwoSpaceConcatenation
 import Formal.R3ConvectionSourceIdentification
 import Formal.R3ProjectedMomentumDuhamelInfrastructure
 import Formal.R3ProjectedMomentumEquation
+import Formal.R3NavierStokesEquation
+import Formal.R3FiniteEnergy
 import Formal.R3MildContinuation
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
@@ -364,3 +366,23 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.hasDerivAt_r3MildDecodedVelocity
 #print axioms MNS2.r3EndpointSafeProjectedMild_momentum
 #print axioms MNS2.exists_r3EndpointSafeProjectedMild_momentum
+
+-- The incompressible Navier-Stokes equation (Clay semantic edge 2b-ii.b, closing edge
+-- 2b): along a mild solution with solenoidal initial coordinate, the decoded physical
+-- velocity has the strong L2 time derivative, satisfies the unprojected momentum
+-- equation with the explicit edge-2a Helmholtz pressure (consumed) componentwise in
+-- Schwartz', and is distributionally divergence-free (edge 1a); plus solenoidal
+-- propagation along the mild solution and the existence composition.
+#print axioms MNS2.r3EndpointSafeProjectedMild_mem_solenoidal
+#print axioms MNS2.postcomp_r3LerayL2Operator_eq
+#print axioms MNS2.r3EndpointSafeProjectedMild_navierStokes
+#print axioms MNS2.exists_r3EndpointSafeProjectedMild_navierStokes
+
+-- Finite-energy semantics (Clay semantic edge 4): the decoded physical velocity of
+-- every order-three coordinate has square-integrable pointwise norm, with energy equal
+-- to the squared L2 carrier norm; instantiated along mild solutions. No energy
+-- inequality is claimed.
+#print axioms MNS2.integrable_norm_sq_r3L2
+#print axioms MNS2.integral_norm_sq_r3L2
+#print axioms MNS2.r3DecodedVelocity_finiteEnergy
+#print axioms MNS2.r3MildDecodedVelocity_finiteEnergy
