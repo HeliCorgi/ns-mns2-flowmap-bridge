@@ -4,11 +4,14 @@ Last updated: 2026-08-23 JST.
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
-> **formal plumbing is STOPPED** by rule. The next work item is Stage-9 mathematics: one
-> falsifiable decision theorem, selected and failcase-audited in
-> `docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md` (the **Scope-B `β_v` endpoint-pinning
-> decision**). The research-side freeze (round 2, 2026-08-21) is **unchanged**: BH
-> YELLOW-RED, B2 UNKILLED in Scope B, trigger (T-c) OPEN.
+> **formal plumbing is STOPPED** by rule. The first Stage-9 decision theorem was
+> commissioned by the user and **has been executed and decided**:
+> **`YES (CONSISTENT)` — scope-free exponent arithmetic does NOT pin `β_v`**
+> (`docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`). The minimal remaining logical gap
+> is one **new** named object, **(Γ-DEP)**. The research-side freeze (round 2, 2026-08-21)
+> is **unchanged**: BH YELLOW-RED, B2 UNKILLED in Scope B, trigger (T-c) OPEN; all map
+> consequences of the decision are **proposals** for the next freeze review, applied to
+> nothing.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -894,13 +897,72 @@ binding, and the round-1 §5 supersession):
   (B5); DVEP recording corrected (B3); gate verdict sentence patched with the
   `A_NS` qualifier (B4).
 
-Next branch — **COMMISSIONED 2026-08-23 by the user's Stage-9 pass instruction**
-("select exactly one decision theorem"; "run failcase audit before proof search").
-Note precisely what changed: round-2 §6 reserved the next branch to the **user's
-choice** with nothing commissioned, and that slot is **where this choice lands, not
-what authorizes it** — the authority is the user's dated instruction. If that
-instruction was not intended as commissioning this limb, the gate document below is
-a **proposal** and proof search must not begin.
+**The commissioned Stage-9 decision is EXECUTED and DECIDED** (2026-08-23, same day;
+master record `docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`; the user
+explicitly commissioned the proof search after the selection):
+
+> **RULING: `YES (CONSISTENT)`.** The middle limb `M = B2 ∩ {β_v ∈ (α,γ)}` (sub-core
+> Γ-saturation with corner attainment failing) **is consistent with the conjunction of
+> the frozen scope-free rows.** Scope-free exponent/region arithmetic does **not** pin
+> `β_v` to `{β_v ≤ α} ∪ {β_v = γ, τ-uniform}`. Certificate conditionality: **NONE**
+> (K4′ not consumed, so no `[(E⁺)+(P)]` print is owed).
+
+- **Method**: 1 statement fixer → 4 independent pin provers (Γ-saturation structure /
+  budgets / ancient-limit zoom / covering-and-combinatorics) → 3 witness builders →
+  witness breaker + pin breaker + location-premise auditor → adjudicator, all reading
+  the frozen sources first-hand. **All four pin attempts returned `PIN_FAILED`**; the
+  pin breaker confirmed none was abandoned prematurely.
+- **Witness `W★`** (exponent bookkeeping, **not** a solution): `γ = 3/5`, `α = 9/20`,
+  `β_v = 1/2`; region C `(9/20, 9/20, 27/20, 12/20, 8/20)` = amplitude and `L³` carrier,
+  **not** Γ-saturated; region S `(1/2, 1/2, 3/2, 1/2, 1/2)` = Γ-saturated sub-core; both
+  in the **printed blob shape** only; realized by one circulation field
+  `Γ(r,t) = Γ₀·min((r/τ^{1/2})^k, τ^{1/2}/r)`, `k > 1`. Every frozen row passes at its
+  own evaluation radius, the mandatory `τ^{α−γ}` misfire check is performed and passed,
+  and **the witness family projects onto ALL of `S_blob`** — the pin fails at every
+  surviving exponent pair, not at one point.
+- **Structural reason**: the frozen rows contain **no statement that LOCATES
+  Γ-saturation**. Each is neutral or one-sided-monotone in `β_v` (Γ-max bounds `r` above
+  never below; the envelope bounds `r_sat` only below; K9 is existential in the region,
+  giving only a floor; K5 is monotone-relaxed by shrinking the structure and cannot cut a
+  Γ-saturated region at any scale; K6 acts on the designated carrier; [D2]/A3 is a
+  region-count floor that `M` meets constructively; K3's cover is monotone under added
+  regions; K11 mentions only `(γ,α)`). Such a conjunction **cannot carve out the open
+  interval `(α,γ)` while admitting both endpoints**.
+- **The pin's two horns are exactly the two inputs the corpus removed from Scope B**:
+  K9's razor location premise `r ≍ ℓ` (demoted by P6/A1/A2 — using it *is* the recorded
+  misfire, so the mandatory check fires **against** the pin; and even granted in full it
+  does not pin, because an enstrophy-free Γ plateau on `[τ^{β_v}, τ^α]` satisfies
+  `σ_core = α` with `β_v > α`), and the **Scope-A amplitude corollary** (which is why
+  `(T3)` is empty in Scope A — granting it is a **class change**, not a condition, which
+  is why the verdict is `YES` and not `PIN_CONDITIONAL`).
+- **MINIMAL LOGICAL GAP — one new named object, `(Γ-DEP)`** (*intra-core circulation
+  depletion*; genuinely new, exists nowhere in the corpus at any scope):
+  ∃ τ-uniform `c′ ∈ (0,1)`, `δ > 0` with
+  `sup_{dist(x,axis) ≤ δτ^{α}} |Γ(x,t)| < c′Γ₀` near `T*` — i.e. **Γ cannot saturate
+  strictly between the envelope corner `τ^γ` and the core scale `τ^α`**. It is
+  sufficient and minimal. **(SB-ANCH) cannot serve**: B6+B13 give
+  `(SB-ANCH) ⟺ {β_v = γ, τ-uniform}`, so it **is** the other horn — a pin conditional on
+  its own conclusion. **V1 is unpromoted and, checked at source, is the `C/r` KNSS-type
+  Liouville family, not a viscous cutoff — its hypothesis fails on `W★`, so it is inert
+  even if promoted.** Granting the two strongest unavailable inputs *simultaneously*
+  (unprinted per-region K11 + a viscous cutoff) yields `β_v = 1/2` exactly, still
+  strictly inside the limb whenever `α < 1/2 < γ` — which `W★` is. **There is no third
+  route: either (Γ-DEP) is proved, or the class changes to Scope A.**
+- **NOT decided** (printed in the record): exponent consistency is **not** existence —
+  `W★` is bookkeeping, not a flow, and no blow-up and no Clay claim is made or implied;
+  realizability is undecided (the single-time coexistence / one-pressure debt is
+  inherited, not discharged); Scope A is untouched (`(T3)` stays empty there);
+  (SB-ANCH) itself is undecided; all marginal/log/sub-polynomial faces are recorded
+  out-of-vocabulary, never adjudicated.
+- **Record-only**: A2's middle-limb debt is **partially discharged in one direction
+  only** (the NO side is closed; the debt as a whole is not). Proposals P1–P7 — including
+  the two new true statements `{β_v < γ} = ¬(SB-ANCH)` exactly, and sup-swirl-poverty on
+  all of `{β_v < γ}` (generalizing the anchor audit's (T3) note from `β_v = α` to every
+  `β_v < γ`) — await the **next user-adjudicated freeze review**. Nothing is applied.
+
+Historical note on authority: round-2 §6 reserved the next branch to the **user's
+choice** with nothing commissioned; that slot is where this choice landed, and the
+authority was the user's dated instruction — first to select, then to execute.
 
 **The Scope-B `β_v` endpoint-pinning decision theorem** —
 `docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md` (full amended statement,
@@ -1179,8 +1241,18 @@ local existence / 無制限一意性 / 明示的 lifespan / restart / concat / c
 **stop rule により、これ以上の formal plumbing はしない** — uniform energy、古典正則性、端点微分、
 maximal trajectory u*、edge 3 proper、edge 5 Clay packaging は、Stage-9 の具体定理が要求するまで着手禁止。
 
-**次にやるのは Stage-9 の数学**: docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md で
-commissioned 済みの唯一の decision theorem = **Scope-B β_v endpoint-pinning decision**
+**最初の Stage-9 decision は実行・決着済み**: docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md
+= **`YES (CONSISTENT)`** — 凍結 scope-free 行は Γ 飽和の位置を決めないので中間肢
+`β_v ∈ (α,γ)` を pin できない。明示 witness `W★`(γ=3/5, α=9/20, β_v=1/2、印字済み blob 形状のみ、
+単一の Γ プロファイル `Γ₀·min((r/τ^{1/2})^k, τ^{1/2}/r)` で実現)が全行を各自の半径で通過し、
+族は `S_blob` 全体に射影する。閉じるには**新規1定理 (Γ-DEP)**(`sup_{dist ≤ δτ^α}|Γ| < c′Γ₀`、
+τ 一様)が必要。**(SB-ANCH) は使えない**(B6+B13 でもう一方の端点と同値=循環論法)。V1 は
+未昇格かつ(出典確認済み)C/r Liouville 族であって粘性カットオフではなく、`W★` 上で仮説が破れる
+ため昇格しても不活性。**指数算術の無矛盾性は NS 解の存在ではない**(coexistence/one-pressure
+債務は継承。blow-up も Clay も一切主張しない)。A2 の中間肢債務は **NO 側のみ** 閉じ、
+提案 P1–P7 は次回 freeze review 待ち(record-only、何も適用していない)。
+
+参考(元の commissioning 記録) = **Scope-B β_v endpoint-pinning decision**
 (Scope-B の B2 クラス、O(1) 非消滅循環、Scope-A 仮説なしで、中間肢 M(sub-core Γ 飽和 かつ
 corner attainment 不成立 = 冪則語彙で β_v ∈ (α,γ))が凍結 scope-free 行の連言と **CONSISTENT** か、
 それとも scope-free な指数算術が β_v を {β_v ≤ α} ∪ {β_v = γ, τ-uniform} に **PIN** するか)。
@@ -1196,6 +1268,12 @@ out-of-vocabulary として記録(辞書を発明しない)。
 (SB-ANCH) = (H1)∧(H2)、trigger (T-c) は OPEN、in-house 3 vehicle は退役/ブロック、fork-β の辞書拒否も有効。
 別途キュー済み(このタスクの blocker ではない): 次回 freeze review での **Seregin arXiv:2606.29468**
 (log 補正 Type-II 族; 除外は ancient Euler の Liouville 定理へ帰着し **未解決**)row-(i) 更新。
+
+**次の候補(ユーザー裁定待ち、何も commissioned していない)**: (1) (Γ-DEP) 自体を定理として攻める
+(この decision が名付けた唯一の閉じ手。Scope B のままで B2 を殺せる可能性がある単一対象)、
+(2) 選定記録が「この次の自然な decision」と記録した **Seregin 級 ancient-Euler Liouville**
+(arXiv:2606.29468 が一般化した形で未解決のまま残している対象)、(3) P1–P7 を裁定する
+**第3回 freeze review**(Seregin row-(i) 更新も同時に処理)。
 
 数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
 (quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。

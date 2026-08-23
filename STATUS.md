@@ -45,10 +45,18 @@ Stage-9 readiness audit は
 
 ## 次の勝負
 
-研究側 Stage 9(NS の未解決数学そのもの)。commissioned 済みの decision theorem は
-**Scope-B `β_v` endpoint-pinning decision** —
-[`docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md`](docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md)
-に statement・kill/survive 基準・failcase 監査・不採用理由・継承義務を固定。record-only。
+研究側 Stage 9(NS の未解決数学そのもの)。最初の decision theorem
+(**Scope-B `β_v` endpoint-pinning decision**,
+[選定記録](docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md))は
+**実行・決着済み: `YES (CONSISTENT)`** —
+[`docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`](docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md)。
+
+凍結された scope-free 行は **Γ 飽和の位置を一切決めない**ため、中間肢 `β_v ∈ (α,γ)` を
+排除できない。明示的 witness `W★` (`γ=3/5, α=9/20, β_v=1/2`)が全行を通過し、その族は
+`S_blob` 全体に射影する。閉じるには新規の1定理 **(Γ-DEP)**(core 内での循環枯渇)が必要で、
+**(SB-ANCH) は使えない**(それ自体がもう一方の端点と同値)。**指数算術の無矛盾性は解の存在では
+ない**。BH は YELLOW-RED、B2 は Scope B で UNKILLED、(T-c) は OPEN のまま。map への影響は
+すべて次回 freeze review への **提案**(record-only)。
 
 形式側の残作業は非ブロッキング(uniform energy、maximal trajectory、classical regularity、
 edge 5 Clay 転送)であり、Stage-9 の具体定理が要求するまで着手しない。

@@ -21,8 +21,13 @@ affects the blow-up/global-regularity route"*, and *"Run failcase audit before p
 search"*. This document executes that instruction; the freeze-review slot is **where the
 choice lands**, not what authorizes it.
 
-If the user did not intend that instruction as the explicit commissioning of this limb,
-treat everything below as a **proposal** and do not begin proof search until they say so.
+**Resolved 2026-08-23 (same day): the user explicitly commissioned the proof search** —
+*"β_v endpoint-pinning decision theorem の proof search を開始せよ。YES/NO どちらの決着も成果
+とする"*, with the standing constraints *"frozen assumptions を変更せず"*, *"新しい formal
+infrastructure は作らず"*, and *"research-side frozen scope を勝手に強化・変更しない"*. The
+conditional "proposal" status above is therefore discharged; this limb is commissioned, and
+the execution record is
+[`BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`](BH_BETAV_ENDPOINT_PINNING_2026-08-23.md).
 
 Method: three independent analysts (frozen ledger / lab registry / literature watch), one
 selector, two independent failcase auditors (checklist lens and adversarial lens), one
