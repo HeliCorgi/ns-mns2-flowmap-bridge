@@ -1,6 +1,14 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-21 JST.
+Last updated: 2026-08-23 JST.
+
+> **Where the project is (2026-08-23).** The formal side has finished preparation:
+> **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
+> **formal plumbing is STOPPED** by rule. The next work item is Stage-9 mathematics: one
+> falsifiable decision theorem, selected and failcase-audited in
+> `docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md` (the **Scope-B `β_v` endpoint-pinning
+> decision**). The research-side freeze (round 2, 2026-08-21) is **unchanged**: BH
+> YELLOW-RED, B2 UNKILLED in Scope B, trigger (T-c) OPEN.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -886,32 +894,155 @@ binding, and the round-1 §5 supersession):
   (B5); DVEP recording corrected (B3); gate verdict sentence patched with the
   `A_NS` qualifier (B4).
 
-Next branch — **user's choice** (round-2 record §6; no default, nothing
-commissioned):
+Next branch — **COMMISSIONED 2026-08-23 by the user's Stage-9 pass instruction**
+("select exactly one decision theorem"; "run failcase audit before proof search").
+Note precisely what changed: round-2 §6 reserved the next branch to the **user's
+choice** with nothing commissioned, and that slot is **where this choice lands, not
+what authorizes it** — the authority is the user's dated instruction. If that
+instruction was not intended as commissioning this limb, the gate document below is
+a **proposal** and proof search must not begin.
 
-1. **Formal (Lean) side**: the 5 Clay semantic-promotion edges (Bucket A of
-   `docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`) and/or the glued
-   maximal trajectory `u*` with pointwise `limsup ‖u*‖ = ∞`.
-2. Deliberately deferred list (the `β_v ∈ (α,γ]` limb is (SB-ANCH)'s home but
-   theorem-shaped — needs explicit commissioning; K8/K10 on multi-region
-   tuples; Jiu–Xin body — paywalled, CLV surrogate recorded; separatrix lemma;
-   ζ-averaging / K12″).
-3. Literature watch per B5's re-check condition (a `C¹` non-localizable
-   witness or a regularity ⟹ localizability theorem re-opens the trigger).
-3. deliberately deferred: intra-core `β_v ∈ (α,γ]` branch; K8/K10 on multi-region
-   tuples; coexistence/one-pressure vocabulary limit; Jiu–Xin body (paywalled);
-   separatrix continuation lemma; ζ-averaging / K12″; optional formal refinement
-   (glued maximal trajectory u*; interface adapters — not blockers).
+**The Scope-B `β_v` endpoint-pinning decision theorem** —
+`docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md` (full amended statement,
+kill/survive criterion, failcase audit, runner-up rejections, and the standing
+obligations inherited by the task). Shape: for Scope-B class **B2** with `O(1)`
+non-evanescent circulation and no Scope-A hypothesis, is the middle limb
+`M` (sub-core Γ-saturation with corner attainment failing — in the power-law
+vocabulary `β_v ∈ (α, γ)`) **CONSISTENT** with the conjunction of the frozen
+scope-free rows (Γ-max, K3, K6+[D2]/A3, K9 at the correct radius, K11, K4‴ [D],
+K4′ [C on (E⁺)+(P)]) — or does scope-free exponent arithmetic **PIN** `β_v` to
+`{β_v ≤ α} ∪ {β_v = γ, τ-uniform}`?
+
+- **NO (pinned)** kills the anchorless intermediate-saturation escape channel and
+  splits the sole unkilled class into two named attackable structures.
+- **YES (consistent)** certifies the first genuinely new Scope-B survival class
+  since the corridor and shows (SB-ANCH) evadable in one specific mode.
+- **Record-only**: any A2 discharge or new survival row is a *proposal* for the
+  next user-adjudicated freeze review, never applied unilaterally. No numerics,
+  no new ansatz, no profile discovery, no CAP trigger, no in-house Liouville.
+- Failcase battery: **SURVIVES in amended form** (the one FAIL was wording
+  fidelity — K4′ mis-glossed and its `[C on (E⁺)+(P)]` tags dropped; repaired).
+
+Lane re-audit (three independent analysts, 2026-08-23): the BH / small-swirl /
+localized-steady-Euler-degeneration / Type-II-window / K12 lane is still **BEST**,
+argued not assumed — K2 forces Type II, K11 + the wedge force quasi-static BH
+cores, and the registry's competing Monster/conveyor lane (alive-but-unproven, no
+ARCH-KILL / no PDE-KILL 2026-08-10) lands at `γ = 5/9`–`2/3`, i.e. **inside the
+same frozen window**, so it is a candidate mechanism within this frame, not a
+replacement. The standing 2026-08-19 reopen clause has fired but its payload
+pointer (quantitative rigidity rate / K12) is **stale and consumed** — superseded
+through (★) → (★_geo) → geometry gate (closed, θ = 1 sharp); its successor on the
+current frontier is exactly the (SB-ANCH)/`β_v` complex commissioned above.
+
+Literature watch (June–August 2026): **Seregin arXiv:2606.29468** (28 Jun 2026)
+generalizes the frozen `γ+α = 1` edge to log-corrected families and again reduces
+exclusion to **open** Liouville theorems for ancient Euler solutions in scaled-energy
+classes — a mandatory row-(i) update **queued for the next freeze review** (not a
+blocker for the commissioned task). Peralta-Salas–Slobodeanu arXiv:2606.13462
+assumes localizability, so **trigger (T-c) stays OPEN and B5 does not fire**;
+Ionescu–Jia–Palasek arXiv:2606.07501 is on the non-uniqueness axis with
+self-similar profiles — logged, no frozen row touched. Explicit null on any
+discharge of (OO) or of the KNSS / CSTY / Lei–Zhang / Chen–Fang–Zhang rows.
+
+Still deliberately deferred: K8/K10 on multi-region tuples; coexistence /
+one-pressure vocabulary limit; Jiu–Xin body (paywalled; CLV surrogate recorded);
+separatrix continuation lemma; ζ-averaging / K12″; the eikonal/localizability
+necessity question (research-level, CAP-adjacent, watch only); the Seregin-class
+ancient-Euler Liouville problem (**the natural successor decision after this
+one**); and all optional formal refinements (glued maximal trajectory `u*`,
+interface adapters — not blockers).
+
+**The Stage-9 readiness pass is complete — Gates A/B/C PASS, formal plumbing STOPPED**
+(2026-08-23; `Formal/R3DecodedVelocityRealness.lean`, `Formal/R3SchwartzInitialData.lean`,
+`Formal/R3SchwartzDivergence.lean`; audit record
+`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`):
+
+- **Task A — the named cheapest Gate-A gap is CLOSED.** The decoder symbol
+  `J⁻³ = (1+‖ξ‖²)^(-3/2)` is real and even, so the **existing** generic multiplier theorem
+  `r3L2Conj_of_fourier_realEven` yields `r3L2Conj_r3H3ToL2Operator` and
+  `isR3RealVelocity_r3H3ToL2Operator`; composed with the unconditional coordinate-level
+  realness `IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity` this gives
+  `r3EndpointSafeProjectedMild_isR3RealVelocity_decoded`: along **every** mild solution
+  with physically real initial coordinate, the decoded velocity `U t` — the field in the NS
+  capstone — is physically real at every certified time. No new reality framework, no
+  classical `C^∞` upgrade, no pointwise representative theorem. The theorem is **actually
+  consumed** by the Task-B entry capstone.
+- **Task B — the concrete admissible initial-data adapter is CLOSED (edge 3-adapter).**
+  `IsR3AdmissibleSchwartzDatum φ` = (conjugation fixed point) ∧ (`ξ·𝓕φ(ξ) = 0` for every
+  `ξ`), and `isR3AdmissibleSchwartzDatum_iff` proves this is **exactly** "real and
+  classically divergence-free" — the equivalence of the two divergence formulations on the
+  Schwartz core is proved **in both directions** in `Formal/R3SchwartzDivergence.lean` via
+  the transfer identity `𝓕(∑ᵢ∂ᵢφᵢ)(ξ) = 2πi·(ξ·𝓕φ(ξ))` and injectivity of the Schwartz
+  Fourier transform. `r3H3ToL2Operator_r3SchwartzToHsCLM` gives **decode ∘ encode =
+  identity** at order three (`r3H3ToL2Operator (r3SchwartzToHsCLM 3 φ) = φ.toLp 2` — the
+  correct direction). `.encode_mem_solenoidal` discharges the capstone's solenoidal
+  hypothesis; `.smooth`, `.decay`, `.classicalDivergence`, `r3SchwartzConjCLM_eq_self_iff`,
+  `r3Schwartz_finiteEnergy` certify the remaining Gate-B properties **for the same datum**.
+  Entry capstone `r3AdmissibleSchwartzDatum_navierStokes`.
+  **Non-vacuity shipped**: `exists_isR3AdmissibleSchwartzDatum_ne_zero` — the explicit
+  **nonzero** datum `𝓕⁻F` with `F(ξ) = i·b(ξ)(ξ₁e₀ − ξ₀e₁)`, `b` the existing plateau bump
+  (`ξ·F ≡ 0` identically; `F` reflected-conjugation-fixed since `b` is real and even; `F ≠ 0`
+  at `ξ* = (0,1/2,0)` where `b = 1` and the first component is `i/2`).
+- **No `H³ ⇒ C^∞` and no `H³ ⇒` rapid decay** is proved, claimed, or used anywhere — that
+  implication is false and the adapter runs the other way. **Edge 3 *proper* stays OPEN**
+  and is recorded `NON-BLOCKING FOR STAGE 9`.
+- **Gate C** is instantiation-only and is now *consumed*
+  (`r3AdmissibleSchwartzDatum_blowup_dichotomy`); no maximal-trajectory packaging built.
+- **`edge 4-uniform: DEFERRED / NON-BLOCKING FOR STAGE 9`** — pointwise-in-time finite
+  energy suffices for readiness; no uniform bound, no energy inequality, no dissipation
+  identity was built.
+
+**Exact semantic strength of the certified Navier–Stokes statement (unchanged by this
+pass):** componentwise in `𝓢'(R³,ℂ)` in space; strong `L²`-valued derivative in time;
+**interior** times `Ioo 0 T` of a **local** certified horizon (no `t = 0`, no `t = T`, no
+global time); pressure = the edge-2a Helmholtz witness, determined up to additive harmonic
+terms, no regularity or decay claimed; `Δ` and `(U·∇)U` identified by theorem, not by
+naming. **Not** a classical pointwise solution.
+
+**Remaining non-blocking formal gaps:** classical `C^∞` semantics; endpoint derivatives;
+global time; uniform-in-time energy / energy inequality; pressure regularity; canonical
+maximal trajectory `u*`; edge 3 proper; edge 5 (Clay breakdown transfer and official
+quantifier packaging). Per the stop rule **none of these may be worked on for
+completeness** — only when a concrete Stage-9 theorem consumes one.
+
+**Research-side freeze: UNCHANGED** (round 2, 2026-08-21). This pass commissioned the next
+research question; it answered none.
 
 The closed layers are statements on the Bessel-coordinate carrier (complex, and real via
 the conjugation gate) plus the Clay semantic-promotion edges closed so far (coordinate
 incompressibility 1a/1b, decoder bridge 3a/3b, generic Helmholtz pressure reconstruction
-2a, convection source identification 2b-i). Unconditional uniqueness and the continuation
-dichotomy are closed at the coordinate level; **no Clay statement is available yet** —
-edges 2b-ii.b (the unprojected equation with pressure — the surviving half of 2b-ii),
-3 proper, 4, 5 remain open.
+2a, convection source identification 2b-i, momentum equation 2b-ii.a/2b-ii.b, initial-data
+adapter 3-adapter). Unconditional uniqueness and the continuation dichotomy are closed at
+the coordinate level; **no Clay statement is available yet** — edges 3 proper, 4-uniform
+and 5 remain open (all recorded non-blocking or deferred).
 
 ## Latest Lean verification
+
+```text
+runner: local Windows (Git Bash) process via Elan, scripts/lean-ci-local.sh
+revision: working tree on main after 1b9cb0a
+  (new: Formal/R3DecodedVelocityRealness.lean, Formal/R3SchwartzInitialData.lean,
+   Formal/R3SchwartzDivergence.lean; extended: Formal/AxiomAudit.lean)
+toolchain: leanprover/lean4:v4.32.1
+dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
+target scope: lake build Formal.R3DecodedVelocityRealness / Formal.R3SchwartzInitialData /
+  Formal.R3SchwartzDivergence / Formal.AxiomAudit — pass; all three new files: zero errors,
+  zero warnings
+full scope: scripts/lean-ci-local.sh (pinned source scan + Formal.+ default target)
+  — exit 0, pass (8769 jobs)
+source scan: pinned sorry/admit/axiom/opaque scan over Formal/ — clean
+axiom scope: Formal.AxiomAudit — pass; all 277 audited declarations, including the
+  26 new ones (5 realness-transport, 21 admissible-data/divergence/witness/Gate-C),
+  depend only on propext, Classical.choice, Quot.sound
+scope note: Stage-9 readiness PASS (Gates A/B/C). NS semantics unchanged: componentwise
+  Schwartz' in space, strong L2 in time, interior local times, local horizon, pressure up
+  to harmonic terms. Realness of the decoded field is now transported (Gate-A gap closed).
+  Uniform-in-time energy, classical smoothness and global time remain unproved and are
+  recorded non-blocking/deferred.
+GitHub Actions: not invoked (quota exhausted; hosted runs banned)
+```
+
+Previous gate (edge 2b-ii.b + edge 4 pointwise half, commit 1b9cb0a):
 
 ```text
 runner: local Windows (Git Bash) process via Elan
@@ -936,8 +1067,8 @@ scope note: edge 2b is now THEOREM-CLOSED in full (2b-i + 2b-ii.a + 2b-ii.b) and
   is PARTIAL (pointwise-in-time only). The NS equation semantics: componentwise Schwartz'
   in space, strong L2 in time, interior local times, complex carrier, pressure up to
   harmonic terms; realness of the decoded field is NOT transported (named cheapest
-  Gate-A gap); the uniform-in-time energy bound, classical smoothness, and global time
-  remain unproved
+  Gate-A gap) -- AS OF THAT COMMIT ONLY; that gap is closed by the 2026-08-23 pass above;
+  the uniform-in-time energy bound, classical smoothness, and global time remain unproved
 GitHub Actions: not invoked (quota exhausted; hosted runs banned)
 ```
 
@@ -989,9 +1120,12 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 - do not auto-merge unless the user explicitly asks;
 - the completed map is a complex Bessel-coordinate extension; arbitrary-`H³` decoder equality with
   a separately defined distributional product is not yet proved;
-- the projected map does not yet supply a physical real-valued/conjugate-symmetric restriction
-  or pressure reconstruction; the two-space Duhamel contract and the ball-local mild existence
-  theorem are supplied by the merged Duhamel/Picard layers and must not be re-proved;
+- (superseded 2026-08-23) pressure reconstruction is closed (edge 2a, consumed by the NS
+  capstone) and realness is closed at **both** levels — coordinate
+  (`IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity`) and decoded
+  (`r3EndpointSafeProjectedMild_isR3RealVelocity_decoded`); the two-space Duhamel contract
+  and the ball-local mild existence theorem are supplied by the merged Duhamel/Picard
+  layers and must not be re-proved;
 - the proved `H² → H³` Stokes operator requires `ν > 0` and positive elapsed time; no bounded
   cross-space operator is supplied at `τ = 0` or `ν = 0`;
 - interval integrability of `r3StokesH2H3TimeKernel` is a scalar-majorant theorem, not yet a proof
@@ -1001,8 +1135,20 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
   core comparison is in `L²` and tempered distributions;
 - do not use the phantom Sobolev-order alias itself as an inclusion or smoothing theorem; the
   positive-time result is justified by its explicit multiplier and decoder theorems;
-- the new local mild solution lives in the complex Bessel-coordinate carrier; do not call it
-  physical local well-posedness before the real-valued/conjugate-symmetric restriction exists;
+- the mild solution lives in the complex Bessel-coordinate carrier; realness is available
+  but **conditional on real data** — for a general complex coordinate nothing is real, so do
+  not describe the carrier itself as physical;
+- `IsR3AdmissibleSchwartzDatum` is **exactly** "real and classically divergence-free
+  Schwartz" (`isR3AdmissibleSchwartzDatum_iff`) and is **non-vacuous**
+  (`exists_isR3AdmissibleSchwartzDatum_ne_zero`); it is an adapter for **one concrete
+  class**, never a characterization of arbitrary `R3HsVelocity 3` — and **no `H³ ⇒ C^∞` or
+  `H³ ⇒` rapid-decay implication exists anywhere in this repository** (it is false);
+- finite energy means `∫‖U(t,x)‖²dx = ‖U t‖² < ∞` for the **physical decoded field** at each
+  time; it is **not** the uniform-in-time Clay predicate (Fefferman (A)) and there is no
+  energy inequality and no dissipation identity;
+- the certified Navier–Stokes statement is componentwise in `𝓢'` in space and strong `L²` in
+  time, at **interior** times of a **local** horizon; it is **not** a classical pointwise
+  solution, says nothing about `t = 0` or `t = T`, and says nothing global;
 - `IsR3RealVelocity` / `IsR3ConjugateSymmetricVelocity` are related through the Plancherel
   `L²` Fourier transform; every concrete operator of the mild theory is
   conjugation-equivariant and realness-preserving; the local mild solution is physically
@@ -1022,4 +1168,35 @@ Do not use GitHub-hosted PR runs as the diagnostic loop.
 
 ## Minimal continuation prompt
 
-`ns-mns2-flowmap-bridge を resume protocol どおり確認して、最新 main/Lean verification と HANDOFF.md を照合して続きから。形式側: 縦連鎖は continuation blow-up dichotomy まで閉鎖済み。**Clay semantic promotion edge 1(coordinate incompressibility)は完全閉鎖(explicit-hypothesis form)**: 1a 分布的半分(R3CoordinateIncompressibility.lean、仮説フリー)+ **1b 古典 pointwise 半分**(R3ClassicalIncompressibility.lean — 物理代表元を逆 Fourier 積分 `r3PhysicalRepresentative g = 𝓕⁻ g` で明示、明示的周波数側 L¹ 仮定(Integrable g、Integrable ‖ξ‖‖g‖)の下で **C¹ + 全点で明示的微分付き HasFDerivAt + 古典 divergence `∑ᵢ (fderiv U x eᵢ)ᵢ = 0`**(fderiv は junk でなく genuine)、Schwartz プロファイルで非空性証人付き、full gate 8758 jobs、6 新定理とも標準3公理、phantom order 不使用)。**edge 3a(decoder-to-hypothesis bridge)も THEOREM-CLOSED**(R3DecoderFrequencyBridge.lean — 任意の L² Bessel 座標の decoded frequency data `(1+‖ξ‖²)^{-3/2} • 𝓕f` が edge-1b の両 L¹ 仮定を満たす(Cauchy–Schwarz + Japanese bracket、order 3 は正直な閾値)。「decoder」は定理で earn 済み: weight = carrier の decoder 記号(`r3InverseBesselWeight_eq_sobolevWeight`)+ **L² decode と tempered decoder `r3HsToTemperedCLM 3` の一致**(`r3L2ToTempered_r3Decoded3PhysicalVelocity`、R3StokesH2H3Smoothing の既存 `r3H3ToL2Operator` を再利用)。座標 solenoidal 性は decode へ移送、Leray 射影で非空性証人、capstone は edge 1b の全仮定を decoder から放電。full gate 8759 jobs、7 監査宣言とも標準3公理。commit 前に 2-agent 敵対的 honesty review を実施し全指摘反映(Plancherel round-trip の誠実な再題名、capstone の 3b 注記、order-3 マーカー付き rename、重複 port の既存機構への差替え)**。**edge 3b も THEOREM-CLOSED**(2026-08-22、R3InversionConsistency.lean — `r3PhysicalRepresentative (r3DecodedFrequency 3 f) =ᵐ coeFn (r3Decoded3PhysicalVelocity f)` を全 L² 座標 f について証明(solenoidal 性不要)。スコープ: ここで必要な L¹∩L² 反転整合の**インスタンス**であり汎用 library ではない。経路: 両辺を smooth compact support テスト関数と pairing — pointwise 側は L¹ 乗法公式(自己随伴性)、L² 側は tempered 経由(既存3補題の再利用)— 同一の周波数側積分に着地し `ae_eq_of_integral_contDiff_smul_eq` で a.e. 一致。束ね系 `r3DecodedFrequency_incompressible_ae_decoder`: solenoidal 座標に対し C¹・全点古典 div-free の明示的代表元が L² decode の a.e. 代表元であり、その tempered 埋め込みは carrier の Bessel decoder に一致。full gate 8760 jobs、4 監査宣言とも標準3公理、commit 前 honesty review 反映済み)。**edge 2a(generic Helmholtz pressure reconstruction)も THEOREM-CLOSED**(2026-08-22、R3HelmholtzPressure.lean — 任意の L² source F に対し明示的圧力 tempered distribution `r3HelmholtzPressure F = 𝓕⁻(embed(low)+embed(high))`(profile `(−2πi)⁻¹(ξ·𝓕F)/‖ξ‖²`、球上 L¹ ⊕ 球外 L²)を構成し、**`∇p = −(I−P)F` を成分別に 𝓢' で証明**(`r3HelmholtzPressure_gradient`)。補空間の a.e. 周波数実現 + 非空性証人 `exists_r3LerayComplementL2_ne_zero`(連続 bump 場で補空間 ≠ 0)込み。符号は NS 規約側と独立追跡で確認(honesty review ×2、数学的 BLOCKER/ERROR ゼロ)。full gate 8761 jobs、5 監査宣言とも標準3公理。NS 非線形項との同定・時間依存・mild→strong は不主張(edge 2b へ))。**edge 2b-i(general H³ convection source identification)も THEOREM-CLOSED**(2026-08-22、R3ConvectionSourceIdentification.lean — 任意の order-3 Bessel 座標 u,v に対し仮説フリーで **`r3H2ToL2Operator (r3ConvectionH3ToH2 u v) = r3DecodedConvectionL2 u v`**: 完備化 convection 座標演算子の genuine J⁻² decode = decoded 物理代表元の pointwise convection `∑ᵢ (U_u)ᵢ ∂ᵢU_v`(edge-1b の明示的微分から構成、genuine fderiv と一致)。経路: Schwartz core での exact Fourier 逆変換(decoder weight 完全相殺)+ 両スロット連続性(微分側 = bounded `2πiξᵢJ⁻³` multiplier CLM、速度側 = 量的 Cauchy–Schwarz decoder L¹ 束縛 `∫‖J⁻³𝓕f‖ ≤ ‖J⁻³‖_{L²}‖f‖` による Lipschitz)+ 二重 density induction。汎用 L¹∩L² inversion 補題(3b 論法の一般化)込み。projected corollary `= P((U·∇)V)`、Leray 補空間差恒等式、edge-2a 圧力勾配の同定 source への直接 instantiation。full gate 8762 jobs、7 監査宣言とも標準3公理、honesty + faithfulness の 2-agent review で数学的 BLOCKER/ERROR ゼロ(符号連鎖・density・decoder 規律を独立確認)、全 NIT 反映済み。**この edge の非空性証人も搭載済み**(`exists_r3DecodedConvectionL2_ne_zero` — e₀ 方向の複素化 ContDiffBump 場 b•e₀; b·∂₀b ≡ 0 なら軸上 FTC で b(0)²=b(2e₀)² ⟹ 1=0 の矛盾。系 `exists_r3ConvectionH3ToH2_ne_zero` 込み、9 監査宣言とも標準3公理。ただし witness 場は divergence-free ではなく、solenoidal u,v および projected source の非零は未主張)。時間依存・Duhamel 微分・mild→strong は不主張)。**edge 2b-ii.a infrastructure pass**(2026-08-22、R3ProjectedMomentumDuhamelInfrastructure.lean — decoded Laplacian `Δ̂·J⁻³`(`Δ̂(ξ)=−(2π)²‖ξ‖²`)を構成し **distributional Laplacian `∑ᵢ∂ᵢ∂ᵢ` と一致することを証明**(`r3L2ToTempered_r3H3LaplacianL2Operator` — 「Δ」の名を定理で earn)、Stokes flow / H²→H³ smoothing との可換性、**Stokes generator identity(pairing 形)**`hasDerivAt_inner_r3StokesL2Path`(正時刻での heat kernel の優収束微分、`z e^{−zc} ≤ c⁻¹` で周波数増大を吸収)とその FTC 形、**Duhamel 三角の Fubini swap**、**decoded mild identity**、2b-i 同定の記録と 2a 圧力証人の instantiation。full gate 8763 jobs、8 監査宣言とも標準3公理、警告ゼロ。当時 assembly は open 記録 — **第6 pass で閉鎖済み、下記**)。**edge 2b-ii.a(projected momentum equation)THEOREM-CLOSED**(2026-08-23、R3ProjectedMomentumEquation.lean — 任意の endpoint-safe projected mild solution に沿って decoded 物理速度が **基本積分恒等式 `U t = U 0 + ∫₀ᵗ(ν•Δ(u σ) − P((U·∇)U)(σ))dσ`**(全 t ∈ [0,T]、`r3MildDecodedVelocity_eq_integral`)と、内部時刻での **強 L² 時間微分付き projected 運動方程式 `∂ₜU = νΔU − P((U·∇)U)`**(`r3EndpointSafeProjectedMild_momentum`)を満たす。Δ = decoded Laplacian(インフラ pass で distributional と同定済み)、非線形項 = 2b-i 同定 `P((U·∇)U)` の literal 形(`r3MildConvectionSource_eq` 消費)。証明 = 発注どおり 5 段分解(source 連続性 → scalar pairing 積分恒等式(decoded mild identity + flowed FTC ×(linear+slice) + ν-free Laplacian recombination + 三角 swap を実消費)→ `ext_inner_left` で L² 化 → Banach FTC-2 → capstone)。インフラ補題は実際に消費され 2b-ii.a-assembly 債務退役。合成系 `exists_r3EndpointSafeProjectedMild_momentum`(existence 定理と同一 predicate)で全 ν>0・全初期値に対し非空。full gate 8764 jobs、6 監査宣言とも標準3公理、警告ゼロ、honesty+faithfulness review で数学的欠陥ゼロ・テキスト指摘全反映。**未主張**: 圧力・unprojected 方程式(2b-ii.b)、L² を超える古典的時間微分、端点 t=0/T での微分; solenoidal 性・実性は不使用・不主張(複素座標 carrier 上の projected 方程式であり、まだ NS 文ではない)。微分が非零になる場合があることは未証明(記録済み debt))。**edge 2b-ii.b(incompressible NS equation)THEOREM-CLOSED — これで edge 2b 全体と台帳 item 2 が完全閉鎖**(2026-08-23、R3NavierStokesEquation.lean — 純合成 pass。solenoidal 初期座標の mild solution に沿って decoded 物理速度が (i) 強 L² 時間微分 `∂ₜU = νΔU − P((U·∇)U)`、(ii) 明示的 2a 圧力 `p = r3HelmholtzPressure((U·∇)U)` による **unprojected 運動方程式 `∂ₜU − νΔU + (U·∇)U + ∇p = 0`**(成分別 𝓢')、(iii) **分布的 incompressibility `∇·U = 0`**(edge 1a)を満たす(`r3EndpointSafeProjectedMild_navierStokes`)。新数学は solenoidal 伝播 `r3EndpointSafeProjectedMild_mem_solenoidal` のみ(kernel-of-CLM 論法)。Helmholtz completion `postcomp_r3LerayL2Operator_eq` が 2a 証人を実消費(旧 instantiation 記録は supersede)。合成系 `exists_r3EndpointSafeProjectedMild_navierStokes` は capstone 全結論を輸出。**同 pass で edge 4 は PARTIAL**(R3FiniteEnergy.lean — 各時刻での有限エネルギー `∫‖U‖² = ‖U‖² < ∞` は閉鎖; **uniform-in-time 束縛・energy inequality は未証明のまま open**)。full gate 8766 jobs、8 新監査宣言とも標準3公理。**Stage-9 Gate A: PARTIAL-PASS(distributional/local/complex)** — Clay 級には未達: decoded 場の実性 transport(最安 gap: `IsR3RealVelocity` を `r3H3ToL2Operator` に通す補題が無い)、古典 C^∞ 意味論、global time、圧力正則性が未証明)。残り edges: **3 proper(SmoothRapidDecayInitial 形の類意味論 — arbitrary H³→smooth は誤りなので admissible-data adapter 方向のみ), 4-uniform(uniform-in-time エネルギー束縛), 5(breakdown 転送、Stage-9 結果の形が固まるまで defer)**(Bucket A = docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。研究側: **FREEZE REVIEW 実行済み**(2026-08-21、ユーザーの fork-(β) 裁定適用; master record = docs/gates/FREEZE_REVIEW_2026-08-21.md(31行裁定テーブル)+ TYPE2_KILL_TABLE_2026-08-19.md への authorized annotation A1–A20; 3-lens Opus 監査で全 BLOCKER/ERROR 修正済み)。凍結後 frontier: **fork (β) — 辞書は neck の poloidal level bound / sup(ω_θ/r) / ℓ_neck を割り当てない(review で何も発明しない)**。M2 RESTRICTED · M3 RESTRICTED(γ₂<γ は K4′ [(E⁺)+(P)] で死亡; tie face は B2 へ併合)· **Scope-A 準静的 = B2 のみ**、kill は R-B2′ [C](full chain: re-centred zoom + Γ-max + (N-Γ) + axial boost + ledger ⟹ |w|≤C/r ⟹ KNSS 5.3 ⟹ w≡0 ⟹ v=b·e_z ⟹ Γ≡0 矛盾)、条件 **(E⁺⁺) = (COH-Δ)+(ANCH)** + (P) + (N-Γ)[C-dict]。**(NECK) = standing dictionary-extension request**(未割当入力2つ: θ_coh(ρ)、ℓ_neck; δ_T は削除済み)。K4 復活 [V](zoom-route-only rider; corridor は直接カバーしない)、K4″≡R-B1 は冗長確認へ降格、K4‴ 採用、S_blob は α>2γ−1 strict、§10 trigger は Scope-B limb のみ A_NS 内文言に修正(DVEP は fire しない)、in-house 3 vehicle(budget/winding・level route・T4-with-sign)は全て退役/ブロック。BH **YELLOW-RED 維持**、CAP trigger なし。**Scope-B reconnaissance 完了**(docs/gates/BH_SCOPEB_RECON_2026-08-21.md; record-only、F21–F29 は proposed 未実行): trigger 裁定 **(T-c) OPEN・二重不発**(DVEP は A_NS の (A1) を構造的に破る + 非局所化可能性は**主張のみで無証明**; 3D で localizability を強制する定理は皆無 — 主題とする3論文は全て仮定する側)。scope 分類: 全 K 行 / R-NEG / S_blob は **SCOPE-FREE**、Scope-A は geometry gate の楕円軌道剛性経由のみ((E⁺⁺)/(NECK)/θ_coh/ℓ_neck/T4 は Scope B では **undefined**; per-level bound は Scope A 外で**偽**(Hill)— 弱体化経路なし)。Scope-B landscape: S_blob 不変、**one-scale ring と M2 は再開**、M3 γ₂<γ は死んだまま(K4′ scope-free)、**B2 は Scope B で未 kill**、最安欠落 = **(SB-ANCH)**(scope-free な re-centring anchor; K9 は存在のみで co-location を与えない)。自前凍結文の欠陥発見: **F22 = R-B2′ の「no Scope-A geometry」条項はアンカーについて偽**(3文書; B2 上では Scope-A-gated)、F24 = gate 判定文の未修正残置、F23 = DVEP 記録の過大表現。**R-B2′ anchor-independence audit 完了**(docs/gates/BH_RB2_ANCHOR_AUDIT_2026-08-21.md; **fork (b)** — scope-free 代替なし、(SB-ANCH) = 名前付き主 Scope-B gap、**B2 は Scope B で未 kill と記録**; (c) は operative test(unlisted 消費)では不発、ただし recon §8 の印字文言では発火していた — C6 として次 agenda に搭載)。要点: 真の Scope-A gate は zoom でなく**網羅性ステップ**(「全 Scope-A blob は two-scale」)で、R-B2′ は `B2 ∩ {β_v = γ}` 上では既に scope-free(Scope B が失うのは「その部分類 = B2」という定理); (SB-ANCH) が付与されても level ≠ labelled region で R-B2′ は Scope B で statable にならない; **(SB-ANCH)-final = (H1) sup-swirl 飽和 ∧ (H2) 同一点 Γ-飽和**(距離節は Γ-max から導出可能で削除; 単一同値形: 包絡線 `Γ(r) ≤ min(Γ₀, r‖u‖_∞)` の角での定数付き達成 ⟺ `β_v = γ` τ-一様 = A2 の未解析中間肢の上端); 連鎖は定数不可知(√42 は5箇所全てアンカー継承); target 分割 (T1) tie face scope-free / (T2) Scope B で undefined / (T3) Scope A で空・Scope B で未主張(frontier 行に Γ-saturated 限定詞が必要); 新債務 F31 = (N-Γ) の印字放電経路は ρ_T > γ 枝では Scope A でも未供給。**第2回 FREEZE REVIEW 実行済み**(2026-08-21、ユーザー修正裁定 F21/F29/F31/F33/C6 適用; master record = docs/gates/FREEZE_REVIEW_2_2026-08-21.md + kill table annotation **B1–B14**; 3-lens 監査で全 ERROR 修正済み)。frontier 差し替え: 「**Scope-A quasi-static = B2; その Γ-saturated realization が R-B2′ [C] の対象**」(Scope-A gate = 網羅性ステップ; 旧「B2 alone, killed by R-B2′」撤回)。R-B2′ 条件 = (E⁺⁺) = (COH-Δ)+**(ANCH-κ)** + (P) + **(N-Γ)[B11 split: tie face/ρ_T=γ → [C-dict]、ρ_T>γ → [C] 放電未供給]**(+ imported layer: (E⁺)、frozen dictionary [C-dict] — B10)。Scope B: **B2 UNKILLED**、(SB-ANCH) = (H1)∧(H2)(距離節削除; β_v = γ の τ-一様 corner attainment、B13)+ 正準 open question 逐語印字(B6)+ **非移植 rider**(SB-ANCH 単独では R-B2′ を Scope B に運べない)。fork-(c) 凍結 = unlisted ∧ independent ∧ irreducible(不発、B14)。trigger (T-c) OPEN + 再チェック条件(B5)。**次はユーザー選択(デフォルト無し)**: (1) Lean 形式側(Clay semantic promotion 5 edges / glued u*)、(2) 後回しリスト(β_v ∈ (α,γ] 肢 = (SB-ANCH) の home、ただし定理形で要明示発注)、(3) B5 条件による文献 watch。数値・新 ansatz(negation witness を除く)・V1/K12 promotion・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない(quota 枯渇)。docs は照合後 main に直接 push。古い会話より実コードを優先して。`
+`ns-mns2-flowmap-bridge を resume protocol どおり確認して続きから。
+
+**形式側は完了・停止中**: Stage-9 readiness = PASS(docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md)。
+実・divergence-free・有限エネルギーの Schwartz 初期データから、認証された局所 mild 解の decoded 物理速度が
+**実際の incompressible Navier–Stokes 方程式**(成分別 𝓢' 空間 × 強 L² 時間微分、局所地平線の内部時刻、
+明示的 Helmholtz 圧力、分布的 ∇·U = 0)を満たすところまで機械検証済み
+(`r3AdmissibleSchwartzDatum_navierStokes` → `r3EndpointSafeProjectedMild_navierStokes`)。
+local existence / 無制限一意性 / 明示的 lifespan / restart / concat / continuation / blow-up dichotomy も閉鎖済み。
+**stop rule により、これ以上の formal plumbing はしない** — uniform energy、古典正則性、端点微分、
+maximal trajectory u*、edge 3 proper、edge 5 Clay packaging は、Stage-9 の具体定理が要求するまで着手禁止。
+
+**次にやるのは Stage-9 の数学**: docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md で
+commissioned 済みの唯一の decision theorem = **Scope-B β_v endpoint-pinning decision**
+(Scope-B の B2 クラス、O(1) 非消滅循環、Scope-A 仮説なしで、中間肢 M(sub-core Γ 飽和 かつ
+corner attainment 不成立 = 冪則語彙で β_v ∈ (α,γ))が凍結 scope-free 行の連言と **CONSISTENT** か、
+それとも scope-free な指数算術が β_v を {β_v ≤ α} ∪ {β_v = γ, τ-uniform} に **PIN** するか)。
+NO なら anchorless intermediate-saturation escape channel が死に、唯一未 kill のクラスが2つの
+名前付き攻撃対象に分裂。YES なら corridor 以来初の新 Scope-B 生存クラスが確定。
+**record-only**: A2 債務の放電も新 survival 行も、次のユーザー裁定 freeze review への *提案* として書くだけ。
+必ず継承する義務: K4′ を使う鎖には必ず [(E⁺)+(P)] を印字(条件付き [C] であり scope-free pin ではない)、
+P6 残余 [V?] と Chen–Fang–Zhang endpoint 可容性は verification obligation として明示、
+K9 適用ごとに τ^{α−γ} misfire チェック、marginal/log/sub-polynomial/循環消滅面は
+out-of-vocabulary として記録(辞書を発明しない)。
+
+**研究側 freeze は不変**(2026-08-21 round 2): BH YELLOW-RED、Scope B で B2 は UNKILLED、
+(SB-ANCH) = (H1)∧(H2)、trigger (T-c) は OPEN、in-house 3 vehicle は退役/ブロック、fork-β の辞書拒否も有効。
+別途キュー済み(このタスクの blocker ではない): 次回 freeze review での **Seregin arXiv:2606.29468**
+(log 補正 Type-II 族; 除外は ancient Euler の Liouville 定理へ帰着し **未解決**)row-(i) 更新。
+
+数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
+(quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。
+docs は照合後 main に直接 push。古い会話より実コード・実 ledger を優先。`

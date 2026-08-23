@@ -311,9 +311,12 @@ Clay/Fefferman statement shape (cross-checked against
      **Scope (unchanged caveats):** componentwise in `𝓢'(R3,ℂ)` in space and
      strong-`L²` in time — *not* a classical pointwise solution; interior times of a
      **local** certified horizon only (no `t = 0`, no `t = T`, no global time); on the
-     **complex** Bessel-coordinate carrier — realness is neither used nor asserted
-     (the coordinate-level realness theorem `…isR3RealVelocity` exists but is not
-     invoked, and realness of the *decoded* field is not transported); the pressure is
+     **complex** Bessel-coordinate carrier — the capstone itself neither uses nor
+     asserts realness (no realness hypothesis, no realness conclusion); realness of the
+     *decoded* field is transported **separately**, and only under the additional
+     hypothesis `IsR3RealVelocity u₀`, by
+     `r3EndpointSafeProjectedMild_isR3RealVelocity_decoded` (2026-08-23 eighth pass,
+     Task A — see below); the pressure is
      the edge-2a witness, determined only up to additive harmonic terms, with no
      regularity or decay claimed; `Δ` and `(U·∇)U` are the operators identified by
      `r3L2ToTempered_r3H3LaplacianL2Operator` and edges 2b-i/3b — cited, not inlined
@@ -331,6 +334,45 @@ Clay/Fefferman statement shape (cross-checked against
    converse embedding for the intended data. The general decoder equality for arbitrary
    `H³` inputs against a separately defined distributional product is also still open
    (`FORMAL_SCOPE.md` §7).
+   **SPLIT (2026-08-23):**
+   - **3-adapter (concrete admissible initial-data bridge): `THEOREM-CLOSED`** —
+     `Formal/R3SchwartzInitialData.lean`.  One concrete admissible class is certified:
+     `IsR3AdmissibleSchwartzDatum φ` for `φ : 𝓢(R³, ℂ³)`, defined by conjugation
+     fixed-point (physically real) and the frequency-side divergence-free condition
+     `ξ · 𝓕φ(ξ) = 0` for every `ξ`.  For the **same** datum the file certifies
+     smoothness (`.smooth`), rapid decay (`.decay`), realness
+     (`r3SchwartzConjCLM_eq_self_iff`), **classical pointwise** divergence-freeness
+     (`.classicalDivergence` — *derived* from the frequency form through edge 3a and the
+     exact Schwartz inversion `r3DecodedRepresentative_schwartz`, not assumed), finite
+     energy (`r3Schwartz_finiteEnergy`), encoding into the solenoidal carrier
+     (`.encode_mem_solenoidal`), realness of the encoded coordinate
+     (`.isR3RealVelocity_encode`), and **decode ∘ encode = identity**
+     (`r3H3ToL2Operator_r3SchwartzToHsCLM`: `r3H3ToL2Operator (r3SchwartzToHsCLM 3 φ) =
+     φ.toLp 2`, the order-three transposition of the proved order-two identity).  Entry
+     capstone `r3AdmissibleSchwartzDatum_navierStokes` starts the certified local theory
+     from such a datum and exports: the decoded velocity at time `0` **is** the literal
+     datum, realness at every certified time, finite energy at every time, and the full
+     Navier–Stokes conclusion of `r3EndpointSafeProjectedMild_navierStokes` at every
+     interior time.  Gate-C instantiation shipped as
+     `r3AdmissibleSchwartzDatum_blowup_dichotomy`.
+     **Scope:** this is an *adapter for one concrete class*, deliberately **not** a
+     characterization of arbitrary `R3HsVelocity 3`.  No `H³ ⇒ C^∞` or `H³ ⇒` rapid-decay
+     implication is proved, claimed, or used anywhere — that direction is false and is not
+     the target.  The converse (classical pointwise divergence-freeness ⇒ the
+     frequency-side condition) is **also proved in this same pass**, in
+     `Formal/R3SchwartzDivergence.lean`
+     (`r3Schwartz_rawDivergence_fourier_iff_classical`, an equivalence in *both*
+     directions, via the transfer identity `𝓕(∑ᵢ∂ᵢφᵢ)(ξ) = 2πi·(ξ·𝓕φ(ξ))` and
+     injectivity of the Schwartz Fourier transform), and is consumed by
+     `isR3AdmissibleSchwartzDatum_iff`.  The interface is therefore **exactly** the
+     classical one, not merely at least as strong as it.
+   - **3 proper (`SmoothRapidDecayInitial`-shaped class semantics for arbitrary coordinate
+     data): still `OPEN`, and deliberately deferred** — a Clay-grade *statement* needs it
+     only if the final packaging quantifies over the coordinate carrier rather than over a
+     concrete admissible class.  Not a Stage-9 blocker
+     (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`).
+   **⇒ ledger item 3 is SPLIT: the concrete admissible adapter is `THEOREM-CLOSED`; the
+   general characterization stays `OPEN` and is `NON-BLOCKING FOR STAGE 9`.**
 4. **Energy semantics** — **`PARTIAL` (pointwise-in-time closed 2026-08-23,
    `Formal/R3FiniteEnergy.lean`; uniform-in-time `OPEN-REQUIRED-FOR-CLAY`).**  For
    **every** `L²` velocity field the pointwise norm is square-integrable
@@ -344,6 +386,10 @@ Clay/Fefferman statement shape (cross-checked against
    and the local-uniform version on a certified horizon would additionally need the
    decoder operator-norm bound (`‖r3H3ToL2Operator‖ ≤ 1`, not yet in the repository)
    applied to the existence theorem's ball clause.
+   **Policy (2026-08-23, Stage-9 readiness audit):
+   `edge 4-uniform: DEFERRED / NON-BLOCKING FOR STAGE 9`.** Pointwise-in-time finite
+   energy suffices for readiness; the selected Stage-9 decision theorem does not consume a
+   uniform-in-time bound or an energy inequality. Do not build them for completeness.
 5. **Breakdown-statement transfer** — a verified breakdown theorem on the concrete solution
    class implies the official whole-space breakdown proposition, including the quantifier
    structure over viscosity (the official statement quantifies over `ν`; a single-`ν`
@@ -469,3 +515,44 @@ space × strong-`L²` time semantics at interior times of a local horizon; Gate 
 lemma transports `IsR3RealVelocity` through `r3H3ToL2Operator`), classical `C^∞`
 semantics, global time, and pressure regularity remain unproved.  Required edges after
 this pass: **3 proper, 4-uniform, 5**.
+
+Update 2026-08-23 (eighth pass — **Stage-9 readiness pass**): two small closures and a
+bounded audit; **no new infrastructure, no new framework**.
+
+- **Task A — the named cheapest Gate-A gap is CLOSED**
+  (`Formal/R3DecodedVelocityRealness.lean`).  The seventh pass recorded "no lemma
+  transports `IsR3RealVelocity` through `r3H3ToL2Operator`".  It now exists: the decoder
+  symbol `J⁻³ = (1+‖ξ‖²)^(-3/2)` is real and even
+  (`r3H3InverseBesselWeightComplex_conj` / `_neg`, instances of the existing
+  `r3SobolevWeightComplex` lemmas at order `-3`), so the **existing** generic multiplier
+  theorem `r3L2Conj_of_fourier_realEven` gives `r3L2Conj_r3H3ToL2Operator` and
+  `isR3RealVelocity_r3H3ToL2Operator`.  Composed with the **unconditional**
+  coordinate-level realness `IsR3EndpointSafeProjectedMildSolutionOn.isR3RealVelocity`
+  this yields `r3EndpointSafeProjectedMild_isR3RealVelocity_decoded`: along every mild
+  solution with physically real initial coordinate, the decoded velocity of the NS
+  capstone is physically real at every certified time.  No new reality framework, no
+  classical `C^∞` upgrade, no pointwise representative theorem.  **Gate A is now
+  PASS at the readiness bar** (semantics unchanged: componentwise `𝓢'` in space,
+  strong `L²` in time, interior times of a local horizon, pressure up to harmonic terms).
+- **Task B — edge 3-adapter `THEOREM-CLOSED`** (`Formal/R3SchwartzInitialData.lean` +
+  `Formal/R3SchwartzDivergence.lean`), see the split recorded under ledger item 3 above.
+  The interface is proved to be **exactly** "real and classically divergence-free"
+  (`isR3AdmissibleSchwartzDatum_iff`, over the two-directional equivalence
+  `r3Schwartz_rawDivergence_fourier_iff_classical` whose transfer identity is
+  `𝓕(∑ᵢ∂ᵢφᵢ)(ξ) = 2πi·(ξ·𝓕φ(ξ))`), and it is **non-vacuous**
+  (`exists_isR3AdmissibleSchwartzDatum_ne_zero`: an explicit nonzero datum
+  `𝓕⁻(i·b(ξ)(ξ₁e₀ − ξ₀e₁))` built from the existing plateau bump).  **Edge 3 *proper*
+  stays OPEN** and is recorded `NON-BLOCKING FOR STAGE 9`.
+- **Gate C** is instantiation-only and is now *consumed* rather than claimed
+  (`r3AdmissibleSchwartzDatum_blowup_dichotomy`).  No maximal-trajectory packaging built.
+- **Edge 4-uniform: `DEFERRED / NON-BLOCKING FOR STAGE 9`** (policy recorded under ledger
+  item 4).  No uniform bound, no energy inequality, no dissipation identity was built.
+
+Full gate **8769 jobs**, exit 0, zero warnings from the three new modules, pinned source
+scan clean, all **277** audited declarations standard-axioms-only.
+
+**Bounded audit verdict (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`): Stage-9
+readiness `PASS`; formal plumbing STOPS.**  Required edges after this pass: **3 proper
+(non-blocking), 4-uniform (deferred), 5 (deferred until a Stage-9 theorem shape exists)**.
+Still not proved and still not claimed: global regularity, blow-up, classical solutions,
+global time, uniform energy, and any Clay statement.

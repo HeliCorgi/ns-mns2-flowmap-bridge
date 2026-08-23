@@ -1,6 +1,11 @@
 # NS MNS-2 Flow-map Bridge
 
-Navier–Stokes / Hou axisymmetric-with-swirl branch で、非線形 flow map と tangent propagator をつなぎつつ、現在は **実際の `R³` function-space Navier–Stokes operator 層**を Lean で組み立てている研究 repo。
+Navier–Stokes / Hou axisymmetric-with-swirl branch の研究 repo。Lean 4 + mathlib で
+**実際の `R³` incompressible Navier–Stokes 方程式**の局所理論(存在・一意性・明示的 lifespan・
+continuation・blow-up dichotomy、および real divergence-free Schwartz 初期データからの
+入口 adapter)を証明済みで、並行して Type-II / BH candidate の kill ledger を回している。
+
+**Clay problem は未解決。global regularity も blow-up も証明していない。**
 
 ## 最上位目標
 
@@ -28,8 +33,9 @@ S_T(c(1)) - S_T(c(0)) = ∫ DS_T(c(s))[c'(s)] ds
 
 ## 現在の formal frontier
 
-`R³` の具体的な operator 層から局所理論までの縦の連鎖は **すべて定理として閉じている**
-(local `Formal.+` gate 8756 jobs green、`Formal/AxiomAudit.lean` は標準3公理のみ):
+`R³` の具体的な operator 層から、局所理論を経て **実際の incompressible Navier–Stokes 方程式**
+までの縦の連鎖が定理として閉じている(local `Formal.+` gate green、`Formal/AxiomAudit.lean` は
+標準3公理 `propext` / `Classical.choice` / `Quot.sound` のみ):
 
 ```text
 explicit R³ operators (Stokes evolution / H²→H³ smoothing / Leray at L², H², H³)
@@ -46,25 +52,39 @@ explicit lifespan  (K(T) = T + √T/(π√ν) 閉形式、T₀ = (δ/(1+(π√ν
         ↓
 unrestricted uniqueness  (ball 制限なし; 実データの任意の mild 解は無条件に実)
         ↓
-restart / concatenation
+restart / concatenation  →  continuation blow-up dichotomy
         ↓
-continuation blow-up dichotomy
-  (認証地平線が非有界か、解ノルムがあらゆる球を脱出するかの二択)
+decoded physical velocity U = J⁻³-decode(u) の意味論
+  (Laplacian・convection・Helmholtz 圧力・divergence をすべて定理で同定)
+        ↓
+∂ₜU − νΔU + (U·∇)U + ∇p = 0,  ∇·U = 0
+  (r3EndpointSafeProjectedMild_navierStokes:
+   空間は成分別 𝓢'、時間は強 L² 微分、局所地平線の内部時刻)
+        ↓
+admissible 初期データ adapter  (real divergence-free Schwartz datum ⇒ 上の全部)
 ```
 
-定理単位の依存連鎖・edge 分類・残存 edge は
+意味論の正確な強さ、定理単位の依存連鎖、edge 分類、残存 edge は
 [`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`](docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)
 に固定してある。
 
 **まだ無いもの(正確に):**
 
+- 古典解の意味論(時間微分は強 `L²`、空間は分布。pointwise classical solution ではない);
+- global time(地平線は局所。dichotomy は証明済みだが global regularity も blow-up も未証明);
+- uniform-in-time energy bound / energy inequality(各時刻の有限エネルギーのみ、edge 4 は PARTIAL);
 - canonical maximal trajectory `u* : [0, T*) → H³` と pointwise
   `limsup_{t→T*} ‖u*‖ = ∞` 形の定理(dichotomy は証明済み、trajectory-level 言い換えは未構成);
-- pressure reconstruction と Clay statement 形への semantic promotion(5 edges、上記文書 Bucket A);
-- Clay A/B/C/D の解決(なし)。
+- 圧力の正則性(edge 2a の witness であり、調和項の差を除いて決まる);
+- 任意 `H³` 初期データの smoothness 特徴づけ(`H³ ⇒ C^∞` は偽であり主張しない);
+- Clay breakdown statement への転送(edge 5)と Clay A/B/C/D の解決(なし)。
 
-研究側は Type-II / BH candidate 問題
-([`docs/gates/BH_PROFILE_TASTE_REPORT.md`](docs/gates/BH_PROFILE_TASTE_REPORT.md))に復帰している。
+形式側は Stage-9 readiness 監査で `PASS`
+([`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`](docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md))、
+以後 formal plumbing は stop rule で停止。研究側の凍結後 frontier は
+[`docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`](docs/gates/TYPE2_KILL_TABLE_2026-08-19.md)、
+次に攻める唯一の decision theorem は
+[`docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md`](docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md)。
 
 ## 主要な式はどこ？
 
@@ -186,9 +206,32 @@ P_freq f(ξ) = P_C(ξ) f(ξ)    a.e. ξ
 
 も証明済み(`r3LerayL2FrequencyOperator_ae`)。
 
+### 6. Navier–Stokes 方程式そのもの
+
+[`Formal/R3NavierStokesEquation.lean`](Formal/R3NavierStokesEquation.lean) の capstone
+`r3EndpointSafeProjectedMild_navierStokes` は、solenoidal 初期座標に対する endpoint-safe
+projected mild solution `u` の decoded 物理速度 `U s = r3H3ToL2Operator (u s)` について、
+地平線内部の各時刻で
+
+```text
+∂ₜU = νΔU − P((U·∇)U)          -- 強 L² 時間微分
+∂ₜU − νΔU + (U·∇)U + ∇p = 0    -- 成分別 𝓢'、p = r3HelmholtzPressure ((U·∇)U)
+∇ · U = 0                        -- 分布的
+```
+
+を証明している。`Δ` と `(U·∇)U` は名前ではなく定理で同定済み
+(`r3L2ToTempered_r3H3LaplacianL2Operator`、edge 2b-i)。
+
+[`Formal/R3SchwartzInitialData.lean`](Formal/R3SchwartzInitialData.lean) は、実・divergence-free
+な Schwartz 初期データからこの理論に入るための最小 adapter
+(`r3AdmissibleSchwartzDatum_navierStokes`)。decode∘encode が恒等になること
+(`r3H3ToL2Operator_r3SchwartzToHsCLM`)、実性の decoder 越しの輸送
+([`Formal/R3DecodedVelocityRealness.lean`](Formal/R3DecodedVelocityRealness.lean))、各時刻の
+有限エネルギーが揃っている。
+
 ## Navier–Stokes 本体との距離
 
-最終的に接続したい equation は unforced incompressible 3D Navier–Stokes
+接続対象の equation は unforced incompressible 3D Navier–Stokes
 
 ```text
 ∂ₜu - νΔu + (u · ∇)u + ∇p = 0
@@ -208,9 +251,14 @@ u(t) = e^{νtΔ}u₀
        - ∫₀ᵗ e^{ν(t-s)Δ} P((u(s) · ∇)u(s)) ds.
 ```
 
-repo には abstract quadratic mild / tangent / continuation bridge はすでにあるが、**上の `R³` Navier–Stokes nonlinear term をその abstract layer に完全接続した段階ではまだない**。
+この projected 形の局所理論(存在・一意性・地平線・restart/continuation)は閉じており、そこから
+**unprojected な上の方程式そのもの**への semantic promotion も上記 capstone で閉じた。
+残る距離は「意味論の強さ」と「時間の大域性」であって、方程式の同定ではない — 具体的には
+古典解・global time・uniform energy・maximal trajectory・Clay breakdown 転送(edge 5)。
 
-現在の `R³` formalization の目的は、まさにその missing bridge を埋めること。
+legacy の abstract quadratic mild / tangent / continuation bridge 層は残置してあるが、`R³` の
+縦連鎖はそれを経由せず具体 operator 上で閉じている(接続 adapter は
+`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md` の Bucket B、bottleneck ではない)。
 
 ## ディレクトリ
 
@@ -247,3 +295,11 @@ repo には abstract quadratic mild / tangent / continuation bridge はすでに
 `EXACT DISCRETE SOLUTION-MAP REPRESENTATION: SUPPORTED`
 
 など各成果物の明示 scope まで。continuum general solution / blowup proof / Clay resolution への promotion は、`PROJECT_GOAL.md` の最終 gate を満たすまでしない。
+
+## License
+
+[Apache License 2.0](LICENSE)。Lean / mathlib エコシステムの標準に合わせている。
+
+Lean 側は mathlib(Apache-2.0)に依存し、`lake-manifest.json` で revision を固定する。将来
+`LeanMillenniumPrizeProblems`(Apache-2.0)等の外部 source を vendoring する場合は、上記
+References 節の方針どおり attribution notice と変更表示を保持すること。

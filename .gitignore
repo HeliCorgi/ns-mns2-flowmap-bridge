@@ -10,3 +10,6 @@ results/**/*.npz
 results/**/*.stdout.json
 results/v2.2/repro_12x24.json
 results/v2.2/repro_12x24.npz
+
+# Lean build artifacts and fetched dependencies
+.lake/

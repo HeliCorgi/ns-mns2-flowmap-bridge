@@ -11,14 +11,18 @@ At the start of every new session, before proposing code or mathematics, read in
 3. `AGENTS.md` — non-negotiable repository rules and claim hygiene;
 4. `FORMAL_SCOPE.md` — current Lean theorem/claim boundary;
 5. `HANDOFF.md` — short-form current frontier and next gate;
-6. `docs/LEAN_CI_OPERATIONS.md` — how Lean verification is currently expected to run.
+6. `docs/LEAN_CI_OPERATIONS.md` — how Lean verification is currently expected to run;
+7. `docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md` — why formal plumbing is **stopped**
+   and what the certified Navier–Stokes statement actually says;
+8. `docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md` — the single commissioned research
+   task, its kill/survive criterion, and the obligations it inherits.
 
 Then inspect GitHub:
 
-7. current `main` HEAD;
-8. current contents of the relevant files under `Formal/`;
-9. open PRs, especially the newest mathematical or verification-related PR;
-10. the newest Lean verification evidence associated with the relevant commit, preferring a ChatGPT-connected external Lean runner result and using GitHub-hosted CI only when it was deliberately run.
+9. current `main` HEAD;
+10. current contents of the relevant files under `Formal/`;
+11. open PRs, especially the newest mathematical or verification-related PR;
+12. the newest Lean verification evidence associated with the relevant commit, preferring a ChatGPT-connected external Lean runner result and using GitHub-hosted CI only when it was deliberately run.
 
 If no Lean result exists for the relevant commit/toolchain, mark the code as unverified. Do not infer proof validity from a stale CI result, an old conversation, or a similar-looking source file.
 

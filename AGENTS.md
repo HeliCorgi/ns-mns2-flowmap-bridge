@@ -50,7 +50,27 @@ Do **not** claim that this repository proves any of the following:
 - that the Hou late-state singular regime has been reproduced or validated here;
 - that a discrete/numerical bridge automatically implies the continuum bridge.
 
-The strongest currently formalized analytic implication is local and conditional:
+The strongest currently formalized **Navier–Stokes** statement (2026-08-23) is local and
+explicitly scoped:
+
+> For every viscosity `ν > 0` and every real, divergence-free Schwartz datum `φ` on `R³`,
+> there is a positive horizon `T` and a certified mild solution whose decoded physical
+> velocity `U` satisfies `U(0) = φ` as an element of `L²(R³, ℂ³)`, is physically real and
+> has finite kinetic energy at every certified time, and satisfies, at every **interior**
+> time of `[0, T]`,
+> `∂ₜU − νΔU + (U·∇)U + ∇p = 0` (componentwise in `𝓢'`, with the explicit Helmholtz
+> pressure) together with `∇·U = 0` (distributionally), the time derivative being a strong
+> `L²`-valued derivative.
+>
+> Anchors: `r3AdmissibleSchwartzDatum_navierStokes`,
+> `r3EndpointSafeProjectedMild_navierStokes`.
+
+That statement is **local in time, distributional in space, and says nothing about global
+regularity or blow-up**. Do not paraphrase it into a global, classical, or Clay-level
+claim, and do not drop the interior-time, local-horizon, or pressure-up-to-harmonic-terms
+qualifiers.
+
+The strongest formalized **abstract flow-map** implication remains local and conditional:
 
 > If a fixed-time map `S` is `C¹` on an open set `U` containing the entire initial-data path, then the exact path-integral reconstruction identity holds on that path.
 

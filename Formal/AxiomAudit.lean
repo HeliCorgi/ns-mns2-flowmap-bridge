@@ -50,6 +50,9 @@ import Formal.R3ProjectedMomentumEquation
 import Formal.R3NavierStokesEquation
 import Formal.R3FiniteEnergy
 import Formal.R3MildContinuation
+import Formal.R3DecodedVelocityRealness
+import Formal.R3SchwartzDivergence
+import Formal.R3SchwartzInitialData
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
 
@@ -386,3 +389,55 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.integral_norm_sq_r3L2
 #print axioms MNS2.r3DecodedVelocity_finiteEnergy
 #print axioms MNS2.r3MildDecodedVelocity_finiteEnergy
+
+-- Realness transport through the order-three decoder (Stage-9 readiness, Gate A): the
+-- decoder symbol J^-3 is real and even, so the bounded decoder commutes with pointwise
+-- conjugation and preserves IsR3RealVelocity; hence along every mild solution with
+-- physically real initial coordinate the decoded physical velocity appearing in the
+-- Navier-Stokes capstone is real at every certified time. No classical C-infinity
+-- upgrade and no pointwise representative theorem is claimed.
+#print axioms MNS2.r3H3InverseBesselWeightComplex_conj
+#print axioms MNS2.r3H3InverseBesselWeightComplex_neg
+#print axioms MNS2.r3L2Conj_r3H3ToL2Operator
+#print axioms MNS2.isR3RealVelocity_r3H3ToL2Operator
+#print axioms MNS2.r3EndpointSafeProjectedMild_isR3RealVelocity_decoded
+
+-- Admissible Schwartz initial data (Clay semantic edge 3, adapter form; Stage-9
+-- readiness, Gates B and C): real divergence-free Schwartz velocity fields encode into
+-- the solenoidal Bessel carrier, the order-three decoder inverts the canonical encoder
+-- on the Schwartz core, and the literal datum is smooth, rapidly decaying, classically
+-- divergence-free, real and finite-energy. The frequency-side and classical
+-- divergence-free conditions are proved EQUIVALENT on the Schwartz core (pointwise
+-- transfer identity with the nonzero constant 2 pi i, plus Schwartz Fourier inversion),
+-- so the interface predicate is exactly "real and classically divergence-free" and
+-- nothing convenient is smuggled into the definition. The entry capstone starts the
+-- certified local Navier-Stokes theory from such a datum; the dichotomy corollary feeds
+-- the same datum into the already-proved continuation machinery (Gate C, instantiation
+-- only); and the witness chain exhibits an explicit NONZERO admissible datum, so the
+-- capstone is neither an empty implication nor a statement about the zero datum.
+-- No arbitrary-H3 characterization is claimed; H3 does not imply smoothness anywhere
+-- here. Terminal by design (audited but consumed by no other module): the entry
+-- capstone, the dichotomy corollary, the interface characterization, the datum
+-- certificates (.classicalDivergence / .smooth / .decay / r3Schwartz_finiteEnergy) and
+-- the non-vacuity witness.
+#print axioms MNS2.r3SchwartzConjCLM_eq_self_iff
+#print axioms MNS2.r3H3ToL2Operator_r3SchwartzToHsCLM
+#print axioms MNS2.r3SchwartzDivergence_fourier_apply
+#print axioms MNS2.r3Schwartz_rawDivergence_fourier_iff_classical
+#print axioms MNS2.isR3AdmissibleSchwartzDatum_iff
+#print axioms MNS2.r3NormalizedDivergencePointwise_smul
+#print axioms MNS2.IsR3AdmissibleSchwartzDatum.encode_mem_solenoidal
+#print axioms MNS2.IsR3AdmissibleSchwartzDatum.classicalDivergence
+#print axioms MNS2.IsR3AdmissibleSchwartzDatum.isR3RealVelocity_encode
+#print axioms MNS2.IsR3AdmissibleSchwartzDatum.smooth
+#print axioms MNS2.IsR3AdmissibleSchwartzDatum.decay
+#print axioms MNS2.r3Schwartz_finiteEnergy
+#print axioms MNS2.r3AdmissibleSchwartzDatum_navierStokes
+#print axioms MNS2.r3AdmissibleSchwartzDatum_blowup_dichotomy
+#print axioms MNS2.r3SchwartzWitnessFrequency_divergence
+#print axioms MNS2.r3SchwartzWitnessFrequency_conjSymm
+#print axioms MNS2.fourier_r3SchwartzWitnessDatum
+#print axioms MNS2.r3SchwartzWitnessDatum_real
+#print axioms MNS2.r3SchwartzWitnessDatum_ne_zero
+#print axioms MNS2.isR3AdmissibleSchwartzDatum_r3SchwartzWitnessDatum
+#print axioms MNS2.exists_isR3AdmissibleSchwartzDatum_ne_zero

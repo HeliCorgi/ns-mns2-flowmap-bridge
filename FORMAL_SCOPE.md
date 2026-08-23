@@ -1,11 +1,13 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-18 (JST), after local full verification of the Picard
-local-existence layer and the conjugation/reflection reality-predicate layer
-(`Formal/EndpointSafeTwoSpacePicard.lean`, `Formal/R3EndpointSafeProjectedLocalExistence.lean`,
-`Formal/R3ConjugationReflection.lean`, `Formal/R3FourierConjugationBridge.lean`) on top of
-merged PR #82: full `Formal.+` gate pass with 8747 jobs, axiom audit standard (`propext`,
-`Classical.choice`, `Quot.sound`), pinned source scan clean.
+Last synchronized: 2026-08-23 (JST), after the Stage-9 readiness pass — realness transport
+through the order-three decoder (`Formal/R3DecodedVelocityRealness.lean`) and the concrete
+admissible Schwartz initial-data adapter (`Formal/R3SchwartzInitialData.lean`), on top of
+the closed Navier–Stokes capstone (`Formal/R3NavierStokesEquation.lean`). Local full
+`Formal.+` gate pass, axiom audit standard (`propext`, `Classical.choice`, `Quot.sound`),
+pinned source scan clean. Verdict of the bounded audit
+(`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`): **Stage-9 readiness `PASS`**;
+formal plumbing stops.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -543,9 +545,23 @@ The next analytic gates, in intended order:
    `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces.
 
 The fixed-point layer, the reality gate, the quantitative lifespan, the uniqueness layer,
-and the continuation dichotomy are all statements on the Bessel-coordinate carrier. The
-glued maximal trajectory, pressure reconstruction, and every Clay-level statement remain
-open.
+and the continuation dichotomy are all statements on the Bessel-coordinate carrier.
+
+**Above that layer (2026-08-22/23), the chain continues and is closed** — this section's
+positive record stops at the carrier, so the theorem-level record of the upper layers lives
+in [`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`](docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)
+and the readiness audit
+[`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`](docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md).
+The anchors are: decoded-velocity semantics (Laplacian / convection / Helmholtz pressure /
+divergence all identified by theorem); the **Navier–Stokes capstone**
+`r3EndpointSafeProjectedMild_navierStokes` (`Formal/R3NavierStokesEquation.lean`);
+pointwise-in-time finite energy (`Formal/R3FiniteEnergy.lean`); realness transport through
+the decoder (`Formal/R3DecodedVelocityRealness.lean`); and the admissible Schwartz
+initial-data adapter `r3AdmissibleSchwartzDatum_navierStokes`
+(`Formal/R3SchwartzInitialData.lean`, `Formal/R3SchwartzDivergence.lean`).
+
+Pressure **reconstruction** is therefore no longer open (edge 2a, closed and consumed); its
+regularity is. The glued maximal trajectory and every Clay-level statement remain open.
 
 ## 7. What is still not formalized
 
@@ -559,13 +575,31 @@ The Lean development does **not** currently establish:
 - equality, for arbitrary completed `H³` inputs, between the decoded extension
   and a separately constructed distributional convection product;
 - a theorem that the Leray symbol maps Schwartz space to itself;
-- pressure reconstruction for the completed projected map;
+- any regularity, decay, or uniqueness statement for the reconstructed pressure — the
+  reconstruction itself is **closed** (edge 2a, `Formal/R3HelmholtzPressure.lean`,
+  `r3HelmholtzPressure_gradient`: `∇p = −(I−P)F` componentwise in `𝓢'` for every `L²`
+  source; consumed by the Navier–Stokes capstone through
+  `postcomp_r3LerayL2Operator_eq`), but the pressure is determined only up to additive
+  harmonic terms and no `Lᵖ`/Sobolev regularity is proved;
 - a bounded `H² → H³` Stokes map at zero elapsed time or zero viscosity (such a bound is not
   expected);
 - a canonical glued maximal trajectory `u* : [0, T*) → H³` with the pointwise blow-up
   statement `T* < ∞ ⇒ limsup ‖u* t‖ = ∞` (the certified-horizon blow-up **dichotomy** is
   formalized; the trajectory-level restatement is not);
 - a complete projected Navier--Stokes quadratic map on the final selected Sobolev/mild carrier with all mapping estimates;
+- **any implication from the coordinate carrier to smoothness or decay** — in particular
+  `H³ ⇒ C^∞` and `H³ ⇒` rapid decay are **not** proved, not claimed, and not used; the
+  admissible-data adapter (`Formal/R3SchwartzInitialData.lean`) runs in the opposite
+  direction (concrete Schwartz datum ⇒ carrier coordinate, with `decode ∘ encode = id`);
+- a characterization of arbitrary `R3HsVelocity 3` elements as smooth rapidly decaying
+  fields (Clay semantic edge 3 *proper*; only the concrete admissible-class adapter is
+  closed);
+- a uniform-in-time energy bound, an energy inequality, or a dissipation identity
+  (finite energy is proved **at each time**; `edge 4-uniform: DEFERRED / NON-BLOCKING FOR
+  STAGE 9`);
+- a classical (pointwise) solution: the certified time derivative is strong `L²`-valued
+  and the momentum equation is componentwise in `𝓢'`, at **interior** times of a **local**
+  certified horizon;
 - a connection of the new concrete local mild solutions to the abstract `MildEvolutionKernel` /
   `LerayProjectedQuadraticContract` mild-theory and flow-map interfaces;
 - an open admissible initial-data domain with `C¹` solution-map dependence for that concrete equation;
@@ -596,6 +630,16 @@ For the current Schwartz/Sobolev route, the intended order is:
    `Formal/EndpointSafeTwoSpaceConcatenation.lean` + `Formal/R3MildContinuation.lean`),
    then the glued maximal trajectory, and connect the concrete evolution to the
    mild-theory and flow-map interfaces.
+
+**Status 2026-08-23 — the near-term formal queue is CLOSED for Stage 9.** The Clay
+semantic-promotion edges 1, 2 and 3-adapter are `THEOREM-CLOSED`, edge 4 is `PARTIAL`
+(pointwise-in-time), and the Stage-9 readiness audit
+(`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`) returned **`PASS`**. Per the audit's
+stop rule, the remaining items in this section — the glued maximal trajectory, the
+abstract-interface adapters, uniform-in-time energy, classical regularity, endpoint
+derivatives, general pressure regularity, edge-3-proper class semantics, and edge-5 Clay
+packaging — are **NOT** to be worked on for completeness. They are revisited only when a
+concrete Stage-9 theorem consumes one of them.
 
 A later PDE layer must still supply the exact local-wellposedness carrier and prove that the concrete Stokes, Leray, convection, and projected quadratic objects instantiate the intended mild theory with the required regularity.
 
