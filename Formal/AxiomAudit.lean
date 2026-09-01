@@ -58,6 +58,7 @@ import Formal.FiniteRankReducedBridge
 import Formal.GronwallIntegralInequality
 import Formal.R3TSelDecodedGradient
 import Formal.R3TSelBridge
+import Formal.R3TSelClassicalComparability
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -486,3 +487,13 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3TSel_horizons_unbounded
 #print axioms MNS2.r3TSel_admissibleSchwartz_globalContinuation
 #print axioms MNS2.r3TSel_conditional_globalContinuation
+
+-- T-SEL bridge discharge, step 1 (SEL-1, user-commissioned 2026-09-02 third session):
+-- the classical Sobolev comparability statement R3TSelClassicalSobolevComparability is
+-- now a PROVED theorem: on the Schwartz core the summed squared L2 norms of the iterated
+-- Frechet derivatives up to order three are two-sidedly comparable to the squared Bessel
+-- carrier norm, with explicit constants c1 = 1/81 and c2 = 27*(2*pi)^6, via iterated
+-- line-derivative Fourier calculus, Schwartz Plancherel, the direction-tuple expansion
+-- of the multilinear operator norm, and the pointwise weight comparison. No new
+-- assumption is introduced; the open Prop of the statement layer is discharged.
+#print axioms MNS2.r3TSel_classicalSobolevComparability
