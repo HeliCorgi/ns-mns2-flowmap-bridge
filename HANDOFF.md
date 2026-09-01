@@ -138,9 +138,34 @@ Last updated: 2026-09-02 JST (second session).
 > clause (`R3TSelInteriorSobolevSmoothing`), SEL-1 comparability clause
 > (`R3TSelClassicalSobolevComparability`). Full pinned local gate PASS
 > (8772 jobs), 21 new axiom-audit prints all standard. Frozen research map,
-> round-4 park, watches, and the M-1 hold are all untouched. **The intended
-> resume anchor for the next session is the "Next work" subsection of the
-> handoff update contract below plus the formalization record's §6.**
+> round-4 park, watches, and the M-1 hold are all untouched.
+>
+> **2026-09-02 (third session): the T-SEL bridge DISCHARGE step is COMMISSIONED
+> and PARTIALLY EXECUTED — SEL-1 and SEL-4 are PROVED** (commission: close
+> SEL-1 → SEL-4 → SEL-3 → SEL-5, known math only, full proofs; final goal =
+> only `N0` left in `r3TSel_conditional_globalContinuation`). Record:
+> `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md`. **SEL-1**:
+> `r3TSel_classicalSobolevComparability` (constants `1/81`, `27(2π)⁶`;
+> `Formal/R3TSelClassicalComparability.lean`). **SEL-4**:
+> `r3TSel_katoPonceCommutator` (constant `93(2π)³`;
+> `Formal/R3TSelSchwartzCalculus.lean` + `Formal/R3TSelLeibnizCommutator.lean`),
+> after restating the Prop to the audit record's own SS-6 `D^α` derivative-tuple
+> form (BKM ineq. (13)) — the sharp fractional `J³` Kato–Ponce needs
+> Littlewood–Paley technology absent from mathlib, is consumed by nothing in the
+> chain, and is claimed in neither direction. New proved infrastructure:
+> Fourier-at-zero integration by parts, the by-parts Gagliardo–Nirenberg quartic
+> `r3TSel_gn_quartic`, `C²`-symmetry line-derivative commutation. **Correction
+> discovered in-session: `R3TSelH3Ladder` now requires `IsR3RealVelocity u0`**
+> (the transport cancellation consumes a real field; the complex-data ladder is
+> not provable-as-stated) — threaded through SEL-9/N1/N2/N3; harmless because
+> SEL-8 supplies realness for all admissible data. **SEL-3 and SEL-5 remain
+> OPEN** with the discharge route (mollified energy method + Friedrichs
+> commutator + SEL-4-for-mollified-fields) and checked dead ends recorded in the
+> discharge record §4. Full pinned local gate PASS (**8775 jobs**), all new
+> audit prints standard; proof commits `0565237`, `bb1c473`. Head `N0`
+> untouched. **The intended resume anchor for the next session is the "Next
+> work" subsection of the handoff update contract below plus the discharge
+> record's §4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -177,22 +202,39 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, second session)
+### Next work (written 2026-09-02, third session)
 
 Read first: this file's top block; `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`
 (esp. §6); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
 `FORMAL_SCOPE.md` (T-SEL subsection); `Formal/R3TSelBridge.lean` docstring.
 
-- **Already sanctioned lane (T-SEL bridge discharge, needs no new commission):** prove
-  the open bridge statements in the recommended order of the formalization record §6 —
-  (a) `R3TSelClassicalSobolevComparability` (SEL-1 clause; bounded Fourier-side weight
-  comparison on the Schwartz core — the natural first target for the next session),
-  then (b) `R3TSelKatoPonceCommutator` (SEL-4; hard, no mathlib analogue; intended
-  toolbox = the repository's `R3H2*`/`R3H3*` weighted-convolution files), then
-  (c) `R3TSelInteriorSobolevSmoothing` (SEL-3 clause), then (d) `R3TSelH3Ladder`
-  (SEL-5; consumes a–c and closes the ladder slot of the conditional chain). Each is
-  independently commissionable and independently falsifiable; do them as separate
-  verified commits.
+Read also: `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md` §4 (the fixed
+discharge route and the checked dead ends) before writing any Lean.
+
+- **Already sanctioned lane (T-SEL bridge discharge, needs no new commission):**
+  SEL-1 and SEL-4 are DONE (`r3TSel_classicalSobolevComparability`,
+  `r3TSel_katoPonceCommutator`). Prove the remaining SEL-5 (`R3TSelH3Ladder`; SEL-3
+  `R3TSelInteriorSobolevSmoothing` falls out as a by-product of the uniform bounds)
+  via the mollified-energy route of the discharge record §4, staged as:
+  (a) the Friedrichs commutator lemma
+  `‖[ρ_ε*, f·∇]g‖_{L²} ≤ C‖∇f‖_{L∞}‖g‖_{L²}` uniform in `ε` (kernel proof: mean
+  value + Minkowski integral inequality — check mathlib for a Bochner Minkowski
+  first); (b) SEL-4 for mollified fields — generalize the mode-1/2/3 machinery of
+  `R3TSelSchwartzCalculus`/`R3TSelLeibnizCommutator` from the Schwartz core to a
+  mollified-regular class (smooth, derivatives to order 3 in `L²`, first derivatives
+  bounded), replacing the Schwartz-specific sup/decay/tuple lemmas by
+  frequency-multiplier bounds (the GN by-parts and Fourier-at-zero integration by
+  parts already apply to that class); (c) the mollified evolution identity from the
+  capstone derivative through the bounded convolution operator, the transport
+  cancellation via Plancherel pairing against the certified a.e.-vanishing frequency
+  divergence (realness from the ladder hypothesis — do NOT drop
+  `IsR3RealVelocity u0`; the complex-data ladder is not provable-as-stated), the
+  `ε → 0` limit, and Grönwall (SEL-6, proved). Commit verified slices separately.
+  **Checked dead ends — do not retry:** frequency-side symbol-difference commutator
+  bounds (Wiener-algebra coefficient, not `‖∇U‖_∞`); sharp-cutoff truncation
+  commutators (no uniform gs-bound); difference quotients on the mild equation
+  (quadratic coefficient; the pairing hits the `H⁴` wall); the sharp fractional `J³`
+  Kato–Ponce (needs Littlewood–Paley; consumed by nothing).
 - **Requires a separate explicit user commission:** any proof search on the head `N0`
   (`R3TSelGradientBound` / `R3TSelHead`), in either direction (proof attempt or the
   counterexample program `Q → ∞` on a bounded horizon). The 2026-09-02 commission
@@ -297,6 +339,15 @@ Read first: this file's top block; `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-0
   `Formal.AxiomAudit`, then the pinned source scan plus full `Formal.+` gate
   (**8772 jobs**, `bash scripts/lean-ci-local.sh`, toolchain
   `leanprover/lean4:v4.32.1`), axiom audit standard for every new audited theorem.
+  No hosted Action was started; no PR was opened.
+- The T-SEL discharge step (SEL-1 proof commit `0565237`:
+  `Formal/R3TSelClassicalComparability.lean`; SEL-4 proof commit `bb1c473`:
+  `Formal/R3TSelSchwartzCalculus.lean`, `Formal/R3TSelLeibnizCommutator.lean`,
+  the SEL-4 Prop restatement and ladder-realness threading in
+  `Formal/R3TSelBridge.lean`, new `Formal/AxiomAudit.lean` prints) is committed
+  directly on `main` after local verification: targeted builds green
+  (8750/8751/8752/8768 jobs), then the pinned source scan plus full `Formal.+`
+  gate (**8775 jobs**), axiom audit standard for every new audited theorem.
   No hosted Action was started; no PR was opened.
 
 ## Local Lean status in this workspace

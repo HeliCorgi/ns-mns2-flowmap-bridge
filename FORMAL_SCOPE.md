@@ -1,14 +1,17 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-09-02 (JST), after the user-commissioned **T-SEL bridge
-formalization** (`Formal/GronwallIntegralInequality.lean`,
-`Formal/R3TSelDecodedGradient.lean`, `Formal/R3TSelBridge.lean`;
-record `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`) on top of the Stage-9
-readiness state of 2026-08-23. Local full `Formal.+` gate pass (8772 jobs), axiom audit
+Last synchronized: 2026-09-02 (JST, third session), after the user-commissioned
+**T-SEL bridge discharge step** (records
+`docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md` and
+`docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md`): **SEL-1 and SEL-4 are now proved
+theorems** (`r3TSel_classicalSobolevComparability`, `r3TSel_katoPonceCommutator`; new
+files `Formal/R3TSelClassicalComparability.lean`, `Formal/R3TSelSchwartzCalculus.lean`,
+`Formal/R3TSelLeibnizCommutator.lean`), on top of the session-2 statement layer
+(`Formal/GronwallIntegralInequality.lean`, `Formal/R3TSelDecodedGradient.lean`,
+`Formal/R3TSelBridge.lean`). Local full `Formal.+` gate pass (8775 jobs), axiom audit
 standard (`propext`, `Classical.choice`, `Quot.sound`), pinned source scan clean. The
-2026-08-23 stop rule on *uncommissioned* formal plumbing is unchanged; the T-SEL layer
-was a separate explicit user commission (2026-09-02) and its head `N0` is untouched by
-commission.
+2026-08-23 stop rule on *uncommissioned* formal plumbing is unchanged; the T-SEL work
+is an explicit user commission and its head `N0` is untouched by commission.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -557,13 +560,22 @@ is the complete record; every artifact is listed there with its CLOSED/OPEN stat
   (`r3TSel_uniform_carrierBound_of_head`, `r3TSel_horizons_unbounded`,
   `r3TSel_admissibleSchwartz_globalContinuation`,
   `r3TSel_conditional_globalContinuation`).
+- **proved in the third session (T-SEL discharge step,
+  `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md`)**: the SEL-1 comparability
+  (`r3TSel_classicalSobolevComparability`, explicit constants `1/81` and `27(2π)⁶`)
+  and the SEL-4 BKM derivative-tuple commutator (`r3TSel_katoPonceCommutator`,
+  explicit constant `93(2π)³`; the Prop was restated to the audit record's own `D^α`
+  form — the sharp fractional `J³` Kato–Ponce is consumed by nothing in the chain and
+  is not claimed).  The ladder Prop `R3TSelH3Ladder` now carries the
+  `IsR3RealVelocity u0` hypothesis required by the transport cancellation (supplied
+  for admissible data by SEL-8).
 - **stated only, OPEN, never asserted** (Prop-valued definitions consumed as explicit
   hypotheses): the head `N0` (`R3TSelGradientBound`, `R3TSelHead`) — **no proof search
-  performed, per commission**; the Kato–Ponce commutator (SEL-4,
-  `R3TSelKatoPonceCommutator`); the integrated `H³` ladder (SEL-5, `R3TSelH3Ladder`);
-  interior Sobolev smoothing (SEL-3 clause, `R3TSelInteriorSobolevSmoothing`); and the
-  classical Sobolev comparability (SEL-1 clause,
-  `R3TSelClassicalSobolevComparability`).
+  performed, per commission**; the integrated `H³` ladder (SEL-5, `R3TSelH3Ladder`);
+  and interior Sobolev smoothing (SEL-3 clause, `R3TSelInteriorSobolevSmoothing`).
+  The intended discharge route for both (mollified energy method, Friedrichs
+  commutator, SEL-4 extension to mollified fields) and the checked dead ends are
+  recorded in the discharge record's §4.
 
 Do not cite the conditional theorems as unconditional results: each carries its open
 hypotheses in its statement. Do not treat `r3DecodedGradSup` as an intrinsic
@@ -603,10 +615,11 @@ regularity is. The glued maximal trajectory and every Clay-level statement remai
 The Lean development does **not** currently establish:
 
 - the T-SEL head `N0` (`R3TSelGradientBound` / `R3TSelHead`) in either direction, nor
-  any of the open bridge statements `R3TSelKatoPonceCommutator`, `R3TSelH3Ladder`,
-  `R3TSelInteriorSobolevSmoothing`, `R3TSelClassicalSobolevComparability` — these are
+  the open bridge statements `R3TSelH3Ladder` and `R3TSelInteriorSobolevSmoothing` —
   statement definitions only, and every `r3TSel_*` continuation theorem is conditional
-  on the ones it names;
+  on the ones it names (`R3TSelClassicalSobolevComparability` and
+  `R3TSelKatoPonceCommutator` are proved);
+- the sharp fractional (`J³`-form) Kato–Ponce commutator, in either direction;
 - Clay statement A, B, C, or D;
 - global smoothness or global existence for arbitrary 3D data;
 - a blow-up counterexample;
