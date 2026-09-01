@@ -1209,9 +1209,12 @@ block). Adjudication authority: the user's dated 2026-09-01 instruction. Summary
   case** for every future Γ-depletion hypothesis. Named debts: D-1 [V?]
   Ożański–Palasek citations; D-2 bare-drift falsity risk (generic supercritical
   divergence-free drifts can defeat parabolic continuity — the decision must name
-  the NS-specific structure it consumes); D-3 WATCH — an unidentified June-2026
-  arXiv preprint claiming unconditional axisymmetric-with-swirl global regularity
-  (CAP-level if ever verified; used nowhere).
+  the NS-specific structure it consumes); D-3 — **identified and triaged
+  2026-09-02** (arXiv:2606.07869v1, claiming unconditional
+  axisymmetric-with-swirl global regularity; first-hand read + adversarial
+  adjudication: load-bearing gaps G1a/G1b/G2 CONFIRMED at the variational core
+  and exhaustion layer; correctness NOT ESTABLISHED; consumed by nothing; no CAP
+  fire; watch triggers recorded — `docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`).
 - **Final next-decision verdict (round-3 §6 + §8): the Γ-OSC feasibility
   decision is commissioning-ready** — the reduced form: extract the weakest
   quantitative drift condition for `osc_{Q_{θR}}Γ ≤ q·osc_{Q_R}Γ` τ-uniformly at
@@ -1451,7 +1454,10 @@ operative 文は **(Γ-DEP)_fld**(`c_* ∈ (0, c₀)`)。**(Γ-OSC)**(core scale
 oscillation contraction)は「特定できた最も直接的な十分条件」— `(Γ-OSC) ⟹ (Γ-DEP)_fld` のみ確立。
 debts: D-1 [V?] Ożański–Palasek 引用、D-2 bare-drift 反例リスク(一般 supercritical div-free drift
 では parabolic continuity が破れ得る — decision は消費する NS 固有構造を明示せよ)、
-D-3 WATCH(6月の axisym-with-swirl 無条件大域正則性主張 preprint、未特定・未検証・どこにも不使用)。
+D-3 は **2026-09-02 に特定・一次 triage 済み**(arXiv:2606.07869v1 =
+axisym-with-swirl 無条件大域正則性主張。全文一次読解+敵対的検証で変分核心 G1a/G1b と
+exhaustion 層 G2 の load-bearing gap を確定。正しさ未確立・どこにも不使用・CAP 不発火。
+再点検トリガー付き master record = `docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`)。
 
 **次の decision(commissioning-ready、ユーザーの commission 待ち)= Γ-OSC feasibility decision**
 (round-3 record §8 の縮小形): 既知 drift–diffusion / boundary-regularity 定理から

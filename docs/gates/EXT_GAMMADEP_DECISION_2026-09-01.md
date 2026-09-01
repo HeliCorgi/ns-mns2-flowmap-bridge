@@ -481,6 +481,12 @@ recomputed; the construction is sound as a single-time field. Itemized:
   were verified, it would terminate the entire axisymmetric breakdown track
   (CAP-level event). To be identified and read first-hand at the next literature
   pass; used nowhere until then, exactly as the external record itself ruled.
+  *(Status 2026-09-02: **IDENTIFIED and triaged first-hand** — arXiv:2606.07869v1,
+  Shahmurov, supplied by the user as a PDF and read in full; adversarially
+  adjudicated **load-bearing gaps CONFIRMED** at the variational core (G1a/G1b)
+  and the exhaustion layer (G2); correctness NOT ESTABLISHED; **still consumed by
+  nothing; no CAP fire**. Master record:
+  `D3_TRIAGE_2606_07869_2026-09-02.md`, incl. watch/re-check triggers.)*
 
 **Effect on the round-3 record:** condition (1) of `FREEZE_REVIEW_3_2026-09-01.md`
 §6 (import first) is **discharged**; condition (2) (statement fixing in frozen

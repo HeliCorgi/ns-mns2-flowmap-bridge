@@ -15,6 +15,14 @@ annotation **C0–C14** + **post-round-3 frontier** を執行。**C0: (Γ-DEP) �
 のみ引用**。frontier: Scope-A exhaustiveness は `ρ_T = γ` 枝のみ、Scope B で B2 UNKILLED。
 BH YELLOW-RED・(T-c) OPEN・CAP なし・Clay 主張なしは不変。**定理・ruling は動いていない**。
 
+**D-3 preprint は特定・一次 triage 済み(2026-09-02)**: arXiv:2606.07869v1(Shahmurov、
+axisym-with-swirl 無条件大域正則性を主張、99頁)をユーザー提供 PDF で全文一次読解し、
+gap-finding を敵対的に検証。**変分核心(strict bridge の no-saturator 論法: dilation 曲線が
+solution-generated 制約と zero-ledger 集合の双方を離脱、制約適格性も退化)と exhaustion 層
+(ledger 4成分が定量未定義で (B) 終結の減少量が不存在)に load-bearing gap を確定**。
+正しさ未確立、どこにも不使用、**branch 終了イベントは不発火**(再点検トリガー登録済み)。
+詳細: [`docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`](docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md)。
+
 外部 record **(EXT-ΓDEP-1)**(ChatGPT 側、ユーザー経由で逐語受領)を import・監査
 ([`docs/gates/EXT_GAMMADEP_DECISION_2026-09-01.md`](docs/gates/EXT_GAMMADEP_DECISION_2026-09-01.md)、
 snapshot レベルで PASS): `Γ-DEP = UNDERDETERMINED`、smooth div-free snapshot counterprofile
