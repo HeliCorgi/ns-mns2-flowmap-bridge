@@ -1,6 +1,7 @@
 import Formal.GronwallIntegralInequality
 import Formal.R3TSelDecodedGradient
 import Formal.R3SchwartzInitialData
+import Mathlib.Analysis.Distribution.SchwartzSpace.Deriv
 
 /-!
 # The T-SEL bridge: formal statement layer and conditional assembly (SEL-1 … SEL-10)
@@ -25,9 +26,9 @@ repository discipline that assumptions live in theorem statements.
   (`Formal/R3SobolevCarrier.lean`), `r3H3ToL2Operator_r3SchwartzToHsCLM`
   (`Formal/R3SchwartzInitialData.lean`); the initial-time carrier-norm identity is
   `r3TSel_initial_carrierNorm` below.  The classical two-sided `Σ‖D^α·‖²`-vs-Bessel
-  comparability is **not consumed** by the assembly (the whole chain runs on the
-  carrier norm) and is recorded as the open statement
-  `R3TSelClassicalSobolevComparability`.
+  comparability `R3TSelClassicalSobolevComparability` is **PROVED**
+  (`r3TSel_classicalSobolevComparability`, `Formal/R3TSelClassicalComparability.lean`,
+  third session), with explicit constants.
 * **SEL-2** (embedding): **closed** — `r3TSel_decoded_embedding`
   (`Formal/R3TSelDecodedGradient.lean`), quantitative, explicit constant.
 * **SEL-3** (identification + interior smoothing).  The identification/NS-semantics half
@@ -35,10 +36,10 @@ repository discipline that assumptions live in theorem statements.
   (`Formal/R3NavierStokesEquation.lean`).  The interior smoothing upgrade is the open
   statement `R3TSelInteriorSobolevSmoothing` (consumed only by the future proof of
   SEL-5, not by the assembly).
-* **SEL-4** (Kato–Ponce commutator): open statement `R3TSelKatoPonceCommutator`, stated
-  on the Schwartz core in the Bessel form `‖J³((φ·∇)φ) − (φ·∇)(J³φ)‖_{L²} ≤
-  C ‖∇φ‖_{L∞} ‖J³φ‖_{L²}` (Kato–Ponce, CPAM 41 (1988); BKM ineq. (13)).  The `D^α` vs
-  `J³` reformulation distance is exactly the deferred SEL-1 comparability.
+* **SEL-4** (BKM/Kato–Ponce commutator): `R3TSelKatoPonceCommutator`, stated on the
+  Schwartz core in the derivative-tuple form of the audit's own SS-6 statement (BKM
+  ineq. (13)); see the definition's docstring for the relation to the sharp fractional
+  Kato–Ponce, which is consumed by nothing in the chain.
 * **SEL-5** (H³ ladder) + the `t₀ ↓ 0` endpoint limit of **SEL-7**: open statement
   `R3TSelH3Ladder` — the ladder in **integrated** form on `[0, t]` along certified
   solutions, `‖u t‖² ≤ ‖u0‖² + ∫₀ᵗ 2C‖∇U(s)‖_{L∞}‖u s‖² ds`.  (The paper derivation
@@ -88,7 +89,7 @@ upgrade remain outside scope guards, as recorded in the audit).
 
 namespace MNS2
 
-open MeasureTheory Set
+open MeasureTheory Set LineDeriv
 open scoped FourierTransform SchwartzMap ENNReal NNReal
 
 noncomputable section
@@ -106,11 +107,12 @@ theorem r3TSel_initial_carrierNorm {nu T : ℝ} {hnu : 0 < nu} {u0 : R3HsVelocit
     ‖u 0‖ = ‖u0‖ := by
   rw [hu.2.2.1]
 
-/-- **SEL-1, deferred clause (OPEN, stated only)**: two-sided comparability, on the
-Schwartz core, between the classical squared Sobolev norm `Σ_{n ≤ 3} ‖D^n φ‖²_{L²}` and
-the squared Bessel carrier norm.  Not consumed by the T-SEL assembly (which runs
-entirely on the carrier norm); it measures the reformulation distance of SEL-4 from its
-literature `D^α` form.  KNOWN-MATH-TO-FORMALIZE per the audit. -/
+/-- **SEL-1, comparability clause**: two-sided comparability, on the Schwartz core,
+between the classical squared Sobolev norm `Σ_{n ≤ 3} ‖D^n φ‖²_{L²}` and the squared
+Bessel carrier norm.  It measures the reformulation distance of SEL-4 from its
+literature `D^α` form.  **PROVED** in `Formal/R3TSelClassicalComparability.lean`
+(`r3TSel_classicalSobolevComparability`, explicit constants `c₁ = 1/81`,
+`c₂ = 27(2π)⁶`). -/
 def R3TSelClassicalSobolevComparability : Prop :=
   ∃ c₁ c₂ : ℝ, 0 < c₁ ∧ 0 < c₂ ∧
     ∀ φ : R3SchwartzVelocity,
@@ -139,40 +141,51 @@ def R3TSelInteriorSobolevSmoothing : Prop :=
     ∀ t ∈ Set.Ioc (0 : ℝ) T, ∀ k : ℕ,
       TemperedDistribution.MemSobolev (k : ℝ) 2 (r3HsToTemperedCLM 3 (u t))
 
-/-! ## SEL-4 — the open Kato–Ponce commutator statement -/
+/-! ## SEL-4 — the BKM/Kato–Ponce commutator statement (derivative-tuple form) -/
 
-/-- **SEL-4 (OPEN, stated only)**: the Kato–Ponce/BKM commutator estimate at order
-three, on the Schwartz core, in Bessel form: for divergence-free Schwartz fields,
+/-- **SEL-4**: the BKM commutator estimate at order three, on the Schwartz core, in the
+derivative-tuple form of the audit record's own SS-6 statement (BKM, CMP 94 (1984),
+ineq. (13)): for every direction tuple `v` of length `n ≤ 3`,
 
-`‖J³((φ·∇)φ) − (φ·∇)(J³φ)‖_{L²} ≤ C ‖∇φ‖_{L∞} ‖J³φ‖_{L²}`.
+`‖∂^v((φ·∇)φ) − (φ·∇)(∂^v φ)‖_{L²} ≤ C ‖∇φ‖_{L∞} ‖J³φ‖_{L²}`.
 
-Source: Kato–Ponce, CPAM 41 (1988), 891–907; Beale–Kato–Majda, CMP 94 (1984),
-ineq. (13).  KNOWN-MATH-TO-FORMALIZE — no mathlib analogue exists today. -/
+This is exactly the commutator consumed by the `D^α` energy derivation of the `H³`
+ladder (SEL-5); the divergence-free hypothesis of the paper statement is not needed for
+the commutator itself and is dropped (it is spent on the transport cancellation inside
+SEL-5).  The distance to the carrier's `J³` reading is the **proved** SEL-1
+comparability `r3TSel_classicalSobolevComparability`.  The sharp *fractional* Kato–Ponce
+commutator (`J³` in place of `∂^v`, CPAM 41 (1988)) is strictly stronger, needs
+Littlewood–Paley machinery absent from mathlib, and is consumed by nothing in the T-SEL
+chain; it is deliberately NOT restated here.  Discharged in
+`Formal/R3TSelLeibnizCommutator.lean`. -/
 def R3TSelKatoPonceCommutator (C : ℝ) : Prop :=
-  ∀ φ : R3SchwartzVelocity,
-    (∀ x : R3, r3ClassicalDivergence (⇑φ) x = 0) →
-    ‖r3SchwartzToHsCLM 3 (r3SchwartzConvection φ φ) -
-        ((r3SchwartzConvection φ
-          (SchwartzMap.fourierMultiplierCLM R3C (r3SobolevWeightComplex 3) φ)).toLp 2 :
-            R3L2Velocity)‖ ≤
+  ∀ (n : ℕ), n ≤ 3 → ∀ (v : Fin n → Fin 3) (φ : R3SchwartzVelocity),
+    ‖((∂^{fun i => r3StdBasis (v i)} (r3SchwartzConvection φ φ) -
+        r3SchwartzConvection φ (∂^{fun i => r3StdBasis (v i)} φ)).toLp 2 :
+          R3L2Velocity)‖ ≤
       C * (r3SchwartzGradSup φ * ‖r3SchwartzToHsCLM 3 φ‖)
 
 /-! ## SEL-5 — the open integrated H³ ladder -/
 
 /-- **SEL-5 + SEL-7 endpoint limit (OPEN, stated only)**: the integrated `H³` energy
-ladder along certified solutions with solenoidal datum,
+ladder along certified solutions with **real** solenoidal datum,
 
 `‖u t‖² ≤ ‖u0‖² + ∫ s in 0..t, 2C ‖∇U(s)‖_{L∞} ‖u s‖² ds` on `[0, T]`,
 
 with `‖∇U(s)‖_{L∞}` carried by `r3DecodedGradSup` (a.e.-pinned to the decoded velocity
 by `r3DecodedRepresentative_ae_r3H3ToL2Operator`).  The paper derivation is BKM
 ineq. (14) + the NS remark: test the `D^α`-equation with `D^α U`, discard the viscous
-term by sign (`C` is `ν`-free), kill transport by `div U = 0`, drop the projector, use
-SEL-4, integrate from `t₀ ↓ 0` by SEL-3 + SEL-7.  KNOWN-MATH-TO-FORMALIZE. -/
+term by sign (`C` is `ν`-free), kill transport by `div U = 0` **and realness of `U`**
+(the transport cancellation `re⟨V,(U·∇)V⟩ = −½∫(div U)|V|²` consumes a real transport
+field, which is why the realness hypothesis is part of the statement: SEL-8 supplies it
+for every admissible datum, and the head/N3 quantify only over admissible data), drop
+the projector, use SEL-4, integrate from `t₀ ↓ 0` by SEL-3 + SEL-7.
+KNOWN-MATH-TO-FORMALIZE. -/
 def R3TSelH3Ladder (C : ℝ) : Prop :=
   ∀ (nu T : ℝ) (hnu : 0 < nu) (u0 : R3HsVelocity 3) (u : ℝ → R3HsVelocity 3),
     IsR3EndpointSafeProjectedMildSolutionOn hnu T u0 u →
     u0 ∈ r3L2SolenoidalSubmodule →
+    IsR3RealVelocity u0 →
     ∀ t ∈ Set.Icc (0 : ℝ) T,
       ‖u t‖ ^ 2 ≤ ‖u0‖ ^ 2 +
         ∫ s in (0 : ℝ)..t, 2 * C * r3DecodedGradSup (u s) * ‖u s‖ ^ 2
@@ -243,7 +256,7 @@ discarded inside the ladder, exactly as the audit records. -/
 theorem r3TSel_carrierBound_of_ladder {C : ℝ} (hC : 0 ≤ C) (hlad : R3TSelH3Ladder C)
     {nu T : ℝ} (hnu : 0 < nu) {u0 : R3HsVelocity 3} {u : ℝ → R3HsVelocity 3}
     (hu : IsR3EndpointSafeProjectedMildSolutionOn hnu T u0 u)
-    (hsol : u0 ∈ r3L2SolenoidalSubmodule) :
+    (hsol : u0 ∈ r3L2SolenoidalSubmodule) (hreal : IsR3RealVelocity u0) :
     ∀ t ∈ Set.Icc (0 : ℝ) T,
       ‖u t‖ ≤ ‖u0‖ * Real.exp (C * r3TSelGradIntegral u t) := by
   intro t ht
@@ -257,7 +270,7 @@ theorem r3TSel_carrierBound_of_ladder {C : ℝ} (hC : 0 ≤ C) (hlad : R3TSelH3L
   have hle : ∀ s ∈ Set.Icc (0 : ℝ) T,
       ‖u s‖ ^ 2 ≤ ‖u0‖ ^ 2 +
         ∫ r in (0 : ℝ)..s, 2 * C * r3DecodedGradSup (u r) * ‖u r‖ ^ 2 :=
-    hlad nu T hnu u0 u hu hsol
+    hlad nu T hnu u0 u hu hsol hreal
   have hgron := le_mul_exp_of_le_add_intervalIntegral (T := T) (a := ‖u0‖ ^ 2)
     (y := fun t => ‖u t‖ ^ 2) (m := fun s => 2 * C * r3DecodedGradSup (u s))
     hT0 hy hm hm0 hle t ht
@@ -300,7 +313,7 @@ on every certified horizon `T′ ≤ T` at every certified time — node `N1` of
 dependency chain, `ν`-free through the bridge. -/
 theorem r3TSel_uniform_carrierBound_of_head {C : ℝ} (hC : 0 ≤ C)
     (hlad : R3TSelH3Ladder C) {nu : ℝ} (hnu : 0 < nu) {u0 : R3HsVelocity 3}
-    (hsol : u0 ∈ r3L2SolenoidalSubmodule)
+    (hsol : u0 ∈ r3L2SolenoidalSubmodule) (hreal : IsR3RealVelocity u0)
     (hhead : R3TSelGradientBound hnu u0) (T : ℝ) :
     ∃ R : ℝ, 0 ≤ R ∧ ∀ T' : ℝ, T' ≤ T →
       ∀ u : ℝ → R3HsVelocity 3,
@@ -313,7 +326,7 @@ theorem r3TSel_uniform_carrierBound_of_head {C : ℝ} (hC : 0 ≤ C)
   have hQT : r3TSelGradIntegral u T' ≤ G := hG T' hT' u hu
   have hQt : r3TSelGradIntegral u t ≤ r3TSelGradIntegral u T' :=
     r3TSelGradIntegral_mono hu.2.1 ht.1 ht.2 le_rfl
-  have hcarrier := r3TSel_carrierBound_of_ladder hC hlad hnu hu hsol t ht
+  have hcarrier := r3TSel_carrierBound_of_ladder hC hlad hnu hu hsol hreal t ht
   refine hcarrier.trans ?_
   have hCQ : C * r3TSelGradIntegral u t ≤ C * G :=
     mul_le_mul_of_nonneg_left (hQt.trans hQT) hC
@@ -327,12 +340,12 @@ certified solutions on all certified horizons, and
 `r3EndpointSafeProjected_horizons_unbounded_of_uniform_bound` refutes boundedness. -/
 theorem r3TSel_horizons_unbounded {C : ℝ} (hC : 0 ≤ C) (hlad : R3TSelH3Ladder C)
     {nu : ℝ} (hnu : 0 < nu) {u0 : R3HsVelocity 3}
-    (hsol : u0 ∈ r3L2SolenoidalSubmodule)
+    (hsol : u0 ∈ r3L2SolenoidalSubmodule) (hreal : IsR3RealVelocity u0)
     (hhead : R3TSelGradientBound hnu u0) :
     ¬ BddAbove (r3MildHorizons hnu u0) := by
   intro hbdd
-  obtain ⟨R, hR0, hR⟩ := r3TSel_uniform_carrierBound_of_head hC hlad hnu hsol hhead
-    (sSup (r3MildHorizons hnu u0) + 1)
+  obtain ⟨R, hR0, hR⟩ := r3TSel_uniform_carrierBound_of_head hC hlad hnu hsol hreal
+    hhead (sSup (r3MildHorizons hnu u0) + 1)
   have hbound : ∀ T ∈ r3MildHorizons hnu u0, ∀ u : ℝ → R3HsVelocity 3,
       IsR3EndpointSafeProjectedMildSolutionOn hnu T u0 u →
       ∀ t ∈ Set.Icc (0 : ℝ) T, ‖u t‖ ≤ R := by
@@ -355,7 +368,8 @@ theorem r3TSel_admissibleSchwartz_globalContinuation {C : ℝ} (hC : 0 ≤ C)
     (hφ : IsR3AdmissibleSchwartzDatum φ)
     (hhead : R3TSelGradientBound hnu (r3SchwartzToHsCLM 3 φ)) :
     ∀ M : ℝ, ∃ T ∈ r3MildHorizons hnu (r3SchwartzToHsCLM 3 φ), M ≤ T := by
-  have hub := r3TSel_horizons_unbounded hC hlad hnu hφ.encode_mem_solenoidal hhead
+  have hub := r3TSel_horizons_unbounded hC hlad hnu hφ.encode_mem_solenoidal
+    hφ.isR3RealVelocity_encode hhead
   intro M
   obtain ⟨T, hT, hMT⟩ := not_bddAbove_iff.mp hub M
   exact ⟨T, hT, hMT.le⟩

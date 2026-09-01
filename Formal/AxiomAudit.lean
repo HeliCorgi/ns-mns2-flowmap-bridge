@@ -59,6 +59,8 @@ import Formal.GronwallIntegralInequality
 import Formal.R3TSelDecodedGradient
 import Formal.R3TSelBridge
 import Formal.R3TSelClassicalComparability
+import Formal.R3TSelSchwartzCalculus
+import Formal.R3TSelLeibnizCommutator
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -497,3 +499,23 @@ into the Lean build log so that unexpected dependencies are visible during revie
 -- of the multilinear operator norm, and the pointwise weight comparison. No new
 -- assumption is introduced; the open Prop of the statement layer is discharged.
 #print axioms MNS2.r3TSel_classicalSobolevComparability
+
+-- T-SEL bridge discharge, step 2 (SEL-4, same commission): the BKM derivative-tuple
+-- commutator estimate R3TSelKatoPonceCommutator is now PROVED with the explicit constant
+-- C = 93*(2*pi)^3 (r3TSel_katoPonceCommutator). Infrastructure proved on the way, all
+-- Schwartz-core: the exact Leibniz commutator expansions at orders one to three; the
+-- commutation of line derivatives from C^2 symmetry of the second Frechet derivative (no
+-- analyticity); integration by parts on R^3 obtained by evaluating the Fourier transform
+-- of the derivative at frequency zero (integral_fderiv_apply_eq_zero); the by-parts
+-- Gagliardo-Nirenberg quartic interpolation r3TSel_gn_quartic; Cauchy-Schwarz for
+-- integrals; single-tuple L^2 bounds by the carrier norm via the proved SEL-1
+-- comparability machinery. The sharp fractional (J^3-form) Kato-Ponce commutator is
+-- deliberately NOT claimed; it is consumed by nothing in the T-SEL chain.
+#print axioms MNS2.lineDerivOp_comm
+#print axioms MNS2.integral_fderiv_apply_eq_zero
+#print axioms MNS2.integral_mul_le_sqrt_mul_sqrt
+#print axioms MNS2.r3TSel_gn_quartic
+#print axioms MNS2.norm_toLp_tuple_le
+#print axioms MNS2.smul_commutator_three
+#print axioms MNS2.r3TSel_term_bound_three
+#print axioms MNS2.r3TSel_katoPonceCommutator
