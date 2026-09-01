@@ -88,11 +88,15 @@ Stage-9 readiness audit は
 **指数算術の無矛盾性は解の存在ではない**。BH は YELLOW-RED、B2 は Scope B で UNKILLED、
 (T-c) は OPEN のまま。map への反映は round 3 で執行済み(C0–C14 + post-round-3 frontier)。
 
-**次の decision(commissioning-ready、ユーザー commission 待ち)= Γ-OSC feasibility decision**:
-core scale `R = τ^α` での τ-uniform oscillation contraction に必要な最弱 drift 条件を明示し、
-frozen B2 に対し双方向検証(`IMPLIED / VIOLATED / UNDERDETERMINED`)。終了規則登録済み:
-IMPLIED(または消費 NS 構造を明示する partial IMPLIED)のみ続行、VIOLATED は終了/pivot 正当、
-UNDERDETERMINED 連続2回で BH branch 終了。
+**Γ-OSC feasibility decision: 実行・決着済み(2026-09-02)= `VIOLATED`**
+([`docs/gates/GAMMA_OSC_FEASIBILITY_2026-09-02.md`](docs/gates/GAMMA_OSC_FEASIBILITY_2026-09-02.md))。
+frozen B2 は既知十分 drift 条件を一つも imply せず(implied 領域は正確に空、主要 cap は強制発散)、
+frozen 両立の明示的族が全最弱段を τ-uniform に破る。既知機構ルートは frozen scope で閉鎖
+(SSŠZ/SVZ/Wu の反例床 + `(ln N)^{−p}` 閾値)。D-1/D-2 放電。C0-clean(¬(Γ-OSC)/¬(Γ-DEP) は主張しない)。
+
+**登録済み終了規則が VIOLATED 節で発火 — BH branch の終了/pivot が正当化。実行はユーザー行為**
+(選択肢: SPEC.md 数値候補プログラム / literature-level Seregin watch。D-3 族 watch は継続)。
+D-3(arXiv:2606.07869)は同日 triage 済み: load-bearing gap 確定、不使用、CAP 不発火。
 
 形式側の残作業は非ブロッキング(uniform energy、maximal trajectory、classical regularity、
 edge 5 Clay 転送)であり、Stage-9 の具体定理が要求するまで着手しない。

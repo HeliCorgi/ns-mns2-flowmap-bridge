@@ -43,6 +43,31 @@ Last updated: 2026-09-01 JST.
 > rule: continue only on IMPLIED (or a partial IMPLIED naming the consumed NS
 > structure); VIOLATED ⟹ end/pivot justified; a second consecutive
 > UNDERDETERMINED ⟹ the BH branch ends.
+>
+> **2026-09-02: the Γ-OSC feasibility decision is EXECUTED and DECIDED —
+> `VIOLATED`** (`docs/gates/GAMMA_OSC_FEASIBILITY_2026-09-02.md`): frozen B2
+> implies **no** known-sufficient drift condition for the τ-uniform oscillation
+> contraction (the implied sub-region of `S_blob` is **exactly empty**; sup /
+> `L^∞_tL³` / local-energy caps are **forced-divergent** class-wide at
+> `ν^{−1}τ^{−(γ−α)}` by the forced-amplitude lemma), and an explicit
+> frozen-compatible smooth divergence-free family defeats **every** minimal
+> known-sufficient rung of both ladders τ-uniformly (power vs at most double-log
+> caps; the known ladder provably terminates at scale invariance — SSŠZ/SVZ/Wu;
+> multi-scale escape closed at the `(ln N)^{−p}, p ≤ 1` threshold). Debts D-1
+> and D-2 DISCHARGED. C0-clean: `VIOLATED ⇏ ¬(Γ-OSC)` and `⇏ ¬(Γ-DEP)` — the
+> named non-rung NS structures (§5.3 of the record) remain live for genuinely
+> new mathematics. **The registered termination rule fires on its VIOLATED
+> clause: the Γ-depletion lane's expected value collapses — END/PIVOT of the BH
+> branch is JUSTIFIED. Execution of the end/pivot is a user act** (recorded
+> options: the `SPEC.md` numerical candidate program; the literature-level
+> Seregin watch; D-3 family watch continues regardless).
+>
+> **Same day: D-3 identified and triaged** — arXiv:2606.07869v1
+> (axisymmetric-with-swirl global-regularity claim): first-hand read +
+> adversarial adjudication CONFIRMED load-bearing gaps (variational core G1a/G1b;
+> exhaustion layer G2); correctness NOT ESTABLISHED; consumed by nothing; **no
+> CAP fire**. Companion identified as arXiv:2606.07875; author-cluster red flag
+> (both-directions claims) recorded. `docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -1459,16 +1484,20 @@ axisym-with-swirl 無条件大域正則性主張。全文一次読解+敵対的�
 exhaustion 層 G2 の load-bearing gap を確定。正しさ未確立・どこにも不使用・CAP 不発火。
 再点検トリガー付き master record = `docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`)。
 
-**次の decision(commissioning-ready、ユーザーの commission 待ち)= Γ-OSC feasibility decision**
-(round-3 record §8 の縮小形): 既知 drift–diffusion / boundary-regularity 定理から
-`R = τ^α` での τ-uniform contraction に必要な最弱の定量的 drift 条件を明示し、
-frozen B2 から導出できるか(IMPLIED)/frozen 両立の smooth div-free profile で破れるか(VIOLATED)/
-どちらでもない(UNDERDETERMINED)を双方向検証。新 exponent restriction による代用禁止。
-核心の問い: 「genuine NS 構造は一般 drift の巨大 drift 障害 `R‖u‖ ≍ τ^{α−γ} → ∞` に勝てるか」。
-**登録済み終了規則**: IMPLIED(または消費した NS 構造を明示する partial IMPLIED)のときのみ続行;
-VIOLATED ⟹ Γ-depletion lane の期待値崩壊、終了/pivot 正当;
-UNDERDETERMINED 連続2回 ⟹ BH branch 終了(pivot 先: SPEC.md の数値候補プログラム、または
-literature-level Seregin watch)。
+**Γ-OSC feasibility decision は実行・決着済み(2026-09-02)= `VIOLATED`**
+(`docs/gates/GAMMA_OSC_FEASIBILITY_2026-09-02.md`): frozen B2 は既知の十分 drift 条件を
+**一つも** imply しない(implied 部分領域は `S_blob` 上で**正確に空**。sup / `L^∞_tL³` /
+local-energy cap は forced-amplitude lemma により class 全体で `ν^{−1}τ^{−(γ−α)}` で
+**強制発散**)。かつ frozen 両立の明示的 smooth div-free 族が両ラダーの**全最弱段**を
+τ-uniform に破る(power 対 高々 double-log。既知ラダーは scale invariance で終端 —
+SSŠZ/SVZ/Wu の反例床。multi-scale 逃げ道は `(ln N)^{−p}, p ≤ 1` 閾値で閉鎖)。
+D-1・D-2 は放電済み。C0-clean: `VIOLATED ⇏ ¬(Γ-OSC)`、`⇏ ¬(Γ-DEP)` — 生き残りは
+record §5.3 の non-rung NS 構造(既知定理なし)のみ。
+
+**登録済み終了規則は VIOLATED 節で発火: Γ-depletion lane の期待値崩壊 — BH branch の
+終了/pivot が正当化された。実行はユーザー行為**(記録済み選択肢: (a) SPEC.md の
+数値候補プログラム、(b) literature-level Seregin watch。D-3 族 watch はどちらでも継続)。
+第4回 freeze review で P1–P6(Γ-OSC record §6)+ pivot 実行を裁定するのが正規手順。
 
 数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
 (quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。

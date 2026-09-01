@@ -467,6 +467,11 @@ recomputed; the construction is sound as a single-time field. Itemized:
   (`η = exp(−N(R)^{O(1)})`) and the "almost Hölder" variant's slightly-
   supercritical hypothesis — citation identifiers lost in transit; full-text
   verification owed before any chain consumes §5's negative claim.
+  *(Status 2026-09-02: **DISCHARGED [V], with erratum** — OP = arXiv:2210.10030,
+  Annals of PDE 2023, Prop 5.1 fetched full-text; contraction exponent
+  `exp(−𝒩^{O(1)})` confirmed; the "almost Hölder" variant is NOT in OP — it is
+  Chen–Tsai–Zhang arXiv:2201.01766. See `GAMMA_OSC_FEASIBILITY_2026-09-02.md`
+  §5.4.)*
 - **D-2 [to verify at commissioning]** Bare-drift falsity risk: for general
   divergence-free supercritical drifts, parabolic continuity/Harnack is known to
   fail in 3D in some regimes (the Seregin–Silvestre–Šverák–Zlatoš divergence-free
@@ -475,6 +480,11 @@ recomputed; the construction is sound as a single-time field. Itemized:
   NS/axisymmetric-specific structure (the drift being the actual NS velocity;
   the `2ν e_r/r` term; the axis boundary; K11's viscous-scale placement) the
   decision consumes. This is a feature: it makes Γ-OSC genuinely two-sided.
+  *(Status 2026-09-02: **DISCHARGED [V]** — SSŠZ arXiv:1010.6025, SVZ
+  arXiv:1205.4364, and Wu arXiv:2106.02408 fetched; failure is binary
+  discontinuity arbitrarily little above criticality in `n ≥ 3`, and Wu Thm 1.8
+  defeats the exact Γ-operator with the axis term plus enstrophy-type bounds.
+  See `GAMMA_OSC_FEASIBILITY_2026-09-02.md` §3.1a FLOOR-1/2/3 and §5.5.)*
 - **D-3 [WATCH, unverified, consumed by nothing]** The reported June-2026 arXiv
   preprint claiming **unconditional global regularity for axisymmetric NS with
   swirl** — unidentified (no arXiv number survived transit). If it existed and
