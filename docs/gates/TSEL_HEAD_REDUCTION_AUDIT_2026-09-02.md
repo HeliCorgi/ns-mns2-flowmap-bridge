@@ -204,6 +204,8 @@ The only budget the energy equality supplies is `∫₀^{T′}‖∇U‖²_{L²}
 > ∀ν>0, ∀ admissible Schwartz datum u0, ∀ finite T: ∃ Q₀(T;ν,‖u0‖) < ∞ such that every certified solution on every certified horizon T′ ≤ T satisfies, for all t ∈ [0,T′]:
 > **‖∇U(t)‖_{L∞} ≤ Q₀ · (1 + ‖∇U(t)‖_{L²}²).**
 
+**[Quantifier ruling (seventh session, `HSEL_QUANTIFIER_AUDIT_2026-09-02.md`): the display above is the datum-specific form H-SEL^ds (∃Q₀ after ∀u0 — the notation `Q₀(T;ν,‖u0‖)` asserts no norm-only dependence, EQ-1); the OPERATIVE research head is the norm-uniform form H-SEL^nu (∃Q₀(T,ν,M) before ∀u0 in the M-ball), which implies this one; the Lean chain consumes only ds.]**
+
 Corrected chain: Arrow α (EB-1, unchanged) ⟹ Arrow β′ (direct integration [KNOWN, trivial]): `∫₀^{T′}‖∇U‖_∞ dt ≤ Q₀(T + ‖u0‖²_{L²,dec}/(2ν)) =: G(T;ν,‖u0‖)` ⟹ N0 verbatim. Corrected scaling: LHS `λ²` vs RHS `λ¹` under `u_λ` — still supercritical as a hypothesis (the scale-invariant exponent is `p = 4`), but one power weaker than the `4/3` print (`λ^{2/3}`); the head is now the closest energy-closable member to scale invariance.
 
 ### 9.2 EH-2 — the reverse-GN reading is RETRACTED (logical-direction error)

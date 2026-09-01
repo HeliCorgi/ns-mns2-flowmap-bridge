@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第6セッション: P-1 literature sweep まで反映 — H-SEL SURVIVES)
+# STATUS — 2026-09-02 (第7セッション: quantifier audit まで反映 — operative head = H-SEL^nu)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -204,6 +204,26 @@ Thm 19(仮説は印字形より弱い — **HR-3′ 弱形 restatement 提案**;
 の energy-homogeneity 注意も記録)。BKM の NS remark を一次 [V] 化。ランキング
 再確認(120/60/45、HR-2/4/7 は scope 外で不変)。**P-2(`Q₅(t)` 数値プローブ)
 commission はユーザー行為。proof search(H-SEL/N0)は引き続き未 commission。**
+
+**第7セッション(ユーザー commission): H-SEL quantifier/falsification audit 実行済み —
+operative head を norm-uniform 形 `H-SEL^nu` に確定**
+([`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md`](docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md)、
+RECORD-ONLY、Lean は読み取りのみ)。**EQ-1/2**: 従来表記 `Q₀(T;ν,‖u₀‖)` は
+datum-specific 形のみを主張(記法 ruling)。Lean N0(`R3TSelGradientBound`)は
+verbatim で datum-specific(∃G は (ν,u0,T) 固定後)。**EQ-3**: 連鎖 N0→N3 は ds で
+十分、nu ⟹ ds は自明、**ds ⟹ nu は OPEN**(非コンパクト H³ 球上の uniform
+boundedness/effectivity 問題)。**EQ-4**: ds の反証 certificate は検証済み blow-up
+certificate と同値(両方向)— 独立反証不能、単一軌道 Q₅ は necessary-signature 役のみ。
+**EQ-5**: nu の反証 certificate = 固定 (ν,T,M) の norm-bounded admissible 族で
+`sup_t Q₅^{(k)} → ∞`(各メンバーは大域滑らかで可; theorem-level 反証は
+non-uniformity 定理 = Palasek/C-2 隣接で Clay 択一に中立 — 非対称性を明記)。
+**EQ-6**: nu は既存 Lean lifespan `T₀(ν,M)` までは既知機械で成立(非自明性チェック;
+open content = `T₀` を越える horizon 延長)。**EQ-7 再裁定: operative research head =
+`H-SEL^nu`**(ds は連鎖十分な fallback; falsifiability 採点は nu 読みでのみ正当)。
+**EQ-8**: roster 全体(HR-1/HR-3′…)に同じ nu 読み discipline を固定、ランキング不変。
+**P-2 は EQ-5 の族プローブに再定義**(単一軌道プローブではない)。nu もバッテリー
+SURVIVES(既録 violator は全て単一軌道; smooth-family 攻撃の既知例なし)。P-2/P-3・
+proof search はいずれも未 commission。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

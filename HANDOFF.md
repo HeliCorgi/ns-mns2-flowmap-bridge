@@ -250,7 +250,39 @@ Last updated: 2026-09-02 JST (second session).
 > Ranking re-affirmed (120/60/45; HR-2/4/7 unchanged — out of scope).
 > **H-SEL is cleared for P-2 (the `Q₅(t)` numerical ratio probe);
 > commissioning P-2 is a user act.** Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + the P-1 record's §3/§5.**
+>
+> **2026-09-02 (seventh session): the H-SEL quantifier/falsification audit is
+> COMMISSIONED and EXECUTED** (`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md`,
+> RECORD-ONLY; one read-only Lean extraction, no edit, no proof search, no
+> numerics). **EQ-1/EQ-2**: the notation `Q₀(T;ν,‖u0‖)` asserted only the
+> **datum-specific** form; the Lean N0 (`R3TSelGradientBound`, verbatim) is
+> datum-specific (`∃G` after fixed `(ν,u0,T)`; docstring "allowed to depend
+> on T, ν, u0"). **EQ-3**: the chain N0→N1→N2→N3 consumes only ds; nu ⟹ ds
+> trivially; **ds ⟹ nu is OPEN** (uniform-boundedness/effectivity over the
+> non-compact H³ ball — critical-norm compactness technology does not close
+> it), so nu is possibly strictly stronger. **EQ-4**: falsifying H-SEL^ds ⟺
+> a validated finite-time blow-up certificate (per-datum bridge, two-sided)
+> — NOT independently falsifiable; single-trajectory `Q₅` keeps only the
+> necessary-signature role. **EQ-5**: the nu certificate is a fixed-(ν,T,M)
+> norm-bounded admissible family with `sup_{t≤T}Q₅^{(k)} → ∞` — every member
+> may be globally smooth; theorem-level refutation would prove genuine
+> non-uniformity (Palasek/C-2-adjacent) WITHOUT deciding the Clay
+> alternative (asymmetry printed). **EQ-6**: H-SEL^nu is already a
+> short-time theorem up to the existing Lean lifespan `T₀(ν,M)` (ball bound
+> + SEL-2) — non-vacuous, battle line = horizon extension past `T₀`.
+> **EQ-7 RE-ADJUDICATION: the OPERATIVE research head is `H-SEL^nu`
+> (norm-uniform)**, ds retained as the chain-sufficient fallback; grounds:
+> only nu is independently falsifiable (the selection's falsifiability
+> scoring is only justified under nu), chain intact, both outcomes
+> informative, C-1/C-2/C-3 carry over (C-2 selects nu's subcritical-M
+> shape). **EQ-8**: the same nu-reading discipline is fixed roster-wide
+> (HR-1/HR-3′ …), no ranking change. **P-2 is redefined as the EQ-5 family
+> probe** (not single-trajectory); commissioning P-2 remains a user act.
+> nu also SURVIVES the battery (all recorded violators are
+> single-trajectory; no smooth-family attack exists — C-1 data are bounded
+> at `Q₅(0) ≤ C_emb·M`, Palasek's family is not H³-bounded). Baseline stays
+> the 8775-job gate. **Resume anchor: "Next work" below + that record's
+> §3–§4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -287,30 +319,35 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, sixth session)
+### Next work (written 2026-09-02, seventh session)
 
-Read first: this file's top block; `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md`
-(the P-1 record — esp. §3 constraints C-1/C-2/C-3 and §5 verdict);
-`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (correction notice, §5, §9 —
-the operative H-SEL statement); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`
-SS-5/SS-6 (N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
+Read first: this file's top block; `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md`
+(the quantifier ruling — esp. §3 certificates and §4 re-adjudication);
+`docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3 constraints C-1/C-2/C-3,
+§5 verdict); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (correction
+notice, §5, §9); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6
+(N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **Selected research theorem: H-SEL (p = 2 form)**:
-  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}²)` on certified horizons; bridge to
-  N0 = EB-1 + direct integration. Do **not** cite the superseded `4/3` form or the
-  retracted reverse-GN reading (EH-2). **P-1 is DONE — H-SEL SURVIVES** (not a
-  rephrase of known math; no known counterexample; cleared for P-2). Any future
-  proof-route discussion MUST respect the recorded constraints: C-1 (dynamical
-  only — every `p < 4` is kinematically false over static div-free fields), C-2
-  (`Q₀`'s subcritical datum-dependence essential — Palasek), C-3 (exact-NS
-  structure beyond energy + bilinear estimates — Tao cascade violates `p < 5/2`).
+- **Selected research theorem: `H-SEL^nu` (norm-uniform, p = 2)**:
+  ∀ν,T,M ∃Q₀(T,ν,M): ∀ admissible u0 with `‖u0‖ ≤ M`, all certified times obey
+  `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖_{L²}²)`. The datum-specific `H-SEL^ds` is the
+  chain-sufficient fallback (Lean N0 is ds — EQ-2); nu ⟹ ds ⟹ N0 ⟹ N1→N2→N3;
+  ds ⟹ nu is OPEN (EQ-3). Do **not** cite the superseded `4/3` form, the
+  retracted reverse-GN reading (EH-2), or `Q₀(T;ν,‖u0‖)` without naming
+  ds/nu (EQ-1). Proof-route constraints C-1/C-2/C-3 (P-1 §3) bind any future
+  proof discussion; EQ-6 records nu as already-known up to the local lifespan
+  `T₀(ν,M)` — the open content is horizon extension past it.
 - **Next in the recorded order, requires an explicit user commission: P-2 — the
-  numerical ratio probe** `Q₅(t) = ‖∇U‖_∞/(1+‖∇U‖₂²)` on candidate datasets
-  (own reproductions when the numerical lane resumes; accessible published
-  near-singular data). Falsification event = validated super-datum growth of
-  `Q₅` on a bounded horizon. After that, P-3 (analytic refutation attempt —
-  seeds: C-1's Lu–Doering-type maximizer configurations; shape guide: the
-  `p < 5/2` Tao-violation window). **Any proof search on H-SEL, and on N0,
+  EQ-5 FAMILY probe**: fixed `(ν,T,M)`; a preregistered admissible family
+  normalized to the `M`-ball (seeds: C-1 maximizer-shaped + frequency-staircase
+  data); resolution-validated trajectories; observable `S(k) = sup_{t≤T}Q₅^{(k)}`
+  with preregistered acceptance thresholds; outcomes graded
+  EVIDENCE-FOR / EVIDENCE-AGAINST / UNDETERMINED (numerics never proves
+  `¬H-SEL^nu`). Single-trajectory `Q₅` divergence is NOT a P-2 target — it is
+  the necessary-signature diagnostic of the singularity program (EQ-4). After
+  P-2: P-3 (analytic refutation attempt — same seeds; `p < 5/2` Tao-violation
+  window as shape guide; a proven divergent family = a non-uniformity theorem,
+  valuable and Clay-neutral). **Any proof search on H-SEL^nu/ds, and on N0,
   remains separately uncommissioned — do not start either implicitly.**
 - **Residual literature debts (small, non-blocking):** V-1′ (Grujić–Guberović CMP
   298 (2010) localization for HR-1's localized form); V-2/V-4/V-6 (Miller, DHY,
