@@ -88,6 +88,31 @@ Last updated: 2026-09-01 JST.
 > `docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md`; acceptance
 > gates + fail-closed stencil rule in the round-4 record §5). M-1 is selected,
 > not yet started.
+>
+> **2026-09-02 (later): M-1 is ON HOLD by user instruction** (numerical lane
+> retained, not discarded, not started), and the **Stage-9 Reverse-Gap Audit is
+> EXECUTED** as a one-shot sanctioned bounded analysis
+> (`docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`, RECORD-ONLY — no frozen
+> verdict, frontier, or park change). Results: the exact Lean continuation
+> **plug spec** extracted from source (carrier norm = Bessel-H³ of the decoded
+> field; the extension/dichotomy interface; the L_bridge template with absent
+> bridge layers B1–B5); **19 reverse-gap candidates** adjudicated across three
+> lanes (whole-space ladder / axisymmetric / K12 complex) with
+> counterexample-first discipline — 18 SURVIVE, 1 BANNED (the carrier-norm
+> restatement, pinned as degenerate endpoint); the **K12-complex re-verified**
+> without assuming past records (two genuine printed-statement defects found:
+> EP-1 KC-3b vacuous middle link, EP-3 KC-7 width-floor vacuity; plus EP-4/EP-6
+> and carried items — all as record-only erratum PROPOSALS EP-1–EP-8 for a
+> future freeze review). **THE SINGLE SELECTED THEOREM: T-SEL = L_a — the
+> time-integrated velocity-gradient bound**
+> `∫₀^{T′} ‖∇U(s)‖_{L∞} ds ≤ G(T; ν, ‖u₀‖)` over certified horizons — with the
+> complete dependency chain N0→N1→N2→N3 (bridge = 1984-known mathematics:
+> Kato–Ponce commutator + Grönwall, **ten on-paper lemmas SEL-1…SEL-10**, four
+> resting on existing Lean anchors, six standard-math-to-formalize; the head N0
+> is OPEN and Clay-equivalent-or-harder, unclaimed). Runner-up: L_b (BKM
+> vorticity form). Formalization/proof exploration of T-SEL awaits a separate
+> user commission — **the intended resume anchor for the next session is that
+> record's SS-5/SS-6 plus this paragraph.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 

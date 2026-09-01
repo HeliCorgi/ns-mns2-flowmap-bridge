@@ -103,7 +103,20 @@ freeze review 裁定のみ)。D-3 / Seregin は standing passive watch register 
 ([`LITERATURE_WATCH_REGISTER_2026-09-02.md`](docs/gates/LITERATURE_WATCH_REGISTER_2026-09-02.md))。
 D-3(arXiv:2606.07869)は triage 済み: load-bearing gap 確定、不使用、CAP 不発火。
 
-## 現在の active lane と次の作業
+## 2026-09-02(後刻): M-1 保留 + Stage-9 Reverse-Gap Audit 実行済み
+
+M-1 はユーザー指示により**保留**(数値 lane は破棄せず・未着手)。代わりに
+**Stage-9 Reverse-Gap Audit** を1回限りの sanctioned bounded analysis として実行
+([`docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`](docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md)、
+RECORD-ONLY — verdict/frontier/park 不変更)。Lean 継続インターフェイスの plug spec を
+ソースから抽出、3レーン19候補を反例先行で裁定(18生存・1 banned)、K12 複合体を再検証
+(EP-1〜EP-8 の erratum 提案、うち2件は真正の printed-statement defect)。
+**選定定理 T-SEL = L_a: `∫₀^{T′}‖∇U‖_{L∞}ds ≤ G(T;ν,‖u₀‖)`**(dependency chain
+N0→N3 完全明記。bridge は既知数学10補題 SEL-1〜10、head N0 は OPEN・Clay 級)。
+T-SEL の形式化・proof 探索は別途 commission 待ち(新セッション予定。resume anchor =
+上記 record の SS-5/SS-6)。
+
+## 現在の active lane と次の作業(M-1 は保留中)
 
 **Active lane = SPEC.md の verified nonlinear finite-cylinder axisymmetric-with-swirl
 numerical candidate program。次 = milestone M-1(選定済み・未着手)**:
