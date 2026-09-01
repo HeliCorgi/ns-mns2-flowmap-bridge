@@ -1,6 +1,6 @@
-# STATUS — 2026-09-01
+# STATUS — 2026-09-02
 
-## 2026-09-01 数学監査パス + FREEZE REVIEW ROUND 3(執行済み)+ (EXT-ΓDEP-1) import
+## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
 corpus 全体の数学監査(8 finder → 敵対的検証 → 統合)で 15 件の欠陥を確定
 (major 2 / minor 7 / nit 6)。凍結 gate 文書には erratum を追記(silent repair なし)、
@@ -73,7 +73,7 @@ Stage-9 readiness audit は
 - Hou late-state state で mechanism を確認した
 - production wall-vorticity solver と同一だと主張する
 
-## 次の勝負
+## 研究側の経過(Stage 9 → round-4 park)
 
 研究側 Stage 9(NS の未解決数学そのもの)。最初の decision theorem
 (**Scope-B `β_v` endpoint-pinning decision**,
@@ -94,9 +94,24 @@ frozen B2 は既知十分 drift 条件を一つも imply せず(implied 領域�
 frozen 両立の明示的族が全最弱段を τ-uniform に破る。既知機構ルートは frozen scope で閉鎖
 (SSŠZ/SVZ/Wu の反例床 + `(ln N)^{−p}` 閾値)。D-1/D-2 放電。C0-clean(¬(Γ-OSC)/¬(Γ-DEP) は主張しない)。
 
-**登録済み終了規則が VIOLATED 節で発火 — BH branch の終了/pivot が正当化。実行はユーザー行為**
-(選択肢: SPEC.md 数値候補プログラム / literature-level Seregin watch。D-3 族 watch は継続)。
-D-3(arXiv:2606.07869)は同日 triage 済み: load-bearing gap 確定、不使用、CAP 不発火。
+**第4回 freeze review 執行済み(2026-09-02、ユーザー裁定)**: P1–P6 全 ADOPT、Γ-OSC
+`VIOLATED` を正確 scope で map に反映(kill table D0–D7 + Post-round-4 frontier)。
+**BH / Γ-depletion branch は active lane として終了・PARK**(「未解決」≠「既知機構の枯渇」を
+明記: B2 UNKILLED・中間肢 open・(Γ-OSC)/(Γ-DEP) open のまま。尽きたのは in-house 既知機構の
+3層在庫。BH verdict は park 時点で YELLOW-RED に凍結。un-park は登録トリガー経由の
+freeze review 裁定のみ)。D-3 / Seregin は standing passive watch register に分離
+([`LITERATURE_WATCH_REGISTER_2026-09-02.md`](docs/gates/LITERATURE_WATCH_REGISTER_2026-09-02.md))。
+D-3(arXiv:2606.07869)は triage 済み: load-bearing gap 確定、不使用、CAP 不発火。
+
+## 現在の active lane と次の作業
+
+**Active lane = SPEC.md の verified nonlinear finite-cylinder axisymmetric-with-swirl
+numerical candidate program。次 = milestone M-1(選定済み・未着手)**:
+**Hou 2022 no-slip wall-vorticity boundary closure の実装+検証**
+(`docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md` の blocker 解消。
+受け入れ条件 = 同文書の要件1–8 + SPEC §8 不変条件。fail-closed stencil rule 適用。
+Hou 再現・`R³`・Clay の主張は一切しない)。詳細:
+[`FREEZE_REVIEW_4_2026-09-02.md`](docs/gates/FREEZE_REVIEW_4_2026-09-02.md) §5。
 
 形式側の残作業は非ブロッキング(uniform energy、maximal trajectory、classical regularity、
 edge 5 Clay 転送)であり、Stage-9 の具体定理が要求するまで着手しない。

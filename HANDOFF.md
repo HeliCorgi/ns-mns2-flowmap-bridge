@@ -49,7 +49,8 @@ Last updated: 2026-09-01 JST.
 > implies **no** known-sufficient drift condition for the τ-uniform oscillation
 > contraction (the implied sub-region of `S_blob` is **exactly empty**; sup /
 > `L^∞_tL³` / local-energy caps are **forced-divergent** class-wide at
-> `ν^{−1}τ^{−(γ−α)}` by the forced-amplitude lemma), and an explicit
+> `ν^{−1}τ^{−(γ−α)}`, the local-energy cap at the squared rate
+> `ν^{−2}τ^{−2(γ−α)}`, by the forced-amplitude lemma), and an explicit
 > frozen-compatible smooth divergence-free family defeats **every** minimal
 > known-sufficient rung of both ladders τ-uniformly (power vs at most double-log
 > caps; the known ladder provably terminates at scale invariance — SSŠZ/SVZ/Wu;
@@ -68,6 +69,25 @@ Last updated: 2026-09-01 JST.
 > exhaustion layer G2); correctness NOT ESTABLISHED; consumed by nothing; **no
 > CAP fire**. Companion identified as arXiv:2606.07875; author-cluster red flag
 > (both-directions claims) recorded. `docs/gates/D3_TRIAGE_2606_07869_2026-09-02.md`.
+>
+> **2026-09-02 (same day): FREEZE REVIEW ROUND 4 is EXECUTED** on the user's
+> dated instruction (`docs/gates/FREEZE_REVIEW_4_2026-09-02.md`; kill-table
+> annotations **D0–D7** + Post-round-4 frontier). P1–P6 all ADOPTED (P6 as
+> executed by the instruction itself); the Γ-OSC `VIOLATED` row is on the map at
+> exact machinery-closure scope (D1, C0-clean). **The BH / Γ-depletion branch is
+> TERMINATED AS THE ACTIVE LANE and PARKED (D0)** — operative distinction:
+> **UNRESOLVED ≠ EXHAUSTED-MACHINERY** (B2 stays UNKILLED, the middle limb and
+> (Γ-OSC)/(Γ-DEP) stay open; what is exhausted is the in-house known-mechanism
+> inventory, in three adjudicated layers); BH verdict frozen YELLOW-RED at park;
+> un-park triggers registered. D-3/Seregin **separated to the standing passive
+> watch register** (`docs/gates/LITERATURE_WATCH_REGISTER_2026-09-02.md`, as
+> W-1–W-3; W-4 = un-park-relevant theory, created alongside). **Active research lane switched to the `SPEC.md` verified nonlinear
+> finite-cylinder numerical candidate program; first bounded milestone
+> selected: M-1 = implement and verify the Hou 2022 no-slip wall-vorticity
+> boundary closure** (clearing the recorded blocker of
+> `docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md`; acceptance
+> gates + fail-closed stencil rule in the round-4 record §5). M-1 is selected,
+> not yet started.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -1487,18 +1507,44 @@ exhaustion 層 G2 の load-bearing gap を確定。正しさ未確立・どこ�
 **Γ-OSC feasibility decision は実行・決着済み(2026-09-02)= `VIOLATED`**
 (`docs/gates/GAMMA_OSC_FEASIBILITY_2026-09-02.md`): frozen B2 は既知の十分 drift 条件を
 **一つも** imply しない(implied 部分領域は `S_blob` 上で**正確に空**。sup / `L^∞_tL³` /
-local-energy cap は forced-amplitude lemma により class 全体で `ν^{−1}τ^{−(γ−α)}` で
-**強制発散**)。かつ frozen 両立の明示的 smooth div-free 族が両ラダーの**全最弱段**を
+local-energy cap は forced-amplitude lemma により class 全体で `ν^{−1}τ^{−(γ−α)}`
+— local-energy cap は自乗レート `ν^{−2}τ^{−2(γ−α)}` — で**強制発散**)。かつ frozen 両立の明示的 smooth div-free 族が両ラダーの**全最弱段**を
 τ-uniform に破る(power 対 高々 double-log。既知ラダーは scale invariance で終端 —
 SSŠZ/SVZ/Wu の反例床。multi-scale 逃げ道は `(ln N)^{−p}, p ≤ 1` 閾値で閉鎖)。
 D-1・D-2 は放電済み。C0-clean: `VIOLATED ⇏ ¬(Γ-OSC)`、`⇏ ¬(Γ-DEP)` — 生き残りは
 record §5.3 の non-rung NS 構造(既知定理なし)のみ。
 
-**登録済み終了規則は VIOLATED 節で発火: Γ-depletion lane の期待値崩壊 — BH branch の
-終了/pivot が正当化された。実行はユーザー行為**(記録済み選択肢: (a) SPEC.md の
-数値候補プログラム、(b) literature-level Seregin watch。D-3 族 watch はどちらでも継続)。
-第4回 freeze review で P1–P6(Γ-OSC record §6)+ pivot 実行を裁定するのが正規手順。
+**第4回 freeze review は実行・執行済み(2026-09-02)**
+(`docs/gates/FREEZE_REVIEW_4_2026-09-02.md`; kill table annotation **D0–D7** +
+Post-round-4 frontier が現行の唯一 operative frontier): P1–P6 全 ADOPT、Γ-OSC
+`VIOLATED` 行は正確な machinery-closure scope で map に反映(D1)。
+**BH / Γ-depletion branch は active lane として終了・PARK(D0)** — 必須の区別:
+**「未解決」≠「既知機構の枯渇」**(B2 は UNKILLED のまま、中間肢と (Γ-OSC)/(Γ-DEP) は
+open のまま。尽きたのは in-house の既知機構在庫であり、3層で裁定済み: 指数算術は pin
+できない → snapshot 幾何は決められない → 既知の動的機構は届かない)。BH verdict は
+park 時点で YELLOW-RED に凍結。un-park は登録トリガー経由の freeze review 裁定のみ。
+**D-3 / Seregin は standing passive watch register に分離**
+(`docs/gates/LITERATURE_WATCH_REGISTER_2026-09-02.md`, W-1〜W-4。トリガー発火は
+次回 freeze review の議題化のみで、自動の再開・採用はない)。
 
-数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
+**現在の active lane = SPEC.md の verified nonlinear finite-cylinder
+axisymmetric-with-swirl numerical candidate program。次の作業 = milestone M-1**
+(選定済み・未着手): **Hou 2022 の no-slip wall-vorticity boundary closure の実装+検証**
+(`docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md` の記録済み blocker の
+解消)。受け入れ条件 = 同監査文書の要件1–8(離散 `ψ₁=0` / `∂_rψ₁=0` / `ω₁=−∂_r²ψ₁` /
+`u₁=0` at `r=1`、極条件、holomorphic tangent / adjoint 整合、壁集中 JVP・adjoint テスト、
+壁残差を interior と分離した refinement)+ SPEC §8 の候補不変条件(項別残差・収束列・
+reload hash)。**fail-closed stencil rule**: Hou 2022 (DOI 10.1007/s10208-022-09578-4)
+とその引用方法論から production stencil を一次資料で確定する。確定できなければ
+`alternative wall closure` とラベルして導出を印字(「Hou production reproduction /
+late-state validation / resolved singular regime」ラベルは gate 全通過+stencil
+provenance 確定まで禁止)。着手前 preflight: AGENTS.md の external exclusion registry /
+equation audit 照合を evidence bundle に記録。M-1 は Hou 再現でも `R³` 結果でも
+Clay 主張でもない(有限円柱は domain-transfer 定理なしに `R³` へ昇格しない)。
+
+数値作業は **M-1 の scope 内でのみ**行う(SPEC.md §§3–8 の規約と AGENTS.md の MNS-2
+numerical invariants / Hou wall-vorticity gate に厳密準拠)。park 済み BH branch への
+in-house 作業・新 ansatz・profile discovery・CAP・in-house Liouville は行わない
+(un-park は freeze review 裁定のみ)。GitHub Actions は一切使わない
 (quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。
 docs は照合後 main に直接 push。古い会話より実コード・実 ledger を優先。`

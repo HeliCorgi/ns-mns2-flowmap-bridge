@@ -695,9 +695,10 @@ power-law row moves, and C3's endpoint carve-out is unaffected. **Named verifica
 debt [V?]: literature-watch-level extraction; full-text verification owed before any
 chain consumes this row.**
 
-**Post-round-3 frontier (frozen; the SOLE operative frontier text — supersedes the
-round-2 closing block; `FREEZE_REVIEW_3_2026-09-01.md` §4 is a summary of this
-block, not a second print):**
+**Post-round-3 frontier (frozen; supersedes the round-2 closing block;
+`FREEZE_REVIEW_3_2026-09-01.md` §4 is a summary of this block, not a second
+print):** *(This frontier block is superseded by the post-round-4 frontier
+below, 2026-09-02.)*
 **Scope A** — quasi-static = B2; its Γ-saturated realization is the target of R-B2′
 [C] on (E⁺⁺) = (COH-Δ)+(ANCH-κ), (P), (N-Γ)[B11 split] (+ imported layer (E⁺),
 frozen dictionary [C-dict] — B10); the Scope-A gate is the exhaustiveness step,
@@ -725,3 +726,117 @@ in-house vehicles retired/blocked (budget/winding by F15–F18; level route and
 T4-with-a-sign by the fork-(β) declinations) · trigger (T-c) OPEN (B5) · Seregin
 log-corrected pressure on the OOV-4 faces, [V?] (C14) · BH **YELLOW-RED
 maintained** · no CAP trigger · **no Clay claim**.
+
+## Annotation (2026-09-02 freeze review round 4 — D0–D7, EXECUTED; master record `FREEZE_REVIEW_4_2026-09-02.md`; adjudication authority: the user's dated 2026-09-02 instruction)
+
+*Label hygiene: the D-annotation numbers are unhyphenated and continue the A/B/C
+rounds; they are unrelated to the hyphenated external-record debts D-1/D-2/D-3,
+to the derivation tag `[D]`, to the β_v decision's internal labels D-1/D-2, and
+to this table's own 2026-08-19 bracketed derivation labels `[D1]/[D1′]/[D2]`
+(K6/K8 rows; the D1 adversarial audit). The watch register's hyphenated
+W-numbers (W-1–W-4) are likewise unrelated to this table's unhyphenated witness
+inventory W1–W5 and to `W★`.*
+
+**D0 (standing, user-directed — THE PARK).** The BH / Γ-depletion branch is
+**terminated as the active research lane and PARKED** — neither KILLED nor
+RESOLVED. Operative status sentence, unchanged in content from the round-4
+record §0 (condensed; the §0 blockquote governs):
+**UNRESOLVED ≠ EXHAUSTED-MACHINERY** — exhausted is this program's in-house
+inventory of known mechanisms at frozen Scope-B, in three adjudicated layers
+(exponent arithmetic cannot pin, β_v `YES (CONSISTENT)`; single-time
+NS-compatible geometry cannot decide, Γ-DEP `UNDERDETERMINED` + snapshot no-go;
+known dynamical machinery cannot deliver, Γ-OSC `VIOLATED`); unresolved — and
+in no way settled by the park — is the mathematics itself (**B2 UNKILLED in
+Scope B; the middle limb open; (Γ-OSC)/(Γ-DEP) live sufficient-condition
+targets**, negations asserted nowhere). BH verdict frozen at YELLOW-RED at park
+time. No in-house branch work without a user-adjudicated un-park; un-park
+triggers: a theorem consuming a D5 structure candidate; a critical-index
+`(ln N)^{−p}, p ≤ 1` contraction; a watch-register trigger (D7); explicit user
+instruction.
+
+**D1 (= P1, ADOPTED — the Γ-OSC frontier row, exact scope).**
+**(Γ-OSC)_feas = VIOLATED (2026-09-02, machinery closure at frozen scope,
+C0-clean):** no known-sufficient drift–diffusion / boundary-regularity rung is
+implied by frozen B2 — the implied sub-region of `S_blob` is exactly empty, and
+the sup / `L^∞_tL³` / CTZ local-energy caps are **forced-divergent** class-wide
+at `ν^{−1}τ^{−(γ−α)}` (resp. squared for the local-energy cap:
+`ν^{−2}τ^{−2(γ−α)}`) (forced-amplitude lemma) — and an explicit
+frozen-compatible smooth divergence-free axis-regular family defeats every
+minimal rung of the adjudicated known-sufficient antichain (L3; L4a/L4b; AX-L5;
+AX-L7) τ-uniformly at power rates vs at most double-log caps (time-integrated
+rung norms evaluated on the declared kinematic scan [C]; snapshot-violated
+minimal members exist in every declared class — master record §2); the known ladder
+provably terminates at scale invariance (SSŠZ/SVZ/Wu floor; Wu Thm 1.8 defeats
+the exact Γ-operator), and the multi-scale escape closes at the
+`(ln N)^{−p}, p ≤ 1` threshold. **Scope guards: derivability statement only;
+`VIOLATED ⇏ ¬(Γ-OSC)_op`, `⇏ ¬(Γ-DEP)_fld`; no NS solution constructed; no
+blow-up, no regularity, no Clay claim.** Master record:
+`GAMMA_OSC_FEASIBILITY_2026-09-02.md`.
+
+**D2 (= P2, ADOPTED).** Debts D-1 and D-2 of `EXT_GAMMADEP_DECISION_2026-09-01.md`
+are **DISCHARGED [V]** (D-1 with the erratum: the "almost Hölder" variant is
+Chen–Tsai–Zhang arXiv:2201.01766, not Ożański–Palasek arXiv:2210.10030); the
+in-place status notes at the EXT record are formally adopted.
+
+**D3 (= P3, ADOPTED — record-only true statements).** (i) **forced-amplitude
+lemma** [D]: `|u_pol| ≳ τ^{−γ}` on a positive core-volume fraction, τ-uniformly,
+from K6-carrier + Γ-max/envelope + printed blob shape; (ii) sign-cap
+**anti-implication** [D]: `∫u_r(r,·)dz = 0` + flux balance force both signed
+parts of `u_r` to full supercritical size at core radius; (iii) the 5-D
+**divergence-form identity** [H]: `∂_tΦ + div₅(b₅Φ) = νΔ₅Φ` with
+`div₅b₅ = 2u_r/r` for `Φ = Γ/r²` — supersedes every clean-transport print of
+`Γ/r²` wherever it appears; (iv) Qian–Xi arXiv:1704.02173 = the unique known
+theorem whose hypothesis frozen B2 pays, conclusion-shape-incapable of feeding
+(Γ-OSC)_op [V]; (v) the `(ln N)^{−p}, p ≤ 1` compensation threshold = the named
+quantitative frontier shape [D].
+
+**D4 (= P4, ADOPTED).** The violation family `𝒱` (coherent-eddy normalization +
+declared kinematic scan; Γ-OSC record §3.2) joins the §A.3 snapshot as a
+**standing test object** for every future Γ-depletion-type hypothesis, incl.
+any un-park proposal, under the §B2.4 discipline.
+
+**D5 (= P5, ADOPTED — structure-candidate register).** The
+exhaustive-at-this-pass register of non-rung NS structure a future dynamical
+closure could consume (Γ-OSC record §5.3): (i) actual nonlinear NS coupling
+(the drift's own swirl *is* Γ); (ii) the axis Dirichlet trace of Γ before `T*`;
+(iii) a sign/structure statement for `u_r` on the axis (the unsigned
+`div₅b₅ = 2u_r/r`); (iv) drift–level-set alignment; (v) K11's viscous-scale
+placement; (vi) the `(ln N)^{−p}, p ≤ 1` contraction shape. Sufficient-condition
+candidates only; **none has a known theorem today**; no exclusivity claimed.
+
+**D6 (= P6, ADOPTED AS EXECUTED — the lane switch).** Active research lane from
+this round: **the `SPEC.md` verified nonlinear finite-cylinder
+axisymmetric-with-swirl numerical candidate program**; first bounded milestone
+**M-1** = implement and verify the Hou 2022 no-slip wall-vorticity boundary
+closure (clear the recorded blocker of
+`docs/reports/HOU_WALL_VORTICITY_BOUNDARY_AUDIT_2026-08-13.md`), acceptance
+gates and the fail-closed stencil rule per the round-4 record §5. Watches are
+not lanes: pivot option (b) is subsumed into D7.
+
+**D7 (= watch separation, ADOPTED).** D-3 (family) and Seregin (C14 + the
+(OO)-adjacent ancient-Euler Liouville object) are **moved to the standing
+passive register** `LITERATURE_WATCH_REGISTER_2026-09-02.md` **as W-1–W-3**;
+**W-4** is additionally created there as the literature half of D0's un-park
+triggers (plus the OOV-a face, added at register creation). All watches are
+decoupled from lanes and from the parked branch; a fired trigger routes to the
+next freeze-review agenda, never to silent adoption or automatic un-park.
+
+**Post-round-4 frontier (frozen; the SOLE operative frontier text — supersedes
+the round-3 closing block; `FREEZE_REVIEW_4_2026-09-02.md` §4 is a summary):**
+**Scope A / Scope B mathematics — carried unchanged in content from the
+post-round-3 block** (condensed here; the full round-3 text and the
+C-annotations remain of record): quasi-static = B2 with R-B2′ [C] and the
+`ρ_T = γ`-only exhaustiveness restriction (C2/F38); Scope B: B2 UNKILLED,
+(SB-ANCH) a genuine conjunction (C1), middle limb row-compliant on all of
+`S_blob` with closure shapes per C0/C10, `{β_v < γ} = ¬(SB-ANCH)` with
+sup-swirl-poverty (C11); M2/M3 RESTRICTED with their riders; one-scale ring and
+M2 reopen in Scope B, `S_ring` carries K11 (C5); (NECK) dictionary-extension
+request; fork-(β) declinations; retired vehicles; (T-c) OPEN (B5); Seregin
+OOV-4 pressure [V?] (C14) ·
+**plus (this round)** — **(Γ-OSC)_feas = VIOLATED** at machinery-closure scope
+(D1, with its scope guards) · **the BH / Γ-depletion branch is PARKED** (D0:
+UNRESOLVED ≠ EXHAUSTED-MACHINERY; three-layer exhaustion; un-park triggers;
+BH verdict frozen YELLOW-RED at park) · **active research lane = the `SPEC.md`
+numerical candidate program, milestone M-1** (D6) · **literature watches
+separated to the standing register** (D7) ·
+BH **YELLOW-RED (frozen at park)** · no CAP trigger · **no Clay claim**.
