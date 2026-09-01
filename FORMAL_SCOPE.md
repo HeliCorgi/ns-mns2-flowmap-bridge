@@ -576,6 +576,17 @@ is the complete record; every artifact is listed there with its CLOSED/OPEN stat
   The intended discharge route for both (mollified energy method, Friedrichs
   commutator, SEL-4 extension to mollified fields) and the checked dead ends are
   recorded in the discharge record's §4.
+- **ON HOLD (user instruction, 2026-09-02 fourth session):** the Lean
+  implementation of SEL-3/SEL-5 is paused and carried as **formalization debt on
+  known mathematics** — `R3TSelH3Ladder` and `R3TSelInteriorSobolevSmoothing` are
+  *not* research-unknowns and are excluded from research-head audits. The §4
+  discharge route above remains the binding plan on resumption (a new user
+  instruction). The T-SEL head reduction audit
+  (`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`) selected the research
+  head **H-SEL** (reverse-interpolation head) with a two-arrow known-math bridge
+  to `N0`; its Arrow α names a further Lean-absent known-math debt **EB-1**
+  (energy equality for certified solutions), also not commissioned. No Lean file
+  changed in that session.
 
 Do not cite the conditional theorems as unconditional results: each carries its open
 hypotheses in its statement. Do not treat `r3DecodedGradSup` as an intrinsic

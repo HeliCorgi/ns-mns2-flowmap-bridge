@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (T-SEL bridge 放電ステップ SEL-1/SEL-4 まで反映)
+# STATUS — 2026-09-02 (第4セッション: SEL-3/SEL-5 保留 + T-SEL head reduction audit まで反映)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -145,6 +145,27 @@ N0→N3 完全明記。bridge は既知数学10補題 SEL-1〜10、head N0 は O
 → **bridge 形式化は第2セッション、SEL-1/SEL-4 の放電は第3セッションで執行済み**
 (上の Formal frontier 節参照)。**head N0 の proof search は未 commission・未着手の
 まま**。残 bridge 義務は SEL-3/SEL-5 のみ(経路 = 放電 record §4)。
+
+## 2026-09-02(第4セッション): SEL-3/SEL-5 保留 + T-SEL head reduction audit 実行済み
+
+ユーザー指示により **SEL-3/SEL-5 の Lean 実装は保留**(既知数学の formalization debt として
+carry; `R3TSelH3Ladder` は研究上の未知命題として扱わない。放電経路=放電 record §4 は
+再開時の拘束プランとして不変)。**N0 の直接 proof search は引き続き未 commission**。
+代わりに **T-SEL head reduction audit** を RECORD-ONLY で実行
+([`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`](docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md)、
+Lean 無変更): ノルム軸は崩壊(fence 6 行 — subcritical sup-norm は古典問題と EQUIVALENT、
+critical は既知の壁、supercritical は橋なし)、構造的 head 7 本を生成(幾何/スペクトル/
+分布形の3レーン)し、反例バッテリー(scaling・frozen-B2 算術・Type-I・multi-scale・
+u_τ/𝒱 guard・FC-086)を証明探索より先に実行 — **7本全 SURVIVE、全て正しい両側 polarity**。
+**選定 head: H-SEL = HR-5(reverse-interpolation / anti-intermittency head)**
+`‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)(1+‖∇U(t)‖_{L²}^{4/3})` — N0 への橋は既知2 arrow
+(energy equality [Lean debt EB-1・未 commission] + Hölder)で証明済み Lean 連鎖に着地。
+frozen window は class-wide に rate `τ^{−(5α−γ)/3}` で violate(最鋭 margin)、Tao averaged
+blow-up は類似形を violate(証明は exact-NS 構造を消費する必要 — FC-086 の位置特定)、
+反証 observable はスカラー比 `Q₅(t)` 1本。次点(C0): HR-1(渦度方向 coherence head)。
+**H-SEL への着手(P-1 文献一次 sweep → P-2 数値比プローブ → P-3 解析的反証試行、
+いずれも証明探索より先)は各々ユーザー commission を要する。** 引用は全て [H]
+(一次 fetch 前・不消費、debts V-1…V-6)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

@@ -163,9 +163,38 @@ Last updated: 2026-09-02 JST (second session).
 > commutator + SEL-4-for-mollified-fields) and checked dead ends recorded in the
 > discharge record §4. Full pinned local gate PASS (**8775 jobs**), all new
 > audit prints standard; proof commits `0565237`, `bb1c473`. Head `N0`
-> untouched. **The intended resume anchor for the next session is the "Next
-> work" subsection of the handoff update contract below plus the discharge
-> record's §4.**
+> untouched.
+>
+> **2026-09-02 (fourth session): SEL-3/SEL-5 Lean implementation is put ON
+> HOLD by user instruction** — carried as *formalization debt on known
+> mathematics* (`R3TSelH3Ladder` / `R3TSelInteriorSobolevSmoothing` are NOT
+> research-unknowns; the discharge record's §4 route and dead ends stand for
+> whenever the debt is paid) — **and the T-SEL head reduction audit is
+> COMMISSIONED and EXECUTED** (RECORD-ONLY, no Lean change, no N0 proof
+> search: `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`). Results: the
+> norm axis collapses (6 fence rows — subcritical sup-norms EQUIVALENT to the
+> classical problem, critical norms = the named L_c/L_d walls, supercritical
+> bridgeless); **7 structural sufficient heads generated** (geometric /
+> spectral / distributional lanes), all run through the standing
+> counterexample battery **before** any proof search — all 7 SURVIVE with
+> correct two-sided polarity (every frozen-window blow-up-compatible scenario
+> violates each). **THE SELECTED HEAD: H-SEL = HR-5, the reverse-interpolation
+> (anti-intermittency) head `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}^{4/3})`**
+> — bridge to N0 = two known arrows (energy equality [Lean debt EB-1, not
+> commissioned] + Hölder in time) landing on the proved Lean assembly;
+> sharpest frozen-window violation margin in the roster (`τ^{−(5α−γ)/3}`
+> class-wide); Tao's averaged blow-up violates its analogue (so any proof
+> must consume exact-NS structure — the FC-086 bar located, not evaded);
+> falsification observable = the single scalar ratio
+> `Q₅(t) = ‖∇U‖_∞/(1+‖∇U‖₂^{4/3})`. Runner-up (C0): HR-1, the CF/BdVB
+> vorticity-direction coherence head. Counterexample-first obligations
+> P-1 (prior-art sweep, debt V-5) / P-2 (numerical ratio probe) / P-3
+> (analytic refutation attempt) **precede any proof search on H-SEL, and
+> commissioning any of them is a user act.** All literature citations in the
+> record are [H] pending first-hand fetch (debts V-1…V-6), consumed by
+> nothing. Nothing frozen moved; no Lean file touched; the verification
+> baseline stays the 8775-job gate. **The intended resume anchor for the next
+> session is the "Next work" subsection below plus that record's §5.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -202,50 +231,42 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, third session)
+### Next work (written 2026-09-02, fourth session)
 
-Read first: this file's top block; `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`
-(esp. §6); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
-`FORMAL_SCOPE.md` (T-SEL subsection); `Formal/R3TSelBridge.lean` docstring.
+Read first: this file's top block; `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
+(the whole record, esp. §5 — the selected head H-SEL, the ranking, and obligations
+P-1/P-2/P-3); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6 (N0 and
+the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
 
-Read also: `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md` §4 (the fixed
-discharge route and the checked dead ends) before writing any Lean.
-
-- **Already sanctioned lane (T-SEL bridge discharge, needs no new commission):**
-  SEL-1 and SEL-4 are DONE (`r3TSel_classicalSobolevComparability`,
-  `r3TSel_katoPonceCommutator`). Prove the remaining SEL-5 (`R3TSelH3Ladder`; SEL-3
-  `R3TSelInteriorSobolevSmoothing` falls out as a by-product of the uniform bounds)
-  via the mollified-energy route of the discharge record §4, staged as:
-  (a) the Friedrichs commutator lemma
-  `‖[ρ_ε*, f·∇]g‖_{L²} ≤ C‖∇f‖_{L∞}‖g‖_{L²}` uniform in `ε` (kernel proof: mean
-  value + Minkowski integral inequality — check mathlib for a Bochner Minkowski
-  first); (b) SEL-4 for mollified fields — generalize the mode-1/2/3 machinery of
-  `R3TSelSchwartzCalculus`/`R3TSelLeibnizCommutator` from the Schwartz core to a
-  mollified-regular class (smooth, derivatives to order 3 in `L²`, first derivatives
-  bounded), replacing the Schwartz-specific sup/decay/tuple lemmas by
-  frequency-multiplier bounds (the GN by-parts and Fourier-at-zero integration by
-  parts already apply to that class); (c) the mollified evolution identity from the
-  capstone derivative through the bounded convolution operator, the transport
-  cancellation via Plancherel pairing against the certified a.e.-vanishing frequency
-  divergence (realness from the ladder hypothesis — do NOT drop
-  `IsR3RealVelocity u0`; the complex-data ladder is not provable-as-stated), the
-  `ε → 0` limit, and Grönwall (SEL-6, proved). Commit verified slices separately.
-  **Checked dead ends — do not retry:** frequency-side symbol-difference commutator
-  bounds (Wiener-algebra coefficient, not `‖∇U‖_∞`); sharp-cutoff truncation
-  commutators (no uniform gs-bound); difference quotients on the mild equation
-  (quadratic coefficient; the pairing hits the `H⁴` wall); the sharp fractional `J³`
-  Kato–Ponce (needs Littlewood–Paley; consumed by nothing).
-- **Requires a separate explicit user commission:** any proof search on the head `N0`
-  (`R3TSelGradientBound` / `R3TSelHead`), in either direction (proof attempt or the
-  counterexample program `Q → ∞` on a bounded horizon). The 2026-09-02 commission
-  explicitly excluded it; do not start it implicitly.
+- **The next research theorem is selected: H-SEL** (head reduction audit §5):
+  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}^{4/3})` on certified horizons, with the
+  two-arrow known-math bridge (energy equality EB-1 + Hölder) to N0 and thence the
+  proved Lean assembly. **Work on H-SEL is NOT yet commissioned.** The recorded
+  counterexample-first order, each step requiring an explicit user commission:
+  P-1 first-hand prior-art sweep (reverse-GN / intermittency-conditional regularity;
+  discharges debt V-5 and re-validates the selection), then P-2 the numerical ratio
+  probe `Q₅(t)` on candidate datasets, then P-3 the analytic refutation attempt —
+  **before any proof search on H-SEL**. Direct proof search on N0 itself remains
+  separately uncommissioned, unchanged.
+- **ON HOLD (user instruction, fourth session): SEL-3/SEL-5 Lean implementation** —
+  formalization debt on known mathematics, NOT research-unknowns. Do not resume
+  without a new user instruction; when resumed, the binding plan is the discharge
+  record `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md` §4 (mollified-energy
+  route; keep `IsR3RealVelocity u0`; do not retry the checked dead ends listed
+  there). The same hold covers the new named debt EB-1 (energy equality for
+  certified solutions) — known math, Lean-absent, not commissioned.
 - **On hold (user instruction, unchanged):** numerical milestone M-1 (Hou 2022
-  no-slip wall-vorticity closure) — retained, not discarded, not started.
-- **Forbidden shortcuts:** do not assert any open `R3TSel*` Prop as an axiom or
-  instance; do not cite the `r3TSel_*` conditional theorems without their hypotheses;
-  do not use the phantom carrier alias as a Sobolev embedding (use the decoded
-  representative machinery); do not re-enable hosted CI (local Elan-pinned gate only,
-  direct fast-forward push to `main`, no PR).
+  no-slip wall-vorticity closure) — retained, not discarded, not started. Note the
+  synergy recorded in the audit: once the numerical lane resumes, the `Q₅(t)` ratio
+  probe (P-2) is a near-free diagnostic on any reproduced candidate flow.
+- **Forbidden shortcuts:** do not assert any open `R3TSel*` Prop (or H-SEL, or EB-1)
+  as an axiom or instance; do not cite the `r3TSel_*` conditional theorems without
+  their hypotheses; do not consume any [H]-tagged citation of the head reduction
+  audit before its first-hand fetch (debts V-1…V-6); do not treat H-SEL's selection
+  as a uniqueness claim (C0 — runner-up HR-1 and revision triggers are printed in
+  the record); do not use the phantom carrier alias as a Sobolev embedding; do not
+  re-enable hosted CI (local Elan-pinned gate only, direct fast-forward push to
+  `main`, no PR).
 
 ## Repository / verification state
 
