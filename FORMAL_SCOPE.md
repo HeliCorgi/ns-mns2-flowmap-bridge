@@ -583,10 +583,11 @@ is the complete record; every artifact is listed there with its CLOSED/OPEN stat
   discharge route above remains the binding plan on resumption (a new user
   instruction). The T-SEL head reduction audit
   (`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`) selected the research
-  head **H-SEL** (reverse-interpolation head) with a two-arrow known-math bridge
-  to `N0`; its Arrow α names a further Lean-absent known-math debt **EB-1**
-  (energy equality for certified solutions), also not commissioned. No Lean file
-  changed in that session.
+  head **H-SEL** (reverse-interpolation head; operative corrected form per that
+  record's §9: `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖_{L²}²)`, endpoint `p = 2`) with a
+  two-arrow known-math bridge to `N0`; its Arrow α names a further Lean-absent
+  known-math debt **EB-1** (energy equality for certified solutions), also not
+  commissioned. No Lean file changed in those sessions.
 
 Do not cite the conditional theorems as unconditional results: each carries its open
 hypotheses in its statement. Do not treat `r3DecodedGradSup` as an intrinsic

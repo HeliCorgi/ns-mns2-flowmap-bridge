@@ -2,6 +2,18 @@
 
 **Repo:** `c:/Users/corgi/Downloads/ns-mns2-flowmap-bridge` · **Status: RECORD-ONLY.** No Lean file is touched; no frozen verdict, frontier, or park changes; every map consequence is a proposal. The Lean verification baseline remains the full pinned gate PASS at 8775 jobs (commits `0565237`/`bb1c473`/`b839af0`).
 
+> **CORRECTION NOTICE (2026-09-02, fifth session, commissioned one-shot — §9).**
+> The H-SEL statement correction audit found and repaired two defects in this
+> record: **EH-1** — the closable-exponent print was wrong: `p = 2`, not
+> `p = 4/3`, is the exact endpoint of the power family closable by the energy
+> equality alone; the selected head is restated with `‖∇U‖₂²` on the right
+> (a strictly weaker, hence better, head; the old `4/3` form implies it).
+> **EH-2** — the "reverse Gagliardo–Nirenberg" reading (a claimed bound on
+> `‖∇³U‖₂`) inverted an inequality and is **retracted**. Read §3 (HR-5 row),
+> §5, and §8 through §9; battery and ranking are re-run there (all verdicts
+> and the selection survive; several printed rates and one superlative are
+> superseded). Original text below is annotated, not silently rewritten.
+
 **Commissioning provenance.** Executed under the user's 2026-09-02 (fourth-session) instruction, which does three things at once:
 
 1. **SEL-3/SEL-5 Lean implementation is put ON HOLD** — carried as *formalization debt on known mathematics*; the Prop `R3TSelH3Ladder` (and the SEL-3 clause `R3TSelInteriorSobolevSmoothing`) is **not** to be treated as a research-unknown. Its mathematical content is the standard 1984 energy ladder (audit SS-6 items 3/5); the fixed mollified-energy discharge route and checked dead ends of `docs/formal/TSEL_BRIDGE_DISCHARGE_2026-09-02.md` §4 stand unchanged for whenever the debt is paid. No Lean edit is made by this session.
@@ -61,7 +73,7 @@ All candidates are stated per-datum/per-horizon (A1): "∃ constants(T;ν,‖u0�
 | **HR-2** | **middle-eigenvalue head**: `‖λ₂⁺(t)‖_{L^q_tL^p_x} ≤ Q₀` for one fixed pair `2/q+3/p = 2, p > 3/2` (`λ₂` = intermediate eigenvalue of `S = sym∇U`) | Neustupa–Penel (2001); Miller, ARMA 235 (2020) 99–139 [H, debt V-2] ⟹ enstrophy control | exactly critical for a `∇U`-order scalar | Miller ⟹ `sup‖ω‖_{L²}` ⟹ Tail-A | **SURVIVES** |
 | **HR-3** | **sparseness head**: at every `t` with `‖ω(t)‖_∞` above a datum threshold, the super-level set `{\|ω(t)\| > c‖ω(t)‖_∞}` is 1-D δ-sparse at scale `κ‖ω(t)‖_∞^{−1/2}` (fixed `c, δ, κ`) | Grujić geometric-depletion framework; Bradshaw–Farhat–Grujić, ARMA 231 (2019) ("algebraic reduction of the scaling gap") [H, debt V-3] ⟹ `‖ω‖_∞` control | the sparseness scale `‖ω‖_∞^{−1/2}` is the parabolic self-similar scale — scale-invariant formulation | BFG ⟹ `sup‖ω‖_∞` ⟹ Tail-B | **SURVIVES** |
 | **HR-4** | **vortex-line geometry head**: through every near-max vorticity point runs a line segment with controlled length, direction variation, and velocity divergence (Deng–Hou–Yu parameters) | Deng–Hou–Yu, CPDE 30 (2005) — stated for **Euler**; the NS transfer is an additional debt [H, debt V-4] | mixed (length parameters supercritical) | DHY(+NS transfer) ⟹ `‖ω‖_∞`-type control ⟹ Tail-B | **SURVIVES** (marginality + transfer debt; see §4) |
-| **HR-5** | **reverse-interpolation (anti-intermittency) head**: `‖∇U(t)‖_{L∞} ≤ Q₀·(1 + ‖∇U(t)‖_{L²}^{4/3})` for all certified `t` | none needed beyond the energy equality: the head + the `L²_t` enstrophy budget close N0 by Hölder alone [D]; relation to known theory: a *reverse* Gagliardo–Nirenberg (by GN `‖∇U‖_∞ ≲ ‖∇U‖₂^{1/4}‖∇³U‖₂^{3/4}`, the head reads `‖∇³U‖₂ ≲ Q₀^{4/3}‖∇U‖₂^{13/9}` — a spectral-non-spreading/bounded-intermittency statement); Tao's averaged-NS blow-up (arXiv:1402.0290) is the template violator (§4); prior conditional-regularity literature on intermittency dimensions to be swept [H, debt V-5] | LHS scales `λ²`, RHS scales `λ^{2/3}`: deeply supercritical as a hypothesis — a strong structural restriction, which is exactly its content; the exponent 4/3 is the largest closable against the `L²`-in-time budget (any θ ≤ 4/3 admissible; 4/3 = weakest member) | **Tail-C** (2 arrows: EB-1 energy equality + Hölder; then the existing Lean N0→N3 assembly) | **SURVIVES** |
+| **HR-5** | **reverse-interpolation (anti-intermittency) head**: `‖∇U(t)‖_{L∞} ≤ Q₀·(1 + ‖∇U(t)‖_{L²}^{4/3})` for all certified `t` | none needed beyond the energy equality: the head + the `L²_t` enstrophy budget close N0 by Hölder alone [D]; relation to known theory: a *reverse* Gagliardo–Nirenberg (by GN `‖∇U‖_∞ ≲ ‖∇U‖₂^{1/4}‖∇³U‖₂^{3/4}`, the head reads `‖∇³U‖₂ ≲ Q₀^{4/3}‖∇U‖₂^{13/9}` — a spectral-non-spreading/bounded-intermittency statement); Tao's averaged-NS blow-up (arXiv:1402.0290) is the template violator (§4); prior conditional-regularity literature on intermittency dimensions to be swept [H, debt V-5] | LHS scales `λ²`, RHS scales `λ^{2/3}`: deeply supercritical as a hypothesis — a strong structural restriction, which is exactly its content; the exponent 4/3 is the largest closable against the `L²`-in-time budget (any θ ≤ 4/3 admissible; 4/3 = weakest member) | **Tail-C** (2 arrows: EB-1 energy equality + Hölder; then the existing Lean N0→N3 assembly) | **SURVIVES** — **row corrected by §9**: endpoint `p = 2` (EH-1); the reverse-GN sentence in this row is RETRACTED (EH-2) |
 | **HR-6** | **strain-integral head**: `∫₀^{T′}‖S(t)‖_{L∞}dt ≤ Q₀` | max principle on `D\|ω\|/Dt ≤ \|Sω\| + ν(…)`: `‖ω(t)‖_∞ ≤ ‖ω₀‖_∞ e^{∫‖S‖_∞}` [D, elementary]; strictly weaker hypothesis than N0 (symmetric part only; the antisymmetric-part analogue is L_b/BKM — banned as a candidate, so HR-6 is kept distinct only by its S-form) | exactly critical (same as N0) | max principle ⟹ `sup‖ω‖_∞` ⟹ Tail-B | **SURVIVES** (low novelty; ban-adjacent) |
 | **HR-7** | **one-component head**: ∃ unit vector `e` (per solution): `‖U·e‖_{L^q_tL^p_x} ≤ Q₀` at a Cao–Titi/Chemin–Zhang-admissible index pair | Cao–Titi, Indiana Univ. Math. J. 57 (2008); Chemin–Zhang(-Zhang) critical-space refinements [H, debt V-6] | critical-to-subcritical per pair | one-component theorem ⟹ Tail-A | **SURVIVES** (no mechanism selects `e`; wall-class for the component) |
 
@@ -89,7 +101,7 @@ Standing guard applied everywhere: `u_τ`/`𝒱` are snapshots/kinematic scans t
 **HR-4 (DHY geometry).**
 - The recorded weakness stands [V, SS-4 L_b R1]: the hypothesis parameters are what Hou-type candidates *marginally* satisfy — polarity is muddy by construction; and the theorem basis is Euler-form, so the NS chain carries a transfer debt on top. No certified violator; survives, weakly. **SURVIVES** (lowest confidence in the roster).
 
-**HR-5 (reverse interpolation).**
+**HR-5 (reverse interpolation).** **[Rates in this block are for the original `4/3` form; the corrected `p = 2` rates are in §9.3 — verdicts unchanged.]**
 - *Polarity vs `S_blob`* [D, adversarially re-checked §5]: core arithmetic gives `‖∇U‖_∞ ~ τ^{−(γ+α)}`, `‖∇U‖²_{L²} ~ τ^{α−2γ}` (core-dominated: `α − 2γ < 0`, so any O(1) background enstrophy is subdominant), hence the head demands `γ ≥ 5α`; the frozen window has `α ≥ 2γ/3 > γ/5` — **every `S_blob` member violates HR-5, class-wide, at rate `τ^{−(5α−γ)/3}`**. Type-I profiles violate at rate `(T−t)^{−2/3}`. Correct polarity, the sharpest margin in the roster.
 - *Frequency-concentration transient* [D]: a single-shell datum at frequency `N` has ratio `~ N^{7/6}`, but `‖u0‖_{H³} ~ N³` absorbs it — the per-datum constant survives kinematic shell data; the open content is growth *along* the flow beyond every function of the datum.
 - *FC-086, sharpened to a feature* [D]: Tao's averaged-NS blow-up is frequency-shell-concentrated and violates the head-analogue at rate `N^{7/6}` — so (i) no averaging paradox arises, and (ii) since the averaged model satisfies the full energy structure yet violates the head, **any proof of HR-5 must consume exact-NS structure beyond the energy identity** — the FC-086 bar is automatically respected and precisely located.
@@ -117,6 +129,8 @@ Axes per the commission, each 1–5: **leverage** (payoff if proved, incl. stand
 | — | E-1…E-6 | — | — | — | — | — | fence rows; unranked by design |
 
 ### THE SINGLE SELECTED HEAD
+
+**[Superseded by §9 (EH-1): the operative statement is the `p = 2` form printed there; the `4/3` form below implies it and is retained as the original print.]**
 
 **H-SEL := HR-5 — the reverse-interpolation (anti-intermittency) head:**
 
@@ -168,4 +182,61 @@ Axes per the commission, each 1–5: **leverage** (payoff if proved, incl. stand
 
 ## §8 — Bottom line
 
-The norm axis collapses (§2): below criticality every sup-norm head is the classical problem restated; at criticality the heads are the named walls; above it no bridge exists. Seven structural heads were generated in three lanes (geometric, spectral, distributional) and run through the standing counterexample battery before any proof search: **all seven survive, none is rejected by a constructed certified violator, and each is violated by every frozen-window blow-up-compatible scenario — the correct two-sided polarity.** The ranking selects **H-SEL = HR-5, the reverse-interpolation head `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖₂^{4/3})`**, as the single next research theorem: its bridge to N0 is two known arrows (energy budget + Hölder) landing on the already-proved Lean assembly, every frozen blow-up-compatible scenario violates it at the sharpest margin in the roster (`τ^{−(5α−γ)/3}` class-wide), Tao's averaged blow-up violates its analogue (so any proof must consume exact-NS structure — the FC-086 constraint located, not evaded), and its falsification observable is a single scalar ratio measurable in any dataset. The coherence head HR-1 is the recorded runner-up. Counterexample-first obligations P-1/P-2/P-3 precede any proof search on H-SEL; commissioning any of them is a user act. SEL-3/SEL-5 are reclassified as on-hold formalization debt on known mathematics — not research-unknowns. Nothing frozen has moved; no Lean file changed; no Clay claim of any kind is made or implied.
+The norm axis collapses (§2): below criticality every sup-norm head is the classical problem restated; at criticality the heads are the named walls; above it no bridge exists. Seven structural heads were generated in three lanes (geometric, spectral, distributional) and run through the standing counterexample battery before any proof search: **all seven survive, none is rejected by a constructed certified violator, and each is violated by every frozen-window blow-up-compatible scenario — the correct two-sided polarity.** The ranking selects **H-SEL = HR-5, the reverse-interpolation head** — operative corrected form (§9): **`‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖₂²)`** — as the single next research theorem: its bridge to N0 is two known arrows (energy budget + direct integration) landing on the already-proved Lean assembly, every frozen blow-up-compatible scenario violates it class-wide (`τ^{−(2α−γ)}`; the original "sharpest margin" superlative is withdrawn in §9), Tao's averaged blow-up violates its analogue (so any proof must consume exact-NS structure — the FC-086 constraint located, not evaded), and its falsification observable is a single scalar ratio measurable in any dataset. The coherence head HR-1 is the recorded runner-up. Counterexample-first obligations P-1/P-2/P-3 precede any proof search on H-SEL; commissioning any of them is a user act. SEL-3/SEL-5 are reclassified as on-hold formalization debt on known mathematics — not research-unknowns. Nothing frozen has moved; no Lean file changed; no Clay claim of any kind is made or implied.
+
+---
+
+## §9 — H-SEL statement correction audit (2026-09-02, fifth session; commissioned one-shot; RECORD-ONLY)
+
+**Commission.** User instruction, fifth session: for the power family `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖₂^p)`, recompute the exact endpoint closable to N0 by the energy equality alone; verify whether `p = 2` is the maximal energy-closable exponent and re-adjudicate the `p = 4/3` selection; re-audit the logical direction of the printed reverse-GN reading and retract it if unjustifiable; re-run the frozen-`S_blob`, Type-I, multi-scale, and Tao-averaged counterexample tests on the corrected head; recompute the ranking including HR-1/HR-3. No Lean change, no proof search, no bulk literature search (V-debts stay undischarged).
+
+### 9.1 EH-1 — the closable endpoint is `p = 2`, not `p = 4/3` (printed-statement defect, corrected)
+
+The only budget the energy equality supplies is `∫₀^{T′}‖∇U‖²_{L²}dt ≤ B := ‖U(0)‖²_{L²}/(2ν)` (plus `sup_t‖U(t)‖₂ ≤ ‖U(0)‖₂`, which only feeds the constant). The head closes N0 iff `∫₀^{T′}(1+‖∇U‖₂^p)dt` is bounded by datum quantities, and from the `L²_t` budget alone [D]:
+
+- **`p ≤ 2` closes.** `p = 2`: directly, `∫‖∇U‖₂² ≤ B` — no Hölder needed, giving `G(T;ν,‖u0‖) = Q₀·(T + B)`. `p < 2`: Hölder, `∫‖∇U‖₂^p ≤ T^{1−p/2}B^{p/2}`.
+- **`p > 2` does not close on this budget.** Time-spike model: enstrophy `‖∇U‖₂² = H` on a window of length `B/H`, else 0 — the budget `∫‖∇U‖₂² = B` is fixed while `∫‖∇U‖₂^p = B·H^{(p−2)/2} → ∞` as `H → ∞`. The energy equality alone cannot exclude such spikes, so no `G` exists for `p > 2` by this route.
+
+**Hence `p = 2` is the exact endpoint — verified as commissioned.** The original print ("4/3 is the largest closable against the `L²`-in-time budget") arose from an unnecessary Hölder split (`q = 3/2` applied to the `4/3` power) and is a **false superlative**; §3's parenthetical "(any θ ≤ 4/3 admissible; 4/3 = weakest member)" is superseded by "(any `p ≤ 2` closable; `p = 2` = weakest, hence primary, member)".
+
+**Re-adjudication of the selection object [D].** Since `1 + x^{4/3} ≤ 2(1 + x²)`, the old `4/3` head **implies** the `p = 2` head (with `Q₀ ↦ 2Q₀`): the correction moves H-SEL to the *weakest* member of the family that still closes N0 — a strictly weaker hypothesis at identical bridge cost (Arrow β even simplifies: direct integration replaces Hölder). The correction is therefore selection-preserving and statement-improving. **Operative statement (H-SEL, corrected):**
+
+> ∀ν>0, ∀ admissible Schwartz datum u0, ∀ finite T: ∃ Q₀(T;ν,‖u0‖) < ∞ such that every certified solution on every certified horizon T′ ≤ T satisfies, for all t ∈ [0,T′]:
+> **‖∇U(t)‖_{L∞} ≤ Q₀ · (1 + ‖∇U(t)‖_{L²}²).**
+
+Corrected chain: Arrow α (EB-1, unchanged) ⟹ Arrow β′ (direct integration [KNOWN, trivial]): `∫₀^{T′}‖∇U‖_∞ dt ≤ Q₀(T + ‖u0‖²_{L²,dec}/(2ν)) =: G(T;ν,‖u0‖)` ⟹ N0 verbatim. Corrected scaling: LHS `λ²` vs RHS `λ¹` under `u_λ` — still supercritical as a hypothesis (the scale-invariant exponent is `p = 4`), but one power weaker than the `4/3` print (`λ^{2/3}`); the head is now the closest energy-closable member to scale invariance.
+
+### 9.2 EH-2 — the reverse-GN reading is RETRACTED (logical-direction error)
+
+The §3 HR-5 row printed: "by GN `‖∇U‖_∞ ≲ ‖∇U‖₂^{1/4}‖∇³U‖₂^{3/4}`, the head reads `‖∇³U‖₂ ≲ Q₀^{4/3}‖∇U‖₂^{13/9}`". This inverts an inequality: GN and the head are **both upper bounds on `‖∇U‖_∞`**; combining two upper bounds on the same quantity yields nothing about `‖∇³U‖₂`. The derivation would need a *lower* bound on `‖∇U‖_∞` in terms of `‖∇³U‖₂` — i.e. GN saturation — which is false in general. Explicit countermodel [D]: `f_N = N^{−1}\sin(Nx₁)φ(x)` (fixed bump `φ`) has `‖∇f_N‖_∞ = O(1)`, `‖∇f_N‖₂ = O(1)`, `‖∇³f_N‖₂ ≍ N² → ∞` — it satisfies every head in the family with a fixed constant while violating the claimed consequence unboundedly. **The sentence is retracted.** What survives: the "anti-intermittency / spectral-concentration" description is **demoted from an equivalent formulation to heuristic motivation** (accurate only for GN-saturating, single-scale-concentrated fields). Verdict impact: none on admission, battery, or polarity — no battery computation consumed the retracted reading; the interpretive strength of HR-5 is reduced, and this is priced into the re-ranking below rather than hidden.
+
+### 9.3 Battery re-run on the corrected head (`p = 2`)
+
+| Test | Arithmetic [D] | Verdict |
+|---|---|---|
+| frozen `S_blob` | `‖∇U‖_∞ ~ τ^{−(γ+α)}` vs `Q₀‖∇U‖₂² ~ Q₀τ^{α−2γ}` (core-dominated: `α−2γ < 0`, O(1) background subdominant — unchanged check): head holds iff `α ≤ γ/2`; window forces `α ≥ 2γ/3 > γ/2` ⟹ **violated class-wide at rate `τ^{−(2α−γ)}`, with `2α−γ ≥ γ/3 > 1/6`** | polarity PASS |
+| margin comparison | the original "sharpest margin in the roster" superlative is **withdrawn**: `2α−γ ≥ α/2` (HR-1's coherence margin) throughout the window with equality only on the `α = 2γ/3` edge — "≥ the coherence head's margin, non-strict at the edge" is the correct print | corrected |
+| Type-I | `‖∇U‖_∞ ~ (T−t)^{−1}` vs `‖∇U‖₂² ~ (T−t)^{−1/2}` ⟹ violated at rate `(T−t)^{−1/2}` (was `(T−t)^{−2/3}` for the `4/3` form) | polarity PASS |
+| single-shell datum (kinematic) | shell at frequency `N`, `‖u‖₂ = 1`: ratio `~ N^{5/2}/N² = N^{1/2}`, absorbed by `Q₀(‖u0‖_{H³})` with `‖u0‖_{H³} ~ N³` — per-datum survival unchanged (was `N^{7/6}`) | no violator |
+| Tao averaged-NS (FC-086) | the frequency-concentrated averaged blow-up violates the head-analogue at rate `N(t)^{1/2} → ∞` beyond any function of the datum; the averaged model satisfies the full energy structure yet violates the head ⟹ **any proof of H-SEL must consume exact-NS structure beyond the energy identity — conclusion unchanged**, rate print corrected | polarity PASS |
+| multi-scale / stacked-cell | spatial/frequency spreading raises `‖∇U‖₂²` relative to `‖∇U‖_∞` — the head only gets easier on spread configurations; blow-up-compatible members must still concentrate and hence violate; unchanged | polarity PASS |
+| fixed-ν phenomenology (heuristic, recorded as such) | Kolmogorov counting: `‖∇U‖_∞/‖∇U‖₂² ~ (ε/ν)^{−1/2}·(intermittency corrections)` — leading power *more* favorable than the `4/3` form's `(ε/ν)^{−1/6}` | favorable |
+
+All polarity checks pass on the corrected head; every rate specific to the `4/3` form (`τ^{−(5α−γ)/3}`, `(T−t)^{−2/3}`, `N^{7/6}`) is superseded by the row above.
+
+### 9.4 Re-ranking (same axes; HR-1/HR-3 re-examined)
+
+No new facts arose about HR-1, HR-3, or any other roster member (no literature fetched, per commission); their rows are re-affirmed as printed. For HR-5 the correction cuts both ways and the offsets are priced explicitly: **(+)** strictly weaker statement at identical (slightly simpler) bridge cost; **(+)** scaling moved one power toward invariance; **(+)** more favorable fixed-ν counting; **(−)** EH-2 removes the structural "reverse-GN" reading (the head's content is thinner than advertised — a ratio bound, with the spectral reading only heuristic); **(−)** the margin superlative is withdrawn (non-strict at the window edge vs HR-1).
+
+| # | Head | Lev | Plaus | Dist | Lean | Π | Change |
+|---|---|---|---|---|---|---|---|
+| 1 | **HR-5 (corrected, `p = 2`)** | 5 | 3 | 2 | 4 | **120** | scores unchanged: the (+) items would justify Plaus 4 in isolation, the EH-2 demotion cancels the bump — held at 3, both directions recorded |
+| 2 | HR-1 coherence | 5 | 3 | 2 | 2 | 60 | unchanged; margin comparison now non-strict at the `α = 2γ/3` edge (cosmetic) |
+| 3 | HR-3 sparseness | 5 | 3 | 3 | 1 | 45 | unchanged |
+| 4– | HR-2 / HR-6 / HR-7 / HR-4 | — | — | — | — | 32/24/24/6 | unchanged |
+
+**Selection re-affirmed (C0: a selection, not a uniqueness claim): H-SEL = HR-5 in the corrected `p = 2` form; runner-up HR-1 unchanged**, with the same revision triggers (a V-5 prior-art refutation, or a P-2 probe showing super-datum growth of the corrected ratio `Q₅(t) := ‖∇U(t)‖_∞/(1+‖∇U(t)‖₂²)`). Obligations P-1/P-2/P-3 stand, now aimed at the `p = 2` form (P-1's sweep must cover the whole family `p ∈ (0,4]`, since prior art on any member bears on the endpoint choice).
+
+### 9.5 Claim boundary of this correction pass
+
+RECORD-ONLY; no Lean file touched; no proof search on H-SEL or N0; no literature fetched (debts V-1…V-6 remain undischarged and unconsumed). EH-1/EH-2 are recorded as errata with the original text annotated in place, not silently rewritten. The corrected H-SEL remains OPEN; universal H-SEL remains Clay-equivalent-or-harder for the certified class; nothing frozen has moved; no Clay claim of any kind is made or implied.

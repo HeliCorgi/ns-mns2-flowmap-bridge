@@ -193,8 +193,33 @@ Last updated: 2026-09-02 JST (second session).
 > commissioning any of them is a user act.** All literature citations in the
 > record are [H] pending first-hand fetch (debts V-1…V-6), consumed by
 > nothing. Nothing frozen moved; no Lean file touched; the verification
-> baseline stays the 8775-job gate. **The intended resume anchor for the next
-> session is the "Next work" subsection below plus that record's §5.**
+> baseline stays the 8775-job gate.
+>
+> **2026-09-02 (fifth session): the H-SEL statement correction audit is
+> COMMISSIONED and EXECUTED** (one-shot, RECORD-ONLY, appended as §9 of
+> `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`; original text
+> annotated, not silently rewritten). **EH-1**: the energy-closable endpoint
+> of the power family `‖∇U‖_∞ ≤ Q₀(1+‖∇U‖₂^p)` is **`p = 2`, not `p = 4/3`**
+> (`p ≤ 2` closes — `p = 2` directly, no Hölder; `p > 2` fails on the `L²_t`
+> budget by the enstrophy time-spike model); since the `4/3` head implies the
+> `p = 2` head, the correction moves H-SEL to the **weakest closable member**
+> — selection-preserving, statement-improving. **Operative H-SEL:
+> `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}²)`**, chain = EB-1 + direct
+> integration, `G = Q₀(T + ‖u0‖²_{L²,dec}/(2ν))`; scaling `λ²` vs `λ¹`
+> (scale-invariant exponent is `p = 4`). **EH-2**: the printed reverse-GN
+> reading (a bound on `‖∇³U‖₂`) inverted an inequality and is **RETRACTED**
+> (countermodel `N^{−1}sin(Nx₁)φ`); the anti-intermittency description is
+> demoted to heuristic motivation. Battery re-run on the corrected head:
+> `S_blob` violated class-wide at `τ^{−(2α−γ)}` (`≥ γ/3`; "sharpest margin"
+> superlative withdrawn — `≥` HR-1's `τ^{−α/2}`, non-strict at the
+> `α = 2γ/3` edge), Type-I at `(T−t)^{−1/2}`, Tao-averaged analogue at
+> `N^{1/2}` (exact-structure requirement unchanged), multi-scale unchanged —
+> **all polarity checks PASS; ranking recomputed with HR-1/HR-3 re-affirmed
+> (120/60/45…); selection re-affirmed: H-SEL (p = 2 form), runner-up HR-1.**
+> P-1/P-2/P-3 now target the `p = 2` form (P-1 must sweep the whole family
+> `p ∈ (0,4]`); `Q₅(t) := ‖∇U‖_∞/(1+‖∇U‖₂²)`. No Lean change, no proof
+> search, no literature fetched (V-1…V-6 undischarged). Baseline stays the
+> 8775-job gate. **Resume anchor: "Next work" below + that record's §9.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -231,23 +256,27 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, fourth session)
+### Next work (written 2026-09-02, fifth session)
 
 Read first: this file's top block; `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
-(the whole record, esp. §5 — the selected head H-SEL, the ranking, and obligations
-P-1/P-2/P-3); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6 (N0 and
-the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
+(the whole record — the top correction notice, §5, and **§9**, which carries the
+operative corrected H-SEL statement, errata EH-1/EH-2, the re-run battery, and the
+re-affirmed ranking); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6
+(N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **The next research theorem is selected: H-SEL** (head reduction audit §5):
-  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}^{4/3})` on certified horizons, with the
-  two-arrow known-math bridge (energy equality EB-1 + Hölder) to N0 and thence the
-  proved Lean assembly. **Work on H-SEL is NOT yet commissioned.** The recorded
-  counterexample-first order, each step requiring an explicit user commission:
-  P-1 first-hand prior-art sweep (reverse-GN / intermittency-conditional regularity;
-  discharges debt V-5 and re-validates the selection), then P-2 the numerical ratio
-  probe `Q₅(t)` on candidate datasets, then P-3 the analytic refutation attempt —
-  **before any proof search on H-SEL**. Direct proof search on N0 itself remains
-  separately uncommissioned, unchanged.
+- **The next research theorem is selected: H-SEL, in the §9 corrected form**:
+  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}²)` on certified horizons — the weakest
+  member of the power family closable by the energy equality alone (endpoint
+  `p = 2`, EH-1) — with the two-arrow known-math bridge (energy equality EB-1 +
+  direct integration) to N0 and thence the proved Lean assembly. Do **not** cite
+  the superseded `4/3` form or the retracted reverse-GN reading (EH-2). **Work on
+  H-SEL is NOT yet commissioned.** The recorded counterexample-first order, each
+  step requiring an explicit user commission: P-1 first-hand prior-art sweep over
+  the whole family `p ∈ (0,4]` (discharges debt V-5 and re-validates the endpoint
+  and the selection), then P-2 the numerical ratio probe
+  `Q₅(t) = ‖∇U‖_∞/(1+‖∇U‖₂²)` on candidate datasets, then P-3 the analytic
+  refutation attempt — **before any proof search on H-SEL**. Direct proof search
+  on N0 itself remains separately uncommissioned, unchanged.
 - **ON HOLD (user instruction, fourth session): SEL-3/SEL-5 Lean implementation** —
   formalization debt on known mathematics, NOT research-unknowns. Do not resume
   without a new user instruction; when resumed, the binding plan is the discharge

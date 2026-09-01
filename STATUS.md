@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第4セッション: SEL-3/SEL-5 保留 + T-SEL head reduction audit まで反映)
+# STATUS — 2026-09-02 (第5セッション: H-SEL statement correction audit まで反映)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -166,6 +166,24 @@ blow-up は類似形を violate(証明は exact-NS 構造を消費する必要 �
 **H-SEL への着手(P-1 文献一次 sweep → P-2 数値比プローブ → P-3 解析的反証試行、
 いずれも証明探索より先)は各々ユーザー commission を要する。** 引用は全て [H]
 (一次 fetch 前・不消費、debts V-1…V-6)。
+
+**第5セッション(ユーザー commission、one-shot): H-SEL statement correction audit
+実行済み**(同 record §9 に追記、原文は注記つきで保存)。**EH-1**: energy equality
+だけで N0 に閉じる power family の正確な endpoint は **p = 2**(p ≤ 2 は閉じる —
+p = 2 は Hölder 不要で直接、p > 2 は enstrophy time-spike モデルで閉じない)。
+旧 print「4/3 が最大」は誤り(不要な Hölder 分割由来の false superlative)。
+4/3 head ⟹ p=2 head なので修正は「energy で閉じる最弱メンバー」への移動 =
+selection 保存・statement 改善。**operative H-SEL:
+`‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u₀‖)(1+‖∇U(t)‖_{L²}²)`**(橋 = EB-1 + 直接積分、
+`G = Q₀(T+‖u₀‖²/2ν)`、scaling λ² vs λ¹)。**EH-2**: reverse-GN 読み
+(`‖∇³U‖₂` の上界主張)は不等式の論理方向逆転で**撤回**(反例モデル
+`N^{−1}sin(Nx₁)φ`; anti-intermittency 解釈は heuristic に降格)。修正版で
+バッテリー再実行: S_blob は class-wide rate `τ^{−(2α−γ)}`(≥ γ/3; 「最鋭 margin」
+superlative は撤回 — HR-1 の `τ^{−α/2}` 以上、`α = 2γ/3` 縁で非狭義)、Type-I
+`(T−t)^{−1/2}`、Tao averaged 類似形 `N^{1/2}`(exact-NS 構造消費の要請は不変)、
+multi-scale 不変 — **全 polarity PASS。ランキング再計算(HR-1/HR-3 再確認、
+120/60/45…)、選定再確認: H-SEL(p = 2 形)、次点 HR-1。** Lean 無変更・proof
+search なし・文献 fetch なし(V-1…V-6 未放電)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
