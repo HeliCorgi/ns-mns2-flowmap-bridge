@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-01 JST.
+Last updated: 2026-09-02 JST (second session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -113,6 +113,34 @@ Last updated: 2026-09-01 JST.
 > vorticity form). Formalization/proof exploration of T-SEL awaits a separate
 > user commission — **the intended resume anchor for the next session is that
 > record's SS-5/SS-6 plus this paragraph.**
+>
+> **2026-09-02 (second session): the T-SEL bridge formalization is COMMISSIONED
+> and EXECUTED** (user instruction: formalize SEL-1…SEL-10 in Lean; do **not**
+> start proof search on the head). Record:
+> `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`. New Lean files
+> `Formal/GronwallIntegralInequality.lean` (SEL-6 **proved** — Grönwall–Bellman
+> integral form, new standalone infrastructure),
+> `Formal/R3TSelDecodedGradient.lean` (SEL-2 **proved quantitatively** —
+> `r3DecodedSup f + r3DecodedGradSup f ≤ C_emb·‖f‖` with explicit Cauchy–Schwarz
+> constants; the `‖∇U‖_{L∞}` carrier `r3DecodedGradSup` is everywhere-defined,
+> Schwartz-core-pinned, a.e.-identified with the decoded velocity, Lipschitz on
+> the carrier; the `Q` functional `r3TSelGradIntegral` with monotonicity), and
+> `Formal/R3TSelBridge.lean` (the SEL-1…SEL-10 statement layer + the **proved
+> conditional assembly** `N0 → N1 → N2 → N3`:
+> `r3TSel_carrierBound_of_ladder` (SEL-9),
+> `r3TSel_uniform_carrierBound_of_head` (N1), `r3TSel_horizons_unbounded` (N2),
+> `r3TSel_admissibleSchwartz_globalContinuation` /
+> `r3TSel_conditional_globalContinuation` (N3), SEL-7/8/10 support theorems).
+> **OPEN, stated-only, never asserted** (Prop definitions used as explicit
+> hypotheses; no axioms): the head `N0` (`R3TSelGradientBound` / `R3TSelHead` —
+> **no proof search performed, per commission**), SEL-4
+> (`R3TSelKatoPonceCommutator`), SEL-5 (`R3TSelH3Ladder`), SEL-3 smoothing
+> clause (`R3TSelInteriorSobolevSmoothing`), SEL-1 comparability clause
+> (`R3TSelClassicalSobolevComparability`). Full pinned local gate PASS
+> (8772 jobs), 21 new axiom-audit prints all standard. Frozen research map,
+> round-4 park, watches, and the M-1 hold are all untouched. **The intended
+> resume anchor for the next session is the "Next work" subsection of the
+> handoff update contract below plus the formalization record's §6.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -129,6 +157,53 @@ Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 7. current GitHub `main`, relevant `Formal/` files, open PRs, and latest Lean verification evidence.
 
 Current code and theorem statements override stale prose.
+
+## Handoff update contract (standing specification)
+
+**Specification (user directive, 2026-09-02): every session that does substantive work
+MUST, before ending, write into this file what the next work is, in a form a fresh
+session can execute without this session's chat history.** Concretely, at end of
+session:
+
+1. update the dated block at the top of this file with what was executed, what was
+   verified (exact gate evidence: runner, toolchain, scope, job count), and what was
+   deliberately **not** done;
+2. rewrite the **"Next work"** subsection below — it must name: the next task(s) in
+   recommended order, the exact files/records a fresh session must read first, any
+   commission boundary (what requires a new explicit user instruction vs. what is
+   already sanctioned), and any tempting-but-forbidden shortcut;
+3. keep `STATUS.md` and `FORMAL_SCOPE.md` synchronized when the formal frontier moved
+   (per `AGENTS.md`);
+4. never leave the next-work description only in a commit message, chat reply, or
+   ephemeral plan — this file is the durable continuation point.
+
+### Next work (written 2026-09-02, second session)
+
+Read first: this file's top block; `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`
+(esp. §6); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
+`FORMAL_SCOPE.md` (T-SEL subsection); `Formal/R3TSelBridge.lean` docstring.
+
+- **Already sanctioned lane (T-SEL bridge discharge, needs no new commission):** prove
+  the open bridge statements in the recommended order of the formalization record §6 —
+  (a) `R3TSelClassicalSobolevComparability` (SEL-1 clause; bounded Fourier-side weight
+  comparison on the Schwartz core — the natural first target for the next session),
+  then (b) `R3TSelKatoPonceCommutator` (SEL-4; hard, no mathlib analogue; intended
+  toolbox = the repository's `R3H2*`/`R3H3*` weighted-convolution files), then
+  (c) `R3TSelInteriorSobolevSmoothing` (SEL-3 clause), then (d) `R3TSelH3Ladder`
+  (SEL-5; consumes a–c and closes the ladder slot of the conditional chain). Each is
+  independently commissionable and independently falsifiable; do them as separate
+  verified commits.
+- **Requires a separate explicit user commission:** any proof search on the head `N0`
+  (`R3TSelGradientBound` / `R3TSelHead`), in either direction (proof attempt or the
+  counterexample program `Q → ∞` on a bounded horizon). The 2026-09-02 commission
+  explicitly excluded it; do not start it implicitly.
+- **On hold (user instruction, unchanged):** numerical milestone M-1 (Hou 2022
+  no-slip wall-vorticity closure) — retained, not discarded, not started.
+- **Forbidden shortcuts:** do not assert any open `R3TSel*` Prop as an axiom or
+  instance; do not cite the `r3TSel_*` conditional theorems without their hypotheses;
+  do not use the phantom carrier alias as a Sobolev embedding (use the decoded
+  representative machinery); do not re-enable hosted CI (local Elan-pinned gate only,
+  direct fast-forward push to `main`, no PR).
 
 ## Repository / verification state
 
@@ -215,6 +290,14 @@ Current code and theorem statements override stale prose.
 - The preferred interactive path is now **ChatGPT -> external Lean runner -> exact diagnostics -> ChatGPT iteration** under the contract in `docs/LEAN_CI_OPERATIONS.md`.
 - Local/self-hosted execution remains a valid reproduction/fallback path.
 - GitHub-hosted Actions should be used only for deliberately spent status/final-confirmation checks or when repository integration policy explicitly requires one.
+- The T-SEL bridge formalization layer (`Formal/GronwallIntegralInequality.lean`,
+  `Formal/R3TSelDecodedGradient.lean`, `Formal/R3TSelBridge.lean`, with 21 new
+  `Formal/AxiomAudit.lean` prints) is committed directly on `main` on top of
+  `a359354` after local verification: targeted builds of all three new modules and
+  `Formal.AxiomAudit`, then the pinned source scan plus full `Formal.+` gate
+  (**8772 jobs**, `bash scripts/lean-ci-local.sh`, toolchain
+  `leanprover/lean4:v4.32.1`), axiom audit standard for every new audited theorem.
+  No hosted Action was started; no PR was opened.
 
 ## Local Lean status in this workspace
 

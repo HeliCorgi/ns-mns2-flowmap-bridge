@@ -1,13 +1,14 @@
 # Formal scope and theorem boundary
 
-Last synchronized: 2026-08-23 (JST), after the Stage-9 readiness pass — realness transport
-through the order-three decoder (`Formal/R3DecodedVelocityRealness.lean`) and the concrete
-admissible Schwartz initial-data adapter (`Formal/R3SchwartzInitialData.lean`), on top of
-the closed Navier–Stokes capstone (`Formal/R3NavierStokesEquation.lean`). Local full
-`Formal.+` gate pass, axiom audit standard (`propext`, `Classical.choice`, `Quot.sound`),
-pinned source scan clean. Verdict of the bounded audit
-(`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`): **Stage-9 readiness `PASS`**;
-formal plumbing stops.
+Last synchronized: 2026-09-02 (JST), after the user-commissioned **T-SEL bridge
+formalization** (`Formal/GronwallIntegralInequality.lean`,
+`Formal/R3TSelDecodedGradient.lean`, `Formal/R3TSelBridge.lean`;
+record `docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`) on top of the Stage-9
+readiness state of 2026-08-23. Local full `Formal.+` gate pass (8772 jobs), axiom audit
+standard (`propext`, `Classical.choice`, `Quot.sound`), pinned source scan clean. The
+2026-08-23 stop rule on *uncommissioned* formal plumbing is unchanged; the T-SEL layer
+was a separate explicit user commission (2026-09-02) and its head `N0` is untouched by
+commission.
 
 This file records what the Lean layer has actually established and what remains outside the proof boundary.
 
@@ -535,6 +536,40 @@ datum norm, the uniform-step extension of norm-bounded mild solutions, and the d
 `r3EndpointSafeProjected_blowup_dichotomy` — either arbitrarily long horizons carry mild
 solutions, or the certified solution norms escape every ball.
 
+### T-SEL bridge statement layer and conditional assembly — 2026-09-02
+
+The selected Stage-9 theorem **T-SEL = L_a** (`docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`,
+SS-5/SS-6) now has its ten-lemma paper bridge formalized as a Lean statement layer plus
+a fully proved conditional assembly (`docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`
+is the complete record; every artifact is listed there with its CLOSED/OPEN status):
+
+- **proved**: the Grönwall–Bellman integral inequality (SEL-6,
+  `le_mul_exp_of_le_add_intervalIntegral`, new standalone infrastructure); the
+  quantitative decoded embedding (SEL-2, `r3TSel_decoded_embedding`:
+  `r3DecodedSup f + r3DecodedGradSup f ≤ C_emb ‖f‖` with explicit Cauchy–Schwarz
+  constants, plus everywhere-`C¹` derivative bounds, Schwartz-core pinning, a.e.
+  identification with the decoded velocity, and Lipschitz continuity of the
+  gradient-sup); the SEL-7 bookkeeping (norm continuity, integrand interval
+  integrability, `Q`-monotonicity for `r3TSelGradIntegral`); SEL-8 realness
+  instantiation; the SEL-9 exponential carrier bound **conditional on the ladder**
+  (`r3TSel_carrierBound_of_ladder`, ν-free); SEL-10 uniqueness transfer and plug
+  discharge; and the composed chain `N0 → N1 → N2 → N3`
+  (`r3TSel_uniform_carrierBound_of_head`, `r3TSel_horizons_unbounded`,
+  `r3TSel_admissibleSchwartz_globalContinuation`,
+  `r3TSel_conditional_globalContinuation`).
+- **stated only, OPEN, never asserted** (Prop-valued definitions consumed as explicit
+  hypotheses): the head `N0` (`R3TSelGradientBound`, `R3TSelHead`) — **no proof search
+  performed, per commission**; the Kato–Ponce commutator (SEL-4,
+  `R3TSelKatoPonceCommutator`); the integrated `H³` ladder (SEL-5, `R3TSelH3Ladder`);
+  interior Sobolev smoothing (SEL-3 clause, `R3TSelInteriorSobolevSmoothing`); and the
+  classical Sobolev comparability (SEL-1 clause,
+  `R3TSelClassicalSobolevComparability`).
+
+Do not cite the conditional theorems as unconditional results: each carries its open
+hypotheses in its statement. Do not treat `r3DecodedGradSup` as an intrinsic
+distributional `W^{1,∞}` seminorm — it is the gradient-sup of the explicit decoded
+representative, a.e.-pinned to the decoded velocity.
+
 The next analytic gates, in intended order:
 
 1. optional refinement of the continuation layer: the canonical glued maximal trajectory
@@ -567,6 +602,11 @@ regularity is. The glued maximal trajectory and every Clay-level statement remai
 
 The Lean development does **not** currently establish:
 
+- the T-SEL head `N0` (`R3TSelGradientBound` / `R3TSelHead`) in either direction, nor
+  any of the open bridge statements `R3TSelKatoPonceCommutator`, `R3TSelH3Ladder`,
+  `R3TSelInteriorSobolevSmoothing`, `R3TSelClassicalSobolevComparability` — these are
+  statement definitions only, and every `r3TSel_*` continuation theorem is conditional
+  on the ones it names;
 - Clay statement A, B, C, or D;
 - global smoothness or global existence for arbitrary 3D data;
 - a blow-up counterexample;

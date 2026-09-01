@@ -55,6 +55,9 @@ import Formal.R3SchwartzDivergence
 import Formal.R3SchwartzInitialData
 import Formal.ReducedBridgeResidual
 import Formal.FiniteRankReducedBridge
+import Formal.GronwallIntegralInequality
+import Formal.R3TSelDecodedGradient
+import Formal.R3TSelBridge
 
 /-
 CI-visible axiom audit for the strongest currently formalized bridge theorems.
@@ -441,3 +444,45 @@ into the Lean build log so that unexpected dependencies are visible during revie
 #print axioms MNS2.r3SchwartzWitnessDatum_ne_zero
 #print axioms MNS2.isR3AdmissibleSchwartzDatum_r3SchwartzWitnessDatum
 #print axioms MNS2.exists_isR3AdmissibleSchwartzDatum_ne_zero
+
+-- T-SEL bridge formalization (Stage-9 selected theorem, user-commissioned 2026-09-02):
+-- the ten-lemma paper bridge of docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md SS-6
+-- as a Lean statement layer plus conditional assembly. CLOSED here: the Gronwall-Bellman
+-- integral inequality (SEL-6, new standalone infrastructure); the quantitative decoded
+-- embedding sup+gradient-sup <= C_emb * carrier norm with explicit Cauchy-Schwarz
+-- constants (SEL-2), including the weighted decoder L^1 bound, the everywhere Frechet
+-- derivative bound, Schwartz-core pinning, a.e. identification of the measured
+-- representative with the decoded velocity, and Lipschitz continuity of the gradient-sup
+-- on the carrier; the SEL-7 bookkeeping (norm continuity, integrand integrability, Q
+-- monotonicity); SEL-8 realness instantiation; the SEL-9 exponential carrier bound
+-- CONDITIONAL on the integrated H3 ladder hypothesis; SEL-10 uniqueness transfer and the
+-- sSup/BddAbove plug discharge; and the conditional chain N0 -> N1 -> N2 -> N3
+-- (ladder hypothesis + OPEN head hypothesis => unbounded certified horizons => global
+-- continuation of the certified class from admissible Schwartz data). NOT closed and NOT
+-- claimed: the head N0 (R3TSelGradientBound / R3TSelHead -- open, hypothesis-only, no
+-- proof search performed by commission), the Kato-Ponce commutator (SEL-4), the
+-- integrated H3 ladder (SEL-5), interior Sobolev smoothing (SEL-3 clause), and the
+-- classical Sobolev comparability (SEL-1 clause) -- all four are Prop-valued statement
+-- definitions consumed as explicit hypotheses, never asserted, never axiomatized. No
+-- Clay-level claim; the terminal node is the certified-class continuation proxy.
+#print axioms MNS2.le_mul_exp_of_le_add_intervalIntegral
+#print axioms MNS2.integral_weighted_norm_r3DecodedFrequency_le
+#print axioms MNS2.norm_fderiv_r3DecodedRepresentative_le
+#print axioms MNS2.r3TSel_decoded_embedding
+#print axioms MNS2.r3DecodedRepresentative_ae_r3H3ToL2Operator
+#print axioms MNS2.r3DecodedSup_schwartz
+#print axioms MNS2.r3DecodedGradSup_schwartz
+#print axioms MNS2.abs_r3DecodedGradSup_sub_le
+#print axioms MNS2.continuous_r3DecodedGradSup
+#print axioms MNS2.r3TSelGradIntegral_nonneg
+#print axioms MNS2.r3TSelGradIntegral_mono
+#print axioms MNS2.r3TSel_initial_carrierNorm
+#print axioms MNS2.r3TSel_carrierNorm_continuousOn
+#print axioms MNS2.r3TSel_gradIntegrand_intervalIntegrable
+#print axioms MNS2.r3TSel_decodedReal_of_admissible
+#print axioms MNS2.r3TSel_carrierBound_of_ladder
+#print axioms MNS2.r3TSel_uniform_bound_transfer
+#print axioms MNS2.r3TSel_uniform_carrierBound_of_head
+#print axioms MNS2.r3TSel_horizons_unbounded
+#print axioms MNS2.r3TSel_admissibleSchwartz_globalContinuation
+#print axioms MNS2.r3TSel_conditional_globalContinuation

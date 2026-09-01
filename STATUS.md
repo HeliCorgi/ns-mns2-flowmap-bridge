@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02
+# STATUS — 2026-09-02 (T-SEL bridge 形式化まで反映)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -52,6 +52,19 @@ continuation blow-up dichotomy → **decoded 物理速度の意味論** →
 [`docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md`](docs/formal/R3_NS_VERTICAL_INTEGRATION_STATUS.md)。
 Stage-9 readiness audit は
 [`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`](docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md)。
+
+**2026-09-02(第2セッション、ユーザー commission): T-SEL bridge の Lean 形式化を執行**
+([`docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md`](docs/formal/TSEL_BRIDGE_FORMALIZATION_2026-09-02.md))。
+SEL-1〜SEL-10 の全10補題が Lean artifact 化:
+**証明済み** = SEL-6(Grönwall–Bellman 積分形、新規独立インフラ)、SEL-2(decoded
+embedding、明示定数つき定量形 `sup + gradSup ≤ C_emb‖f‖`)、SEL-7 の消費部
+(連続性・可積分性・Q 単調性)、SEL-8(実性)、SEL-9(ladder 仮定つき指数 carrier
+bound、ν-free)、SEL-10(uniqueness transfer + sSup/BddAbove plug discharge)、
+および条件付き連鎖 **N0→N1→N2→N3**(`r3TSel_conditional_globalContinuation`)。
+**陳述のみ(OPEN、無主張、公理化なし)** = head N0(`R3TSelGradientBound`/`R3TSelHead`
+— **proof search は commission により未着手**)、SEL-4 Kato–Ponce、SEL-5 積分形 H³
+ladder、SEL-3 内部平滑化節、SEL-1 古典ノルム同値節(いずれも明示仮定 Prop)。
+フルゲート PASS(8772 jobs)、公理監査は新定理21件すべて標準3公理のみ。
 
 ## いま通ってるやつ(数値側)
 
@@ -113,8 +126,9 @@ RECORD-ONLY — verdict/frontier/park 不変更)。Lean 継続インターフェ
 (EP-1〜EP-8 の erratum 提案、うち2件は真正の printed-statement defect)。
 **選定定理 T-SEL = L_a: `∫₀^{T′}‖∇U‖_{L∞}ds ≤ G(T;ν,‖u₀‖)`**(dependency chain
 N0→N3 完全明記。bridge は既知数学10補題 SEL-1〜10、head N0 は OPEN・Clay 級)。
-T-SEL の形式化・proof 探索は別途 commission 待ち(新セッション予定。resume anchor =
-上記 record の SS-5/SS-6)。
+→ **bridge 形式化は第2セッションで commission され執行済み**(上の Formal frontier 節
+参照)。**head N0 の proof search は未 commission・未着手のまま**。残 bridge 義務の
+放電順序(SEL-1 同値節 → SEL-4 → SEL-3 → SEL-5)は形式化 record の §6。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
