@@ -217,7 +217,9 @@ def r3PressureFrequencyHighL2 (F : R3L2Velocity) : Lp ℂ 2 (volume : Measure R3
 /-- **An explicit Helmholtz pressure witness for an `L²` source**: the inverse Fourier
 transform of the (low + high) embedded pressure frequency profile, as a tempered
 distribution — the canonical `‖ξ‖⁻²`-normalized choice (junk value `0` at `ξ = 0`);
-the gradient identity below determines it only up to additive harmonic terms. -/
+the gradient identity below determines it up to additive constants (a nonconstant
+harmonic distribution has nonzero gradient; the weaker induced Poisson equation
+`Δp = −∇·F` would determine it only up to harmonic terms). -/
 def r3HelmholtzPressure (F : R3L2Velocity) : 𝓢'(R3, ℂ) :=
   𝓕⁻ (((r3PressureFrequencyLowL1 F : Lp ℂ 1 (volume : Measure R3)) : 𝓢'(R3, ℂ)) +
     ((r3PressureFrequencyHighL2 F : Lp ℂ 2 (volume : Measure R3)) : 𝓢'(R3, ℂ)))

@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-08-23 JST.
+Last updated: 2026-09-01 JST.
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -12,6 +12,13 @@ Last updated: 2026-08-23 JST.
 > is **unchanged**: BH YELLOW-RED, B2 UNKILLED in Scope B, trigger (T-c) OPEN; all map
 > consequences of the decision are **proposals** for the next freeze review, applied to
 > nothing.
+>
+> **2026-09-01: a corpus-wide mathematical audit pass** (multi-agent, adversarially
+> verified) found and recorded 15 defects (2 major) in the frozen research prose — none
+> touching a ruling, a Lean theorem, or the frontier verdicts. Frozen gate documents
+> carry appended errata; kill-table corrections are **queued as F37–F43** for the
+> round-3 user-adjudicated freeze review; live documents are repaired in place. See
+> "2026-09-01 mathematical audit pass" below.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -315,7 +322,9 @@ done — `docs/gates/TWO_SCALE_LITERATURE_GATE_2026-08-18.md`,
 Outcome: the Hou–Huang two-scale scenarios are Clay-inadmissible (Euler / degenerate ν) and
 their standard-ν NS transfer died in the authors' own test (max-vorticity growth < 2); the
 survival map nevertheless leaves a **nonempty open window** — `γ ∈ (1/2, 1)`,
-`α ∈ (max(2γ/3, 2γ−1), γ)` for a core carrying the `L³` divergence, with sub-parabolic ring
+`max(2γ/3, 2γ−1) ≤ α < γ` for a core carrying the `L³` divergence (lower boundary
+closed, as the source map prints it in [D3]/§5; the `2γ−1` clause was later frozen
+strict as kill-table A7: `α > 2γ−1`), with sub-parabolic ring
 collapse dead and swirl-dominated cores forced into ≥3-region structures.
 
 Consequences for planning:
@@ -859,15 +868,20 @@ record-only — F30–F36 proposed, not executed):
   make R-B2′ statable in Scope B (level ≠ labelled region; (E⁺⁺)/(NECK)
   undefined there) — outcome (a) alone would not have killed B2 in Scope B;
 - **(SB-ANCH)-final**: (H1) sup-swirl saturation ∧ (H2) co-located Γ-saturation
-  (distance clause deleted — derivable from (H1)+Γ-max; (H1) ⇏ (H2));
+  (distance clause deleted — derivable from (H1)+Γ-max; neither pointwise
+  implication holds: (H1) ⇏ (H2) and (H2) ⇏ (H1) — 2026-09-01 erratum to B6/F32,
+  queued F37);
   equivalent single form: the envelope `Γ(r) ≤ min(Γ₀, r‖u‖_∞)` attained within
   a constant at its corner ⟺ **`β_v = γ` τ-uniformly** = the top endpoint of
   A2's unanalysed middle limb;
 - chain facts: 4 anchor-touch sites, 1 irreducible (zoom-centre selection); all
   five √42 constants anchor-inherited, chain constant-agnostic (any τ-uniform
   `c` substitutes verbatim); target partition (T1) tie face scope-free /
-  (T2) `B2∩{β_v=γ}` undefined in Scope B / (T3) `B2∩{β_v<γ}` empty in Scope A,
-  never claimed in Scope B — frontier lines need the "Γ-saturated" qualifier;
+  (T2) `B2∩{β_v=γ}` undefined in Scope B / (T3) `B2∩{β_v<γ}` empty in Scope A
+  only on the `ρ_T = γ` sub-branch (2026-09-01 erratum, queued F38: on `ρ_T > γ`
+  the amplitude corollary supplies (H1), not (H2), and (T3)-emptiness is not
+  established), never claimed in Scope B — frontier lines need the "Γ-saturated"
+  qualifier;
 - **new debt (C5/F31)**: (N-Γ)'s printed discharge route is not supplied by the
   anchor on the `ρ_T > γ` sub-branch, even in Scope A.
 
@@ -883,7 +897,9 @@ binding, and the round-1 §5 supersession):
   R-B2′ [C]**"; the Scope-A gate is the **exhaustiveness step**, not the zoom;
   target partition (T1) tie face scope-free / (T2) `B2∩{β_v=γ}` — machinery
   scope-free granted membership, undefined in Scope B / (T3) `β_v<γ` empty in
-  Scope A (narrows A2's debt there to the endpoint), never claimed in Scope B;
+  Scope A (narrows A2's debt there to the endpoint), never claimed in Scope B
+  (2026-09-01 erratum, queued F38: the Scope-A emptiness/narrowing holds only on
+  `ρ_T = γ`);
 - **(N-Γ) split (F31/B11)**: tie face / `ρ_T = γ` → [C-dict]; `ρ_T > γ` →
   **[C], discharge unsupplied** (blanket [C-dict] tags in A15/A16/round-1 §5
   superseded);
@@ -933,8 +949,9 @@ explicitly commissioned the proof search after the selection):
   misfire, so the mandatory check fires **against** the pin; and even granted in full it
   does not pin, because an enstrophy-free Γ plateau on `[τ^{β_v}, τ^α]` satisfies
   `σ_core = α` with `β_v > α`), and the **Scope-A amplitude corollary** (which is why
-  `(T3)` is empty in Scope A — granting it is a **class change**, not a condition, which
-  is why the verdict is `YES` and not `PIN_CONDITIONAL`).
+  `(T3)` is empty in Scope A on the `ρ_T = γ` sub-branch — 2026-09-01 erratum, queued
+  F38 — granting it is a **class change**, not a condition, which is why the verdict
+  is `YES` and not `PIN_CONDITIONAL`).
 - **MINIMAL LOGICAL GAP — one new named object, `(Γ-DEP)`** (*intra-core circulation
   depletion*; genuinely new, exists nowhere in the corpus at any scope):
   ∃ τ-uniform `c′ ∈ (0,1)`, `δ > 0` with
@@ -951,7 +968,8 @@ explicitly commissioned the proof search after the selection):
 - **NOT decided** (printed in the record): exponent consistency is **not** existence —
   `W★` is bookkeeping, not a flow, and no blow-up and no Clay claim is made or implied;
   realizability is undecided (the single-time coexistence / one-pressure debt is
-  inherited, not discharged); Scope A is untouched (`(T3)` stays empty there);
+  inherited, not discharged); Scope A is untouched (`(T3)` stays empty there on
+  `ρ_T = γ`; the blanket emptiness carries the 2026-09-01 F38 erratum);
   (SB-ANCH) itself is undecided; all marginal/log/sub-polynomial faces are recorded
   out-of-vocabulary, never adjudicated.
 - **Record-only**: A2's middle-limb debt is **partially discharged in one direction
@@ -1078,7 +1096,72 @@ adapter 3-adapter). Unconditional uniqueness and the continuation dichotomy are 
 the coordinate level; **no Clay statement is available yet** — edges 3 proper, 4-uniform
 and 5 remain open (all recorded non-blocking or deferred).
 
+## 2026-09-01 mathematical audit pass (erratum layer; record-only for the map)
+
+Commissioned by the user's 2026-09-01 instruction ("数学的におかしい部分があれば直して",
+then continue). Method: 8 independent finders (decision-doc deep audit / frozen map /
+2026-08-20 layer / 2026-08-21 layer / summary fidelity / Lean-source cross-check /
+independent exponent recomputation / formal status docs) → dedup → adversarial
+verification (majority-refute, up to 3 lenses per finding) → synthesis. 23 raw → 15
+confirmed (2 major, 7 minor, 6 nit). Repair convention: frozen `docs/gates/` records
+get **appended errata only**; kill-table corrections are **queued as F37–F43** for the
+round-3 user-adjudicated freeze review (nothing applied to a row or annotation); live
+docs repaired in place.
+
+The two major findings (both in `BH_RB2_ANCHOR_AUDIT_2026-08-21.md`, executed into
+kill-table B6/B2):
+
+- **F37**: B6's clause "`(H2) ⟹ (H1)`" is false once the distance clause is deleted —
+  neither pointwise implication holds; only the conjunction `(H1) ∧ (H2)` ⟺ τ-uniform
+  corner attainment (`β_v = γ`, B13) is true. Nothing downstream consumes the false
+  direction; no ruling moves.
+- **F38**: "(T3) `B2 ∩ {β_v < γ}` empty in Scope A by the amplitude corollary" is
+  unproved as cited on the `ρ_T > γ` sub-branch (the corollary supplies (H1) and only
+  **caps** `Γ(L)` — F31's own direction; `Γ_L ≍ Γ₀τ^{ρ_T−γ} → 0` there). Established
+  only on `ρ_T = γ`. Downstream restatements in the β_v decision record, the selection
+  record, and this file carry erratum markers.
+
+Minor/nit errata (appended at each source; queue items in parentheses): Seregin K10
+edge endpoint `γ = 3/5` outside the class (F39); S_ring K8-arm strictness (F40);
+S_ring missing the K11 clause — adjudication requested (F41); "lifetime `1` fails
+everywhere by K11" is exactly-marginal at `ρ = 1/2` on the `γ+α = 1` edge (F42, plus
+origin errata in the neck-budget and COH-winding docs); the COH-winding midrange
+inequality silently drops its `∫T4` and viscous Γ-defect terms (F43); (Γ-DEP)
+necessity/"no third route" overstated — sufficiency stands, an outright (SB-ANCH)
+proof is the other admissible closure shape (β_v decision erratum E1); (Γ-DEP)
+"In words" gloss weaker than its formula (E2); θ_coh fork-(β) provenance (E3);
+selection record's "answered `inf s = 0`" was [C]-conditional, not settled;
+survival-map [H2] is a limsup statement, not a full limit; HANDOFF window
+transcription drift (`α ∈ (…)` → `max(…) ≤ α < γ`, repaired in place); pressure
+ambiguity class is **additive constants** under the gradient identity, not general
+harmonic terms (STATUS doc + `Formal/R3HelmholtzPressure.lean` docstring — comment
+only, no proof touched).
+
+**Unchanged**: every Lean theorem and its axiom audit; the `YES (CONSISTENT)` ruling,
+`W★`, and (Γ-DEP) sufficiency; all frozen verdicts (BH YELLOW-RED · B2 UNKILLED in
+Scope B · (T-c) OPEN · no CAP trigger · no Clay claim). The round-3 freeze review
+agenda is now **P1–P7 + Seregin row-(i) + F37–F43**.
+
 ## Latest Lean verification
+
+```text
+runner: local Windows (Git Bash) process via Elan, scripts/lean-ci-local.sh
+revision: working tree on main after 9928b21 (2026-09-01 audit pass; only Lean change:
+  Formal/R3HelmholtzPressure.lean docstring — comment-only, no proof or statement touched)
+toolchain: leanprover/lean4:v4.32.1
+dependency manifest: committed lake-manifest.json; mathlib per lake-manifest.json
+full scope: scripts/lean-ci-local.sh (pinned source scan + Formal.+ default target)
+  — exit 0, pass (8769 jobs); remaining warnings are cache replays of pre-existing
+  lints in untouched modules
+source scan: pinned sorry/admit/axiom/opaque scan over Formal/ — clean
+axiom scope: Formal.AxiomAudit — pass; audited declarations depend only on propext,
+  Classical.choice, Quot.sound (unchanged)
+scope note: docs-layer erratum pass; no theorem added, removed, or restated
+GitHub Actions: not invoked (quota exhausted; hosted runs banned; user directive
+  2026-09-01: all Lean runs local from now on)
+```
+
+Previous gate (Stage-9 readiness pass, commit c805a06):
 
 ```text
 runner: local Windows (Git Bash) process via Elan, scripts/lean-ci-local.sh
@@ -1273,7 +1356,9 @@ out-of-vocabulary として記録(辞書を発明しない)。
 (この decision が名付けた唯一の閉じ手。Scope B のままで B2 を殺せる可能性がある単一対象)、
 (2) 選定記録が「この次の自然な decision」と記録した **Seregin 級 ancient-Euler Liouville**
 (arXiv:2606.29468 が一般化した形で未解決のまま残している対象)、(3) P1–P7 を裁定する
-**第3回 freeze review**(Seregin row-(i) 更新も同時に処理)。
+**第3回 freeze review**(Seregin row-(i) 更新と、2026-09-01 数学監査が queue した
+**F37–F43**(major 2 件: B6 の `(H2) ⟹ (H1)` 撤回、B2 (T3) の Scope-A 空性の
+`ρ_T = γ` への再スコープ)も同時に処理)。
 
 数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
 (quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。

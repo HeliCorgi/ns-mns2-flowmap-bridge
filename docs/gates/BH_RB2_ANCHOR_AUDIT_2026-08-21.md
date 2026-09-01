@@ -161,3 +161,73 @@ Docs read first-hand: `BH_SCOPEB_RECON_2026-08-21.md`,
 `BH_RING_COROLLARY_ADVERSARIAL_AUDIT_2026-08-19.md`,
 `BH_GEO_SWIRL_AGGREGATION_2026-08-19.md`, `FREEZE_REVIEW_2026-08-21.md`,
 `TYPE2_SURVIVAL_MAP_2026-08-18.md`, `D1_ADVERSARIAL_AUDIT_2026-08-19.md`.
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired; kill-table corrections queued as F37/F38)
+
+**E1 (§2 (SB-ANCH)-final: "`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`" — the first implication is
+FALSE as printed; transcribed verbatim into kill-table B6/F32).** Once the distance
+clause `dist(x, axis) ≤ CΓ₀/‖u‖_∞` is deleted as a hypothesis, **neither pointwise
+implication holds: `(H1) ⇏ (H2)` and `(H2) ⇏ (H1)`.** (H2) gives
+`|u_θ| = |Γ|/r ≥ c′Γ₀/r`, which reaches `c‖u‖_∞` only under an upper bound on `r` that
+(H2) does not supply: the envelope `Γ ≤ r‖u‖_∞` bounds `r` from **below** only
+(`r ≥ c′Γ₀/‖u‖_∞`), and Γ-max bounds `r` above only **given (H1)** (§2's own words:
+"Γ-max bounds `r` above, never below"). Counterexample in the corpus's own live
+vocabulary: any `β_v < γ` configuration (incl. (T3)'s razor limb `β_v = α`, live in
+Scope B) has `|Γ| ≍ Γ₀` at `r_sat ≍ τ^{β_v}` with
+`|u_θ|(r_sat) ≍ τ^{γ−β_v}‖u‖_∞ = o(‖u‖_∞)`: (H2) holds τ-uniformly while (H1) fails
+for every τ-uniform `c` — exactly the arithmetic of
+`BH_BETAV_ENDPOINT_PINNING_2026-08-23.md` P4(ii), printed there without flagging B6.
+Consistency check: were `(H2) ⟹ (H1)` true, K9's Γ-saturated region would supply
+(SB-ANCH) in Scope B and kill B2 there — against this document's own headline; and
+(SB-ANCH) would collapse to (H2) alone, against its printing as a conjunction. The
+implication became false precisely when the distance clause was deleted:
+`(H2) + distance ⟹ (H1)` is true; bare `(H2) ⟹ (H1)` is not. **Replacement clause [D]:**
+
+> Neither pointwise implication holds after the distance-clause deletion:
+> `(H1) ⇏ (H2)` and `(H2) ⇏ (H1)`. What is true:
+> `(H1) + Γ-max ⟹ r(x_k) ≤ Γ₀/(c‖u‖_∞)`; `(H2) + envelope ⟹ r(x_k) ≥ c′Γ₀/‖u‖_∞`;
+> hence the conjunction `(H1) ∧ (H2)` ⟺ τ-uniform attainment of the envelope at its
+> corner — `β_v = γ` in the B13 sense.
+
+Everything downstream consumes only the conjunction (or the single equivalent form,
+which is unchanged); no ruling moves. Print sites superseded here, not rewritten: §2
+line 42 (this file); kill-table B6 (queued F37); `HANDOFF.md`'s one-sided
+"(H1) ⇏ (H2)" summary (live doc, repaired in place).
+
+**E2 (§4 (T3) and the soundness claim at lines 100–102: "empty in Scope A by the
+amplitude corollary" is UNPROVED AS CITED on `ρ_T > γ`).** The Scope-A amplitude
+corollary supplies **(H1)** at the top-speed level
+(`r_min ≍ Γ(L)/‖u‖_∞ ≤ √42Γ₀/‖u‖_∞`) and **caps** `Γ(L)` — "it does not bound it
+below", this document's own F31, printed two lines after the claim. On the sub-branch
+`ρ_T > γ`, kept live in Scope A by the corpus itself ("capped (`ρ_T ≥ γ`), not
+pinned", multiregion §2; B11: discharge unsupplied "even in Scope A"), the corollary's
+level carries `Γ_L ≍ Γ₀τ^{ρ_T−γ} → 0` — (H1) **without** (H2). Since T3-emptiness in
+Scope A ⟺ Scope A supplies (H2) on all of B2 (via B6+B13, with B6 as corrected in
+E1), the printed claim contradicts §2's co-frozen "Scope A supplies … (H2) only on
+`ρ_T = γ`" — two frozen statements in one box, mutually inconsistent. No recorded row
+forces the Γ-saturated level to be a full-speed level (per-level swirl-richness gives
+only `r_min(M) ≍ Γ₀/|u|_M`); the inference commits the amplitude-saturated ⟹
+Γ-saturated conflation that F31 corrects one line away. **Replacement statement [D]:**
+
+> In Scope A the amplitude corollary makes (T3) empty **only on the `ρ_T = γ`
+> sub-branch** (where the tongue tip is itself Γ-saturated). On `ρ_T > γ` the
+> corollary supplies (H1) but not (H2), and no recorded scope-free or Scope-A row
+> locates Γ-saturation at the corner, so `(T3) ∩ {ρ_T > γ}` is **not established
+> empty**; A2's middle-limb debt is **not** narrowed to its endpoint in Scope A
+> without a further (Γ-DEP)-type location theorem. Whether individual sub-limbs
+> (e.g. the razor limb `β_v = α`) admit separate Scope-A exclusions is not
+> adjudicated here.
+
+Consequently the frontier-soundness sentence ("sound only because T3 = ∅ in Scope A")
+holds only on `ρ_T = γ`, and the narrowing rider executed into kill-table B2 is
+re-scoped (queued F38). Downstream reassertion sites superseded here, not rewritten
+there: `FREEZE_REVIEW_2_2026-08-21.md` §3 ("pinned to its endpoint `β_v = γ` by the
+amplitude corollary"); `BH_BETAV_ENDPOINT_PINNING_2026-08-23.md` §4 horn 2 / §5
+candidate-table row 1 / §7.3 (erratum E4 appended there);
+`STAGE9_DECISION_SELECTION_2026-08-23.md` §2 "Why it matters" (erratum E2 appended
+there); `HANDOFF.md` (live doc, repaired in place).
+
+**Freeze queue (proposed, NOT executed — for the round-3 user adjudication): F37** —
+replace B6's "`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`" with E1's replacement clause. **F38** —
+re-scope B2 (T3) and its Scope-A narrowing rider per E2. The kill table carries the
+matching erratum-and-queue section; no map text is edited by this erratum.

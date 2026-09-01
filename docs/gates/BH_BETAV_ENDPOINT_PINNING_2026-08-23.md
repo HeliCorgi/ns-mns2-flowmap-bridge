@@ -372,3 +372,74 @@ Scope A. **(SB-ANCH) cannot do it: it is logically the other endpoint.**
 
 Frontier status after this pass (unchanged pending freeze review): **BH YELLOW-RED · B2
 UNKILLED in Scope B · (T-c) OPEN · no CAP trigger · no Clay claim.**
+
+---
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired; the `YES (CONSISTENT)` ruling, the witness `W★`, and the sufficiency of (Γ-DEP) are all unaffected)
+
+**E1 (§5 "Sufficient, and minimal" / "a pin requires exactly a new upper bound on `Γ`
+inside the core" / "There is no third route"; §8 "(SB-ANCH) cannot do it").** The
+**sufficiency** of (Γ-DEP) stands as proved. The **necessity/exclusivity** claims
+overstate what this pass established: an outright **proof of (SB-ANCH)** for the
+class — a τ-uniform constant-factor lower bound on `Γ` at the corner radius
+`Γ₀/‖u‖_∞` — would equally exclude the middle limb, since
+`(SB-ANCH) ⟺ {β_v = γ, τ-uniform}` (B6+B13, re-derived in this document's own P4(i):
+`M ⟹ ¬(SB-ANCH)`), and `β_v = γ` lies in the endpoint set; in that scenario (Γ-DEP)
+is false ((Γ-DEP) forces `β_v ≤ α < γ`), so (Γ-DEP) is sufficient but **not
+necessary**. §8's dismissal ("logically the other endpoint") bars (SB-ANCH) only as a
+**premise** in a conditional pin derivation (circularity); it does not bar proving it
+outright — a route this record itself keeps open (P1's "(ii) (SB-ANCH)"; §7.4). A
+per-member dichotomy theorem (`(Γ-DEP) ∨ (SB-ANCH)` memberwise) would be a further
+admissible closure shape. **Replacement statement:**
+
+> (Γ-DEP) is the minimal new object that closes the middle limb **from below**
+> (`β_v ≤ α`); the only other closure shape is the second horn itself — a proof of
+> (SB-ANCH), i.e. a τ-uniform constant-factor lower bound on `Γ` at the corner —
+> which is the standing open gap and cannot be consumed as a premise without
+> circularity; a per-member dichotomy `(Γ-DEP) ∨ (SB-ANCH)` is a third admissible
+> shape. No closure shape avoids new mathematics; none is derivable from the frozen
+> rows (both (Γ-DEP) and (SB-ANCH) fail on the bookkeeping witness `W★`).
+
+"The single named object", "minimal" (in the unqualified sense), and "There is no
+third route" are withdrawn as universal claims; §8's "(SB-ANCH) cannot do it" is to
+be read "(SB-ANCH) cannot be consumed as a premise; proved outright, it closes the
+limb from the other side".
+
+**E2 (§5 (Γ-DEP) "In words" gloss).** The gloss understates the displayed formula:
+since `γ > α`, for every fixed `δ > 0` the ball `dist ≤ δτ^α` **contains** the
+envelope corner `τ^γ` near `T*` (`τ^γ/(δτ^α) = δ^{−1}τ^{γ−α} → 0`), so the formula
+forbids `c′`-level saturation at the corner and below it as well — pinning to the
+**first horn only** (`β_v ≤ α`), exactly as the derivation two lines later uses
+("`r_sat ≥ δτ^α` … hence `β_v ≤ α` — the pin's first horn"). The printed words
+describe a strictly weaker statement (which would pin only to the union of both
+endpoints). Corrected gloss:
+
+> In words: within any fixed fraction of the core scale `τ^α` — a region that
+> includes the envelope corner `τ^γ` — `Γ` stays a fixed factor below `Γ₀`; in
+> particular it cannot saturate at any radius `≲ τ^α`, forcing `β_v ≤ α` (the pin's
+> first horn).
+
+The sufficiency claim is unaffected (the first horn is a subset of the pin's
+endpoint set).
+
+**E3 (§5 candidate table, row 3 — provenance).** `θ_coh` is **not** among fork (β)'s
+declined objects: the frozen declination (FREEZE_REVIEW round 1 §1; kill-table
+frontier blocks, both rounds) covers exactly three — the neck poloidal level bound,
+`sup(ω_θ/r)`, and `ℓ_neck`. `θ_coh` is one of (NECK)'s two named unassigned
+dictionary-extension inputs (A16) and is Scope-B-undefined per B9. Row split,
+corrected:
+
+> | neck poloidal level bound, `sup(ω_θ/r)`, `ℓ_neck` | **declined by fork (β)** |
+> | `θ_coh` | **standing unassigned dictionary-extension input (A16); undefined, not open, in Scope B (B9)** |
+
+The row's operative conclusion — unavailable at frozen scope — is unchanged (it
+holds via B9, not via the fork-(β) citation).
+
+**E4 (cross-reference — §4 horn 2, §5 candidate-table row 1, §7.3: "(T3) empty in
+Scope A by the amplitude corollary").** Superseded by the 2026-09-01 erratum to
+`BH_RB2_ANCHOR_AUDIT_2026-08-21.md` (E2, queued F38): the emptiness is established
+only on the `ρ_T = γ` sub-branch; §4 horn 2's "why the pin is trivially true there"
+and §7.3's "remains empty in Scope A" are to be read with that restriction (on
+`ρ_T > γ` the corollary supplies (H1), never (H2), and the pin is not established
+even in Scope A absent a (Γ-DEP)-type theorem). The Scope-B `YES (CONSISTENT)`
+ruling is unaffected.

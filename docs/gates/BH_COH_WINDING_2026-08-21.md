@@ -227,3 +227,36 @@ witness — harmless (argues the negative) and refuted anyway.
 Sources read first-hand this pass: `BH_NECK_OMEGA_BUDGET_2026-08-20.md`,
 `BH_BIOT_SAVART_LEDGER_2026-08-20.md`, `BH_MULTIREGION_AUDIT_2026-08-20.md`,
 `BH_CONSTANT_EXCLUSION_ROW_2026-08-20.md`, `TYPE2_KILL_TABLE_2026-08-19.md`.
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired; the F15/F16 retirement rulings are unaffected)
+
+**E1 (§2 item 1, the midrange inequality; repeated in F15; transcribed as kill-table
+A19's parenthetical): the printed inequality drops two terms of its own identity.**
+The midrange/oscillation bound controls **only the winding term**: with winding
+number 0, `|∮Γ∂_sθ ds| = |∮(Γ−Γ̄)∂_sθ ds| ≤ ½ osc_loop(Γ)·TV_s(θ)`. Rearranging the
+identity printed immediately before it,
+`κ_pol(t) − κ₀ = −∮Γ∂_sθ ds + ∫₀ᵗT4 dt′ + ν∫₀ᵗ∮(Δ−(2/r)∂_r)Γ dθ dt′`, so as printed
+`|κ_pol(t) − κ₀| ≤ ½ osc_loop(Γ)·TV_s(θ(t))` is false unless the `∫T4` and viscous
+Γ-defect entries vanish — and neither may be dropped: the ν-term's cancellation
+lives only under `d/dt` (F19/R-NEG5; §4 row 2), and T4 is unsigned and unestimated
+after six passes (F20). **Corrected form [D]:**
+
+> `|κ_pol(t) − κ₀ − ∫₀ᵗ T4 dt′ − ν∫₀ᵗ∮(Δ−(2/r)∂_r)Γ dθ dt′| ≤ ½ osc_loop(Γ)·TV_s(θ(t))`
+
+— equivalently: the oscillation bound controls the winding term alone; the T4 and
+viscous-defect entries must be carried separately, additively. §1(b)'s starvation
+list already names T4 as an unassigned input, so this is a mis-transcription in the
+frozen wording, not a hidden logical hole; the retirement of the winding form as a
+discharge vehicle (F15/F16) is unaffected — strengthened, if anything, since even
+the increment bound carries the unestimated T4 additively. Kill-table A19's
+parenthetical is queued as F43.
+
+**E2 (§1 (COH-Δ) restatement and F16's frozen wording: "lifetime `1` fails
+everywhere on the neck by K11").** Non-strict K11 delivers only `ρ ≥ 1/2` at the
+neck's `ρ = (γ+α)/2` endpoint; at `ρ = 1/2` on the `γ+α = 1` edge (in-window
+exactly for `γ ∈ (1/2, 3/5]`), `θ = 1 = 2ρ` is exactly marginal — the same status
+the sentence assigns the viscous horizon — not failing. §2 item 3's own "`O(1)`
+only on the K10 edge `γ+α = 1`" already records the exception. Corrected clause:
+"lifetime `1` fails everywhere on the neck by K11 except exactly-marginal at
+`ρ = 1/2` when `γ+α = 1`". Origin erratum: `BH_NECK_OMEGA_BUDGET_2026-08-20.md`
+(appended there); kill-table A16 queued as F42. No result moves.

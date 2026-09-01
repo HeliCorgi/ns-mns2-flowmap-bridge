@@ -317,8 +317,10 @@ Clay/Fefferman statement shape (cross-checked against
      hypothesis `IsR3RealVelocity u₀`, by
      `r3EndpointSafeProjectedMild_isR3RealVelocity_decoded` (2026-08-23 eighth pass,
      Task A — see below); the pressure is
-     the edge-2a witness, determined only up to additive harmonic terms, with no
-     regularity or decay claimed; `Δ` and `(U·∇)U` are the operators identified by
+     the edge-2a witness, determined by the gradient identity up to additive constants
+     (the induced Poisson equation `Δp = −∇·F` alone would determine it only up to
+     harmonic terms; a nonconstant harmonic tempered distribution has nonzero gradient
+     and fails the identity), with no regularity or decay claimed; `Δ` and `(U·∇)U` are the operators identified by
      `r3L2ToTempered_r3H3LaplacianL2Operator` and edges 2b-i/3b — cited, not inlined
      into the statement.  Nothing is proved to be nonzero (2b-ii.a's recorded debt
      persists).  **No Clay-level claim.**

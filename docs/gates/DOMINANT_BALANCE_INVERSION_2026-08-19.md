@@ -94,3 +94,14 @@ convection–diffusion-balanced (`γ = α`, Type-I-like local Reynolds) singular
 arithmetically incompatible with carrying the critical norm. The next research-grade
 question, deferred by plan until after Lean Stage 0: do Bragg–Hawthorne profiles compatible
 with `σ = α`, `O(1)` circulation, and the wedge exponents exist at all?
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired)
+
+**§3 item 1: the heading interval `(1/2, 3/5]` and the clause "this edge is *exactly*
+Seregin's Euler-scaling Type II class" are inconsistent with the item's own K10 cite
+two lines later (`γ ∈ (1/2, 3/5)`).** The K10 image is the open interval
+(`m₀ ∈ (2/5, 1)` ⟹ `m ∈ (1/2, 1)` ⟹ `γ = α_S/(α_S+1) ∈ (1/2, 3/5)`); the edge point
+`(γ, α) = (3/5, 2/5)` lies on the `γ + α = 1` edge but outside the class. "Exactly"
+holds only on `γ ∈ (1/2, 3/5)`; K10's conditional exclusion pressure does not reach
+the endpoint `γ = 3/5`. (Kill-table queue item F39; survival-map erratum recorded
+likewise.)

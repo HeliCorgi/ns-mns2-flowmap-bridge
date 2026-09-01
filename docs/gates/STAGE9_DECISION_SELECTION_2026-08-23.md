@@ -255,3 +255,34 @@ only partition edge (`r_sat` is an infimum over a possibly empty set).
 - It authorizes no numerics, no new ansatz, no profile discovery, and no in-house Liouville
   manufacturing.
 - It makes no Clay claim of any kind.
+
+---
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired; the selection and the executed decision are unaffected)
+
+**E1 (§1 reconciliation chain: "→ answered `inf s = 0` and decoupled (P0 probe)").**
+Overstates a conditional result as settled. The P0 probe's own verdict
+(`BH_SWIRL_FRACTION_PROBE_2026-08-19.md` §1) is "(★) as literally stated is LIKELY
+answered NO", via an explicit `s → 0` candidate family **conditional [C] on one
+unproved separatrix-continuation lemma** (constants [C-num]); the probe itself rules
+"Not YELLOW-GREEN" and carries the continuation lemma as an OPEN item (§6), and the
+geometry gate (§6) keeps the realizing shell family [C] on the same lemma. Nowhere in
+the corpus is `inf s = 0` established unconditionally. **Corrected chain segment:**
+
+> retired as ill-posed (K12 audit) → replaced by (★) → decoupled from the branch
+> verdict, with an explicit `s → 0` family conditional [C] on the unproved
+> separatrix-continuation lemma (P0 probe: (★) likely answered NO, not settled) →
+> replaced by (★_geo) → **closed affirmatively** by the geometry gate (Outcome A,
+> θ = 1 sharp)
+
+The load-bearing content of the sentence — the decoupling and the (★_geo) closure at
+θ = 1 — is accurately reported and unchanged; `HANDOFF.md`'s summary already prints
+the correct conditional form.
+
+**E2 (§2 "Why it matters": "In Scope A the limb is already pinned to `β_v = γ` by the
+amplitude corollary (B2 (T3))").** Superseded by the 2026-09-01 erratum to
+`BH_RB2_ANCHOR_AUDIT_2026-08-21.md` (E2, queued F38): the Scope-A pinning is
+established only on the `ρ_T = γ` sub-branch; on `ρ_T > γ` the corollary supplies
+(H1), not (H2), and (T3)-emptiness is not established. The clause "every bit of
+output is net-new Scope-B content" weakens to "net-new at least in Scope B"; the
+selection's ranking and the executed decision are unaffected.

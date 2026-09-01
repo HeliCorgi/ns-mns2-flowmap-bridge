@@ -1,4 +1,15 @@
-# STATUS — 2026-08-23
+# STATUS — 2026-09-01
+
+## 2026-09-01 数学監査パス(erratum 層のみ、map は record-only)
+
+corpus 全体の数学監査(8 finder → 敵対的検証 → 統合)で 15 件の欠陥を確定
+(major 2 / minor 7 / nit 6)。**定理・ruling・凍結 verdict はどれも動いていない**。
+凍結 gate 文書には erratum を追記(silent repair なし)、kill table への修正は
+**F37–F43 として第3回 freeze review へ queue**(row/annotation は未編集)、live 文書
+(HANDOFF / formal status / Lean docstring 1件=コメントのみ)は直接修正。major 2 件:
+B6 の `(H2) ⟹ (H1)` は距離節削除後は偽(F37)、B2 (T3) の「Scope A で空」は
+`ρ_T = γ` 枝でのみ確立(F38)。詳細は
+[HANDOFF.md](HANDOFF.md) の「2026-09-01 mathematical audit pass」。
 
 ## Formal (Lean) frontier
 

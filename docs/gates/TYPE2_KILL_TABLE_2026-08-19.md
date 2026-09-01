@@ -492,3 +492,112 @@ transplant R-B2′; one-scale ring and M2 reopen in Scope B; **M3 `γ₂ < γ`: 
 transports as a scope-free statement, the kill stays conditional on
 (E⁺)+(P), and (P)'s Scope-B status is unresolved (B1)**; trigger (T-c) OPEN
 (B5) · BH verdict **YELLOW-RED maintained**; no CAP trigger.
+
+## Erratum & freeze queue F37–F43 (2026-09-01, synthesis audit — appended, not silently repaired; nothing below edits a row or annotation until user-adjudicated at freeze review round 3)
+
+**F37 (MAJOR — B6/F32, the clause "`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`").** False as
+printed once the distance clause is deleted: (H2) yields `|u_θ| ≥ c′Γ₀/r` and no
+upper bound on `r` (the envelope bounds `r_sat` only from below; Γ-max bounds `r`
+above only given (H1)). Corpus counterexample: every `β_v < γ` configuration has
+(H2) at `r_sat ≍ τ^{β_v}` with `|u_θ|(r_sat) = o(‖u‖_∞)` — (H1) fails (B2 (T3);
+`BH_BETAV_ENDPOINT_PINNING_2026-08-23.md` P4(ii)). Proposed replacement, verbatim
+from the anchor-audit erratum E1:
+> Neither pointwise implication holds after the distance-clause deletion:
+> `(H1) ⇏ (H2)` and `(H2) ⇏ (H1)`. What is true:
+> `(H1) + Γ-max ⟹ r(x_k) ≤ Γ₀/(c‖u‖_∞)`; `(H2) + envelope ⟹ r(x_k) ≥ c′Γ₀/‖u‖_∞`;
+> hence the conjunction `(H1) ∧ (H2)` ⟺ τ-uniform attainment of the envelope at its
+> corner — `β_v = γ` in the B13 sense.
+B6's single equivalent form, the B6 rider, and the frontier's "(SB-ANCH) ⟺
+`β_v = γ`" line consume only the conjunction and stand unchanged.
+
+**F38 (MAJOR — B2 (T3) and its narrowing rider).** "Empty in Scope A by the
+amplitude corollary" is unproved as cited on `ρ_T > γ`: the corollary supplies (H1)
+and caps `Γ(L)` (B2's own F31 clause, printed in the same annotation); on
+`ρ_T > γ` — live in Scope A (multiregion §2 "capped, not pinned"; B11 "even in
+Scope A") — the level's `Γ_L ≍ Γ₀τ^{ρ_T−γ} → 0`, and no recorded row locates
+Γ-saturation at the corner. T3-emptiness would mean Scope A supplies (H2) on all of
+B2, contradicting B6's co-frozen "(H2) only on `ρ_T = γ`". Proposed replacement of
+the (T3) bullet:
+> **(T3)** `B2 ∩ {β_v < γ}` (incl. K9's razor limb `β_v = α`): **empty in Scope A
+> on the `ρ_T = γ` sub-branch by the amplitude corollary; NOT established empty on
+> `ρ_T > γ` (the corollary supplies (H1), never (H2) — F31's capping direction);
+> live and never claimed in Scope B** — R-B2′ has no zoom centre there. *(This
+> narrows A2's `β_v ∈ (α,γ]` open debt in Scope A to its endpoint `β_v = γ` **only
+> on `ρ_T = γ`**; on `ρ_T > γ` the limb stays open in Scope A as well, absent a
+> (Γ-DEP)-type location theorem; in Scope B it stays fully open — its home as
+> (SB-ANCH), B6/B13.)*
+Source: anchor-audit erratum E2, which enumerates the superseded downstream print
+sites (`FREEZE_REVIEW_2_2026-08-21.md` §3; `BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`
+§4/§5/§7.3; `STAGE9_DECISION_SELECTION_2026-08-23.md` §2).
+
+**F39 (minor — §2 S_blob paragraph, the Seregin-edge identification).** Endpoint
+overreach, inconsistent with this table's own K10 row and §4 debt item 3, both of
+which correctly print `γ ∈ (1/2, 3/5)` **open**: `m₀ ∈ (2/5, 1)` ⟹
+`m = 3m₀/(2+m₀) ∈ (1/2, 1)` ⟹ `α_S = 2−m ∈ (1, 3/2)` ⟹
+`γ = α_S/(α_S+1) ∈ (1/2, 3/5)`; `γ = 3/5` requires the excluded `m₀ = 2/5`. The
+wedge's `γ+α = 1` lower edge itself does extend over `(1/2, 3/5]`, so the corner
+`(γ, α) = (3/5, 2/5)` is on the edge but **outside** the K10 class. Proposed
+replacement sentence:
+> The `γ + α = 1` lower edge is exactly Seregin's Euler-scaling class (K10) for
+> `γ ∈ (1/2, 3/5)` and is under conditional exclusion pressure there; the edge's
+> endpoint `γ = 3/5` (`m₀ = 2/5`, excluded from K10's range) lies on the edge but
+> outside the class, so the conditional exclusion pressure does not reach it.
+Same slip propagated in `TYPE2_SURVIVAL_MAP_2026-08-18.md` §7 and
+`DOMINANT_BALANCE_INVERSION_2026-08-19.md` §3.1 (errata appended there).
+Measure-zero, but the corner is the point Prop G's θ = 4 threshold analysis
+isolates, so the identification must not silently include it.
+
+**F40 (minor — §2 S_ring, boundary strictness of the lower envelope).** The single
+strict `<` over `max(2γ−1, min(1−γ, 1/2)·[C])` wrongly excludes the face
+`ρ = min(1−γ, 1/2)`: K8's row excludes only the **open** set `ρ < min(1−γ, 1/2)`,
+and its source [D1′] (`D1_ADVERSARIAL_AUDIT_2026-08-19.md`) states the surviving
+condition as the **non-strict** `ρ ≥ min(1−γ, 1/2)`. Strictness is correct only for
+the K5 arm (`ρ ≤ 2γ−1` excluded; dissipation log-diverges at equality). For
+in-window `γ ∈ (1/2, 2/3)` the binding arm is `1−γ`, so the printed set drops a
+face no K-row excludes — violating the table's own format `S_survive = S₀ \ ⋃K_j`;
+this is the ring analogue of the S_blob mixed-strictness that A7 repaired for the
+blob only. Proposed replacement (joint form with F41):
+> `S_ring = {(γ, ρ, α) : 1/2 < γ < 1, γ + α ≥ 1 (K11 — F41), 2γ−1 < ρ (K5, strict),
+> min(1−γ, 1/2) ≤ ρ ([C], K8, non-strict), ρ ≤ α, ρ < γ (K3/R4),
+> 2γ ≤ ρ + 2α < 3γ}` — closes at `γ = 1` (as before, from K5+K6).
+
+**F41 (minor — S_ring was not updated with K11).** Both K11 derivations apply
+verbatim at a ring core: (i) term balance — `∂ₜu ~ τ^{−γ−1}` vs convection
+`U²/ℓ = τ^{−2γ−α}` and diffusion `νU/ℓ² = τ^{−γ−2α}` use only the amplitude `γ` and
+the finest scale `α`, giving `γ + α ≥ 1`; (ii) energy flux — growth exponent
+`−2γ+ρ+2α−1` vs convective supply `τ^{−3γ+ρ+α}` gives `γ + α ≥ 1` again (`ρ`
+cancels). Yet the printed S_ring (its unconditional clauses, i.e. ignoring the [C]
+K8 arm) contains K11-violating points, e.g. `(γ, ρ, α) = (0.55, 0.30, 0.44)` with
+`γ + α = 0.99 < 1` — an internal inconsistency under the table's own format
+`S_survive = S₀ \ ⋃K_j` (K11's row states no blob restriction; B1 declares K1–K11
+arithmetic scope-free; A16 applies K11 at neck radii). Adjudication requested
+between: (a) adopt the `γ + α ≥ 1 (K11)` clause (F40's joint form — shrink-only;
+under the K8 arm it is implied, so only the unconditional set changes; moot for the
+excluded Scope-A one-scale ring, live for its Scope-B reopening), or (b) print an
+explicit blob-core-only scoping rider on the K11 row. The F40 joint form assumes (a).
+
+**F42 (nit — A16 (COH-Δ), "lifetime `1` fails everywhere by K11").** With the
+non-strict threshold (`θ_coh(ρ) ≥ 2ρ` delivered; the same sentence calls the
+viscous horizon `2ρ` "exactly marginal") and non-strict K11, `θ = 1` fails iff
+`ρ > 1/2` **strictly**; on the K11-equality edge `γ+α = 1` — inside the frozen
+window exactly for `γ ∈ (1/2, 3/5]` (A7 makes only `α > 2γ−1` strict) — the neck
+endpoint `ρ = (γ+α)/2 = 1/2` has `1 = 2ρ`: exactly marginal, not failing
+(`BH_COH_WINDING` §2 item 3's own "`O(1)` only on the K10 edge `γ+α = 1`").
+Proposed replacement clause:
+> viscous `2ρ` exactly marginal; lifetime `1` fails everywhere by K11 **except
+> exactly-marginal at the neck endpoint `ρ = 1/2` on the `γ+α = 1` edge** — and K11
+> (`γ+α ≥ 1`) places the whole neck at `ρ ≥ 1/2`, i.e. entirely inside `√(ντ)` —
+Superseded print sites, not rewritten there: `FREEZE_REVIEW_2026-08-21.md` §3;
+origin wordings in `BH_NECK_OMEGA_BUDGET_2026-08-20.md` §1/§4 and
+`BH_COH_WINDING_2026-08-21.md` §1/F16 (errata appended at both source docs). No
+result moves: the marginal set is a codimension-1 edge at a single neck endpoint,
+and the neck-budget MASTER RESULT (no sub-wedge survives; the outer endpoint
+`ρ = γ > 1/2` always fails) is untouched.
+
+**F43 (minor — A19's parenthetical winding form).** As a formula it silently drops
+the `∫T4` and viscous Γ-defect entries of the identity it abbreviates; the
+midrange/oscillation bound controls the winding term alone. Proposed corrected
+print (source: `BH_COH_WINDING_2026-08-21.md` erratum E1):
+> `|κ_pol(t) − κ₀ − ∫₀ᵗ T4 dt′ − ν∫₀ᵗ∮(Δ−(2/r)∂_r)Γ dθ dt′| ≤ ½ osc_loop(Γ)·TV_s(θ(t))`
+A19's retirement ruling (increment vs level; input starvation) never used the false
+form and is unaffected.

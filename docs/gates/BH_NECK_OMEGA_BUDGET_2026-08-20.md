@@ -207,3 +207,29 @@ rules; do not stand down to V1; no in-house Liouville.
 Sources read first-hand this pass: `BH_BIOT_SAVART_LEDGER_2026-08-20.md`,
 `BH_MULTIREGION_AUDIT_2026-08-20.md`, `BH_CONSTANT_EXCLUSION_ROW_2026-08-20.md`,
 `TYPE2_KILL_TABLE_2026-08-19.md` (K11, `S_blob`).
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired; the §4 MASTER RESULT is unaffected)
+
+**§1 (COH) block ("collapse lifetime `θ = 1` (fails everywhere on the neck, by
+K11)") and §4 ("θ = 1 is exactly what exceeds the threshold, everywhere on the
+neck"): boundary quantifier overstated.** This document's own convention puts
+equality on the delivered side ((E⁺⁺) delivered iff `θ_coh(ρ) ≥ 2ρ`; the viscous
+horizon `θ = 2ρ` is "exactly marginal", not failing), so `θ = 1` fails at `ρ` iff
+`ρ > 1/2` **strictly** — while K11 is non-strict (`γ+α ≥ 1`), giving only
+`ρ = (γ+α)/2 ≥ 1/2` at the neck's endpoint. On the K11-equality face `α = 1−γ` —
+inside the frozen window exactly for `γ ∈ (1/2, 3/5]` — the endpoint `ρ = 1/2` has
+`θ = 1 = 2ρ`: **exactly marginal, delivered-marginally, not failing** (corroborated
+by `BH_COH_WINDING_2026-08-21.md` §2 item 3: "`O(1)` only on the K10 edge
+`γ+α = 1`"). Corrected wordings:
+
+> collapse lifetime `θ = 1` (fails on the whole neck by K11 except exactly-marginal
+> at the endpoint `ρ = 1/2` when `γ+α = 1`, i.e. `α = 1−γ`, `γ ≤ 3/5`).
+
+> Lifetime-length coherence (`θ = 1`) meets or exceeds the threshold everywhere on
+> the neck, exceeding it strictly except at `ρ = 1/2` on the `γ+α = 1` edge.
+
+The §4 MASTER RESULT is unaffected (the marginal set is codimension-1; the outer
+endpoint `ρ = γ > 1/2` always fails, so no sub-wedge is delivered; "residence-free
+sub-wedge empty since `2ρ ≤ 1` throughout needs `γ ≤ 1/2`" stands). Downstream print
+sites superseded here, not rewritten: `BH_COH_WINDING_2026-08-21.md` §1/F16 (erratum
+E2 appended there), kill-table A16 (queued F42), `FREEZE_REVIEW_2026-08-21.md` §3.

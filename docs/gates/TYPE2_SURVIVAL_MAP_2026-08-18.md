@@ -135,3 +135,24 @@ conditional exclusion pressure; the interior demands quasi-static steady-Euler
 (Bragg–Hawthorne) cores. See `TYPE2_KILL_TABLE_2026-08-19.md` and
 `DOMINANT_BALANCE_INVERSION_2026-08-19.md`. The map is frozen apart from footnote-level
 residues recorded in the kill table.
+
+## Erratum (2026-09-01, synthesis audit — appended, not silently repaired)
+
+- **[H2] (§2): limit form overstates the cited theorems.** CSTY 2008/2009 and KNSS
+  2009 exclude the existence of any constant `C_*` with `|v| ≤ C_*|t|^{−1/2}`; the
+  exact negation is `limsup_{t→T*} √τ‖u‖_∞ = ∞`, not the full limit
+  `√τ‖u‖_∞ → ∞` (a liminf could a priori stay bounded; no axisymmetric liminf
+  theorem is cited — contrast [H6], where the limit form carries its own separate
+  Seregin 2012 citation). Corrected [H]:
+  > **Type II required**: `limsup_{t→T*} √τ‖u(t)‖_∞ = ∞` (no bound
+  > `|v| ≤ C_*|t|^{−1/2}` with any constant survives).
+  Within the power-law ansatz vocabulary (`‖u‖_∞ ~ τ^{−γ}`) limsup and lim coincide,
+  so no downstream cut moves; the kill table's K2 row ("`γ = 1/2` with bounded
+  prefactor" excluded) already states the correct bounded-prefactor form.
+- **§7 freeze note: Seregin-edge endpoint.** "`(1/2, 3/5]` … is exactly Seregin's
+  Euler-scaling Type II class" holds for `γ ∈ (1/2, 3/5)` **open** (K10:
+  `m₀ ∈ (2/5, 1)` ⟹ `γ = α_S/(α_S+1) ∈ (1/2, 3/5)`); the edge's endpoint `γ = 3/5`
+  (`α = 2/5`) is on the `γ + α = 1` edge but **outside** the K10 class — the
+  conditional exclusion pressure does not reach it. (Same slip in the kill table §2,
+  queued there as F39, and in `DOMINANT_BALANCE_INVERSION_2026-08-19.md` §3.1;
+  errata recorded at each site.)
