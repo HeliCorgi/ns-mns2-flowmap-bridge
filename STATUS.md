@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第5セッション: H-SEL statement correction audit まで反映)
+# STATUS — 2026-09-02 (第6セッション: P-1 literature sweep まで反映 — H-SEL SURVIVES)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -184,6 +184,26 @@ superlative は撤回 — HR-1 の `τ^{−α/2}` 以上、`α = 2γ/3` 縁で�
 multi-scale 不変 — **全 polarity PASS。ランキング再計算(HR-1/HR-3 再確認、
 120/60/45…)、選定再確認: H-SEL(p = 2 形)、次点 HR-1。** Lean 無変更・proof
 search なし・文献 fetch なし(V-1…V-6 未放電)。
+
+**第6セッション(ユーザー commission): P-1 = H-SEL 一次文献 sweep 実行済み —
+判定: H-SEL SURVIVES(降格なし・棄却なし)、P-2 進行可**
+([`docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md`](docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md)、
+4並列一次検証レーン+main-loop 裁定、RECORD-ONLY)。**降格チェック**: family の
+どのメンバー(scale-invariant p=4 含む)も瞬時形では未証明 — 既知フロンティアは
+FGT 時間平均 `⟨‖∇u‖∞^{1/2}⟩`(必要指数1に対し 1/2)+ historical analyticity-radius
+換算 p=5 のみ。同一形の既知仮説なし(最近接 architecture 前例 = Gibbon et al.
+Nonlinearity 27 (2014) regime-I — novelty 主張時は要引用)。**棄却チェック**:
+反例探索2レーン独立で空、worst-case 数値(Kang–Yun–Protas `ℰ₀^{3/2}`、depletion)は
+支持的。**証明経路制約3件を命名**: C-1(Lu–Doering maximizer が p<4 を kinematic に
+偽にする — 証明は dynamical 必須)、C-2(Palasek arXiv:2509.18595 — Q₀ の subcritical
+依存は本質的)、C-3(Tao averaged cascade は p<5/2 を violate — energy+bilinear では
+不可、exact-NS 構造必須)。**HR-1/HR-3 の plug-in を verbatim 検証**(V-1/V-3/V-5
+放電): HR-1 は BdVB DIE 15 (2002)(β=1/2・定数任意)に re-base(CF 1993 は
+Lipschitz 限定で NEAR-MISS; 局所化 sub-debt V-1′)、HR-3 は BFG ARMA 231 (2019)
+Thm 19(仮説は印字形より弱い — **HR-3′ 弱形 restatement 提案**; Albritton–Bradshaw
+の energy-homogeneity 注意も記録)。BKM の NS remark を一次 [V] 化。ランキング
+再確認(120/60/45、HR-2/4/7 は scope 外で不変)。**P-2(`Q₅(t)` 数値プローブ)
+commission はユーザー行為。proof search(H-SEL/N0)は引き続き未 commission。**
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

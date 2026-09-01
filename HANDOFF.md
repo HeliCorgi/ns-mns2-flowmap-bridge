@@ -219,7 +219,38 @@ Last updated: 2026-09-02 JST (second session).
 > P-1/P-2/P-3 now target the `p = 2` form (P-1 must sweep the whole family
 > `p ∈ (0,4]`); `Q₅(t) := ‖∇U‖_∞/(1+‖∇U‖₂²)`. No Lean change, no proof
 > search, no literature fetched (V-1…V-6 undischarged). Baseline stays the
-> 8775-job gate. **Resume anchor: "Next work" below + that record's §9.**
+> 8775-job gate.
+>
+> **2026-09-02 (sixth session): P-1, the H-SEL primary-literature sweep, is
+> COMMISSIONED and EXECUTED** (four parallel first-hand lanes + main-loop
+> adjudication; record `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md`;
+> RECORD-ONLY, no Lean, no proof search). **VERDICT: H-SEL SURVIVES — no
+> demotion, no refutation.** No published theorem proves any family member
+> instantaneously (not even scale-invariant `p = 4`; the known frontier is
+> the FGT time-averaged `⟨‖∇u‖_∞^{1/2}⟩` bound — exponent 1/2 vs the needed
+> 1 — plus *historical* analyticity-radius conversions at `p = 5`); no named
+> hypothesis identical to H-SEL exists (closest architecture precedent:
+> Gibbon et al. Nonlinearity 27 (2014) regime-I — cite in novelty claims);
+> refutation searches empty; worst-case numerics (Kang–Yun–Protas: `ℰ₀^{3/2}`
+> amplification, depletion) supportive. **Three named proof-route constraints
+> recorded: C-1** Lu–Doering maximizers make every `p < 4` kinematically
+> false over static div-free fields — the proof must be dynamical; **C-2**
+> Palasek arXiv:2509.18595 — `Q₀`'s subcritical `‖u0‖_{H³}` dependence is
+> essential (critical-norm-only constants are refuted); **C-3** Tao's
+> averaged cascade violates every member `p < 5/2` (rate `N^{1/2}` at
+> `p = 2`) while preserving energy + bilinear estimates — exact-NS structure
+> required. **HR-1/HR-3 plug-ins verified verbatim** (V-1/V-3/V-5
+> discharged): HR-1 re-based to BdVB, Diff. Int. Eq. 15 (2002) (β = ½,
+> **arbitrary constant**, Leray–Hopf; CF 1993 is Lipschitz-only — NEAR-MISS;
+> sub-debt V-1′ = Grujić–Guberović CMP 298 (2010) localization); HR-3 plug-in
+> = BFG ARMA 231 (2019) Thm 19, whose hypothesis is *weaker* than printed —
+> **HR-3′ restatement proposed** (one post-escape-time instant, per-component
+> ± sets, δ = (3/4)^{1/3}); Albritton–Bradshaw arXiv:2110.02187
+> energy-homogeneity caution carried. BKM's NS remark now first-hand [V].
+> Ranking re-affirmed (120/60/45; HR-2/4/7 unchanged — out of scope).
+> **H-SEL is cleared for P-2 (the `Q₅(t)` numerical ratio probe);
+> commissioning P-2 is a user act.** Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + the P-1 record's §3/§5.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -256,27 +287,37 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, fifth session)
+### Next work (written 2026-09-02, sixth session)
 
-Read first: this file's top block; `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
-(the whole record — the top correction notice, §5, and **§9**, which carries the
-operative corrected H-SEL statement, errata EH-1/EH-2, the re-run battery, and the
-re-affirmed ranking); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6
-(N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
+Read first: this file's top block; `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md`
+(the P-1 record — esp. §3 constraints C-1/C-2/C-3 and §5 verdict);
+`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (correction notice, §5, §9 —
+the operative H-SEL statement); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`
+SS-5/SS-6 (N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **The next research theorem is selected: H-SEL, in the §9 corrected form**:
-  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}²)` on certified horizons — the weakest
-  member of the power family closable by the energy equality alone (endpoint
-  `p = 2`, EH-1) — with the two-arrow known-math bridge (energy equality EB-1 +
-  direct integration) to N0 and thence the proved Lean assembly. Do **not** cite
-  the superseded `4/3` form or the retracted reverse-GN reading (EH-2). **Work on
-  H-SEL is NOT yet commissioned.** The recorded counterexample-first order, each
-  step requiring an explicit user commission: P-1 first-hand prior-art sweep over
-  the whole family `p ∈ (0,4]` (discharges debt V-5 and re-validates the endpoint
-  and the selection), then P-2 the numerical ratio probe
-  `Q₅(t) = ‖∇U‖_∞/(1+‖∇U‖₂²)` on candidate datasets, then P-3 the analytic
-  refutation attempt — **before any proof search on H-SEL**. Direct proof search
-  on N0 itself remains separately uncommissioned, unchanged.
+- **Selected research theorem: H-SEL (p = 2 form)**:
+  `‖∇U(t)‖_∞ ≤ Q₀(T;ν,‖u0‖)·(1+‖∇U(t)‖_{L²}²)` on certified horizons; bridge to
+  N0 = EB-1 + direct integration. Do **not** cite the superseded `4/3` form or the
+  retracted reverse-GN reading (EH-2). **P-1 is DONE — H-SEL SURVIVES** (not a
+  rephrase of known math; no known counterexample; cleared for P-2). Any future
+  proof-route discussion MUST respect the recorded constraints: C-1 (dynamical
+  only — every `p < 4` is kinematically false over static div-free fields), C-2
+  (`Q₀`'s subcritical datum-dependence essential — Palasek), C-3 (exact-NS
+  structure beyond energy + bilinear estimates — Tao cascade violates `p < 5/2`).
+- **Next in the recorded order, requires an explicit user commission: P-2 — the
+  numerical ratio probe** `Q₅(t) = ‖∇U‖_∞/(1+‖∇U‖₂²)` on candidate datasets
+  (own reproductions when the numerical lane resumes; accessible published
+  near-singular data). Falsification event = validated super-datum growth of
+  `Q₅` on a bounded horizon. After that, P-3 (analytic refutation attempt —
+  seeds: C-1's Lu–Doering-type maximizer configurations; shape guide: the
+  `p < 5/2` Tao-violation window). **Any proof search on H-SEL, and on N0,
+  remains separately uncommissioned — do not start either implicitly.**
+- **Residual literature debts (small, non-blocking):** V-1′ (Grujić–Guberović CMP
+  298 (2010) localization for HR-1's localized form); V-2/V-4/V-6 (Miller, DHY,
+  Cao–Titi — only if HR-2/HR-4/HR-7 ever become load-bearing); V-8/V-9/V-10
+  (paywalled originals — verified via secondaries, fetch only if load-bearing).
+  The HR-3′ restatement (P-1 record §4) is adopted-for-citation within the head
+  roster; it changes no selection.
 - **ON HOLD (user instruction, fourth session): SEL-3/SEL-5 Lean implementation** —
   formalization debt on known mathematics, NOT research-unknowns. Do not resume
   without a new user instruction; when resumed, the binding plan is the discharge
