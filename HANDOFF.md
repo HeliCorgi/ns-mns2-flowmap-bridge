@@ -7,8 +7,9 @@ Last updated: 2026-09-01 JST.
 > **formal plumbing is STOPPED** by rule. The first Stage-9 decision theorem was
 > commissioned by the user and **has been executed and decided**:
 > **`YES (CONSISTENT)` — scope-free exponent arithmetic does NOT pin `β_v`**
-> (`docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`). The minimal remaining logical gap
-> is one **new** named object, **(Γ-DEP)**. The research-side freeze (round 2, 2026-08-21)
+> (`docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`). The remaining logical gap
+> was there named **(Γ-DEP)** — re-scoped at round 3 (C0): **sufficient-only**,
+> three recorded closure shapes. The research-side freeze (round 2, 2026-08-21)
 > is **unchanged**: BH YELLOW-RED, B2 UNKILLED in Scope B, trigger (T-c) OPEN; all map
 > consequences of the decision are **proposals** for the next freeze review, applied to
 > nothing.
@@ -16,9 +17,32 @@ Last updated: 2026-09-01 JST.
 > **2026-09-01: a corpus-wide mathematical audit pass** (multi-agent, adversarially
 > verified) found and recorded 15 defects (2 major) in the frozen research prose — none
 > touching a ruling, a Lean theorem, or the frontier verdicts. Frozen gate documents
-> carry appended errata; kill-table corrections are **queued as F37–F43** for the
-> round-3 user-adjudicated freeze review; live documents are repaired in place. See
-> "2026-09-01 mathematical audit pass" below.
+> carry appended errata; kill-table corrections were queued as F37–F43; live documents
+> are repaired in place. See "2026-09-01 mathematical audit pass" below.
+>
+> **2026-09-01 (same day): FREEZE REVIEW ROUND 3 is EXECUTED** on the user's dated
+> instruction (`docs/gates/FREEZE_REVIEW_3_2026-09-01.md`; kill-table annotations
+> **C0–C14**). All of F37–F43 ADOPTED (F41 in option (a): `S_ring` gains K11);
+> P1–P7 ADOPTED (P1/P2/P3 amended — P1 for the new standing policy
+> **C0: (Γ-DEP) is a sufficient closer only** ("unique closer"/"no third route"
+> retired from citation), P2/P3 for F38-consistency and C0); the Seregin arXiv:2606.29468 row-(i) update ADOPTED as
+> pressure-only with a named [V?] full-text debt (C14). The **frontier is re-fixed
+> uniquely** (post-round-3 block): Scope-A exhaustiveness holds only on `ρ_T = γ`;
+> on `ρ_T > γ` (T3)-emptiness is NOT established even in Scope A; Scope B unchanged
+> (B2 UNKILLED, (SB-ANCH) a genuine conjunction). The external ChatGPT-side record
+> **(EXT-ΓDEP-1)** (`Γ-DEP = UNDERDETERMINED`; smooth divergence-free snapshot
+> counterprofile; the (Γ-DEP)_fld re-fix; (Γ-OSC)) was supplied verbatim by the
+> user the same day and is **IMPORTED with an in-repo audit — PASS at snapshot
+> level** (`docs/gates/EXT_GAMMADEP_DECISION_2026-09-01.md`; debts D-1/D-2/D-3
+> named, consumed by nothing). Headline no-go: **(Γ-DEP) is not derivable from
+> single-time NS-compatible smooth geometry — any proof must consume the time
+> evolution.** **Final next-decision verdict (round-3 §8): the Γ-OSC feasibility
+> decision** (weakest drift condition for the τ-uniform contraction at `R = τ^α`;
+> both directions vs frozen B2; `IMPLIED / VIOLATED / UNDERDETERMINED`) **is
+> commissioning-ready** — commissioning is a user act. Registered termination
+> rule: continue only on IMPLIED (or a partial IMPLIED naming the consumed NS
+> structure); VIOLATED ⟹ end/pivot justified; a second consecutive
+> UNDERDETERMINED ⟹ the BH branch ends.
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -952,19 +976,21 @@ explicitly commissioned the proof search after the selection):
   `(T3)` is empty in Scope A on the `ρ_T = γ` sub-branch — 2026-09-01 erratum, queued
   F38 — granting it is a **class change**, not a condition, which is why the verdict
   is `YES` and not `PIN_CONDITIONAL`).
-- **MINIMAL LOGICAL GAP — one new named object, `(Γ-DEP)`** (*intra-core circulation
-  depletion*; genuinely new, exists nowhere in the corpus at any scope):
+- **NAMED GAP — one new object, `(Γ-DEP)`** (*intra-core circulation depletion*;
+  genuinely new, exists nowhere in the corpus at any scope):
   ∃ τ-uniform `c′ ∈ (0,1)`, `δ > 0` with
-  `sup_{dist(x,axis) ≤ δτ^{α}} |Γ(x,t)| < c′Γ₀` near `T*` — i.e. **Γ cannot saturate
-  strictly between the envelope corner `τ^γ` and the core scale `τ^α`**. It is
-  sufficient and minimal. **(SB-ANCH) cannot serve**: B6+B13 give
+  `sup_{dist(x,axis) ≤ δτ^{α}} |Γ(x,t)| < c′Γ₀` near `T*` *(operative form since
+  2026-09-01: **(Γ-DEP)_fld** with `c_* ∈ (0, c₀)` — decision-record erratum E5)*.
+  It is sufficient *(the further claims "minimal" and "no third route" are
+  **withdrawn** — decision-record erratum E1 / round-3 C0: an outright (SB-ANCH)
+  proof and a memberwise dichotomy are the other recorded closure shapes)*.
+  **(SB-ANCH) cannot serve as a premise**: B6+B13 give
   `(SB-ANCH) ⟺ {β_v = γ, τ-uniform}`, so it **is** the other horn — a pin conditional on
   its own conclusion. **V1 is unpromoted and, checked at source, is the `C/r` KNSS-type
   Liouville family, not a viscous cutoff — its hypothesis fails on `W★`, so it is inert
   even if promoted.** Granting the two strongest unavailable inputs *simultaneously*
   (unprinted per-region K11 + a viscous cutoff) yields `β_v = 1/2` exactly, still
-  strictly inside the limb whenever `α < 1/2 < γ` — which `W★` is. **There is no third
-  route: either (Γ-DEP) is proved, or the class changes to Scope A.**
+  strictly inside the limb whenever `α < 1/2 < γ` — which `W★` is.
 - **NOT decided** (printed in the record): exponent consistency is **not** existence —
   `W★` is bookkeeping, not a flow, and no blow-up and no Clay claim is made or implied;
   realizability is undecided (the single-time coexistence / one-pressure debt is
@@ -1140,7 +1166,66 @@ only, no proof touched).
 **Unchanged**: every Lean theorem and its axiom audit; the `YES (CONSISTENT)` ruling,
 `W★`, and (Γ-DEP) sufficiency; all frozen verdicts (BH YELLOW-RED · B2 UNKILLED in
 Scope B · (T-c) OPEN · no CAP trigger · no Clay claim). The round-3 freeze review
-agenda is now **P1–P7 + Seregin row-(i) + F37–F43**.
+agenda was **P1–P7 + Seregin row-(i) + F37–F43** — executed the same day (next
+section).
+
+## 2026-09-01 freeze review round 3 (EXECUTED)
+
+Master record `docs/gates/FREEZE_REVIEW_3_2026-09-01.md`; kill-table annotation
+block **C0–C14** + the **post-round-3 frontier** (supersedes round 2's closing
+block). Adjudication authority: the user's dated 2026-09-01 instruction. Summary:
+
+- **C0 (standing policy, user-directed):** (Γ-DEP) is cited as **sufficient only**;
+  the recorded closure shapes for the middle limb are (Γ-DEP) / an outright
+  (SB-ANCH) proof (never as a premise) / a memberwise dichotomy
+  `(Γ-DEP) ∨ (SB-ANCH)` — no exclusivity claim. "Unique closer" / "no third route"
+  retired from citation.
+- **F37–F43 all ADOPTED** (C1–C7); F41 in option (a) — `S_ring` gains `γ + α ≥ 1`.
+- **P1–P7 all ADOPTED** (C8–C14); P1/P2/P3 amended at adjudication (P1 for C0;
+  P2/P3 for F38-consistency and C0 — their drafted texts contradicted the same-day
+  F38 re-scoping and the sufficiency-only policy).
+- **Seregin row-(i) ADOPTED** (C14): arXiv:2606.29468's log-corrected families add
+  conditional pressure **on the OOV faces only** — a scope annotation, not a new
+  cut; **[V?] full-text verification debt named** before any chain may consume it.
+- **Frontier re-fixed uniquely:** Scope-A exhaustiveness (and hence the middle-limb
+  endpoint-narrowing there) holds **only on `ρ_T = γ`**; on `ρ_T > γ`,
+  (T3)-emptiness is **not established even in Scope A**. Scope B: B2 UNKILLED;
+  (SB-ANCH) a genuine conjunction (neither clause implies the other); middle limb
+  row-compliant on all of `S_blob`; `{β_v < γ} = ¬(SB-ANCH)` with sup-swirl-poverty
+  throughout. BH YELLOW-RED · (T-c) OPEN · no CAP trigger · no Clay claim.
+- **(EXT-ΓDEP-1) IMPORTED the same day** (round-3 record §8;
+  `docs/gates/EXT_GAMMADEP_DECISION_2026-09-01.md` — two external documents
+  verbatim + in-repo audit, **PASS at snapshot level**, every derivable claim
+  recomputed). Content: `Γ-DEP = UNDERDETERMINED`; an actual smooth / compactly
+  supported / axisymmetric / divergence-free / axis-regular counterprofile
+  (`Γ_τ = mΓ₀χ(r/τ^β)η((z−z*)/τ^β)`, `c₀ < m < 1`, plus a `ψ₁`-streamfunction
+  poloidal blob) realizing the middle limb within every frozen budget — **the
+  static route to (Γ-DEP) is closed: any proof must consume the NS time
+  evolution**; the operative field statement is now **(Γ-DEP)_fld**
+  (`c_* ∈ (0, c₀)` — fixes the 08-23 print's vacuity gap); **(Γ-OSC)** (τ-uniform
+  oscillation contraction at core scale) is *the most direct identified
+  sufficient condition* — `(Γ-OSC) ⟹ (Γ-DEP)_fld` verified, converse/exclusivity
+  unproved (C0-consistent hygiene); the counterprofile is a **standing test
+  case** for every future Γ-depletion hypothesis. Named debts: D-1 [V?]
+  Ożański–Palasek citations; D-2 bare-drift falsity risk (generic supercritical
+  divergence-free drifts can defeat parabolic continuity — the decision must name
+  the NS-specific structure it consumes); D-3 WATCH — an unidentified June-2026
+  arXiv preprint claiming unconditional axisymmetric-with-swirl global regularity
+  (CAP-level if ever verified; used nowhere).
+- **Final next-decision verdict (round-3 §6 + §8): the Γ-OSC feasibility
+  decision is commissioning-ready** — the reduced form: extract the weakest
+  quantitative drift condition for `osc_{Q_{θR}}Γ ≤ q·osc_{Q_R}Γ` τ-uniformly at
+  `R = τ^α` from known drift–diffusion / boundary-regularity theorems; verify
+  both directions against frozen B2 (derivable? or violated by an explicit
+  frozen-compatible smooth profile?); verdict `IMPLIED / VIOLATED /
+  UNDERDETERMINED`; **no new exponent restrictions as substitutes**. The core
+  question: does genuine NS structure beat the generic large-drift obstruction
+  `R‖u‖ ≍ τ^{α−γ} → ∞`? **Registered termination rule:** continue past this
+  decision only on IMPLIED (or a partial IMPLIED naming the consumed NS
+  structure); VIOLATED ⟹ the Γ-depletion lane's expected value collapses
+  (end/pivot justified); a second consecutive UNDERDETERMINED ⟹ the BH branch
+  ends (pivot: the `SPEC.md` numerical candidate program, or literature-level
+  Seregin watch). Commissioning is a user act; nothing started.
 
 ## Latest Lean verification
 
@@ -1328,12 +1413,14 @@ maximal trajectory u*、edge 3 proper、edge 5 Clay packaging は、Stage-9 の�
 = **`YES (CONSISTENT)`** — 凍結 scope-free 行は Γ 飽和の位置を決めないので中間肢
 `β_v ∈ (α,γ)` を pin できない。明示 witness `W★`(γ=3/5, α=9/20, β_v=1/2、印字済み blob 形状のみ、
 単一の Γ プロファイル `Γ₀·min((r/τ^{1/2})^k, τ^{1/2}/r)` で実現)が全行を各自の半径で通過し、
-族は `S_blob` 全体に射影する。閉じるには**新規1定理 (Γ-DEP)**(`sup_{dist ≤ δτ^α}|Γ| < c′Γ₀`、
-τ 一様)が必要。**(SB-ANCH) は使えない**(B6+B13 でもう一方の端点と同値=循環論法)。V1 は
+族は `S_blob` 全体に射影する。閉じ手は3形(round-3 **C0**、必要性表現は引用禁止):
+**(Γ-DEP)[十分条件のみ]**/(SB-ANCH) の outright 証明(**前提としては**循環で不可)/
+memberwise 二分法 `(Γ-DEP) ∨ (SB-ANCH)`。operative な field-level 文は **(Γ-DEP)_fld**
+(`c_* ∈ (0, c₀)`、E5/EXT §B.5 — 08-23 印字の `c′ ∈ (0,1)` は vacuity ギャップにつき超越)。V1 は
 未昇格かつ(出典確認済み)C/r Liouville 族であって粘性カットオフではなく、`W★` 上で仮説が破れる
 ため昇格しても不活性。**指数算術の無矛盾性は NS 解の存在ではない**(coexistence/one-pressure
 債務は継承。blow-up も Clay も一切主張しない)。A2 の中間肢債務は **NO 側のみ** 閉じ、
-提案 P1–P7 は次回 freeze review 待ち(record-only、何も適用していない)。
+提案 P1–P7 は **round 3(2026-09-01)で全裁定・執行済み**(C8–C14; P1/P2/P3 は修正裁定)。
 
 参考(元の commissioning 記録) = **Scope-B β_v endpoint-pinning decision**
 (Scope-B の B2 クラス、O(1) 非消滅循環、Scope-A 仮説なしで、中間肢 M(sub-core Γ 飽和 かつ
@@ -1347,18 +1434,35 @@ P6 残余 [V?] と Chen–Fang–Zhang endpoint 可容性は verification obliga
 K9 適用ごとに τ^{α−γ} misfire チェック、marginal/log/sub-polynomial/循環消滅面は
 out-of-vocabulary として記録(辞書を発明しない)。
 
-**研究側 freeze は不変**(2026-08-21 round 2): BH YELLOW-RED、Scope B で B2 は UNKILLED、
-(SB-ANCH) = (H1)∧(H2)、trigger (T-c) は OPEN、in-house 3 vehicle は退役/ブロック、fork-β の辞書拒否も有効。
-別途キュー済み(このタスクの blocker ではない): 次回 freeze review での **Seregin arXiv:2606.29468**
-(log 補正 Type-II 族; 除外は ancient Euler の Liouville 定理へ帰着し **未解決**)row-(i) 更新。
+**研究側 freeze の現在形 = round 3(2026-09-01 執行済み)**: 監査 F37–F43・提案 P1–P7・
+Seregin row-(i) をすべて個別裁定(全 ADOPT、P2/P3 は F38 整合と C0 のため修正)。
+kill table annotation **C0–C14** + **post-round-3 frontier** が現行(round-2 block を supersede):
+Scope-A exhaustiveness は `ρ_T = γ` 枝でのみ成立、`ρ_T > γ` では (T3) 空性は Scope A でも未確立;
+Scope B は B2 UNKILLED、(SB-ANCH) = (H1)∧(H2) は真の連言(どちらの含意も不成立、C1/F37)。
+**C0(恒久方針): (Γ-DEP) は十分条件としてのみ引用**(「唯一の閉じ手」「third route なし」は引用禁止)。
+BH YELLOW-RED、(T-c) OPEN、CAP なし、Clay 主張なしは全て不変。
 
-**次の候補(ユーザー裁定待ち、何も commissioned していない)**: (1) (Γ-DEP) 自体を定理として攻める
-(この decision が名付けた唯一の閉じ手。Scope B のままで B2 を殺せる可能性がある単一対象)、
-(2) 選定記録が「この次の自然な decision」と記録した **Seregin 級 ancient-Euler Liouville**
-(arXiv:2606.29468 が一般化した形で未解決のまま残している対象)、(3) P1–P7 を裁定する
-**第3回 freeze review**(Seregin row-(i) 更新と、2026-09-01 数学監査が queue した
-**F37–F43**(major 2 件: B6 の `(H2) ⟹ (H1)` 撤回、B2 (T3) の Scope-A 空性の
-`ρ_T = γ` への再スコープ)も同時に処理)。
+**外部 record (EXT-ΓDEP-1) は import 済み**(`docs/gates/EXT_GAMMADEP_DECISION_2026-09-01.md`、
+逐語2文書+リポジトリ内監査 PASS): `Γ-DEP decision = UNDERDETERMINED`。headline no-go =
+**snapshot レベル(smooth/div-free/finite-energy の単一時刻場)では (Γ-DEP) は決まらない —
+証明は NS の時間発展を消費しなければならない**(counterprofile
+`Γ_τ = mΓ₀χ(r/τ^β)η((z−z*)/τ^β)` + ψ₁ poloidal blob、frozen budget 全通過、恒久テストケース)。
+operative 文は **(Γ-DEP)_fld**(`c_* ∈ (0, c₀)`)。**(Γ-OSC)**(core scale での τ-uniform
+oscillation contraction)は「特定できた最も直接的な十分条件」— `(Γ-OSC) ⟹ (Γ-DEP)_fld` のみ確立。
+debts: D-1 [V?] Ożański–Palasek 引用、D-2 bare-drift 反例リスク(一般 supercritical div-free drift
+では parabolic continuity が破れ得る — decision は消費する NS 固有構造を明示せよ)、
+D-3 WATCH(6月の axisym-with-swirl 無条件大域正則性主張 preprint、未特定・未検証・どこにも不使用)。
+
+**次の decision(commissioning-ready、ユーザーの commission 待ち)= Γ-OSC feasibility decision**
+(round-3 record §8 の縮小形): 既知 drift–diffusion / boundary-regularity 定理から
+`R = τ^α` での τ-uniform contraction に必要な最弱の定量的 drift 条件を明示し、
+frozen B2 から導出できるか(IMPLIED)/frozen 両立の smooth div-free profile で破れるか(VIOLATED)/
+どちらでもない(UNDERDETERMINED)を双方向検証。新 exponent restriction による代用禁止。
+核心の問い: 「genuine NS 構造は一般 drift の巨大 drift 障害 `R‖u‖ ≍ τ^{α−γ} → ∞` に勝てるか」。
+**登録済み終了規則**: IMPLIED(または消費した NS 構造を明示する partial IMPLIED)のときのみ続行;
+VIOLATED ⟹ Γ-depletion lane の期待値崩壊、終了/pivot 正当;
+UNDERDETERMINED 連続2回 ⟹ BH branch 終了(pivot 先: SPEC.md の数値候補プログラム、または
+literature-level Seregin watch)。
 
 数値・新 ansatz・profile discovery・CAP・in-house Liouville は行わない。GitHub Actions は一切使わない
 (quota 枯渇、ローカル Elan の pinned gate = scripts/lean-ci-local.sh が evidence contract)。

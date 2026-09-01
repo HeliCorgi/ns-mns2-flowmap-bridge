@@ -443,3 +443,13 @@ and §7.3's "remains empty in Scope A" are to be read with that restriction (on
 `ρ_T > γ` the corollary supplies (H1), never (H2), and the pin is not established
 even in Scope A absent a (Γ-DEP)-type theorem). The Scope-B `YES (CONSISTENT)`
 ruling is unaffected.
+
+**E5 (2026-09-01, later the same day — §5's displayed (Γ-DEP) statement:
+operative form superseded).** The imported external record
+(`EXT_GAMMADEP_DECISION_2026-09-01.md` §B.5) fixes a vacuity gap in the printed
+`c′ ∈ (0,1)` quantifier (for `c′ > c₀` the saturation level need not exist, since
+the class assumes only `liminf ‖Γ‖_∞/Γ₀ ≥ c₀`). The operative field-level form is
+now **(Γ-DEP)_fld**: ∃ `c_* ∈ (0, c₀)`, `δ > 0`, `τ₀ > 0` such that
+`sup_{dist ≤ δτ^α} |Γ(·, T*−τ)| < c_*Γ₀` for all `0 < τ < τ₀`. Statement-level
+refinement only; this record's ruling and the derivation `r_sat ≥ δτ^α ⟹ β_v ≤ α`
+are unchanged.

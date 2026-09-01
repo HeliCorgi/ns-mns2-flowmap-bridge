@@ -493,6 +493,9 @@ transports as a scope-free statement, the kill stays conditional on
 (E⁺)+(P), and (P)'s Scope-B status is unresolved (B1)**; trigger (T-c) OPEN
 (B5) · BH verdict **YELLOW-RED maintained**; no CAP trigger.
 
+*(This frontier block is superseded by the post-round-3 frontier below,
+2026-09-01.)*
+
 ## Erratum & freeze queue F37–F43 (2026-09-01, synthesis audit — appended, not silently repaired; nothing below edits a row or annotation until user-adjudicated at freeze review round 3)
 
 **F37 (MAJOR — B6/F32, the clause "`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`").** False as
@@ -601,3 +604,124 @@ print (source: `BH_COH_WINDING_2026-08-21.md` erratum E1):
 > `|κ_pol(t) − κ₀ − ∫₀ᵗ T4 dt′ − ν∫₀ᵗ∮(Δ−(2/r)∂_r)Γ dθ dt′| ≤ ½ osc_loop(Γ)·TV_s(θ(t))`
 A19's retirement ruling (increment vs level; input starvation) never used the false
 form and is unaffected.
+
+## Annotation (2026-09-01 freeze review round 3 — C0–C14, EXECUTED; master record `FREEZE_REVIEW_3_2026-09-01.md`; adjudication authority: the user's dated 2026-09-01 instruction)
+
+*Label hygiene: C-numbers continue the A/B annotation series; they are unrelated to
+the anchor audit's internal ledger C1–C9 and to region C of `W★`.*
+
+**C0 (standing policy, user-directed).** **(Γ-DEP) is cited as a SUFFICIENT closer
+only.** The β_v decision's "single named object" / unqualified "minimal" / "there is
+no third route" claims are retired from citation (erratum E1 at source). Recorded
+closure shapes for the middle limb: (Γ-DEP) [sufficient]; an outright proof of
+(SB-ANCH) (never as a premise); a memberwise dichotomy `(Γ-DEP) ∨ (SB-ANCH)`. No
+exclusivity among shapes is claimed.
+
+**C1 (= F37, ADOPTED).** B6's clause "`(H2) ⟹ (H1)`; `(H1) ⇏ (H2)`" is **replaced**
+by the F37 blockquote above, which is now the operative text of B6 at that point.
+B6's single equivalent form, its rider, and "(SB-ANCH) ⟺ `β_v = γ`" stand.
+
+**C2 (= F38, ADOPTED).** B2's (T3) bullet and its narrowing rider are **replaced**
+by the F38 blockquote above (Scope-A emptiness on `ρ_T = γ` only). The
+exhaustiveness-gate sentence of B2's closing paragraph carries the same restriction
+(see the post-round-3 frontier below).
+
+**C3 (= F39, ADOPTED).** §2's S_blob Seregin-edge sentence is **replaced** by the
+F39 blockquote above (`γ ∈ (1/2, 3/5)` open; the endpoint is on the edge, outside
+the K10 class).
+
+**C4/C5 (= F40 + F41 option (a), ADOPTED).** §2's `S_ring` is **replaced** by the
+F40 joint form above: K8 arm non-strict, K5 arm strict, and the new clause
+`γ + α ≥ 1 (K11)` (both K11 derivations are core-shape-agnostic; shrink-only;
+implied under the [C] K8 arm; live for the Scope-B ring reopening).
+
+**C6 (= F42, ADOPTED).** A16's lifetime clause is **replaced** by the F42 blockquote
+above (exactly-marginal at the neck endpoint `ρ = 1/2` on the `γ+α = 1` edge).
+
+**C7 (= F43, ADOPTED).** A19's parenthetical winding form is **replaced** by the F43
+corrected inequality above.
+
+**C8 (= P1, ADOPTED as amended).** A2's middle-limb rider now reads: *"analysed
+against the frozen scope-free rows (2026-08-23): the limb `β_v ∈ (α,γ)` is
+**row-compliant on all of `S_blob`** — no scope-free pin to `{β_v ≤ α} ∪ {β_v = γ,
+τ-uniform}` exists; the debt narrows to (i) the existence question (out of scope for
+exponent bookkeeping) and (ii) the closure shapes of C0."* The NO side of the debt
+is closed; the debt as a whole is NOT discharged.
+
+**C9 (= P2, ADOPTED as amended).** (T3)'s Scope-B status: *"live in Scope B and, on
+the frozen scope-free rows, row-compliant on all of `S_blob`; R-B2′ still has no
+zoom centre there (unchanged); its Scope-A emptiness holds on the `ρ_T = γ`
+sub-branch only (C2/F38)."* (P2's drafted "untouched" clause conflicted with F38 and
+was amended at adjudication.)
+
+**C10 (= P3, ADOPTED as amended).** Frontier sentence, executed in the post-round-3
+frontier block: after "first named gap (SB-ANCH) ⟺ `β_v = γ`" — *"; the complement
+`{β_v < γ}` is not reachable by scope-free arithmetic — the middle limb
+`β_v ∈ (α,γ)` is row-compliant at every point of `S_blob`; (Γ-DEP) is a
+**sufficient** closer (C0), an outright (SB-ANCH) proof closes it from the other
+endpoint, and a memberwise dichotomy is a third shape; the Scope-A amplitude
+corollary remains a class change, effective only on `ρ_T = γ` (C2)."*
+
+**C11 (= P4, ADOPTED).** Two record-only true statements in the frozen vocabulary:
+(i) `{β_v = γ, τ-uniform} ⟺ (SB-ANCH)`, hence `M ⟹ ¬(SB-ANCH)` and
+**`{β_v < γ} = ¬(SB-ANCH)` exactly** (re-derived from Γ-max alone; consumes the
+conjunction, not the C1-withdrawn implication); (ii) on **all** of `{β_v < γ}` the
+flow is sup-swirl-poor at the saturation radius:
+`|u_θ|(r_sat) ≍ τ^{γ−β_v}‖u‖_∞ = o(‖u‖_∞)` — (H1) is unattained there
+(generalizing the anchor audit's (T3) note from `β_v = α` to every `β_v < γ`; the
+same arithmetic as C1's counterexample, now a positive record).
+
+**C12 (= P5, ADOPTED).** §2's sentence "Conditional refinement from K9: the swirl
+exponent on its fibers is pinned to `σ = α` — an amplitude-subdominant core carrying
+`O(1)` swirl circulation" is **struck** (superseded by A1's `σ_core`/`σ_sup` split
+and A2's saturation-scale trichotomy; the 2026-08-23 decision turned on exactly that
+pinning being unavailable).
+
+**C13 (= P6, ADOPTED).** New record-only row: *"Middle-limb realization
+(record-only, [B] bookkeeping): for every `(γ,α) ∈ S_blob` and every
+`β_v ∈ (α,γ)`, the two-region tuple `C = (α, α, 3α, γ, 2α−β_v)`,
+`S = (β_v, β_v, 3β_v, β_v, β_v)` satisfies every frozen scope-free row. This is
+exponent bookkeeping and NOT a survival claim about Navier–Stokes."* (Re-verified at
+adjudication: K5a/K5b/K6/K11/Γ-max/envelope pass; S sits on the `v = 3γ_j` marginal
+face exactly as `W★` — OOV-1, recorded not decided.)
+
+**C14 (= P7 / Seregin row-(i) update, ADOPTED — pressure-only, [V?]).** Seregin
+arXiv:2606.29468 (28 Jun 2026) generalizes the K10 Euler-scaling class to
+**log-corrected families**, again reducing exclusion to **open** ancient-Euler
+Liouville theorems in scaled-energy classes. The added pressure lives on the map's
+out-of-vocabulary faces (OOV-4, where the 08-23 record places exactly these
+families): **scope annotation, not a new cut** — no
+power-law row moves, and C3's endpoint carve-out is unaffected. **Named verification
+debt [V?]: literature-watch-level extraction; full-text verification owed before any
+chain consumes this row.**
+
+**Post-round-3 frontier (frozen; the SOLE operative frontier text — supersedes the
+round-2 closing block; `FREEZE_REVIEW_3_2026-09-01.md` §4 is a summary of this
+block, not a second print):**
+**Scope A** — quasi-static = B2; its Γ-saturated realization is the target of R-B2′
+[C] on (E⁺⁺) = (COH-Δ)+(ANCH-κ), (P), (N-Γ)[B11 split] (+ imported layer (E⁺),
+frozen dictionary [C-dict] — B10); the Scope-A gate is the exhaustiveness step,
+**established only on the `ρ_T = γ` sub-branch (C2/F38)** — there, every Scope-A B2
+candidate enters the Γ-saturated realization and A2's middle-limb debt narrows to
+its endpoint; **on `ρ_T > γ`, (T3)-emptiness is NOT established even in Scope A**
+(the corollary supplies (H1) and only caps `Γ(L)` — F31) and the middle limb is open
+absent a (Γ-DEP)-type location theorem ·
+**Scope B** — **B2 UNKILLED**; first named gap **(SB-ANCH) ⟺ `β_v = γ`** (τ-uniform
+corner attainment, B13), a genuine **conjunction** (H1) ∧ (H2), neither clause
+implying the other (C1); B6's non-transplant rider stands; the complement
+`{β_v < γ}` is not reachable by scope-free arithmetic — the middle limb
+`β_v ∈ (α,γ)` is row-compliant at every point of `S_blob`; (Γ-DEP) is a
+**sufficient** closer (C0), an outright (SB-ANCH) proof closes it from the other
+endpoint, and a memberwise dichotomy is a third shape; the Scope-A amplitude
+corollary remains a class change, effective only on `ρ_T = γ` (C2);
+`{β_v < γ} = ¬(SB-ANCH)` exactly, with sup-swirl-poverty throughout (C11) ·
+**carried** — M2 RESTRICTED (no independent members) · M3 RESTRICTED (`γ₂ < γ` dies
+by K4′ [(E⁺)+(P)] — K4′ transports as a scope-free statement, the kill stays
+conditional, (P)'s Scope-B status unresolved (B1); tie face merges into B2) ·
+one-scale ring and M2 reopen in Scope B (`S_ring` now carries K11 — C5) · (NECK) =
+standing dictionary-extension request (`θ_coh`, `ℓ_neck`) · fork (β) — the
+dictionary declines the neck level bound, `sup(ω_θ/r)`, and `ℓ_neck` · all three
+in-house vehicles retired/blocked (budget/winding by F15–F18; level route and
+T4-with-a-sign by the fork-(β) declinations) · trigger (T-c) OPEN (B5) · Seregin
+log-corrected pressure on the OOV-4 faces, [V?] (C14) · BH **YELLOW-RED
+maintained** · no CAP trigger · **no Clay claim**.
