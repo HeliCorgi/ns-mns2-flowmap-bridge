@@ -310,8 +310,41 @@ Last updated: 2026-09-02 JST (second session).
 > priority family**. The falsification frontier is pinned to this window
 > (+ S-5 core, dynamically-reached LD geometry). Inadmissible-by-rule
 > guards upheld (snapshots, averaged NS, torus/finite-cylinder, Palasek's
-> family). Baseline stays the 8775-job gate. **Resume anchor: "Next work"
-> below + that record's §3–§5.**
+> family). Baseline stays the 8775-job gate.
+>
+> **2026-09-02 (ninth session): the S-7 axisymmetric-no-swirl uniformity
+> decision is COMMISSIONED and EXECUTED — VERDICT: UNIFORM-BOUND; S-7 is
+> CLOSED; V-11 DISCHARGED at primary level**
+> (`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md`, RECORD-ONLY; two
+> first-hand literature lanes + main-loop derivation; no Lean, no numerics).
+> **Artifact ruling:** `D₀ = ‖ω₀/r‖_∞` is a PROOF ARTIFACT of the U–Y
+> presentation — **Ladyzhenskaya 1968 (Russian original, all 23 pages,
+> [V-P]) never uses it** (data class (45)–(46): energy + enstrophy +
+> `ω₀/r ∈ L²`; stretching estimate (33) consumes the propagated L² norm);
+> LMNP 1999 [V-P] needs only `v₀ ∈ H²` with `C(‖v₀‖_{2,2})` constants; the
+> measure-data theory (Feng–Šverák ARMA 215 (2015); Gallay–Šverák 2015/2019
+> [V-P]) runs on `‖ω_θ‖_{L¹(drdz)}`/`Γ/ν` with the `L∞` level regenerated
+> by viscous smoothing. `D₀` genuinely lives only in the ν-uniform/Euler
+> `p = ∞` endpoint. **Uniform bound derived (two routes):** Route A = LMNP
+> constants + one Agmon/Kato–Ponce ladder rung [D-standard]; Route B =
+> the NEW [D] Hardy data bound `‖ω₀/r‖_{L^{3,1}} ≤ CM` (weighted 1-D Hardy,
+> `p ∈ (2,6]`, + `∇ω ∈ H¹ ↪ L^p`) + `L^p` monotonicity [V-P:
+> Hmidi–Rousset p. 1228; Ladyzhenskaya (17)] + the verified lemma (L*)
+> `‖u^r/r‖_∞ ≲ ‖ω/r‖_{L^{3,1}}` [V-P: Abidi–Hmidi–Keraani Math. Ann. 347
+> (2010) Prop 4.1(i)] + stretching Grönwall + subcritical bootstrap ⟹
+> **`sup_{t≤T}Q₅ ≤ C(ν,T,M)` on the axisym no-swirl M-ball — the first
+> large-data (no-smallness) subclass where H-SEL^nu provably holds**, with
+> bonus `‖u_r/r‖_{L^∞_{t,x}} ≤ C₁M`. Lower-bound half closed negatively
+> (`D₀ → ∞` forces nothing). **Mechanism note:** the closure runs through a
+> ball-controlled monotone quantity (`η` in `L^p`) — exact-NS structure of
+> the C-3 kind, absent with swirl (the `∂_z(Γ²/r⁴)` source breaks
+> monotonicity — consistent with the frozen Γ-lane findings). **Frontier
+> after closure: axisym-WITH-swirl C²-escape families (P-2 retarget
+> proposal, priority) + the S-5 generic core.** Plausibility-upgrade note
+> for a future ranking pass recorded (proposal only). Residues: U–Y
+> internal bookkeeping [V-adj, non-load-bearing]; Shirota–Yanagisawa
+> original [V-adj via AHK, Route-B-only]. Baseline stays the 8775-job
+> gate. **Resume anchor: "Next work" below + that record's §3/§5.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -348,41 +381,43 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, eighth session)
+### Next work (written 2026-09-02, ninth session)
 
 Read first: this file's top block;
-`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md` (P-3 record — esp. §2
-obstruction lemmas O-1…O-4, §3 seed table with S-7, §4 verdict/frontier);
-`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (quantifier ruling, EQ-5
+`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md` (the S-7 decision —
+esp. §3 derivation, §5 verdict/frontier);
+`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md` (P-3, with its §4
+supersession note); `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5
 certificate); `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3
 constraints C-1/C-2/C-3); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
 (correction notice, §9); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`
 SS-5/SS-6; `FORMAL_SCOPE.md` (T-SEL subsection).
 
 - **Selected research theorem: `H-SEL^nu` (norm-uniform, p = 2)** — unchanged
-  (EQ-7): ∀ν,T,M ∃Q₀(T,ν,M): ∀ admissible u0 with `‖u0‖ ≤ M`, certified times
-  obey `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖_{L²}²)`; ds fallback; the citation bans of the
-  seventh-session block stand. **P-1 DONE (SURVIVES), P-3 DONE (SURVIVES).**
-  The falsification frontier is pinned to the **C²-escape window** (the `H³`
-  ball does not control `‖∇²u0‖_∞`); the head provably holds on the
-  small-critical sub-ball (O-1) and up to `T₀(ν,M)` (EQ-6).
-- **Next, each requiring an explicit user commission (either order is
-  defensible; recorded recommendation: P-2 first):**
-  1. **P-2 — the EQ-5 family probe, now with the P-3 targeting:** priority
-     family = **S-7** (axisymmetric no-swirl, `D₀^{(k)} = ‖ω₀/r‖_∞ ~ k`,
-     ball-normalized — every member provably globally smooth, so the
-     measurement is uncontaminated by blow-up ambiguity, and axisymmetric
-     reduction makes it cheap); secondary = S-3 reconnection geometry,
-     quarantine-boundary data (`N ≈ N*(ν,M)`). Preregistered thresholds;
-     outcomes EVIDENCE-FOR/AGAINST/UNDETERMINED only. **Discharge debt V-11
-     first** (first-hand fetch of the Ladyzhenskaya/Ukhovskii–Yudovich
-     axisym-no-swirl quantitative bound structure — load-bearing for S-7's
-     design). Whole-space-approximating methodology must be fixed at
-     commissioning (finite-cylinder runs are certificate-inadmissible).
+  (EQ-7); ds fallback; the citation bans of the seventh-session block stand.
+  **P-1 DONE (SURVIVES) · P-3 DONE (SURVIVES) · S-7 decision DONE
+  (UNIFORM-BOUND, V-11 discharged).** The head now provably holds on: the
+  small-critical sub-ball (O-1), horizons `≤ T₀(ν,M)` (EQ-6), and **the whole
+  axisymmetric no-swirl sub-ball** (S-7 decision §3 — first large-data
+  subclass; `D₀`-dependence was a proof artifact). Falsification frontier:
+  **axisym-WITH-swirl C²-escape families + the S-5 generic core.**
+- **Next, each requiring an explicit user commission (recorded
+  recommendation: P-2 first):**
+  1. **P-2 — the EQ-5 family probe, retargeted by the S-7 decision:**
+     priority family = **axisymmetric-with-swirl** ball families driving
+     swirl-weighted second-derivative quantities (the no-swirl closure
+     mechanism — `η`-monotonicity — is broken by the `∂_z(Γ²/r⁴)` source
+     there; smoothness is NOT guaranteed per member, so the measurement
+     protocol must handle unresolved members fail-closed); secondary = S-3
+     reconnection geometry, quarantine-boundary data (`N ≈ N*(ν,M)`).
+     Preregistered thresholds; outcomes EVIDENCE-FOR/AGAINST/UNDETERMINED
+     only; whole-space-approximating methodology fixed at commissioning
+     (finite-cylinder runs are certificate-inadmissible).
   2. **Proof-route selection for H-SEL^nu** (a selection audit, not proof
-     search): candidate routes must respect C-1 (dynamical only), C-2
-     (subcritical `Q₀`), C-3 (exact-NS structure), O-1/O-2 (the battle is the
-     O(1)-frequency core), and the S-7 window (no reliance on `C²`-datum
+     search): routes must respect C-1/C-2/C-3, O-1/O-2, and the mechanism
+     note of the S-7 decision (a ball-controlled monotone quantity closed
+     the no-swirl class — the shape hint is to seek analogous exact-NS
+     monotone structure for the general class; no reliance on `C²`-datum
      quantities).
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on H-SEL^nu/ds or on N0; SEL-3/SEL-5 and EB-1 Lean work (on hold);

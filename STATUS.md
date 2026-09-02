@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第8セッション: P-3 falsification search まで反映 — H-SEL^nu SURVIVES)
+# STATUS — 2026-09-02 (第9セッション: S-7 uniformity decision まで反映 — UNIFORM-BOUND)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -245,6 +245,27 @@ debt V-11)で、既知の定量評価は全て D₀ 経由で劣化 — 最鋭�
 フロンティアはこの window(+S-5 core、動的到達 LD 幾何)に固定。除外則
 (snapshot/averaged/torus/finite-cylinder/Palasek 族)は全て維持。次 = P-2(S-7
 priority、V-11 放電を先行)または proof-route selection — いずれも user commission。
+
+**第9セッション(ユーザー commission): S-7 axisymmetric-no-swirl uniformity decision
+実行済み — 判定: UNIFORM-BOUND、S-7 は CLOSED、V-11 一次放電**
+([`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md`](docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md)、
+RECORD-ONLY、Lean 無変更・数値なし)。**artifact 裁定**: `D₀ = ‖ω₀/r‖∞` 依存は
+U–Y 提示の proof artifact — **Ladyzhenskaya 1968(ロシア語原文全23頁 [V-P])は
+D₀ を一切使わない**(データ級 (45)–(46) = energy + enstrophy + `ω₀/r ∈ L²`、
+stretching 評価 (33) は伝播 L² ノルムを消費)、LMNP 1999 [V-P] は `v₀ ∈ H²` のみ、
+measure-data 理論(Feng–Šverák ARMA 215、Gallay–Šverák 2015/2019 [V-P])は L∞ 層を
+粘性平滑化で再生成。D₀ が本質的なのは ν-uniform/Euler の p=∞ endpoint のみ。
+**一様評価の導出(2経路)**: Route A = LMNP 定数 + Agmon/Kato–Ponce ladder 1段
+[D-standard]、Route B = 新 [D] Hardy データ評価 `‖ω₀/r‖_{L^{3,1}} ≤ CM` + L^p 単調性
+[V-P] + 検証済み補題 (L*) `‖u^r/r‖∞ ≲ ‖ω/r‖_{L^{3,1}}`(Abidi–Hmidi–Keraani
+Math. Ann. 347 (2010) Prop 4.1(i) [V-P])+ stretching Grönwall + bootstrap ⟹
+**`sup_{t≤T}Q₅ ≤ C(ν,T,M)`(axisym no-swirl M-ball 上)— H-SEL^nu が成立する
+初の large-data 部分クラス**。下界側は否定的に閉鎖(D₀→∞ は何も強制しない)。
+**機構ノート**: 閉鎖は ball 制御可能な単調量(η の L^p)経由 = C-3 型の exact-NS
+構造で、swirl があると `∂_z(Γ²/r⁴)` source が単調性を壊す(凍結 Γ-lane 知見と整合)。
+**閉鎖後のフロンティア = axisym-WITH-swirl C²-escape 族(P-2 retarget 提案・優先)
++ S-5 generic core。** 残債: U–Y 内部(非載荷)、Shirota–Yanagisawa 原文(Route B
+のみ載荷)。P-2 / proof-route selection はいずれも user commission 待ち。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
