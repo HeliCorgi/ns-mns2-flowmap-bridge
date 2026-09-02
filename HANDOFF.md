@@ -381,7 +381,39 @@ Last updated: 2026-09-02 JST (second session).
 > `u_r/r`-criteria: CFZ, KPZ, Hou–Li, Zhang–Zhang, Wei, Lei–Zhang — load-
 > bearing for Arrow S4 and the rephrase filter; discharge before any
 > consumption or proof commissioning). Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + that record's §4.**
+>
+> **2026-09-02 (eleventh session): the V-12 targeted primary-source audit is
+> COMMISSIONED and EXECUTED** (`docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md`,
+> RECORD-ONLY, two primary lanes). **Composite verdict:** (Q3) the Hou–Li
+> `(q,η)` system is VERIFIED verbatim [V-P: arXiv:math/0608295 (96)–(98)] —
+> the route record's algebra stands. (Q2) **T-SRC as printed is DEMOTED —
+> strictly dominated by Li–Pan, DCDS 42 (2022), arXiv:2011.03146, Thm 1.3 /
+> Cond. 1.1 at `s = 1`** [V-P]: `u_θ/r ∈ L^{q}_tL^p_x` with
+> `3/p + 2/q ≤ 2`, `p > 3/2`, **no smallness, finiteness suffices** ⟹
+> regularity — new to the frozen corpus (K9/L-AX4 stops at `d ≥ 0`).
+> (Q1) **`sup_t‖u_r/r‖_∞ ⟹ H³` is published NOWHERE** — Arrow S4 as
+> printed is a literature GAP (Kubica-II excludes the exact corner;
+> NP/RZ are different objects; no paper states `H³` bounds with
+> `C(ν,T,M,K)` constants) — retired and moot. (Q4) the shortest bridge is
+> now the single published theorem. **RE-BASED HEAD: T-SRC′ =
+> `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M)`** (canonical critical-line member
+> `3/p+2/q = 2`; upgrades the energy identity's own free budget
+> `∫‖u_θ/r‖₂²dt ≤ M²/2ν` from `L¹(dt)` to `L²(dt)` of the same channel —
+> **one half criticality unit above known unconditional math**, vs the
+> parent head's full unit). Chain: T-SRC′ ⟹ [Li–Pan, residues V-13(i,ii)]
+> per-datum axisym regularity = H-SEL^ds|axisym ⟹ [V-13(iii): Li–Pan
+> quantitativity, else bounded re-run on the published CFZ/RZ toolkit]
+> H-SEL^nu|axisym. Battery: Type-I violates at exactly log rate
+> (scale-critical head); the frozen-window violation localization ties to
+> `β_v` (subcore channel diverges iff `β_v ≥ 1/2`; core envelope permits —
+> no class-wide kill established, checked). **Proposals (record-only):
+> P-LP** (Li–Pan's solutions-level `β_v`-budget tie → watch/freeze-review;
+> no un-park trigger fires) and **watch routing of Shahmurov
+> arXiv:2605.01875/2605.09797** (same author as the gap-confirmed D-3; no
+> CAP fire). **V-12 DISCHARGED; new debt V-13** (Li–Pan reduction clause +
+> equality endpoint + proof quantitativity — precedes any nu-layer
+> consumption or proof commissioning). Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + the V-12 record's §2.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -418,45 +450,53 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, tenth session)
+### Next work (written 2026-09-02, eleventh session)
 
 Read first: this file's top block;
-`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md` (the route selection —
-esp. §1 decomposition, §4 T-SRC + chain + debt V-12);
-`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md` (§3 mechanism);
-`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5/EQ-7 quantifier
-discipline); `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3
-C-1/C-2/C-3); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (§9);
+`docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md` (the V-12 audit — esp. §2
+verdict + re-based head, §3 battery/proposals, §4 debts);
+`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md` (with its §4
+supersession note); `docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md`
+(§3 mechanism); `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5/EQ-7);
+`docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3 C-1/C-2/C-3);
+`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (§9);
 `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
 `FORMAL_SCOPE.md` (T-SEL subsection).
 
 - **Head lineage now:** general head = `H-SEL^nu` (p = 2, norm-uniform,
   EQ-7 — OPEN; provably holds on the small-critical sub-ball, up to
-  `T₀(ν,M)`, and on the axisym no-swirl sub-ball). **Selected minimal
-  source-control theorem: T-SRC** — `‖u_θ/r‖_{L⁴_t(L⁵∩L⁸)} ≤ Q₀(ν,T,M)`
-  on axisym ball data — whose chain (route record §4) extends the validated
-  subclass to full axisymmetry: `T-SRC ⟹ C-P2 restored ⟹ (L*) ⟹ [S4 +
-  V-12] uniform H³ ⟹ H-SEL^nu|_axisym`. Do not cite T-SRC without its
-  norm-uniform quantifiers; the general-class head stays OPEN.
+  `T₀(ν,M)`, and on the axisym no-swirl sub-ball). **Operative
+  source-control head (re-based by V-12): T-SRC′ =
+  `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M)`** on axisym ball data (canonical member
+  of the critical line `3/p + 2/q = 2, p > 3/2`; the retired `L⁴_t(L⁵∩L⁸)`
+  form must not be cited as selected). Chain: T-SRC′ ⟹ [Li–Pan DCDS 42
+  (2022) Thm 1.3, s = 1 — published, no smallness; residues V-13(i,ii)]
+  H-SEL^ds|axisym ⟹ [V-13(iii) or bounded quantitative re-run]
+  H-SEL^nu|axisym. Position: exactly one half criticality unit above the
+  free energy budget `∫‖u_θ/r‖₂²dt ≤ M²/(2ν)` — a "no temporal
+  concentration of the swirl-dissipation channel" statement.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **V-12 discharge** (targeted prior-art sweep: published `u_θ/r`- and
-     `u_r/r`-criteria for axisym-with-swirl NS — CFZ DCDS 37 (2017), KPZ
-     arXiv:1206.4567, Hou–Li CPAM 61 (2008), P. Zhang–T. Zhang, Wei,
-     Lei–Zhang). Decides: (a) whether Arrow S4 is verbatim-known; (b)
-     whether any published criterion coincides with or dominates T-SRC
-     (which would demote it per the head-reduction discipline). **Precedes
-     any T-SRC consumption or proof commissioning.**
-  2. **P-2 — the family probe, now aimable at the budget observable:**
-     axisym-with-swirl ball families at fixed `(ν,T,M)` measuring BOTH
-     `Q₅` and the T-SRC budget `‖u_θ/r‖_{L⁴_t(L⁵∩L⁸)}` (cheap scalars;
-     fail-closed protocol for unresolved members; finite-cylinder runs
-     certificate-inadmissible; preregistered thresholds;
-     EVIDENCE-FOR/AGAINST/UNDETERMINED only).
-  3. Only after 1–2: any proof commissioning on T-SRC (counterexample-first
-     discipline applies to it as to every head).
+  1. **V-13 discharge** (Li–Pan arXiv:2011.03146 first-hand: (i) the
+     `h ≡ 0, ρ ≡ 0` reduction clause covers pure NS; (ii) the equality
+     endpoint of Cond. 1.1; (iii) proof quantitativity — if (iii) fails,
+     the nu-layer needs a bounded quantitative re-run on the published
+     CFZ/RZ toolkit). **Precedes any T-SRC′ consumption or proof
+     commissioning.**
+  2. **P-2 — the family probe, re-aimed at the T-SRC′ observable:**
+     axisym-with-swirl ball families at fixed `(ν,T,M)` measuring `Q₅`,
+     the budget `∫‖u_θ/r‖₂⁴dt`, and its temporal profile `h(t) = ‖u_θ/r‖₂²`
+     (the falsification signature is temporal concentration of `h`);
+     fail-closed protocol; finite-cylinder certificate-inadmissible;
+     preregistered thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only.
+  3. **Freeze-review/watch proposals awaiting user adjudication:** P-LP
+     (Li–Pan's solutions-level `β_v`-budget tie — new to the corpus; no
+     class-wide kill established; no un-park trigger fired) and the
+     Shahmurov 2605.01875/2605.09797 watch routing (same author as the
+     gap-confirmed D-3).
+  4. Only after 1–2: any proof commissioning on T-SRC′.
 - **Still separately uncommissioned — do not start implicitly:** any proof
-  search on T-SRC, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean work (on
+  search on T-SRC′, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean work (on
   hold); M-1 (on hold).
 - **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
   citing conditional chains without hypotheses; no [H]-tagged citation

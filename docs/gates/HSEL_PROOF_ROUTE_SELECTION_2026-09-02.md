@@ -41,6 +41,8 @@ The system in the good variables (Hou–Li form [H]; the source `∂_z(Γ²)/r�
 
 ## §4 — THE SELECTED MINIMAL SOURCE-CONTROL THEOREM
 
+**[SUPERSEDED (eleventh session, `HSEL_V12_PRIMARY_AUDIT_2026-09-02.md`): the V-12 audit found T-SRC as printed below to be strictly DOMINATED by a published no-smallness criterion (Li–Pan, DCDS 42 (2022), Cond. 1.1 at s = 1: `3/p + 2/q ≤ 2`, `p > 3/2`, finiteness suffices). The operative head is the re-based critical-line budget T-SRC′ = `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M)`, whose bridge to regularity is the published theorem (Arrows S2–S4 below are replaced wholesale; the u_r/r arrow S4 as printed is also a literature GAP — retired). Read this section through the V-12 record.]**
+
 **T-SRC (norm-uniform form; OPEN — never asserted):**
 
 > ∀ν>0, ∀T<∞, ∀M<∞: ∃Q₀(ν,T,M) < ∞ such that every certified solution from every admissible **axisymmetric** Schwartz datum with `‖u0‖ ≤ M` satisfies, on every certified horizon `T′ ≤ T`:

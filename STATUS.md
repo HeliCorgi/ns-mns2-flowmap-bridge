@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第10セッション: proof-route selection まで反映 — T-SRC 選定)
+# STATUS — 2026-09-02 (第11セッション: V-12 audit まで反映 — T-SRC′ へ re-base)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -292,6 +292,34 @@ axisym blow-up signature(凍結 window 候補は必ず発散 — rate 印字済�
 `q = Γ/r²` は (Γ-DEP) 型と隣接(un-park trigger は不発火 — 定理未証明)。
 **新 debt V-12**(u_θ/r・u_r/r 型既知判定基準の targeted 一次 sweep — Arrow S4 と
 言い換えフィルタに載荷; T-SRC の消費・proof commission に先行必須)。
+
+**第11セッション(ユーザー commission): V-12 targeted primary audit 実行済み —
+複合裁定: T-SRC(印字形)は DEMOTED、head を T-SRC′ に re-base、bridge は
+VERIFIED(published)、u_r/r arrow は GAP-FOUND(退役)**
+([`docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md`](docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md)、
+RECORD-ONLY、2一次レーン)。**(Q3)** Hou–Li (q,η) 系は verbatim 検証 [V-P]
+(arXiv:math/0608295 (96)–(98) — 符号・係数とも route record の代数どおり)。
+**(Q2)** 決定的発見: **Li–Pan, DCDS 42 (2022), arXiv:2011.03146, Thm 1.3/Cond 1.1
+(s=1)** [V-P] — `u_θ/r ∈ L^q_tL^p_x`、`3/p+2/q ≤ 2`、`p>3/2`、**smallness 不要・
+有限性のみ** ⟹ regularity(凍結 corpus に無い新定理; K9/L-AX4 は d ≥ 0 止まり)。
+T-SRC 印字形(criticality 1.1)は margin 0.9 で内側 — **支配され demote**。
+**(Q1)** `sup_t‖u_r/r‖∞ ⟹ H³` は**どこにも出版されていない**(Kubica-II は
+該当 corner の3端点全て除外+正部分のみ+swirl 副条件; 定量的 H³ 結論
+`C(ν,T,M,K)` を印字する論文もゼロ)— Arrow S4 印字形は文献 GAP、ただし退役で
+無害。**(Q4)** 最短 bridge = published 定理1本(Li–Pan)。**re-based head:
+T-SRC′ = `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M)`**(critical line `3/p+2/q=2` の
+canonical member — energy 恒等式が無条件で与える同一チャネル
+`∫‖u_θ/r‖₂²dt ≤ M²/2ν` の時間可積分性を L¹→L² に上げるだけ = 既知無条件数学の
+**半 criticality 単位**上、swirl-dissipation channel の時間集中禁止文)。連鎖:
+T-SRC′ ⟹ [Li–Pan、残差 V-13(i,ii)] H-SEL^ds|axisym ⟹ [V-13(iii) 定量性、
+なければ CFZ/RZ toolkit で有界再構成] H-SEL^nu|axisym。バッテリー: Type-I は
+正確に log rate で violate(head は exact scale-critical)、凍結 window の violation
+局在は β_v に直結(subcore channel は β_v ≥ 1/2 でのみ発散; core 包絡は発散を
+許すが強制せず — **class-wide kill は不成立と確認**)。**提案(record-only)**:
+P-LP(Li–Pan の解レベル β_v–budget tie → watch/freeze-review; un-park trigger
+不発火)、Shahmurov arXiv:2605.01875/2605.09797 の watch routing(D-3 と同著者)。
+**V-12 放電・新 debt V-13**(Li–Pan の還元節・等号端点・証明定量性 — nu 層の
+消費と proof commission に先行必須)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
