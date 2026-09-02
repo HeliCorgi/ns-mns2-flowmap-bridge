@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第7セッション: quantifier audit まで反映 — operative head = H-SEL^nu)
+# STATUS — 2026-09-02 (第8セッション: P-3 falsification search まで反映 — H-SEL^nu SURVIVES)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -224,6 +224,27 @@ open content = `T₀` を越える horizon 延長)。**EQ-7 再裁定: operative
 **P-2 は EQ-5 の族プローブに再定義**(単一軌道プローブではない)。nu もバッテリー
 SURVIVES(既録 violator は全て単一軌道; smooth-family 攻撃の既知例なし)。P-2/P-3・
 proof search はいずれも未 commission。
+
+**第8セッション(ユーザー commission): P-3 = H-SEL^nu の解析的反証探索を P-2 に
+先行して実行済み — 判定: SURVIVES(certificate は現行既知数学から構成不能)**
+([`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md`](docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md)、
+RECORD-ONLY、Lean 無変更・数値なし・open core への proof search なし)。障害補題4件
+([D]-standard): **O-1** small-critical persistence(`‖u₀‖_{Ḣ^{1/2}} ≤ ε₀ν` の部分球では
+`sup_t‖u‖_{H³} ≤ Me^{Cε₀²}` — head はそこで既知数学として成立)、**O-2** frequency
+quarantine(ball 内で O(1) critical ノルムは `N*(ν,M) = (M/ε₀ν)^{2/5}` 以下でのみ
+運搬可能 — 高周波族は自動的に O-1 に落ちる)、**O-3** 固定 horizon への scaling
+import 不能(正味 `λ^{−1/2} → 0`)、**O-4** 二重障害(非摂動 seed は成長下界定理と
+[0,T] 滑らかさ保証の両方を欠く)。seed 裁定: S-1 高周波 staircase・S-6 small-data
+は CLOSED、S-4 shear/strain transient は機構として CLOSED、S-2 multi-scale・
+S-3 Lu–Doering 幾何・S-5 O(1) core は UNCONSTRUCTIBLE(depletion 数値も adverse)。
+**新発見 S-7 = C²-escape window**: `H³ ↪ C^{1,1/2}` 止まりで ball は `‖∇²u₀‖∞` を
+制御しない — `D₀^{(k)} = ‖ω₀/r‖∞ ~ k → ∞` の axisymmetric **no-swirl** 族は ball 内に
+構成可能かつ**各メンバーの大域滑らかさが無条件に既知**(Ladyzhenskaya/UY [H]、
+debt V-11)で、既知の定量評価は全て D₀ 経由で劣化 — 最鋭の live seed として
+**P-2 の priority family に指定**(下界定理は無く certificate ではない)。反証
+フロンティアはこの window(+S-5 core、動的到達 LD 幾何)に固定。除外則
+(snapshot/averaged/torus/finite-cylinder/Palasek 族)は全て維持。次 = P-2(S-7
+priority、V-11 放電を先行)または proof-route selection — いずれも user commission。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

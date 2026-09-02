@@ -281,8 +281,37 @@ Last updated: 2026-09-02 JST (second session).
 > nu also SURVIVES the battery (all recorded violators are
 > single-trajectory; no smooth-family attack exists — C-1 data are bounded
 > at `Q₅(0) ≤ C_emb·M`, Palasek's family is not H³-bounded). Baseline stays
-> the 8775-job gate. **Resume anchor: "Next work" below + that record's
-> §3–§4.**
+> the 8775-job gate.
+>
+> **2026-09-02 (eighth session): P-3, the analytic falsification search for
+> H-SEL^nu, is COMMISSIONED and EXECUTED ahead of P-2**
+> (`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md`, RECORD-ONLY; no
+> Lean, no numerics, no proof search on the open core). **VERDICT: SURVIVES
+> — no falsification certificate is constructible from any commissioned
+> seed with current known mathematics.** Four obstruction lemmas fixed
+> ([D]-standard): **O-1** small-critical persistence (`‖u0‖_{Ḣ^{1/2}} ≤
+> ε₀ν` ⟹ `sup_t‖u‖_{H³} ≤ Me^{Cε₀²}` — that sub-ball validates the head);
+> **O-2** frequency quarantine (ball data with spectrum ≥ N have critical
+> norm ≤ MN^{−5/2}: O(1) critical norm lives only below
+> `N*(ν,M) = (M/ε₀ν)^{2/5}`); **O-3** no scaling import at fixed horizon
+> (zoom ladder nets `λ^{−1/2} → 0`); **O-4** double obstruction (every
+> nonperturbative seed lacks BOTH a growth lower-bound theorem AND a
+> smoothness guarantee on `[0,T]`). Seeds: S-1 high-frequency staircase
+> CLOSED (O-1∘O-2), S-6 small-data class CLOSED (O-1), S-4 shear/strain
+> transients CLOSED as a mechanism (frequency-independent amplification +
+> C²-bounded linear cap; residue routed onward), S-2 multi-scale packets /
+> S-3 Lu–Doering geometry / S-5 O(1)-core UNCONSTRUCTIBLE (O-4; adverse
+> depletion numerics). **NEW: S-7, the C²-escape window** — `H³ ↪ C^{1,1/2}`
+> only, so the ball does NOT control `‖∇²u0‖_∞`; axisymmetric **no-swirl**
+> families with `D₀^{(k)} = ‖ω₀/r‖_∞ ~ k → ∞` inside the ball have
+> **unconditionally known global smoothness** (Ladyzhenskaya/UY [H], debt
+> V-11) while every known quantitative bound degrades through `D₀` — the
+> sharpest live seed, no lower-bound theorem, **routed to P-2 as the
+> priority family**. The falsification frontier is pinned to this window
+> (+ S-5 core, dynamically-reached LD geometry). Inadmissible-by-rule
+> guards upheld (snapshots, averaged NS, torus/finite-cylinder, Palasek's
+> family). Baseline stays the 8775-job gate. **Resume anchor: "Next work"
+> below + that record's §3–§5.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -319,36 +348,45 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, seventh session)
+### Next work (written 2026-09-02, eighth session)
 
-Read first: this file's top block; `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md`
-(the quantifier ruling — esp. §3 certificates and §4 re-adjudication);
-`docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3 constraints C-1/C-2/C-3,
-§5 verdict); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (correction
-notice, §5, §9); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6
-(N0 and the Lean plug); `FORMAL_SCOPE.md` (T-SEL subsection).
+Read first: this file's top block;
+`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md` (P-3 record — esp. §2
+obstruction lemmas O-1…O-4, §3 seed table with S-7, §4 verdict/frontier);
+`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (quantifier ruling, EQ-5
+certificate); `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3
+constraints C-1/C-2/C-3); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
+(correction notice, §9); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`
+SS-5/SS-6; `FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **Selected research theorem: `H-SEL^nu` (norm-uniform, p = 2)**:
-  ∀ν,T,M ∃Q₀(T,ν,M): ∀ admissible u0 with `‖u0‖ ≤ M`, all certified times obey
-  `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖_{L²}²)`. The datum-specific `H-SEL^ds` is the
-  chain-sufficient fallback (Lean N0 is ds — EQ-2); nu ⟹ ds ⟹ N0 ⟹ N1→N2→N3;
-  ds ⟹ nu is OPEN (EQ-3). Do **not** cite the superseded `4/3` form, the
-  retracted reverse-GN reading (EH-2), or `Q₀(T;ν,‖u0‖)` without naming
-  ds/nu (EQ-1). Proof-route constraints C-1/C-2/C-3 (P-1 §3) bind any future
-  proof discussion; EQ-6 records nu as already-known up to the local lifespan
-  `T₀(ν,M)` — the open content is horizon extension past it.
-- **Next in the recorded order, requires an explicit user commission: P-2 — the
-  EQ-5 FAMILY probe**: fixed `(ν,T,M)`; a preregistered admissible family
-  normalized to the `M`-ball (seeds: C-1 maximizer-shaped + frequency-staircase
-  data); resolution-validated trajectories; observable `S(k) = sup_{t≤T}Q₅^{(k)}`
-  with preregistered acceptance thresholds; outcomes graded
-  EVIDENCE-FOR / EVIDENCE-AGAINST / UNDETERMINED (numerics never proves
-  `¬H-SEL^nu`). Single-trajectory `Q₅` divergence is NOT a P-2 target — it is
-  the necessary-signature diagnostic of the singularity program (EQ-4). After
-  P-2: P-3 (analytic refutation attempt — same seeds; `p < 5/2` Tao-violation
-  window as shape guide; a proven divergent family = a non-uniformity theorem,
-  valuable and Clay-neutral). **Any proof search on H-SEL^nu/ds, and on N0,
-  remains separately uncommissioned — do not start either implicitly.**
+- **Selected research theorem: `H-SEL^nu` (norm-uniform, p = 2)** — unchanged
+  (EQ-7): ∀ν,T,M ∃Q₀(T,ν,M): ∀ admissible u0 with `‖u0‖ ≤ M`, certified times
+  obey `‖∇U(t)‖_∞ ≤ Q₀(1+‖∇U(t)‖_{L²}²)`; ds fallback; the citation bans of the
+  seventh-session block stand. **P-1 DONE (SURVIVES), P-3 DONE (SURVIVES).**
+  The falsification frontier is pinned to the **C²-escape window** (the `H³`
+  ball does not control `‖∇²u0‖_∞`); the head provably holds on the
+  small-critical sub-ball (O-1) and up to `T₀(ν,M)` (EQ-6).
+- **Next, each requiring an explicit user commission (either order is
+  defensible; recorded recommendation: P-2 first):**
+  1. **P-2 — the EQ-5 family probe, now with the P-3 targeting:** priority
+     family = **S-7** (axisymmetric no-swirl, `D₀^{(k)} = ‖ω₀/r‖_∞ ~ k`,
+     ball-normalized — every member provably globally smooth, so the
+     measurement is uncontaminated by blow-up ambiguity, and axisymmetric
+     reduction makes it cheap); secondary = S-3 reconnection geometry,
+     quarantine-boundary data (`N ≈ N*(ν,M)`). Preregistered thresholds;
+     outcomes EVIDENCE-FOR/AGAINST/UNDETERMINED only. **Discharge debt V-11
+     first** (first-hand fetch of the Ladyzhenskaya/Ukhovskii–Yudovich
+     axisym-no-swirl quantitative bound structure — load-bearing for S-7's
+     design). Whole-space-approximating methodology must be fixed at
+     commissioning (finite-cylinder runs are certificate-inadmissible).
+  2. **Proof-route selection for H-SEL^nu** (a selection audit, not proof
+     search): candidate routes must respect C-1 (dynamical only), C-2
+     (subcritical `Q₀`), C-3 (exact-NS structure), O-1/O-2 (the battle is the
+     O(1)-frequency core), and the S-7 window (no reliance on `C²`-datum
+     quantities).
+- **Still separately uncommissioned — do not start implicitly:** any proof
+  search on H-SEL^nu/ds or on N0; SEL-3/SEL-5 and EB-1 Lean work (on hold);
+  M-1 (on hold).
 - **Residual literature debts (small, non-blocking):** V-1′ (Grujić–Guberović CMP
   298 (2010) localization for HR-1's localized form); V-2/V-4/V-6 (Miller, DHY,
   Cao–Titi — only if HR-2/HR-4/HR-7 ever become load-bearing); V-8/V-9/V-10
