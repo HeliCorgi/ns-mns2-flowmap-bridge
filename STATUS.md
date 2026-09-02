@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第11セッション: V-12 audit まで反映 — T-SRC′ へ re-base)
+# STATUS — 2026-09-02 (第12セッション: V-13 放電まで反映 — QUANTITATIVE-BRIDGE)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -320,6 +320,26 @@ P-LP(Li–Pan の解レベル β_v–budget tie → watch/freeze-review; un-park
 不発火)、Shahmurov arXiv:2605.01875/2605.09797 の watch routing(D-3 と同著者)。
 **V-12 放電・新 debt V-13**(Li–Pan の還元節・等号端点・証明定量性 — nu 層の
 消費と proof commission に先行必須)。
+
+**第12セッション(ユーザー commission): V-13 放電 — 判定: QUANTITATIVE-BRIDGE**
+([`docs/gates/HSEL_V13_DISCHARGE_2026-09-02.md`](docs/gates/HSEL_V13_DISCHARGE_2026-09-02.md)、
+RECORD-ONLY、一次深読1レーン+main-loop 再導出)。**(i)** pure NS 還元はクリーン
+(`h₀ ≡ 0, ρ₀ ≡ 0` を排除する評価は皆無; `μ = 1` 正規化 — 一般 ν は scaling
+`(T,M,M′,Q) ↦ (νT, ν⁻¹M, ν⁻¹M′, ν⁻³Q)` で復元)。**(ii)** `s=1, (q,p)=(4,2)`
+等号端点は**証明の native case**(Young が生む Grönwall 指数 `2p/((1+s)p−3)` が
+そこで正確に 4; 非厳密 `≤` 印字どおり; 除外は `p = 3/(1+s)` のみ = smallness 枝;
+区間分割不要)。**(iii)** 証明は端から端まで定量的(明示的 energy/Grönwall 連鎖で
+`H^m` bound を**証明**; compactness・矛盾法・BKM 委譲なし; F = 明示的二重指数塔)。
+**唯一の実質的 carry: 暗黙 datum `M′ = ‖ru₀^θ‖_{L∞}`**(Lemma 3.1(i) と s=1 の
+J-step (3.22) が消費; swirl torus 族で `Γ₀ ≲ MR^{1/2} → ∞` — H³-ball 非一様の
+far-field-weight escape window であることを main-loop 検証; 凍結 corpus の class
+datum `Γ₀` そのもの)。**EV-1 量化子精密化**: T-SRC′ の定数は `Q₀(ν,T,M,M′)`、
+nu 層は2パラメタ球 `(M,M′)` 上の一様性(per-datum ds は無制限)。**T-SRC′ →
+H-SEL|axisym の下流連鎖は published + quantitative で完全検証済み — 系譜で初めて
+「開いているのは head そのものだけ」の状態に到達。** 改良機会(J-step の Γ₀ 消費
+回避 ⟹ M-only 一様性 — 有界な新作業、未 commission)を記録。次 = P-2(観測量
+確定: Q₅・budget・時間プロファイル h(t))→ T-SRC′ proof commissioning → P-LP/
+Shahmurov watch 裁定 — いずれも user commission。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

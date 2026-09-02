@@ -413,7 +413,34 @@ Last updated: 2026-09-02 JST (second session).
 > CAP fire). **V-12 DISCHARGED; new debt V-13** (Li–Pan reduction clause +
 > equality endpoint + proof quantitativity — precedes any nu-layer
 > consumption or proof commissioning). Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + the V-12 record's §2.**
+>
+> **2026-09-02 (twelfth session): V-13 is COMMISSIONED and DISCHARGED —
+> VERDICT: QUANTITATIVE-BRIDGE**
+> (`docs/gates/HSEL_V13_DISCHARGE_2026-09-02.md`, RECORD-ONLY; one primary
+> deep-read lane + main-loop re-derivations). **(i)** the pure-NS reduction
+> of Li–Pan (h₀ ≡ 0, ρ₀ ≡ 0) is clean — no estimate excludes zero fields;
+> viscosity normalized `μ = 1`, general-ν recovered by the recorded scaling
+> `(T,M,M′,Q) ↦ (νT, ν⁻¹M, ν⁻¹M′, ν⁻³Q)`. **(ii)** the `s = 1, (q,p) =
+> (4,2)` equality endpoint is the proof's NATIVE case — the Young-produced
+> Grönwall exponent `2p/((1+s)p−3)` equals exactly 4 there; non-strict `≤`
+> as printed; only `p = 3/(1+s)` is excluded (smallness branch); no
+> interval-splitting needed. **(iii)** the proof is quantitative end to
+> end: explicit energy/Grönwall chain to a PROVED `H^m` bound (no
+> compactness, no contradiction, no BKM delegation); `F` = explicit
+> double-exponential tower. **One substantive carry: the tacit datum
+> `M′ = ‖ru₀^θ‖_{L∞}`** (consumed in Lemma 3.1(i) and the s = 1 J-step
+> (3.22)), main-loop-verified NOT ball-uniform on the H³ ball (swirl torus:
+> `Γ₀ ≲ MR^{1/2} → ∞`) — a far-field-weight escape window, and a standing
+> class datum of the frozen corpus (B2's own `Γ₀`). **EV-1 quantifier
+> refinement:** T-SRC′'s constant is `Q₀(ν,T,M,M′)` and the nu-layer
+> conclusion is uniform on the two-parameter ball `(M,M′)`; per-datum ds is
+> unrestricted. **The T-SRC′ → H-SEL|axisym chain is now
+> published-and-quantitative end to end — the first head in the lineage
+> whose entire downstream bridge is verified known math with tracked
+> constants; only the head itself is open.** Refinement opportunity
+> recorded (avoid the `J`-step's `Γ₀`-consumption ⟹ M-only uniformity —
+> bounded new work, not commissioned). Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + the V-13 record's §2.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -450,51 +477,45 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, eleventh session)
+### Next work (written 2026-09-02, twelfth session)
 
 Read first: this file's top block;
-`docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md` (the V-12 audit — esp. §2
-verdict + re-based head, §3 battery/proposals, §4 debts);
-`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md` (with its §4
-supersession note); `docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md`
-(§3 mechanism); `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5/EQ-7);
-`docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3 C-1/C-2/C-3);
-`docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (§9);
+`docs/gates/HSEL_V13_DISCHARGE_2026-09-02.md` (the V-13 discharge — §2
+verdict + the exact chain with EV-1 quantifiers);
+`docs/gates/HSEL_V12_PRIMARY_AUDIT_2026-09-02.md` (§2 re-based head, §3
+proposals); `docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md` (§1
+mechanism, with supersession notes); `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md`
+(EQ-5/EQ-7); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (§9);
 `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
 `FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **Head lineage now:** general head = `H-SEL^nu` (p = 2, norm-uniform,
-  EQ-7 — OPEN; provably holds on the small-critical sub-ball, up to
-  `T₀(ν,M)`, and on the axisym no-swirl sub-ball). **Operative
-  source-control head (re-based by V-12): T-SRC′ =
-  `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M)`** on axisym ball data (canonical member
-  of the critical line `3/p + 2/q = 2, p > 3/2`; the retired `L⁴_t(L⁵∩L⁸)`
-  form must not be cited as selected). Chain: T-SRC′ ⟹ [Li–Pan DCDS 42
-  (2022) Thm 1.3, s = 1 — published, no smallness; residues V-13(i,ii)]
-  H-SEL^ds|axisym ⟹ [V-13(iii) or bounded quantitative re-run]
-  H-SEL^nu|axisym. Position: exactly one half criticality unit above the
-  free energy budget `∫‖u_θ/r‖₂²dt ≤ M²/(2ν)` — a "no temporal
-  concentration of the swirl-dissipation channel" statement.
+- **Head lineage now:** general head = `H-SEL^nu` (p = 2, norm-uniform —
+  OPEN; provably holds on the small-critical sub-ball, up to `T₀(ν,M)`,
+  and on the axisym no-swirl sub-ball). **Operative source-control head:
+  T-SRC′ = `‖u_θ/r‖_{L⁴_tL²_x} ≤ Q₀(ν,T,M,M′)`** on the axisym
+  two-parameter ball (`M` = carrier `H³`, `M′ = ‖ru₀^θ‖_∞` — EV-1). **Its
+  entire downstream chain is now verified, published, quantitative known
+  mathematics** (Li–Pan Thm 1.3 at the native `(1,4,2)` endpoint; V-12 +
+  V-13 discharged): T-SRC′ ⟹ `sup_t‖u‖_{H³} ≤ F(ν,T,M,M′,Q₀)` ⟹
+  H-SEL^nu on the `(M,M′)`-ball / H-SEL^ds|axisym per-datum ⟹ N0|axisym.
+  Only the head itself is open. Do not cite the retired `L⁴_t(L⁵∩L⁸)` form.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **V-13 discharge** (Li–Pan arXiv:2011.03146 first-hand: (i) the
-     `h ≡ 0, ρ ≡ 0` reduction clause covers pure NS; (ii) the equality
-     endpoint of Cond. 1.1; (iii) proof quantitativity — if (iii) fails,
-     the nu-layer needs a bounded quantitative re-run on the published
-     CFZ/RZ toolkit). **Precedes any T-SRC′ consumption or proof
-     commissioning.**
-  2. **P-2 — the family probe, re-aimed at the T-SRC′ observable:**
-     axisym-with-swirl ball families at fixed `(ν,T,M)` measuring `Q₅`,
-     the budget `∫‖u_θ/r‖₂⁴dt`, and its temporal profile `h(t) = ‖u_θ/r‖₂²`
-     (the falsification signature is temporal concentration of `h`);
-     fail-closed protocol; finite-cylinder certificate-inadmissible;
-     preregistered thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only.
+  1. **P-2 — the family probe, final observable set:** axisym-with-swirl
+     `(M,M′)`-ball families at fixed `(ν,T)` measuring `Q₅`, the budget
+     `∫‖u_θ/r‖₂⁴dt`, and the temporal profile `h(t) = ‖u_θ/r‖₂²`
+     (falsification signature = temporal concentration of `h`); fail-closed
+     protocol; finite-cylinder certificate-inadmissible; preregistered
+     thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only.
+  2. **T-SRC′ proof commissioning** (counterexample-first discipline
+     satisfied: P-1/P-3-level checks done for the lineage, battery run,
+     bridge verified; the recorded refinement opportunity — avoiding the
+     `J`-step's `Γ₀`-consumption for M-only uniformity — can ride along).
   3. **Freeze-review/watch proposals awaiting user adjudication:** P-LP
      (Li–Pan's solutions-level `β_v`-budget tie — new to the corpus; no
-     class-wide kill established; no un-park trigger fired) and the
-     Shahmurov 2605.01875/2605.09797 watch routing (same author as the
-     gap-confirmed D-3).
-  4. Only after 1–2: any proof commissioning on T-SRC′.
+     class-wide kill; no un-park trigger fired) and the Shahmurov
+     2605.01875/2605.09797 watch routing (same author as the gap-confirmed
+     D-3).
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-SRC′, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean work (on
   hold); M-1 (on hold).

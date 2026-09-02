@@ -57,7 +57,7 @@ At `s = 1` this is literally a `q = u_θ/r` criterion with the admissible region
 ## §4 — Debt ledger update
 
 - **V-12: DISCHARGED** (this record; both lanes primary-level; the Neustupa–Pokorný and Kubica-II texts, CFZ, Hou–Li arXiv, Lei–Zhang, Wei, Li–Pan ×2, Fang–Chen–Zhang, RZ 2019, Q.S. Zhang survey all [V-P]; Chae–Lee via two concordant [V-adj]; KPZ-I proper inaccessible [V-abs] — non-load-bearing).
-- **NEW V-13** (Li–Pan reduction clause + equality endpoint + proof quantitativity — load-bearing for the nu-layer Arrow Q; precedes any nu-consumption or proof commissioning).
+- **NEW V-13** (Li–Pan reduction clause + equality endpoint + proof quantitativity — load-bearing for the nu-layer Arrow Q; precedes any nu-consumption or proof commissioning). **[DISCHARGED, twelfth session: `HSEL_V13_DISCHARGE_2026-09-02.md` — VERDICT QUANTITATIVE-BRIDGE; all three clauses verified; quantifier refinement EV-1: the nu-layer is uniform on the two-parameter ball `(M, M′ = ‖ru₀^θ‖_∞)`.]**
 - Non-load-bearing residues: KPZ-I exact indices; Zujin Zhang CAMWA 76 (2018) and the 2023 JMAA mixed-Lorentz paper (both access-blocked [V-abs]; unlikely to bear on the `(4,2)` member, flagged).
 
 ## §5 — Claim boundary
