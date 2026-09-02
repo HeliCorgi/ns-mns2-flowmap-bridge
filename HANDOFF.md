@@ -440,7 +440,43 @@ Last updated: 2026-09-02 JST (second session).
 > constants; only the head itself is open.** Refinement opportunity
 > recorded (avoid the `J`-step's `Γ₀`-consumption ⟹ M-only uniformity —
 > bounded new work, not commissioned). Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + the V-13 record's §2.**
+>
+> **2026-09-02 (thirteenth session): the T-SRC′ temporal-spike mechanism
+> audit is COMMISSIONED and EXECUTED — T-SRC′ compresses to ONE
+> spike-exclusion lemma; THE STOP RULE FIRES and the axisym lane STOPS**
+> (`docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md`, RECORD-ONLY,
+> main-loop derivations [D]; no Lean, no numerics, no proof search).
+> **Exact identity:** `h′ = −2νD − 4S`, `D = ‖∇q‖₂² + axis trace ≥ 0`,
+> `S = ∫(u_r/r)q²dx` (only inflow grows `h` — spin-up). **Mechanism
+> table:** M-A identity CLOSES; M-B one-sided `h′` DEAD-END standalone;
+> M-C height–lifetime partially CLOSES (universal decay envelope
+> `h ≤ 1/(κΔt+1/h₀)`); **M-D CLOSES — the engine:** outer split
+> (`u_θ = rq`) + per-slice 2-D GN (no axis log) prove `D ≥ c·h²/M²`
+> [D, scale-consistent], giving `h′ ≤ −κh² + 4S₋`, `κ = 2νc/M²`; M-E
+> (Γ-max) unused auxiliary — **the reduction is `M′`-free**; M-F
+> stretching structure SURVIVES (dual form `S = ⟨ψ₁,∂_z(q²)⟩`; the
+> UNWEIGHTED energy-exchange budget `∫∫(u_r/r)u_θ²` is FREE — the open
+> content is exactly the `r^{−4}` weight + the unsigned `u_r` of Γ-OSC
+> §5.3(iii)). **THE REDUCTION (proved [D]):** `κ∫h²dt ≤ h(0) + 4𝔖₋` with
+> `h(0) ≤ CM²` ball-uniform ⟹ **T-SPK** (OPEN):
+> `𝔖₋ = ∫∫(u_r/r)₋q²dxdt ≤ Q₀(ν,T,M,M′)` ⟹ T-SRC′ ⟹ H-SEL|axisym — a
+> single monotone sign-localized scalar (inflow spin-up work), maximally
+> falsifiable; violated by ALL frozen-window profiles (`Γ₀²τ^{−γ−α−β}`,
+> divergent by K11). **STOP-RULE ADJUDICATION:** the architecture
+> transfers verbatim to general 3-D (`E ≤ ‖u‖₂‖Δu‖₂ ⟹
+> E′ ≤ −(2ν/M²)E² + N` ⟹ production budget ⟹ `E ∈ L²_t ⟹
+> u ∈ L⁴_tḢ¹ ↪ L⁴_tL⁶` = the Serrin pair (4,6)) — but the transferred
+> lemma IS the **E-2/L_d Serrin wall** (fence-classified, inadmissible).
+> **Structural finding:** the same free architecture lands strictly inside
+> the wall on the swirl channel (Li–Pan) and ON the wall for full
+> enstrophy — a mechanism-level explanation of the axisym half-unit vs
+> general full-unit gap; a general-class breakthrough by this route needs
+> a partial enstrophy channel with its own free `L¹_t` budget and sub-wall
+> criterion — no known structure supplies one. **All admissible survivors
+> are axisym-specific ⟹ the lane STOPS; T-SPK parked as the compressed
+> axisym proof target (with its proved reduction); control returns to the
+> general N0/H-SEL side.** Baseline stays the 8775-job gate. **Resume
+> anchor: "Next work" below + that record's §3–§4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -477,7 +513,49 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, twelfth session)
+### Next work (written 2026-09-02, thirteenth session)
+
+**The axisym lane is STOPPED by the commissioned stop rule** (mechanism audit
+§4): its assets are PARKED in fully-documented state — **T-SPK** (the
+compressed proof target, with its PROVED reduction `T-SPK ⟹ T-SRC′ ⟹
+H-SEL|axisym ⟹ N0|axisym`, the whole downstream verified quantitative
+published math), the P-2 observable set (`Q₅`, budget, `h(t)`-profile,
+`𝔖₋(t)`), and the standing proposals (P-LP; Shahmurov watch). Re-opening any
+of it is a user act. **Control returns to the general N0/H-SEL side.** Read
+first: this file's top block; `docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md`
+(§3 the reduction, §4 the stop-rule ruling + structural finding);
+then the general-side stack (`HSEL_QUANTIFIER_AUDIT` EQ-5/EQ-7;
+`HSEL_P1_LITERATURE_SWEEP` §3 C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH`
+O-1/O-2 + S-5; `TSEL_HEAD_REDUCTION_AUDIT` §9; `STAGE9_REVERSE_GAP_AUDIT`
+SS-5/SS-6; `FORMAL_SCOPE.md` T-SEL subsection).
+
+- **General-side state:** head = `H-SEL^nu` (p = 2, norm-uniform) — OPEN;
+  provably holds on the small-critical sub-ball (O-1), up to `T₀(ν,M)`
+  (EQ-6), and on the axisym sub-balls (S-7 no-swirl unconditionally;
+  with-swirl conditionally on the parked T-SPK/T-SRC′). Constraints
+  C-1/C-2/C-3 + the NEW §4 structural finding bind any route discussion:
+  the temporal-anti-concentration architecture is free but lands on the
+  Serrin wall for full enstrophy — a general-class route via it would need
+  a partial enstrophy channel with its own free `L¹_t` budget and a
+  sub-wall criterion, which no known structure supplies.
+- **Options for the next commission (user act; no recorded preference —
+  genuinely open fork):** (a) a general-side channel-search audit (hunt for
+  partial enstrophy channels with free budgets + sub-wall criteria — the
+  §4 finding's shape, counterexample-first); (b) P-2 in general form (the
+  EQ-5 family probe with the O-2 quarantine targeting); (c) re-open the
+  parked axisym lane (T-SPK proof commissioning or the axisym P-2);
+  (d) freeze-review adjudication of the accumulated proposals (P-LP,
+  Shahmurov watch, EP-1…EP-8, HR-3′, plausibility-bump note); (e) resume
+  the on-hold Lean debts (SEL-3/SEL-5, EB-1) as formalization work.
+- **Still separately uncommissioned — do not start implicitly:** any proof
+  search on T-SPK, T-SRC′, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean
+  work (on hold); M-1 (on hold).
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR.
+
+### (superseded) Next work (written 2026-09-02, twelfth session)
 
 Read first: this file's top block;
 `docs/gates/HSEL_V13_DISCHARGE_2026-09-02.md` (the V-13 discharge — §2

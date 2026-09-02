@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第12セッション: V-13 放電まで反映 — QUANTITATIVE-BRIDGE)
+# STATUS — 2026-09-02 (第13セッション: T-SPK 縮約 + stop rule 発火まで反映 — axisym lane 停止)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -340,6 +340,35 @@ H-SEL|axisym の下流連鎖は published + quantitative で完全検証済み �
 回避 ⟹ M-only 一様性 — 有界な新作業、未 commission)を記録。次 = P-2(観測量
 確定: Q₅・budget・時間プロファイル h(t))→ T-SRC′ proof commissioning → P-LP/
 Shahmurov watch 裁定 — いずれも user commission。
+
+**第13セッション(ユーザー commission): T-SRC′ temporal-spike mechanism audit
+実行済み — T-SRC′ は単一の spike-exclusion lemma に縮約可能(YES)、stop rule
+発火で axisym lane 停止・general 側へ復帰**
+([`docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md`](docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md)、
+RECORD-ONLY、main-loop 導出 [D]、Lean/数値/proof search なし)。**正確な恒等式**:
+`h′ = −2νD − 4S`(D = ‖∇q‖₂² + 軸トレース ≥ 0、S = ∫(u_r/r)q²dx — h を成長させ
+うるのは inflow spin-up のみ)。機構表: M-A 恒等式 CLOSES、M-B 片側 h′ 単独
+DEAD-END、M-C 高さ–寿命は減衰側 CLOSES(普遍包絡 `h ≤ 1/(κΔt+1/h₀)`)、
+**M-D CLOSES = エンジン**: 外側分割(u_θ = rq)+ スライスごと 2D GN(軸 log
+回避)で `D ≥ c·h²/M²` を証明 [D] ⟹ `h′ ≤ −κh² + 4S₋`(κ = 2νc/M²)、M-E
+(Γ-max)は未使用補助 — **縮約は M′ 不要**、M-F stretching 構造 SURVIVES
+(双対形 `S = ⟨ψ₁,∂_z(q²)⟩`; **非荷重版 ∫∫(u_r/r)u_θ² は energy 恒等式で無料**
+— open content は正確に r^{−4} 荷重 + Γ-OSC §5.3(iii) の unsigned u_r)。
+**縮約(証明済み [D])**: `κ∫h²dt ≤ h(0) + 4𝔖₋`、h(0) ≤ CM² ball 一様 ⟹
+**T-SPK(OPEN)**: `𝔖₋ = ∫∫(u_r/r)₋q²dxdt ≤ Q₀(ν,T,M,M′)` ⟹ T-SRC′ ⟹
+H-SEL|axisym — 単調・符号局在のスカラー1個(inflow spin-up work)、凍結 window
+全メンバーが profile レベルで violate(K11 により `Γ₀²τ^{−γ−α−β}` 発散)。
+**stop rule 裁定**: architecture は一般 3D に逐語転送可能(`E ≤ ‖u‖₂‖Δu‖₂` ⟹
+production budget ⟹ `E ∈ L²_t` ⟹ `u ∈ L⁴_tḢ¹ ↪ L⁴_tL⁶` = Serrin 対 (4,6))
+— しかし転送先は **E-2/L_d Serrin 壁そのもの**(fence 分類・不適格)。
+**構造的発見**: 同一の free architecture が swirl channel では壁の内側
+(Li–Pan)、full enstrophy では壁の上に着地 — axisym 半単位 vs 一般1単位の
+機構レベルの説明; この経路での一般突破には「独自の free L¹_t budget と
+sub-wall criterion を持つ部分 enstrophy channel」が必要で、既知構造には無い。
+**適格な生存機構は全て axisym-specific ⟹ lane 停止; T-SPK は縮約証明つきで
+park; general N0/H-SEL 側へ復帰。** 次の commission は自由 fork(general
+channel-search audit / 一般形 P-2 / axisym lane 再開 / freeze-review 裁定 /
+Lean 債務再開)— いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
