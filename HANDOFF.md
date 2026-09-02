@@ -344,7 +344,44 @@ Last updated: 2026-09-02 JST (second session).
 > for a future ranking pass recorded (proposal only). Residues: U–Y
 > internal bookkeeping [V-adj, non-load-bearing]; Shirota–Yanagisawa
 > original [V-adj via AHK, Route-B-only]. Baseline stays the 8775-job
-> gate. **Resume anchor: "Next work" below + that record's §3/§5.**
+> gate.
+>
+> **2026-09-02 (tenth session): the H-SEL proof-route selection audit is
+> COMMISSIONED and EXECUTED**
+> (`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md`, RECORD-ONLY; no
+> Lean, no numerics, no proof search). The no-swirl mechanism is decomposed
+> into **C-P1** (Hardy datum entry — survives with swirl; bonus: `q = u_θ/r
+> = Γ/r²` is `∇u`-order, so `‖q₀‖_{L^p} ≤ C_pM` ball-uniformly for ALL
+> `p ∈ (2,∞]`), **C-P2** (η `L^p` propagation — **the only broken
+> component**: in Hou–Li variables the source is exactly `∂_z(q²)`, and the
+> divergence structure + dissipation absorption reduce the need to the
+> single quartic budget `∫‖q‖⁴_{L^{2p}}dt` — no source `L∞` ever needed),
+> **C-P3** ((L*) static drift estimate — survives verbatim), **C-P4**
+> (closure — conditional-known-class, debt V-12). Unconditional closure
+> provably fails (Osgood loop = local theory — nothing open accidentally
+> proved). Known free input: energy gives `∫‖q‖²_{L²}dt ≤ M²/2ν`. Candidates
+> R-1 (q-sup), R-2 (sup-L^s), R-3 (budget), R-4 (negative-Sobolev shuffles
+> — same scaling line), R-5 (drift `∫‖u_r/r‖∞dt` — high rephrase risk,
+> fallback) run counterexample-first (ball/energy/battery/rephrase filters;
+> all polarity checks PASS vs `S_blob`/Type-I; Tao bar respected at method
+> level). **THE SELECTED MINIMAL SOURCE-CONTROL THEOREM: T-SRC** (norm-
+> uniform): `‖u_θ/r‖_{L⁴_t(L⁵_x∩L⁸_x)} ≤ Q₀(ν,T,M)` on certified horizons
+> for axisymmetric ball data (family `4<s₀<6<s₁`, weakens as `s₁↓6⁺`; a
+> time-integrated Γ-depletion-flavored statement: `Γ` depletes faster than
+> `r²` in `L⁴_tL^s`). Chain: T-SRC + energy ⟹ [S1–S2, D] η-norms ⟹ [S3,
+> V-P: AHK] `sup‖u_r/r‖∞` ⟹ [S4, KNOWN-class + V-12] uniform `H³` ⟹
+> SEL-2 ⟹ **H-SEL^nu on the FULL axisymmetric sub-ball** (extends S-7's
+> no-swirl validation; general class stays OPEN). Falsification semantics:
+> nu-family budget divergence = Clay-neutral non-uniformity theorem;
+> single-trajectory divergence = axisym blow-up signature (frozen-window
+> candidates must diverge it — printable rates). Cross-links recorded
+> (C0-clean, proposal-level): S3 bounds the Γ-OSC §5.3(iii) unknown
+> `u_r/r`; `q = Γ/r²` adjacency to (Γ-DEP)-type statements — no un-park
+> trigger fires. **New debt V-12** (targeted prior-art on `u_θ/r`- and
+> `u_r/r`-criteria: CFZ, KPZ, Hou–Li, Zhang–Zhang, Wei, Lei–Zhang — load-
+> bearing for Arrow S4 and the rephrase filter; discharge before any
+> consumption or proof commissioning). Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + that record's §4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -381,47 +418,50 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, ninth session)
+### Next work (written 2026-09-02, tenth session)
 
 Read first: this file's top block;
-`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md` (the S-7 decision —
-esp. §3 derivation, §5 verdict/frontier);
-`docs/gates/HSEL_P3_FALSIFICATION_SEARCH_2026-09-02.md` (P-3, with its §4
-supersession note); `docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5
-certificate); `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3
-constraints C-1/C-2/C-3); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md`
-(correction notice, §9); `docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md`
-SS-5/SS-6; `FORMAL_SCOPE.md` (T-SEL subsection).
+`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md` (the route selection —
+esp. §1 decomposition, §4 T-SRC + chain + debt V-12);
+`docs/gates/HSEL_S7_UNIFORMITY_DECISION_2026-09-02.md` (§3 mechanism);
+`docs/gates/HSEL_QUANTIFIER_AUDIT_2026-09-02.md` (EQ-5/EQ-7 quantifier
+discipline); `docs/gates/HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` (§3
+C-1/C-2/C-3); `docs/gates/TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` (§9);
+`docs/gates/STAGE9_REVERSE_GAP_AUDIT_2026-09-02.md` SS-5/SS-6;
+`FORMAL_SCOPE.md` (T-SEL subsection).
 
-- **Selected research theorem: `H-SEL^nu` (norm-uniform, p = 2)** — unchanged
-  (EQ-7); ds fallback; the citation bans of the seventh-session block stand.
-  **P-1 DONE (SURVIVES) · P-3 DONE (SURVIVES) · S-7 decision DONE
-  (UNIFORM-BOUND, V-11 discharged).** The head now provably holds on: the
-  small-critical sub-ball (O-1), horizons `≤ T₀(ν,M)` (EQ-6), and **the whole
-  axisymmetric no-swirl sub-ball** (S-7 decision §3 — first large-data
-  subclass; `D₀`-dependence was a proof artifact). Falsification frontier:
-  **axisym-WITH-swirl C²-escape families + the S-5 generic core.**
+- **Head lineage now:** general head = `H-SEL^nu` (p = 2, norm-uniform,
+  EQ-7 — OPEN; provably holds on the small-critical sub-ball, up to
+  `T₀(ν,M)`, and on the axisym no-swirl sub-ball). **Selected minimal
+  source-control theorem: T-SRC** — `‖u_θ/r‖_{L⁴_t(L⁵∩L⁸)} ≤ Q₀(ν,T,M)`
+  on axisym ball data — whose chain (route record §4) extends the validated
+  subclass to full axisymmetry: `T-SRC ⟹ C-P2 restored ⟹ (L*) ⟹ [S4 +
+  V-12] uniform H³ ⟹ H-SEL^nu|_axisym`. Do not cite T-SRC without its
+  norm-uniform quantifiers; the general-class head stays OPEN.
 - **Next, each requiring an explicit user commission (recorded
-  recommendation: P-2 first):**
-  1. **P-2 — the EQ-5 family probe, retargeted by the S-7 decision:**
-     priority family = **axisymmetric-with-swirl** ball families driving
-     swirl-weighted second-derivative quantities (the no-swirl closure
-     mechanism — `η`-monotonicity — is broken by the `∂_z(Γ²/r⁴)` source
-     there; smoothness is NOT guaranteed per member, so the measurement
-     protocol must handle unresolved members fail-closed); secondary = S-3
-     reconnection geometry, quarantine-boundary data (`N ≈ N*(ν,M)`).
-     Preregistered thresholds; outcomes EVIDENCE-FOR/AGAINST/UNDETERMINED
-     only; whole-space-approximating methodology fixed at commissioning
-     (finite-cylinder runs are certificate-inadmissible).
-  2. **Proof-route selection for H-SEL^nu** (a selection audit, not proof
-     search): routes must respect C-1/C-2/C-3, O-1/O-2, and the mechanism
-     note of the S-7 decision (a ball-controlled monotone quantity closed
-     the no-swirl class — the shape hint is to seek analogous exact-NS
-     monotone structure for the general class; no reliance on `C²`-datum
-     quantities).
+  recommendation, in order):**
+  1. **V-12 discharge** (targeted prior-art sweep: published `u_θ/r`- and
+     `u_r/r`-criteria for axisym-with-swirl NS — CFZ DCDS 37 (2017), KPZ
+     arXiv:1206.4567, Hou–Li CPAM 61 (2008), P. Zhang–T. Zhang, Wei,
+     Lei–Zhang). Decides: (a) whether Arrow S4 is verbatim-known; (b)
+     whether any published criterion coincides with or dominates T-SRC
+     (which would demote it per the head-reduction discipline). **Precedes
+     any T-SRC consumption or proof commissioning.**
+  2. **P-2 — the family probe, now aimable at the budget observable:**
+     axisym-with-swirl ball families at fixed `(ν,T,M)` measuring BOTH
+     `Q₅` and the T-SRC budget `‖u_θ/r‖_{L⁴_t(L⁵∩L⁸)}` (cheap scalars;
+     fail-closed protocol for unresolved members; finite-cylinder runs
+     certificate-inadmissible; preregistered thresholds;
+     EVIDENCE-FOR/AGAINST/UNDETERMINED only).
+  3. Only after 1–2: any proof commissioning on T-SRC (counterexample-first
+     discipline applies to it as to every head).
 - **Still separately uncommissioned — do not start implicitly:** any proof
-  search on H-SEL^nu/ds or on N0; SEL-3/SEL-5 and EB-1 Lean work (on hold);
-  M-1 (on hold).
+  search on T-SRC, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean work (on
+  hold); M-1 (on hold).
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR.
 - **Residual literature debts (small, non-blocking):** V-1′ (Grujić–Guberović CMP
   298 (2010) localization for HR-1's localized form); V-2/V-4/V-6 (Miller, DHY,
   Cao–Titi — only if HR-2/HR-4/HR-7 ever become load-bearing); V-8/V-9/V-10

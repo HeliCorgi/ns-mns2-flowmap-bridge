@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第9セッション: S-7 uniformity decision まで反映 — UNIFORM-BOUND)
+# STATUS — 2026-09-02 (第10セッション: proof-route selection まで反映 — T-SRC 選定)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -266,6 +266,32 @@ Math. Ann. 347 (2010) Prop 4.1(i) [V-P])+ stretching Grönwall + bootstrap ⟹
 **閉鎖後のフロンティア = axisym-WITH-swirl C²-escape 族(P-2 retarget 提案・優先)
 + S-5 generic core。** 残債: U–Y 内部(非載荷)、Shirota–Yanagisawa 原文(Route B
 のみ載荷)。P-2 / proof-route selection はいずれも user commission 待ち。
+
+**第10セッション(ユーザー commission): H-SEL proof-route selection audit 実行済み —
+最小 source-control theorem T-SRC を1本選定**
+([`docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md`](docs/gates/HSEL_PROOF_ROUTE_SELECTION_2026-09-02.md)、
+RECORD-ONLY、Lean 無変更・数値なし・proof search なし)。no-swirl 機構を4部品に分解:
+**C-P1**(Hardy datum 入口 — swirl でも生存; おまけ: `q = u_θ/r = Γ/r²` は ∇u-次
+なので `‖q₀‖_{L^p} ≤ C_pM` が p ∈ (2,∞] 全域 ball 一様 — q は C²-escape しない)、
+**C-P2**(η の L^p 伝播 — **唯一の破断点**: Hou–Li 変数で source は正確に `∂_z(q²)`
+であり、divergence 構造+散逸吸収で必要は quartic budget `∫‖q‖⁴_{L^{2p}}dt` のみ —
+source の L∞ は一切不要)、**C-P3**((L*) static 評価 — verbatim 生存)、**C-P4**
+(閉鎖 — 条件付き既知級、debt V-12)。無条件閉鎖は Osgood ループで不可能
+(= 局所理論; 未解決を誤って証明していないことの確認)。energy は無条件に
+`∫‖q‖²_{L²}dt ≤ M²/2ν` を供給。候補 R-1(q-sup)/R-2(sup-L^s)/R-3(budget)/
+R-4(negative-Sobolev — 同一 scaling line)/R-5(drift `∫‖u_r/r‖∞` — 言い換え
+リスク高、fallback)を反例先行4フィルタで検査(全 polarity PASS)。
+**選定: T-SRC(norm-uniform)= `‖u_θ/r‖_{L⁴_t(L⁵∩L⁸)} ≤ Q₀(ν,T,M)`**(族
+`4<s₀<6<s₁`、`s₁↓6⁺` で最弱化; Γ が軸近傍で r² より速く L⁴_tL^s 減衰する
+time-integrated Γ-depletion 型)。連鎖: T-SRC + energy ⟹ [S1–S2, D] η ⟹
+[S3 = AHK (L*)] `sup‖u_r/r‖∞` ⟹ [S4 既知級 + V-12] uniform H³ ⟹ SEL-2 ⟹
+**H-SEL^nu|axisym(with swirl — S-7 検証の拡張; 一般クラスは OPEN のまま)**。
+反証意味論: 族 budget 発散 = Clay 中立の non-uniformity 定理 / 単一軌道発散 =
+axisym blow-up signature(凍結 window 候補は必ず発散 — rate 印字済み)。cross-link
+(C0-clean・proposal-level): S3 は Γ-OSC §5.3(iii) の未知量 u_r/r を bound する;
+`q = Γ/r²` は (Γ-DEP) 型と隣接(un-park trigger は不発火 — 定理未証明)。
+**新 debt V-12**(u_θ/r・u_r/r 型既知判定基準の targeted 一次 sweep — Arrow S4 と
+言い換えフィルタに載荷; T-SRC の消費・proof commission に先行必須)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
