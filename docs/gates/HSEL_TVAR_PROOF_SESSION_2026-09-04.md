@@ -49,3 +49,7 @@ Integrating §2 and optimizing `e` — which is now a **linear-spectral** proble
 ## §6 — Claim boundary
 
 No open statement is proved: T-CONE, T-VAR, T-DIR, H-SEL, N0 all remain OPEN; the session's [D]-items are linear algebra along the commissioned identity set (the frame identity, the rise decomposition and its recombination check, the overcharge counter-observation, the spectral-part domination, the T-CONE ⟹ T-VAR arrow, the barrier repricing). **Nothing here asserts, approaches, or implies a resolution of the Navier–Stokes Millennium problem in either direction.** Wall-requiring routes were rejected on sight per the commissioned rule; the logical-collapse caveat applies to T-CONE as to every head; C0 — a selection, not uniqueness. Commissioning proof work on T-CONE, a T-CONE-targeted probe (`spec 𝔑(T′)` is a computable observable on the existing probe infrastructure), or anything else downstream is a user act.
+
+---
+
+**Erratum / annotation (2026-09-04, twenty-second session; see `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md`, the symmetric-sector collapse lemma SSC).** §3's "strictly weaker than every trace-level statement (`λ_min(𝔑) ≤ ⅓tr𝔑`)" holds with equality on the Γ-equivariant sector (`𝔑 = (TV₊(E)/6)I`), where T-CONE ⟺ T-VAR ⟺ `TV₊(E) ≲ Q₀` — the full-enstrophy rise budget. The "missing anti-equidistribution mechanism" of §4.3 is identically false on that sector (`R₋ ∝ I`), so it cannot be an NS theorem on the whole ball.

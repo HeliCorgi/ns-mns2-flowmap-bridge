@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第21セッション: T-CONE proof session まで反映 — ONE-SUBLEMMA: T-DET)
+# STATUS — 2026-09-04 (第22セッション: T-VAR inequality session まで反映 — ROUTE-KILLED: 一般 lane の wall-free program は SSC 補題により閉鎖)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -566,6 +566,37 @@ T-DIR ⟹ [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean。** 次 =
 ① T-DET proof session(T-DET 自体が Clay 級硬の可能性に注意 — 更なる弱化も NS
 confinement 機構も無ければ DEAD-END で一般 lane を park し HR-1/HR-3′ へ)
 → ② T-DET 向け probe(要 prereg)— いずれも user act。
+
+**第22セッション(ユーザー commission): T-VAR inequality session 実行済み — 判定:
+ROUTE-KILLED(一般 T-DIR lane の wall-free program)**
+([`docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md`](docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md)、
+Lean/数値なし; 新しい名前付き sufficient condition は導入せず; [D] 収穫のみ)。
+commission = exact NS から T-VAR に実際に寄与する新 inequality を wall なしで最低1本
+(言い換え・より強い十分条件・det/trace/eigenvalue 化・別 open head の仮定は不可)。
+**探索収穫(全て wall-level の FAILCASE)**: I-1 production tensor の Lamb-vector 表示
+`𝒫_{ij} = −∫∂ᵢ∂ⱼu·(ω×u)dx`(圧力消去済み、record 新規)、I-2 e に一様な支配
+`(X_e′)₊ ≤ ‖P(ω×u)‖²₂/(2ν)` と厳密 budget 恒等式
+`∫‖P(ω×u)‖² = ∫‖∂_tu‖² + ν(E(T′)−E(0)) + ν²∫‖Δu‖²`(H² wall)、I-4 e に一様な
+pointwise 支配は原理的に sub-wall 不可(`avg_e(X_e′)₊ ≥ (E′)₊/3`)。
+**構造的障害 = symmetric-sector collapse lemma(SSC)[D 証明済み]**: 四面体群
+Γ = A₄ = ⟨diag(1,−1,−1), diag(−1,1,−1), 巡回置換⟩ に equivariant な sub-ball
+`𝔅_Γ(M)` は NS flow 不変(O(3) 共変性 + 一意性)、任意の M で非空・無限次元
+(Γ 平均した Schwartz potential の curl)、その上では全ての Gram 型 tensor が各時刻で
+スカラー(`G = (E/3)I`, `D = (‖∇²u‖²/3)I`, `𝒫 = −(∫ωᵀSω/3)I`, `R₋ = ((E′)₊/6)I`,
+`𝔑 = (TV₊(E)/6)I`)。従って sector 上で**逐語的に**: T-VAR ⟺ `TV₊(‖∇u‖²₂) ≤ 3Q₀`
+(全 enstrophy 上昇 budget = wall)、T-DIR ⟺ `∫‖∇u‖⁴₂dt ≤ 9Q₀`(L⁴_tḢ¹ wall —
+CFZ (4,2) criterion は sector 上では全勾配 criterion、設計条件 C4 は不成立)、
+T-DIR-SPK ⟺ `∫(∫ωᵀSω)₊ ≤ 3Q₀`、T-CONE ⟺ T-DET ⟺ `TV₊(E) ≤ 6Q₀`
+(`λ_min𝔑 = tr𝔑/3`、`det𝔑 = (tr𝔑/3)³` — 「trace より厳密に弱い」は sector 上で等号)、
+T-GRAM の canonical 方向は球面全体(probe R1 Taylor–Green の三重縮退 = SSC の実例)。
+T-CONE/T-DET の「anti-equidistribution / codim-1 confinement」入力は sector 上で恒等的に
+偽(`R₋ ∝ I`)なので球全体の NS 定理にはなり得ない。二分法: 一様な寄与は wall への
+寄与(棄却・入手不能)、異方性条件付きの寄与は sector 上で空虚で閉じられない。
+**判定 ROUTE-KILLED。推奨 = 一般 lane の PARK(user act)**。T-DET proof session /
+T-DET probe は moot。erratum 注記を channel-search・quantifier-battery・T-VAR・T-CONE
+記録末尾に日付付きで追記(silent repair なし)。新しい standing battery 項目 **SYM-test**
+(∃方向 / 異方性型 head は commission 前に `𝔅_Γ(M)` 上で評価)。HR-1/HR-3′ fallback は
+SYM-test 通過を条件に file 上に残置。対称流の正則性・特異性については一切主張しない。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

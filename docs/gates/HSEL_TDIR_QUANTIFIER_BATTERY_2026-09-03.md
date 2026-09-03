@@ -45,3 +45,7 @@ No certified counterfamily is constructible from any commissioned seed with curr
 ## §5 — Claim boundary
 
 RECORD-ONLY; no Lean edit; no numerics; no proof search on T-DIR/T-DIR-SPK/H-SEL/N0 — DQ-1 and the §2 identities are quantifier/battery analysis at [D]-standard level (compactness, Gram algebra, classical integration-by-parts identities); both heads remain OPEN and unclaimed. **Nothing here asserts, approaches, or implies a resolution of the Navier–Stokes Millennium problem in either direction.** The F2 barrier sharpens where any future proof must operate (NS dynamics vs kinematics) without deciding anything; the Gram reformulation is a restatement, not progress. C0 discipline throughout; commissioning V-15, the probe, or any proof work is a user act.
+
+---
+
+**Erratum / annotation (2026-09-04, twenty-second session; see `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md`, the symmetric-sector collapse lemma SSC).** The battery F1–F7 lacked the *symmetric family*: Γ-equivariant certified solutions (Γ = tetrahedral group) have `G(t) = (E(t)/3)I` for all `t`, hence `inf_e ∫(eᵀGe)²dt = ∫E²dt/9` — the ∃e freedom is void there and the §2c statement "the open content of T-DIR is precisely a temporal-coherence/anisotropy statement" is false on that sector (there it is the enstrophy wall itself). Not a counterexample family (no blow-up asserted); a structural collapse. Verdict SURVIVES is unaffected as a statement; the positional "sub-wall" claim is withdrawn on the sector.
