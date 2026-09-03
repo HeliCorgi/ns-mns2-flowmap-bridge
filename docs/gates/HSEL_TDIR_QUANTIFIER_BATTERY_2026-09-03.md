@@ -1,0 +1,47 @@
+# HSEL_TDIR_QUANTIFIER_BATTERY — 2026-09-03 — T-DIR quantifier + adversarial battery audit: the direction-extraction lemma DQ-1 CLOSES with zero constant loss (quantifiers confirmed, no revision); the ONB sum identities are verified and show the ∃e freedom cannot close by averaging; no certified counterfamily; kinematic rotating-anisotropy violators recorded as the exact-NS-dynamics barrier; VERDICT: SURVIVES (RECORD-ONLY)
+
+**Repo:** `c:/Users/corgi/Downloads/ns-mns2-flowmap-bridge` · **Status: RECORD-ONLY.** No Lean file touched; no numerics; no proof search on T-DIR/T-DIR-SPK (the lemma DQ-1 and the identities below are the commissioned quantifier/battery analysis — [D]-standard, kinematic/functional-analytic; both heads remain OPEN); nothing frozen moved. Lean baseline unchanged (8775-job gate).
+
+**Commissioning provenance.** User instruction, 2026-09-03 (fifteenth session): (1) audit the horizon-dependent direction selection — close completely the lemma extracting, from `∀Tₙ↑T* ∃eₙ: ∫₀^{Tₙ}‖∂_{eₙ}u‖₂⁴dt ≤ Q`, a single fixed `e*` with `∫₀^{T*}‖∂_{e*}u‖₂⁴dt ≤ Q` by compactness of S² (else fix T-DIR's quantifiers); (2) counterexample-first battery on T-DIR/T-DIR-SPK — derive/verify the ONB identities `Σᵢ X_{eᵢ} = ‖∇u‖₂²`, `Σᵢ P_{eᵢ} = −∫ωᵀSω`, confirm the ∃e rotation freedom does not close from energy/vortex-stretching averaging alone; (3) hunt smooth/certified fixed-`H³`-ball families worsening ALL fixed directions simultaneously (high-frequency packets, rotating anisotropy, multi-direction strain, Lu–Doering geometry, small-data global family, Tao averaged); (4) kinematic time-dependent div-free violators count as the "exact NS dynamics required" barrier, not as counterexamples. Verdict ∈ {SURVIVES / COUNTERFAMILY / QUANTIFIER-GAP}; only SURVIVES proceeds to V-15.
+
+**Method.** Main-loop derivations ([D], signs/indices/measures re-checked); battery on the standing landscape (O-1/O-2/O-4 obstructions, frozen profiles, Tao bar). Notation: `G(t)` = the gradient Gram matrix `Gᵢⱼ(t) = ⟨∂ᵢu(t), ∂ⱼu(t)⟩_{L²}` (symmetric PSD, `tr G = ‖∇u‖₂²`), so `X_e(t) = eᵀG(t)e` and `F_T(e) := ∫₀^T (eᵀG(t)e)² dt`.
+
+---
+
+## §1 — DQ-1, the direction-extraction lemma: CLOSED, zero loss [D]
+
+**Lemma DQ-1.** Let `u` be a certified maximal evolution with horizons `Tₙ ↑ T*`, smooth on each compact `[0,Tₙ]`, and suppose for each `n` there is `eₙ ∈ S²` with `F_{Tₙ}(eₙ) ≤ Q`. Then there is `e* ∈ S²` with `∫₀^{T*}‖∂_{e*}u‖₂⁴dt ≤ Q`.
+
+*Proof.* (i) By compactness of `S²`, pass to a subsequence `eₙ → e*`. (ii) For fixed `m`, `u` is smooth on the compact `[0,T_m]`, so `‖G(t)‖ ≤ ‖∇u(t)‖₂²` is bounded there and `|F_{T_m}(e) − F_{T_m}(f)| ≤ C‖G‖²_{L²(0,T_m)}|e−f|` — `F_{T_m}` is (Lipschitz-)continuous on `S²`. (iii) Monotonicity in `T` (nonnegative integrand): for `n ≥ m`, `F_{T_m}(eₙ) ≤ F_{Tₙ}(eₙ) ≤ Q`. Let `n → ∞` at fixed `m`: `F_{T_m}(e*) ≤ Q`. (iv) Let `m → ∞`: monotone convergence gives `∫₀^{T*}(e*ᵀG e*)²dt = lim_m F_{T_m}(e*) ≤ Q`. ∎
+
+**Consequences.** (a) **T-DIR's printed ∃-per-horizon quantifier is SOUND — no revision needed**: the per-horizon form self-upgrades to a single fixed direction on the closed union with the SAME constant `Q₀` (zero loss), which is exactly what the Zhang/CFZ bridge consumes (one fixed direction over the whole interval). (b) The plug shape is the SEL-10 pattern: were horizons bounded with `T* = sSup`, DQ-1 + the bridge gives smooth extension past `T*` (the certified strong solution extends to a Leray–Hopf weak solution on `[0,T*]` by the standard weak-limit bookkeeping, Zhang's theorem applies on `(0,T*]`, local theory restarts) — contradiction; the weak-limit/class-match bookkeeping is the same B-layer-style known-math debt already inside V-15's clause. **Verdict component: NOT QUANTIFIER-GAP.**
+
+## §2 — The ONB sum identities and the averaging no-go [D]
+
+**(a)** For any orthonormal basis `{e₁,e₂,e₃}`: `Σᵢ X_{eᵢ} = Σᵢ eᵢᵀGeᵢ = tr G = ‖∇u‖₂²`. ✓ (basis-free).
+
+**(b)** `Σᵢ P_{eᵢ} = Σₐ ∫(∂ₐu)ᵀS(∂ₐu)dx = ∫ ∂ₐu_j (∂_j u_i) ∂ₐu_i dx = −⟨u·∇u, Δu⟩` (integrate by parts; the transport half vanishes by incompressibility). Comparing the two computations of `d/dt½‖∇u‖₂²` — the velocity form `−ν‖Δu‖² + ⟨u·∇u,Δu⟩` and the vorticity form `∫ωᵀSω − ν‖∇ω‖²`, using `‖∇u‖₂ = ‖ω‖₂`, `‖Δu‖₂ = ‖∇ω‖₂` (div-free, whole space) — gives `⟨u·∇u,Δu⟩ = ∫ωᵀSω`, hence **`Σᵢ P_{eᵢ} = −∫ωᵀSω`** ✓ — the commissioned identity: *the total directional-channel production over any ONB is minus the vortex-stretching integral.*
+
+**(c) Averaging no-go (confirmed).** Uniform averaging over `e ∈ S²`: `avg_e X_e = ‖∇u‖₂²/3` and, by Jensen, `avg_e ∫X_e²dt ≥ ∫(‖∇u‖₂²/3)²dt` — the rotation freedom, fed only the energy budget or the stretching-sum identity, delivers at best directions whose budget is comparable to `∫E²dt`, i.e. **the E-2/L_d wall quantity**; and a stretching-sum budget `∫(−∫ωᵀSω)₊dt` is itself wall-level (it is the full-enstrophy production budget of the T-SPK record's §4). **The ∃e freedom therefore cannot close by averaging — the open content of T-DIR is precisely a temporal-coherence/anisotropy statement:** in Gram form, `T-DIR ⟺ inf_{e∈S²} ∫₀^{T′}(eᵀG(t)e)²dt ≤ Q₀` — a certified solution must not sustain critical gradient concentration that is both temporally coherent and isotropic (or direction-decohering) enough to keep every fixed direction at wall level. This is genuinely new structure, not reachable from the identities above — exactly as a non-collapsed head should be.
+
+## §3 — Adversarial battery (counterexample-first)
+
+| Family | Finding | Status |
+|---|---|---|
+| F1: high-frequency packets (all fixed directions worsened by frequency growth) | O-2 quarantine (ball data with spectrum ≥ N are critically small) + O-1 persistence ⟹ `sup_t‖u‖_{H³}` uniform ⟹ `∫X_e²dt ≤ T(CM)⁴` for **every** `e` | CLOSED |
+| F2: rotating anisotropy | **Kinematic violators EXIST [D]**: rotate a fixed anisotropic profile (`G_v = diag(g,ε,ε)`) by `R(t)` sweeping `S²`; then for every fixed `e`, `∫(eᵀG(t)e)²dt ~ cTg²` — all directions defeated. **These solve no PDE** — per the commissioned rule this is recorded as the **exact-NS-dynamics barrier**: T-DIR is kinematically false as a per-field statement (like every head in this lineage, C-1-pattern), and any proof must show NS dynamics cannot sustain coherent rotating concentration. NOT a counterexample. As a *certified* family: no construction theorem produces sustained rotating concentration (the O-4 double obstruction verbatim: no growth lower bound + no smoothness guarantee past `T₀(ν,M)`) | BARRIER recorded; certified version UNCONSTRUCTIBLE |
+| F3: multi-direction strain / Lu–Doering geometry | ball-capped data give bounded instantaneous quantities in all directions (`X_e(0) ≤ M²`); dynamical sustainment has no theorem; depletion numerics adverse (KYP) | UNCONSTRUCTIBLE (O-4) |
+| F4: small-data global family | O-1 ⟹ uniform `H³` ⟹ the head HOLDS there (validating subclass, all `e`) | CLOSED (validates) |
+| F5: Tao averaged | inadmissible as counterexample by rule (different equation); statement-analogue ill-posed (no component structure survives averaging); METHOD bar respected — the channel identity consumes `div ∂_e u = 0` and the exact pressure structure, neither averaging-stable (C-3) | guarded |
+| F6: frozen `S_blob` / Type-I profiles | in the printed cores all gradient directions are comparable ⟹ every fixed `e` is violated at the common rate ⟹ the ∃e head is violated — correct polarity (logically forced through the verified bridge anyway); Type-I log-critical as expected | polarity PASS |
+| F7: invariant-direction sanity | flows with `∂_{e}u ≡ 0` for some `e` (2.5-D) satisfy the head trivially and are globally regular — consistency check passes; the axisym restriction of T-DIR sits coherently beside the parked axisym lane | sanity PASS |
+
+No certified counterfamily is constructible from any commissioned seed with current known mathematics; the landscape is the P-3 one (O-1/O-2 close the perturbative seeds, O-4 blocks the nonperturbative ones), now with the F2 barrier explicitly on file.
+
+## §4 — VERDICT
+
+**SURVIVES.** (1) DQ-1 closes the quantifier question with zero constant loss — the printed ∃-per-horizon form is confirmed (NOT QUANTIFIER-GAP). (2) The ONB identities are verified and establish that the rotation freedom cannot be closed by energy/stretching averaging — the head's content (temporally-coherent isotropic concentration exclusion, `inf_e ∫(eᵀGe)²dt` form) is genuinely open and non-collapsed. (3) No COUNTERFAMILY: perturbative seeds closed, nonperturbative seeds doubly obstructed, kinematic violators filed as the exact-NS-dynamics barrier per the commissioned rule. **T-DIR is cleared to proceed to V-15** (commissioning V-15 is a user act); the V-15 clause now explicitly includes the DQ-1 §1(b) weak-limit/class-match bookkeeping.
+
+## §5 — Claim boundary
+
+RECORD-ONLY; no Lean edit; no numerics; no proof search on T-DIR/T-DIR-SPK/H-SEL/N0 — DQ-1 and the §2 identities are quantifier/battery analysis at [D]-standard level (compactness, Gram algebra, classical integration-by-parts identities); both heads remain OPEN and unclaimed. **Nothing here asserts, approaches, or implies a resolution of the Navier–Stokes Millennium problem in either direction.** The F2 barrier sharpens where any future proof must operate (NS dynamics vs kinematics) without deciding anything; the Gram reformulation is a restatement, not progress. C0 discipline throughout; commissioning V-15, the probe, or any proof work is a user act.

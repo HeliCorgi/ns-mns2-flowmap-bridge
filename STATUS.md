@@ -1,4 +1,4 @@
-# STATUS — 2026-09-03 (第14セッション: general channel search まで反映 — T-DIR 選定)
+# STATUS — 2026-09-03 (第15セッション: T-DIR quantifier/battery audit まで反映 — SURVIVES)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -398,6 +398,26 @@ supplies one」節は検証により覆り訂正(in-place 注記; 当時の stop
 規則の正しい適用)。バッテリー全 polarity PASS。次 = ① T-DIR 反証バッテリー
 (∃e の回転自由度は未検証領域 — 全方向を破る certified 族の探索)→ ② V-15 放電
 → ③ P-2 型プローブ → ④ proof commissioning — いずれも user act。
+
+**第15セッション(ユーザー commission): T-DIR quantifier + adversarial battery
+audit 実行済み — 判定: SURVIVES(QUANTIFIER-GAP なし・COUNTERFAMILY なし)**
+([`docs/gates/HSEL_TDIR_QUANTIFIER_BATTERY_2026-09-03.md`](docs/gates/HSEL_TDIR_QUANTIFIER_BATTERY_2026-09-03.md)、
+RECORD-ONLY、main-loop 導出 [D])。**DQ-1(方向抽出補題)完全閉鎖・定数損失ゼロ**:
+`X_e = eᵀG(t)e`(G = 勾配 Gram 行列)と書き、compact horizon 上の `F_T(e)` の
+連続性 + S² compact + 単調収束の対角論法で、∃-per-horizon 形から単一固定方向 e*
+を同じ Q₀ のまま抽出 — **印字量化子は確認済み・修正不要**(plug は SEL-10 型;
+weak-limit/class-match 帳簿は V-15 節へ編入)。**ONB 恒等式検証 [D]**:
+`Σᵢ X_{eᵢ} = tr G = ‖∇u‖₂²`、`Σᵢ P_{eᵢ} = −∫ωᵀSω`(`⟨u·∇u,Δu⟩ = ∫ωᵀSω` 経由)。
+帰結 = **averaging no-go**: e-一様平均は `∫(E/3)²dt` = E-2/L_d 壁しか与えず、
+∃e の回転自由度は energy/stretching averaging では閉じない — head の open content
+は「時間的にコヒーレントな等方的臨界集中の排除」(Gram 形
+`inf_e ∫(eᵀG(t)e)²dt ≤ Q₀` が正準形)。**バッテリー**: F1 高周波 CLOSED
+(O-1∘O-2)、**F2 回転異方性 — kinematic violator は存在**(回転 `diag(g,ε,ε)`
+profile が全固定方向を g² レベルで破る)⟹ 規則どおり **exact-NS-dynamics
+barrier** として記録(反例に数えず; certified 版は O-4 で構成不能)、F3 LD/
+多方向 strain 構成不能、F4 small-data は head を検証する側、F5 Tao guarded
+(C-3)、F6 凍結 profile は全方向 violate = polarity PASS、F7 2.5D sanity PASS。
+**T-DIR は V-15 へ進行可(commission は user act)。**
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

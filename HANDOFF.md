@@ -514,8 +514,35 @@ Last updated: 2026-09-02 JST (second session).
 > one" clause is corrected (annotated in place); the stop rule of THIS
 > audit does not fire; HR-1/HR-3′ stay the fallback ordering. Battery all
 > polarity PASS (S_blob ∀-direction violation; Type-I log-critical; Tao
-> structure-bar respected). Baseline stays the 8775-job gate. **Resume
-> anchor: "Next work" below + that record's §3–§4.**
+> structure-bar respected). Baseline stays the 8775-job gate.
+>
+> **2026-09-03 (fifteenth session): the T-DIR quantifier + adversarial
+> battery audit is COMMISSIONED and EXECUTED — VERDICT: SURVIVES**
+> (`docs/gates/HSEL_TDIR_QUANTIFIER_BATTERY_2026-09-03.md`, RECORD-ONLY,
+> main-loop derivations [D]). **DQ-1 (direction extraction) CLOSES with
+> zero constant loss**: writing `X_e = eᵀG(t)e` (G = the gradient Gram
+> matrix), per-horizon continuity of `F_T(e)` on compact horizons +
+> S²-compactness + monotone convergence upgrade the ∃-per-horizon form to
+> a single fixed `e*` on `[0,T*)` with the SAME `Q₀` — **the printed
+> quantifiers are confirmed, no revision**; the plug is the SEL-10
+> pattern (weak-limit/class-match bookkeeping folded into V-15). **ONB
+> identities verified [D]:** `Σᵢ X_{eᵢ} = tr G = ‖∇u‖₂²` and
+> `Σᵢ P_{eᵢ} = −∫ωᵀSω` (via `⟨u·∇u,Δu⟩ = ∫ωᵀSω`); consequence — the
+> **averaging no-go**: uniform e-averaging delivers only `∫(E/3)²dt` =
+> the E-2/L_d wall, so the ∃e freedom cannot close from
+> energy/stretching averaging; the head's open content is a
+> temporal-coherence/anisotropy exclusion, Gram form
+> `inf_e ∫(eᵀG(t)e)²dt ≤ Q₀`. **Battery:** F1 high-frequency CLOSED
+> (O-1∘O-2); **F2 rotating anisotropy — kinematic violators EXIST**
+> (rotating `diag(g,ε,ε)` profile defeats every fixed e at level `g²`) —
+> filed per the commissioned rule as the **exact-NS-dynamics barrier**,
+> NOT a counterexample; certified version UNCONSTRUCTIBLE (O-4); F3
+> LD/multi-strain UNCONSTRUCTIBLE; F4 small-data validates; F5 Tao
+> guarded (C-3); F6 frozen profiles violate every direction — polarity
+> PASS; F7 2.5-D sanity PASS. **No COUNTERFAMILY, no QUANTIFIER-GAP —
+> T-DIR cleared to proceed to V-15 (a user act).** Baseline stays the
+> 8775-job gate. **Resume anchor: "Next work" below + that record's
+> §1–§2.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -574,20 +601,21 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   H-SEL^nu ⟹ Lean N1→N2→N3. Only the head is open. Parked/available:
   the axisym assets (T-SPK, T-SRC′, P-LP, Shahmurov watch), HR-1/HR-3′
   as the recorded fallback ordering if T-DIR dies.
+- **DONE (fifteenth session): the T-DIR quantifier/battery audit —
+  SURVIVES.** DQ-1 closed (quantifiers confirmed, zero loss); ONB
+  identities verified; averaging no-go established; F2 kinematic barrier
+  filed; no counterfamily. The Gram reformulation
+  `inf_e ∫(eᵀG(t)e)²dt ≤ Q₀` is the head's canonical open form.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **T-DIR falsification/battery pass** (P-3-style, before any proof
-     work): seeds = strain-compression configurations maximizing `𝔓₋`
-     (LD-adjacent), anisotropic escape families (can a certified family
-     defeat EVERY direction e? — the ∃e quantifier's rotation freedom is
-     untested territory), O-2 quarantine data; plus a targeted prior-art
-     check on `∂₃u ∈ L⁴L²`-budget-type statements.
-  2. **V-15 discharge** (Zhang 2017 / CFZ 2021 proof quantitativity +
-     Leray–Hopf class-match bookkeeping — nu-layer only; ds-layer already
-     rests on [V-P] qualitative criteria).
-  3. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)` (cheap
-     scalars; direction scan over e).
-  4. Only after 1–2: T-DIR/T-DIR-SPK proof commissioning.
+  1. **V-15 discharge** (Zhang 2017 / CFZ 2021 proof quantitativity +
+     the DQ-1 §1(b) weak-limit/class-match bookkeeping — nu-layer only;
+     ds-layer already rests on [V-P] qualitative criteria; also a
+     targeted prior-art check on `∂₃u ∈ L⁴L²`-budget-type statements and
+     on anisotropy/coherence literature adjacent to the Gram form).
+  2. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)`, and the
+     Gram spectrum `spec G(t)` (cheap scalars; direction scan over e).
+  3. Only after 1: T-DIR/T-DIR-SPK proof commissioning.
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
   SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).
