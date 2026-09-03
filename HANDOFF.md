@@ -672,8 +672,43 @@ Last updated: 2026-09-02 JST (second session).
 > `ω×e = 2Ae` is his object at constant direction — no usable transfer.
 > **Per the commission: T-VAR is the single next target.** Battery:
 > polarity forced; kinematic rotators = standing barrier; small-data
-> subclass satisfies. Baseline stays the 8775-job gate. **Resume anchor:
-> "Next work" below + that record's §1/§3.**
+> subclass satisfies. Baseline stays the 8775-job gate.
+>
+> **2026-09-04 (twentieth session): the T-VAR proof session is
+> COMMISSIONED and EXECUTED — VERDICT: ONE-SUBLEMMA (T-CONE)**
+> (`docs/gates/HSEL_TVAR_PROOF_SESSION_2026-09-04.md`; no Lean, no
+> numerics; [D]-yields only, no open statement claimed). **Frame
+> identity derived:** `QᵀG′Q = Λ′ + [Ω,Λ]` with `G′ = −2R` gives
+> `λᵢ′ = −2R̃ᵢᵢ` and **`|λᵢ−λⱼ||Ω_ij| = 2|R̃_ij|` — the commissioned
+> gap-weighted rotation IS the off-diagonal of R in the Gram eigenframe**
+> (no division by the gap ever occurs; degeneracies harmless). Rise
+> decomposition: amplitude + rotation parts recombine exactly; the
+> entrywise sweep dominator OVERCHARGES dissipative epochs (R ⪰ 0 ⟹ no
+> rise, positive charge) — rejected; the correct refinement is spectral:
+> `(X_e′)₊ ≤ 2eᵀR₋e` (R₋ = negative spectral part). **THE SUBLEMMA:
+> T-CONE** (norm-uniform, OPEN): `λ_min(∫₀^{T′}R₋(t)dt) ≤ Q₀(ν,T,M)` —
+> "some fixed direction escapes the accumulated negative cone".
+> **Proved: T-CONE ⟹ T-VAR (constant 2; e = min-eigenvector of the
+> accumulated matrix — the ∃-quantifier COLLAPSES onto one PSD matrix,
+> frame-free, no eigenvector-regularity technicalities, DQ-1-compatible)
+> ⟹ T-DIR ⟹ the verified chain.** Weakest-dominator justification
+> printed (only the R₊-shielding slack lies below it, returning to T-VAR
+> itself). Four checks: (1) near-isotropic rotation harmless —
+> structurally confirmed (degenerate gaps null the cost); (2) big gap +
+> bounded off-diagonals ⟹ slow frames (the anisotropic-branch
+> mechanism); (3) dichotomy priced — **T-CONE ⟺ accumulated negative
+> production cannot be both wall-large and directionally
+> equidistributed; the missing NS input is an anti-equidistribution
+> mechanism** (free identities checked insufficient: `tr𝔑` wall-level,
+> `∫trR = ½(E(0)−E(T′))` signed-only — wall routes rejected on sight);
+> (4) `D ⪰ 0` narrows/closes the cone but does not constrain its
+> angular velocity. Barrier repriced and intact (kinematic rotator
+> defeats T-CONE as it must: `λ_min(𝔑) ~ fTg/3`); small-data subclass
+> satisfies; polarity forced. **Chain: T-CONE ⟹ T-VAR ⟹ T-DIR ⟹
+> [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean.** `spec 𝔑(T′)`
+> is computable on the existing probe infrastructure. Baseline stays the
+> 8775-job gate. **Resume anchor: "Next work" below + that record's
+> §3–§4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -763,23 +798,32 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   The proof's open content is sharply located (P-d): NS must bound the
   Gram frame's oscillation frequency along one direction — the free
   identities are provably insufficient (matrix-path counterexample).
+- **DONE (twentieth session): the T-VAR proof session — ONE-SUBLEMMA
+  (T-CONE).** The single open target is now **T-CONE**:
+  `λ_min(∫₀^{T′}R₋(t)dt) ≤ Q₀(ν,T,M)`, `R = νD + 𝒫 = −½G′`, `R₋` its
+  negative spectral part — frame-free, ∃-collapsed (the direction = a
+  min-eigenvector of one accumulated PSD matrix). Proved:
+  T-CONE ⟹ T-VAR ⟹ T-DIR ⟹ [DQ-1 + Zhang/CFZ, V-15, M-only]
+  H-SEL^nu ⟹ N0 ⟹ Lean. Open content: **an NS anti-equidistribution
+  mechanism for the accumulated negative production** (it may not be
+  both wall-large and directionally equidistributed); the barrier is
+  repriced as gap × frequency × equidistribution.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **T-VAR proof session(s)** — the required input is an NS-dynamical
-     oscillation/frequency bound for one channel; assets available: the
-     P-c free identity (`∫trR = ½(E(0)−E(T′))`), the check-4 ROUTE-SWAP
-     map (coherence + λ₂-alignment ⟹ good direction — compare against
-     HR-1/HR-3′ before adopting), the probe infrastructure
-     (`experiments/tgram_probe/` can measure `TV₊(X_e)` and the
-     R-tensor's negative-cone rotation directly — a T-VAR-targeted
-     probe is a natural companion commission).
-  2. Optional probe re-test / T-VAR-targeted probe (rise-budget and
-     frame-rotation-frequency observables; preregister first).
+  1. **T-CONE proof session** — the anisotropic-branch mechanism is
+     identified (big gap + bounded `R̃`-off-diagonals ⟹ slow frames,
+     §4.2); the missing input is the anti-equidistribution mechanism;
+     the check-4 ROUTE-SWAP map (coherence + λ₂-alignment) remains on
+     file for comparison against HR-1/HR-3′ before any adoption.
+  2. **T-CONE-targeted probe** — `spec 𝔑(T′) = spec ∫R₋dt` is directly
+     computable on `experiments/tgram_probe/` (R = νD + 𝒫 assembled
+     from the stored G/D/𝒫 series); preregister first; measures the
+     equidistribution question empirically.
   3. Standing items unchanged: parked assets (T-GRAM with Y-1/Y-2;
-     T-DIR-SPK archived as the stronger member; axisym T-SPK/T-SRC′;
-     P-LP; Shahmurov watch); accumulated freeze-review proposals;
-     on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold; HR-1/HR-3′
-     fallback ordering.
+     T-DIR-SPK and T-VAR archived as stronger members; axisym
+     T-SPK/T-SRC′; P-LP; Shahmurov watch); accumulated freeze-review
+     proposals; on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold;
+     HR-1/HR-3′ fallback ordering.
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
   SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).

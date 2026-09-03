@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第19セッション: 初の proof session まで反映 — ONE-SUBLEMMA: T-VAR)
+# STATUS — 2026-09-04 (第20セッション: T-VAR proof session まで反映 — ONE-SUBLEMMA: T-CONE)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -514,6 +514,31 @@ TV bound なし、(4) coherence + λ₂-整列は良方向を生成し得る(`�
 バッテリー: polarity 強制・回転 kinematic は標準 barrier・small-data 部分クラスは
 成立。次 = ① T-VAR proof session(P-c 恒等式・check-4 map・probe インフラが資産)
 → ② 任意の T-VAR 向け probe(要 prereg)— いずれも user act。
+
+**第20セッション(ユーザー commission): T-VAR proof session 実行済み — 判定:
+ONE-SUBLEMMA(T-CONE)**
+([`docs/gates/HSEL_TVAR_PROOF_SESSION_2026-09-04.md`](docs/gates/HSEL_TVAR_PROOF_SESSION_2026-09-04.md)、
+Lean/数値なし; [D] 収穫のみ、open statement 無主張)。**frame 恒等式導出**:
+`QᵀG′Q = Λ′ + [Ω,Λ]`、`G′ = −2R` により `λᵢ′ = −2R̃ᵢᵢ`、
+**`|λᵢ−λⱼ||Ω_ij| = 2|R̃_ij|` — commissioned の gap-weighted rotation は R の
+G-固有枠非対角成分そのもの**(gap 除算の病理なし・縮退無害)。rise 分解は
+amplitude + rotation に正確に再結合; 成分ごとの sweep dominator は**散逸 epoch を
+過剰請求**(R ⪰ 0 で rise ゼロなのに請求正)— 棄却; 正しい精密化はスペクトル:
+`(X_e′)₊ ≤ 2eᵀR₋e`。**選定 sublemma T-CONE(OPEN)**:
+`λ_min(∫₀^{T′}R₋(t)dt) ≤ Q₀(ν,T,M)` — 「累積負錐からある固定方向が逃れる」。
+**証明済み**: T-CONE ⟹ T-VAR(定数2; e = 累積 PSD 行列の最小固有ベクトル —
+**∃量化子が1行列に崩壊、frame-free、固有ベクトル正則性の技術不要、DQ-1 互換**)
+⟹ T-DIR ⟹ 検証済み連鎖。最弱支配性の正当化印字(下に残る slack は R₊-shielding
+のみで T-VAR 自身に戻る)。4チェック: (1) 等方近傍で回転無害(構造的確認)、
+(2) 大 gap + 有界非対角 ⟹ 遅い frame(異方分岐の機構)、(3) dichotomy の価格:
+**T-CONE ⟺ 累積負生産は「壁レベルの大きさ」と「方向等分配」を両立できない —
+欠けている NS 入力は anti-equidistribution 機構**(free 恒等式は不十分と検査済み:
+tr𝔑 は壁、∫trR は符号つきのみ — 壁ルートは規則どおり即棄却)、(4) D ⪰ 0 は
+錐を狭め/閉じるが角速度は制約しない。barrier 再価格(gap × 周波数 × 等分配)で
+無傷、small-data 成立、polarity 強制。**連鎖: T-CONE ⟹ T-VAR ⟹ T-DIR ⟹
+[DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean。** `spec 𝔑(T′)` は既存
+probe インフラで計算可能。次 = ① T-CONE proof session → ② T-CONE 向け probe
+(要 prereg)— いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
