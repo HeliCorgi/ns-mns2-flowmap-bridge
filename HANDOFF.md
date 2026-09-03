@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-fourth session).
+Last updated: 2026-09-04 JST (twenty-fifth session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -852,6 +852,50 @@ Last updated: 2026-09-04 JST (twenty-fourth session).
 > pointwise-sink devices) without sufficiency claims. Baseline stays the
 > 8775-job gate. **Resume anchor: "Next work" below (twenty-third session
 > version, unchanged in substance) + that record's §1/§2.**
+>
+> **2026-09-04 (twenty-fifth session): PARK RULING EXECUTED; HR-3′ BATTERY
+> and GAP DECOMPOSITION EXECUTED — HR-3′ ROUTE-KILLED as a head; the
+> `2/5 → 1/2` gap is NOT-CLOSABLE as posed; addendum: Grujić–Xu asymptotic
+> criticality does NOT close by `k(t) → ∞`; R1 viscous-ball check NEGATIVE**
+> (`docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md`,
+> `docs/gates/HSEL_GX_ASYMPTOTIC_CRITICALITY_2026-09-04.md`; no Lean, no
+> numerics, no new head/sublemma). **(1) PARK:** the general T-DIR lane is
+> parked by user ruling (SSC = closing evidence; annotations appended to
+> the channel-search and SSC records; un-park trigger = a wall-free
+> mechanism non-vacuous on `𝔅_Γ(M)`). **(2) Battery — the coherent-core
+> family [D]:** a Gaussian/Burgers core has `r_B/(ν/Λ)^{1/2} = (Re_Γ/π)^{1/2}`,
+> so for `Re_Γ ≥ π/(4\ln(2M)c(M)²) (< 1)` the selected super-level set
+> contains every segment of every half-length `≤ ρ_c` through deep-core
+> points — BFG Thm 19's hypothesis fails at every post-escape time of any
+> growth phase carried by such a tube; under the horizon reading of "escape
+> time" the head is FALSE per solution (COUNTERFAMILY; rigorous
+> construction of one certified fat-core growth phase = short-time
+> construction debt), under the blow-up reading it is vacuous for regular
+> flows and ⟺ regularity (RESTATEMENT); threshold variants are false or
+> circular. New standing battery item: **per-solution truth** (a
+> criterion's hypothesis promoted to a head must hold for regular flows
+> with solution-dependent constants) — HR-3/3′ fail, HR-1/HR-2/HR-5/HR-6
+> pass. **(3) Gap:** duality is dimension-capped (`1/(2+a)`; `‖u‖₂` gives
+> `2/5`; `1/2` needs `a = 0`); no dynamical closure since the target is
+> false for regular flows (analyticity even forces a fat ball of radius
+> `(1−λ)Λ^{-1/2}/C₁` at the maximum); the only true form is the
+> blow-up-restricted one = exclusion of "fat-core blow-up" ≡ regularity
+> (Thm 19 already excludes every non-fat blow-up). **(4) GX addendum [D]:**
+> `r_apr(k) ≤ r_crit(k) ⟺ A_k ≤ Θ(k) = (C_c(k)/C_a(k))^{2(k+2)(k+5/2)}‖u₀‖₂^{-2(k+2)}`;
+> `C_a(k)` bounded (band-limited tests), `A_k` factorial; without chain
+> hypotheses the exponent gap `1/(2k+3)` makes `Θ(k)` only exponential —
+> fails for every `k(t)`; with the ascending chain (factorial gain) the
+> per-level loss `2^{-k}` (Thm 2.4's `2^{2k}`) gives `Θ(k) ∼ 2^{-2k³}` —
+> fails; closure would need loss `≤ k^{-1+ε}` (then `k(t) ∼ \ln Λ/\ln\ln Λ`
+> works and viscous-scale cores become sparse at level `k`) AND the chain
+> hypothesis (3.8)–(3.9) at level `k(t)` at escape times — **obstruction =
+> constant growth; residual = chain selection; time synchronization is
+> not an obstruction.** R1 cannot give `\sup_{x₀}Ω^{1/2}∫_{B_{cΩ^{-1/2}}}|ω| ≤ ε`
+> (trivial for `c ≲ ε^{1/3}`, false at `x_max` otherwise by the Harnack
+> ball). Fallback ordering exhausted at HR-3′; remaining SYM+per-solution
+> survivors: HR-1 (two gaps), HR-2 (V-2 debt), H-SEL/HR-5 (C-1/C-2/C-3).
+> Baseline stays the 8775-job gate. **Resume anchor: "Next work" below +
+> the two records' verdict sections.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -888,7 +932,49 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-fourth session)
+### Next work (written 2026-09-04, twenty-fifth session)
+
+Read first: the twenty-second to twenty-fifth session paragraphs of the
+top block; `docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md` (§0 PARK state,
+§1 the coherent-core family and the per-solution-truth item, §2 the gap
+decomposition, §3 verdict); `docs/gates/HSEL_GX_ASYMPTOTIC_CRITICALITY_2026-09-04.md`
+(§2 closure condition, §3 the constant-growth formula, §4 the R1 check);
+`docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md` §5 (HR-1's two gaps).
+
+- **State:** general T-DIR lane PARKED (ruling executed). HR-3/HR-3′
+  ROUTE-KILLED as heads (fail per-solution truth; blow-up reading is a
+  restatement); the BFG/Grujić theorems stay valid as criteria. GX
+  asymptotic criticality does not close by `k(t) → ∞` (constant growth).
+  Direct research session: D. Two standing battery items now precede any
+  head promotion: **SYM-test** and **per-solution truth**.
+- **Remaining candidates on file (none selected):** HR-1 (½-Hölder
+  coherence; gaps G1 time/scaling + G2 average→pointwise); HR-2 (`λ₂⁺`
+  critical norm; V-2 Miller verification debt); H-SEL = HR-5 (reverse
+  interpolation `p = 2`; constraints C-1/C-2/C-3; P-2 probe never run).
+  Any re-selection is a user act and must re-run both battery items and
+  the P-1 prior-art sweep on the chosen head.
+- **NOT to do (moot / forbidden without a new instruction):** T-DET proof
+  session or probe; HR-3′ proof work or a sparseness probe; proof search
+  on any head; numerics; Lean; new named heads/sublemmas; re-deriving
+  R1–R6 or the coherent-core family.
+- **Next, each requiring an explicit user commission (recorded options,
+  no order implied):** (a) re-selection among HR-1 / HR-2 / H-SEL with the
+  two battery items (cheap, on paper); (b) the `SPEC.md` numerical
+  program M-1 (on hold; the only non-head lane); (c) discharge of the GX
+  constants debt (verbatim `k`-dependence of Lemma 3.6's `c*` and of
+  Thm 3.8/3.9's constants; a background extraction may have written
+  `scratchpad/gx_constants.txt` — file as an annotation; the verdict
+  changes only if a loss-free chain version exists, moving the obstruction
+  to chain selection); (d) the short-time construction of a certified
+  fat-core growth phase (turns the COUNTERFAMILY debt into a theorem; not
+  needed for any decision on file).
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; no claim about regularity or
+  singularity of symmetric flows or of fat-core scenarios.
+
+### (superseded) Next work (written 2026-09-04, twenty-fourth session)
 
 Read first: the twenty-second, twenty-third and twenty-fourth session
 paragraphs of the top block; `docs/gates/NS_DIRECT_RESEARCH_SESSION_2026-09-04.md`

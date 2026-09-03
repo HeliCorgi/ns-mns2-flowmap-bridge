@@ -97,3 +97,7 @@ Hence the lane "prove T-VAR from exact NS by wall-free inequalities" cannot succ
 ## §6 — Claim boundary
 
 No open statement is proved or disproved: T-VAR, T-DIR, T-DIR-SPK, T-GRAM, T-CONE, T-DET, H-SEL, N0 remain OPEN as statements; SSC shows they *contain* the enstrophy wall on an invariant sector, nothing more. The [D]-items are: NS `O(3)`-covariance + uniqueness (flow invariance of equivariant data), the conjugation law of Gram-type tensors, an elementary commutant computation, an explicit non-empty equivariant Schwartz family, and two integration-by-parts identities (I-1, I-2). **Nothing here asserts, approaches, or implies a resolution of the Navier–Stokes Millennium problem in either direction** — in particular, no statement about the regularity or singularity of symmetric flows is made. Per the commission no new named sufficient condition is introduced (SSC is an obstruction lemma, not a head). Parking, pivoting, erratum adoption into the kill table, and any probe or proof commissioning are user acts; the appended errata are annotations, not freeze-review rulings.
+
+---
+
+**PARK annotation (2026-09-04, twenty-fifth session; user ruling).** The recommendation of §5 item 1 is **EXECUTED**: the general lane is PARKED on this record as closing evidence (`docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md` §0).

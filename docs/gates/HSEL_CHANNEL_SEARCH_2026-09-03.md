@@ -71,3 +71,7 @@ RECORD-ONLY; no Lean edit; no numerics; no proof search on T-DIR/T-DIR-SPK/H-SEL
 ---
 
 **Erratum / annotation (2026-09-04, twenty-second session; see `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md`, the symmetric-sector collapse lemma SSC).** The §2 collapse check ("no div-free identity, elliptic estimate, or Riesz transform recovers the full gradient from `∂_e u`") is correct for general fields but the channel DOES collapse on an NS-invariant sub-ball: for tetrahedrally-equivariant certified solutions `‖∂_e u‖²₂ = ‖∇u‖²₂/3` for every `e` and every `t`, so on that sector T-DIR is the `L⁴_tḢ¹` wall and the (4,2) bridge criterion is the full-gradient criterion — design condition C4 ("does NOT collapse onto the wall") fails there. The sector is non-empty at every `M`. Add the SYM-test to the collapse check.
+
+---
+
+**PARK annotation (2026-09-04, twenty-fifth session; user ruling).** The general T-DIR / T-DIR-SPK / T-GRAM / T-VAR / T-CONE / T-DET lane that this record opened is **PARKED** with `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md` (SSC) as closing evidence; see `docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md` §0 for the parked state and the registered un-park trigger. Nothing in this record is retracted beyond the errata already appended.

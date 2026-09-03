@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第24セッション: direct NS research session まで反映 — 判定 D. NO-NEW-PROGRESS; HR-3′ fallback 不変)
+# STATUS — 2026-09-04 (第25セッション: PARK 裁定執行・HR-3′ battery/gap decomposition・GX 再解析まで反映 — HR-3′ ROUTE-KILLED; GX は k(t)→∞ で閉じない)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -648,6 +648,38 @@ kernel に入れる route は magnitude coherence 条件付き(HR-1 gap (G2) と
 消費する — file 上の最弱十分 target は依然 HR-3′ の単一 gap。B ではない(R1/R2 は新規だが初等的
 かつ支配される)、C でもない(新しい核心命題なし)。推奨不変: PARK 裁定 → HR-3′ battery →
 gap decomposition(R1 は窓内 time-selection の道具として保存、十分性は主張しない)。
+
+**第25セッション(ユーザー裁定 + commission): (1) 一般 T-DIR lane の PARK 裁定を執行、
+(2) HR-3′ counterexample-first battery、(3) gap decomposition、(4) 追加: Grujić–Xu
+asymptotic criticality の再解析と R1 viscous-ball check**
+([`docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md`](docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md)、
+[`docs/gates/HSEL_GX_ASYMPTOTIC_CRITICALITY_2026-09-04.md`](docs/gates/HSEL_GX_ASYMPTOTIC_CRITICALITY_2026-09-04.md);
+Lean/数値なし; 新 head・新 sublemma なし)。**(1) PARK**: SSC 記録を closing evidence として
+一般 lane を PARK(channel-search 記録と SSC 記録に注記追記; un-park trigger = `𝔅_Γ(M)` 上で
+非空虚な wall-free 機構)。**(2) battery — coherent-core family [D]**: Gaussian/Burgers core は
+`r_B/(ν/Λ)^{1/2} = (Re_Γ/π)^{1/2}` を満たすので、`Re_Γ ≥ π/(4 ln(2M) c(M)²)`(< 1)なら選択された
+super-level set は core 深部の各点を通るあらゆる方向・あらゆる半長 `≤ ρ_c` の線分を含み、
+BFG Thm 19 の仮説は当該 tube が最大値を担う成長期のすべての post-escape 時刻で不成立。
+escape time の horizon 読みでは head は解ごとに偽(COUNTERFAMILY; certified な fat-core
+成長期の厳密構成は短時間構成債務)、blow-up 読みでは正則流に対して空虚で正則性の言い換え
+(RESTATEMENT)、閾値版は偽か循環。新 standing battery 項目 **per-solution truth**(criterion の
+仮説を head に昇格するには正則流で解依存定数付きで成立すること — HR-3/3′ は不合格、
+HR-1/HR-2/HR-5/HR-6 は合格)。**(3) gap**: 双対性は次元で上限(指数 `1/(2+a)`、`‖u‖₂` で `2/5`、
+`1/2` には `a = 0` が必要)、動的閉鎖は target が正則流で偽なので不可能(解析性は最大点周りに
+半径 `(1−λ)Λ^{-1/2}/C₁` の fat ball を強制)、唯一真な形は blow-up 限定形 = 「fat-core blow-up
+の排除」≡ 正則性(Thm 19 は非 fat な blow-up を既に排除)。**HR-3/HR-3′ は head として
+ROUTE-KILLED、`2/5 → 1/2` gap は posed の形では NOT-CLOSABLE**。**(4) GX 追加 [D]**:
+`r_apr(k) ≤ r_crit(k) ⟺ A_k ≤ Θ(k) = (C_c(k)/C_a(k))^{2(k+2)(k+5/2)}‖u₀‖₂^{-2(k+2)}`;
+`C_a(k)` は有界(band-limited test)、`A_k` は階乗的; chain 仮説なしでは指数 gap `1/(2k+3)` で
+`Θ(k)` は高々指数的 — 任意の `k(t)` で不成立; ascending chain(階乗 gain)でも level ごとの loss
+`2^{-k}`(Thm 2.4 の `2^{2k}`)により `Θ(k) ∼ 2^{-2k³}` — 不成立。閉じる条件は loss `≤ k^{-1+ε}`
+(そのとき `k(t) ∼ ln Λ/ln ln Λ` で成立し viscous-scale core も level k で sparse になる)かつ
+chain 仮説 (3.8)–(3.9) が escape time で level `k(t)` において成立すること — **障害 = constant
+growth、残余 = chain selection、time synchronization は障害でない**。R1 は
+`sup_{x₀}Ω^{1/2}∫_{B_{cΩ^{-1/2}}}|ω| ≤ ε` を与えない(`c ≲ ε^{1/3}` で自明、それ以外は Harnack ball
+により `x_max` で偽)。fallback 順序は HR-3′ で尽きた; SYM + per-solution を通る残存候補は
+HR-1(gap 2つ)、HR-2(V-2 債務)、H-SEL/HR-5(C-1/C-2/C-3)。次は user act(再選定 / M-1 /
+GX 定数債務 / fat-core 構成)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
