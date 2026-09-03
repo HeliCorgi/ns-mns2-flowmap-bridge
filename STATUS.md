@@ -725,7 +725,7 @@ pressure Hessian を経て生き残る λ₂ の渦度 source の割合)は even
 (F-tube が全 event で確認)。prereg 規則による判定: C1 は systematic だが free companion なし ⟹
 DIAGNOSTIC-ONLY、head 昇格なし。follow-up prereg 2件を記録: (1) 96³–128³・複数 datum 族での
 λ₂ の conditional pressure-shielding 不等式(sharp な dealiased 圧力検証付き)、(2) 大きな box 内の
-孤立した強い構造で L¹-radius の free far-strain bound を regime 内に置く試験。E2b は完了次第 §7 に追記。
+孤立した強い構造で L¹-radius の free far-strain bound を regime 内に置く試験。E2b(96³)は §7 に追記済み: tail 1.3e-4 で依然 unresolved だが全比が 64³→96³ で ≈10 % 以内に安定(C1 0.08、C4 < 0、core は ≥10 viscous 長で fat)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

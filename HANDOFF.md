@@ -940,8 +940,9 @@ Last updated: 2026-09-04 JST (twenty-seventh session).
 > objective and stays unstarted; the T-GRAM solver was re-implemented with
 > parametrised `N` and cross-validated to machine precision (E0 = R1).
 > Five runs (E0 TG ν=0.02 — the only tail-resolved one; E1 TG ν=0.01; E3
-> shear+noise; E4 random band; E2 antiparallel tubes 64³ excluded, E2b 96³
-> pending) with exact-identity validations at every output (production
+> shear+noise; E4 random band; E2 antiparallel tubes 64³ excluded; E2b 96³
+> filed in §7: tail 1.3e-4 still unresolved, but every ratio grid-stable to
+> ≈10 %, C1 0.08, C4 < 0) with exact-identity validations at every output (production
 > three ways `≤ 5e-16`; `∫S:∇²p = 0` `≤ 7e-17`; the pressure-trace check
 > is only de-aliasing-accurate, 1e-3–4e-2 — recorded as a preregistration
 > defect). Term budgets inside growth events: **C1 = net/gross stretching
@@ -1028,8 +1029,8 @@ preregistrations, §7 E2b appendix if present); `experiments/m1_events/PREREG.md
      large box (vortex-ring pair, 128³) to put the `L¹`-radius far-strain
      bound in regime (`Λ ≫ ‖ω‖_{L¹}(L/2)^{-3}`) and measure the near
      fraction `α_{near}/α` at `r₁` — the one route with a bridge shape.
-  3. Append E2b (96³ tubes) to the record when its run completes (only
-     strengthens/weakens the tube row).
+  3. (done) E2b (96³ tubes) filed in the record §7: ratios grid-stable,
+     tail still unresolved — a resolved tube event needs ≥ 128³.
   4. Standing: passive literature watch; Lean debts on hold; Hou closure
      unstarted.
 - **Forbidden shortcuts (standing):** no asserting open Props as axioms; no

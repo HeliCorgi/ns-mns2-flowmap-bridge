@@ -70,7 +70,11 @@ By the preregistered rule: **C1 is systematic** (`≤ 0.5` at every event output
 
 **Consequences (recommendations; user acts):** (1) no head is promoted; the numerical lane stays open with the two follow-ups above as the recorded next preregistrations (both cheap; (1) is the more decision-relevant since it feeds the only registered un-park trigger); (2) the Hou finite-cylinder closure remains unstarted and unnecessary for these objectives; (3) the E2b (96³) result is appended in §7 when available and can only strengthen or weaken the tube-run row, not the verdict.
 
-## §7 — Appendix: E2b (96³) — `[appended when the run completes]`
+## §7 — Appendix: E2b (antiparallel tubes, `ν = 0.01`, 96³, `dt = 0.0075`, `T = 6`; 1010 s)
+
+**Resolution:** max tail `1.3e-4` — still above the `1e-5` rule (this tube configuration at `ν = 0.01` needs a finer grid than 96³); E2b is therefore **diagnostic-only, like E2**, and the resolved set for the verdict remains `{E0}`. Validations: production three ways `≤ 4e-5` of the gross (the `\det`-form differs from the frame sum at `4e-5`, the direct form at `5e-16`), `∫S:∇²p = 0` at `9e-18`, `E = 2‖S‖²` at `1e-15`; the pressure-trace check at the de-aliasing residual (`0.36`). Growth events: the same three short events as at 64³ (`2.11–2.59`, `4.37–5.47`, `5.78–5.98`), 19 full outputs.
+
+**Grid stability of the ratios (64³ → 96³), medians inside events:** C1 `0.081 → 0.077`; C2 `0.276 → 0.270`; C4 `−0.042 → −0.055` (`[−0.11, −0.001]`); C5′ `0.133 → 0.146`; twist share `0.343 → 0.312`; `|S|²`-share of `λ₂ > 0` on the intense set `0.72 → 0.71`; `cos²θ₂` on the set `0.69 → 0.70`; minimal in-set run length through `x_{max}` `≥ 11.5 → ≥ 9.6` viscous lengths (median `22.8 → 25.5`); within-event trends flat in both (`d\log C1/d\log Λ = −0.03 → +0.05`; `dC4/d\log Λ = −0.01 → −0.04`, C4 already `≈ 0` throughout). **Every diagnostic ratio is stable to within `≈ 10 %` under the resolution change while the spectral tail is not resolved — the ratios are carried by the resolved scales.** This does not lift E2/E2b into the resolved set (the rule is the tail), but it makes the tube row of §4 credible as a diagnostic: for coherent antiparallel tubes the net stretching is `≈ 8 %` of the gross, the pressure Hessian cancels the vortical source of `λ₂` on the intense set completely (C4 `< 0`: the pressure term over-compensates), and the cores are fat at `≥ 10` viscous lengths in every direction. The verdict of §5 is unchanged.
 
 ## §6 — Claim boundary
 
