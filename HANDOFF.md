@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-second session).
+Last updated: 2026-09-04 JST (twenty-third session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -782,6 +782,43 @@ Last updated: 2026-09-04 JST (twenty-second session).
 > fallback ordering on file subject to the SYM-test; M-1 on hold; no
 > claim in either direction about symmetric flows. Baseline stays the
 > 8775-job gate. **Resume anchor: "Next work" below + that record's §2/§5.**
+>
+> **2026-09-04 (twenty-third session): the POST-SSC FALLBACK AUDIT is
+> COMMISSIONED and EXECUTED — VERDICT: HR3-SELECT**
+> (`docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md`; no Lean, no
+> numerics, no new head, no new named sublemma). **SYM-test on the
+> Γ = A₄-equivariant sector — BOTH HR-1 and HR-3′ PASS** [D]: the sector
+> forces `ω(0,t) = u(0,t) = 0`, pins `ω ∥ axis` on the 7 symmetry axes
+> (`|sin∠| ≥ √(2/3)` between distinct axes), makes the six per-component
+> super-level sets isometric copies of one set — orbit/fixed-point
+> constraints only, no norm identity; neither head degenerates to a wall,
+> neither is auto-satisfied or auto-violated (HR-1 on the sector forbids
+> two high-vorticity points on distinct axes within `(2/3)ρ²` — the
+> Kida–Pelz axis-collapse — correct polarity). **HR-3′ chain [V]:** BFG
+> ARMA 2019 Thm 19 (1-D `(3/4)^{1/3}`-sparseness of the selected
+> `V^{j,±}_s = {ω_j^± > (1/2M)‖ω(s)‖_∞}` at some `ρ ≤ (2c(M))⁻¹‖ω(s)‖_∞^{-1/2}`,
+> one `s` per escape-time window ⟹ no blow-up) versus Thm 26 (energy ⟹
+> 3-D 3/4-sparseness of the SAME sets at the SAME threshold at
+> `r_a = c‖u₀‖₂^{2/5}‖ω‖_∞^{-2/5}`, ALL times) + Remark 14 (3-D δ ⟹ 1-D
+> δ^{1/3}). Same-notation differentiation: constants MATCHED, time
+> selection FAVOURABLE (∀τ vs ∃s), component-vs-magnitude MATCHED, 1-D/3-D
+> closed at the a priori scale — **ONE gap: the scale exponent 2/5 → 1/2**
+> (`r_c/r_a = c‖u₀‖₂^{-2/5}‖ω‖_∞^{-1/10}`; in BFG's classes `Z_{2/5} ∼ L^{6/5,∞}`
+> → `Z_{1/2} ∼ L^{3/2,∞}`, the standard half criticality unit, on a
+> geometric object strictly weaker than the norm; Albritton–Bradshaw
+> caution carried: the a priori side is exactly energy-level). **HR-1
+> chain:** BdVB 2002 (`β = ½`, uniform `ρ`, on `{|ω| ≥ Λ}`) [V-adj ×2]
+> versus the unconditional supply derived [D]:
+> `‖ω(T′)‖_{L¹} + ν∫∫_{ω≠0}|ω||∇ξ|² ≤ ‖ω₀‖_{L¹} + E₀/(2√2ν)` (the
+> `|ω|`-equation `D_t|ω| = α|ω| + νΔ|ω| − ν|ω||∇ξ|²` integrated) ⟹
+> `∫∫_{|ω|≥Λ}|∇ξ|² ≤ C₀/(νΛ)` — **TWO independent gaps**: (G1) `L¹_t`
+> energy-level (index 5/2) vs `L^∞_t` (index 1/2); (G2) weighted
+> `L²`-average of `∇ξ` vs the pointwise Hölder modulus the kernel bound
+> consumes (`H¹ ⊄ C^{1/2}` in 3-D). **Verdict HR3-SELECT** (C0; HR-1
+> runner-up). Debts named: V-3′ (quantitativity of Thm 19 for the
+> nu-layer), the Thm-19 selection-rule reading, V-1′ unchanged, Chae 2007
+> exponents, the `‖ω₀‖_{L¹}` ball parameter. Baseline stays the 8775-job
+> gate. **Resume anchor: "Next work" below + that record's §4/§6.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -818,7 +855,59 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-second session)
+### Next work (written 2026-09-04, twenty-third session)
+
+Read first: this file's top block (the twenty-second and twenty-third
+session paragraphs); `docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md`
+(§4 the HR-3′ same-notation table and gap (i); §5 the HR-1 two gaps; §6
+verdict + recommendations); `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md`
+(§2 SSC, §5 the PARK recommendation); the HR rows of
+`TSEL_HEAD_REDUCTION_AUDIT_2026-09-02.md` §3–§4 and the plug-in table of
+`HSEL_P1_LITERATURE_SWEEP_2026-09-02.md` §1/§4.
+
+- **State:** the general T-DIR/T-VAR/T-CONE/T-DET lane is ROUTE-KILLED as
+  a wall-free program (SSC) and is a PARK candidate; the fallback audit
+  selected **HR-3′** (per-component vorticity super-level-set sparseness,
+  BFG Thm 19 form) as the next head: SYM-passing, non-degenerate, with a
+  published a priori estimate (BFG Thm 26 + Remark 14) on the *same*
+  observable and **one** residual quantitative gap — the sparseness-scale
+  exponent `2/5 → 1/2` at one post-escape time. HR-1 is the runner-up
+  (two independent gaps).
+- **NOT to do (moot / forbidden without a new instruction):** the T-DET
+  proof session or probe; any proof search on T-DIR/T-DIR-SPK/T-VAR/
+  T-CONE/T-DET/H-SEL/N0; any proof search on HR-3′ or HR-1; numerics;
+  Lean; creating a new named head or sublemma for gap (i).
+- **Next, each requiring an explicit user commission (recommended order):**
+  1. **PARK ruling** for the general T-DIR lane (freeze-review-type; the
+     SSC record is the closing evidence; the proved arrows, Y-1/Y-2, DQ-1,
+     V-15 survive as record theorems).
+  2. **HR-3′ counterexample-first battery** (on-paper): the sector battery
+     of the audit's §4, the sheet-organised blind spot, frozen profiles,
+     Type-I, Tao-averaged (level-set geometry does not survive averaging —
+     FC-086 favourable), small-data. Verdict SURVIVES / COUNTERFAMILY.
+  3. **HR-3′ gap-(i) proof-route decomposition** (only after 2 SURVIVES):
+     which exact-NS structure beyond the energy inequality could move the
+     1-D sparseness scale of the selected component super-level set from
+     `c‖u₀‖₂^{2/5}‖ω‖_∞^{-2/5}` to `(2c(M))⁻¹‖ω(s)‖_∞^{-1/2}` at one time
+     `s` per escape window; assets: the ∃-time freedom of Thm 19, the
+     per-component/Remark-25 freedom, Grujić 2013 §5's filament-diameter
+     scenario; constraint: the Albritton–Bradshaw energy-homogeneity
+     caution (the a priori side carries no more than the energy).
+     Counterexample-first; wall routes rejected on sight; the SSC-type
+     collapse check (SYM-test) already passed.
+  4. Debts to discharge only if load-bearing: V-3′ (quantitative Thm 19),
+     the Thm-19 selection-rule reading, V-1′ (localization), Chae 2007
+     exponents, `‖ω₀‖_{L¹}` as a ball parameter for (U).
+  5. Standing alternatives unchanged: `SPEC.md` numerical program with M-1
+     (on hold); passive literature watch; SEL-3/SEL-5/EB-1 Lean debts (on
+     hold).
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; no claim about regularity or
+  singularity of symmetric flows.
+
+### (superseded) Next work (written 2026-09-04, twenty-second session)
 
 Read first: this file's top block (the twenty-second-session paragraph);
 `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md` (§2 the SSC lemma

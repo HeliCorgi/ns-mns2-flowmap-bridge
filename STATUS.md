@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第22セッション: T-VAR inequality session まで反映 — ROUTE-KILLED: 一般 lane の wall-free program は SSC 補題により閉鎖)
+# STATUS — 2026-09-04 (第23セッション: post-SSC fallback audit まで反映 — HR3-SELECT; 一般 lane は PARK 候補)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -597,6 +597,35 @@ T-DET probe は moot。erratum 注記を channel-search・quantifier-battery・T
 記録末尾に日付付きで追記(silent repair なし)。新しい standing battery 項目 **SYM-test**
 (∃方向 / 異方性型 head は commission 前に `𝔅_Γ(M)` 上で評価)。HR-1/HR-3′ fallback は
 SYM-test 通過を条件に file 上に残置。対称流の正則性・特異性については一切主張しない。
+
+**第23セッション(ユーザー commission): post-SSC fallback audit 実行済み — 判定:
+HR3-SELECT**
+([`docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md`](docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md)、
+Lean/数値なし; 新 head・新 named sublemma なし)。**SYM-test(Γ = A₄ sector)は HR-1・HR-3′
+とも PASS**[D]: sector は `ω(0,t) = u(0,t) = 0` を強制し、7本の対称軸上で `ω ∥ 軸`
+(相異なる軸間で `|sin∠| ≥ √(2/3)`)、6つの成分別 super-level set を互いに合同にする —
+軌道・固定点の制約のみで norm 恒等式は生じない。どちらも wall へ恒等退化せず、
+自動成立・自動不成立もしない(HR-1 は sector 上で「相異なる軸上の高渦度点は距離
+`(2/3)ρ²` 以上」を強制 = Kida–Pelz 型の軸方向崩壊を禁止、polarity 正)。
+**HR-3′ の一次文献鎖 [V]**: BFG ARMA 2019 Thm 19(選択された成分集合
+`V^{j,±}_s = {ω_j^± > (1/2M)‖ω(s)‖_∞}` が各 x₀ の周りで scale `ρ ≤ (2c(M))⁻¹‖ω(s)‖_∞^{-1/2}`
+で 1-D `(3/4)^{1/3}`-sparse、escape time 後の窓内の1時刻 s で ⟹ blow-up なし)対
+Thm 26(energy ⟹ **同じ集合・同じ閾値**が全時刻で scale `r_a = c‖u₀‖₂^{2/5}‖ω‖_∞^{-2/5}`
+にて 3-D 3/4-sparse)+ Remark 14(3-D δ ⟹ 1-D δ^{1/3})。同一記法での差分: 定数一致、
+time-selection は有利(∀τ 対 ∃s)、component-vs-magnitude 一致、1-D/3-D は a priori scale で
+閉鎖 — **残る gap は1つ: scale 指数 2/5 → 1/2**(`r_c/r_a = c‖u₀‖₂^{-2/5}‖ω‖_∞^{-1/10}`;
+BFG の class で `Z_{2/5} ∼ L^{6/5,∞}` → `Z_{1/2} ∼ L^{3/2,∞}`、標準的な criticality 半単位、
+ただし norm より厳密に弱い幾何対象上; Albritton–Bradshaw の注意 — a priori 側は
+energy-level 情報そのもの — を継承)。**HR-1 の鎖**: BdVB 2002(`β = ½`、一様 ρ、
+`{|ω| ≥ Λ}` 上)[V-adj ×2] 対 無条件供給 [D]:
+`‖ω(T′)‖_{L¹} + ν∫∫_{ω≠0}|ω||∇ξ|² ≤ ‖ω₀‖_{L¹} + E₀/(2√2ν)`(`D_t|ω| = α|ω| + νΔ|ω| − ν|ω||∇ξ|²`
+の積分)⟹ `∫∫_{|ω|≥Λ}|∇ξ|² ≤ C₀/(νΛ)` — **独立な gap が2つ**: (G1) `L¹_t` energy-level
+(index 5/2)対 `L^∞_t`(index 1/2)、(G2) `∇ξ` の重み付き `L²` 平均 対 kernel 評価が消費する
+各点 Hölder modulus(3-D で `H¹ ⊄ C^{1/2}`)。**判定 HR3-SELECT**(C0; HR-1 は次点)。
+債務: V-3′(nu 層のための Thm 19 定量化)、Thm 19 の選択則の読み、V-1′ 不変、Chae 2007 の
+指数、(U) の `‖ω₀‖_{L¹}` ball parameter。次 = ① 一般 lane の PARK 裁定 → ② HR-3′ の
+counterexample-first battery → ③ gap (i) の proof-route decomposition — いずれも user act。
+対称流の正則性・特異性は一切主張しない。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
