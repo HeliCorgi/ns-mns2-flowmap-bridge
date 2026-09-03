@@ -610,7 +610,39 @@ Last updated: 2026-09-02 JST (second session).
 > probe clause did NOT auto-fire (reduction found); next options (user
 > acts): probe on (`ē`, `X_ē(t)`, `(−ēᵀ𝒫ē)₊(t)`, `spec G(t)`) / T-GRAM
 > proof commissioning / fallbacks on file. Baseline stays the 8775-job
-> gate. **Resume anchor: "Next work" below + that record's §1/§3.**
+> gate.
+>
+> **2026-09-04 (eighteenth session): the T-GRAM specialization stress-test
+> / probe is COMMISSIONED and EXECUTED (numerical, preregistered,
+> fail-closed, EVIDENCE-GRADE) — VERDICT: CANONICAL-ADVERSE; T-GRAM is
+> PARKED; the operative head REVERTS to T-DIR-SPK(∃e)**
+> (`docs/gates/HSEL_TGRAM_PROBE_2026-09-04.md`; preregistration committed
+> BEFORE any run at `experiments/tgram_probe/PREREG.md` = `906601f`;
+> solver/postprocessing + results in `experiments/tgram_probe/`). New
+> probe infrastructure: a self-contained 64³ pseudo-spectral NS solver
+> (rotational form, Leray projection, 2/3 dealias, RK4; numpy-only) —
+> smoke-validated against analytic Taylor–Green energy, machine-zero
+> divergence, viscous decay, and **the Y-1 matrix identity
+> `G′ = −2νD − 2𝒫` at residual ~3.7×10⁻⁴ (joint code+math validation)**;
+> in-run validations V1/V2 ≤ 2×10⁻⁴ across all five runs. Fail-closed:
+> R2–R4 EXCLUDED (V3 spectral tail 3.6–4.8×10⁻⁵ > 10⁻⁵); resolved set =
+> {R1 Taylor–Green: STABLE, R̃ ≡ 1.000 (triple-degenerate E_min —
+> partly definitional); R5 small-data control: **ADVERSE — R̃ up to 309,
+> ≈17 at T** (B ≈ 3.3×10⁻² vs B_all ≈ 1.9×10⁻³ — both absolutely tiny:
+> T-GRAM itself would HOLD there with tiny Q₀, but the commissioned
+> RATIO test fires)}. Mechanism [D]: in the Stokes-dominated regime both
+> `ē` (∫G-locked) and 𝒫's frame (datum-locked) are data-frozen with no
+> dynamical mixing — the canonical direction's optimality margin is
+> unbounded exactly where dynamics is weakest; by contrast ALL four
+> nonlinear runs (incl. the three excluded, diagnostic-only) show
+> R̃ ≈ 1.00–1.06 — canonical near-optimality in active regimes.
+> **Consequences per the preregistered rules: T-GRAM parked (its proved
+> Y-1/Y-2 yields survive as record theorems); operative head =
+> T-DIR-SPK(∃e), position unchanged (Y-1 sup-arrow along any fixed e +
+> DQ-1 + the V-15-verified M-only bridge consume only ∃e); T-GRAM proof
+> search NOT commissioned.** Re-test proposals recorded (absolute-scale
+> gate on the ratio; 96³ resolution). Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + that record's §2–§3.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -679,28 +711,33 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   strong-solution-framed, quantitative, M-only constants; DQ-1 +
   rotation fold in with zero extra hypotheses); only the head is open.
 - **DONE (seventeenth session): the T-DIR-SPK decomposition — ONE-LEMMA
-  REDUCTION FOUND.** Yields Y-1 (`G′ = −2νD − 2𝒫`) and Y-2 (the
-  canonical fixed-direction free L¹ budget `∫X_ē dt ≤ M²/6ν`);
-  **selected lemma T-GRAM**: `∫₀^{T′}(−ēᵀ𝒫ē)₊dt ≤ Q₀(ν,T,M)` at
-  `ē(T′)` = smallest-eigenvalue eigenvector of `∫₀^{T′}G dt` — one
-  proved arrow to T-DIR, thence the verified bridge. Fallbacks on file:
-  T-DIR-SPK(∃e), T-DIR, the Gram form.
+  REDUCTION FOUND (T-GRAM).** Yields Y-1 (`G′ = −2νD − 2𝒫`) and Y-2
+  (the canonical fixed-direction free L¹ budget) — both survive as
+  record theorems regardless of T-GRAM's fate.
+- **DONE (eighteenth session): the T-GRAM probe — CANONICAL-ADVERSE.**
+  T-GRAM PARKED (the canonical `ē` is unboundedly suboptimal in the
+  Stokes-dominated regime — R5: R̃ up to 309; near-optimal `R̃ ≈ 1` in
+  all nonlinear runs). **Operative head = T-DIR-SPK(∃e)**:
+  `∃e ∈ S²: ∫₀^{T′}(−eᵀ𝒫(t)e)₊dt ≤ Q₀(ν,T,M)` — Y-1 sup-arrow along
+  the chosen `e` (or the κ-damping reduction) ⟹ T-DIR ⟹ DQ-1 +
+  the V-15-verified quantitative M-only bridge ⟹ H-SEL^nu ⟹ N0 ⟹ Lean.
+  Probe infrastructure now exists (`experiments/tgram_probe/` — 64³
+  pseudo-spectral, Y-1-validated).
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **Probe on the T-GRAM observables** — `ē(horizon)`, `X_ē(t)`,
-     `(−ēᵀ𝒫ē)₊(t)`, `spec G(t)` (cheap scalars; preregistered
-     thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only; fail-closed for
-     unresolved members; the probe doubles as the T-GRAM-vs-T-DIR
-     revision-trigger test).
-  2. **T-GRAM proof commissioning** (counterexample-first discipline
-     satisfied through the lineage; R1's adverse alignment, R4's
-     rotation no-go, and the F2 barrier locate the required inputs —
-     the proof must control production along ONE canonical direction
-     using NS dynamics beyond energy).
-  3. Standing items unchanged: parked axisym assets (T-SPK/T-SRC′,
-     P-LP, Shahmurov watch); accumulated freeze-review proposals;
-     on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold; HR-1/HR-3′
-     fallback ordering.
+  1. **T-DIR-SPK(∃e) proof commissioning** (counterexample-first
+     discipline fully satisfied through the lineage: channel search,
+     quantifier audit DQ-1, battery, V-15, decomposition, probe; the F2
+     barrier, R1-adverse alignment, R4 rotation no-go, and now the
+     probe's regime picture — nonlinear near-optimality vs linear
+     data-locking — locate the required inputs).
+  2. Optional probe re-test (proposals recorded: absolute-scale-gated
+     ratio criterion; 96³ resolution for the R2–R4 class) — evidence
+     refinement only.
+  3. Standing items unchanged: parked assets (T-GRAM with Y-1/Y-2;
+     axisym T-SPK/T-SRC′; P-LP; Shahmurov watch); accumulated
+     freeze-review proposals; on-hold Lean debts (SEL-3/SEL-5, EB-1);
+     M-1 on hold; HR-1/HR-3′ fallback ordering.
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
   SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).

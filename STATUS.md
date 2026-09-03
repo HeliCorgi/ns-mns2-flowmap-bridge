@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第17セッション: T-GRAM 縮約まで反映 — 一般 lane は1補題に圧縮)
+# STATUS — 2026-09-04 (第18セッション: T-GRAM probe まで反映 — CANONICAL-ADVERSE、T-DIR-SPK(∃e) に復帰)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -468,6 +468,29 @@ N0 ⟹ Lean。**一般レベルの architecture が完成: 正準固定方向の
 ē が adversarial に悪ければ T-DIR-SPK(∃e) へ fallback)。probe 条項は auto-fire
 せず(縮約が見つかったため)。次 = ① T-GRAM observable のプローブ(ē・X_ē(t)・
 (−ēᵀ𝒫ē)₊(t)・spec G(t))→ ② T-GRAM proof commissioning — いずれも user act。
+
+**第18セッション(ユーザー commission): T-GRAM specialization stress-test /
+probe 実行済み(数値・preregistered・fail-closed・EVIDENCE-GRADE)— 判定:
+CANONICAL-ADVERSE、T-GRAM は park、operative head は T-DIR-SPK(∃e) に復帰**
+([`docs/gates/HSEL_TGRAM_PROBE_2026-09-04.md`](docs/gates/HSEL_TGRAM_PROBE_2026-09-04.md)、
+prereg は実行前 commit `906601f`、solver/結果は `experiments/tgram_probe/`)。
+新インフラ: 自前 64³ 擬スペクトル NS ソルバ(numpy のみ、rotational form、
+2/3 dealias、RK4)— TG 解析値との energy 一致・機械零 div・粘性減衰一致に加え
+**Y-1 行列恒等式 `G′ = −2νD − 2𝒫` を残差 ~3.7×10⁻⁴ で数値検証**(コードと数学の
+同時検証)。fail-closed: R2–R4 は V3(tail 3.6–4.8×10⁻⁵ > 10⁻⁵)で verdict 除外。
+resolved = {R1 TG: STABLE(R̃ ≡ 1.000 — 三重縮退で E_min = 全球、半ば定義的)、
+R5 small-data control: **ADVERSE — R̃ 最大 309・終端 ≈17**(B ≈ 3.3×10⁻² vs
+B_all ≈ 1.9×10⁻³ — 絶対値は微小で T-GRAM 自体は成立するが、commissioned な
+比テストが発火)}。機構 [D]: Stokes 支配 regime では ē(∫G 固定)と 𝒫 の frame
+(datum 固定)が共にデータ凍結で動的混合なし — **正準方向の最適性 margin は
+力学が最弱の regime でちょうど非有界**;対照的に非線形4 run(除外3本含む・
+診断のみ)は R̃ ≈ 1.00–1.06 で正準方向は near-optimal。**帰結(prereg 規則
+どおり)**: T-GRAM park(Y-1/Y-2 は record の定理として存続)、operative head =
+**T-DIR-SPK(∃e)**(Y-1 sup-arrow + DQ-1 + V-15 検証済み M-only 橋は ∃e のみ
+消費 — 位置は不変)、T-GRAM proof search は不 commission。re-test 提案record 済み
+(絶対スケール gate つき比・96³)。次 = ① T-DIR-SPK(∃e) proof commissioning
+(反例先行 discipline は系譜全体で充足済み)→ ② 任意の probe re-test —
+いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
