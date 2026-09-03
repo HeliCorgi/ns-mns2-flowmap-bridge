@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-sixth session).
+Last updated: 2026-09-04 JST (twenty-seventh session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -929,6 +929,41 @@ Last updated: 2026-09-04 JST (twenty-sixth session).
 > structural sign for `p₂₂`/the frame term in the intense regime, or
 > evidence of `r → 0` at high-Re peaks). Baseline stays the 8775-job gate.
 > **Resume anchor: "Next work" below + that record's §5/§6.**
+>
+> **2026-09-04 (twenty-seventh session): M-1 RE-OPENED as an
+> enstrophy-growth-event TERM-BUDGET STUDY (preregistered, committed
+> before any run) — VERDICT: DIAGNOSTIC-ONLY**
+> (`docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md`; `experiments/m1_events/`
+> PREREG + `events.py` + `postprocess.py` + `nearfar_posthoc.py` + results;
+> no Lean; EVIDENCE-GRADE, periodic box). Interpretation recorded: the Hou
+> finite-cylinder closure (original M-1 content) is unnecessary for the
+> objective and stays unstarted; the T-GRAM solver was re-implemented with
+> parametrised `N` and cross-validated to machine precision (E0 = R1).
+> Five runs (E0 TG ν=0.02 — the only tail-resolved one; E1 TG ν=0.01; E3
+> shear+noise; E4 random band; E2 antiparallel tubes 64³ excluded, E2b 96³
+> pending) with exact-identity validations at every output (production
+> three ways `≤ 5e-16`; `∫S:∇²p = 0` `≤ 7e-17`; the pressure-trace check
+> is only de-aliasing-accurate, 1e-3–4e-2 — recorded as a preregistration
+> defect). Term budgets inside growth events: **C1 = net/gross stretching
+> 0.08–0.30, systematic (≤ 0.33) in every run but flat in intensity within
+> events** (no depletion exponent); C2 sign cancellation partial; at the
+> maximum, twist + core diffusion cancel 25–70 % of `α`, and the twist term
+> carries ≈ ½ of the global enstrophy dissipation; **C4 = surviving
+> fraction of the `λ₂` vortical source after self-damping and pressure
+> Hessian on the intense positive-`λ₂` set falls with intensity inside
+> events (r = −0.94, −1.00, −0.88) from ≈ 0.5 to ≈ 0, and is ≈ 0 for
+> tubes — the pressure Hessian shields `λ₂` in the intense regime (the
+> HR-2 un-park trigger's structural sign, as a conditional statistic)**;
+> the stretching at the maximum is ≈ 100 % nonlocal at 2–8 viscous lengths
+> (post-hoc split) but the `L¹`-radius bridge route is out of regime (r₁ of
+> box size); the intense set is fat at ≥ 8–23 viscous lengths in every
+> direction (F-tube confirmed in all events). Verdict by the preregistered
+> rule: C1 systematic but without free companion ⟹ DIAGNOSTIC-ONLY; no
+> head promoted. Recorded follow-up preregistrations: (1) conditional
+> pressure-shielding inequality for `λ₂` at 96³–128³, several datum
+> families; (2) isolated intense structure in a large box to test the free
+> far-strain bound at the `L¹` radius. Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + that record's §4/§5.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -965,7 +1000,45 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-sixth session)
+### Next work (written 2026-09-04, twenty-seventh session)
+
+Read first: the twenty-second to twenty-seventh session paragraphs of the
+top block; `docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md` (§2 what each
+ratio can deliver, §4 results and trends, §5 verdict + the two follow-up
+preregistrations, §7 E2b appendix if present); `experiments/m1_events/PREREG.md`.
+
+- **State:** head program CLOSED at audit level (twenty-sixth); numerical
+  lane OPEN in its re-defined form (event term budgets), first study done:
+  DIAGNOSTIC-ONLY, with two concrete, cheap follow-ups and one
+  decision-relevant observation (pressure-Hessian shielding of `λ₂`
+  strengthening with intensity — evidence side of HR-2's un-park trigger,
+  not yet at resolved grade, no bridge).
+- **NOT to do (without a new instruction):** proof search on any head;
+  promotion of any measured cancellation to a head (needs SYM-test +
+  per-solution truth + a free companion + bridge shape on paper); Hou wall
+  closure; `ν`-extrapolation; blow-up search.
+- **Next options (each a user act; recommended order):**
+  1. **Follow-up preregistration (1):** conditional pressure-shielding of
+     `λ₂` on the intense positive-`λ₂` set at 96³–128³ (tail-resolved),
+     three datum families, with the sharp de-aliased pressure check; test
+     whether `C4 → 0` with intensity is robust; if yes, an on-paper session
+     on the conditional sign of `p₂₂` in intense regions (the only
+     registered un-park trigger of the head program).
+  2. **Follow-up preregistration (2):** isolated intense structure in a
+     large box (vortex-ring pair, 128³) to put the `L¹`-radius far-strain
+     bound in regime (`Λ ≫ ‖ω‖_{L¹}(L/2)^{-3}`) and measure the near
+     fraction `α_{near}/α` at `r₁` — the one route with a bridge shape.
+  3. Append E2b (96³ tubes) to the record when its run completes (only
+     strengthens/weakens the tube row).
+  4. Standing: passive literature watch; Lean debts on hold; Hou closure
+     unstarted.
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; torus numerics are evidence-grade
+  only; measured cancellations are observations, never theorems.
+
+### (superseded) Next work (written 2026-09-04, twenty-sixth session)
 
 Read first: the twenty-second to twenty-sixth session paragraphs of the
 top block; `docs/gates/HSEL_RESIDUAL_HEAD_AUDIT_2026-09-04.md` (§1 the

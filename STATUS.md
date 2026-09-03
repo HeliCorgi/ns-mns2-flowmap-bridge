@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第26セッション: residual-head decisive audit まで反映 — ALL-PARK; 一般 lane の head program は監査レベルで閉鎖)
+# STATUS — 2026-09-04 (第27セッション: M-1 再開 = enstrophy-growth event の term-budget study まで反映 — DIAGNOSTIC-ONLY; follow-up prereg 2件)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -704,6 +704,28 @@ Stokes run は 0.02 で平坦。⟹ HR-2 の内容は物理的に関連する re
 なし。** 一般 lane の head program は監査レベルで閉鎖(Gram 型 = SSC、level-set 型 = fat-core、
 scalar-invariant strain 型 = 定数倍 wall)。HR-2 の un-park trigger(`p₂₂`/frame 項の構造的符号、
 または高 Re peak で `r → 0` の証拠)を登録。残る選択肢は M-1(保留中)と literature watch。
+
+**第27セッション(ユーザー commission): M-1 を「enstrophy-growth event を構成する exact NS 項の
+conditional statistics / geometry の探索」として再開(preregistration を先に commit)— 判定:
+DIAGNOSTIC-ONLY**
+([`docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md`](docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md);
+`experiments/m1_events/`; Lean なし; torus の evidence-grade)。解釈: 元の M-1(Hou の有限円柱 wall
+closure)は目的に不要で未着手のまま; T-GRAM solver を N 可変で再実装し E0 = R1 で機械精度一致。
+5 run(E0 TG ν=0.02 のみ tail-resolved; E1/E3/E4 は 4–6e-5 で diagnostic; E2 64³ は除外、E2b 96³
+実行中)、各出力で恒等式検証(production 3通り一致 ≤ 5e-16、`∫S:∇²p = 0` ≤ 7e-17; 圧力 trace
+検証は dealiasing 精度 1e-3–4e-2 止まり — prereg 欠陥として記録)。成長 event 内の term budget:
+**C1 = net/gross stretching は 0.08–0.30 で全 run で systematic(≤ 0.33)だが event 内で強度依存なし**
+(depletion 指数なし); C2 符号相殺は部分的; 最大点では twist + core diffusion が α の 25–70 % を
+相殺、twist 項は全 enstrophy dissipation の約半分; **C4(intense な λ₂>0 集合上で self-damping と
+pressure Hessian を経て生き残る λ₂ の渦度 source の割合)は event 内で強度とともに減少
+(r = −0.94, −1.00, −0.88)、≈0.5 → ≈0、tube run では ≈0 — 強い regime で pressure Hessian が λ₂ を
+遮蔽(HR-2 の un-park trigger の構造的符号の evidence 側、conditional statistic として)**;
+最大点の stretching は 2–8 viscous 長で ≈100 % 非局所(post-hoc split)だが L¹-radius の bridge route
+は regime 外(r₁ が box サイズ); intense set は最大点を通る全方向で ≥ 8–23 viscous 長の fat
+(F-tube が全 event で確認)。prereg 規則による判定: C1 は systematic だが free companion なし ⟹
+DIAGNOSTIC-ONLY、head 昇格なし。follow-up prereg 2件を記録: (1) 96³–128³・複数 datum 族での
+λ₂ の conditional pressure-shielding 不等式(sharp な dealiased 圧力検証付き)、(2) 大きな box 内の
+孤立した強い構造で L¹-radius の free far-strain bound を regime 内に置く試験。E2b は完了次第 §7 に追記。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
