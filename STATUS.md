@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第18セッション: T-GRAM probe まで反映 — CANONICAL-ADVERSE、T-DIR-SPK(∃e) に復帰)
+# STATUS — 2026-09-04 (第19セッション: 初の proof session まで反映 — ONE-SUBLEMMA: T-VAR)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -491,6 +491,29 @@ B_all ≈ 1.9×10⁻³ — 絶対値は微小で T-GRAM 自体は成立するが
 (絶対スケール gate つき比・96³)。次 = ① T-DIR-SPK(∃e) proof commissioning
 (反例先行 discipline は系譜全体で充足済み)→ ② 任意の probe re-test —
 いずれも user act。
+
+**第19セッション(ユーザー commission): T-DIR-SPK(∃e) の初 proof session
+実行済み — 判定: ONE-SUBLEMMA(T-VAR)、commissioned head は re-base**
+([`docs/gates/HSEL_TDIRSPK_PROOF_SESSION_2026-09-04.md`](docs/gates/HSEL_TDIRSPK_PROOF_SESSION_2026-09-04.md)、
+Lean/数値なし; 証明済み項目は [D] flag、open statement は無主張)。**P-a**: 正確な
+再定式化 `½TV₊(X_e) ≤ K(e) ≤ ½TV₊(X_e) + ν∫eᵀDe dt` — **T-DIR-SPK は連鎖が
+不要とする方向 H² 散逸 budget を余分に強制**(EH-1 前例により re-base)。
+**P-b**: 補題 **T-VAR**(`∃e: ∫(d/dt‖∂_eu‖²)₊dt ≤ Q₀(ν,T,M)` = channel energy の
+総上昇 budget)を定義し、**両 arrow を証明**: T-DIR-SPK ⟹ T-VAR ⟹ T-DIR
+(`sup X_e ≤ M²+Q₀` ⟹ `∫X_e² ≤ T(M²+Q₀)²`)— **T-VAR が連鎖を閉じる最弱
+メンバー**。**P-c**: rise-tensor 形 `T-VAR ⟺ ∃e: ∫(−eᵀRe)₊dt ≤ Q₀/2`
+(`R = νD+𝒫 = −½G′`)+ 新 free 恒等式 `∫trR dt = ½(E(0)−E(T′)) ≤ M²/2`
+(unbudgeted なのは方向ごとの振動のみ)。**P-d**: free 行列パス補題は**偽**
+(回転異方性パス: free budget 全固定で `TV₊ ~ fTg → ∞`)— **barrier を局在化:
+証明は「1方向についての Gram frame 振動周波数の NS 力学的 bound」を要する**。
+5チェック: (1) 球面最小化は trace/averaging = 壁のみ(即棄却)、(2) `𝒫 ≺ 0` に
+障害なし・残資源は R の負錐回転、(3) `G′`/`D⪰0` は P-a/P-c 構造を与えるが free
+TV bound なし、(4) coherence + λ₂-整列は良方向を生成し得る(`∂_eu = Se + ½ω×e`)
+が open head 2個 ⟹ **ROUTE-SWAP(記録のみ・不採用)**、(5) Miller 親縁
+(`ω×e = 2Ae`)・転用なし。**commission の規定により T-VAR が唯一の次 target。**
+バッテリー: polarity 強制・回転 kinematic は標準 barrier・small-data 部分クラスは
+成立。次 = ① T-VAR proof session(P-c 恒等式・check-4 map・probe インフラが資産)
+→ ② 任意の T-VAR 向け probe(要 prereg)— いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

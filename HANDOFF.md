@@ -642,7 +642,38 @@ Last updated: 2026-09-02 JST (second session).
 > DQ-1 + the V-15-verified M-only bridge consume only ∃e); T-GRAM proof
 > search NOT commissioned.** Re-test proposals recorded (absolute-scale
 > gate on the ratio; 96³ resolution). Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + that record's §2–§3.**
+>
+> **2026-09-04 (nineteenth session): the FIRST proof session on
+> T-DIR-SPK(∃e) is COMMISSIONED and EXECUTED — VERDICT: ONE-SUBLEMMA
+> (T-VAR); the commissioned head is RE-BASED (it over-demands)**
+> (`docs/gates/HSEL_TDIRSPK_PROOF_SESSION_2026-09-04.md`; no Lean, no
+> numerics; proved yields flagged [D], no open statement claimed).
+> **P-a:** exact reformulation `½TV₊(X_e) ≤ K(e) ≤ ½TV₊(X_e) +
+> ν∫eᵀDe dt` — **T-DIR-SPK forces a directional H²-dissipation budget
+> the chain never needs** ⟹ re-based per the EH-1 precedent. **P-b: the
+> sublemma T-VAR** (∃e: `∫(d/dt‖∂_eu‖²)₊dt ≤ Q₀(ν,T,M)` — budgeted
+> total channel-energy rise) with BOTH arrows proved:
+> T-DIR-SPK ⟹ T-VAR ⟹ T-DIR (`sup X_e ≤ M²+Q₀` ⟹ `∫X_e² ≤ T(M²+Q₀)²`)
+> — **T-VAR is the weakest chain-closing member**. **P-c:** rise-tensor
+> form `T-VAR ⟺ ∃e: ∫(−eᵀRe)₊dt ≤ Q₀/2`, `R = νD+𝒫 = −½G′`; new free
+> identity `∫trR dt = ½(E(0)−E(T′)) ≤ M²/2` (only per-direction
+> oscillation is unbudgeted). **P-d:** the free matrix-path lemma is
+> **FALSE** (rotating-anisotropy path: all free budgets fixed,
+> `TV₊ ~ fTg → ∞` with rotation frequency `f`) — **the barrier is
+> localized: any proof must extract an NS-dynamical bound on the Gram
+> frame's oscillation frequency for one direction.** Commissioned
+> checks: (1) sphere minimization reaches only trace/averaging = walls
+> (rejected on sight); (2) no obstruction to `𝒫 ≺ 0`; the residual
+> resource is `R`'s negative-cone rotation; (3) `G′`/`D⪰0` give the
+> P-a/P-c structure but no free TV bound; (4) coherence + λ₂-alignment
+> WOULD generate the good direction (`∂_eu = Se + ½ω×e`; `e ∥` coherent
+> `ω̂` ⟹ `P_e ≈ ∫eᵀS³e ≳ 0` under DNS-generic alignment) — **two open
+> heads ⟹ ROUTE-SWAP, recorded not taken**; (5) Miller kinship:
+> `ω×e = 2Ae` is his object at constant direction — no usable transfer.
+> **Per the commission: T-VAR is the single next target.** Battery:
+> polarity forced; kinematic rotators = standing barrier; small-data
+> subclass satisfies. Baseline stays the 8775-job gate. **Resume anchor:
+> "Next work" below + that record's §1/§3.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -723,21 +754,32 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   the V-15-verified quantitative M-only bridge ⟹ H-SEL^nu ⟹ N0 ⟹ Lean.
   Probe infrastructure now exists (`experiments/tgram_probe/` — 64³
   pseudo-spectral, Y-1-validated).
+- **DONE (nineteenth session): the first T-DIR-SPK(∃e) proof session —
+  ONE-SUBLEMMA.** T-DIR-SPK re-based (over-demanded a directional
+  dissipation budget, P-a); **the single next target is T-VAR**:
+  `∃e ∈ S²: ∫₀^{T′}(d/dt‖∂_e u‖²_{L²})₊dt ≤ Q₀(ν,T,M)` (equivalently
+  `∃e: ∫(−eᵀRe)₊dt ≤ Q₀/2`, `R = −½G′`), with the proved arrows
+  T-DIR-SPK ⟹ T-VAR ⟹ T-DIR and the downstream verified chain intact.
+  The proof's open content is sharply located (P-d): NS must bound the
+  Gram frame's oscillation frequency along one direction — the free
+  identities are provably insufficient (matrix-path counterexample).
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **T-DIR-SPK(∃e) proof commissioning** (counterexample-first
-     discipline fully satisfied through the lineage: channel search,
-     quantifier audit DQ-1, battery, V-15, decomposition, probe; the F2
-     barrier, R1-adverse alignment, R4 rotation no-go, and now the
-     probe's regime picture — nonlinear near-optimality vs linear
-     data-locking — locate the required inputs).
-  2. Optional probe re-test (proposals recorded: absolute-scale-gated
-     ratio criterion; 96³ resolution for the R2–R4 class) — evidence
-     refinement only.
+  1. **T-VAR proof session(s)** — the required input is an NS-dynamical
+     oscillation/frequency bound for one channel; assets available: the
+     P-c free identity (`∫trR = ½(E(0)−E(T′))`), the check-4 ROUTE-SWAP
+     map (coherence + λ₂-alignment ⟹ good direction — compare against
+     HR-1/HR-3′ before adopting), the probe infrastructure
+     (`experiments/tgram_probe/` can measure `TV₊(X_e)` and the
+     R-tensor's negative-cone rotation directly — a T-VAR-targeted
+     probe is a natural companion commission).
+  2. Optional probe re-test / T-VAR-targeted probe (rise-budget and
+     frame-rotation-frequency observables; preregister first).
   3. Standing items unchanged: parked assets (T-GRAM with Y-1/Y-2;
-     axisym T-SPK/T-SRC′; P-LP; Shahmurov watch); accumulated
-     freeze-review proposals; on-hold Lean debts (SEL-3/SEL-5, EB-1);
-     M-1 on hold; HR-1/HR-3′ fallback ordering.
+     T-DIR-SPK archived as the stronger member; axisym T-SPK/T-SRC′;
+     P-LP; Shahmurov watch); accumulated freeze-review proposals;
+     on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold; HR-1/HR-3′
+     fallback ordering.
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
   SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).
