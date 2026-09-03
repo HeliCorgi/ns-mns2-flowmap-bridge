@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第25セッション: PARK 裁定執行・HR-3′ battery/gap decomposition・GX 再解析まで反映 — HR-3′ ROUTE-KILLED; GX は k(t)→∞ で閉じない)
+# STATUS — 2026-09-04 (第26セッション: residual-head decisive audit まで反映 — ALL-PARK; 一般 lane の head program は監査レベルで閉鎖)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -680,6 +680,30 @@ growth、残余 = chain selection、time synchronization は障害でない**。
 により `x_max` で偽)。fallback 順序は HR-3′ で尽きた; SYM + per-solution を通る残存候補は
 HR-1(gap 2つ)、HR-2(V-2 債務)、H-SEL/HR-5(C-1/C-2/C-3)。次は user act(再選定 / M-1 /
 GX 定数債務 / fat-core 構成)。
+
+**第26セッション(ユーザー commission): residual-head decisive audit(HR-1 / HR-2 / H-SEL)
+実行済み — 判定: ALL-PARK**
+([`docs/gates/HSEL_RESIDUAL_HEAD_AUDIT_2026-09-04.md`](docs/gates/HSEL_RESIDUAL_HEAD_AUDIT_2026-09-04.md);
+Lean なし; evidence-grade 診断 1 本 `experiments/hr2_diag/`)。**V-2 放電**([V-adj]; Miller ARMA
+235 (2020) Thm 5.2: `C(Ḣ¹)∩L²(Ḣ²)` の mild 解、`2/p+3/q = 2`、`3/2 < q ≤ ∞`、必要十分)。(4,2)
+member を `ν` 込みで再導出 [D]: `∫ωᵀSω = −4∫det S`、`−det S ≤ ½λ₂⁺|S|²`、`λ₂⁺ ≤ |S|/√6`、
+`‖S(t)‖²₂ ≤ ‖S(0)‖²₂exp((27/128)C_GN⁴ν⁻³∫‖λ₂⁺‖₂⁴)` — 初等的・定量的・M-only の bridge。
+**strain equation を押した結果 [D]**: 固有値方程式
+`D_tλ_i = −λ_i² + ¼(|ω|²−ω_i²) − p_{ii} + νΔλ_i + 2νΣ_{j≠i}(λ_j−λ_i)|e_i·∇e_j|²`; 中間固有値は
+frame-viscous 項が符号不定、渦度 source `¼|ω_⊥₂|²` は非負(DNS 的 `ω ∥ e₂` で消える)、
+pressure Hessian 対角 `p₂₂` は符号不定かつ自由な積分なし(`Σp_ii = Δp` のみ); restricted-Euler
+が示すとおり正則化の内容はすべて `p₂₂` にある。無条件在庫: `λ₂⁺ ≤ |S|/√6`、
+`∫∫(λ₂⁺)² ≤ ‖u₀‖²₂/(24ν)`、production `≤ 2∫λ₂⁺|S|²` — critical なものはなし。**5軸比較**: HR-2 が
+形式的に優位(SYM ✓、per-solution ✓、critical (4,2)、同一 observable の free budget、gap 1つ
+`∫X → ∫X²`、`X = ‖λ₂⁺‖²₂ ≤ E/12`、∃自由度なし・frame なし)、HR-1 は gap 2つ、H-SEL は 1単位
+supercritical + C-1/C-3。**診断(torus 64³; 検証 `−4∫det S = −tr𝒫` 1e-14、`2‖S‖² = trG`)**:
+`r = X/‖S‖²₂ ≈ 0.03–0.08`(全 nonlinear run)、enstrophy 成長中に上昇(R1 0.007→0.076、R4
+0.006→0.030)、peak で強い strain energy の 85–93 % が `λ₂ > 0` 側、Miller bound は 72–90 % 飽和;
+Stokes run は 0.02 で平坦。⟹ HR-2 の内容は物理的に関連する regime で `L⁴_tḢ¹` wall の定数倍
+(`≲ 13`)、唯一の lever(λ₂ の符号)は経験的に逆方向。**ALL-PARK: 次 session の proof search
+なし。** 一般 lane の head program は監査レベルで閉鎖(Gram 型 = SSC、level-set 型 = fat-core、
+scalar-invariant strain 型 = 定数倍 wall)。HR-2 の un-park trigger(`p₂₂`/frame 項の構造的符号、
+または高 Re peak で `r → 0` の証拠)を登録。残る選択肢は M-1(保留中)と literature watch。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

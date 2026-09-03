@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-fifth session).
+Last updated: 2026-09-04 JST (twenty-sixth session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -896,6 +896,39 @@ Last updated: 2026-09-04 JST (twenty-fifth session).
 > survivors: HR-1 (two gaps), HR-2 (V-2 debt), H-SEL/HR-5 (C-1/C-2/C-3).
 > Baseline stays the 8775-job gate. **Resume anchor: "Next work" below +
 > the two records' verdict sections.**
+>
+> **2026-09-04 (twenty-sixth session): RESIDUAL-HEAD DECISIVE AUDIT
+> (HR-1 / HR-2 / H-SEL) EXECUTED — VERDICT: ALL-PARK**
+> (`docs/gates/HSEL_RESIDUAL_HEAD_AUDIT_2026-09-04.md`; no Lean; one
+> evidence-grade diagnostic run, `experiments/hr2_diag/`). **V-2
+> discharged** at [V-adj] (Miller ARMA 235 (2020) Thm 5.2: mild solutions
+> in `C(Ḣ¹)∩L²(Ḣ²)`, `2/p+3/q = 2`, `3/2 < q ≤ ∞`, `‖u(T)‖²_{Ḣ¹} ≤
+> ‖u⁰‖²_{Ḣ¹}exp(C_q∫‖λ₂⁺‖^p_{L^q})`, necessary and sufficient); the (4,2)
+> member re-derived [D] with `ν`: `∫ωᵀSω = −4∫det S`, `−det S ≤ ½λ₂⁺|S|²`,
+> `λ₂⁺ ≤ |S|/√6`, `‖S(t)‖²₂ ≤ ‖S(0)‖²₂exp((27/128)C_GN⁴ν⁻³∫‖λ₂⁺‖₂⁴)` —
+> elementary, quantitative, `M`-only bridge. **Strain equation pushed
+> [D]:** `D_tλ_i = −λ_i² + ¼(|ω|²−ω_i²) − p_{ii} + νΔλ_i + 2νΣ_{j≠i}(λ_j−λ_i)|e_i·∇e_j|²`;
+> the middle eigenvalue has an unsigned frame-viscous term, a non-negative
+> vortical source `¼|ω_⊥₂|²` (killed by the DNS-generic `ω ∥ e₂`), and an
+> unsigned pressure-Hessian diagonal `p₂₂` with no free integral (only
+> `Σp_ii = Δp = ½|ω|²−|S|²`); restricted-Euler shows all regularising
+> content sits in `p₂₂`. Unconditional inventory for `λ₂⁺`: pointwise
+> `≤ |S|/√6`, `∫∫(λ₂⁺)² ≤ ‖u₀‖²₂/(24ν)`, production `≤ 2∫λ₂⁺|S|²` — nothing
+> critical. **Five-axis table:** HR-2 dominates formally (SYM ✓,
+> per-solution ✓, critical (4,2), same-observable free budget, ONE
+> half-unit gap `∫X → ∫X²`, `X = ‖λ₂⁺‖²₂ ≤ E/12`, no `∃`-freedom, no frame);
+> HR-1 two gaps; H-SEL one unit supercritical + C-1/C-3. **Diagnostic
+> (torus 64³, validation: `−4∫det S = −tr𝒫` to 1e-14, `2‖S‖² = trG`):**
+> `r = X/‖S‖²₂ ≈ 0.03–0.08` in all active regimes, RISING during
+> enstrophy growth (R1 0.007→0.076 at the peak, R4 0.006→0.030), `85–93 %`
+> of intense strain energy where `λ₂ > 0`, Miller's bound `72–90 %`
+> saturated at peaks; Stokes run flat at 0.02. ⟹ HR-2's content is the
+> `L⁴_tḢ¹` wall up to a constant `≲ 13` in the physically relevant regime,
+> with the only lever (sign of `λ₂`) empirically pushed the wrong way.
+> **ALL-PARK: no proof search.** Un-park triggers for HR-2 registered (a
+> structural sign for `p₂₂`/the frame term in the intense regime, or
+> evidence of `r → 0` at high-Re peaks). Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + that record's §5/§6.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -932,7 +965,37 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-fifth session)
+### Next work (written 2026-09-04, twenty-sixth session)
+
+Read first: the twenty-second to twenty-sixth session paragraphs of the
+top block; `docs/gates/HSEL_RESIDUAL_HEAD_AUDIT_2026-09-04.md` (§1 the
+(4,2) bridge, §2 the strain-equation inventory, §3 the five-axis table, §5
+the diagnostic, §6 ALL-PARK + un-park triggers).
+
+- **State: the head program of the general lane is CLOSED at audit level.**
+  Parked: the T-DIR/T-VAR/T-CONE/T-DET Gram lane (SSC); killed as heads:
+  HR-3/HR-3′ (fat-core family, per-solution-truth failure); ALL-PARK:
+  HR-1 (two gaps), HR-2 (`λ₂⁺` — the wall up to a constant factor `≲ 13`,
+  evidence-grade), H-SEL (one unit supercritical, C-1/C-3). Every priced
+  head reduces to the enstrophy wall in some disguise; the open object is
+  the wall itself.
+- **NOT to do (without a new instruction):** proof search on any head;
+  promotion of any criterion's hypothesis to a head without the SYM-test
+  and the per-solution-truth check; re-running the priced kills (SSC,
+  fat-core, `λ₂⁺` fraction); Lean on parked material.
+- **Options on file (each a user act):** (a) the `SPEC.md` numerical
+  program M-1 (on hold) — now the only non-head lane; (b) the passive
+  literature watch (register W-1–W-4 + the GX/BFG/Miller lines); (c) a
+  higher-resolution re-test of the `λ₂⁺` fraction (96³/128³, vortex-ring
+  or antiparallel-tube data) if the HR-2 un-park trigger is ever suspected;
+  (d) a freeze-review-type ruling recording the closure of the head program.
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; no claim about regularity or
+  singularity in any regime; torus numerics are evidence-grade only.
+
+### (superseded) Next work (written 2026-09-04, twenty-fifth session)
 
 Read first: the twenty-second to twenty-fifth session paragraphs of the
 top block; `docs/gates/HSEL_HR3_BATTERY_GAP_2026-09-04.md` (§0 PARK state,
