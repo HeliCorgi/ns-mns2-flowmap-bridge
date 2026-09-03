@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-third session).
+Last updated: 2026-09-04 JST (twenty-fourth session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -819,6 +819,39 @@ Last updated: 2026-09-04 JST (twenty-third session).
 > nu-layer), the Thm-19 selection-rule reading, V-1′ unchanged, Chae 2007
 > exponents, the `‖ω₀‖_{L¹}` ball parameter. Baseline stays the 8775-job
 > gate. **Resume anchor: "Next work" below + that record's §4/§6.**
+>
+> **2026-09-04 (twenty-fourth session): a DIRECT 3-D NS RESEARCH SESSION
+> is COMMISSIONED and EXECUTED — VERDICT: D. NO-NEW-PROGRESS**
+> (`docs/gates/NS_DIRECT_RESEARCH_SESSION_2026-09-04.md`; no Lean, no
+> numerics, no new head/sublemma). Free exploration of the Clay problem
+> itself (T-DIR lane parked by SSC; HR-3′ kept as fallback, not binding).
+> Six routes carried to formula level: **R1** the exact dual-weighted `L¹`
+> vorticity identity `∫|ω(T)|ψ = ∫|ω₀|w(0) + ∫∫(α − ν|∇ξ|²)|ω|w` (backward
+> transport–diffusion weight `w`) + Nash's drift-independent bound
+> `‖w(T−s)‖_∞ ≤ C‖ψ‖₁(νs)^{-3/2}` ⟹ proved [D] local mass estimate
+> `∫_{B_r(x₀)}|ω(T)| ≤ Cr³(νT)^{-3/2}‖ω₀‖₁ + ∫_{T−r²/ν}^T P + CΣ2^{-3k/2}∫_{T−2^{k+1}r²/ν}^T P`
+> (`P = ∫α₊|ω| ≤ ‖∇u‖₂²/√2`) — dimension `L`, dominated by the instantaneous
+> Harnack bound `E ≳ ‖ω‖_∞^{1/2}` and by CKN in the singular regime;
+> **R2** the critical weighted identity with `φ = |x−x₀(t)|⁻¹` carrying the
+> pointwise sink `−4πν|ω(x₀(t),t)|` [D] — sources only BKM-controlled;
+> **R3** the effective rate `α − ν|∇ξ|²` at the maximum (trivial
+> extension of the `∫‖α₊‖_∞` criterion); **R4** the critical `L^{3/2}`
+> identity — closure `∫α|ω|^{3/2} ≤ C∫|∇ω|²|ω|^{-1/2}` is kinematically
+> FALSE (blob ratio `∼ ΩR²`), only small-critical-norm closes (mechanism
+> would be ESS 2003 via `ω ∈ L^∞L^{3/2} ⟹ u ∈ L^∞L³`); **R5** `L^p`
+> interpolation through Constantin's `L¹` bound gives only `ω ∈ L³_tL^{3/2}_x`
+> (dimension `L²`, worse than energy) and recovers smallness or the
+> `L⁴_tḢ¹` wall; **R6** Constantin's kernel through the free twist
+> dissipation `∫∫|ω||∇ξ|²` is conditional on magnitude coherence (HR-1
+> gap (G2) shape). **Common terminus:** every free quantity has length
+> dimension `≥ L^{1/2}`, every continuation mechanism consumes a
+> dimensionless bound; the weakest sufficient target on file stays HR-3′'s
+> single gap. Not B (R1/R2 new but elementary and dominated), not C (no
+> new core proposition). Recommendations unchanged: PARK ruling; HR-3′
+> gap decomposition next; R1/R2 kept as tools (time-selection /
+> pointwise-sink devices) without sufficiency claims. Baseline stays the
+> 8775-job gate. **Resume anchor: "Next work" below (twenty-third session
+> version, unchanged in substance) + that record's §1/§2.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -855,7 +888,45 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-third session)
+### Next work (written 2026-09-04, twenty-fourth session)
+
+Read first: the twenty-second, twenty-third and twenty-fourth session
+paragraphs of the top block; `docs/gates/NS_DIRECT_RESEARCH_SESSION_2026-09-04.md`
+(§1 routes R1–R6 with the [D] items and failcases; §2 the common
+terminus); `docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md` (§4 the
+HR-3′ single gap); `docs/gates/HSEL_TVAR_INEQUALITY_SESSION_2026-09-04.md` (§2 SSC).
+
+- **State:** general T-DIR lane ROUTE-KILLED wall-free (SSC), PARK ruling
+  pending; fallback audit selected HR-3′ (one gap: sparseness-scale
+  exponent `2/5 → 1/2` at one post-escape time); the direct research
+  session found no new critical estimate (verdict D) and left two
+  elementary tools on file (R1 dual `L¹` identity + Nash bound; R2
+  critical weighted identity with pointwise sink) — no sufficiency claim.
+- **NOT to do (moot / forbidden without a new instruction):** T-DET proof
+  session or probe; proof search on any head; numerics; Lean; new named
+  heads/sublemmas; re-deriving R1–R6 (on file with their failcase reasons).
+- **Next, each requiring an explicit user commission (recommended order):**
+  1. **PARK ruling** for the general T-DIR lane (freeze-review-type).
+  2. **HR-3′ counterexample-first battery** (on paper; sector battery,
+     sheet-organised blind spot, frozen profiles, Type-I, Tao-averaged,
+     small-data).
+  3. **HR-3′ gap decomposition** (only after 2 SURVIVES): which exact-NS
+     structure beyond the energy inequality could move the 1-D sparseness
+     scale from `c‖u₀‖₂^{2/5}‖ω‖_∞^{-2/5}` to `(2c(M))⁻¹‖ω(s)‖_∞^{-1/2}` at
+     one `s` per escape window; R1 is the natural time-selection device
+     inside the window (recorded, not claimed sufficient); the
+     Albritton–Bradshaw energy-homogeneity caution binds.
+  4. Debts only if load-bearing: V-3′, the Thm-19 selection-rule reading,
+     V-1′, Chae 2007 exponents, `‖ω₀‖_{L¹}` as a ball parameter.
+  5. Standing alternatives unchanged: `SPEC.md` numerical program with M-1
+     (on hold); passive literature watch; SEL-3/SEL-5/EB-1 Lean debts.
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; no claim about regularity or
+  singularity of symmetric flows; no claim that R1/R2 approach criticality.
+
+### (superseded) Next work (written 2026-09-04, twenty-third session)
 
 Read first: this file's top block (the twenty-second and twenty-third
 session paragraphs); `docs/gates/HSEL_POST_SSC_FALLBACK_AUDIT_2026-09-04.md`

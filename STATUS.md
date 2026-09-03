@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第23セッション: post-SSC fallback audit まで反映 — HR3-SELECT; 一般 lane は PARK 候補)
+# STATUS — 2026-09-04 (第24セッション: direct NS research session まで反映 — 判定 D. NO-NEW-PROGRESS; HR-3′ fallback 不変)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -626,6 +626,28 @@ energy-level 情報そのもの — を継承)。**HR-1 の鎖**: BdVB 2002(`β 
 指数、(U) の `‖ω₀‖_{L¹}` ball parameter。次 = ① 一般 lane の PARK 裁定 → ② HR-3′ の
 counterexample-first battery → ③ gap (i) の proof-route decomposition — いずれも user act。
 対称流の正則性・特異性は一切主張しない。
+
+**第24セッション(ユーザー commission): direct 3-D NS research session 実行済み — 判定:
+D. NO-NEW-PROGRESS**
+([`docs/gates/NS_DIRECT_RESEARCH_SESSION_2026-09-04.md`](docs/gates/NS_DIRECT_RESEARCH_SESSION_2026-09-04.md)、
+Lean/数値なし; 新 head・新 sublemma なし)。T-DIR lane は SSC により PARK 候補、HR-3′ は
+fallback として保持しつつ、Clay 問題そのものを自由探索。6 route を式レベルまで押した:
+**R1** 渦度 `L¹` の厳密双対恒等式 `∫|ω(T)|ψ = ∫|ω₀|w(0) + ∫∫(α − ν|∇ξ|²)|ω|w`(後向き
+移流拡散 weight `w`)+ Nash の drift 非依存評価 `‖w(T−s)‖_∞ ≤ C‖ψ‖₁(νs)^{-3/2}` ⟹ 局所
+`L¹` 質量評価 `∫_{B_r(x₀)}|ω(T)| ≤ Cr³(νT)^{-3/2}‖ω₀‖₁ + ∫_{T−r²/ν}^T P + CΣ2^{-3k/2}∫_{T−2^{k+1}r²/ν}^T P`
+(`P = ∫α₊|ω| ≤ ‖∇u‖₂²/√2`)を証明 [D] — ただし次元 `L`、特異領域では瞬時の Harnack 評価
+`E ≳ ‖ω‖_∞^{1/2}` と CKN に支配される; **R2** critical weight `φ = |x−x₀(t)|⁻¹` の恒等式
+(各点 sink `−4πν|ω(x₀(t),t)|` を持つ)[D] — source は BKM rate でしか抑えられない;
+**R3** 最大点での実効 rate `α − ν|∇ξ|²`(`∫‖α₊‖_∞` criterion の自明な拡張); **R4** critical
+`L^{3/2}` 恒等式 — 閉じ込め `∫α|ω|^{3/2} ≤ C∫|∇ω|²|ω|^{-1/2}` は運動学的に偽(blob で比
+`∼ ΩR²`)、small critical norm でのみ閉じる(機構自体は ESS 2003 経由で真正);
+**R5** Constantin の `L¹` bound 経由の `L^p` 補間は `ω ∈ L³_tL^{3/2}_x`(次元 `L²`、energy より悪い)
+のみで、smallness か `L⁴_tḢ¹` wall に戻る; **R6** twist dissipation `∫∫|ω||∇ξ|²` を Constantin
+kernel に入れる route は magnitude coherence 条件付き(HR-1 gap (G2) と同型)。**共通の終点**:
+自由に得られる量はすべて長さ次元 `≥ L^{1/2}`、既知の continuation 機構はすべて無次元 bound を
+消費する — file 上の最弱十分 target は依然 HR-3′ の単一 gap。B ではない(R1/R2 は新規だが初等的
+かつ支配される)、C でもない(新しい核心命題なし)。推奨不変: PARK 裁定 → HR-3′ battery →
+gap decomposition(R1 は窓内 time-selection の道具として保存、十分性は主張しない)。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 
