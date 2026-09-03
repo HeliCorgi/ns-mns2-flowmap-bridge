@@ -960,12 +960,15 @@ decomposition, §3 verdict); `docs/gates/HSEL_GX_ASYMPTOTIC_CRITICALITY_2026-09-
 - **Next, each requiring an explicit user commission (recorded options,
   no order implied):** (a) re-selection among HR-1 / HR-2 / H-SEL with the
   two battery items (cheap, on paper); (b) the `SPEC.md` numerical
-  program M-1 (on hold; the only non-head lane); (c) discharge of the GX
-  constants debt (verbatim `k`-dependence of Lemma 3.6's `c*` and of
-  Thm 3.8/3.9's constants; a background extraction may have written
-  `scratchpad/gx_constants.txt` — file as an annotation; the verdict
-  changes only if a loss-free chain version exists, moving the obstruction
-  to chain selection); (d) the short-time construction of a certified
+  program M-1 (on hold; the only non-head lane); (c) the GX constants
+  debt is DISCHARGED at statement level (annotation §7 of the GX record:
+  Lemma 3.6's constant is `c*(λ,δ,d,p)(η/2)^k`, so `C_a(k) → 2/η ≈ 50–60`;
+  Thm 3.8's chain-version radius is `T^{1/2} ≲ C(‖u₀‖,ℓ,k)^{-1}‖D^ku₀‖^{-1/(k+1)}`
+  with the `k`-dependence of `C` unstated; verdict unchanged — the
+  obstruction is pinned to `C(‖u₀‖,ℓ,k) ≤ η/2·(1 − o(1))`, unsupplied);
+  the only remaining sub-debt is reading the proof of Thm 3.8 (iteration
+  (2.9)–(2.10)), which cannot close the gap (chain selection (3.8)–(3.9)–(3.14)
+  at level `k(t)` at escape times would remain); (d) the short-time construction of a certified
   fat-core growth phase (turns the COUNTERFAMILY debt into a theorem; not
   needed for any decision on file).
 - **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
