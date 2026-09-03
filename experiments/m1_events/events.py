@@ -232,8 +232,9 @@ def full_diag(g, uh, nu):
     P = sum(P_i)
     P_det = -4.0 * dx3 * float(np.sum(lam[..., 0] * lam[..., 1] * lam[..., 2]))
     P_direct = dx3 * float(np.sum(np.einsum('abci,abcij,abcj->abc', w.transpose(1, 2, 3, 0), S, w.transpose(1, 2, 3, 0))))
-    val['P_frame_vs_det'] = abs(P - P_det) / max(abs(P_direct), 1e-300)
-    val['P_frame_vs_direct'] = abs(P - P_direct) / max(abs(P_direct), 1e-300)
+    P_abs_glob = dx3 * float(np.sum(np.abs(lam) * wi ** 2))  # gross production (normaliser; P itself can vanish by symmetry)
+    val['P_frame_vs_det'] = abs(P - P_det) / max(P_abs_glob, 1e-300)
+    val['P_frame_vs_direct'] = abs(P - P_direct) / max(P_abs_glob, 1e-300)
     val['E_vs_2S2'] = abs(E - 2 * dx3 * float(np.sum(Sfro2))) / max(E, 1e-300)
     out = dict(E=E, P=P, P_i=P_i, P_abs=dx3 * float(np.sum(np.abs(lam) * wi ** 2)),
                G=dx3 * float(np.sum(np.sqrt(Sfro2) * w2)), diss=nu * dx3 * float(np.sum(gradw2)),
