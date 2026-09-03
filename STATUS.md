@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第16セッション: V-15 放電まで反映 — 一般 lane 橋完全検証)
+# STATUS — 2026-09-04 (第17セッション: T-GRAM 縮約まで反映 — 一般 lane は1補題に圧縮)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -444,6 +444,30 @@ CF は別対象)。**一般 lane の橋は完全検証済み — 開いている
 M-only の定量的 published 連鎖で N0・Lean assembly まで到達。系譜の最強検証
 状態。** 次 = ① P-2 型プローブ(`X_e`・`𝔓₋`・spec G)→ ② T-DIR/T-DIR-SPK
 proof commissioning — いずれも user act。
+
+**第17セッション(ユーザー commission): T-DIR-SPK proof-route decomposition
+実行済み — 判定: ONE-LEMMA REDUCTION FOUND、T-GRAM 選定**
+([`docs/gates/HSEL_TGRAM_DECOMPOSITION_2026-09-04.md`](docs/gates/HSEL_TGRAM_DECOMPOSITION_2026-09-04.md)、
+RECORD-ONLY、main-loop 導出 [D])。**構造的収穫**: **Y-1** 行列発展恒等式
+`G′(t) = −2νD(t) − 2𝒫(t)`(𝒫 = 生産テンソル `∫(∂ᵢu)ᵀS(∂ⱼu)dx`、trace は古典
+enstrophy 恒等式)、**Y-2 = 鍵**: 正準固定方向の free L¹ budget — `ē` =
+`∫₀^{T′}G dt` の最小固有ベクトルに対し `∫X_ē dt = λ_min(∫G) ≤ M²/(6ν)` が
+**無料**(「固定方向 + free budget」の同時実現 — per-time では不十分という制約を
+正準構成で突破)、Y-3: det/異方性汎関数に符号構造なし。**機構裁定**: R1 alignment
+depletion は adverse(channel vector は gradient-like で圧縮整列が DNS 的に
+generic — 単独 FAILCASE)、R2 CF coherence は open head への route-swap、R3
+spectral split(SP-a 生産異方性 × SP-b frame coherence)は両因子 NEW-MATH、
+R4 回転率の energy/dissipation 制御は **free level で不可**(rate ~ ‖G′‖/gap は
+壁 budget を要し、gap は悪い等方 regime でちょうど消える)。**選定補題 T-GRAM
+(OPEN)**: `∫₀^{T′}(−ēᵀ𝒫(t)ē)₊dt ≤ Q₀(ν,T,M)`。証明済み連鎖 [D]: Y-1 を ē 沿いに
+積分 + 符号捨て ⟹ `sup_t X_ē ≤ M²+2Q₀`、Y-2 と組んで `∫X_ē²dt ≤
+(M²+2Q₀)M²/(6ν)` ⟹ T-DIR(T′ 依存は DQ-1)⟹ V-15 検証済み橋 ⟹ H-SEL^nu ⟹
+N0 ⟹ Lean。**一般レベルの architecture が完成: 正準固定方向の free L¹ budget +
+証明済み sup-arrow + published 定量橋 — 開いているのは生産 budget 1個。**
+注意(印字済み): T-GRAM は specialization(T-DIR より真に強い可能性; probe で
+ē が adversarial に悪ければ T-DIR-SPK(∃e) へ fallback)。probe 条項は auto-fire
+せず(縮約が見つかったため)。次 = ① T-GRAM observable のプローブ(ē・X_ē(t)・
+(−ēᵀ𝒫ē)₊(t)・spec G(t))→ ② T-GRAM proof commissioning — いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

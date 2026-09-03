@@ -574,7 +574,43 @@ Last updated: 2026-09-02 JST (second session).
 > fully bridge-verified: only T-DIR is open, with an M-only quantitative
 > published chain to N0 and the Lean assembly — the strongest verified
 > state the head lineage has reached.** Baseline stays the 8775-job gate.
-> **Resume anchor: "Next work" below + the V-15 record's §3.**
+>
+> **2026-09-04 (seventeenth session): the T-DIR-SPK proof-route
+> decomposition is COMMISSIONED and EXECUTED — VERDICT: ONE-LEMMA
+> REDUCTION FOUND, T-GRAM selected**
+> (`docs/gates/HSEL_TGRAM_DECOMPOSITION_2026-09-04.md`, RECORD-ONLY;
+> main-loop derivations [D]). **Structural yields: Y-1** the matrix
+> evolution identity `G′(t) = −2νD(t) − 2𝒫(t)` (`𝒫ᵢⱼ = ∫(∂ᵢu)ᵀS(∂ⱼu)dx`
+> the production tensor, `D` the PSD dissipation tensor; trace =
+> the classical enstrophy identity); **Y-2 — the key find: the canonical
+> fixed-direction free L¹ budget** — with `ē` = a smallest-eigenvalue
+> eigenvector of `∫₀^{T′}G dt`: `∫X_ē dt = λ_min(∫G) ≤ M²/(6ν)` FREE (a
+> FIXED direction with free budget, strictly more than the insufficient
+> per-time statement); Y-3: no signed det/anisotropy structure exists.
+> **Mechanisms adjudicated:** R1 alignment depletion — adverse (the
+> channel vector is gradient-like, `D_t(∂_eu) = −(∇u)(∂_eu)+…`, and
+> compressive alignment is the DNS-generic behavior) — FAILCASE
+> standalone; R2 CF coherence — route-swap to open HR-1 — FAILCASE as a
+> route; R3 spectral split (SP-a production anisotropy × SP-b frame
+> coherence) — both factors NEW-MATH, separately kinematically defeated;
+> R4 rotation-rate control by energy/dissipation — **NO at the free
+> level** (rate ~ ‖G′‖/gap needs wall budgets; gap vanishes exactly in
+> the bad isotropic regime) — COLLAPSES-TO-WALL as a free route.
+> **THE SELECTED LEMMA: T-GRAM** (norm-uniform, OPEN):
+> `∫₀^{T′}(−ēᵀ𝒫(t)ē)₊dt ≤ Q₀(ν,T,M)` at the canonical `ē(T′)`. Proved
+> chain [D]: Y-1 along `ē` + sign-discard ⟹ `sup_t X_ē ≤ M²+2Q₀`; paired
+> with Y-2 ⟹ `∫X_ē²dt ≤ (M²+2Q₀)M²/(6ν)` ⟹ T-DIR (DQ-1 handles the
+> `T′`-dependence) ⟹ the V-15-verified bridge ⟹ H-SEL^nu ⟹ N0 ⟹ Lean.
+> **The general-level architecture is complete: free L¹ budget at a
+> canonical fixed direction + proved sup-arrow + published quantitative
+> bridge; open = ONE production budget.** Caveat printed (specialization
+> — possibly strictly stronger than T-DIR; revision trigger: probe shows
+> `ē` adversarially bad ⟹ fall back to T-DIR-SPK(∃e)); battery: polarity
+> forced, F2 kinematic barrier stands, no certified counterfamily. The
+> probe clause did NOT auto-fire (reduction found); next options (user
+> acts): probe on (`ē`, `X_ē(t)`, `(−ēᵀ𝒫ē)₊(t)`, `spec G(t)`) / T-GRAM
+> proof commissioning / fallbacks on file. Baseline stays the 8775-job
+> gate. **Resume anchor: "Next work" below + that record's §1/§3.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -642,17 +678,25 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   NOT-DEMOTED.** The T-DIR chain is verified end to end (P2
   strong-solution-framed, quantitative, M-only constants; DQ-1 +
   rotation fold in with zero extra hypotheses); only the head is open.
+- **DONE (seventeenth session): the T-DIR-SPK decomposition — ONE-LEMMA
+  REDUCTION FOUND.** Yields Y-1 (`G′ = −2νD − 2𝒫`) and Y-2 (the
+  canonical fixed-direction free L¹ budget `∫X_ē dt ≤ M²/6ν`);
+  **selected lemma T-GRAM**: `∫₀^{T′}(−ēᵀ𝒫ē)₊dt ≤ Q₀(ν,T,M)` at
+  `ē(T′)` = smallest-eigenvalue eigenvector of `∫₀^{T′}G dt` — one
+  proved arrow to T-DIR, thence the verified bridge. Fallbacks on file:
+  T-DIR-SPK(∃e), T-DIR, the Gram form.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)`, and the
-     Gram spectrum `spec G(t)` (cheap scalars; direction scan over e;
-     preregistered thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only;
-     fail-closed for unresolved members).
-  2. **T-DIR / T-DIR-SPK proof commissioning** (counterexample-first
-     discipline satisfied for the lineage: channel search, quantifier
-     audit, battery, V-15 all done; the F2 exact-NS-dynamics barrier and
-     the averaging no-go locate the proof's required inputs; the Miller
-     Thm 1.6 `v×ω`-variant is the recorded structural neighbor).
+  1. **Probe on the T-GRAM observables** — `ē(horizon)`, `X_ē(t)`,
+     `(−ēᵀ𝒫ē)₊(t)`, `spec G(t)` (cheap scalars; preregistered
+     thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only; fail-closed for
+     unresolved members; the probe doubles as the T-GRAM-vs-T-DIR
+     revision-trigger test).
+  2. **T-GRAM proof commissioning** (counterexample-first discipline
+     satisfied through the lineage; R1's adverse alignment, R4's
+     rotation no-go, and the F2 barrier locate the required inputs —
+     the proof must control production along ONE canonical direction
+     using NS dynamics beyond energy).
   3. Standing items unchanged: parked axisym assets (T-SPK/T-SRC′,
      P-LP, Shahmurov watch); accumulated freeze-review proposals;
      on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold; HR-1/HR-3′
