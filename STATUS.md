@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第20セッション: T-VAR proof session まで反映 — ONE-SUBLEMMA: T-CONE)
+# STATUS — 2026-09-04 (第21セッション: T-CONE proof session まで反映 — ONE-SUBLEMMA: T-DET)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -539,6 +539,33 @@ tr𝔑 は壁、∫trR は符号つきのみ — 壁ルートは規則どおり�
 [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean。** `spec 𝔑(T′)` は既存
 probe インフラで計算可能。次 = ① T-CONE proof session → ② T-CONE 向け probe
 (要 prereg)— いずれも user act。
+
+**第21セッション(ユーザー commission): T-CONE proof session 実行済み — 判定:
+ONE-SUBLEMMA(T-DET)**
+([`docs/gates/HSEL_TCONE_PROOF_SESSION_2026-09-04.md`](docs/gates/HSEL_TCONE_PROOF_SESSION_2026-09-04.md)、
+Lean/数値なし; [D] 収穫のみ、open statement 無主張)。**不変式による支配**:
+PSD 3×3 で `λ_min ≤ (det)^{1/3}` ⟹ **`det𝔑 ≤ Q₀³ ⟹ T-CONE`**[D 証明済み]、
+かつ `det ≤ (tr/3)³` なので det は禁止された trace より**厳密に弱い**(正しい
+弱化方向)。**rank 階層**: `e₂ = 0 ⟺ rank ≤ 1`(2平面逃避=過剰)、
+`det = 0 ⟺ rank ≤ 2 ⟺ λ_min = 0`(1直線逃避)— **det が λ_min に正確対応する
+triple-filling 不変量**。**選定 sublemma T-DET(OPEN)**:
+`det(∫₀^{T′}R₋dt) ≤ Q₀³` — frame-free・∃は1行列のスカラー不変量に完全崩壊。
+チェック: (3) **incompressibility は rank-3 充填を free に妨げない** —
+`tr𝒫 = ∫S:W`(S は pointwise traceless、`W = J^TJ ⪰ 0`)は符号不定で、3つの
+積分形 `eᵀ𝒫e` の同時負性を禁じない(open core)、(4) 圧力は既消去・strain
+tracelessness は pointwise で 𝔑 に非作用・alignment は DNS-adverse — free な
+幾何 block なし、(1–2) per-time 負固有空間の pairwise overlap で `∫R₋` は rank
+について superadditive(rank-1/time ⟹ 累積 rank-3)— per-time の細さは free な
+defect を生まない、(5) `D ⪰ 0` は各方向の錐を狭める(Weyl `R₋ ⪯ 𝒫₋`)—
+codim-1 confinement の機構形だが free bound なし。**dichotomy の価格: T-DET ⟺
+累積負方向が「壁レベルの大きさ」と「3次元等分配」を両立しない(2平面に閉じた
+sweep は det = 0 で T-DET 成立)** — open 入力は 3次元 anti-equidistribution /
+余次元1 confinement(「全方向制御」より厳密に小さい)。barrier 再価格
+(3D-sweep rotator で `det ~ (fTg)³`)無傷。**連鎖: T-DET ⟹ T-CONE ⟹ T-VAR ⟹
+T-DIR ⟹ [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean。** 次 =
+① T-DET proof session(T-DET 自体が Clay 級硬の可能性に注意 — 更なる弱化も NS
+confinement 機構も無ければ DEAD-END で一般 lane を park し HR-1/HR-3′ へ)
+→ ② T-DET 向け probe(要 prereg)— いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

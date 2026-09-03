@@ -707,8 +707,39 @@ Last updated: 2026-09-02 JST (second session).
 > satisfies; polarity forced. **Chain: T-CONE ⟹ T-VAR ⟹ T-DIR ⟹
 > [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean.** `spec 𝔑(T′)`
 > is computable on the existing probe infrastructure. Baseline stays the
-> 8775-job gate. **Resume anchor: "Next work" below + that record's
-> §3–§4.**
+> 8775-job gate.
+>
+> **2026-09-04 (twenty-first session): the T-CONE proof session is
+> COMMISSIONED and EXECUTED — VERDICT: ONE-SUBLEMMA (T-DET)**
+> (`docs/gates/HSEL_TCONE_PROOF_SESSION_2026-09-04.md`; no Lean, no
+> numerics; [D]-yields only, no open statement claimed). **Invariant
+> domination:** for PSD 3×3, `λ_min ≤ (det)^{1/3}` ⟹ **`det𝔑 ≤ Q₀³ ⟹
+> T-CONE`** [D, proved], and `det ≤ (tr/3)³` so det is STRICTLY WEAKER
+> than the banned trace — the right weakening. **Rank hierarchy:**
+> `e₂ = 0 ⟺ rank ≤ 1` (2-plane escape, over-strong); `det = 0 ⟺
+> rank ≤ 2 ⟺ λ_min = 0` (one-line escape) — **det is the exact invariant
+> matching λ_min, the triple-filling obstruction**. **THE SUBLEMMA:
+> T-DET** (norm-uniform, OPEN): `det(∫₀^{T′}R₋dt) ≤ Q₀³` — frame-free,
+> ∃-collapsed to a scalar invariant of one accumulated matrix.
+> Checks: (3) **incompressibility gives NO free rank-3 block** —
+> `tr𝒫 = ∫S:W` (S traceless pointwise, `W = J^TJ ⪰ 0`) is
+> sign-indefinite and does not forbid the three integrated forms
+> `eᵀ𝒫e` from being simultaneously negative (the open core); (4) pressure
+> already cancelled, strain-tracelessness pointwise not on 𝔑, alignment
+> DNS-adverse — no free geometric block; (1–2) pairwise negative-eigenspace
+> overlap makes `∫R₋` superadditive in rank (rank-1-per-time ⟹ rank-3
+> accumulated), so per-time thinness gives no free defect; (5) `D ⪰ 0`
+> narrows the cone per-direction (Weyl `R₋ ⪯ 𝒫₋`) — a codim-1-confinement
+> mechanism shape, not a free bound. **Dichotomy priced: T-DET ⟺ the
+> accumulated negative direction does not both stay wall-magnitude AND
+> 3-D-equidistribute; a sweep confined to a 2-plane leaves det = 0 and
+> T-DET holds** — the open input is 3-D anti-equidistribution /
+> codimension-1 confinement (strictly smaller than "control all
+> directions"). Barrier repriced (3-D-sweep rotator gives `det ~
+> (fTg)³`), intact. **Chain: T-DET ⟹ T-CONE ⟹ T-VAR ⟹ T-DIR ⟹
+> [DQ-1 + Zhang/CFZ V-15 M-only] H-SEL^nu ⟹ N0 ⟹ Lean.** `det∫R₋dt`
+> computable on the probe infrastructure. Baseline stays the 8775-job
+> gate. **Resume anchor: "Next work" below + that record's §2/§4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -799,28 +830,36 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   Gram frame's oscillation frequency along one direction — the free
   identities are provably insufficient (matrix-path counterexample).
 - **DONE (twentieth session): the T-VAR proof session — ONE-SUBLEMMA
-  (T-CONE).** The single open target is now **T-CONE**:
-  `λ_min(∫₀^{T′}R₋(t)dt) ≤ Q₀(ν,T,M)`, `R = νD + 𝒫 = −½G′`, `R₋` its
-  negative spectral part — frame-free, ∃-collapsed (the direction = a
-  min-eigenvector of one accumulated PSD matrix). Proved:
-  T-CONE ⟹ T-VAR ⟹ T-DIR ⟹ [DQ-1 + Zhang/CFZ, V-15, M-only]
-  H-SEL^nu ⟹ N0 ⟹ Lean. Open content: **an NS anti-equidistribution
-  mechanism for the accumulated negative production** (it may not be
-  both wall-large and directionally equidistributed); the barrier is
-  repriced as gap × frequency × equidistribution.
+  (T-CONE).** Frame identity + spectral refinement gave
+  T-CONE = `λ_min(∫R₋dt) ≤ Q₀`.
+- **DONE (twenty-first session): the T-CONE proof session — ONE-SUBLEMMA
+  (T-DET).** The single open target is now **T-DET**:
+  `det(∫₀^{T′}R₋(t)dt) ≤ Q₀³`, `R = νD + 𝒫 = −½G′` — frame-free,
+  ∃-collapsed to a scalar invariant; proved arrow `λ_min ≤ det^{1/3}`.
+  Proved chain: T-DET ⟹ T-CONE ⟹ T-VAR ⟹ T-DIR ⟹ [DQ-1 + Zhang/CFZ,
+  V-15, M-only] H-SEL^nu ⟹ N0 ⟹ Lean. Open content: **3-D
+  anti-equidistribution / codimension-1 confinement of the accumulated
+  negative cone** (T-DET ⟺ the negative direction does not both stay
+  wall-magnitude and 3-D-equidistribute; a 2-plane-confined sweep leaves
+  det = 0). Incompressibility gives no free rank-3 block (`tr𝒫 = ∫S:W`);
+  `D ⪰ 0` supplies the codim-1-confinement mechanism shape (Weyl
+  `R₋ ⪯ 𝒫₋`) but no free bound.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **T-CONE proof session** — the anisotropic-branch mechanism is
-     identified (big gap + bounded `R̃`-off-diagonals ⟹ slow frames,
-     §4.2); the missing input is the anti-equidistribution mechanism;
-     the check-4 ROUTE-SWAP map (coherence + λ₂-alignment) remains on
-     file for comparison against HR-1/HR-3′ before any adoption.
-  2. **T-CONE-targeted probe** — `spec 𝔑(T′) = spec ∫R₋dt` is directly
-     computable on `experiments/tgram_probe/` (R = νD + 𝒫 assembled
-     from the stored G/D/𝒫 series); preregister first; measures the
-     equidistribution question empirically.
+  1. **T-DET proof session** — the missing input is 3-D
+     anti-equidistribution / codimension-1 confinement; assets: the
+     Weyl `R₋ ⪯ 𝒫₋` cone-narrowing (D can zero out a direction), the
+     superadditive-rank observation, the check-4 ROUTE-SWAP map on file.
+     Watch for the honest possibility that T-DET itself is
+     Clay-equivalent-hard — if the session finds no strictly-weaker
+     non-trace target and no NS confinement mechanism, the verdict may be
+     DEAD-END (park the general lane, revert to HR-1/HR-3′).
+  2. **T-DET-targeted probe** — `det∫R₋dt` and the sweep's dimensional
+     spread are computable on `experiments/tgram_probe/` (R = νD + 𝒫
+     from the stored series); preregister first; measures 3-D
+     equidistribution empirically.
   3. Standing items unchanged: parked assets (T-GRAM with Y-1/Y-2;
-     T-DIR-SPK and T-VAR archived as stronger members; axisym
+     T-DIR-SPK/T-VAR/T-CONE archived as stronger members; axisym
      T-SPK/T-SRC′; P-LP; Shahmurov watch); accumulated freeze-review
      proposals; on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold;
      HR-1/HR-3′ fallback ordering.
