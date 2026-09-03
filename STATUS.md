@@ -1,4 +1,4 @@
-# STATUS — 2026-09-03 (第15セッション: T-DIR quantifier/battery audit まで反映 — SURVIVES)
+# STATUS — 2026-09-04 (第16セッション: V-15 放電まで反映 — 一般 lane 橋完全検証)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -418,6 +418,32 @@ barrier** として記録(反例に数えず; certified 版は O-4 で構成不�
 多方向 strain 構成不能、F4 small-data は head を検証する側、F5 Tao guarded
 (C-3)、F6 凍結 profile は全方向 violate = polarity PASS、F7 2.5D sanity PASS。
 **T-DIR は V-15 へ進行可(commission は user act)。**
+
+**第16セッション(2026-09-04、ユーザー commission): V-15 放電 — 判定:
+QUANTITATIVE-BRIDGE、prior art による demote なし**
+([`docs/gates/HSEL_V15_DISCHARGE_2026-09-04.md`](docs/gates/HSEL_V15_DISCHARGE_2026-09-04.md)、
+RECORD-ONLY、2レーン: 両 bridge 論文の一次深読 + Gram 形 targeted prior-art)。
+**(1)** (4,2) は両論文で smallness-free・q=2 非退化(P1 = Zhang BMS 2017 Thm 2、
+閉 window [1.562,3]、q=2 での補間指数すべて内部; P2 = Hui Chen–Fang–Zhang MMAS
+2021 Thm 1.1、window (3/2,6]、q=2 は非退化中間枝)。ν=1 正規化、復元則
+`F(ν,T,M,Q) = unscale F(1,νT,ν⁻¹M,ν^{−3/4}Q)`。**(2) class-match はクリーン —
+commission の想定より良い: P2 の定理は H¹ strong solution そのものについて陳述**
+— certified solution がそのまま対象、Leray–Hopf 経由不要(CLASS-GAP なし)。
+**(3) 定量的・P2 自己完結**: 全ステップ明示的(compactness・矛盾法・外部委譲
+なし)、tail-smallness は分割 `N ≤ ⌈(2C₁Q)⁴⌉+1` で定量化 ⟹
+`sup_t‖u‖_{H³} ≤ F(ν,T,M,Q)`(F 明示的、Q⁴ の二重指数型)— **しかも M-only:
+axisym lane の M′ に相当する追加 datum 入力なし**。P1 は corroboration(終端の
+[33] 委譲は未検証 flag、非載荷)。**(4)** 回転 e↦e₃ は定数不変(絶対定数)。
+**(5)** DQ-1 は追加仮定ゼロで組み込み(strong-solution 枠組み、SEL-10 型)。
+**prior art: NOT-DEMOTED** — `inf_e∫(eᵀGe)²dt ≤ Q₀` と同値・支配する定理は
+存在せず(最近接: CFZ/Zhang = pairing consumer; Miller arXiv:2002.02152
+Thm 1.6 = 唯一の existential-direction L⁴L² budget 型だが v×ω・conditional —
+構造的隣人・variant channel 候補として記録; strain 固有値系は pointwise で
+incomparable; small-∂₃u/almost-2D 系は smallness 側の validating relative;
+CF は別対象)。**一般 lane の橋は完全検証済み — 開いているのは T-DIR のみ、
+M-only の定量的 published 連鎖で N0・Lean assembly まで到達。系譜の最強検証
+状態。** 次 = ① P-2 型プローブ(`X_e`・`𝔓₋`・spec G)→ ② T-DIR/T-DIR-SPK
+proof commissioning — いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

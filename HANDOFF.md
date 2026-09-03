@@ -541,8 +541,40 @@ Last updated: 2026-09-02 JST (second session).
 > guarded (C-3); F6 frozen profiles violate every direction — polarity
 > PASS; F7 2.5-D sanity PASS. **No COUNTERFAMILY, no QUANTIFIER-GAP —
 > T-DIR cleared to proceed to V-15 (a user act).** Baseline stays the
-> 8775-job gate. **Resume anchor: "Next work" below + that record's
-> §1–§2.**
+> 8775-job gate.
+>
+> **2026-09-04 (sixteenth session): V-15 is COMMISSIONED and DISCHARGED —
+> VERDICT: QUANTITATIVE-BRIDGE; the Gram form is NOT demoted by prior
+> art** (`docs/gates/HSEL_V15_DISCHARGE_2026-09-04.md`, RECORD-ONLY; two
+> lanes: full primary deep-reads of both bridge papers + a targeted
+> Gram-form prior-art check). **(1)** (4,2) is smallness-free and
+> non-degenerate at `q = 2` in BOTH papers (P1 = Zhang BMS 2017 Thm 2,
+> closed window [1.562,3], interpolation exponents at q = 2 all interior;
+> P2 = Hui Chen–Fang–Zhang MMAS 2021 Thm 1.1, window (3/2,6], q = 2 in
+> the non-degenerate middle branch); ν = 1 normalized, recovery
+> `F(ν,T,M,Q) = unscale F(1, νT, ν⁻¹M, ν^{−3/4}Q)`. **(2) CLASS-MATCH
+> CLEAN — better than commissioned: P2's theorem is stated for the H¹
+> STRONG solution itself**, so the certified solution IS its object; no
+> Leray–Hopf passage needed. **(3) QUANTITATIVE, P2 self-contained**: all
+> steps explicit (no compactness/contradiction/delegation); tail-smallness
+> quantized by partition `N ≤ ⌈(2C₁Q)⁴⌉+1` ⟹ `sup_t‖u‖_{H³} ≤
+> F(ν,T,M,Q)`, F explicit double-exp in Q⁴ — **and M-only: no
+> M′-analogue carry (cleaner than the axisym lane)**. P1 corroborates
+> (its terminal [33]-delegation unverified — flagged, non-load-bearing).
+> **(4)** rotation `e ↦ e₃` constant-invariant (absolute constants).
+> **(5)** DQ-1 folds in with zero extra hypotheses (strong-solution
+> framing; SEL-10 pattern verbatim). **Prior art: NOT-DEMOTED** — no
+> theorem equivalent to or dominating `inf_e∫(eᵀGe)²dt ≤ Q₀` exists;
+> nearest relatives recorded (CFZ/Zhang = pairing consumers; **Miller
+> arXiv:2002.02152 Thm 1.6** = the only published existential-direction
+> L⁴L² budget statement, for `v×ω`, conditional — closest structural
+> neighbor, candidate variant channel; strain-eigenvalue criteria
+> pointwise-incomparable; small-∂₃u/almost-2D results = validating
+> smallness relatives; CF = different object). **The GENERAL lane is now
+> fully bridge-verified: only T-DIR is open, with an M-only quantitative
+> published chain to N0 and the Lean assembly — the strongest verified
+> state the head lineage has reached.** Baseline stays the 8775-job gate.
+> **Resume anchor: "Next work" below + the V-15 record's §3.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -606,16 +638,25 @@ C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
   identities verified; averaging no-go established; F2 kinematic barrier
   filed; no counterfamily. The Gram reformulation
   `inf_e ∫(eᵀG(t)e)²dt ≤ Q₀` is the head's canonical open form.
+- **DONE (sixteenth session): V-15 discharged — QUANTITATIVE-BRIDGE,
+  NOT-DEMOTED.** The T-DIR chain is verified end to end (P2
+  strong-solution-framed, quantitative, M-only constants; DQ-1 +
+  rotation fold in with zero extra hypotheses); only the head is open.
 - **Next, each requiring an explicit user commission (recorded
   recommendation, in order):**
-  1. **V-15 discharge** (Zhang 2017 / CFZ 2021 proof quantitativity +
-     the DQ-1 §1(b) weak-limit/class-match bookkeeping — nu-layer only;
-     ds-layer already rests on [V-P] qualitative criteria; also a
-     targeted prior-art check on `∂₃u ∈ L⁴L²`-budget-type statements and
-     on anisotropy/coherence literature adjacent to the Gram form).
-  2. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)`, and the
-     Gram spectrum `spec G(t)` (cheap scalars; direction scan over e).
-  3. Only after 1: T-DIR/T-DIR-SPK proof commissioning.
+  1. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)`, and the
+     Gram spectrum `spec G(t)` (cheap scalars; direction scan over e;
+     preregistered thresholds; EVIDENCE-FOR/AGAINST/UNDETERMINED only;
+     fail-closed for unresolved members).
+  2. **T-DIR / T-DIR-SPK proof commissioning** (counterexample-first
+     discipline satisfied for the lineage: channel search, quantifier
+     audit, battery, V-15 all done; the F2 exact-NS-dynamics barrier and
+     the averaging no-go locate the proof's required inputs; the Miller
+     Thm 1.6 `v×ω`-variant is the recorded structural neighbor).
+  3. Standing items unchanged: parked axisym assets (T-SPK/T-SRC′,
+     P-LP, Shahmurov watch); accumulated freeze-review proposals;
+     on-hold Lean debts (SEL-3/SEL-5, EB-1); M-1 on hold; HR-1/HR-3′
+     fallback ordering.
 - **Still separately uncommissioned — do not start implicitly:** any proof
   search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
   SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).
