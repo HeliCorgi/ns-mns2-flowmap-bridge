@@ -1,4 +1,4 @@
-# STATUS — 2026-09-02 (第13セッション: T-SPK 縮約 + stop rule 発火まで反映 — axisym lane 停止)
+# STATUS — 2026-09-03 (第14セッション: general channel search まで反映 — T-DIR 選定)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -369,6 +369,35 @@ sub-wall criterion を持つ部分 enstrophy channel」が必要で、既知構�
 park; general N0/H-SEL 側へ復帰。** 次の commission は自由 fork(general
 channel-search audit / 一般形 P-2 / axisym lane 再開 / freeze-review 裁定 /
 Lean 債務再開)— いずれも user act。
+
+**第14セッション(2026-09-03、ユーザー commission): general N0 channel-search
+audit 実行済み — 判定: ONE-CHANNEL-SELECTED = 方向微分 channel、候補定理 T-DIR**
+([`docs/gates/HSEL_CHANNEL_SEARCH_2026-09-03.md`](docs/gates/HSEL_CHANNEL_SEARCH_2026-09-03.md)、
+RECORD-ONLY)。channel 表: Ch-1 strain/vorticity は collapse check で即棄却
+(`‖S‖₂² = ½‖∇u‖₂²`)、Ch-2 λ₂⁺ は COERCIVITY ✗(固有値交差で evolution identity
+なし — 最近接 miss)、Ch-4 helicity(無符号散逸)・Ch-5 周波数 shell(Besov 壁崩壊
++ **averaging-STABLE = C-3 違反**)・Ch-5′ 局所 enstrophy(CKN 族 + FC-086 圧力
+flux)・Ch-6 ω₃ 単独(bridge OPEN — Neustupa–Penel が verbatim "challenging open
+problem")は棄却。**選定 Ch-3a: `X_e = ‖∂_e u‖₂²`** — [D] 検証済み構造:
+**evolution identity から圧力が完全消滅**(`div ∂_e u = 0`)、production は純
+strain 形 `P_e = ∫(∂_e u)ᵀS(∂_e u)dx`、減衰定数は正確に `κ = 2ν/M²`(GN 不要)。
+**bridge 一次検証 [V-P]**: native member `∂₃u ∈ L⁴_tL²_x`(正確に臨界)は
+smallness 不要の published criterion が2本 — Zhang BMS 7 (2017) Thm 2(window
+[1.562,3] ∋ 2、Leray–Hopf)+ Chen–Fang–Zhang MMAS 44 (2021) Thm 1.1(window
+(3/2,6]);Wolf 2015 は `∇u₃` を正確に (4,2) で、Chae–Choe 1999 は2成分 ω̃ を
+cover;pre-2015 の Kukavica–Ziane window は q = 2 に届かない(post-2015 文献が
+閉じた点)。**候補定理 T-DIR**(∃方向・norm-uniform): ∃e ∈ S²:
+`∫₀^{T′}‖∂_e u‖⁴_{L²}dt ≤ Q₀(ν,T,M)`;縮約証明 [D]: `κ∫X_e²dt ≤ M² + 2𝔓₋` ⟹
+**T-DIR-SPK**: `𝔓₋ = ∫(−∫(∂_e u)ᵀS(∂_e u)dx)₊dt ≤ Q₀`(一方向の圧縮 strain
+増幅仕事、圧力消去済み)。連鎖: T-DIR(-SPK) ⟹ [Zhang/CFZ] **一般クラス N0^ds**
+⟹ [新 debt V-15: criterion 証明の定量性、nu 層のみ] H-SEL^nu ⟹ Lean N1→N2→N3。
+**一般 lane が axisym lane と同じ single-open-link 形に到達 — 一般 certified
+class について「開いているのは head だけ」。** T-DIR は HR-7 族の T-SPK
+architecture による upgrade。**EC-1**: T-SPK record §4 の「no known structure
+supplies one」節は検証により覆り訂正(in-place 注記; 当時の stop ruling 自体は
+規則の正しい適用)。バッテリー全 polarity PASS。次 = ① T-DIR 反証バッテリー
+(∃e の回転自由度は未検証領域 — 全方向を破る certified 族の探索)→ ② V-15 放電
+→ ③ P-2 型プローブ → ④ proof commissioning — いずれも user act。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

@@ -475,7 +475,46 @@ Last updated: 2026-09-02 JST (second session).
 > criterion — no known structure supplies one. **All admissible survivors
 > are axisym-specific ⟹ the lane STOPS; T-SPK parked as the compressed
 > axisym proof target (with its proved reduction); control returns to the
-> general N0/H-SEL side.** Baseline stays the 8775-job gate. **Resume
+> general N0/H-SEL side.** Baseline stays the 8775-job gate.
+>
+> **2026-09-03 (fourteenth session): the general N0 channel-search audit is
+> COMMISSIONED and EXECUTED — VERDICT: ONE-CHANNEL-SELECTED**
+> (`docs/gates/HSEL_CHANNEL_SEARCH_2026-09-03.md`, RECORD-ONLY; main-loop
+> structural analysis + one first-hand literature lane on the single
+> undecidable point). Channel table: Ch-1 strain/vorticity REJECTED at the
+> collapse check (`‖S‖₂² = ½‖∇u‖₂²` div-free identity); Ch-2 λ₂⁺ REJECTED
+> at COERCIVITY (no evolution identity at eigenvalue crossings — nearest
+> structural miss); Ch-4 helicity REJECTED (unsigned dissipation, no
+> criterion); Ch-5 frequency shells REJECTED doubly (Besov-wall collapse +
+> averaging-STABLE, C-3 violation); Ch-5′ local enstrophy REJECTED (CKN
+> family + FC-086 pressure flux); Ch-6 ω₃ REJECTED at SUB-WALL-BRIDGE
+> (Neustupa–Penel: verbatim "a challenging open problem").
+> **SELECTED: Ch-3a — the directional-derivative channel
+> `X_e = ‖∂_e u‖²_{L²}`.** Structure [D]: **the evolution identity is
+> pressure-free** (`⟨∇∂_e p, ∂_e u⟩ = 0` by `div ∂_e u = 0`); production
+> `P_e = ∫(∂_e u)ᵀS(∂_e u)dx` (pure strain form); damping with EXACT
+> constant `κ = 2ν/M²` (`X_e = −⟨u,∂_e²u⟩ ≤ M‖∇∂_e u‖` — no GN needed).
+> **Bridge VERIFIED [V-P]: the native member `∂₃u ∈ L⁴_tL²_x` (exactly
+> critical) is a published smallness-free criterion TWICE — Zhang, Bull.
+> Math. Sci. 7 (2017) Thm 2 (window [1.562,3] ∋ 2, Leray–Hopf) and
+> Chen–Fang–Zhang, MMAS 44 (2021) Thm 1.1 (window (3/2,6]); Wolf 2015
+> covers `∇u₃` at exactly (4,2); Chae–Choe 1999 covers two-component ω̃;
+> pre-2015 Kukavica–Ziane windows do NOT reach q = 2 — the post-2015
+> literature closes the point.** THE CANDIDATE: **T-DIR** (∃-direction,
+> norm-uniform): ∃e ∈ S²: `∫₀^{T′}‖∂_e u‖⁴_{L²}dt ≤ Q₀(ν,T,M)`; proved
+> reduction [D]: `κ∫X_e²dt ≤ M² + 2𝔓₋` ⟹ compressed form **T-DIR-SPK**:
+> `𝔓₋ = ∫(−∫(∂_e u)ᵀS(∂_e u)dx)₊dt ≤ Q₀` — compressive-strain
+> amplification work along one direction, pressure-cancelled. Chain:
+> T-DIR(-SPK) ⟹ [Zhang/CFZ, V-P] **GENERAL-class N0^ds** ⟹ [debt V-15:
+> criterion-proof quantitativity, nu-layer only] H-SEL^nu ⟹ Lean
+> N1→N2→N3. **The general lane now has the same single-open-link shape the
+> axisym lane achieved — only the head is open, for the GENERAL certified
+> class.** T-DIR upgrades the HR-7 family with the full T-SPK
+> architecture. **EC-1**: the T-SPK record's "no known structure supplies
+> one" clause is corrected (annotated in place); the stop rule of THIS
+> audit does not fire; HR-1/HR-3′ stay the fallback ordering. Battery all
+> polarity PASS (S_blob ∀-direction violation; Type-I log-critical; Tao
+> structure-bar respected). Baseline stays the 8775-job gate. **Resume
 > anchor: "Next work" below + that record's §3–§4.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
@@ -513,7 +552,51 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-02, thirteenth session)
+### Next work (written 2026-09-03, fourteenth session)
+
+Read first: this file's top block;
+`docs/gates/HSEL_CHANNEL_SEARCH_2026-09-03.md` (the channel search — §2
+table, §3 T-DIR/T-DIR-SPK + battery, §4 verdict + EC-1);
+`docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md` (the architecture,
+with its §4 EC-1 annotation); the general-side stack
+(`HSEL_QUANTIFIER_AUDIT` EQ-5/EQ-7; `HSEL_P1_LITERATURE_SWEEP` §3
+C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH` O-1/O-2;
+`TSEL_HEAD_REDUCTION_AUDIT` §9; `STAGE9_REVERSE_GAP_AUDIT` SS-5/SS-6;
+`FORMAL_SCOPE.md` T-SEL subsection).
+
+- **Selected general-class research theorem: T-DIR** (∃-direction,
+  norm-uniform; OPEN): ∃e ∈ S² per certified solution with
+  `∫₀^{T′}‖∂_e u‖⁴_{L²}dt ≤ Q₀(ν,T,M)`; compressed form **T-DIR-SPK**
+  (production budget `𝔓₋ = ∫(−∫(∂_e u)ᵀS(∂_e u)dx)₊dt ≤ Q₀`,
+  pressure-cancelled, `κ = 2ν/M²` exact). Chain: T-DIR(-SPK) ⟹
+  [Zhang BMS 2017 Thm 2 / CFZ MMAS 2021 Thm 1.1, both V-P, smallness-free,
+  (4,2) interior to both windows] **GENERAL-class N0^ds** ⟹ [V-15]
+  H-SEL^nu ⟹ Lean N1→N2→N3. Only the head is open. Parked/available:
+  the axisym assets (T-SPK, T-SRC′, P-LP, Shahmurov watch), HR-1/HR-3′
+  as the recorded fallback ordering if T-DIR dies.
+- **Next, each requiring an explicit user commission (recorded
+  recommendation, in order):**
+  1. **T-DIR falsification/battery pass** (P-3-style, before any proof
+     work): seeds = strain-compression configurations maximizing `𝔓₋`
+     (LD-adjacent), anisotropic escape families (can a certified family
+     defeat EVERY direction e? — the ∃e quantifier's rotation freedom is
+     untested territory), O-2 quarantine data; plus a targeted prior-art
+     check on `∂₃u ∈ L⁴L²`-budget-type statements.
+  2. **V-15 discharge** (Zhang 2017 / CFZ 2021 proof quantitativity +
+     Leray–Hopf class-match bookkeeping — nu-layer only; ds-layer already
+     rests on [V-P] qualitative criteria).
+  3. **P-2-style probe** on the observables `X_e(t)`, `𝔓₋(t)` (cheap
+     scalars; direction scan over e).
+  4. Only after 1–2: T-DIR/T-DIR-SPK proof commissioning.
+- **Still separately uncommissioned — do not start implicitly:** any proof
+  search on T-DIR, T-DIR-SPK, T-SPK, T-SRC′, H-SEL^nu/ds, or N0;
+  SEL-3/SEL-5 and EB-1 Lean work (on hold); M-1 (on hold).
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR.
+
+### (superseded) Next work (written 2026-09-02, thirteenth session)
 
 **The axisym lane is STOPPED by the commissioned stop rule** (mechanism audit
 §4): its assets are PARKED in fully-documented state — **T-SPK** (the
@@ -521,39 +604,7 @@ compressed proof target, with its PROVED reduction `T-SPK ⟹ T-SRC′ ⟹
 H-SEL|axisym ⟹ N0|axisym`, the whole downstream verified quantitative
 published math), the P-2 observable set (`Q₅`, budget, `h(t)`-profile,
 `𝔖₋(t)`), and the standing proposals (P-LP; Shahmurov watch). Re-opening any
-of it is a user act. **Control returns to the general N0/H-SEL side.** Read
-first: this file's top block; `docs/gates/HSEL_TSPK_MECHANISM_AUDIT_2026-09-02.md`
-(§3 the reduction, §4 the stop-rule ruling + structural finding);
-then the general-side stack (`HSEL_QUANTIFIER_AUDIT` EQ-5/EQ-7;
-`HSEL_P1_LITERATURE_SWEEP` §3 C-1/C-2/C-3; `HSEL_P3_FALSIFICATION_SEARCH`
-O-1/O-2 + S-5; `TSEL_HEAD_REDUCTION_AUDIT` §9; `STAGE9_REVERSE_GAP_AUDIT`
-SS-5/SS-6; `FORMAL_SCOPE.md` T-SEL subsection).
-
-- **General-side state:** head = `H-SEL^nu` (p = 2, norm-uniform) — OPEN;
-  provably holds on the small-critical sub-ball (O-1), up to `T₀(ν,M)`
-  (EQ-6), and on the axisym sub-balls (S-7 no-swirl unconditionally;
-  with-swirl conditionally on the parked T-SPK/T-SRC′). Constraints
-  C-1/C-2/C-3 + the NEW §4 structural finding bind any route discussion:
-  the temporal-anti-concentration architecture is free but lands on the
-  Serrin wall for full enstrophy — a general-class route via it would need
-  a partial enstrophy channel with its own free `L¹_t` budget and a
-  sub-wall criterion, which no known structure supplies.
-- **Options for the next commission (user act; no recorded preference —
-  genuinely open fork):** (a) a general-side channel-search audit (hunt for
-  partial enstrophy channels with free budgets + sub-wall criteria — the
-  §4 finding's shape, counterexample-first); (b) P-2 in general form (the
-  EQ-5 family probe with the O-2 quarantine targeting); (c) re-open the
-  parked axisym lane (T-SPK proof commissioning or the axisym P-2);
-  (d) freeze-review adjudication of the accumulated proposals (P-LP,
-  Shahmurov watch, EP-1…EP-8, HR-3′, plausibility-bump note); (e) resume
-  the on-hold Lean debts (SEL-3/SEL-5, EB-1) as formalization work.
-- **Still separately uncommissioned — do not start implicitly:** any proof
-  search on T-SPK, T-SRC′, H-SEL^nu/ds, or N0; SEL-3/SEL-5 and EB-1 Lean
-  work (on hold); M-1 (on hold).
-- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
-  citing conditional chains without hypotheses; no [H]-tagged citation
-  consumption before first-hand fetch; local Elan-pinned gate only, direct
-  fast-forward push to `main`, no PR.
+of it is a user act. **Control returns to the general N0/H-SEL side.**
 
 ### (superseded) Next work (written 2026-09-02, twelfth session)
 
