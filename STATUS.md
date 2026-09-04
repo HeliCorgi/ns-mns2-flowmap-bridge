@@ -763,7 +763,7 @@ arXiv:2606.27560(2026-06-25): ℝ³、ν = 1、energy class; filter φ_ℓ、0<�
 (Prop 6.1)経由でのみ入る**; far field は Thm 8.2 で energy-level(loss 2^{3k/2})、commutator は Thm 9.3 で
 increment-defect 汎関数経由; 正則性主張なし。Dascaliuc–Grujić 1205.7080 [V]: transport residual ≤ ¼P +
 C(1+M_R²)R⁻²O。**固定 scale の filtered budget は energy で自明 [D]** — burden は scale uniformity。
-**数値**(E0 resolved; E3 diagnostic; E4/E1/E2/E2b は完了次第追記): Yu 構造の budget を one-step FD で
+**数値**(E0 resolved; E1/E3/E4 は diagnostic で 4 datum すべてで一様、§9 に追記済み; E2 は全出力 unresolved; E2b は保留): Yu 構造の budget を one-step FD で
 検証; near は全 masked output で吸収(A_N E0 0.04 / E3 0.5); **surplus は全 growth output で FAR field が担う
 (s_F +2.7〜+5.4、transition なし、event 全体で persistence); commutator forcing は全 output で SINK
 (A_C −0.45 / −0.97)**; localization は ≈0 か sink; A_Fe ≈ 0.15。subfilter 分解の far/commutator 帰属は filter

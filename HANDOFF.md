@@ -1021,8 +1021,8 @@ Last updated: 2026-09-04 JST (twenty-ninth session).
 > commutator Thm 9.3 via an increment-defect functional; no regularity claim.
 > Dascaliuc–Grujić 1205.7080 [V]: transport residual ≤ ¼P + C(1+M_R²)R⁻²O.
 > **Fixed-scale filtered budgets are energy-trivial [D]** — the burden is
-> scale uniformity. **Numerics (E0 resolved; E3 diagnostic; E4/E1/E2/E2b
-> appended when done):** Yu-structure budget validated by one-step FD;
+> scale uniformity. **Numerics (E0 resolved; E1/E3/E4 diagnostic — datum-uniform across
+> all four, appended in §9; E2 fully unresolved; E2b pending):** Yu-structure budget validated by one-step FD;
 > near absorbed at every masked output (A_N 0.04 E0 / 0.5 E3); **surplus
 > carried by the FAR field at every growth output (s_F +2.7…+5.4), no
 > transitions, full-event persistence; commutator forcing a SINK at every
