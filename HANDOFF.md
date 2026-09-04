@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-eighth session).
+Last updated: 2026-09-04 JST (twenty-ninth session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -999,6 +999,43 @@ Last updated: 2026-09-04 JST (twenty-eighth session).
 > still 1.3e-4 (diagnostic). Baseline
 > stays the 8775-job gate. **Resume anchor: "Next work" below + that record's
 > §5/§6.**
+>
+> **2026-09-04 (twenty-ninth session): FINITE-SCALE NEAR/FAR DECOMPOSITION
+> of the vortex stretching in growth events — VERDICT: ROUTE-KILLED as a
+> proof route; structure filed as DIAGNOSTIC**
+> (`docs/gates/M1_NEARFAR_RESIDUAL_2026-09-04.md`; `experiments/m1_events/`
+> `nearfar_decomp.py` (subfilter split), `nearfar_yu.py` (literature-faithful
+> filtered budget), `stateflow_harness.py`; inputs `M1_INDEPENDENT_PROBE/`,
+> `Stateflow M-1/` (GPT-side, verbatim, not authoritative); stateflow from
+> HeliCorgi/kernel-dynamics-viewer @ 3fb6421, harness only). **Audits:** the
+> GPT direct localized-Betchov estimate `|∫J_B·∇χ| ≤ εν‖∇²u‖² +
+> Cε⁻³ν⁻³r⁻⁴‖u₀‖₂⁴‖∇u‖₂²` is CORRECT [D] (Hölder + GN + Young (4/3,4)); caveat:
+> global dissipation inside a local budget; the r⁻⁴ (Λ² at the viscous
+> scale) shrinking-core judgment CORRECT [D]; β_B stays parked. **Literature
+> lead obtained first-hand [V]:** Yu, arXiv:2606.27560 (25 Jun 2026): ℝ³,
+> unit ν, energy class; filter φ_ℓ, 0<ℓ≤ρr≤r/4; near strain = Biot–Savart
+> kernel truncated at ρr acting on Ω_ℓ; Cor 2.3 `V⁺_near ≤ (1−ε)P^ρ +
+> C_{ε,ϑ,φ}ρ²M_{r,ρ}(u)(r/ℓ)⁵O` (audit omitted ρ²); **Remark 2.6: kinematic —
+> holds for every div-free energy-class field, NS enters only via the
+> balance (Prop 6.1)**; far field Thm 8.2 energy-level with loss 2^{3k/2};
+> commutator Thm 9.3 via an increment-defect functional; no regularity claim.
+> Dascaliuc–Grujić 1205.7080 [V]: transport residual ≤ ¼P + C(1+M_R²)R⁻²O.
+> **Fixed-scale filtered budgets are energy-trivial [D]** — the burden is
+> scale uniformity. **Numerics (E0 resolved; E3 diagnostic; E4/E1/E2/E2b
+> appended when done):** Yu-structure budget validated by one-step FD;
+> near absorbed at every masked output (A_N 0.04 E0 / 0.5 E3); **surplus
+> carried by the FAR field at every growth output (s_F +2.7…+5.4), no
+> transitions, full-event persistence; commutator forcing a SINK at every
+> output (A_C −0.45 / −0.97)**; localisation ≈ 0 or sink; A_Fe ≈ 0.15. The
+> subfilter split's far/commutator attribution is filter-scale dependent
+> (not intrinsic). **Analytic step:** only new statement (S′) `R_comm ≤ 0`
+> at intense cores — scale-invariant sign, SYM-pass, but per-solution truth
+> not guaranteed (backscatter), vacuous as ℓ → 0, and its use leaves the far
+> coefficient `∝ Λ^{5/4}ν^{-5/4}‖u₀‖₂` (free but scale-losing) — weaker than
+> BKM; the residual = scale-uniform far-field control = the wall in
+> local-reservoir form ⟹ **ROUTE-KILLED**; (S′) not promoted. Baseline stays
+> the 8775-job gate. **Resume anchor: "Next work" below + that record's
+> §5–§7.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -1035,7 +1072,38 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-eighth session)
+### Next work (written 2026-09-04, twenty-ninth session)
+
+Read first: the twenty-second to twenty-ninth session paragraphs of the
+top block; `docs/gates/M1_NEARFAR_RESIDUAL_2026-09-04.md` (§1 J_B audit,
+§2 Yu/DG audit, §3 fixed-scale triviality, §5 decision question, §6 the
+un-promoted (S′), §7 verdict, §9 appendix); the twenty-seventh/eighth
+records for the standing follow-up preregistrations.
+
+- **State:** head program CLOSED (audit level). Numerical lane: event term
+  budgets DIAGNOSTIC-ONLY; Betchov cross-check MIXED (β_B = alignment /
+  third-invariant coordinate); **near/far decomposition ROUTE-KILLED as a
+  proof route** (near field kinematically absorbed; surplus carried by the
+  far field whose free bound is scale-losing; commutator a sink) — nothing
+  promoted. Every priced route relocates the enstrophy wall without
+  lowering it.
+- **NOT to do (without a new instruction):** promotion of β_B, C1, C4, (S),
+  (S′), A_F/A_C or any measured sign/ratio to a head; proof search on any
+  head; Hou wall closure; ν-extrapolation; blow-up search; using
+  within-event correlations as independence evidence; treating fixed-scale
+  filtered inequalities as burden reduction.
+- **Options on file (user acts):** (a) the joint 96³–128³ follow-up
+  preregistration (λ₂ pressure-shielding, hot-core phase, E2b grid
+  stability) — may add the far-field efficiency A_Fe and the commutator sign
+  (S′) as diagnostic observables; (b) the isolated-structure large-box test
+  of the L¹-radius far-strain route; (c) a freeze-review-type closure ruling
+  for the whole general lane (heads + numerical routes priced); (d) passive
+  literature watch (add Yu 2606.27560 and the Grujić school to the register).
+- **Forbidden shortcuts (standing):** as before; torus numerics evidence-grade
+  only; measured signs are observations, never theorems; the resolved set is
+  E0 alone under the standing per-run rule.
+
+### (superseded) Next work (written 2026-09-04, twenty-eighth session)
 
 Read first: the twenty-second to twenty-eighth session paragraphs of the
 top block; `docs/gates/M1_BETCHOV_XCHECK_2026-09-04.md` (§1 the

@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第28セッション: GPT 側 Betchov probe の post-hoc adversarial cross-check まで反映 — MIXED; 昇格なし)
+# STATUS — 2026-09-04 (第29セッション: 有限 scale near/far 分解まで反映 — ROUTE-KILLED(proof route として); 構造は DIAGNOSTIC として file)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -747,6 +747,30 @@ statement (S) `4∫_{Ω_θ}det(∇u) ≥ 0`(β_B ≤ 1、production super-level 
 最大 0.97)を提案し、5項目チェック: scaling ✓、free companion ✗、wall 言い換えでない(ただし
 方向が正則性に逆: stretching の下界)、SYM ✓、per-solution truth 不明 ⟹ **昇格せず**。128³
 follow-up は λ₂ pressure-shielding の follow-up と合同でのみ価値あり; E2b(96³)は §8 に追記済み: β(θ) は全 θ で ≈0.05 以内に grid-stable(tube の平坦な 0.5–0.65 profile は datum の性質)、tail は 1.3e-4 で diagnostic のまま。
+
+**第29セッション(ユーザー commission): enstrophy-growth event の vortex stretching の有限 scale
+near/far 分解 — 判定: ROUTE-KILLED(proof route として)、構造は DIAGNOSTIC として file**
+([`docs/gates/M1_NEARFAR_RESIDUAL_2026-09-04.md`](docs/gates/M1_NEARFAR_RESIDUAL_2026-09-04.md);
+`experiments/m1_events/nearfar_decomp.py`(subfilter 分解)、`nearfar_yu.py`(文献忠実な filtered budget)、
+`stateflow_harness.py`; 入力 `M1_INDEPENDENT_PROBE/`・`Stateflow M-1/`(GPT 側、逐語、authoritative
+ではない); stateflow は kernel-dynamics-viewer @ 3fb6421 を harness としてのみ使用)。**監査**: GPT の直接
+localized-Betchov 評価 `|∫J_B·∇χ| ≤ εν‖∇²u‖² + Cε⁻³ν⁻³r⁻⁴‖u₀‖₂⁴‖∇u‖₂²` は正しい [D](Hölder + GN +
+Young (4/3,4); 注意: local budget 内で global dissipation を借用)、r⁻⁴(viscous scale で Λ²)による
+shrinking-core 閉鎖不能の判定も正しい [D]; β_B は park のまま。**文献 lead を一次入手 [V]**: Yu,
+arXiv:2606.27560(2026-06-25): ℝ³、ν = 1、energy class; filter φ_ℓ、0<ℓ≤ρr≤r/4; near strain = 半径 ρr で
+切った Biot–Savart kernel を Ω_ℓ に作用; Cor 2.3 `V⁺_near ≤ (1−ε)P^ρ + C_{ε,ϑ,φ}ρ²M_{r,ρ}(u)(r/ℓ)⁵O`
+(audit は ρ² を落としていた); **Remark 2.6: 運動学的 — div-free energy-class 場すべてで成立、NS は balance
+(Prop 6.1)経由でのみ入る**; far field は Thm 8.2 で energy-level(loss 2^{3k/2})、commutator は Thm 9.3 で
+increment-defect 汎関数経由; 正則性主張なし。Dascaliuc–Grujić 1205.7080 [V]: transport residual ≤ ¼P +
+C(1+M_R²)R⁻²O。**固定 scale の filtered budget は energy で自明 [D]** — burden は scale uniformity。
+**数値**(E0 resolved; E3 diagnostic; E4/E1/E2/E2b は完了次第追記): Yu 構造の budget を one-step FD で
+検証; near は全 masked output で吸収(A_N E0 0.04 / E3 0.5); **surplus は全 growth output で FAR field が担う
+(s_F +2.7〜+5.4、transition なし、event 全体で persistence); commutator forcing は全 output で SINK
+(A_C −0.45 / −0.97)**; localization は ≈0 か sink; A_Fe ≈ 0.15。subfilter 分解の far/commutator 帰属は filter
+scale 依存(intrinsic でない)。**解析 step**: 唯一の新 statement (S′) `R_comm ≤ 0`(intense core)は
+scale-invariant な符号で SYM 合格だが、per-solution truth は保証されず(backscatter)、ℓ → 0 で空虚、
+使っても far 係数 `∝ Λ^{5/4}ν^{-5/4}‖u₀‖₂`(free だが scale-losing)が残り BKM より弱い; residual =
+far field の scale-uniform 制御 = local-reservoir 形の wall ⟹ **ROUTE-KILLED**; (S′) は昇格せず。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

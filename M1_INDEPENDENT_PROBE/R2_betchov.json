@@ -1,0 +1,42 @@
+{
+  "t": 0.25,
+  "tail": 1.6199128923251716e-06,
+  "algerr": 1.187134088521425e-15,
+  "flux_l2_relerr": 0.0013676003269463728,
+  "global_int_q": 4409.280242098106,
+  "global_int_b": 4409.280242098105,
+  "cond": {
+    "qtop90": {
+      "int_b_over_int_q": 0.5313655221087961,
+      "int_mismatch_over_int_q": 0.468634477891204,
+      "abs_mismatch_over_q": 0.6327076377677596,
+      "same_sign_b_frac": 0.8742323097463285,
+      "mean_lambda2": 0.9789464547629312,
+      "lambda2pos_frac": 0.8742323097463285
+    },
+    "qtop95": {
+      "int_b_over_int_q": 0.5294559240033856,
+      "int_mismatch_over_int_q": 0.4705440759966145,
+      "abs_mismatch_over_q": 0.6011198121922433,
+      "same_sign_b_frac": 0.902731156545621,
+      "mean_lambda2": 1.1431578585939959,
+      "lambda2pos_frac": 0.902731156545621
+    },
+    "qtop99": {
+      "int_b_over_int_q": 0.6361068415697259,
+      "int_mismatch_over_int_q": 0.36389315843027426,
+      "abs_mismatch_over_q": 0.5086141617937077,
+      "same_sign_b_frac": 0.9439359267734554,
+      "mean_lambda2": 1.7214778425560266,
+      "lambda2pos_frac": 0.9439359267734554
+    },
+    "qtop99.5": {
+      "int_b_over_int_q": 0.6490322820742106,
+      "int_mismatch_over_int_q": 0.3509677179257894,
+      "abs_mismatch_over_q": 0.49438580919808145,
+      "same_sign_b_frac": 0.9374523264683448,
+      "mean_lambda2": 1.9351916779497493,
+      "lambda2pos_frac": 0.9374523264683448
+    }
+  }
+}
