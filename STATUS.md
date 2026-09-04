@@ -1,4 +1,4 @@
-# STATUS — 2026-09-04 (第27セッション: M-1 再開 = enstrophy-growth event の term-budget study まで反映 — DIAGNOSTIC-ONLY; follow-up prereg 2件)
+# STATUS — 2026-09-04 (第28セッション: GPT 側 Betchov probe の post-hoc adversarial cross-check まで反映 — MIXED; 昇格なし)
 
 ## 2026-09-01/02 数学監査パス + FREEZE REVIEW ROUND 3/4 + Stage-9 decisions(すべて執行済み)
 
@@ -726,6 +726,27 @@ pressure Hessian を経て生き残る λ₂ の渦度 source の割合)は even
 DIAGNOSTIC-ONLY、head 昇格なし。follow-up prereg 2件を記録: (1) 96³–128³・複数 datum 族での
 λ₂ の conditional pressure-shielding 不等式(sharp な dealiased 圧力検証付き)、(2) 大きな box 内の
 孤立した強い構造で L¹-radius の free far-strain bound を regime 内に置く試験。E2b(96³)は §7 に追記済み: tail 1.3e-4 で依然 unresolved だが全比が 64³→96³ で ≈10 % 以内に安定(C1 0.08、C4 < 0、core は ≥10 viscous 長で fat)。
+
+**第28セッション(ユーザー commission): GPT 側の独立 probe(局所 Betchov 比 β_B)の post-hoc
+adversarial cross-check — 判定: MIXED、昇格なし**
+([`docs/gates/M1_BETCHOV_XCHECK_2026-09-04.md`](docs/gates/M1_BETCHOV_XCHECK_2026-09-04.md);
+`experiments/m1_events/betchov_xcheck.py`・`betchov_post.py`・`results_xcheck/`; 既存の prereg・
+resolution rule・DIAGNOSTIC-ONLY 判定は不変)。**解析的同定 [D]**: traceless な A = ∇u に対し
+`q + 4det S = (4/3)tr A³ = 4det(∇u)` なので `1 − β_B(Ω) = 4∫_Ω det(∇u)/∫_Ω q` — 「Betchov flux
+fraction」は領域の第3不変量(古典的 R)であり、core 上では `ω ∥ e_k` に対し
+`β_loc ≈ −4∏_{i≠k}λ_i/|ω|²`(`ω ∥ e₃` で小/負、`ω ∥ e₂` で O(1))。**数値**(prereg と同一
+snapshot、determinism 厳密一致; `β(𝕋³) = 1`、代数残差 1e-15; GPT 実装と E0/E3/E4 で3桁一致):
+E0(resolved)の nested profile `β(top θ) = 0.04 → 0.30`(θ = 0.5 → 20 %)、`{|ω|>0.25Λ}` で 0.70、
+`{λ₂>0}∩{|ω|>0.25Λ}` で 1.12 — 「≳ 1 の外側領域」は λ₂>0 の選択(負 source cell を落とす)による;
+E0 の core β は event 中に 0.30 → 0.01 と単調減少; **全 run が β(top1) ≈ 0.04–0.06 の flux-fed onset
+から始まり**、E3/E4/E2 は ω が e₂ に整列するにつれ source-dominated な peak(0.7–0.9)へ、TG 族は
+flux-fed のまま — datum 依存かつ phase 依存; **β–C4 は非単調**(相関の符号が run 間で反転; E3 が
+反例: β_int ≈ 1 で C4 → −0.4); **軸**: C1 と C4 は run 間で共変(datum-intensity 軸1本)、β は第2の
+座標だが cos²θ₂ が既に担う alignment/第3不変量座標(全 run で相関)— 3軸ではなく2軸。最小
+statement (S) `4∫_{Ω_θ}det(∇u) ≥ 0`(β_B ≤ 1、production super-level set 上; 全 sample 点で成立、
+最大 0.97)を提案し、5項目チェック: scaling ✓、free companion ✗、wall 言い換えでない(ただし
+方向が正則性に逆: stretching の下界)、SYM ✓、per-solution truth 不明 ⟹ **昇格せず**。128³
+follow-up は λ₂ pressure-shielding の follow-up と合同でのみ価値あり; E2b(96³)は完了次第追記。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

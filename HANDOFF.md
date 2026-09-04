@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-04 JST (twenty-seventh session).
+Last updated: 2026-09-04 JST (twenty-eighth session).
 
 > **Where the project is (2026-08-23).** The formal side has finished preparation:
 > **Stage-9 readiness = `PASS`** (`docs/formal/STAGE9_READINESS_AUDIT_2026-08-23.md`), so
@@ -965,6 +965,38 @@ Last updated: 2026-09-04 JST (twenty-seventh session).
 > families; (2) isolated intense structure in a large box to test the free
 > far-strain bound at the `L¹` radius. Baseline stays the 8775-job gate.
 > **Resume anchor: "Next work" below + that record's §4/§5.**
+>
+> **2026-09-04 (twenty-eighth session): POST-HOC ADVERSARIAL CROSS-CHECK of
+> the GPT-side independent probe (localized Betchov ratio) — VERDICT: MIXED;
+> nothing promoted** (`docs/gates/M1_BETCHOV_XCHECK_2026-09-04.md`;
+> `experiments/m1_events/betchov_xcheck.py`, `betchov_post.py`,
+> `results_xcheck/`; the preregistered verdict and rules unchanged). **Analytic
+> identification [D]:** for traceless `A = ∇u`, `q + 4det S = (4/3)tr A³ =
+> 4det(∇u)`, so `1 − β_B(Ω) = 4∫_Ω det(∇u)/∫_Ω q` — the "Betchov-flux
+> fraction" is the regional third invariant (the classical `R`), and on cores
+> `β_loc ≈ −4∏_{i≠k}λ_i/|ω|²` for `ω ∥ e_k` (small/negative for extensional
+> alignment `ω ∥ e₃`, `O(1)` for `ω ∥ e₂`). **Numerics** (same snapshots as
+> the preregistered study, determinism exact; `β(𝕋³) = 1`, algebraic residual
+> 1e-15; three-digit agreement with the GPT implementation on E0/E3/E4):
+> E0 (resolved) nested profile `β(top θ) = 0.04 → 0.30` (θ = 0.5 → 20 %),
+> `0.70` on `{|ω|>0.25Λ}`, `1.12` on `{λ₂>0}∩{|ω|>0.25Λ}` — the "≳ 1 outer
+> region" is the `λ₂>0` selection (it drops exactly the negative-source cells);
+> E0 core β falls 0.30 → 0.01 through the event; **every run starts its
+> event with β(top1) ≈ 0.04–0.06 (flux-fed onset)**, then E3/E4/E2 migrate to
+> source-dominated peaks (0.7–0.9) as `ω` aligns with `e₂` while the TG
+> family stays flux-fed — datum- and phase-dependent; **β–C4 not monotone**
+> (correlation sign flips across runs; E3 = counterexample: β_int ≈ 1, C4 →
+> −0.4); **axes:** C1 and C4 co-vary across runs (one datum-intensity axis),
+> β is a second coordinate but it is the alignment / third-invariant
+> coordinate already carried by `cos²θ₂` (correlates with it in every run) —
+> two axes, not three. Minimal statement proposed and NOT promoted: (S)
+> `4∫_{Ω_θ}det(∇u) ≥ 0` (β_B ≤ 1) on production super-level sets — holds at
+> every sampled point (max 0.97) — dimensionless, SYM-pass, but no free
+> companion, adverse direction (lower bound on stretching), per-solution truth
+> unknown ⟹ not a head. 128³ follow-up worth preregistering only jointly with
+> the λ₂ pressure-shielding follow-up; E2b (96³) appended when done. Baseline
+> stays the 8775-job gate. **Resume anchor: "Next work" below + that record's
+> §5/§6.**
 
 This is the short-form continuation point for future GPT sessions. The repository is expected to be developed primarily through repeated GPT sessions; do not rely on chat history as durable state.
 
@@ -1001,7 +1033,43 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, or
    ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-04, twenty-seventh session)
+### Next work (written 2026-09-04, twenty-eighth session)
+
+Read first: the twenty-second to twenty-eighth session paragraphs of the
+top block; `docs/gates/M1_BETCHOV_XCHECK_2026-09-04.md` (§1 the
+`4det(∇u)` identification, §4 the four answers, §5 axes, §6 verdict + the
+un-promoted statement (S)); `docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md`
+§5 (the two follow-up preregistrations).
+
+- **State:** head program CLOSED (audit level); numerical lane open in the
+  event-term-budget form: preregistered study DIAGNOSTIC-ONLY; GPT-side
+  Betchov cross-check MIXED — structure real but it is the third-invariant /
+  alignment coordinate, not a new mechanism axis; nothing promoted.
+- **NOT to do (without a new instruction):** promotion of β_B, C1, C4 or (S)
+  to heads; proof search on any head; Hou wall closure; ν-extrapolation;
+  blow-up search; treating within-event correlations as mechanism
+  independence.
+- **Next options (each a user act; recommended order):**
+  1. Joint follow-up preregistration at 96³–128³ (tail-resolved, non-TG
+     datum families): (a) the conditional pressure-shielding inequality for
+     `λ₂` (C4 → 0 with intensity), (b) the phase structure of hot cores
+     (flux-fed onset `β(top1) ≈ 0.05` → source-dominated peak) with
+     `cos²θ₂` as the explanatory coordinate, (c) the sharp de-aliased
+     pressure check; E2b grid stability of β(θ) folded in.
+  2. Follow-up (2) of the twenty-seventh record (isolated intense structure
+     in a large box for the `L¹`-radius far-strain route).
+  3. Optional on-paper session on the sign of the regional third invariant
+     on production hot sets ((S) of the cross-check record) — a statement
+     about NS geometry, explicitly not a regularity route.
+  4. Standing: passive literature watch; Lean debts on hold; Hou closure
+     unstarted.
+- **Forbidden shortcuts (standing):** no asserting open Props as axioms; no
+  citing conditional chains without hypotheses; no [H]-tagged citation
+  consumption before first-hand fetch; local Elan-pinned gate only, direct
+  fast-forward push to `main`, no PR; torus numerics are evidence-grade
+  only; measured cancellations and signs are observations, never theorems.
+
+### (superseded) Next work (written 2026-09-04, twenty-seventh session)
 
 Read first: the twenty-second to twenty-seventh session paragraphs of the
 top block; `docs/gates/M1_EVENT_TERM_BUDGETS_2026-09-04.md` (§2 what each
