@@ -994,7 +994,9 @@ Last updated: 2026-09-04 JST (twenty-eighth session).
 > every sampled point (max 0.97) — dimensionless, SYM-pass, but no free
 > companion, adverse direction (lower bound on stretching), per-solution truth
 > unknown ⟹ not a head. 128³ follow-up worth preregistering only jointly with
-> the λ₂ pressure-shielding follow-up; E2b (96³) appended when done. Baseline
+> the λ₂ pressure-shielding follow-up; E2b (96³) filed in §8: β(θ) grid-stable
+> to ≈0.05 at every θ (tube profile flat 0.5–0.65 is a datum property), tail
+> still 1.3e-4 (diagnostic). Baseline
 > stays the 8775-job gate. **Resume anchor: "Next work" below + that record's
 > §5/§6.**
 

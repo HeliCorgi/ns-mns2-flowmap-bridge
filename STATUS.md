@@ -746,7 +746,7 @@ flux-fed のまま — datum 依存かつ phase 依存; **β–C4 は非単調**
 statement (S) `4∫_{Ω_θ}det(∇u) ≥ 0`(β_B ≤ 1、production super-level set 上; 全 sample 点で成立、
 最大 0.97)を提案し、5項目チェック: scaling ✓、free companion ✗、wall 言い換えでない(ただし
 方向が正則性に逆: stretching の下界)、SYM ✓、per-solution truth 不明 ⟹ **昇格せず**。128³
-follow-up は λ₂ pressure-shielding の follow-up と合同でのみ価値あり; E2b(96³)は完了次第追記。
+follow-up は λ₂ pressure-shielding の follow-up と合同でのみ価値あり; E2b(96³)は §8 に追記済み: β(θ) は全 θ で ≈0.05 以内に grid-stable(tube の平坦な 0.5–0.65 profile は datum の性質)、tail は 1.3e-4 で diagnostic のまま。
 
 ## 現在の active lane と次の作業(M-1 は保留中)
 

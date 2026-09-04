@@ -72,7 +72,13 @@ Data: the maximum of `β_B(Ω_θ)` over all event outputs, all θ, all five runs
 
 **On a 128³ follow-up:** worth preregistering **only together with** follow-up (1) of the twenty-seventh record (the conditional pressure-shielding of `λ₂`) and the phase question (flux-fed onset → source-dominated peak in non-TG data), on a tail-resolved tube/high-Re event; as a stand-alone grid-stability test of `β_B(θ)` it is not decision-relevant, because (S) cannot be promoted regardless of the outcome.
 
-## §8 — Appendix: E2b (96³) — `[appended when the run completes]`
+## §8 — Appendix: E2b (antiparallel tubes, 96³) — question 4 answered
+
+E2b completed (1584 s under contention). Resolution: max tail `1.3e-4` — still above the rule (as in the preregistered study; a resolved tube event needs `≥ 128³`), so E2b stays **diagnostic-only**. Validation: determinism against the preregistered E2b snapshots exact (0.0); algebraic identity `≤ 8e-14`; the `\mathrm{div}J_B` aliasing residual falls from `0.74` (64³) to `0.22` (96³) while β is computed from `q` and `\det S` only (resolved-scale quantities).
+
+**Grid stability of the profile (event medians, 64³ → 96³):** `θ = 0.5 %`: 0.550 → 0.620; `1 %`: 0.520 → 0.579; `2 %`: 0.511 → 0.539; `5 %`: 0.524 → 0.525; `10 %`: 0.567 → 0.588; `20 %`: 0.618 → 0.641; intense mask: 0.551 → 0.553; `\{|ω|>0.25Λ\}`: 0.653 → 0.733; `Q`-shares within 3 %; C1 0.081 → 0.077; C4 −0.042 → −0.055. **The time series are superposable output by output** (β(top1): `0.50 0.55 0.61 0.64 0.65 | 0.19 0.22 0.26 0.31 0.37 0.42 0.47 0.53 0.61 0.66 0.68 …` at 64³ versus `0.52 0.58 0.64 0.67 0.70 | 0.18 0.22 0.26 0.32 0.37 0.43 0.49 0.55 0.63 0.69 0.73 …` at 96³; β(intense) and C4 likewise). **Answer to question 4: `β_B(θ)` is grid-stable to `≈ 0.05` (`≈ 10 %`) at every θ and on both masks for the tube run, with the largest drift at the smallest set (`0.5 %`, a few hundred cells) and on the unrestricted `|ω|` mask.** The flat "mixed" tube profile (`0.5–0.65` at all θ, in contrast with the steep TG profile) is therefore a property of the datum, not of the grid.
+
+**On the 128³ follow-up (part of question 4):** the ratio itself does not need 128³ to be measured reliably; what 128³ would add is a *tail-resolved* tube event, which is required by the standing rule for anything to enter a verdict. Recommendation unchanged from §6: preregister 128³ **jointly** with the `λ₂` pressure-shielding inequality and the hot-core phase structure (flux-fed onset → source-dominated peak, `cos²θ₂` as the explanatory coordinate); as a stand-alone grid-stability test of `β_B(θ)` it is not decision-relevant.
 
 ## §7 — Claim boundary
 
