@@ -758,5 +758,1715 @@
   "label_recurrence": 1,
   "A_N_crossings": [],
   "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E4",
+  "c": 8.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E4",
+  "c": 8.0,
+  "sigma": 0.25,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E4",
+  "c": 16.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E4",
+  "c": 16.0,
+  "sigma": 0.25,
+  "n_masked_in": 10,
+  "n_growth": 10,
+  "n_total": 61,
+  "R_over_dx": [
+   7.840089102267523,
+   6.547164849493672,
+   9.162391228427046
+  ],
+  "ell_over_dx": [
+   1.9600222755668808,
+   1.636791212373418,
+   2.2905978071067614
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.023561609277568094,
+  "axes_in_event": {
+   "A_N": [
+    0.331031918444597,
+    0.14548732562906785,
+    0.777666085084558
+   ],
+   "A_F": [
+    6.911994649519429,
+    3.141939628908609,
+    17.221001508233996
+   ],
+   "A_C": [
+    -1.1202677090760993,
+    -2.0215578721958947,
+    -0.39163871890822727
+   ],
+   "A_L": [
+    -1.359135546358833,
+    -2.8353844275588025,
+    -0.5108758813432946
+   ],
+   "A_Fe": [
+    0.19784152330391241,
+    0.11209445892414904,
+    0.24159629334037622
+   ],
+   "g": [
+    3.4728775717117335,
+    0.3997830105560357,
+    12.727122352756638
+   ],
+   "M": [
+    41.436121091436135,
+    20.732794336532603,
+    58.085339976036586
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -0.3032328840359484,
+    -2.161075187933211,
+    -0.02045043362958996
+   ],
+   "s_F": [
+    2.0877573798315003,
+    1.2463562162489783,
+    7.680348813978832
+   ],
+   "s_C": [
+    -0.3392008104597268,
+    -3.231588095514051,
+    -0.03092077179389763
+   ],
+   "s_L": [
+    -0.4276007504627879,
+    -1.2876855305315706,
+    -0.1949850108254908
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 10,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E4",
+  "c": 32.0,
+  "sigma": 0.125,
+  "n_masked_in": 7,
+  "n_growth": 6,
+  "n_total": 61,
+  "R_over_dx": [
+   15.0980190452375,
+   13.094329698987345,
+   15.89503498511789
+  ],
+  "ell_over_dx": [
+   1.8872523806546875,
+   1.636791212373418,
+   1.9868793731397363
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.7235409468674726,
+  "axes_in_event": {
+   "A_N": [
+    0.4529664716679156,
+    0.3565649724666641,
+    0.5788630580049811
+   ],
+   "A_F": [
+    3.748907174331064,
+    2.6531092275489674,
+    6.69581256346648
+   ],
+   "A_C": [
+    -1.2432484756596338,
+    -1.4682252121414703,
+    -1.1609925981204667
+   ],
+   "A_L": [
+    -0.25678640338680664,
+    -0.4974446999325369,
+    -0.14186839163061532
+   ],
+   "A_Fe": [
+    0.13956717929028895,
+    0.1319263427521847,
+    0.15031312351858175
+   ],
+   "g": [
+    0.5830298363453397,
+    -0.0025681560767637354,
+    3.58011063168247
+   ],
+   "M": [
+    109.86963909876708,
+    82.17541571737438,
+    142.83355908040414
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -1.0444552390510424,
+    -4.519724227494514,
+    -0.24744451985655447
+   ],
+   "s_F": [
+    4.055297977281842,
+    1.7053963973074944,
+    12.372383379243267
+   ],
+   "s_C": [
+    -1.6387390761339231,
+    -6.149596417305162,
+    -0.3340997105266414
+   ],
+   "s_L": [
+    -0.2886422790583715,
+    -0.7030627344435919,
+    -0.12385216692429857
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 6,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E4",
+  "c": 32.0,
+  "sigma": 0.25,
+  "n_masked_in": 7,
+  "n_growth": 2,
+  "n_total": 61,
+  "R_over_dx": [
+   15.0980190452375,
+   13.094329698987345,
+   15.89503498511789
+  ],
+  "ell_over_dx": [
+   3.774504761309375,
+   3.273582424746836,
+   3.9737587462794726
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.03879321504213649,
+  "axes_in_event": {
+   "A_N": [
+    0.45535148006283327,
+    0.4052751005851573,
+    0.5103251696016488
+   ],
+   "A_F": [
+    3.5777759527595756,
+    3.0650976480206333,
+    6.326038374592058
+   ],
+   "A_C": [
+    -3.1932719761122605,
+    -3.8890893815254763,
+    -2.9691115834099717
+   ],
+   "A_L": [
+    -0.3459573087448122,
+    -0.5623268490273226,
+    -0.12421102835648251
+   ],
+   "A_Fe": [
+    0.1120400535848953,
+    0.10467613286513901,
+    0.14399848063612497
+   ],
+   "g": [
+    -1.5440453792252025,
+    -2.728166433259018,
+    0.9301304669401224
+   ],
+   "M": [
+    109.86963909876708,
+    82.17541571737438,
+    142.83355908040414
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -1.2073634700984184,
+    -1.510901660038473,
+    -0.9038252801583636
+   ],
+   "s_F": [
+    7.320233845217018,
+    5.780083560310299,
+    8.860384130123737
+   ],
+   "s_C": [
+    -4.591249098513167,
+    -5.7493540418657565,
+    -3.433144155160578
+   ],
+   "s_L": [
+    -0.521621276605432,
+    -0.6001284282195068,
+    -0.44311412499135705
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 2,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E1",
+  "c": 8.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 81,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E1",
+  "c": 8.0,
+  "sigma": 0.25,
+  "n_masked_in": 18,
+  "n_growth": 9,
+  "n_total": 81,
+  "R_over_dx": [
+   6.587934182017408,
+   6.065285676469032,
+   7.209136604974986
+  ],
+  "ell_over_dx": [
+   1.646983545504352,
+   1.516321419117258,
+   1.8022841512437464
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.0021376152335251916,
+  "axes_in_event": {
+   "A_N": [
+    0.012208375531814501,
+    0.001765167948953842,
+    0.030340359224088145
+   ],
+   "A_F": [
+    3.3227717184638266,
+    0.625143192279704,
+    4.408302007187014
+   ],
+   "A_C": [
+    -0.5118175306137199,
+    -0.5901207748435371,
+    -0.32590988989972125
+   ],
+   "A_L": [
+    -0.35242330747200973,
+    -2.4455791108877234,
+    0.023429497891408208
+   ],
+   "A_Fe": [
+    0.10938899294573558,
+    0.006844454713847705,
+    0.2467100010583589
+   ],
+   "g": [
+    -2.4781021598890987,
+    -18.832020069501937,
+    2.807528928158338
+   ],
+   "M": [
+    1.0984330163285283,
+    0.8412010070057651,
+    1.4845999240882422
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -0.44408572414036906,
+    -0.5787031287246436,
+    -0.38897694825462464
+   ],
+   "s_F": [
+    1.6867604793097846,
+    1.5631709564364042,
+    1.9646451701248824
+   ],
+   "s_C": [
+    -0.2306169999855802,
+    -0.3085880179976694,
+    -0.17021543100054523
+   ],
+   "s_L": [
+    -0.02597653379941674,
+    -0.07735402340256936,
+    0.008345238282825929
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 9,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E1",
+  "c": 16.0,
+  "sigma": 0.125,
+  "n_masked_in": 18,
+  "n_growth": 17,
+  "n_total": 81,
+  "R_over_dx": [
+   13.175868364034816,
+   12.130571352938064,
+   14.418273209949971
+  ],
+  "ell_over_dx": [
+   1.646983545504352,
+   1.516321419117258,
+   1.8022841512437464
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.05094590986151074,
+  "axes_in_event": {
+   "A_N": [
+    0.16486579720653566,
+    0.06559407586348318,
+    0.22739766848660142
+   ],
+   "A_F": [
+    3.247410696378815,
+    2.3395328433260256,
+    3.6164665797982103
+   ],
+   "A_C": [
+    -0.5171402806706026,
+    -0.5708905957158822,
+    -0.1525901447249455
+   ],
+   "A_L": [
+    -0.03090942856021365,
+    -0.07590051147876553,
+    0.024354144917903053
+   ],
+   "A_Fe": [
+    0.11641379948535185,
+    0.056119218885527525,
+    0.1592565737585739
+   ],
+   "g": [
+    1.1606392832616201,
+    -0.13783916398795662,
+    1.3412728335069735
+   ],
+   "M": [
+    6.390926638448526,
+    4.3629977335589425,
+    7.229030438018722
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -0.8676881007525497,
+    -21.19791491109254,
+    -0.7764349715551258
+   ],
+   "s_F": [
+    2.3772724778029373,
+    2.2292884162044917,
+    26.46307018218396
+   ],
+   "s_C": [
+    -0.43343419850656123,
+    -3.25898627886272,
+    -0.3925105750710305
+   ],
+   "s_L": [
+    -0.025627464341178453,
+    -1.0061689922286963,
+    0.022737909432689222
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 17,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E1",
+  "c": 16.0,
+  "sigma": 0.25,
+  "n_masked_in": 39,
+  "n_growth": 24,
+  "n_total": 81,
+  "R_over_dx": [
+   11.960997671425078,
+   8.46418066815169,
+   14.418273209949971
+  ],
+  "ell_over_dx": [
+   2.9902494178562695,
+   2.1160451670379223,
+   3.604568302487493
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": 0.056548520878813714,
+  "axes_in_event": {
+   "A_N": [
+    0.1314954111296956,
+    0.025557261262391284,
+    0.1925569852443272
+   ],
+   "A_F": [
+    2.7468043898182395,
+    1.1211977186227122,
+    3.1563729004921104
+   ],
+   "A_C": [
+    -1.130796541880143,
+    -1.527158272341046,
+    -0.2500118660842172
+   ],
+   "A_L": [
+    -0.04702249471766647,
+    -0.3298451830806432,
+    0.02778112091994165
+   ],
+   "A_Fe": [
+    0.1419233808303753,
+    0.027619044091343393,
+    0.21299928021613837
+   ],
+   "g": [
+    0.23005891201037632,
+    -0.9087610085410986,
+    0.463977635943887
+   ],
+   "M": [
+    4.609787188673884,
+    1.9137829132156945,
+    7.229030438018722
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    -2.846809213041765,
+    -19.49105138854248,
+    -2.1361795494207576
+   ],
+   "s_F": [
+    7.695088349107815,
+    6.203784071933718,
+    48.54927769212467
+   ],
+   "s_C": [
+    -3.2741940468160253,
+    -28.4827730179956,
+    -2.801939039335132
+   ],
+   "s_L": [
+    -0.3207741007233609,
+    -1.8673668103672394,
+    0.4245467144134161
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 24,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": 1.0
+ },
+ {
+  "run": "E1",
+  "c": 32.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 81,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E1",
+  "c": 32.0,
+  "sigma": 0.25,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 81,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 8.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 8.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 8.0,
+  "sigma": 0.25,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 16.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 16.0,
+  "sigma": 0.25,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 32.0,
+  "sigma": 0.125,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
+ },
+ {
+  "run": "E2",
+  "c": 32.0,
+  "sigma": 0.25,
+  "n_masked_in": 0,
+  "n_growth": 0,
+  "n_total": 61,
+  "R_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "ell_over_dx": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "betchov_resid_max": NaN,
+  "budget_resid_max": NaN,
+  "axes_in_event": {
+   "A_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_L": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "A_Fe": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "g": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "M": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "JB_over_nuLap": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "shares_at_growth": {
+   "s_N": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_F": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_C": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "s_L": [
+    NaN,
+    NaN,
+    NaN
+   ]
+  },
+  "dominant_counts": {
+   "FAR": 0,
+   "COMM": 0,
+   "LOC": 0,
+   "NONE": 0
+  },
+  "label_transitions": [],
+  "label_persistence": 6.0,
+  "label_recurrence": 1,
+  "A_N_crossings": [],
+  "frac_absorbed_in_event": NaN
  }
 ]

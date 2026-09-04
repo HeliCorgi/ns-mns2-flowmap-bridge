@@ -87,7 +87,20 @@ Audit of (S′) on the commissioned axes: *NS scaling* — a sign statement of a
 - GPT-side items adjudicated: the direct `J_B` estimate — correct [D], shrinking-core judgment correct [D], `β_B` stays parked; the literature lead — [V] at statement level, accurate but incomplete in the audit's summary (kinematic universality; far/commutator not absorbed; no closure claimed by the author).
 - **Consequences (user acts):** no proof search; the numerical lane's remaining preregistrable follow-ups are unchanged (twenty-seventh/eighth records) plus, optionally, a high-resolution test of (S′) and of the far-field efficiency `A_{Fe}` on a tail-resolved tube event; the Hou closure stays unstarted; the GPT-side input folders are committed verbatim as inputs (not authoritative).
 
-## §9 — Appendix: E4 / E1 / E2 (Yu structure) and E2b (subfilter) — `[appended when the runs complete]`
+## §9 — Appendix: E4 / E1 / E2 (Yu structure); E2b (subfilter) pending
+
+Yu-structure runs completed for E4 (911 s), E2 (978 s), E1; the harness masks per snapshot as in §5 (all three are **diagnostic** under the standing per-run rule; E2 has no masked output at all — its tail exceeds `10^{-5}` from the start — so the tube run contributes nothing here).
+
+| run, rung (`R/dx`, `ρR/dx`, `ℓ/dx`) | masked outputs (growth) | `A_N` | `A_F` | `A_C` | `A_L` | `A_Fe` | `s_N, s_F, s_C, s_L` at `g>0` | dominant class |
+|---|---|---|---|---|---|---|---|---|
+| E4, `c=16, σ=¼` (7.8, 2.0, 2.0) | 10 (10) | 0.33 [0.15, 0.78] | 6.9 [3.1, 17.2] | **−1.12** [−2.0, −0.4] | −1.36 | 0.20 | −0.3, **+2.1**, −0.3, −0.4 | **FAR at all 10** |
+| E4, `c=32, σ=⅛` (15.1, 3.8, 1.9) | 7 (6) | 0.45 [0.36, 0.58] | 3.7 [2.7, 6.7] | **−1.24** [−1.5, −1.2] | −0.26 | 0.14 | −1.0, **+4.1**, −1.6, −0.3 | **FAR at all 6** |
+| E1, `c=8, σ=¼` (6.6, 1.7, 1.7) | 18 (9) | 0.012 [0.00, 0.03] | 3.3 [0.6, 4.4] | **−0.51** [−0.59, −0.33] | −0.35 | 0.11 | −0.4, **+1.7**, −0.2, −0.03 | **FAR at all 9** |
+| E1, `c=16, σ=⅛` (13.2, 3.3, 1.7) | 18 (17) | 0.17 [0.07, 0.23] | 3.2 [2.3, 3.6] | **−0.52** [−0.57, −0.15] | −0.03 | 0.12 | −0.9, **+2.4**, −0.4, −0.03 | **FAR at all 17** |
+| E1, `c=16, σ=¼` (12.0, 3.0, 3.0) | 39 (24) | 0.13 [0.03, 0.19] | 2.7 [1.1, 3.2] | **−1.13** [−1.53, −0.25] | −0.05 | 0.14 | −2.9, **+7.7**, −3.3, −0.3 | **FAR at all 24** |
+| E2 (tubes) | 0 | — | — | — | — | — | — | (unresolved at every output) |
+
+**Datum uniformity (four data, one resolved):** at every masked growth output of E0, E1, E3, E4, on every usable rung (`c ∈ \{8,16,32\}`, `σ ∈ \{⅛,¼\}`), the near field is absorbed (`A_N < 1`, with `ε_{eff}` from `0.99` in the TG family at the finest usable rung down to `0.5` in E3/E4 and at the coarser rungs), the far field carries the surplus (`s_F` from `+1.7` to `+7.7`; dominant class FAR at 100 % of growth outputs; no transitions; persistence equal to the event length in every run), and the commutator forcing is a sink (`A_C < 0` at every masked output of every run; medians `−0.45` to `−1.24`), with the localisation residual `≈ 0` in the TG family and a sink in E3/E4. **The structure of §5 is datum-uniform in the accessible regime; the resolved evidence remains E0 alone.** The verdict of §7 is unchanged (the far-field class has no scale-uniform free bound; its control is the wall). E2b (96³, subfilter split) is still running and will only affect the contrast decomposition (A); it is not needed for any statement above.
 
 ## §8 — Claim boundary
 
