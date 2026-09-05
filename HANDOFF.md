@@ -1,88 +1,79 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-05 JST (thirty-first session).
+Last updated: 2026-09-05 JST (thirty-second session).
 
 > **Historical archive.**  The full session-by-session handoff through the
 > twenty-ninth session is preserved verbatim at main commit
-> `c69315e32eead48c1fd681bf86c8bab1af815e64` (the PR #83 merge).  This file is
-> intentionally compacted back to its stated role as the short-form continuation point;
-> old research rulings are not rescinded by the compaction.  Current source/theorem
-> statements and the dated gate records remain authoritative.
+> `c69315e32eead48c1fd681bf86c8bab1af815e64` (the PR #83 merge).  This live file
+> is intentionally the short-form continuation point; old research rulings are not
+> rescinded by compaction.  Current source/theorem statements and dated gate records
+> remain authoritative.
 >
 > **2026-09-05 (thirtieth session): ASTRA S15 TRAVELING-MAX ATTEMPT EXECUTED.**
-> The user commissioned a direct attempt on the current `R^3`, `f = 0`,
-> axisymmetric-with-swirl breakdown track, after a short re-audit of Shahmurov
-> arXiv:2606.07869v1.  The D-3 verdict stayed unchanged: correctness NOT
-> ESTABLISHED because the recorded G1a/G1b variational-class gap and G2
-> exhaustion/routing gap remain load-bearing; the paper is consumed by nothing.
-> Record: `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`.
-> From the audited NS equations the record derives, under an explicit smooth unique
-> nondegenerate off-axis positive maximizer branch,
+> Record: `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`.  For the actual
+> unforced axisymmetric-with-swirl NS system, under an explicit smooth unique
+> nondegenerate off-axis positive maximizer branch, the record derives
 > `U = u^theta/r`, `S = psi1_z = -u^r/r`, `A = U(x_*)`,
-> `q = S_*/A`, `d = -nu(L5 U)_*/A^2`, and the exact amplitude identity
+> `q = S_*/A`, `d = -nu(L5 U)_*/A^2`, and
 > **`A' = (2q-d)A^2`**.  The proposed cone is
-> `q >= 1/4`, `0 <= d <= 1/8`; inside it the elementary coefficient bound is
-> **`A' >= (3/8)A^2`**.  The exact normalized boundary equations isolate two
-> analytic obligations: **Q** at `q=1/4`,
-> `Pi + e + d/4 + m >= 17/16`, and **D** at `d=1/8`,
-> `h - 2e - f <= 1/32` (the commutator sign was rechecked and corrected before
-> commit).  No invariant-region theorem, cone entry, maximizer persistence, NS
-> breakdown, or Clay alternative is claimed.
+> `q >= 1/4`, `0 <= d <= 1/8`; inside it
+> **`A' >= (3/8)A^2`**.  The two analytic boundary obligations are
+> **Q**: `Pi + e + d/4 + m >= 17/16` at `q=1/4`, and
+> **D**: `h - 2e - f <= 1/32` at `d=1/8` (here `f` is the normalized
+> fourth-order viscous term, not physical forcing).  PR #83 added the research
+> record and only three real-algebra Lean consequences; no PDE barrier was encoded.
+> PR #83 merged as `c69315e32eead48c1fd681bf86c8bab1af815e64`.
 >
-> PR **#83** (`Research: traveling-max invariant cone for Astra S15`) added the
-> research record plus `Formal/R3TravelingMaxInvariantCone.lean` and
-> `Formal/R3TravelingMaxInvariantConeAudit.lean`.  Lean scope is deliberately only
-> three real-algebra consequences: `travelingMax_growthCoefficient`,
-> `travelingMax_qBoundary_inward`, `travelingMax_dBoundary_inward`; no PDE identity
-> is asserted in Lean.  GitHub-hosted Lean run **#259** (`33930424998`, job
-> `101207713329`) on the PR merge ref completed successfully under
-> `leanprover/lean4:v4.32.1`: proof-hole/local-axiom scan PASS; full `lake build`
-> **8777 jobs PASS**; the three new axiom prints contain only `propext`,
-> `Classical.choice`, `Quot.sound`.  PR #83 was merged as
-> `c69315e32eead48c1fd681bf86c8bab1af815e64`.
->
-> **2026-09-05 (thirty-first session): THE Q YES/NO DECISION IS EXECUTED —
+> **2026-09-05 (thirty-first session): Q DECISION EXECUTED —
 > `NO (UNIVERSAL-Q FALSE)`.**
-> Record: `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md` on branch
-> `research/astra-s15-q-decision`.  The exact decision object is **Q-UNIV**:
-> whether every admissible smooth compactly supported axisymmetric-with-swirl datum
-> having at `t=0` a unique positive nondegenerate off-axis `U` maximum with
-> `q=1/4`, `0<=d<1/8` must satisfy Q.  **Answer: NO.**
-> The counterfamily is analytic, not numerical.  Fix a compactly supported local
-> core whose complete maximum jet gives `q=1/4`, `e=m=0` and
-> `0<d=nu*kappa/A<1/8`.  Add a disjoint thin **negative pure-swirl torus** at
-> radius `R>r_*`.  It is `C_c^infty`, axisymmetric and divergence-free; because its
-> normalized swirl is nonpositive it cannot replace the positive `U` maximum, and
-> because it vanishes near the maximum it changes none of
-> `A,q,d,e,m,H,nabla S,L5 S,nabla L5 U` there.  Its only relevant effect is the
-> nonlocal pressure.
+> Record: `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`, merged by PR #84 as
+> `0fa9cadf998fcb5935812cfb56b4a86ea49c81cd`.  Q-UNIV asks whether all admissible
+> compactly supported axisymmetric data at a moving positive maximum with
+> `q=1/4`, `0<=d<1/8` must satisfy Q.  **No.**  A disjoint smooth negative
+> pure-swirl torus preserves the complete local maximum jet but changes nonlocal
+> pressure.  The exact Newtonian ring expansion gives a strictly negative radial
+> pressure derivative for an exterior tangential ring; scaling the torus amplitude
+> sends `Pi -> -infinity` while the local Q data stay fixed.  Thus Q can point
+> outward for the actual local NS solution.  Q-UNIV is KILLED.  Q-SPEC, a
+> datum-specific global pressure/relay coherence statement, remained logically open.
 >
-> The load-bearing sign is exact.  For the tangential line stress on a ring,
-> with `G(x)=1/(4*pi*|x|)` and
-> `J(r,R)=int_0^{2pi} G((r,0,0)-R e_r(theta)) dtheta`, integration by parts in
-> `theta` gives `P_R = partial_R J`.  For `0<r<R`,
-> `J=(1/(2R))*sum_{n>=0} c_n^2 (r/R)^(2n)`,
-> `c_n=binom(2n,n)/4^n>0`, hence
-> **`partial_r partial_R J = -sum_{n>=1} n(2n+1)c_n^2
-> r^(2n-1)R^(-2n-2) < 0`**.  A smooth thin-torus approximation preserves this
-> strict sign.  Scaling its amplitude by `B` gives
-> `partial_r p_remote(x_*) = B^2 C_epsilon`, `C_epsilon<0`.
-> Disjoint supports make the quadratic stresses add exactly, so
-> `Pi_B = Pi_core + B^2 C_epsilon/(r_* A^2) -> -infinity` while all local Q
-> data stay fixed.  Therefore for large `B`, Q fails and the exact moving-max
-> identity gives **`q'(0)<0` for the actual local Navier–Stokes solution**.
+> **2026-09-05 (thirty-second session): D DECISION EXECUTED —
+> `NO (UNIVERSAL-D FALSE)`.**
+> Record: `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md` on branch
+> `research/astra-s15-d-decision`.  The exact decision object **D-UNIV** asks whether
+> every admissible smooth compactly supported axisymmetric-with-swirl datum whose
+> actual local NS solution has at `t=0` a unique positive nondegenerate off-axis
+> `U=u^theta/r` maximum with `q=1/4` and `d=1/8` must satisfy
+> `h - 2e - f4 <= 1/32`, where
+> `f4 = nu^2 (L5^2 U)_*/A^3` is the previous record's symbol `f`.
+> **Answer: NO.**
 >
-> **Ruling:** **Q-UNIV is KILLED / NO.**  Consequently no proof using only the
-> local maximum jet (or any hypothesis preserved by the remote-torus perturbation)
-> can establish Q class-wide, and pressure does not automatically rescue the local
-> two-variable depletion skeleton.  This does **not** kill the conditional algebra
-> `Q + D + cone entry => A' >= (3/8)A^2`, does not decide D, and does not rule out
-> a specially selected datum whose *global dynamical coherence* enforces Q along its
-> trajectory.  Rename that residual existential obligation **Q-SPEC**.  Any Q-SPEC
-> proof must explicitly consume a global hypothesis violated by the remote-torus
-> counterfamily.  Merely sharpening Hessian/curvature/maximizer-relay algebra is a
-> forbidden repeat.  No Lean source changed in the Q decision; `FORMAL_SCOPE.md`
-> therefore did not move.
+> Fix a compactly supported off-axis core with the exact corner jet.  Independently
+> of the meridional field, add the pure-swirl perturbation
+> **`Phi_M = -M (r-r0)^4 chi`**, where `chi=1` near the positive maximum and is
+> nonnegative and compactly supported away from the axis.  `Phi_M <= 0`, so the
+> unique positive global maximum remains fixed.  Its complete jet through order
+> three vanishes at the maximum, hence `A,H,q,d,e,nabla S,nabla L5 U,V_*` and `h`
+> are unchanged.  The commutator identity at a critical point is
+> `[L5,b·nabla]U_* = 2 sum_i (partial_i b)_* · (partial_i nabla U)_*`, so it uses
+> only the Hessian of `U`.  But
+> **`(L5^2 Phi_M)_* = -24 M`**, hence
+> **`f4_M = f4_0 - 24 nu^2 M/A^3`** and
+> `h_M - 2e_M - f4_M -> +infinity`.  For large `M`, D fails.  At the exact corner
+> `q=1/4,d=1/8`, the exact identity
+> **`d' = A[-1/32 + h - 2e - f4]`** then gives **`d'(0)>0` for the actual local
+> Navier–Stokes solution**.  This is an analytic local fourth-jet counterfamily, not
+> a numerical observation.
+>
+> **Ruling after sessions 31–32:** both universal boundary mechanisms of the present
+> two-variable `(q,d)` cone are independently KILLED: Q-UNIV by nonlocal pressure
+> freedom and D-UNIV by local fourth-jet freedom.  The exact moving-max identities
+> and conditional scalar algebra remain correct, but this particular universal-cone
+> realization of Astra S15 is now **PARKED BY DEFAULT**.  A future reopening must
+> present genuinely new propagated structure that excludes *both* counterfamilies;
+> simply adding more local jet variables or restating Q-SPEC/D-SPEC is not enough.
+> No Lean source changed in sessions 31–32, so `FORMAL_SCOPE.md` and `STATUS.md`
+> intentionally do not move.
 
 This is the short-form continuation point for future GPT sessions.  The repository is
 expected to be developed primarily through repeated GPT sessions; do not rely on chat
@@ -100,8 +91,9 @@ Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 6. `docs/LEAN_CI_OPERATIONS.md`;
 7. `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`;
 8. `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`;
-9. current GitHub `main`, relevant `Formal/` files, open PRs, and latest Lean
-   verification evidence.
+9. `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md`;
+10. current GitHub `main`, relevant `Formal/` files, open PRs, and latest Lean
+    verification evidence.
 
 Current code and theorem statements override stale prose.  For pre-Astra history, consult
 this file at `c69315e32eead48c1fd681bf86c8bab1af815e64` and the dated gate records;
@@ -125,69 +117,76 @@ session:
 4. never leave the next-work description only in a commit message, chat reply, PR
    comment, or ephemeral plan — this file is the durable continuation point.
 
-### Next work (written 2026-09-05, thirty-first session)
+### Next work (written 2026-09-05, thirty-second session)
 
-Read first: the thirtieth/thirty-first session blocks above;
+Read first: the session-30/31/32 blocks above;
 `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md` §§2–6;
-`docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md` §§0,2–7; `SPEC.md` §§2–6.
+`docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md` §§0,2–7;
+`docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md` §§0–5; `SPEC.md` §§2–6.
 
-- **Current target/state:** the Astra S15 realization is a **conditional existential
-  route with its universal Q mechanism killed**.  Q-UNIV = NO/KILLED by the remote
-  negative-swirl pressure-poisoning counterfamily.  **Q-SPEC remains OPEN**: one
-  specially chosen trajectory may still possess a global pressure/relay coherence that
-  rules out the counterfamily.  **D remains OPEN**.  The conditional cone algebra and
-  its three Lean real-algebra theorems remain valid.  There is no Clay claim.
-- **Latest Lean verification:** runner = GitHub-hosted Actions; workflow = `Lean 4
-  formalization`; run #259 / `33930424998`; job `101207713329`; checked PR #83
-  merge ref for head `33e6ceecb1a6afb615718619809f87e959f8641b` under
-  `leanprover/lean4:v4.32.1`; scope = source scan + full `Formal.+` / 8777 jobs;
-  result = PASS; new theorem axiom prints standard only.  Q-decision work is docs-only,
-  so it does not change the formal verification boundary.
-- **Completed infrastructure:** `ASTRA_S15_TRAVELING_MAX_2026-09-05.md` (exact
-  moving-max equations + conditional cone); `R3TravelingMaxInvariantCone.lean` and
-  its audit (three algebraic theorems); `ASTRA_S15_Q_DECISION_2026-09-05.md`
-  (Q-UNIV no-go via exact pressure-ring sign + smooth remote-torus counterfamily).
+- **Current target/state:** the current `(q,d)` traveling-max S15 cone is **PARKED BY
+  DEFAULT**.  Q-UNIV = NO/KILLED and D-UNIV = NO/KILLED by independent exact
+  counterfamilies.  The conditional algebra `Q + D + cone entry => A' >= (3/8)A^2`
+  remains true but has no universal PDE barrier behind it.  Q-SPEC and a possible
+  D-SPEC are logical existential residues only; neither is an active theorem.  There
+  is no Clay claim.
+- **Latest meaningful Lean verification:** no Lean source changed in the Q or D
+  decisions.  The latest hosted verification of the unchanged formal tree is GitHub
+  Actions workflow `Lean 4 formalization`, run **#260** (`33932277589`), job
+  `101213161122`, head `132b4e22ddc4b22eb640b49cf6c527d225c67fd7`, runner
+  GitHub-hosted Ubuntu 24.04, Lean **4.32.1**; proof-hole/local-axiom/opaque scan PASS;
+  full `lake build` **8777 jobs PASS**; the three traveling-max algebra theorem axiom
+  prints remain `[propext, Classical.choice, Quot.sound]`.  D-decision work is docs-only
+  and does not change this formal verification boundary.
+- **Completed decision infrastructure:**
+  `ASTRA_S15_TRAVELING_MAX_2026-09-05.md` (exact moving-max equations + conditional
+  cone); `R3TravelingMaxInvariantCone.lean` and audit (three scalar algebra facts);
+  `ASTRA_S15_Q_DECISION_2026-09-05.md` (remote-pressure Q no-go);
+  `ASTRA_S15_D_DECISION_2026-09-05.md` (quartic fourth-jet D no-go).
 - **Next analytic gate, recommended order (each is a new user act):**
-  1. **Q-SPEC global-coherence decision.**  Ask whether any *natural global condition
-     already compatible with the current `R^3`, `f=0` candidate track* forbids remote
-     pressure poisoning and is dynamically preserved up to the proposed first contacts.
-     Counterexample-first.  A surviving condition must be stated as an exact pressure
-     integral/sign inequality or another explicit global invariant and must identify
-     exactly which feature of the remote torus it excludes.  If no such condition is
-     found without importing a regularity wall, **PARK the Astra S15 realization**.
-  2. **D YES/NO decision**, independently: attack
-     `h - 2e - f <= 1/32` by a local/high-frequency or remote-perturbation
-     counterfamily before attempting any proof.  Do not assume Q-SPEC while deciding D.
-  3. Only if 1 and 2 survive: construct one exact admissible core with cone entry and
-     formulate a Dini/branch-switching replacement for the unique off-axis maximizer
-     hypothesis.
+  1. **Leave this S15 cone parked and return to a different theorem-shaped route.**
+     Preferred fresh route: a frequency/dissipation-scale transfer decision on the
+     existing `R^3` formal/analytic stack.  Start by defining one exact candidate
+     estimate that would imply a known continuation criterion; then attack that estimate
+     counterexample-first so that a disguised regularity assumption is not smuggled in.
+  2. Alternative fresh route: ancient-solution inheritance + Liouville rigidity.  State
+     the exact property claimed to survive blow-up rescaling before searching for a
+     Liouville theorem; do not assume original finite energy survives the rescaling.
+  3. Reopen traveling-max S15 only if a new hypothesis is supplied that is demonstrably
+     violated by both the remote negative-swirl pressure torus and the local quartic
+     fourth-jet perturbation, is propagated by actual NS evolution, and is weaker than a
+     known regularity criterion.  Such a reopening should be a new gate, not a silent
+     Q-SPEC/D-SPEC retry.
   4. Standing older lanes remain as in the archived twenty-ninth-session handoff:
      general head program parked/closed at audit level; numerical event-budget results
      diagnostic only; SEL-3/SEL-5/EB-1 Lean debts on hold; passive literature watch
      unchanged.
 - **Do NOT assume / forbidden repeats:**
-  - do not claim Q from local `U,S,H,L5U,L5S` data or from the favorable first relay
-    term; the counterfamily preserves those data while reversing Q;
-  - do not read `Q-UNIV KILLED` as `S15 existential route KILLED`;
-  - do not formalize the trivial scalar statement "very negative Pi violates Q" and
-    present it as a mechanization of the pressure no-go;
-  - do not claim the remote-torus family is a blow-up construction; it is a local-time
-    counterexample to a proposed boundary sign;
+  - do not claim Q from local maximum jets; remote pressure changes Q while preserving
+    them;
+  - do not claim D from zero-through-third jets or maximum geometry; the quartic
+    perturbation preserves them while sending the D left-hand side to `+infinity`;
+  - do not convert the quartic family into a blow-up claim: it proves an outward
+    derivative at one local-time cone boundary only;
+  - do not formalize trivial scalar inequalities and present them as mechanization of
+    either analytic no-go;
+  - do not reopen this `(q,d)` cone by simply adding `L5^2 U` as another state variable
+    unless a finite closure/invariance mechanism for the resulting derivative hierarchy
+    is proved;
   - do not un-park BH/Γ, T-DIR/T-VAR/T-CONE/T-DET, HR-* or numerical routes without
-    their recorded user-act/trigger rules;
-  - no numerical sign observation may replace the exact pressure-kernel sign already
-    proved in the Q decision record.
+    their recorded user-act/trigger rules.
 
 ## Repository / verification state
 
-- `main` at the start of the thirty-first session:
-  `c69315e32eead48c1fd681bf86c8bab1af815e64` (merged PR #83).
-- Current work branch: `research/astra-s15-q-decision`.
-- Q-decision record first commit on that branch:
-  `f72a13db8d59652b345d0b850d83f827ab4a3c5e`.
-- PR #83 is merged.  Do not reopen it; the Q decision is a separate focused change.
-- No Lean source is changed by the Q decision.  `FORMAL_SCOPE.md` is intentionally
-  unchanged.
+- `main` at the start of the thirty-second session:
+  `0fa9cadf998fcb5935812cfb56b4a86ea49c81cd` (merged PR #84).
+- Current work branch: `research/astra-s15-d-decision`.
+- D-decision record first commit on that branch:
+  `a7a4948a1c5a6cd26b4bc43bf6ae353c7f0d7c6a`.
+- PR #83 and PR #84 are merged.  Do not reopen them; the D decision is a separate
+  focused change.
+- No Lean source is changed by the D decision.  `FORMAL_SCOPE.md` and `STATUS.md` are
+  intentionally unchanged.
 - Automatic/full hosted CI policy remains governed by `docs/LEAN_CI_OPERATIONS.md`;
   do not use hosted Actions as an interactive compiler.
 
@@ -198,6 +197,7 @@ Current physical specialization remains `R^3`, preferably `f=0`, axisymmetric wi
 breakdown side, governed by `SPEC.md`.
 
 No current result proves Navier–Stokes blow-up or global regularity.  The newest theorem-level
-research result is negative knowledge: a proposed **universal Q boundary sign is false** for
-admissible initial data because nonlocal pressure can be altered independently of the fixed
-local maximum jet.  This is a route-refinement/no-go result, not a Clay result.
+research results are negative knowledge: the present traveling-max two-variable cone has no
+universal Q barrier because nonlocal pressure can be changed independently of the local maximum
+jet, and no universal D barrier because the fourth swirl jet can be changed independently of the
+zero-through-third local jet.  These are route-refinement/no-go results, not Clay results.
