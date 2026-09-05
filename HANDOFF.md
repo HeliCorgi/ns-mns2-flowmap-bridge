@@ -31,43 +31,41 @@ Last updated: 2026-09-06 JST (thirty-fifth session).
 >
 > **2026-09-05 (thirty-fourth session): FDT LOW-HIGH OPERATOR GATE ATTACKED.**
 > Record: `docs/gates/FDT_LH_DECISION_2026-09-05.md` on PR #87 branch
-> `research/fdt-lh-decision`. For
-> `C_j(a,b)=P[Delta_j,a·grad]b` and its one-window heat integral, a real
-> divergence-free Schwartz packet counterfamily gives a subcritical target high block
-> but arbitrarily large normalized LH contribution while both ordinary energy and the
-> one-window enstrophy budget tend to zero. Therefore **FDT-LH-OP = NO**. This does
-> not refute FDT-INJ because the bad datum changes with `j`.
+> `research/fdt-lh-decision`. For `C_j(a,b)=P[Delta_j,a·grad]b` and its one-window
+> heat integral, a real divergence-free Schwartz packet counterfamily gives a
+> subcritical target high block but arbitrarily large normalized LH contribution
+> while both ordinary energy and the one-window enstrophy budget tend to zero.
+> Therefore **FDT-LH-OP = NO**. This does not refute FDT-INJ because the bad datum
+> changes with `j`.
 >
 > **2026-09-06 (thirty-fifth session): FDT-LH-DYN AFFINE MODEL ATTACKED.**
 > Record: `docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md` on PR #87.
 >
-> Use the trace-free affine strain
-> `a(x)=(-gamma x1, gamma x2, 0)` and transverse shear
-> `w(t,x)=e3 f(t,x1)`. Because `(w·grad)a=(w·grad)w=0`, `Delta a=0`, and
+> Use the trace-free affine strain `a(x)=(-gamma x1, gamma x2, 0)` and transverse
+> shear `w(t,x)=e3 f(t,x1)`. Because `(w·grad)a=(w·grad)w=0`, `Delta a=0`, and
 > `(a·grad)a` is cancelled by `p=-(gamma^2/2)(x1^2+x2^2)`, the full field `u=a+w`
 > is an exact nonlinear unforced NS solution whenever
 > `partial_t f-gamma x1 partial_1 f=nu partial_1^2 f`.
 >
 > For `f(0,x1)=B cos(k0 x1)`, the exact solution is
 > `f(t,x1)=B D(t) cos(k(t)x1)`, `k(t)=k0 exp(gamma t)`,
-> `D(t)=exp[-nu k0^2(exp(2gamma t)-1)/(2gamma)]`.
-> If `m_j(t)=phi_j(k(t)e1)`, then exactly
+> `D(t)=exp[-nu k0^2(exp(2gamma t)-1)/(2gamma)]`. If
+> `m_j(t)=phi_j(k(t)e1)`, then exactly
 >
 > **`C_j(a,w(t))=-m_j'(t)w(t)`.**
 >
-> After conjugating by the low flow, the phase is fixed, diffusion is anisotropic, and
-> the Eulerian LP cutoff becomes a deformed multiplier `M_j(t)`. In this exact model
-> the signed dynamic commutator Duhamel term telescopes to
+> After conjugating by the low flow, the phase is fixed, diffusion is anisotropic,
+> and the Eulerian LP cutoff becomes a deformed multiplier `M_j(t)`. In this exact
+> model the signed dynamic commutator Duhamel term telescopes to
 >
 > **`K_j(t)=[m_j(t)-m_j(0)]g(t)`.**
 >
 > At one viscous window `tau_j=a_*/(nu lambda_j^2)`, take
 > `gamma=sigma nu lambda_j^2` and choose an initial frequency below the `j` shell that
 > is strained into a point `rho lambda_j` with `m_*=phi(rho e1)>0`. The final heat
-> factor is
-> `D(tau_j)=exp[-rho^2(1-exp(-2sigma a_*))/(2sigma)] -> 1` as `sigma->infinity`.
-> With `B=epsilon c_0 nu lambda_j/m_*`, `1/2<epsilon<1`, the final target block stays
-> subcritical while, for large `sigma`,
+> factor is `D(tau_j)=exp[-rho^2(1-exp(-2sigma a_*))/(2sigma)] -> 1` as
+> `sigma->infinity`. With `B=epsilon c_0 nu lambda_j/m_*`, `1/2<epsilon<1`, the
+> final target block stays subcritical while, for large `sigma`,
 >
 > **`lambda_j^-1 ||K_j(tau_j)||_infinity
 >      = epsilon c_0 nu D(tau_j) > (1/2)c_0 nu`.**
@@ -86,7 +84,6 @@ This is the durable continuation point for future GPT sessions. Do not rely on c
 ## Resume protocol
 
 Follow `docs/GPT_WORKFLOW.md`. Read, in order:
-
 1. `PROJECT_GOAL.md`;
 2. `SPEC.md`;
 3. `AGENTS.md`;
@@ -96,17 +93,14 @@ Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 7. `docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md`;
 8. `docs/gates/FDT_LH_DECISION_2026-09-05.md`;
 9. `docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md`;
-10. the three Astra S15 gate records if the parked route is relevant;
-11. current GitHub `main`, open PRs, and relevant formal files.
+10. current GitHub `main`, open PRs, and relevant formal files.
 
 ## Handoff update contract
 
-Every substantive session must, before ending:
-
-1. record what was executed and what was deliberately not claimed;
-2. rewrite **Next work** below with the exact next gate, read order, and forbidden shortcuts;
-3. update `STATUS.md` / `FORMAL_SCOPE.md` only if the formal frontier actually moved;
-4. keep the durable continuation here, not only in chat, PR comments, or commit messages.
+Every substantive session must, before ending: record what was executed and not claimed; rewrite
+**Next work** with exact next gate/read order/forbidden shortcuts; synchronize `STATUS.md` and
+`FORMAL_SCOPE.md` only if the formal frontier moved; and keep the durable continuation here rather
+than only in chat or PR comments.
 
 ### Next work (written 2026-09-06, thirty-fifth session)
 
@@ -115,8 +109,8 @@ Every substantive session must, before ending:
   no-go but not an admissible-data counterexample. S15 `(q,d)` also remains parked.
 - **Recommended next gate: `FDT-MAT` (material-frequency injection).** Define a
   low-flow-conjugated/material dyadic projector `Delta_j^mat(t)` following
-  `u_{<=j-2}` so principal low transport commutes by construction and the exact affine
-  model has zero material-shell transport defect. Derive the exact remaining terms
+  `u_{<=j-2}` so principal low transport commutes by construction and the exact
+  affine model has zero material-shell transport defect. Derive exact remaining terms
   from conjugated diffusion, Leray projection, deformation metric, HL, and HH before
   estimating anything.
 - **First FDT-MAT YES/NO question:** can the residual be defined so that (i) benign
@@ -124,10 +118,9 @@ Every substantive session must, before ending:
   would still imply a known continuation criterion, and (iii) no `int F`,
   `int ||grad u||_infinity`, Serrin norm, bounded H3, or equivalent continuation wall
   is inserted by hand?
-- **Alternative admissibility bridge:** `FDT-LH-LOC` may try to localize the affine
-  strain/shear to Schwartz data and prove a controlled one-window approximation. Do
-  not treat localization as automatic: pressure, nonlocality, and cutoff errors must
-  be quantified.
+- **Alternative admissibility bridge:** `FDT-LH-LOC` may localize affine strain/shear
+  to Schwartz data and prove a controlled one-window approximation. Pressure,
+  nonlocality, and cutoff errors must be quantified; localization is not automatic.
 - **Do not resume separate LH margin estimates.** The affine identity shows the
   unavoidable distortion coefficient is schematically
   `int_{t-tau_j}^t ||grad u_{<=j-2}||_infinity ds`; session 34 already showed ordinary
