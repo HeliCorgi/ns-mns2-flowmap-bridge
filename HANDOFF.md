@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-06 JST (thirty-ninth session).
+Last updated: 2026-09-06 JST (fortieth session).
 
 > **Historical archive.** The full session-by-session handoff through the twenty-ninth
 > session is preserved at main commit `c69315e32eead48c1fd681bf86c8bab1af815e64`
@@ -20,96 +20,90 @@ Last updated: 2026-09-06 JST (thirty-ninth session).
 > `docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md`,
 > `docs/gates/FDT_MAT_STRUCT_DECISION_2026-09-06.md`, and
 > `docs/gates/FDT_ROUTE_PARK_DECISION_2026-09-06.md`.
+> Parent `FDT-INJ` remains OPEN. `FDT-LH-OP = NO`, `FDT-LH-DYN-AFF = NO`,
+> `FDT-MAT-COMM = YES`, `FDT-MAT-BRIDGE-UNIF = NO`; the remaining bridge is the
+> critical low-flow deformation itself, so the FDT cross-track is **PARKED**.
 >
-> Parent `FDT-INJ` remains OPEN. Static energy closure failed; `FDT-LH-OP = NO`;
-> `FDT-LH-DYN-AFF = NO`; `FDT-MAT-COMM = YES`; `FDT-MAT-BRIDGE-UNIF = NO`.
-> The remaining material/Eulerian bridge is the critical low-flow deformation itself, so
-> `FDT-DEF-BUDGET-AS-INDEPENDENT-REDUCTION = FAIL` and the FDT cross-track is **PARKED**.
->
-> **2026-09-06 (thirty-eighth session): BREAKDOWN SIDE REOPENED — B2 GAMMA-MAX CURVATURE.**
+> **2026-09-06 (thirty-eighth session): B2 GAMMA-MAX CURVATURE.**
 > Record: `docs/gates/B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md` (merged by PR #89).
->
-> For the actual axisymmetric circulation equation
+> For the actual circulation equation
 >
 > `(partial_t + u^r partial_r + u^z partial_z) Gamma
 >   = nu (partial_r^2 - r^{-1} partial_r + partial_z^2) Gamma`,
 >
-> a fixed signed non-evanescent maximum satisfies, a.e.,
+> a fixed signed non-evanescent maximum satisfies a.e.
 >
-> **`-M_sigma'(t)=nu kappa_sigma(t)`**,
+> **`-M_sigma'(t)=nu kappa_sigma(t)`**, hence
+> **`nu int^{T*} kappa_sigma(t) dt < infinity`**.
 >
-> where `kappa_sigma` is the least nonnegative transverse curvature among active maximizers.
-> Hence
+> With `ell_Gamma=(M_sigma/kappa_sigma)^{1/2}`,
+> **`int^{T*} ell_Gamma^{-2} dt < infinity`**. Therefore a non-evanescent Gamma maximum
+> cannot maintain a tau-uniform one-scale turnover `ell_Gamma <= C tau^beta` for
+> `beta>=1/2`. Decisions: `B2-GAMMA-CURVATURE-BUDGET = YES` and
+> `B2-GAMMA-ONESCALE(beta>=1/2) = NO`.
 >
-> **`nu int^{T*} kappa_sigma(t) dt < infinity`**
+> **2026-09-06 (thirty-ninth session): B2 GAMMA FLAT-TOP / TRANSITION ENSTROPHY.**
+> Record: `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`.
+> The mandatory axis-to-saturation transition carries
 >
-> and, with `ell_Gamma=(M_sigma/kappa_sigma)^{1/2}`,
+> `omega^r=-Gamma_z/r`, `omega^z=Gamma_r/r`,
 >
-> **`int^{T*} ell_Gamma^{-2} dt < infinity`.**
+> and physical enstrophy
 >
-> Therefore a non-evanescent Gamma maximum cannot maintain a tau-uniform one-scale turnover
-> `ell_Gamma <= C tau^beta` for `beta>=1/2`. Decisions:
+> `E_Gamma=2pi int (|Gamma_r|^2+|Gamma_z|^2)/r dr dz`.
 >
-> - `B2-GAMMA-CURVATURE-BUDGET = YES`;
-> - `B2-GAMMA-ONESCALE(beta>=1/2) = NO`.
+> If `|Gamma(R,z)|>=m`, then
+> **`int_0^R |Gamma_r|^2/r dr >= 2m^2/R^2`**; over axial length `L_z`,
+> **`E_Gamma >= 4pi m^2 L_z/R^2`**. This does not kill the middle limb: for
+> `L_z~R~tau^{beta_v}` the cost is `~tau^{-beta_v}` and is integrable since
+> `beta_v<gamma<1`; even `L_z~tau^alpha` is integrable because
+> `2 beta_v-alpha < 2 gamma-alpha < 1` from K5. Thus
+> **`B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`**.
 >
-> The Stage-9 arithmetic witness `(gamma,alpha,beta_v)=(3/5,9/20,1/2)` remains a frozen-row
-> consistency certificate but is not an actual-NS witness with a uniformly comparable smooth
-> Gamma-turnover width.
+> The transition nevertheless forces
+> **`||omega||_infinity >= c tau^{-2 beta_v}`**, so
+> **`B2-GAMMA-TRANSITION-VORTICITY = YES`**. A logarithmic-capacity flat-top snapshot
+> shows that second-order flatness plus one saturation point does not imply a thick or
+> expensive high-Gamma neighborhood.
 >
-> **2026-09-06 (thirty-ninth session): B2 GAMMA FLAT-TOP / TRANSITION ENSTROPHY AUDIT.**
-> Record: `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md` on branch
-> `research/b2-gamma-flattop-enstrophy`.
+> **2026-09-06 (fortieth session): B2 GAMMA TRANSITION-RESIDENCE STOP/GO.**
+> Record: `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`.
 >
-> The mandatory axis-to-saturation transition has exact swirl-generated poloidal vorticity
+> For a transition width `R(t)`, define the diffusive clock
 >
-> `omega^r = -Gamma_z/r`, `omega^z = Gamma_r/r`,
+> `D(t0,t1)=nu int_{t0}^{t1} R(s)^(-2) ds`.
 >
-> so its physical enstrophy contribution is
+> If `R~tau^{beta_v}` with `beta_v>=1/2`, then `D(t0,T*)=infinity`; so a fixed
+> high-Gamma packet that genuinely remains confined on one `R`-scale, is not replenished,
+> and has a uniform capacity/Poincare gap would suffer unlimited diffusive time. This gives
+> **`B2-GAMMA-RESIDENCE-DIFFUSIVE-CLOCK = YES`**.
 >
-> `E_Gamma = 2pi int (|Gamma_r|^2+|Gamma_z|^2)/r dr dz`.
+> But the frozen middle limb does not force such residence. To move `O(R)` during the
+> remaining time requires only `|u^r|~R/tau~tau^{beta_v-1}`, and K11 plus
+> `beta_v>alpha>=1-gamma` gives `tau^{beta_v-1}=o(tau^{-gamma})`. To outrun one local
+> diffusion time requires only `|u^r|~nu/R~nu tau^{-beta_v}`, also below the Type-II
+> amplitude because `beta_v<gamma`. Localized conveyor energy/dissipation costs have the
+> correct sign to remain finite and even vanish with `R`.
 >
-> If `|Gamma(R,z)|>=m` then the radial line inequality gives
+> An exact nonlinear affine NS model
 >
-> **`int_0^R |Gamma_r|^2/r dr >= 2m^2/R^2`.**
+> `u^r=-a(t)r`, `u^z=2a(t)z`, `u^theta=Omega(t)r`, `Omega'=2a Omega`
 >
-> If this saturation persists over axial length `L_z`, then
+> has `Gamma=Omega r^2`, for which `(partial_r^2-r^{-1}partial_r)Gamma=0`; along radial
+> characteristics `dGamma/dt=0`. With `a=beta/tau`, material radii satisfy
+> `r~tau^beta`, while the radial and swirl speeds remain compatible with the middle-limb
+> Type-II envelope whenever `beta>alpha>=1-gamma` and `beta<gamma`. The affine model is
+> not finite energy and is not a B2 witness; it is a mechanism-level exact-NS no-go to any
+> drift-independent residence theorem.
 >
-> **`E_Gamma >= 4pi m^2 L_z/R^2`.**
+> Exact decisions:
+> - **`B2-GAMMA-LATE-ARRIVAL-BARRIER = NO`** from the presently controlled quantities;
+> - **`B2-GAMMA-TRANSITION-RESIDENCE-KILL = NO`** as an unconditional current reduction;
+> - **`B2-GAMMA-FLATTOP / RESIDENCE SUBLANE = PARKED`**.
 >
-> This does **not** kill the middle limb. For `L_z~R~tau^{beta_v}` the cost is only
-> `~tau^{-beta_v}`, time-integrable because `beta_v<gamma<1`. Even under the stronger
-> `L_z~tau^alpha` core-sheet hypothesis, the cost `~tau^{alpha-2 beta_v}` is integrable because
->
-> **`2 beta_v-alpha < 2 gamma-alpha < 1`**
->
-> from the frozen strict K5/dissipation inequality `alpha>2gamma-1`.
->
-> Thus **`B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`**: the standard finite physical dissipation budget
-> produces no new exponent cut beyond K5.
->
-> The transition does force pointwise vorticity. By the mean-value theorem, some point inside the
-> radial transition obeys
->
-> **`|omega^z| >= m/R^2`, hence `||omega||_infinity >= c tau^{-2 beta_v}`.**
->
-> Thus **`B2-GAMMA-TRANSITION-VORTICITY = YES`**. For `beta_v>=1/2` this is non-integrable in
-> time, which is compatible with a breakdown trajectory rather than contradictory.
->
-> Pointwise curvature depletion also does not imply a thick high-Gamma neighborhood. A smooth
-> logarithmic-capacity flat-top profile centered at radius `R`, with plateau radius `a`, outer scale
-> `L<R/4`, and logarithmic transition, has weighted Dirichlet/enstrophy cost
->
-> **`<= C M^2/[R log(L/a)]`**
->
-> while fixed-fraction saturation stays at radius comparable to `R`. Taking the pure-swirl field
-> `u^theta=Gamma/r` gives a real divergence-free `C_c^infinity(R^3)` instantaneous datum. This is
-> not a B2 singular trajectory; it falsifies any universal instantaneous claim that `r_sat` plus
-> second-order flatness alone forces a thick or expensive transition.
->
-> The full vorticity-production identity does not repair the kill with known budgets: palinstrophy
-> and the stretching source have no independent finite/sign-definite budget up to a hypothetical
-> singular time. A production-based kill would require genuinely new PDE control.
+> The parent Scope-B B2 middle limb remains OPEN through late-arrival/conveyor,
+> max-displacement, or genuinely multiscale replenishment. Do not confuse parking this
+> proof mechanism with proving the middle limb exists.
 
 This is the durable continuation point for future GPT sessions. Do not rely on chat history.
 
@@ -127,7 +121,8 @@ Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 9. `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`;
 10. `docs/gates/B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md`;
 11. `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`;
-12. current GitHub `main`, open PRs, and relevant formal files.
+12. `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`;
+13. current GitHub `main`, open PRs, and relevant formal files.
 
 ## Handoff update contract
 
@@ -136,42 +131,43 @@ Every substantive session must, before ending: record what was executed and not 
 `FORMAL_SCOPE.md` only if the formal frontier moved; and keep the durable continuation here rather
 than only in chat or PR comments.
 
-### Next work (written 2026-09-06, thirty-ninth session)
+### Next work (written 2026-09-06, fortieth session)
 
-- **Current state:** breakdown-side B2 remains active. Frozen arithmetic does not pin `beta_v`.
-  Actual Gamma dynamics kills a nondegenerate one-scale maximum turnover at `beta_v>=1/2`, but the
-  flat-top escape is **not** killed by physical `L^2` enstrophy/dissipation. Instead the required
-  axis-to-saturation transition carries large off-maximum vorticity `~r_sat^{-2}`.
-- **Next gate: `B2-GAMMA-TRANSITION-RESIDENCE`.** Use the actual scalar Gamma advection-diffusion
-  equation to ask whether high-Gamma material can be delivered to `R(t)~tau^{beta_v}` and remain
-  non-evanescent despite diffusion across the mandatory transition. Distinguish **late arrival** from
-  residence for `~tau` time; a static enstrophy estimate cannot make this distinction.
-- The residence gate must use actual drift/flow geometry. It is invalid to assume a bound equivalent
-  to a continuation criterion merely to control the meridional flow.
-- **Parallel fallback:** `B2-GAMMA-MAX-DISPLACEMENT`. If high-Gamma material can always arrive late,
-  allow first fixed-fraction saturation at `r_sat` while the true non-evanescent maximum lies farther
-  out; audit whether this creates a genuinely new region or collides with K6/K9 location premises.
-- **Do not infer superlevel thickness from maximum curvature.** The logarithmic-capacity snapshot
-  demonstrates that second-order flatness plus one saturation point does not supply such thickness.
-- **Do not call `beta_v<=1/2` a theorem.** Flat-top, late-arrival, max-displacement, and multiscale
-  escapes remain open.
+- **Current state:** B2 remains the active breakdown-side lane, but the current
+  flat-top/transition-residence sublane is **PARKED** by the user's stop/go rule. The diffusive clock
+  diverges at `beta_v>=1/2`, yet the actual hypotheses do not force the same high-Gamma material to
+  remain resident for that clock; late arrival is compatible with the frozen amplitude and finite
+  energy/dissipation budgets.
+- **Next distinct gate: `B2-GAMMA-MAX-DISPLACEMENT`.** Treat this as a new branch, not another
+  residence repair. Allow first fixed-fraction saturation at `r_sat~tau^{beta_v}` while the true
+  non-evanescent `|Gamma|` maximum sits parametrically farther out. Decide whether this necessarily
+  creates an additional dynamically relevant region beyond the two-region `C+S` witness, or whether
+  it remains compatible with K6/K9 location premises and the separate `L^3` carrier.
+- The max-displacement gate must be **actual-PDE/geometry aware**. Repeating frozen exponent
+  arithmetic is insufficient. Useful inputs may include the Gamma maximum principle, meridional
+  incompressibility/flow-map geometry, and the exact locations at which K6/K9 hypotheses fire.
+- **Do not continue `B2-GAMMA-TRANSITION-RESIDENCE`** by adding new exponents, static norms, or local
+  capacity quantities. Reopen only for a genuinely new material-history/drift theorem, propagated
+  superlevel-capacity result, or interaction forcing residence.
+- **Do not call `beta_v<=1/2` a theorem.** Late-arrival, max-displacement, and multiscale escapes remain.
+- **Do not use the affine model as a Clay-admissible witness.** It is infinite-energy and serves only
+  as an exact-NS mechanism no-go for drift-independent residence decay.
 - **Do not reopen S15 or FDT** absent their recorded reopen conditions.
-- **Lean:** no new formal layer yet. The formal frontier did not move; `FORMAL_SCOPE.md` and
-  `STATUS.md` remain unchanged.
+- **Lean:** no new formal layer. `FORMAL_SCOPE.md` and `STATUS.md` remain unchanged.
 
 ## Repository / verification state
 
 - Main includes merged PR #89 (session-38 curvature gate).
-- Current branch: `research/b2-gamma-flattop-enstrophy`.
-- Session-39 flat-top/enstrophy record first commit: `cf69c182806ee06cac692d65068e4faece036761`.
-- No Lean/runtime source changed in session 39; this is analytic docs-only frontier work.
+- Current branch / open PR: `research/b2-gamma-flattop-enstrophy`, PR #90.
+- Session-39 flat-top/enstrophy first commit: `cf69c182806ee06cac692d65068e4faece036761`.
+- Session-40 residence decision first commit: `2e0d71582d9d0772f1ac1ace82f9b78e8750cb95`.
+- No Lean/runtime source changed in sessions 39–40; analytic docs-only frontier work.
 - Prior exact formal baseline remains Lean 4.32.1 / **8777 jobs PASS**.
 
 ## Project claim boundary
 
 Ultimate target: an exact official Clay/Fefferman A/B/C/D statement. No current result proves 3D
-Navier–Stokes global regularity or blow-up. The current breakdown-side refinement says: a
-non-evanescent Gamma maximum cannot maintain a one-scale nondegenerate turnover at exponent
-`>=1/2`; flattening that maximum shifts the cost into an off-maximum swirl-gradient/vorticity layer,
-but the standard finite physical enstrophy budget is too weak to exclude that layer throughout the
-frozen B2 middle limb.
+Navier–Stokes global regularity or blow-up. The newest conclusion is a strategic/dynamical split:
+`beta_v>=1/2` gives an infinite local diffusive clock for persistent one-scale residence, but the
+actual B2 hypotheses do not force such residence, and known budgets allow late radial delivery.
+Therefore the flat-top/residence proof mechanism is parked; the parent B2 middle limb remains open.
