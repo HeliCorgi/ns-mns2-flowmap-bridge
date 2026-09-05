@@ -1,187 +1,172 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-06 JST (forty-first session).
+Last updated: **2026-09-06 JST (forty-third session)**.
 
-> **Historical archive.** The full session-by-session handoff through the twenty-ninth
-> session is preserved at main commit `c69315e32eead48c1fd681bf86c8bab1af815e64`
-> (PR #83 merge). This live file is intentionally the short-form continuation point.
-> Current theorem/source files and dated gate records override stale prose.
->
-> **Sessions 30–32: ASTRA S15 traveling-max cone explored, then parked.**
-> Read `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`,
-> `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`, and
-> `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md`. The conditional cone gave
-> `A'>=(3/8)A^2`, but Q-UNIV was killed by remote pressure freedom and D-UNIV by
-> local fourth-jet freedom. The `(q,d)` S15 realization remains **PARKED BY DEFAULT**.
->
-> **Sessions 33–37: FDT regularity cross-track explored, then parked.**
-> Read `docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md`,
-> `docs/gates/FDT_LH_DECISION_2026-09-05.md`,
-> `docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md`,
-> `docs/gates/FDT_MAT_STRUCT_DECISION_2026-09-06.md`, and
-> `docs/gates/FDT_ROUTE_PARK_DECISION_2026-09-06.md`.
-> Parent `FDT-INJ` remains OPEN. `FDT-LH-OP = NO`, `FDT-LH-DYN-AFF = NO`,
-> `FDT-MAT-COMM = YES`, `FDT-MAT-BRIDGE-UNIF = NO`; the remaining bridge is the
-> critical low-flow deformation itself, so the FDT cross-track is **PARKED**.
->
-> **2026-09-06 (thirty-eighth session): B2 GAMMA-MAX CURVATURE.**
-> Record: `docs/gates/B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md` (merged by PR #89).
-> For the actual circulation equation
->
-> `(partial_t + u^r partial_r + u^z partial_z) Gamma
->   = nu (partial_r^2 - r^{-1} partial_r + partial_z^2) Gamma`,
->
-> a fixed signed non-evanescent maximum satisfies a.e.
->
-> **`-M_sigma'(t)=nu kappa_sigma(t)`**, hence
-> **`nu int^{T*} kappa_sigma(t) dt < infinity`**.
->
-> With `ell_Gamma=(M_sigma/kappa_sigma)^{1/2}`,
-> **`int^{T*} ell_Gamma^{-2} dt < infinity`**. Therefore a non-evanescent Gamma maximum
-> cannot maintain a tau-uniform one-scale turnover `ell_Gamma <= C tau^beta` for
-> `beta>=1/2`. Decisions: `B2-GAMMA-CURVATURE-BUDGET = YES` and
-> `B2-GAMMA-ONESCALE(beta>=1/2) = NO`.
->
-> **2026-09-06 (thirty-ninth session): B2 GAMMA FLAT-TOP / TRANSITION ENSTROPHY.**
-> Record: `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`.
-> The mandatory axis-to-saturation transition carries
-> `omega^r=-Gamma_z/r`, `omega^z=Gamma_r/r`, and
-> `E_Gamma=2pi int (|Gamma_r|^2+|Gamma_z|^2)/r dr dz`.
-> If `|Gamma(R,z)|>=m`, then
-> **`int_0^R |Gamma_r|^2/r dr >= 2m^2/R^2`**; over axial length `L_z`,
-> **`E_Gamma >= 4pi m^2 L_z/R^2`**. This does not kill the middle limb because the
-> resulting costs are already integrable inside the frozen K5 wedge. Thus
-> **`B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`**.
-> The transition nevertheless forces
-> **`||omega||_infinity >= c tau^{-2 beta_v}`**, so
-> **`B2-GAMMA-TRANSITION-VORTICITY = YES`**. A logarithmic-capacity flat-top snapshot
-> prevents inferring a thick high-Gamma set from maximum curvature alone.
->
-> **2026-09-06 (fortieth session): B2 GAMMA TRANSITION-RESIDENCE STOP/GO.**
-> Record: `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`.
-> The local diffusive clock `nu int R^{-2}` diverges for `R~tau^{beta_v}` with
-> `beta_v>=1/2`, but the B2 hypotheses do not force one high-Gamma packet to remain resident.
-> Delivery over the remaining time and delivery faster than one local diffusion time both fit below
-> the Type-II amplitude envelope. An exact infinite-energy affine NS conveyor confirms the mechanism
-> no-go. Decisions:
-> - `B2-GAMMA-LATE-ARRIVAL-BARRIER = NO` from presently controlled quantities;
-> - `B2-GAMMA-TRANSITION-RESIDENCE-KILL = NO`;
-> - `B2-GAMMA-FLATTOP / RESIDENCE SUBLANE = PARKED`.
->
-> **2026-09-06 (forty-first session): STOCHASTIC/BESSEL HITTING ATTACK.**
-> Record: `docs/gates/B2_GAMMA_STOCHASTIC_HITTING_DECISION_2026-09-06.md` on branch
-> `research/b2-gamma-stochastic-hitting`, stacked on open PR #90.
->
-> Put `y=r^2` and `S=-u^r/r`.  The exact circulation equation becomes
->
-> **`G_t - 2 S y G_y + u^z G_z = 4 nu y G_yy + nu G_zz`.**
->
-> Thus the radial diffusion is the zero-dimensional squared-Bessel generator.  For frozen inward
-> strain `A>=0`, the probability/harmonic measure of reaching `L^2` before the absorbing axis is
->
-> **`p_A(y;L)=(1-exp(-A y/(2 nu)))/(1-exp(-A L^2/(2 nu)))`**,
->
-> with `p_0=y/L^2`.
->
-> More importantly, this promotes to an actual-PDE comparison barrier.  For fixed small `L`, define
-> the running inward-strain ceiling `A(t)` as the maximum of a datum-dependent baseline and
-> `sup_{s<=t, r<=L,z} S(s,r,z)`.  For either sign of Gamma,
->
-> **`sigma Gamma(r,z,t) <= 2 M0 p_{A(t)}(r^2;L)`.**
->
-> Hence fixed-fraction saturation at radius `R<<L` forces
->
-> **`A(t) R^2 >= c(1-e^{-1}) nu`**
->
-> up to the printed fixed-fraction constant.  Therefore a middle-limb law
-> `R~tau^{beta_v}` forces arbitrarily late inward strain with
->
-> **`S^+ >= c nu tau^{-2 beta_v}`**
->
-> along a sequence.  Decision: **`B2-GAMMA-HITTING-STRAIN = YES`.**
->
-> This still gives no new exponent exclusion.  If the strain is realized near `r~R`, the required
-> radial speed is only `nu/R~tau^{-beta_v}`, strictly below the Type-II envelope because
-> `beta_v<gamma`.  Moreover the hoped-for elliptic bridge fails structurally:
-> `psi_1=A z` has `S=A` but `L5 psi_1=0`, hence `omega_1=0` locally.  Compact localization moves
-> the elliptic source to a cutoff shell, and at the critical choice `A~nu/R^2` its energy and
-> one-viscous-window dissipation costs are both `~nu^2 R -> 0`.  NS scaling preserves `S R^2`
-> while energy scales to zero.
->
-> Exact decisions:
-> - **`B2-GAMMA-HITTING-STRAIN = YES`;**
-> - **`B2-GAMMA-HITTING-NEW-EXPONENT-CUT = NO`;**
-> - **`B2-GAMMA-STRAIN-ELLIPTIC-KILL = NO`;**
-> - **`B2-GAMMA-SATURATION-MICROGEOMETRY = PARKED`.**
->
-> The parent B2 middle limb remains OPEN.  The park ruling prevents another loop through
-> co-location / max-displacement / packet-thickness variants unless a genuinely propagated
-> cross-location or cross-scale theorem appears.
+This is the durable short-form continuation point. Current source/theorem statements and merged `main` control accepted state. Open PRs may contain later research results but are not accepted `main` state until merged.
 
-This is the durable continuation point for future GPT sessions. Do not rely on chat history.
+## Accepted main boundary
+
+Main accepted head before the present PR-90 synchronization was
+
+`327c2fdc382d4a40cc7779552ae898ec70959ed5`.
+
+PR #92 is merged. The repository therefore contains the accepted periodic-domain sidecar
+
+- `Formal/PeriodicClayCore.lean`;
+- `Formal/PeriodicExplicitShear.lean`;
+- `Formal/PeriodicClayShear.lean`;
+- `Formal/PeriodicClayEnergy.lean`;
+- `Formal/PeriodicClayQuantifiers.lean`;
+- `Formal/PeriodicClayCertificate.lean`;
+
+with anchors
+
+- `ClayNS.certified_nonzero_periodic_NS`;
+- `ClayNS.clayB_has_nonzero_smooth_specialization`;
+- `ClayNS.not_clayB_iff_unforcedPeriodicObstruction`;
+- `ClayNS.failure_of_clayB_has_nonzero_datum`;
+- `ClayNS.covering_solved_family_implies_clayB`.
+
+The universal proposition `ClayNS.ClayB` remains **unproved**. The periodic shear result is a global special-family certificate, not Clay B and not a whole-space result.
+
+The accepted whole-space `R^3` formal frontier is unchanged: local actual-NS mild theory for real divergence-free Schwartz data, explicit lifespan, unrestricted uniqueness, restart/continuation dichotomy, decoded velocity/pressure semantics, and the actual incompressible Navier--Stokes equation at interior times. Primary anchors remain `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`.
+
+PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e` passed hosted Lean workflow #277 (`33996261541`): forbidden-source scan PASS and full cached `Formal.+` build PASS under Lean 4.32.1 / mathlib `520045ab14e26149ee970e2e617ca04b09bde5d6`.
+
+## Breakdown research accepted on main
+
+Merged PR #89 established the B2 Gamma-maximum curvature gate:
+
+- `B2-GAMMA-CURVATURE-BUDGET = YES`;
+- under one-scale nondegeneracy, `B2-GAMMA-ONESCALE(beta>=1/2) = NO`;
+- the parent B2 middle limb remains OPEN.
+
+S15 remains parked by default. The FDT regularity cross-track remains parked. Do not reopen either without its recorded reopen condition.
+
+## Branch-local research now carried by PR #90
+
+PR #90 is `research/b2-gamma-flattop-enstrophy`. It now also contains the former stacked PR #91, which was merged **into the PR-90 branch**, not into `main`.
+
+Session 39 — flat-top / transition enstrophy:
+
+- exact transition vorticity: `omega^r=-Gamma_z/r`, `omega^z=Gamma_r/r`;
+- if `|Gamma(R,z)|>=m`, then `int_0^R |Gamma_r|^2/r dr >= 2m^2/R^2`;
+- over axial length `L_z`, `E_Gamma >= 4pi m^2 L_z/R^2`;
+- `B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`;
+- `B2-GAMMA-TRANSITION-VORTICITY = YES` with `||omega||_infinity >= c R^{-2}`.
+
+Session 40 — transition residence:
+
+- the local diffusive clock `nu int R^{-2}` diverges for `R~tau^{beta_v}`, `beta_v>=1/2`;
+- actual B2 hypotheses do not force one high-Gamma packet to remain resident;
+- late arrival / conveyor transport fits below the Type-II amplitude envelope;
+- exact affine NS conveyor provides a mechanism no-go for drift-independent residence decay;
+- `B2-GAMMA-LATE-ARRIVAL-BARRIER = NO`;
+- `B2-GAMMA-TRANSITION-RESIDENCE-KILL = NO`;
+- `B2-GAMMA-FLATTOP / RESIDENCE SUBLANE = PARKED`.
+
+Session 41 — Bessel/stochastic hitting:
+
+with `y=r^2`, `G(y,z,t)=Gamma(sqrt(y),z,t)`, `S=-u^r/r`, the exact equation is
+
+`G_t - 2 S y G_y + u^z G_z = 4 nu y G_yy + nu G_zz`.
+
+For frozen inward strain `A>=0`, the outer-before-axis harmonic measure is
+
+`p_A(y;L)=(1-exp(-A y/(2 nu)))/(1-exp(-A L^2/(2 nu)))`,
+
+and the actual-PDE comparison barrier yields the necessary condition
+
+`A(t) R^2 >= c(1-e^{-1}) nu`
+
+for fixed-fraction Gamma saturation at `R<<L`. Hence arbitrarily late saturation at `R~tau^{beta_v}` forces inward strain of order
+
+`S^+ >= c nu tau^{-2 beta_v}`
+
+along a sequence.
+
+Exact decisions:
+
+- `B2-GAMMA-HITTING-STRAIN = YES`;
+- `B2-GAMMA-HITTING-NEW-EXPONENT-CUT = NO`;
+- `B2-GAMMA-STRAIN-ELLIPTIC-KILL = NO`;
+- `B2-GAMMA-SATURATION-MICROGEOMETRY = PARKED`.
+
+The local harmonic model `psi_1=A z` has `S=A` but `L5 psi_1=0`, so large local strain need not produce local `omega_1`; compact localization pushes the source to a shell and critical strain `A~nu/R^2` has vanishing small-scale energy cost. Do not restart the same route by adding co-location, max-displacement, packet thickness, or another residence variable unless a genuinely propagated theorem appears.
+
+Relevant branch-local records:
+
+- `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`;
+- `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`;
+- `docs/gates/B2_GAMMA_STOCHASTIC_HITTING_DECISION_2026-09-06.md`.
+
+## PR #90 conflict resolution — session 43
+
+The conflict was caused by both `main` and PR #90 changing `HANDOFF.md` after their common base. The research gate files themselves did not conflict.
+
+Resolution policy:
+
+- keep all accepted main content, including the PR-92 periodic formal sidecar and synchronized formal claim boundary;
+- keep all three PR-90 research gate records, including the PR-91 Bessel-hitting result now merged into the PR-90 branch;
+- replace the conflicting handoff with this combined continuation point;
+- do not treat the PR-90 research conclusions as accepted main state until PR #90 itself is merged.
+
+No Lean/runtime source is changed by this conflict resolution.
+
+## Next research gate
+
+The Gamma-saturation microgeometry family is parked. The next breakdown-side selection must be **orthogonal to the location of the bad set**.
+
+Start from the post-K11 dominant-balance split:
+
+- edge `gamma+alpha=1`: generalized self-similar Euler balance, already under conditional Seregin/Liouville pressure;
+- interior `gamma+alpha>1`: quasi-static Euler core, with convection/pressure leading and viscosity/time derivative lower order.
+
+The next theorem-shaped target is therefore a **steady-Euler / ancient-limit compatibility gate**, not another Gamma-location variable. It must ask whether an interior B2 sequence can have a nontrivial rescaled inviscid limit compatible simultaneously with finite local energy, axisymmetric-with-swirl structure, non-evanescent circulation, and the frozen Type-II bookkeeping.
+
+Before promoting any steady/self-similar profile route, respect the read-only negative-knowledge registry: the previously studied continuous self-similar steady-front profile is already KILLED by Liouville results and must not be reopened under a renamed ansatz. A new gate must state exactly why its quasi-static/local/ancient limit is outside that old hypothesis class.
+
+Recommended first decision object:
+
+`B2-ANCIENT-EULER-COMPACTNESS`:
+
+> Given one fixed hypothetical B2 solution in the interior `gamma+alpha>1`, can one choose a sequence of core times and normalized core frames so that a subsequence converges on compact spacetime sets to a nonzero bounded/finite-local-energy ancient Euler solution with the required axisymmetric swirl/circulation signature?
+
+This is a YES/NO compactness gate, not yet a Liouville theorem. If NO, identify the precise missing compactness quantity and decide whether it is controlled by existing B2 budgets. If YES, the next gate is a Liouville/structure theorem for exactly that limit class.
+
+Do not replace compactness by formal power counting, and do not assume convergence of pressure or derivatives without a proved local bound.
 
 ## Resume protocol
 
-Follow `docs/GPT_WORKFLOW.md`. Read, in order:
+At substantive resume read, in order:
+
 1. `PROJECT_GOAL.md`;
 2. `SPEC.md`;
 3. `AGENTS.md`;
 4. `FORMAL_SCOPE.md`;
-5. this file;
-6. `docs/LEAN_CI_OPERATIONS.md`;
-7. `docs/gates/STAGE9_DECISION_SELECTION_2026-08-23.md`;
-8. `docs/gates/BH_BETAV_ENDPOINT_PINNING_2026-08-23.md`;
-9. `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`;
+5. this `HANDOFF.md`;
+6. `docs/GPT_WORKFLOW.md`;
+7. `docs/LEAN_CI_OPERATIONS.md`;
+8. `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`;
+9. `docs/gates/DOMINANT_BALANCE_INVERSION_2026-08-19.md`;
 10. `docs/gates/B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md`;
-11. `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`;
-12. `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`;
-13. `docs/gates/B2_GAMMA_STOCHASTIC_HITTING_DECISION_2026-09-06.md`;
-14. current GitHub `main`, open PRs, and the latest breakdown-side kill/readiness records.
+11. the three branch-local Gamma records listed above;
+12. the external read-only no-go registry;
+13. current `main`, PR #90, and latest CI.
 
-## Handoff update contract
+## Claim boundary / forbidden shortcuts
 
-Every substantive session must, before ending: record what was executed and not claimed; rewrite
-**Next work** with exact next gate/read order/forbidden shortcuts; synchronize `STATUS.md` and
-`FORMAL_SCOPE.md` only if the formal frontier moved; and keep the durable continuation here rather
-than only in chat or PR comments.
+Do not:
 
-### Next work (written 2026-09-06, forty-first session)
+- claim Clay A/B/C/D;
+- claim universal periodic B from the explicit shear family;
+- identify periodic fields with the whole-space `R^3` carriers;
+- treat branch-local PR-90 conclusions as merged state;
+- reopen S15 or FDT without their recorded reopen conditions;
+- continue the parked Gamma-saturation microgeometry route by adding another local escape variable;
+- reopen the killed continuous self-similar steady-front route under renamed variables;
+- use numerical evidence as a continuum blow-up proof;
+- equate a finite-cylinder Hou computation with an official Clay-domain construction without a transfer theorem;
+- add Lean plumbing merely for completeness.
 
-- **Current state:** B2 remains the active parent breakdown-side lane, but the Gamma-saturation
-  microgeometry program is **PARKED**.  It produced real dynamical necessities (maximum-curvature
-  budget, transition vorticity, and now a BESQ/hitting inward-strain barrier), but every attempted
-  kill is compatible with Type-II amplitude and finite energy/dissipation once the bad set is allowed
-  to relocate or become scale-critical.
-- **Do not proceed to `B2-GAMMA-MAX-DISPLACEMENT` as another location bookkeeping pass.** Reopen this
-  family only for a propagated theorem forcing co-location, a one-fixed-solution scale-to-scale
-  material-history theorem, a global constraint excluding harmonic strain, or an external critical
-  drift theorem genuinely weaker than known continuation criteria.
-- **Next research selection must be orthogonal to Gamma saturation location.** Return to the
-  post-K11 / ancient-limit / steady-Euler side of the Type-II funnel, or select another actual-NS
-  quantity with a signed/global propagated budget.  Prefer an obstruction invariant under relocating
-  the bad set, so a remote-region escape cannot simply reopen the same branch.
-- **Do not reopen S15 or FDT** absent their recorded reopen conditions.
-- **Do not claim the parent B2 middle limb is false or realized.** It remains OPEN; only this proof
-  mechanism is parked.
-- **Lean:** no new formal layer. The formal frontier did not move; `FORMAL_SCOPE.md` and `STATUS.md`
-  remain unchanged.
-
-## Repository / verification state
-
-- Main includes merged PR #89 (session-38 curvature gate).
-- PR #90 (`research/b2-gamma-flattop-enstrophy`) remains open and contains sessions 39–40; its
-  current head `66aa21f4e0647cd5abc78b3f62ea27dc99f28d73` passed workflow run #276.
-- Current stacked branch: `research/b2-gamma-stochastic-hitting`, based on PR #90 head.
-- Session-41 gate first commit: `90e0133c06d32c84abd22cbf372ec61b0567d4c0`.
-- No Lean/runtime source changed in sessions 39–41; analytic docs-only frontier work.
-- Prior exact formal baseline remains Lean 4.32.1 / **8777 jobs PASS**.
-
-## Project claim boundary
-
-Ultimate target: an exact official Clay/Fefferman A/B/C/D statement. No current result proves 3D
-Navier–Stokes global regularity or blow-up. The newest result is an actual-PDE Bessel/hitting barrier:
-fixed-fraction circulation saturation approaching the axis forces scale-critical inward meridional
-strain of order `nu/R^2` along arbitrarily late scales.  That requirement is nevertheless compatible
-with the frozen Type-II envelope and can be supported by locally harmonic strain at vanishing
-energy cost under NS scaling.  The Gamma-saturation microgeometry route is therefore parked rather
-than extended through another escape-location variable.
+The parent B2 middle limb remains OPEN. Neither the accepted formal stack nor the branch-local B2 reductions prove blow-up or global regularity.
