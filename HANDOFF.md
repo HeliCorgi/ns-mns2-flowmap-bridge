@@ -1,83 +1,86 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: 2026-09-05 JST (thirty-second session).
+Last updated: 2026-09-05 JST (thirty-third session).
 
-> **Historical archive.**  The full session-by-session handoff through the
-> twenty-ninth session is preserved verbatim at main commit
-> `c69315e32eead48c1fd681bf86c8bab1af815e64` (the PR #83 merge).  This live file
-> is intentionally the short-form continuation point; old research rulings are not
-> rescinded by compaction.  Current source/theorem statements and dated gate records
-> remain authoritative.
+> **Historical archive.** The full session-by-session handoff through the
+> twenty-ninth session is preserved at main commit
+> `c69315e32eead48c1fd681bf86c8bab1af815e64` (PR #83 merge).  This live file is
+> intentionally the short-form continuation point.  Current theorem/source files and
+> dated gate records override stale prose.
 >
-> **2026-09-05 (thirtieth session): ASTRA S15 TRAVELING-MAX ATTEMPT EXECUTED.**
-> Record: `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`.  For the actual
-> unforced axisymmetric-with-swirl NS system, under an explicit smooth unique
-> nondegenerate off-axis positive maximizer branch, the record derives
-> `U = u^theta/r`, `S = psi1_z = -u^r/r`, `A = U(x_*)`,
-> `q = S_*/A`, `d = -nu(L5 U)_*/A^2`, and
-> **`A' = (2q-d)A^2`**.  The proposed cone is
-> `q >= 1/4`, `0 <= d <= 1/8`; inside it
-> **`A' >= (3/8)A^2`**.  The two analytic boundary obligations are
-> **Q**: `Pi + e + d/4 + m >= 17/16` at `q=1/4`, and
-> **D**: `h - 2e - f <= 1/32` at `d=1/8` (here `f` is the normalized
-> fourth-order viscous term, not physical forcing).  PR #83 added the research
-> record and only three real-algebra Lean consequences; no PDE barrier was encoded.
-> PR #83 merged as `c69315e32eead48c1fd681bf86c8bab1af815e64`.
+> **Sessions 30–32: ASTRA S15 traveling-max cone explored, then parked.**
+> Read, in order:
+> `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`,
+> `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`, and
+> `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md`.
+> The exact moving-max identity is
+> `A'=(2q-d)A^2`; the candidate cone `q>=1/4`, `0<=d<=1/8` gives the conditional
+> algebraic growth `A'>=(3/8)A^2`.  Both proposed universal inward barriers were
+> independently killed: **Q-UNIV = NO** by a remote negative-swirl pressure torus
+> that preserves the local maximum jet while sending the normalized pressure term
+> negative, and **D-UNIV = NO** by the local quartic pure-swirl perturbation
+> `Phi_M=-M(r-r0)^4 chi`, which preserves the zero-through-third maximum jet while
+> sending the normalized fourth-order term outward.  The `(q,d)` S15 realization is
+> therefore **PARKED BY DEFAULT**.  Reopening requires one propagated structure that
+> excludes both counterfamilies and is weaker than a known regularity criterion.
+> PR #83 merged as `c69315e32eead48c1fd681bf86c8bab1af815e64`, PR #84 as
+> `0fa9cadf998fcb5935812cfb56b4a86ea49c81cd`, and PR #85 as
+> `084aa0d1fca1d89726af1f544f3689a95a3f71ba`.
 >
-> **2026-09-05 (thirty-first session): Q DECISION EXECUTED —
-> `NO (UNIVERSAL-Q FALSE)`.**
-> Record: `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`, merged by PR #84 as
-> `0fa9cadf998fcb5935812cfb56b4a86ea49c81cd`.  Q-UNIV asks whether all admissible
-> compactly supported axisymmetric data at a moving positive maximum with
-> `q=1/4`, `0<=d<1/8` must satisfy Q.  **No.**  A disjoint smooth negative
-> pure-swirl torus preserves the complete local maximum jet but changes nonlocal
-> pressure.  The exact Newtonian ring expansion gives a strictly negative radial
-> pressure derivative for an exterior tangential ring; scaling the torus amplitude
-> sends `Pi -> -infinity` while the local Q data stay fixed.  Thus Q can point
-> outward for the actual local NS solution.  Q-UNIV is KILLED.  Q-SPEC, a
-> datum-specific global pressure/relay coherence statement, remained logically open.
+> **2026-09-05 (thirty-third session): FREQUENCY / DISSIPATION-SCALE ROUTE OPENED.**
+> Record: `docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md` on branch
+> `research/frequency-dissipation-transfer-decision`.  This is deliberately a
+> **regularity-side cross-track gate**; it does not silently replace the current
+> `SPEC.md` breakdown-side priority.
 >
-> **2026-09-05 (thirty-second session): D DECISION EXECUTED —
-> `NO (UNIVERSAL-D FALSE)`.**
-> Record: `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md` on branch
-> `research/astra-s15-d-decision`.  The exact decision object **D-UNIV** asks whether
-> every admissible smooth compactly supported axisymmetric-with-swirl datum whose
-> actual local NS solution has at `t=0` a unique positive nondegenerate off-axis
-> `U=u^theta/r` maximum with `q=1/4` and `d=1/8` must satisfy
-> `h - 2e - f4 <= 1/32`, where
-> `f4 = nu^2 (L5^2 U)_*/A^3` is the previous record's symbol `f`.
-> **Answer: NO.**
+> Fix a smooth inhomogeneous Littlewood–Paley decomposition `u_j=Delta_j u`,
+> `lambda_j=2^j`, and the Cheskidov–Shvydkoy dissipation wavenumber `Q(t)`,
+> `Lambda=2^Q`, with low-mode coefficient
+> `F(t)=sup_{j<=Q} lambda_j ||u_j||_infinity`.  The published continuation input is
+> `int_0^T F < infinity => continuation`; energy supplies only `Lambda in L^1`, while
+> `Lambda in L^(5/2)` or a terminal-time-uniform small critical high-frequency tail
+> is sufficient.
 >
-> Fix a compactly supported off-axis core with the exact corner jet.  Independently
-> of the meridional field, add the pure-swirl perturbation
-> **`Phi_M = -M (r-r0)^4 chi`**, where `chi=1` near the positive maximum and is
-> nonnegative and compactly supported away from the axis.  `Phi_M <= 0`, so the
-> unique positive global maximum remains fixed.  Its complete jet through order
-> three vanishes at the maximum, hence `A,H,q,d,e,nabla S,nabla L5 U,V_*` and `h`
-> are unchanged.  The commutator identity at a critical point is
-> `[L5,b·nabla]U_* = 2 sum_i (partial_i b)_* · (partial_i nabla U)_*`, so it uses
-> only the Hessian of `U`.  But
-> **`(L5^2 Phi_M)_* = -24 M`**, hence
-> **`f4_M = f4_0 - 24 nu^2 M/A^3`** and
-> `h_M - 2e_M - f4_M -> +infinity`.  For large `M`, D fails.  At the exact corner
-> `q=1/4,d=1/8`, the exact identity
-> **`d' = A[-1/32 + h - 2e - f4]`** then gives **`d'(0)>0` for the actual local
-> Navier–Stokes solution**.  This is an analytic local fourth-jet counterfamily, not
-> a numerical observation.
+> The new exact decision object is **FDT-INJ**.  Choose fixed annular heat constants
+> `C_H,c_H` and `a_*>0` with `C_H exp(-c_H a_*)<=1/4`, set the one-viscous-window
+> length `tau_j=a_*/(nu lambda_j^2)`, and define
 >
-> **Ruling after sessions 31–32:** both universal boundary mechanisms of the present
-> two-variable `(q,d)` cone are independently KILLED: Q-UNIV by nonlocal pressure
-> freedom and D-UNIV by local fourth-jet freedom.  The exact moving-max identities
-> and conditional scalar algebra remain correct, but this particular universal-cone
-> realization of Astra S15 is now **PARKED BY DEFAULT**.  A future reopening must
-> present genuinely new propagated structure that excludes *both* counterfamilies;
-> simply adding more local jet variables or restating Q-SPEC/D-SPEC is not enough.
-> No Lean source changed in sessions 31–32, so `FORMAL_SCOPE.md` and `STATUS.md`
-> intentionally do not move.
+> `I_j(t) = lambda_j^(-1) || int_{max(0,t-tau_j)}^t
+>              exp(nu(t-s)Delta) Delta_j P div(u tensor u)(s) ds ||_infinity`.
+>
+> **FDT-INJ asks:** for every `nu>0`, every real divergence-free Schwartz datum,
+> and every finite horizon `L`, does there exist a finite datum-dependent `J` such
+> that
+>
+> `sup_{0<t<min(L,T_*)} sup_{j>=J} I_j(t) <= (1/2)c_0 nu`?
+>
+> **Current verdict: OPEN.**  The norm is intentionally outside the time integral so
+> time/phase/polarization/triad cancellations remain available.  A first-contact
+> argument is fully recorded in the gate: Schwartz initial-tail smallness gives a
+> `1/4` margin; one viscous-window Stokes decay gives another `1/4` homogeneous bound;
+> FDT-INJ gives a `1/2` nonlinear bound; therefore no sufficiently high block can hit
+> `lambda_j^(-1)||u_j||_infinity=c_0 nu`.  Hence `Q` is bounded on each finite horizon,
+> `F` is integrable, and the published criterion continues the solution.  Under the
+> stated universal quantifiers a YES would therefore provide a whole-space
+> regularity-A route after the standard Clay admissibility checks.
+>
+> A tempting static shortcut was killed in the same record.  A datum-independent
+> pointwise estimate `F(t)||u(t)||_2^2 <= C(nu)||grad u(t)||_2^2` is false already at
+> `t=0`: for single-annulus divergence-free Schwartz data
+> `u_0^{A,lambda}(x)=A v(lambda x)`, with `A/lambda` above the dissipation threshold,
+> the ratio of the two sides scales like `A/lambda` and can be made arbitrarily large.
+> Thus the new route must be genuinely dynamical; energy plus a static spectrum is
+> not the missing theorem.
+>
+> The gate deliberately adds **no Lean theorem**.  Existing formal assets include the
+> exact R3 Stokes/Leray/frequency infrastructure, positive-time H2->H3 Stokes
+> smoothing, projected `H3 x H3 -> H2` convection, and Fourier convolution/Young
+> bridges.  Missing FDT-specific layers are Littlewood–Paley projectors, annular
+> L-infinity Bernstein/heat bounds, dyadic projected Duhamel in L-infinity, and the
+> Bony commutator package.  Do not build this plumbing before an analytic sub-gate
+> survives.
 
-This is the short-form continuation point for future GPT sessions.  The repository is
-expected to be developed primarily through repeated GPT sessions; do not rely on chat
-history as durable state.
+This is the durable continuation point for future GPT sessions.  Do not rely on chat history.
 
 ## Resume protocol
 
@@ -89,115 +92,71 @@ Follow `docs/GPT_WORKFLOW.md`. Read, in order:
 4. `FORMAL_SCOPE.md`;
 5. this file;
 6. `docs/LEAN_CI_OPERATIONS.md`;
-7. `docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md`;
-8. `docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md`;
-9. `docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md`;
-10. current GitHub `main`, relevant `Formal/` files, open PRs, and latest Lean
-    verification evidence.
+7. `docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md`;
+8. for why S15 is parked, the three Astra S15 gate records named above;
+9. current GitHub `main`, open PRs, and the relevant Stokes/Leray/convection formal files.
 
-Current code and theorem statements override stale prose.  For pre-Astra history, consult
-this file at `c69315e32eead48c1fd681bf86c8bab1af815e64` and the dated gate records;
-do not reconstruct old rulings from chat history.
+## Handoff update contract
 
-## Handoff update contract (standing specification)
+Every substantive session must, before ending:
 
-**Specification (user directive, 2026-09-02): every session that does substantive work
-MUST, before ending, write into this file what the next work is, in a form a fresh
-session can execute without this session's chat history.**  Concretely, at end of
-session:
+1. record what was executed and what was deliberately not claimed;
+2. rewrite **Next work** below with the exact next gate, read order, and forbidden shortcuts;
+3. update `STATUS.md` / `FORMAL_SCOPE.md` only if the formal frontier actually moved;
+4. keep the durable continuation here, not only in chat, PR comments, or commit messages.
 
-1. update the dated block at the top of this file with what was executed, what was
-   verified (exact gate evidence: runner, toolchain, scope, job count), and what was
-   deliberately **not** done;
-2. rewrite the **"Next work"** subsection below — it must name the next task(s) in
-   recommended order, the exact files/records a fresh session must read first, any
-   commission boundary, and any tempting-but-forbidden shortcut;
-3. keep `STATUS.md` and `FORMAL_SCOPE.md` synchronized when the formal frontier moved
-   (per `AGENTS.md`);
-4. never leave the next-work description only in a commit message, chat reply, PR
-   comment, or ephemeral plan — this file is the durable continuation point.
+### Next work (written 2026-09-05, thirty-third session)
 
-### Next work (written 2026-09-05, thirty-second session)
+Read first: the session-33 block above and
+`docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md` §§0–10.
 
-Read first: the session-30/31/32 blocks above;
-`docs/gates/ASTRA_S15_TRAVELING_MAX_2026-09-05.md` §§2–6;
-`docs/gates/ASTRA_S15_Q_DECISION_2026-09-05.md` §§0,2–7;
-`docs/gates/ASTRA_S15_D_DECISION_2026-09-05.md` §§0–5; `SPEC.md` §§2–6.
-
-- **Current target/state:** the current `(q,d)` traveling-max S15 cone is **PARKED BY
-  DEFAULT**.  Q-UNIV = NO/KILLED and D-UNIV = NO/KILLED by independent exact
-  counterfamilies.  The conditional algebra `Q + D + cone entry => A' >= (3/8)A^2`
-  remains true but has no universal PDE barrier behind it.  Q-SPEC and a possible
-  D-SPEC are logical existential residues only; neither is an active theorem.  There
-  is no Clay claim.
-- **Latest meaningful Lean verification:** no Lean source changed in the Q or D
-  decisions.  The latest hosted verification of the unchanged formal tree is GitHub
-  Actions workflow `Lean 4 formalization`, run **#260** (`33932277589`), job
-  `101213161122`, head `132b4e22ddc4b22eb640b49cf6c527d225c67fd7`, runner
-  GitHub-hosted Ubuntu 24.04, Lean **4.32.1**; proof-hole/local-axiom/opaque scan PASS;
-  full `lake build` **8777 jobs PASS**; the three traveling-max algebra theorem axiom
-  prints remain `[propext, Classical.choice, Quot.sound]`.  D-decision work is docs-only
-  and does not change this formal verification boundary.
-- **Completed decision infrastructure:**
-  `ASTRA_S15_TRAVELING_MAX_2026-09-05.md` (exact moving-max equations + conditional
-  cone); `R3TravelingMaxInvariantCone.lean` and audit (three scalar algebra facts);
-  `ASTRA_S15_Q_DECISION_2026-09-05.md` (remote-pressure Q no-go);
-  `ASTRA_S15_D_DECISION_2026-09-05.md` (quartic fourth-jet D no-go).
-- **Next analytic gate, recommended order (each is a new user act):**
-  1. **Leave this S15 cone parked and return to a different theorem-shaped route.**
-     Preferred fresh route: a frequency/dissipation-scale transfer decision on the
-     existing `R^3` formal/analytic stack.  Start by defining one exact candidate
-     estimate that would imply a known continuation criterion; then attack that estimate
-     counterexample-first so that a disguised regularity assumption is not smuggled in.
-  2. Alternative fresh route: ancient-solution inheritance + Liouville rigidity.  State
-     the exact property claimed to survive blow-up rescaling before searching for a
-     Liouville theorem; do not assume original finite energy survives the rescaling.
-  3. Reopen traveling-max S15 only if a new hypothesis is supplied that is demonstrably
-     violated by both the remote negative-swirl pressure torus and the local quartic
-     fourth-jet perturbation, is propagated by actual NS evolution, and is weaker than a
-     known regularity criterion.  Such a reopening should be a new gate, not a silent
-     Q-SPEC/D-SPEC retry.
-  4. Standing older lanes remain as in the archived twenty-ninth-session handoff:
-     general head program parked/closed at audit level; numerical event-budget results
-     diagnostic only; SEL-3/SEL-5/EB-1 Lean debts on hold; passive literature watch
-     unchanged.
-- **Do NOT assume / forbidden repeats:**
-  - do not claim Q from local maximum jets; remote pressure changes Q while preserving
-    them;
-  - do not claim D from zero-through-third jets or maximum geometry; the quartic
-    perturbation preserves them while sending the D left-hand side to `+infinity`;
-  - do not convert the quartic family into a blow-up claim: it proves an outward
-    derivative at one local-time cone boundary only;
-  - do not formalize trivial scalar inequalities and present them as mechanization of
-    either analytic no-go;
-  - do not reopen this `(q,d)` cone by simply adding `L5^2 U` as another state variable
-    unless a finite closure/invariance mechanism for the resulting derivative hierarchy
-    is proved;
-  - do not un-park BH/Γ, T-DIR/T-VAR/T-CONE/T-DET, HR-* or numerical routes without
-    their recorded user-act/trigger rules.
+- **Current target/state:** `FDT-INJ` is **OPEN**.  It is the active theorem-shaped
+  frequency/dissipation-scale decision.  It is regularity-side and cross-track; the
+  current `SPEC.md` breakdown specialization is not yet changed.  The old S15 `(q,d)`
+  cone remains parked.
+- **Next analytic gate: FDT-LH.**  Freeze one sufficiently high dyadic block `j` and
+  one viscous window `tau_j`.  Write the exact Bony low–high piece as a transport term
+  plus `[Delta_j,u_{<=j-2}·grad]u_j`-type commutator after Leray projection.  Decide,
+  counterexample-first, whether its contribution to the vector Duhamel injection can
+  be bounded by a fixed fraction of `c_0 nu` using a coefficient with an independently
+  finite time budget.
+- **If FDT-LH = NO:** record the exact actual-trajectory or theorem-level obstruction
+  and decide whether it kills FDT-INJ or only that decomposition estimate.  Do not
+  “repair” it by inserting `int F`, `||grad u||_infinity`, a Serrin norm, bounded H3,
+  or another continuation criterion.
+- **If FDT-LH survives:** next attack the comparable-high/high backscatter term, then
+  the high–low summable tail.  Only after a load-bearing analytic estimate survives
+  should any Littlewood–Paley/Bony Lean layer be commissioned.
+- **Exact NO requirement for FDT-INJ:** one fixed `nu`, one fixed Schwartz datum, one
+  finite horizon, and its actual solution must exhibit arbitrarily high blocks with
+  one-window injection `I_j>(1/2)c_0 nu`.  A family of different bad data with the
+  active block moved upward does not refute FDT-INJ because `J` is datum-dependent.
+- **Forbidden shortcuts:** do not replace the norm of the time-integrated nonlinear
+  vector by the integral of norms without explicitly accepting a stronger theorem;
+  do not infer frequency transfer from shell energies alone; do not rely only on
+  properties shared by Tao's averaged blow-up operator; do not claim that S7/S8 or
+  FDT-INJ is already proved; do not change `SPEC.md` to an A-side program unless a
+  genuinely surviving theorem justifies that strategic switch.
 
 ## Repository / verification state
 
-- `main` at the start of the thirty-second session:
-  `0fa9cadf998fcb5935812cfb56b4a86ea49c81cd` (merged PR #84).
-- Current work branch: `research/astra-s15-d-decision`.
-- D-decision record first commit on that branch:
-  `a7a4948a1c5a6cd26b4bc43bf6ae353c7f0d7c6a`.
-- PR #83 and PR #84 are merged.  Do not reopen them; the D decision is a separate
-  focused change.
-- No Lean source is changed by the D decision.  `FORMAL_SCOPE.md` and `STATUS.md` are
+- `main` at start of session 33: `084aa0d1fca1d89726af1f544f3689a95a3f71ba`
+  (merged PR #85).
+- Current branch: `research/frequency-dissipation-transfer-decision`.
+- FDT gate first commit: `5141b8c95c423f8324ecdf2f0cbfcd7c4e51e6c5`.
+- No Lean/runtime source changed in session 33; `FORMAL_SCOPE.md` and `STATUS.md` remain
   intentionally unchanged.
-- Automatic/full hosted CI policy remains governed by `docs/LEAN_CI_OPERATIONS.md`;
-  do not use hosted Actions as an interactive compiler.
+- Latest completed hosted integration check before this branch: PR #85, workflow
+  `Lean 4 formalization`, run **#261** (`33934510992`), conclusion **success**.
+  The formal tree was unchanged from the prior verified traveling-max tree; the
+  proof-hole/local-axiom/opaque scan and full cached build passed.  The prior exact
+  full-build baseline is Lean 4.32.1 / **8777 jobs PASS**.
+- GitHub-hosted Actions remain a final/status resource, not an interactive compiler.
 
 ## Project claim boundary
 
-Ultimate target: an exact official Clay/Fefferman Navier–Stokes A/B/C/D statement.
-Current physical specialization remains `R^3`, preferably `f=0`, axisymmetric with swirl,
-breakdown side, governed by `SPEC.md`.
-
-No current result proves Navier–Stokes blow-up or global regularity.  The newest theorem-level
-research results are negative knowledge: the present traveling-max two-variable cone has no
-universal Q barrier because nonlocal pressure can be changed independently of the local maximum
-jet, and no universal D barrier because the fourth swirl jet can be changed independently of the
-zero-through-third local jet.  These are route-refinement/no-go results, not Clay results.
+Ultimate target: an exact official Clay/Fefferman A/B/C/D statement.  No current result proves
+3D Navier–Stokes global regularity or blow-up.  The newest active result is an **open reduction**:
+`FDT-INJ` would imply a known frequency continuation criterion by a first-contact argument, while a
+static energy-only shortcut has been analytically ruled out.  This is research-direction refinement,
+not a Clay result.
