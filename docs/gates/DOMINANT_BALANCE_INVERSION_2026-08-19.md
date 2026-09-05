@@ -105,3 +105,35 @@ two lines later (`γ ∈ (1/2, 3/5)`).** The K10 image is the open interval
 holds only on `γ ∈ (1/2, 3/5)`; K10's conditional exclusion pressure does not reach
 the endpoint `γ = 3/5`. (Kill-table queue item F39; survival-map erratum recorded
 likewise.)
+
+## Erratum (2026-09-06, modulation-compactness audit — appended, not silently repaired)
+
+**§1/§3 item 2/§4 overstate the size of the full time derivative in the K11 interior.**
+The amplitude-growth argument supplies a lower-scale requirement `|partial_t u| >=~ U/tau`
+at an amplitude-achieving point; it does **not** prove the universal asymptotic equality
+`|partial_t u| ~ U/tau` for the entire core field. A normalized shape may evolve on the
+faster convective clock while its fitted amplitude and length drift on the slower collapse
+clock.
+
+With the exact dynamic normalization
+
+`u(x,t)=U(t) v((x-x_c(t))/ell(t),s)`, `ds/dt=U/ell`,
+
+one obtains
+
+`partial_s v + (v.grad)v + grad q - (x_c'/U).grad v`
+`  + delta [gamma v + alpha (y.grad)v] = eps Delta v`,
+
+where
+
+`delta=tau^(alpha+gamma-1)->0`, `eps=nu tau^(gamma-alpha)->0`
+
+in the interior. The coefficient of `partial_s v` is exactly one. Hence the general leading
+core equation is **unsteady Euler**, not steady Euler. `gamma+alpha>1` makes the scale/amplitude
+modulation slow compared with the convective dynamics; it does not force shape stationarity.
+
+The K11 cut `gamma+alpha>=1` itself is **unchanged**: its amplitude-response logic and the
+independent energy-flux derivation remain valid. What is withdrawn is only the unconditional
+classification "interior => quasi-static / steady-Euler fixed shape". A steady
+Bragg--Hawthorne profile is now treated as an additional shape-locking specialization, exactly
+as recorded in `B2_MODULATION_COMPACTNESS_DECISION_2026-09-06.md`.
