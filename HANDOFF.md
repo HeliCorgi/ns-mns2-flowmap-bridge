@@ -217,9 +217,8 @@ Resume protocol items 7–9.
 - Session-35 affine decision first commit:
   `17ba363afe0e6fc3061809b920a438600f4db773`.
 - Session-35 integration/update commits include
-  `a5df47d0676c82fe50aff780a581d6dea473a1a8` (session-34 record cross-link/update),
-  `5138569adc3005dbf0921045061dea2deaabf975` (handoff refresh), and this final
-  handoff pin.
+  `a5df47d0676c82fe50aff780a581d6dea473a1a8` (session-34 record cross-link/update)
+  plus subsequent handoff refresh commits on PR #87.
 - No Lean/runtime source changed in sessions 34–35; `FORMAL_SCOPE.md` and `STATUS.md`
   intentionally remain unchanged.
 - PR #87 pre-session-35 hosted integration check: workflow `Lean 4 formalization`,
