@@ -8,25 +8,25 @@
 - `B2-GAMMA-TRANSITION-VORTICITY = YES`;
 - `B2-GAMMA-FLATTOP` as an actual-NS asymptotic branch remains **OPEN**.
 
-This record continues `B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md`.  The previous gate proved
+This record continues `B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md`. The previous gate proved
 that a non-evanescent circulation maximum cannot retain a uniformly nondegenerate one-scale
-curvature turnover on a scale `tau^beta` with `beta>=1/2`.  The natural escape is a flat maximum:
+curvature turnover on a scale `tau^beta` with `beta>=1/2`. The natural escape is a flat maximum:
 curvature at the active `Gamma` maximum becomes small while the field still has to return to
 `Gamma=0` on the axis.
 
-The present pass asks the question requested in the handoff:
+The present pass asks:
 
 > does the unavoidable transition from `Gamma=0` on the axis to `|Gamma|~Gamma0` near the
 > saturation radius spend enough **physical enstrophy / vorticity-production budget** to kill the
 > flat-top escape?
 
-The answer from the currently available finite physical budgets is **NO**.  The transition does force
+The answer from the currently available finite physical budgets is **NO**. The transition does force
 large pointwise poloidal vorticity, but its `L^2` enstrophy cost is compatible with the entire frozen
-B2 middle limb.  Moreover, without a quantitative thickness assumption on the high-`Gamma` set, the
+B2 middle limb. Moreover, without a quantitative thickness assumption on the high-`Gamma` set, the
 2D meridional transition has a logarithmic-capacity escape and no useful universal `L^2` lower bound
 from one saturation point alone.
 
-No singular Navier--Stokes solution is constructed.  No global regularity or Clay alternative is
+No singular Navier--Stokes solution is constructed. No global regularity or Clay alternative is
 proved.
 
 ---
@@ -44,7 +44,7 @@ Use the same Scope-B B2 setting as the previous gate:
   `alpha<beta_v<gamma<1`.
 
 The previous gate leaves, for `beta_v>=1/2`, only curvature depletion / flat-top, displacement of the
-true maximum, or genuinely multiscale turnover.  Here we focus on the flat-top branch while keeping
+true maximum, or genuinely multiscale turnover. Here we focus on the flat-top branch while keeping
 the true maximum at the saturation region unless explicitly stated otherwise.
 
 ---
@@ -77,7 +77,7 @@ Therefore their physical `L^2(R^3)` contribution is
  =2\pi\int_{\mathbb R}\int_0^\infty
  \frac{|\partial_r\Gamma|^2+|\partial_z\Gamma|^2}{r}\,dr\,dz.
  }
- \tag{1.2)
+ \tag{1.2}
 \]
 
 For smooth divergence-free fields,
@@ -102,7 +102,7 @@ This is the strongest immediately available global finite budget to charge the t
 
 ## 2. A linewise transition inequality
 
-Fix one time and one axial coordinate `z`.  Smooth axisymmetry gives
+Fix one time and one axial coordinate `z`. Smooth axisymmetry gives
 
 \[
  \Gamma(0,z)=0.
@@ -270,9 +270,9 @@ Therefore any non-evanescent saturation at `R~tau^{beta_v}` forces
  \tag{4.2}
 \]
 
-For `beta_v>=1/2`, this lower bound is non-integrable in time.  That is not a contradiction for a
+For `beta_v>=1/2`, this lower bound is non-integrable in time. That is not a contradiction for a
 hypothetical breakdown trajectory; it is the correct direction for a Beale--Kato--Majda-type
-necessary divergence.  The transition layer therefore trades the forbidden curvature at the
+necessary divergence. The transition layer therefore trades the forbidden curvature at the
 Gamma maximum for large **off-maximum swirl-gradient vorticity**.
 
 ### Decision
@@ -288,9 +288,9 @@ This is an actual geometric consequence of `Gamma(0,z)=0` plus non-evanescent sa
 
 ## 5. Pointwise flatness does not imply a thick high-Gamma neighborhood
 
-The previous curvature gate controls only the Hessian trace at the active maximum.  Even if the
+The previous curvature gate controls only the Hessian trace at the active maximum. Even if the
 maximum becomes exactly flat at second order, uncontrolled higher derivatives can place the
-transition arbitrarily close to the flat top.  There is no theorem in the frozen stack converting
+transition arbitrarily close to the flat top. There is no theorem in the frozen stack converting
 small maximum curvature into a lower bound for the measure of a high-`Gamma` superlevel set.
 
 The obstruction can be made explicit by a meridional logarithmic-capacity profile.
@@ -313,7 +313,7 @@ Start from the piecewise logarithmic profile
  \tag{5.1}
 \]
 
-and smooth the two corners without changing the estimates by more than fixed factors.  Define
+and smooth the two corners without changing the estimates by more than fixed factors. Define
 
 \[
  \Gamma_{R,a,L}(r,z)=M G_{a,L}(\rho).
@@ -322,10 +322,10 @@ and smooth the two corners without changing the estimates by more than fixed fac
 
 Because the support stays away from the axis, `u^theta=Gamma/r` is a smooth compactly supported
 axisymmetric swirl field; taking the velocity to be pure swirl gives a real smooth divergence-free
-`C_c^infinity(R^3)` datum.  The center is an exact flat plateau: all spatial derivatives vanish
+`C_c^infinity(R^3)` datum. The center is an exact flat plateau: all spatial derivatives vanish
 there before the transition begins.
 
-On the support, `r~R`.  Direct integration gives
+On the support, `r~R`. Direct integration gives
 
 \[
  \boxed{
@@ -346,10 +346,10 @@ weighted enstrophy cost can be reduced by the arbitrarily large logarithm `log(L
 This proves a precise warning:
 
 > a single saturation point plus second-order flatness at the maximum does **not** force a
-> quantitative `L^2` transition cost.  A thickness / capacity hypothesis is additional structure,
+> quantitative `L^2` transition cost. A thickness / capacity hypothesis is additional structure,
 > not a consequence of the current curvature theorem.
 
-These profiles are only instantaneous admissible data snapshots, not B2 singular trajectories.  Their
+These profiles are only instantaneous admissible data snapshots, not B2 singular trajectories. Their
 role is to falsify any attempted universal instantaneous inequality that would deduce a strong
 enstrophy lower bound solely from `r_sat` and maximum flatness.
 
@@ -366,17 +366,17 @@ The full vorticity enstrophy identity is
  \tag{6.1}
 \]
 
-A steep transition may make both palinstrophy and the stretching term very large.  In three
+A steep transition may make both palinstrophy and the stretching term very large. In three
 dimensions, however, neither side has a sign that supplies an independent finite budget up to a
-hypothetical singular time.  The energy inequality controls the **time integral of enstrophy**,
+hypothetical singular time. The energy inequality controls the **time integral of enstrophy**,
 not the time integral of palinstrophy or the absolute vorticity-production term.
 
 Therefore charging the flat-top transition to (6.1) would require a new estimate controlling the
-stretching source strongly enough to dominate the transition.  No such estimate is present in the
+stretching source strongly enough to dominate the transition. No such estimate is present in the
 frozen B2 stack, and assuming a Serrin/BKM-equivalent control would simply import a regularity
 criterion.
 
-So this pass does **not** prove that every possible vorticity-production argument fails.  It proves
+So this pass does **not** prove that every possible vorticity-production argument fails. It proves
 that the standard physical production identity, with the budgets presently available in the
 project, does not kill the flat-top branch.
 
@@ -416,7 +416,7 @@ The question should be formulated directly from the scalar advection--diffusion 
 > `beta_v>=1/2` and remain non-evanescent while diffusion acts across the mandatory axis-to-saturation
 > transition, **without** requiring a new continuation-strength bound on the meridional drift?
 
-This must be attacked before inventing a new exponent.  In particular:
+This must be attacked before inventing a new exponent. In particular:
 
 - distinguish a high-Gamma material packet arriving late near the axis from a packet residing there
   for `~tau` time;
@@ -435,8 +435,8 @@ max-displacement/location audit rather than more curvature/enstrophy power count
 No Lean source is added.
 
 The useful new statements are weighted meridional inequalities, capacity geometry, and actual
-axisymmetric vorticity identities.  They do not yet bridge to a theorem about the fixed B2 class, and
-the current Lean stack lacks the relevant axisymmetric pointwise/superlevel machinery.  Formalizing
+axisymmetric vorticity identities. They do not yet bridge to a theorem about the fixed B2 class, and
+the current Lean stack lacks the relevant axisymmetric pointwise/superlevel machinery. Formalizing
 only the elementary Cauchy--Schwarz estimate would not move the proof frontier.
 
 `FORMAL_SCOPE.md` and `STATUS.md` remain unchanged.
