@@ -73,7 +73,8 @@ Last updated: 2026-09-06 JST (thirty-fifth session).
 >
 > **2026-09-06 (thirty-fifth session): FDT-LH-DYN AFFINE MODEL ATTACKED.**
 > Record: `docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md` on the same PR #87
-> branch.
+> branch.  The session also updated `FDT_LH_DECISION_2026-09-05.md` to cross-link and
+> incorporate the new ruling.
 >
 > Use the trace-free affine strain
 >
@@ -215,6 +216,9 @@ Resume protocol items 7–9.
   `3306bbead924c1f7c4c8812c5bf5b206b6eb6d01`.
 - Session-35 affine decision first commit:
   `17ba363afe0e6fc3061809b920a438600f4db773`.
+- Session-35 integration/update commits after that include
+  `a5df47d0676c82fe50aff780a581d6dea473a1a8` (cross-link/update of the session-34
+  record) and this final handoff commit.
 - No Lean/runtime source changed in sessions 34–35; `FORMAL_SCOPE.md` and `STATUS.md`
   intentionally remain unchanged.
 - PR #87 pre-session-35 hosted integration check: workflow `Lean 4 formalization`,
