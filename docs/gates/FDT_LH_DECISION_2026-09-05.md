@@ -1,8 +1,13 @@
 # FDT low-high commutator decision — 2026-09-05
 
-**Status: NO-GO FOR THE OPERATOR/ENERGY-BUDGET CLOSURE; SIGNED DYNAMIC WINDOW REMAINS OPEN.**
+**Status: NO-GO FOR THE OPERATOR/ENERGY-BUDGET CLOSURE; AFFINE SIGNED-DYNAMIC REPAIR ALSO KILLED.**
 
 **Primary verdict:** `FDT-LH-OP = NO`.
+
+**Follow-up:** the exact affine-strain signed-dynamic repair is decided separately in
+`docs/gates/FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md`, with verdict
+`FDT-LH-DYN-AFF = NO`.  The parent `FDT-INJ` statement on real divergence-free Schwartz data
+remains OPEN.
 
 This note attacks the first analytic sub-gate left by
 `docs/gates/FREQUENCY_DISSIPATION_TRANSFER_DECISION_2026-09-05.md`.
@@ -17,7 +22,9 @@ The point is to separate two logically different questions which were previously
 2. can the **actual signed time-dependent Navier–Stokes trajectory** produce extra temporal/phase
    cancellation which makes its low-high contribution small for all sufficiently high blocks?
 
-The first question has a clean NO answer.  The second remains open.
+The first question has a clean NO answer in this record.  The natural affine low-flow-conjugation
+version of the second question is also NO by the 2026-09-06 follow-up, but the fully admissible
+finite-energy/Schwartz `R^3` version is not refuted.
 
 No global regularity theorem, no blow-up theorem, and no Clay alternative is proved.
 
@@ -388,8 +395,9 @@ budget can be the missing theorem.
 
 What (6.2) does **not** prove is that the signed time-integrated commutator on the actual trajectory
 must exceed a fixed margin later in the window.  The actual solution may generate transport,
-phase, polarization, or temporal cancellation.  That residual dynamic possibility is exactly what
-remains open.
+phase, polarization, or temporal cancellation.  The exact affine-strain follow-up shows that the
+most natural low-flow-conjugation version of such cancellation is nevertheless false as a mechanism;
+see `FDT_LH_DYN_AFFINE_DECISION_2026-09-06.md`.
 
 ---
 
@@ -433,7 +441,8 @@ it by
 would merely import a continuation wall forbidden by the parent gate.
 
 The counterfamily above shows that ordinary energy and viscous-window enstrophy cannot replace this
-coefficient.
+coefficient.  The affine follow-up shows that exact signed low-flow conjugation does not remove the
+same deformation either: it becomes an LP multiplier boundary displacement.
 
 ---
 
@@ -449,13 +458,14 @@ coefficient.
   the one-window `L^2` enstrophy budget.
 - Any claim that incompressibility + Leray projection annihilates the low-high commutator.
 
-### Not killed
+### Not killed by this record alone
 
 - The parent **`FDT-INJ`** statement.  It remains OPEN.
 - A datum-dependent high-frequency cutoff `J(u_0,nu,L)`.
-- A **signed, genuinely time-dependent** low-high cancellation along one actual trajectory.
-- A low-flow conjugation / paracomposition / Lagrangian renormalization which removes the principal
-  deformation before the final `L^infinity` norm.
+- A fully admissible finite-energy/Schwartz dynamic theorem using genuinely new propagated
+  structure.
+- Cancellation between the LH piece and other parts of the full nonlinear Duhamel term.
+- A material/deformed dyadic observable which absorbs low-flow shell transport.
 - The high-high and high-low pieces of the FDT decomposition.
 
 The family `(a_{j,M},b_j)` is a family of different data.  By the explicit NO rule in the parent
@@ -463,29 +473,31 @@ record, this does **not** refute `FDT-INJ`, because `J` is allowed to depend on 
 
 ---
 
-## 9. The residual dynamic gate
+## 9. Follow-up ruling after the affine model
 
-Rename the surviving low-high question
+The 2026-09-06 exact affine record proves
 
 \[
-\boxed{\texttt{FDT-LH-DYN}.}
+\boxed{\texttt{FDT-LH-DYN-AFF = NO}.}
 \]
 
-A valid YES theorem must use the actual time-dependent vector integral and must exploit structure
-which is absent from the frozen operator counterfamily.  The cleanest next decision is:
+For a trace-free affine strain plus transverse shear, the full nonlinear NS equations reduce exactly
+to strain-diffusion of the shear.  After low-flow conjugation, the signed commutator Duhamel term
+is
 
-> Can one conjugate the high block by the low-frequency divergence-free flow over one viscous
-> window and prove that the **deformation/heat commutator after conjugation** has a fixed critical
-> margin using a time budget already known to be finite independently of continuation?
+\[
+[m_j(t)-m_j(0)]g(t),
+\]
 
-A proposed proof fails immediately if its coefficient is `int F`, `int ||grad u||_infinity`, a
-Serrin norm, bounded `H^3`, or another regularity criterion in disguise.
+so it is an order-one spectral-shell displacement, not a small oscillatory remainder.  It can exceed
+`(1/2)c_0 nu` while the final target block is still subcritical.
 
-Counterexample-first test for the next session: use an affine trace-free strain as the symbolic
-model.  Constant translation is irrelevant because it commutes with radial LP multipliers; genuine
-strain changes frequency and is the load-bearing low-high mechanism.
+The affine background is not in `L^2`, so this is not a Clay-admissible counterexample.  But it kills
+the proposed mechanism “Lagrangianize the LH term and signed cancellation will make it small.”
 
-Only if `FDT-LH-DYN` survives should the project proceed to the high-high backscatter gate.
+**Strategic ruling:** separate-LH fixed-margin estimates are now PARKED.  The recommended next gate
+is `FDT-MAT`: define a material-frequency observable that follows the low flow and therefore does
+not charge benign shell relabeling as nonlinear injection.
 
 ---
 
@@ -493,9 +505,9 @@ Only if `FDT-LH-DYN` survives should the project proceed to the high-high backsc
 
 No Lean file is added here.
 
-The present result is an analytic no-go about a Littlewood–Paley commutator and its critical
-scaling.  The repository does not yet contain the LP/Bony `L^infinity` layer needed to mechanize the
-actual operator.  Formalizing only the scalar scaling equalities would not move the proof frontier
-and would violate the standing “no plumbing before an analytic gate survives” rule.
+The result is an analytic no-go about a Littlewood–Paley commutator and its critical scaling.  The
+repository does not yet contain the LP/Bony `L^infinity` layer needed to mechanize the actual
+operator.  Formalizing only the scalar scaling equalities would not move the proof frontier and
+would violate the standing “no plumbing before an analytic gate survives” rule.
 
 `FORMAL_SCOPE.md` and `STATUS.md` therefore remain unchanged.
