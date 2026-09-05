@@ -216,15 +216,16 @@ Resume protocol items 7–9.
   `3306bbead924c1f7c4c8812c5bf5b206b6eb6d01`.
 - Session-35 affine decision first commit:
   `17ba363afe0e6fc3061809b920a438600f4db773`.
-- Session-35 integration/update commits after that include
-  `a5df47d0676c82fe50aff780a581d6dea473a1a8` (cross-link/update of the session-34
-  record) and this final handoff commit.
+- Session-35 integration/update commits include
+  `a5df47d0676c82fe50aff780a581d6dea473a1a8` (session-34 record cross-link/update),
+  `5138569adc3005dbf0921045061dea2deaabf975` (handoff refresh), and this final
+  handoff pin.
 - No Lean/runtime source changed in sessions 34–35; `FORMAL_SCOPE.md` and `STATUS.md`
   intentionally remain unchanged.
 - PR #87 pre-session-35 hosted integration check: workflow `Lean 4 formalization`,
   run **#263** (`33950506980`), job `101264255550`, conclusion **success**; proof-hole /
-  local-axiom scan and cached full build both passed.  Session-35 docs pushes may
-  trigger a fresh integration run; treat it as status only.
+  local-axiom scan and cached full build both passed.  The final session-35 docs head
+  may trigger a fresh integration run; treat it as status only.
 - Prior exact formal baseline remains Lean 4.32.1 / **8777 jobs PASS**.
 - GitHub-hosted Actions remain a final/status resource, not an interactive compiler.
 
