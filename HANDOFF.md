@@ -1,34 +1,29 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: **2026-09-06 JST (forty-fourth session)**.
+Last updated: **2026-09-06 JST (forty-fifth session)**.
 
-This is the durable short-form continuation point. Current theorem/source files and merged `main` control accepted state. Stacked research PRs are branch-local until merged.
+This is the durable short-form continuation point. Current theorem/source files and merged `main` control accepted state. Stacked research branches are not accepted `main` state until integrated there.
 
 ## Accepted main boundary
 
-Accepted `main` head before the current research stack is
+Current accepted `main` head at this session start:
 
-`327c2fdc382d4a40cc7779552ae898ec70959ed5`.
+`6d70e3c9a8040d7d6e6570f0f62379fdb9b313c9`
 
-PR #92 is merged. The accepted periodic sidecar contains
+(PR #90 merge).
 
-- `Formal/PeriodicClayCore.lean`;
-- `Formal/PeriodicExplicitShear.lean`;
-- `Formal/PeriodicClayShear.lean`;
-- `Formal/PeriodicClayEnergy.lean`;
-- `Formal/PeriodicClayQuantifiers.lean`;
-- `Formal/PeriodicClayCertificate.lean`;
+Accepted formal state includes the PR-92 periodic sidecar and the pre-existing whole-space `R^3` local actual-NS stack. The periodic anchors include `ClayNS.certified_nonzero_periodic_NS` and `ClayNS.clayB_has_nonzero_smooth_specialization`; the universal proposition `ClayNS.ClayB` remains **unproved**. The whole-space anchors remain `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`; that result is local/distributional, not global regularity.
 
-with anchors `ClayNS.certified_nonzero_periodic_NS`, `ClayNS.clayB_has_nonzero_smooth_specialization`, and the three quantifier/coverage theorems. The universal proposition `ClayNS.ClayB` remains **unproved**. PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e` passed hosted Lean workflow #277 (`33996261541`), including the forbidden-source scan and full cached `Formal.+` build under Lean 4.32.1 / mathlib `520045ab14e26149ee970e2e617ca04b09bde5d6`.
+PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e` passed hosted Lean workflow #277 (`33996261541`). PR #90 reconciled head `cf8ea8b0ba502223e83c03383abc4187ba1ccfe2` passed hosted workflow #278 (`33998128794`). No Lean/runtime source changed in sessions 39–45.
 
-The accepted whole-space formal frontier is unchanged: local actual-NS mild theory on `R^3` for real divergence-free Schwartz data, explicit lifespan, unrestricted uniqueness, restart/continuation dichotomy, decoded velocity/pressure semantics, actual incompressible NS at interior times, and the admissible-data adapter. This remains local/distributional, not a Clay result.
+## Breakdown research accepted on main
 
-## Breakdown research stack
+PR #89 plus PR #90 are now merged on `main`.
 
-Merged PR #89 is accepted on `main` and establishes the B2 Gamma-max curvature budget. The parent B2 middle limb remains OPEN.
+The accepted B2 Gamma results include:
 
-PR #90 (`research/b2-gamma-flattop-enstrophy`) is open and currently mergeable after session-43 conflict resolution. It contains sessions 39–41, including former stacked PR #91 merged into the PR-90 branch:
-
+- `B2-GAMMA-CURVATURE-BUDGET = YES`;
+- one-scale `B2-GAMMA-ONESCALE(beta>=1/2) = NO` under its stated nondegeneracy;
 - `B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`;
 - `B2-GAMMA-TRANSITION-VORTICITY = YES`;
 - `B2-GAMMA-LATE-ARRIVAL-BARRIER = NO`;
@@ -38,134 +33,125 @@ PR #90 (`research/b2-gamma-flattop-enstrophy`) is open and currently mergeable a
 - `B2-GAMMA-STRAIN-ELLIPTIC-KILL = NO`;
 - `B2-GAMMA-SATURATION-MICROGEOMETRY = PARKED`.
 
-PR #90 conflict-resolution head:
+The parent B2 middle limb remains OPEN. S15 and FDT remain parked under their recorded reopen rules.
 
-`cf8ea8b0ba502223e83c03383abc4187ba1ccfe2`.
+## Session 44 branch-local result — ancient / steady Euler
 
-The conflict was only the simultaneous `HANDOFF.md` edit on `main` and the branch; all accepted PR-92 formal files plus all three B2 gate records were retained. No Lean/runtime source changed. Hosted workflow #278 was triggered by the synchronized PR-90 head; read its live status rather than inferring from older runs.
-
-S15 and the FDT cross-track remain parked. The Gamma-saturation microgeometry subprogram remains parked. Do not reopen them without their recorded reopen conditions.
-
-## Session 44 — B2 ancient-Euler compactness decision
+PR #93 was merged into its stacked base branch `research/b2-gamma-flattop-enstrophy` **after** PR #90 had already been merged to `main`; therefore the session-44 file is branch history, not automatically accepted main history.
 
 Record:
 
 `docs/gates/B2_ANCIENT_EULER_COMPACTNESS_DECISION_2026-09-06.md`.
 
-The post-K11 interior has
+For the K11 interior `gamma>alpha`, `gamma+alpha>1`, the convective scaling has
 
-`gamma > alpha`, `gamma + alpha > 1`,
+`eps_n = nu/(U_n ell_n) -> 0`
 
-with amplitude/scale
+and both normalized time horizons diverge. Under local normalized `L^infinity` tightness, weak compactness reaches Euler--Reynolds, not automatically Euler. Static steady-Euler Liouville/exponent kills fail broadly because nontrivial compact axisymmetric steady Euler flows with swirl exist.
 
-`U_n ~ tau_n^(-gamma)`, `ell_n ~ tau_n^alpha`.
+The session also found the conditional fixed-shape adjoint identity:
 
-Using convective time
+`<V,L_V w>=0`,
 
-`theta_n = ell_n/U_n ~ tau_n^(alpha+gamma)`
+`<V,D_{gamma,alpha}V>=(gamma-3alpha/2)||V||_2^2`,
 
-and normalized fields
+`<V,-Delta V>=||grad V||_2^2`.
 
-`v_n(y,s)=U_n^(-1)u(x_n+ell_n y,t_n+theta_n s)`,
+It gives a first-order obstruction **only if** defect-free strong compactness, a nonzero steady profile, shape stationarity, and a bounded first-order expansion are independently justified.
 
-the exact equation is
+## Session 45 — B2 modulation compactness decision
 
-`partial_s v_n + (v_n.grad)v_n + grad q_n = eps_n Delta v_n`,
+Current branch:
 
-`eps_n = nu/(U_n ell_n) ~ nu tau_n^(gamma-alpha) -> 0`.
+`research/b2-modulation-compactness-decision`
 
-Also
+based on `research/b2-ancient-euler-compactness`.
 
-`tau_n/theta_n ~ tau_n^(1-alpha-gamma) -> infinity`,
+New record:
 
-so both forward and backward normalized time horizons tend to infinity. Decisions:
+`docs/gates/B2_MODULATION_COMPACTNESS_DECISION_2026-09-06.md`.
 
-- **`B2-ANCIENT-VANISHING-VISCOSITY = YES`;**
-- **`B2-ANCIENT-ETERNAL-WINDOW = YES`.**
+### Exact dynamic normalization
 
-Under the natural local normalized `L^infinity` envelope one may extract
+With
 
-`v_n weak-* -> v`, `v_n tensor v_n weak-* -> M`,
+`U=tau^(-gamma)`, `ell=tau^alpha`, `ds/dt=U/ell`,
 
-and the viscosity vanishes distributionally. The honest compactness endpoint is therefore Euler--Reynolds:
+`u(x,t)=U(t)v((x-x_c(t))/ell(t),s)`,
 
-`partial_s v + div(v tensor v) + grad q = -div R`,
+the exact normalized equation is
 
-`R=M-v tensor v`.
+`partial_s v + (v.grad)v + grad q - (x_c'/U).grad v`
+`  + delta [gamma v + alpha(y.grad)v] = eps Delta v`,
 
-No current B2 budget forces `R=0`, and pointwise max normalization does not force a nonzero weak limit. A smooth axisymmetric pure-swirl high-frequency counterprofile shows why symmetry + `L^infinity` compactness alone cannot identify the quadratic limit. It is a kinematic compactness counterprofile only, not an NS witness.
+where
 
-Decision:
+`delta=tau^(alpha+gamma-1)->0`,
 
-- **`B2-ANCIENT-EULER-REYNOLDS-LIMIT = YES`** conditional on local normalized `L^infinity` tightness;
-- **`B2-ANCIENT-EULER-COMPACTNESS = NO` from current B2 controls.**
+`eps=nu tau^(gamma-alpha)->0`.
 
-The naive second step also fails: smooth compactly supported nontrivial steady Euler flows in `R^3` exist, and Constantin--La--Vicol realize the construction through the stationary **axisymmetric Grad--Shafranov ansatz with swirl**. Their multiscale construction also allows independently rescaled steady templates. Hence:
+The coefficient of `partial_s v` is **exactly one**. Thus `gamma+alpha>1` makes the fitted amplitude/scale drift slow on the convective clock; it does **not** force the normalized shape to be stationary. The general leading equation is unsteady Euler (or Euler--Reynolds after only weak compactness), not steady Euler.
 
-- **`B2-STEADY-EULER-STATIC-LIOUVILLE-KILL = NO`;**
-- **`B2-STEADY-EULER-STATIC-EXPONENT-CUT = NO`.**
+Decisions:
 
-This does not reopen the external-registry route already killed for a continuous self-similar steady-front NS profile. The present interior leading equation is steady Euler; the relevant compact Euler templates are known to exist.
+- **`B2-MODULATION-SLOW-PARAMETERS = YES`;**
+- **`B2-MODULATION-SHAPE-STATIONARITY = NO` from current B2 hypotheses.**
 
-### New positive calculation: first-order modulation adjoint
+This corrects an overstatement in `DOMINANT_BALANCE_INVERSION_2026-08-19.md`: the K11 cut `gamma+alpha>=1` remains valid, but the old unconditional phrase "interior => quasi-static steady-Euler core" is withdrawn. An explicit dated erratum was appended; no silent repair was made.
 
-For a nonzero compact smooth steady Euler profile `V`, let
+### Strong compactness audit
 
-`L_V w = P[(V.grad)w + (w.grad)V]`.
+For a normalized cylinder,
 
-For divergence-free `w`,
+`int |grad_y v_n|^2 ~ (1/(U_n ell_n^2)) int |grad_x u|^2`,
 
-`<V,L_V w> = 0`.
+with
 
-For the dilation generator
+`1/(U_n ell_n^2) ~ tau_n^(gamma-2alpha)`.
 
-`D_{gamma,alpha}V = gamma V + alpha (y.grad)V`,
+Since the frozen blob wedge has `alpha>=2gamma/3`, this prefactor diverges. Finite physical dissipation gives no rate that produces a uniform positive normalized regularity/translation modulus. The normalized viscous length is `sqrt(eps_n)`, leaving a growing inertial band
 
-one has
+`1 << k_n << eps_n^(-1/2)`
 
-`<V,D_{gamma,alpha}V> = (gamma - 3 alpha/2)||V||_2^2`,
+where `eps_n k_n^2->0` and sub-core oscillations can survive a convective window.
 
-and
+An exact periodic NS shear family is recorded only as a mechanism test: bounded vanishing-viscosity solutions can weakly converge while retaining a nonzero quadratic defect. It is **not** an `R^3` axisymmetric B2 witness. The earlier axisymmetric snapshot counterprofile separately shows symmetry alone does not supply compactness.
 
-`<V,-Delta V> = ||grad V||_2^2 > 0`.
+Decisions:
 
-In a dynamically normalized fixed-shape frame the two subleading coefficients are
+- **`B2-MODULATION-STRONG-COMPACTNESS = NO` from current B2 budgets;**
+- **`B2-MODULATION-COMPACTNESS = NO` as the proposed unconditional reduction.**
 
-`delta_t ~ tau^(alpha+gamma-1)`,
+The energy pairing of the dynamic equation merely rewrites the physical energy equality and reproduces the K5 `alpha>=2gamma/3` threshold; it gives no hidden stationarity or defect-killing budget.
 
-`delta_nu ~ nu tau^(gamma-alpha)`,
+### Strategic ruling
 
-so
+The chain
 
-`delta_nu/delta_t = nu tau^(1-2alpha)`.
+`B2 interior -> strong steady-Euler fixed profile -> first-order adjoint obstruction`
 
-A bounded first-order correction to a **shape-stationary** steady profile must therefore satisfy the exact adjoint solvability balance
+is **PARKED**.
 
-`delta_t (gamma - 3 alpha/2)||V||_2^2 + delta_nu ||grad V||_2^2 = lower order`.
+The session-44 adjoint identity remains a valid conditional specialization test. Reopen this lane only for a genuinely independent one-fixed-solution cross-scale compactness theorem, a propagated shape-locking theorem, or an obstruction formulated directly at the unsteady Euler--Reynolds level.
 
-Conditional consequences:
-
-- `alpha<1/2`: leading solvability forces `alpha=2gamma/3`;
-- `alpha>1/2`: the viscous forcing fails the adjoint test for every nonzero compact fixed profile;
-- `alpha=1/2`: one needs the tuned relation `(3/4-gamma)||V||_2^2 = nu||grad V||_2^2`.
-
-Decision:
-
-**`B2-STEADY-EULER-MODULATION-ADJOINT = YES` as a conditional algebraic obstruction.**
-
-It is not an unconditional exponent cut because the current B2 hypotheses do not provide defect-free strong compactness, nonzero compact profile convergence, asymptotic shape stationarity, or a justified bounded first-order expansion.
+Do **not** introduce a positive Sobolev/Besov/BKM/Serrin/H3 assumption and rename it "compactness".
 
 ## Next work
 
-The only live continuation of the ancient/steady-Euler idea is
+Run one bounded selection pass:
 
-**`B2-MODULATION-COMPACTNESS`**:
+**`B2-SIGNED-BUDGET-SELECTION`**.
 
-> For one fixed hypothetical B2 solution in the K11 interior, do actual NS plus the existing energy/dissipation/Type-II hypotheses force enough strong compactness and asymptotic shape stationarity to make the first-order steady-Euler modulation equation valid with a bounded correction?
+Goal: inspect exact global/signed identities of the original `R^3` axisymmetric NS solution **before any singular rescaling** and select at most one new theorem-shaped gate. Candidate channels may include component-energy exchange, global circulation/weighted-circulation entropies, angular momentum, helicity-type balances, or another exact signed quantity.
 
-A YES activates the adjoint obstruction and would collapse a large portion of the interior exponent wedge toward exceptional balance sets. A NO must exhibit a dynamically admissible one-fixed-solution escape mechanism (persistent Reynolds defect, motion through a steady-Euler moduli family, or true sub-core oscillation). A snapshot oscillation family alone is not enough.
+Selection requirements:
 
-**Stop rule:** if proving this compactness requires a continuation-strength hypothesis (uniform positive Sobolev/Besov control, BKM/Serrin, bounded H3, or equivalent), park the ancient/steady-Euler route instead of renaming regularity as compactness.
+1. exact actual-NS identity/inequality on the current `SPEC.md` domain/data class;
+2. sign/monotonicity or finite total budget that survives relocation of the bad set;
+3. nontrivial scaling interaction with the B2 wedge beyond existing K5 energy/dissipation and the parked Gamma-saturation microgeometry;
+4. not a continuation criterion in disguise.
+
+If no candidate passes all four tests, record `NO-CHANNEL` and do not open another local-geometry escape branch.
 
 ## Resume protocol
 
@@ -175,31 +161,30 @@ Read in order:
 2. `SPEC.md`;
 3. `AGENTS.md`;
 4. `FORMAL_SCOPE.md`;
-5. this file;
+5. this `HANDOFF.md`;
 6. `docs/GPT_WORKFLOW.md`;
 7. `docs/LEAN_CI_OPERATIONS.md`;
 8. `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`;
-9. `docs/gates/DOMINANT_BALANCE_INVERSION_2026-08-19.md`;
-10. the merged B2 curvature gate and the three PR-90 Gamma records;
-11. `docs/gates/B2_ANCIENT_EULER_COMPACTNESS_DECISION_2026-09-06.md`;
-12. the external read-only no-go registry;
-13. current `main`, PR #90, the current stacked branch/PR, and latest CI.
+9. `docs/gates/DOMINANT_BALANCE_INVERSION_2026-08-19.md` including the 2026-09-06 erratum;
+10. merged B2 Gamma records;
+11. `docs/gates/B2_ANCIENT_EULER_COMPACTNESS_DECISION_2026-09-06.md` on the stacked history;
+12. `docs/gates/B2_MODULATION_COMPACTNESS_DECISION_2026-09-06.md`;
+13. the external read-only no-go registry;
+14. current `main`, current research branch/PR, and latest CI.
 
 ## Claim boundary / forbidden shortcuts
 
 Do not:
 
 - claim Clay A/B/C/D;
-- treat PR-90 or later stacked research conclusions as merged main state;
-- call Euler--Reynolds an Euler solution;
-- infer nonzero weak limit from a pointwise normalized maximum;
-- drop the Reynolds defect without strong convergence;
-- use Gavrilov/Constantin--La--Vicol steady Euler flows as NS blow-up witnesses;
-- promote the conditional modulation-adjoint calculation to an unconditional B2 cut;
-- reopen the killed continuous self-similar steady-front route under renamed variables;
-- continue the parked Gamma-saturation route with another local escape variable;
-- reopen S15/FDT without their recorded conditions;
+- claim the parent B2 middle limb is excluded or realized;
+- treat Euler--Reynolds as Euler;
+- infer shape stationarity from `gamma+alpha>1`;
+- infer strong compactness from finite physical dissipation after the singular normalization;
+- promote the conditional steady-profile adjoint calculation to an unconditional cut;
+- reopen the parked Gamma-saturation, S15, FDT, or fixed-profile ancient-Euler lanes without their recorded reopen conditions;
+- use the periodic shear mechanism as an `R^3` B2 witness;
 - use numerical evidence as a continuum blow-up proof;
 - add Lean plumbing merely for completeness.
 
-The parent B2 middle limb remains OPEN. No current result proves 3D Navier--Stokes blow-up or global regularity.
+No current result proves 3D Navier--Stokes blow-up or global regularity.
