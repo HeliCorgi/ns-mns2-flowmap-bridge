@@ -1,0 +1,248 @@
+name: M-1 E4c near-far calibrated gate
+
+on:
+  pull_request:
+    types: [opened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m1-e4c-nearfar-calibrated-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nearfar:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'numerics/m1-e4c-nearfar-calibrated'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: E4c96
+            N: 96
+            T: "6.0"
+            dt: "0.008333333333333333"
+            source_run: "34019449248"
+            artifact_id: "9985091027"
+            artifact_name: m1-E4c96-resolution-screen
+            artifact_digest: sha256:ca63edd772797ad325e819b682f8187f6aa1500eb34484400e0c30cd5ddae8da
+          - name: E4c128
+            N: 128
+            T: "6.0"
+            dt: "0.00625"
+            source_run: "34020092555"
+            artifact_id: "9985610481"
+            artifact_name: m1-E4c128-resolution-screen
+            artifact_digest: sha256:9f17b8e926f9a90c69b33a61701a22e724a15da46931e3e19f8eb914d1aeef88
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Verify exact accepted R0 artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ matrix.artifact_id }}
+          EXPECTED_NAME: ${{ matrix.artifact_name }}
+          EXPECTED_DIGEST: ${{ matrix.artifact_digest }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          aid = os.environ['ARTIFACT_ID']
+          url = f'https://api.github.com/repos/HeliCorgi/ns-mns2-flowmap-bridge/actions/artifacts/{aid}'
+          req = urllib.request.Request(url, headers={
+              'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          })
+          with urllib.request.urlopen(req) as r:
+              d = json.load(r)
+          assert str(d['id']) == aid, d
+          assert d['name'] == os.environ['EXPECTED_NAME'], d
+          assert not d['expired'], d
+          assert d.get('digest') == os.environ['EXPECTED_DIGEST'], d
+          print(f"artifact provenance PASS id={aid} name={d['name']} digest={d.get('digest')}")
+          PY
+
+      - name: Recover accepted R0 screen
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: experiments/m1_events/results_resolution_rescue
+          github-token: ${{ github.token }}
+          repository: HeliCorgi/ns-mns2-flowmap-bridge
+          run-id: ${{ matrix.source_run }}
+
+      - name: Recheck fail-closed R0 fields
+        env:
+          RUN_NAME: ${{ matrix.name }}
+          EXPECTED_N: ${{ matrix.N }}
+          EXPECTED_T: ${{ matrix.T }}
+          EXPECTED_DT: ${{ matrix.dt }}
+        run: |
+          python - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          name = os.environ['RUN_NAME']
+          d = json.loads(Path(f'experiments/m1_events/results_resolution_rescue/{name}.json').read_text())
+          assert d['name'] == name, d
+          assert int(d['N']) == int(os.environ['EXPECTED_N']), d
+          assert math.isclose(float(d['nu']), 0.02, rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d['T']), float(os.environ['EXPECTED_T']), rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d['dt']), float(os.environ['EXPECTED_DT']), rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d['tail_tolerance']), 1e-5, rel_tol=0.0, abs_tol=1e-18), d
+          assert d['tail_pass'] is True, d
+          assert d['finite_pass'] is True, d
+          assert float(d['max_tail']) <= float(d['tail_tolerance']), d
+          print(f"{name} R0 provenance/gate PASS max_tail={d['max_tail']:.12e}")
+          PY
+
+      - name: Run unchanged Yu-structured near/far diagnostic
+        run: python experiments/m1_events/nearfar_rescue.py ${{ matrix.name }}
+
+      - name: Sanity-check R1 output
+        env:
+          RUN_NAME: ${{ matrix.name }}
+        run: |
+          python - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          name = os.environ['RUN_NAME']
+          p = Path(f'experiments/m1_events/results_nearfar_yu_rescue/{name}.json')
+          d = json.loads(p.read_text())
+          assert d['name'] == name
+          assert len(d['t']) == len(d['snap']) == len(d['tail']) > 1
+          assert all(math.isfinite(float(x)) for x in d['tail'])
+          assert max(float(x) for x in d['tail']) <= 1e-5
+          print(f"{name}: R1 samples={len(d['t'])} sampled_max_tail={max(d['tail']):.12e} wall={d['walltime_s']:.3f}s")
+          PY
+
+      - name: Upload E4c R1 near/far artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-${{ matrix.name }}-nearfar-rescue
+          path: experiments/m1_events/results_nearfar_yu_rescue/${{ matrix.name }}.json
+          if-no-files-found: error
+
+  compare-certify:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'numerics/m1-e4c-nearfar-calibrated'
+    needs: nearfar
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify frozen calibration artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          aid = 9994071254
+          name = 'm1-filter-calibration-envelope'
+          digest = 'sha256:6d6ca58697a1659d814dc5ae9736e105847ebdd690423d5233997f547129506e'
+          url = f'https://api.github.com/repos/HeliCorgi/ns-mns2-flowmap-bridge/actions/artifacts/{aid}'
+          req = urllib.request.Request(url, headers={
+              'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+              'Accept': 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+          })
+          with urllib.request.urlopen(req) as r:
+              d = json.load(r)
+          assert int(d['id']) == aid, d
+          assert d['name'] == name, d
+          assert not d['expired'], d
+          assert d.get('digest') == digest, d
+          print(f'calibration provenance PASS id={aid} digest={digest}')
+          PY
+
+      - name: Download both current-run E4c R1 outputs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: m1-E4c*-nearfar-rescue
+          path: experiments/m1_events/results_nearfar_yu_rescue
+          merge-multiple: true
+
+      - name: Recover frozen manufactured calibration envelope
+        uses: actions/download-artifact@v4
+        with:
+          name: m1-filter-calibration-envelope
+          path: experiments/m1_events/results_e4c_calibrated/input/envelope
+          github-token: ${{ github.token }}
+          repository: HeliCorgi/ns-mns2-flowmap-bridge
+          run-id: 34049373265
+
+      - name: Run threshold-free E4c R2 comparison
+        run: |
+          mkdir -p experiments/m1_events/results_e4c_calibrated
+          python experiments/m1_events/compare_nearfar_refinement.py \
+            experiments/m1_events/results_nearfar_yu_rescue/E4c96.json \
+            experiments/m1_events/results_nearfar_yu_rescue/E4c128.json \
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_R2.json \
+            | tee experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_R2.txt
+
+      - name: Apply frozen calibration mechanically
+        run: |
+          python experiments/m1_events/certify_nearfar_with_calibration.py \
+            experiments/m1_events/results_e4c_calibrated/input/envelope/envelopes.json \
+            experiments/m1_events/results_nearfar_yu_rescue/E4c96.json \
+            experiments/m1_events/results_nearfar_yu_rescue/E4c128.json \
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_calibrated.json \
+            | tee experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_calibrated.txt
+
+      - name: Evaluate preregistered primary row
+        run: |
+          python experiments/m1_events/evaluate_e4c_calibrated_gate.py \
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_calibrated.json \
+            experiments/m1_events/results_e4c_calibrated/E4c_gate_decision.json \
+            | tee experiments/m1_events/results_e4c_calibrated/E4c_gate_decision.txt
+
+      - name: Sanity-check result bundle
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('experiments/m1_events/results_e4c_calibrated')
+          r2 = json.loads((root/'E4c96_vs_E4c128_R2.json').read_text())
+          cert = json.loads((root/'E4c96_vs_E4c128_calibrated.json').read_text())
+          gate = json.loads((root/'E4c_gate_decision.json').read_text())
+          assert r2['lo']['name'] == 'E4c96' and r2['hi']['name'] == 'E4c128'
+          assert cert['lo']['name'] == 'E4c96' and cert['hi']['name'] == 'E4c128'
+          assert cert['envelope_reference_pair'] == [160, 192]
+          assert gate['primary_row'] == 'c=16,sigma=0.125'
+          assert gate['decision'] in {'GO_TO_DT2','STOP_PARK_FILTERED_NEARFAR'}
+          labels = set()
+          for row in cert['combos'].values():
+              for s in row['samples']:
+                  labels.add(s['lo']['label']); labels.add(s['hi']['label'])
+                  if s['lo']['bin'] == 'B3':
+                      assert s['lo']['label'] == 'NUMERICALLY_UNCERTIFIED_RESOLUTION'
+                  if s['hi']['bin'] == 'B3':
+                      assert s['hi']['label'] == 'NUMERICALLY_UNCERTIFIED_RESOLUTION'
+          assert 'INCONSISTENT_MULTIPLE_WINNERS' not in labels
+          assert 'NONFINITE_OR_BAD_P' not in labels
+          print('E4c calibrated bundle sanity PASS decision=', gate['decision'])
+          print('labels=', sorted(labels))
+          PY
+
+      - name: Upload E4c R2 + calibrated decision bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-E4c96-E4c128-nearfar-calibrated
+          path: |
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_R2.json
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_R2.txt
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_calibrated.json
+            experiments/m1_events/results_e4c_calibrated/E4c96_vs_E4c128_calibrated.txt
+            experiments/m1_events/results_e4c_calibrated/E4c_gate_decision.json
+            experiments/m1_events/results_e4c_calibrated/E4c_gate_decision.txt
+          if-no-files-found: error
