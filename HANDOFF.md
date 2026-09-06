@@ -1,224 +1,190 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: **2026-09-06 JST (forty-eighth session)**.
+Last updated: **2026-09-06 JST (forty-ninth session)**.
 
-This is the durable short-form continuation point. Current theorem/source files and merged `main` control accepted state. Open/stacked research PRs and numerical branches are not accepted `main` state until merged.
+This is the durable continuation point. Current theorem/source files and merged `main` control accepted state. Numerical artifacts are evidence only for the exact revision/run recorded below. No current result proves Clay A/B/C/D.
 
 ## Accepted main boundary
 
 Current accepted `main` head at this session start:
 
-`6d824e274cd116036a08ed2781dd1368e89863b8`
+`64848e3912021be870d3aa19866f1e37b41a0059`
 
-(PR #96 merge: `Numerics: preregister M1 resolution rescue`).
+(PR #98 merge: `Numerics: run first M1 resolution rescue screen`).
 
-Accepted formal state includes:
+Immediately preceding accepted research integration:
 
-- the existing whole-space `R^3` local actual-NS mild stack for real divergence-free Schwartz data, with anchors `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`;
-- the periodic special-family sidecar from PR #92, including `ClayNS.certified_nonzero_periodic_NS` and `ClayNS.clayB_has_nonzero_smooth_specialization`.
+- PR #97 merged as `25954382b1db85fcd5fc2a35b6b6e70c34240327`;
+- its B2 records establish only the negative compactness/stationarity decisions already stated there; they do not kill the parent B2 middle limb.
 
-The whole-space theorem is local/distributional; the periodic theorem is a special-family global certificate. `ClayNS.ClayB` remains unproved. No Clay A/B/C/D statement is proved.
+Accepted formal state remains unchanged:
 
-Latest accepted hosted Lean evidence remains:
+- whole-space `R^3` local actual-NS mild stack for real divergence-free Schwartz data, anchored by `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`;
+- periodic special-family sidecar from PR #92, including `ClayNS.certified_nonzero_periodic_NS` and `ClayNS.clayB_has_nonzero_smooth_specialization`;
+- `ClayNS.ClayB` remains defined but unproved.
 
-- PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e`, workflow #277: PASS;
-- PR #90 reconciled head `cf8ea8b0ba502223e83c03383abc4187ba1ccfe2`, workflow #278: PASS.
+The whole-space theorem is local in time and distributional in space. The periodic theorem is a special-family global certificate, not the universal Clay-B proposition.
 
-No Lean/runtime formal source changed in sessions 39–48.
+Latest hosted Lean evidence on the most recent numerical PR head:
+
+- PR #98 head `99541d2202c9394926b46a82dda991a892f0f4e5`;
+- workflow `Lean 4 formalization`, run #282 / run id `34005553922`;
+- result: **PASS**.
+
+No Lean/formal source changed in PR #97 or #98, so `FORMAL_SCOPE.md` is intentionally unchanged. Stage-9 formal plumbing remains stopped unless a concrete commissioned theorem consumes a missing formal edge or a semantic defect is found.
 
 ## Breakdown analytic state
 
-Merged PR #89 and PR #90 leave the parent B2 middle limb OPEN while parking the Gamma-saturation microgeometry route.
+The parent B2 middle limb remains **OPEN**. Accepted negative/narrowing results include:
 
-The later analytic records remain outside accepted main unless PR #97 is merged:
-
+- S15 `(q,d)` cone parked after the pressure and fourth-jet counterfamilies;
+- FDT cross-track parked under its recorded deformation/Cauchy-Green reopen conditions;
+- Gamma-saturation microgeometry static-enstrophy kill failed, while the mandatory transition-vorticity lower bound survived;
+- fixed-profile ancient/steady-Euler route parked;
 - `B2-ANCIENT-EULER-COMPACTNESS = NO` from current B2 controls;
 - `B2-MODULATION-SHAPE-STATIONARITY = NO` from current hypotheses;
 - `B2-MODULATION-STRONG-COMPACTNESS = NO` from current budgets;
-- the fixed-profile ancient/steady-Euler lane is parked;
-- the old unconditional phrase `interior => quasi-static steady-Euler core` is withdrawn, while the K11 cut `gamma+alpha>=1` itself remains valid.
+- K11's exponent cut itself remains valid, but the old unconditional phrase `interior => quasi-static steady-Euler core` is withdrawn.
 
-S15, FDT, Gamma-saturation microgeometry, and the fixed-profile ancient/steady-Euler lane remain parked under their recorded reopen conditions.
+Do not reopen these lanes merely because the numerical M-1 program is inconclusive.
 
-## Session 47 — return to numerical candidate / M-1
+## Active lane — periodic M-1 resolution rescue
 
-User commissioned a return to the `SPEC.md` numerical candidate / M-1 lane rather than opening another analytic escape variable.
+The user commissioned a return to the M-1 numerical candidate/mechanism-selection lane. The governing records are:
 
-PR #96 added and merged the resolution-rescue infrastructure. The immediate decision was **not** to invent another observable. The standing M-1 prerequisite is to repair resolution/convergence evidence first.
+- `experiments/m1_events/PREREG.md`;
+- `M1_INDEPENDENT_PROBE/M1_INDEPENDENT_PROBE_2026-09-04.md`;
+- `Stateflow M-1/M1_BOUNDARY_LOCALIZATION_ESTIMATE_AUDIT_2026-09-04.md`;
+- `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`.
 
-### Existing run-level resolution audit
+This is periodic `T^3` evidence-grade work only. It is not an `R^3` candidate and not a blow-up/regularity theorem.
 
-The preregistered M-1 rule admits a run into the mechanism verdict only if its spectral tail remains `<= 1e-5` over the whole run.
+The standing fail-closed resolution rule is
 
-Stored `experiments/m1_events/results/summary.json` gives:
+```text
+max_tail <= 1e-5 over the entire run
+```
 
-| run | N | max tail | run-level status |
-|---|---:|---:|---|
-| E0 | 64 | `2.8691770713435234e-08` | PASS |
-| E1 | 64 | `3.969158378526758e-05` | FAIL |
-| E3 | 64 | `4.8422283231966924e-05` | FAIL |
-| E4 | 64 | `5.9967246781271955e-05` | FAIL |
-| E2 | 64 | `9.939773706363298e-04` | FAIL |
-| E2b | 96 | `1.3196230254612794e-04` | FAIL |
+plus finite numerical state. Per-snapshot masks do not repair a globally unresolved run.
 
-Thus only E0 currently satisfies the standing **whole-run** resolution rule. Per-snapshot masks in `stateflow_harness.py` do not upgrade E1/E2/E3/E4 to resolved runs.
+The legacy E3/E4 random FFT-array seeds are not one fixed continuum datum across changing `N`. Only the new `E3c*`/`E4c*` resolution-invariant seed families may be used for fixed-datum convergence comparisons.
 
-The existing Yu-structured filtered near/far outputs remain useful only as a hypothesis generator: at locally admissible growth samples, positive near-field stretching is absorbed and the positive surplus is classified as FAR rather than COMM/LOC. This is not yet a cross-datum conclusion because the other runs fail the whole-run tail gate.
+## Session 49 — first executed rescue result
 
-### Fixed-datum convergence defect found
+PR #98 is merged. Its revision-qualified numerical workflow completed successfully.
 
-The legacy random initializers `ic_random_band` and the random perturbation inside `ic_r4` draw random numbers directly into FFT arrays whose shape depends on `N`.
+Workflow evidence:
 
-Therefore holding the RNG seed fixed while changing `N` does **not** define one fixed continuum datum. Old E3/E4 remain valid one-grid diagnostics, but a naive `N=64 -> 96 -> 128` rerun is not a spatial-convergence sequence for one datum.
+- workflow: `M-1 resolution rescue`;
+- run id: `34005553913`;
+- PR head: `99541d2202c9394926b46a82dda991a892f0f4e5`;
+- GitHub-hosted Ubuntu 24.04;
+- Python 3.12.14, NumPy 2.5.2, SciPy 1.18.1.
 
-PR #96 adds a resolution-independent continuum seeding layer instead of silently reusing the old provenance.
+Seed self-check:
 
-## M-1 resolution-rescue files now on main
+```text
+PASS shared=0.000e+00 coeff_norm_delta=4.441e-16
+```
 
-### `experiments/m1_events/resolution_invariant_ic.py`
+`E1R96` result:
 
-Introduces a canonical finite integer-wavevector list, resolution-independent sine/cosine random coefficients, coefficientwise divergence-free projection, and grid sampling of one fixed trigonometric polynomial.
+```text
+N = 96
+nu = 0.01
+T = 8
+dt = 1/150
+nsteps = 1200
+max_tail = 6.086987397920e-07
+tail_tolerance = 1.000000000000e-05
+tail_pass = True
+finite_pass = True
+max_relative_single_step_energy_growth = 0.000000000000e+00
+walltime_s = 519.108
+```
 
-New fixed-datum families:
+Therefore
 
-- `E3c*`: deterministic two-mode backbone plus a 10% resolution-independent low-band perturbation;
-- `E4c*`: resolution-independent random band `1 <= |k| <= 2`.
+```text
+E1R96 WHOLE-RUN RESOLUTION SCREEN = PASS
+```
 
-Old E3/E4 data and files are not rewritten.
+at the preregistered tail gate.
 
-### `experiments/m1_events/check_resolution_invariant_ic.py`
+Artifact:
 
-Deterministic construction self-check for N=24/48:
+- `m1-e1r96-resolution-screen`;
+- id `9980926946`;
+- ZIP digest `sha256:d15de290da07776781a36a2337723899d0703b7ee01873d0a370bd559dd03c53`.
 
-- historical RMS normalization;
-- Fourier divergence to roundoff;
-- exact agreement on shared physical grid points;
-- invariant Fourier coefficient norm.
+Durable result record added on the current continuation branch:
 
-### `experiments/m1_events/resolution_rescue.py`
+`experiments/m1_events/M1_RESOLUTION_RESCUE_RUN1_RESULT_2026-09-06.md`.
 
-Cheap fail-closed whole-run screen performed **before** the expensive filtered near/far diagnostics.
+Consequence: `E1R96` is eligible for `nearfar_rescue.py`. This is still only one periodic fixed datum and does not establish FAR/COMM/LOC universality or refinement stability.
 
-Every accepted RK4 step records/updates:
+## Current continuation branch
 
-- spectral tail and full-run maximum tail;
-- finite-value status;
-- kinetic energy and maximum positive single-step relative energy growth.
+Branch:
 
-At `0.1` physical-time cadence it additionally records enstrophy, maximum vorticity, and an advective CFL diagnostic.
+`numerics/m1-resolution-run2`
 
-Preregistered ladder:
+Purpose: execute the next preregistered R0 pair before any new observable is invented.
 
-- E1 Taylor--Green: `E1R96`, then `E1R128` if needed/valuable;
-- E2 antiparallel tubes: `E2R128`, then `E2R160`, then `E2R192` only as needed;
-- fixed-continuum E3c and E4c: N=64,96,128 with `dt` proportional to `1/N`.
+New workflow:
 
-A run advances only if `max_tail <= 1e-5` over the entire interval and all values remain finite.
+`.github/workflows/m1-resolution-rescue-stage2.yml`
 
-### `experiments/m1_events/nearfar_rescue.py`
+It runs the exact fixed-continuum seed self-check and then screens in parallel:
 
-Runs the expensive existing `nearfar_yu.snapshot` diagnostic only after the matching resolution-screen JSON reports `tail_pass=true` and `finite_pass=true`. It refuses unresolved runs.
+- `E3c64`;
+- `E3c96`.
 
-### `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`
+Scientific `tail_pass=false` remains a numerical result, not a CI failure. Exceptions, non-finite state, timeout, missing artifact, or seed-self-check failure remain real execution failures.
 
-GO only if at least two genuinely different continuum data produce tail-qualified, refinement-stable growth events with the same residual class carrying the positive surplus after near-field absorption. STOP/park if residual dominance changes with datum/refinement or cannot be resolved without moving to impractical scales.
-
-No post-hoc percentage convergence tolerance is introduced. A mechanism promotion needs a separately justified tolerance/manufactured filter-resolution test, and the highest accepted spatial grid must also be rerun with `dt/2` before moving beyond diagnostic-only status.
-
-## Session 48 — PR #97 repair and first repository M-1 execution
-
-The user reported an error on PR #97. Inspection showed **no CI failure** on its old head. The error was a stale-branch merge conflict after PR #96 advanced `main`, primarily because both histories changed `HANDOFF.md`.
-
-PR #97 was synchronized with current `main` by a two-parent merge commit while retaining only its three analytic research documents over the post-#96 tree:
-
-- branch: `research/b2-ancient-euler-compactness`;
-- synchronized head: `ffec0c9ec667daf12387231407ea943a2106ccb8`;
-- PR #97 is now open and mergeable, not merged;
-- the stale branch-local `HANDOFF.md` was deliberately replaced by current-main M-1 handoff content;
-- PR title/body were repaired to state the actual analytic claim boundary.
-
-Do not merge PR #97 without explicit user instruction. Numerical M-1 remains the active lane.
-
-### First execution branch / PR
-
-Current numerical branch:
-
-`numerics/m1-resolution-run1`
-
-Current PR:
-
-PR #98 `Numerics: run first M1 resolution rescue screen`.
-
-A focused workflow `.github/workflows/m1-resolution-rescue.yml` was added. It runs:
-
-1. the exact repository `check_resolution_invariant_ic.py` self-check;
-2. only after that passes, the preregistered `E1R96` whole-run screen;
-3. uploads `E1R96.json` as `m1-e1r96-resolution-screen`.
-
-Scientific `tail_pass=false` is **not** converted into a red CI result; exceptions, non-finite state, timeout, missing artifact, and self-check failure remain infrastructure failures.
-
-Workflow run #1 / run id `34005384433` is the relevant numerical run.
-
-Verified so far on the actual PR checkout:
-
-- `seed-self-check`: **PASS**;
-- exact output: `PASS shared=0.000e+00 coeff_norm_delta=4.441e-16`;
-- Python 3.12.14, NumPy 2.5.2, SciPy 1.18.1 on Ubuntu 24.04 hosted runner;
-- `e1r96-screen`: **IN PROGRESS** at this handoff update.
-
-A local/container reproduction made from the current-main source fragments gave the same self-check output before the hosted run. The hosted PR checkout is the revision-qualified evidence.
-
-Opening PR #98 also triggered the repository's ordinary Lean PR workflow even though no Lean source changed. Do not interpret that unrelated check as numerical evidence; no Lean theorem frontier changes in this PR.
+At this handoff write the branch is prepared but the PR/workflow result is not yet assigned. Do not infer an E3c PASS/FAIL until the actual workflow artifacts/logs are inspected.
 
 ## Next work
 
-First inspect workflow run `34005384433` and the `E1R96` artifact/result.
+1. Open the focused PR from `numerics/m1-resolution-run2` to `main` and inspect the `E3c64` / `E3c96` workflow outputs.
+2. If both E3c runs pass the whole-run tail gate, retain them as the first fixed-continuum two-resolution pair and proceed to the preregistered E4c pair before selecting a mechanism. `E1R96` may also enter `nearfar_rescue.py`, but one-datum near/far evidence is not yet a cross-datum verdict.
+3. If one E3c resolution fails, follow the preregistered ladder to `E3c128` only as needed; do not move the `1e-5` tail gate.
+4. After the E3c decision, screen `E4c64` and `E4c96`, then `E2R128` in the recorded order.
+5. Only after a run is whole-run tail-qualified may `nearfar_rescue.py` be run for it.
+6. Mechanism promotion requires at least two genuinely different continuum data with tail-qualified, refinement-stable growth events and the same residual class (FAR/COMM/LOC) carrying the positive surplus after near-field absorption.
+7. Before promotion beyond diagnostic-only status, justify a convergence tolerance independently/manufactured-test-first and rerun the highest accepted spatial grid with `dt/2`.
 
-If `E1R96` has `tail_pass=true` and `finite_pass=true`, it becomes eligible for `nearfar_rescue.py`; this is still one-datum periodic evidence only. If it fails the tail gate, proceed to `E1R128` before any near/far diagnostic for Taylor--Green.
+## Commission boundaries / forbidden shortcuts
 
-After the E1 decision, continue the preregistered order:
+Do **not**:
 
-1. `E3c64` and `E3c96`;
-2. `E4c64` and `E4c96`;
-3. `E2R128`;
-4. advance to N=128/160/192 only when the previous resolution fails the tail gate or a second qualified resolution is needed for convergence.
-
-Only after a run passes the **whole-run** tail gate may `nearfar_rescue.py` be run for it.
-
-If at least two distinct fixed continuum data become resolved, compare growth-event timing and the axes `A_N`, `A_F`, `A_C`, `A_L`, `g`, residual-class labels, `R/dx`, `ell/dx`, and filtered-budget residual on common physical times before selecting a mechanism.
+- claim Clay A/B/C/D, numerical blow-up, or numerical global regularity;
+- call the periodic M-1 program an `R^3` candidate;
+- identify CI success with scientific tail-gate success;
+- treat a per-snapshot stateflow mask as repair of a globally unresolved run;
+- compare legacy E3/E4 at different `N` as one fixed continuum datum;
+- run expensive near/far diagnostics on an unresolved run;
+- select a convergence tolerance after seeing which tolerance gives the preferred residual class;
+- call the historical FAR pattern universal before at least two distinct fixed continuum data are resolved and refinement-stable;
+- revive the killed Betchov-boundary mechanism as an independent physical transport mechanism;
+- reopen S15, FDT, Gamma microgeometry, or fixed-profile ancient-Euler lanes without satisfying their recorded reopen conditions;
+- add Lean plumbing merely for completeness.
 
 ## Resume protocol
 
-At substantive resume read:
+At substantive resume inspect, in order:
 
 1. `PROJECT_GOAL.md`;
 2. `SPEC.md`;
 3. `AGENTS.md`;
 4. `FORMAL_SCOPE.md`;
-5. this `HANDOFF.md`;
+5. this file;
 6. `docs/GPT_WORKFLOW.md`;
 7. `docs/LEAN_CI_OPERATIONS.md`;
-8. `experiments/m1_events/PREREG.md`;
-9. `M1_INDEPENDENT_PROBE/M1_INDEPENDENT_PROBE_2026-09-04.md`;
-10. `Stateflow M-1/M1_BOUNDARY_LOCALIZATION_ESTIMATE_AUDIT_2026-09-04.md`;
-11. `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`;
-12. `resolution_invariant_ic.py`, `resolution_rescue.py`, `nearfar_rescue.py`;
-13. external `FABLE5_NEXT_TASK_AUDIT.md` numerical guardrails;
-14. current main, PR #97, PR #98, and current numerical outputs/artifacts.
+8. Stage-9 readiness/selection records as required by `docs/GPT_WORKFLOW.md`;
+9. the four M-1 records listed above;
+10. `resolution_invariant_ic.py`, `resolution_rescue.py`, `nearfar_rescue.py`;
+11. external `ns-singularity-certificate-lab@fable5-mainline/FABLE5_NEXT_TASK_AUDIT.md` numerical guardrails;
+12. current `main`, open PRs, workflow artifacts/logs, and the exact numerical revision under discussion.
 
-## Claim boundary / forbidden shortcuts
-
-Do not:
-
-- claim Clay A/B/C/D or numerical blow-up;
-- call periodic M-1 data an `R^3` candidate;
-- treat a per-snapshot stateflow mask as repair of a globally unresolved run;
-- compare old E3/E4 at different `N` as one fixed-datum convergence sequence;
-- run the expensive near/far diagnostic before the corresponding whole-run tail screen passes;
-- select a convergence tolerance after seeing which tolerance makes the desired mechanism pass;
-- call the historical FAR pattern universal before at least two distinct fixed continuum data are resolved and refinement-stable;
-- reopen parked analytic lanes merely because numerical data are inconclusive;
-- identify a scientific tail FAIL with a software/CI failure;
-- add Lean plumbing merely for completeness.
-
-The present objective is evidence-grade mechanism selection and candidate infrastructure only. No current result proves 3D Navier--Stokes blow-up or global regularity.
+The current objective is evidence-grade mechanism selection and candidate infrastructure only. No current result proves a 3D Navier--Stokes singularity or a global-regularity theorem.
