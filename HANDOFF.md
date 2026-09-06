@@ -1,144 +1,175 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: **2026-09-06 JST (forty-third session)**.
+Last updated: **2026-09-06 JST (forty-seventh session)**.
 
-This is the durable short-form continuation point. Current source/theorem statements and merged `main` control accepted state. Open PRs may contain later research results but are not accepted `main` state until merged.
+This is the durable short-form continuation point. Current theorem/source files and merged `main` control accepted state. Open/stacked research PRs and numerical branches are not accepted `main` state until merged.
 
 ## Accepted main boundary
 
-Main accepted head before the present PR-90 synchronization was
+Current accepted `main` head at this session start:
 
-`327c2fdc382d4a40cc7779552ae898ec70959ed5`.
+`6d70e3c9a8040d7d6e6570f0f62379fdb9b313c9`
 
-PR #92 is merged. The repository therefore contains the accepted periodic-domain sidecar
+(PR #90 merge).
 
-- `Formal/PeriodicClayCore.lean`;
-- `Formal/PeriodicExplicitShear.lean`;
-- `Formal/PeriodicClayShear.lean`;
-- `Formal/PeriodicClayEnergy.lean`;
-- `Formal/PeriodicClayQuantifiers.lean`;
-- `Formal/PeriodicClayCertificate.lean`;
+Accepted formal state includes:
 
-with anchors
+- the existing whole-space `R^3` local actual-NS mild stack for real divergence-free Schwartz data, with anchors `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`;
+- the periodic special-family sidecar from PR #92, including `ClayNS.certified_nonzero_periodic_NS` and `ClayNS.clayB_has_nonzero_smooth_specialization`.
 
-- `ClayNS.certified_nonzero_periodic_NS`;
-- `ClayNS.clayB_has_nonzero_smooth_specialization`;
-- `ClayNS.not_clayB_iff_unforcedPeriodicObstruction`;
-- `ClayNS.failure_of_clayB_has_nonzero_datum`;
-- `ClayNS.covering_solved_family_implies_clayB`.
+The whole-space theorem is local/distributional; the periodic theorem is a special-family global certificate. `ClayNS.ClayB` remains unproved. No Clay A/B/C/D statement is proved.
 
-The universal proposition `ClayNS.ClayB` remains **unproved**. The periodic shear result is a global special-family certificate, not Clay B and not a whole-space result.
+Latest accepted hosted Lean evidence remains:
 
-The accepted whole-space `R^3` formal frontier is unchanged: local actual-NS mild theory for real divergence-free Schwartz data, explicit lifespan, unrestricted uniqueness, restart/continuation dichotomy, decoded velocity/pressure semantics, and the actual incompressible Navier--Stokes equation at interior times. Primary anchors remain `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`.
+- PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e`, workflow #277: PASS;
+- PR #90 reconciled head `cf8ea8b0ba502223e83c03383abc4187ba1ccfe2`, workflow #278: PASS.
 
-PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e` passed hosted Lean workflow #277 (`33996261541`): forbidden-source scan PASS and full cached `Formal.+` build PASS under Lean 4.32.1 / mathlib `520045ab14e26149ee970e2e617ca04b09bde5d6`.
+No Lean/runtime formal source changed in sessions 39–47.
 
-## Breakdown research accepted on main
+## Breakdown analytic state
 
-Merged PR #89 established the B2 Gamma-maximum curvature gate:
+Merged PR #89 and PR #90 leave the parent B2 middle limb OPEN while parking the Gamma-saturation microgeometry route.
 
-- `B2-GAMMA-CURVATURE-BUDGET = YES`;
-- under one-scale nondegeneracy, `B2-GAMMA-ONESCALE(beta>=1/2) = NO`;
-- the parent B2 middle limb remains OPEN.
+Two later analytic branches remain outside accepted main:
 
-S15 remains parked by default. The FDT regularity cross-track remains parked. Do not reopen either without its recorded reopen condition.
+- PR #94 `Research: decide B2 modulation compactness gate` — the exact convective normalization shows slow fitted parameters do not imply shape stationarity; strong compactness is not supplied by current B2 budgets; the fixed-profile ancient/steady-Euler lane is parked.
+- PR #95 `Research: audit B2 signed global budgets` — bounded audit of standard exact signed/global identities returns `B2-SIGNED-BUDGET-SELECTION = NO-CHANNEL`.
 
-## Branch-local research now carried by PR #90
+These analytic records motivate the present numerical pivot but must not be treated as merged main state unless separately integrated.
 
-PR #90 is `research/b2-gamma-flattop-enstrophy`. It now also contains the former stacked PR #91, which was merged **into the PR-90 branch**, not into `main`.
+S15, FDT, Gamma-saturation microgeometry, and the fixed-profile ancient/steady-Euler lane remain parked under their recorded reopen conditions.
 
-Session 39 — flat-top / transition enstrophy:
+## Session 47 — return to numerical candidate / M-1
 
-- exact transition vorticity: `omega^r=-Gamma_z/r`, `omega^z=Gamma_r/r`;
-- if `|Gamma(R,z)|>=m`, then `int_0^R |Gamma_r|^2/r dr >= 2m^2/R^2`;
-- over axial length `L_z`, `E_Gamma >= 4pi m^2 L_z/R^2`;
-- `B2-GAMMA-FLATTOP-ENSTROPHY-KILL = NO`;
-- `B2-GAMMA-TRANSITION-VORTICITY = YES` with `||omega||_infinity >= c R^{-2}`.
+User commissioned a return to the `SPEC.md` numerical candidate / M-1 lane rather than opening another analytic escape variable.
 
-Session 40 — transition residence:
+Current branch:
 
-- the local diffusive clock `nu int R^{-2}` diverges for `R~tau^{beta_v}`, `beta_v>=1/2`;
-- actual B2 hypotheses do not force one high-Gamma packet to remain resident;
-- late arrival / conveyor transport fits below the Type-II amplitude envelope;
-- exact affine NS conveyor provides a mechanism no-go for drift-independent residence decay;
-- `B2-GAMMA-LATE-ARRIVAL-BARRIER = NO`;
-- `B2-GAMMA-TRANSITION-RESIDENCE-KILL = NO`;
-- `B2-GAMMA-FLATTOP / RESIDENCE SUBLANE = PARKED`.
+`numerics/m1-resolution-rescue`
 
-Session 41 — Bessel/stochastic hitting:
+The immediate decision was **not** to invent another observable. The standing M-1 prerequisite is to repair resolution/convergence evidence first.
 
-with `y=r^2`, `G(y,z,t)=Gamma(sqrt(y),z,t)`, `S=-u^r/r`, the exact equation is
+### Existing run-level resolution audit
 
-`G_t - 2 S y G_y + u^z G_z = 4 nu y G_yy + nu G_zz`.
+The preregistered M-1 rule admits a run into the mechanism verdict only if its spectral tail remains `<= 1e-5` over the whole run.
 
-For frozen inward strain `A>=0`, the outer-before-axis harmonic measure is
+Stored `experiments/m1_events/results/summary.json` gives:
 
-`p_A(y;L)=(1-exp(-A y/(2 nu)))/(1-exp(-A L^2/(2 nu)))`,
+| run | N | max tail | run-level status |
+|---|---:|---:|---|
+| E0 | 64 | `2.8691770713435234e-08` | PASS |
+| E1 | 64 | `3.969158378526758e-05` | FAIL |
+| E3 | 64 | `4.8422283231966924e-05` | FAIL |
+| E4 | 64 | `5.9967246781271955e-05` | FAIL |
+| E2 | 64 | `9.939773706363298e-04` | FAIL |
+| E2b | 96 | `1.3196230254612794e-04` | FAIL |
 
-and the actual-PDE comparison barrier yields the necessary condition
+Thus only E0 currently satisfies the standing **whole-run** resolution rule. Per-snapshot masks in `stateflow_harness.py` do not upgrade E1/E2/E3/E4 to resolved runs.
 
-`A(t) R^2 >= c(1-e^{-1}) nu`
+The existing Yu-structured filtered near/far outputs remain useful only as a hypothesis generator: at locally admissible growth samples, positive near-field stretching is absorbed and the positive surplus is classified as FAR rather than COMM/LOC. This is not yet a cross-datum conclusion because the other runs fail the whole-run tail gate.
 
-for fixed-fraction Gamma saturation at `R<<L`. Hence arbitrarily late saturation at `R~tau^{beta_v}` forces inward strain of order
+### Fixed-datum convergence defect found
 
-`S^+ >= c nu tau^{-2 beta_v}`
+The legacy random initializers `ic_random_band` and the random perturbation inside `ic_r4` draw random numbers directly into FFT arrays whose shape depends on `N`.
 
-along a sequence.
+Therefore holding the RNG seed fixed while changing `N` does **not** define one fixed continuum datum. Old E3/E4 remain valid one-grid diagnostics, but a naive `N=64 -> 96 -> 128` rerun is not a spatial-convergence sequence for one datum.
 
-Exact decisions:
+This branch adds a resolution-independent continuum seeding layer instead of silently reusing the old provenance.
 
-- `B2-GAMMA-HITTING-STRAIN = YES`;
-- `B2-GAMMA-HITTING-NEW-EXPONENT-CUT = NO`;
-- `B2-GAMMA-STRAIN-ELLIPTIC-KILL = NO`;
-- `B2-GAMMA-SATURATION-MICROGEOMETRY = PARKED`.
+## New numerical files
 
-The local harmonic model `psi_1=A z` has `S=A` but `L5 psi_1=0`, so large local strain need not produce local `omega_1`; compact localization pushes the source to a shell and critical strain `A~nu/R^2` has vanishing small-scale energy cost. Do not restart the same route by adding co-location, max-displacement, packet thickness, or another residence variable unless a genuinely propagated theorem appears.
+### `experiments/m1_events/resolution_invariant_ic.py`
 
-Relevant branch-local records:
+Introduces a canonical finite integer-wavevector list, resolution-independent sine/cosine random coefficients, coefficientwise divergence-free projection, and grid sampling of one fixed trigonometric polynomial.
 
-- `docs/gates/B2_GAMMA_FLATTOP_ENSTROPHY_DECISION_2026-09-06.md`;
-- `docs/gates/B2_GAMMA_TRANSITION_RESIDENCE_DECISION_2026-09-06.md`;
-- `docs/gates/B2_GAMMA_STOCHASTIC_HITTING_DECISION_2026-09-06.md`.
+New fixed-datum families:
 
-## PR #90 conflict resolution — session 43
+- `E3c*`: deterministic two-mode backbone plus a 10% resolution-independent low-band perturbation;
+- `E4c*`: resolution-independent random band `1 <= |k| <= 2`.
 
-The conflict was caused by both `main` and PR #90 changing `HANDOFF.md` after their common base. The research gate files themselves did not conflict.
+Old E3/E4 data and files are not rewritten.
 
-Resolution policy:
+### `experiments/m1_events/check_resolution_invariant_ic.py`
 
-- keep all accepted main content, including the PR-92 periodic formal sidecar and synchronized formal claim boundary;
-- keep all three PR-90 research gate records, including the PR-91 Bessel-hitting result now merged into the PR-90 branch;
-- replace the conflicting handoff with this combined continuation point;
-- do not treat the PR-90 research conclusions as accepted main state until PR #90 itself is merged.
+Deterministic construction self-check for N=24/48:
 
-No Lean/runtime source is changed by this conflict resolution.
+- historical RMS normalization;
+- Fourier divergence to roundoff;
+- exact agreement on shared physical grid points;
+- invariant Fourier coefficient norm.
 
-## Next research gate
+An equivalent isolated mock-grid check was run during development and passed (shared-grid difference `0`, Fourier divergence about `3e-17`). The repository script itself has not yet been executed against a checked-out branch in this environment.
 
-The Gamma-saturation microgeometry family is parked. The next breakdown-side selection must be **orthogonal to the location of the bad set**.
+### `experiments/m1_events/resolution_rescue.py`
 
-Start from the post-K11 dominant-balance split:
+Cheap fail-closed whole-run screen performed **before** the expensive filtered near/far diagnostics.
 
-- edge `gamma+alpha=1`: generalized self-similar Euler balance, already under conditional Seregin/Liouville pressure;
-- interior `gamma+alpha>1`: quasi-static Euler core, with convection/pressure leading and viscosity/time derivative lower order.
+Every accepted RK4 step records/updates:
 
-The next theorem-shaped target is therefore a **steady-Euler / ancient-limit compatibility gate**, not another Gamma-location variable. It must ask whether an interior B2 sequence can have a nontrivial rescaled inviscid limit compatible simultaneously with finite local energy, axisymmetric-with-swirl structure, non-evanescent circulation, and the frozen Type-II bookkeeping.
+- spectral tail and full-run maximum tail;
+- finite-value status;
+- kinetic energy and maximum positive single-step relative energy growth.
 
-Before promoting any steady/self-similar profile route, respect the read-only negative-knowledge registry: the previously studied continuous self-similar steady-front profile is already KILLED by Liouville results and must not be reopened under a renamed ansatz. A new gate must state exactly why its quasi-static/local/ancient limit is outside that old hypothesis class.
+At `0.1` physical-time cadence it additionally records enstrophy, maximum vorticity, and an advective CFL diagnostic.
 
-Recommended first decision object:
+Preregistered ladder:
 
-`B2-ANCIENT-EULER-COMPACTNESS`:
+- E1 Taylor--Green: `E1R96`, then `E1R128` if needed/valuable;
+- E2 antiparallel tubes: `E2R128`, then `E2R160`, then `E2R192` only as needed;
+- fixed-continuum E3c and E4c: N=64,96,128 with `dt` proportional to `1/N`.
 
-> Given one fixed hypothetical B2 solution in the interior `gamma+alpha>1`, can one choose a sequence of core times and normalized core frames so that a subsequence converges on compact spacetime sets to a nonzero bounded/finite-local-energy ancient Euler solution with the required axisymmetric swirl/circulation signature?
+A run advances only if `max_tail <= 1e-5` over the entire interval and all values remain finite.
 
-This is a YES/NO compactness gate, not yet a Liouville theorem. If NO, identify the precise missing compactness quantity and decide whether it is controlled by existing B2 budgets. If YES, the next gate is a Liouville/structure theorem for exactly that limit class.
+### `experiments/m1_events/nearfar_rescue.py`
 
-Do not replace compactness by formal power counting, and do not assume convergence of pressure or derivatives without a proved local bound.
+Runs the expensive existing `nearfar_yu.snapshot` diagnostic only after the matching resolution-screen JSON reports `tail_pass=true` and `finite_pass=true`. It refuses unresolved runs.
+
+### `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`
+
+Durable preregistration for the resolution rescue and stop/go rule.
+
+GO only if at least two genuinely different continuum data produce tail-qualified, refinement-stable growth events with the same residual class carrying the positive surplus after near-field absorption. STOP/park if residual dominance changes with datum/refinement or cannot be resolved without moving to impractical scales.
+
+No post-hoc percentage convergence tolerance is introduced. A mechanism promotion needs a separately justified tolerance/manufactured filter-resolution test, and the highest accepted spatial grid must also be rerun with `dt/2` before moving beyond diagnostic-only status.
+
+## Verification state
+
+No production M-1 rescue simulation has been executed in this ChatGPT environment yet.
+
+Completed development checks:
+
+- new Python source was syntax-checked in isolated form;
+- the continuum-seeding construction was checked with an equivalent mock spectral grid: RMS normalization exact to floating precision, shared-grid values identical, Fourier divergence approximately `3e-17`.
+
+Not yet verified here:
+
+- repository execution of `check_resolution_invariant_ic.py`;
+- E1R96/E2R128/E3c*/E4c* whole-run screens;
+- any rescued filtered near/far run;
+- any spatial/time convergence verdict.
+
+Do not report the rescue as numerically passed until those runs exist.
+
+## Next work
+
+Execute the **cheap resolution screen first**, not the filtered diagnostic.
+
+Recommended order:
+
+1. repository self-check `check_resolution_invariant_ic.py`;
+2. `E1R96` (analytic fixed datum; simplest unresolved historical case);
+3. `E3c64` and `E3c96`;
+4. `E4c64` and `E4c96`;
+5. `E2R128`;
+6. advance to N=128/160/192 only when the previous resolution fails the tail gate or a second qualified resolution is needed for convergence.
+
+Only after a run passes the **whole-run** tail gate may `nearfar_rescue.py` be run for it.
+
+If at least two distinct fixed continuum data become resolved, compare growth-event timing and the axes `A_N`, `A_F`, `A_C`, `A_L`, `g`, residual-class labels, `R/dx`, `ell/dx`, and filtered-budget residual on common physical times before selecting a mechanism.
 
 ## Resume protocol
 
-At substantive resume read, in order:
+At substantive resume read:
 
 1. `PROJECT_GOAL.md`;
 2. `SPEC.md`;
@@ -147,26 +178,26 @@ At substantive resume read, in order:
 5. this `HANDOFF.md`;
 6. `docs/GPT_WORKFLOW.md`;
 7. `docs/LEAN_CI_OPERATIONS.md`;
-8. `docs/gates/TYPE2_KILL_TABLE_2026-08-19.md`;
-9. `docs/gates/DOMINANT_BALANCE_INVERSION_2026-08-19.md`;
-10. `docs/gates/B2_GAMMA_MAX_CURVATURE_DECISION_2026-09-06.md`;
-11. the three branch-local Gamma records listed above;
-12. the external read-only no-go registry;
-13. current `main`, PR #90, and latest CI.
+8. `experiments/m1_events/PREREG.md`;
+9. `M1_INDEPENDENT_PROBE/M1_INDEPENDENT_PROBE_2026-09-04.md`;
+10. `Stateflow M-1/M1_BOUNDARY_LOCALIZATION_ESTIMATE_AUDIT_2026-09-04.md`;
+11. `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`;
+12. `resolution_invariant_ic.py`, `resolution_rescue.py`, `nearfar_rescue.py`;
+13. external `FABLE5_NEXT_TASK_AUDIT.md` numerical guardrails;
+14. current main, open PRs, branch state, and current numerical outputs.
 
 ## Claim boundary / forbidden shortcuts
 
 Do not:
 
-- claim Clay A/B/C/D;
-- claim universal periodic B from the explicit shear family;
-- identify periodic fields with the whole-space `R^3` carriers;
-- treat branch-local PR-90 conclusions as merged state;
-- reopen S15 or FDT without their recorded reopen conditions;
-- continue the parked Gamma-saturation microgeometry route by adding another local escape variable;
-- reopen the killed continuous self-similar steady-front route under renamed variables;
-- use numerical evidence as a continuum blow-up proof;
-- equate a finite-cylinder Hou computation with an official Clay-domain construction without a transfer theorem;
+- claim Clay A/B/C/D or numerical blow-up;
+- call periodic M-1 data an `R^3` candidate;
+- treat a per-snapshot stateflow mask as repair of a globally unresolved run;
+- compare old E3/E4 at different `N` as one fixed-datum convergence sequence;
+- run the expensive near/far diagnostic before the corresponding whole-run tail screen passes;
+- select a convergence tolerance after seeing which tolerance makes the desired mechanism pass;
+- call the historical FAR pattern universal before at least two distinct fixed continuum data are resolved and refinement-stable;
+- reopen parked analytic lanes merely because numerical data are inconclusive;
 - add Lean plumbing merely for completeness.
 
-The parent B2 middle limb remains OPEN. Neither the accepted formal stack nor the branch-local B2 reductions prove blow-up or global regularity.
+The present objective is evidence-grade mechanism selection and candidate infrastructure only. No current result proves 3D Navier--Stokes blow-up or global regularity.
