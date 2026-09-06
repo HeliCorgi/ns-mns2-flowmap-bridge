@@ -1,0 +1,73 @@
+name: M-1 E3c128 resolution screen
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/m1-resolution-rescue-stage3.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: m1-e3c128-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seed-self-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Check fixed-continuum seed construction
+        working-directory: experiments/m1_events
+        run: python check_resolution_invariant_ic.py
+
+  e3c128-screen:
+    needs: seed-self-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run E3c128 whole-run resolution screen
+        run: python experiments/m1_events/resolution_rescue.py E3c128
+
+      - name: Report scientific gate without converting tail FAIL into CI failure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("experiments/m1_events/results_resolution_rescue/E3c128.json")
+          d = json.loads(p.read_text())
+          print(f"E3c128 N={d['N']}")
+          print(f"max_tail={d['max_tail']:.12e}")
+          print(f"tail_tolerance={d['tail_tolerance']:.12e}")
+          print(f"tail_pass={d['tail_pass']}")
+          print(f"finite_pass={d['finite_pass']}")
+          print(f"max_relative_single_step_energy_growth={d['max_relative_single_step_energy_growth']:.12e}")
+          print(f"walltime_s={d['walltime_s']:.3f}")
+          if not d["finite_pass"]:
+              raise SystemExit("non-finite numerical state: infrastructure/numerical failure")
+          PY
+
+      - name: Upload E3c128 resolution screen artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-E3c128-resolution-screen
+          path: experiments/m1_events/results_resolution_rescue/E3c128.json
+          if-no-files-found: error
