@@ -38,7 +38,7 @@ def _minus_l5_fd(r: float, z: float, p: cf.SeedParams, h: float) -> float:
 
 
 def _second_order(errors: list[float]) -> bool:
-    # The first two refinements should improve strongly unless already at roundoff.
+    # Three h halvings should show close to 4x error reduction unless already at roundoff.
     if errors[-1] < 5e-9:
         return True
     return errors[0] > 2.5 * errors[1] and errors[1] > 2.5 * errors[2]
@@ -68,7 +68,7 @@ def audit_seed(name: str, p: cf.SeedParams) -> dict:
 
     # Independent Cartesian divergence convergence at an interior point.
     xy = r0 / math.sqrt(2.0)
-    hs = [2.0e-3, 1.0e-3, 5.0e-4]
+    hs = [1.0e-3, 5.0e-4, 2.5e-4]
     div_fd = [abs(_cart_div_fd(xy, xy, z0, p, h)) for h in hs]
 
     # Independent cylindrical finite-difference elliptic check away from r=0.
@@ -114,7 +114,7 @@ def audit_seed(name: str, p: cf.SeedParams) -> dict:
         and _second_order(div_fd)
         and div_fd[-1] <= 2e-5
         and _second_order(l5_fd)
-        and l5_fd[-1] <= 5e-3
+        and l5_fd[-1] <= 1e-4
         and support_leak == 0.0
         and shared_err <= 5e-13
         and energy > 0.0
