@@ -1,0 +1,111 @@
+name: M-1 filter resolution calibration
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  calibrate:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'numerics/m1-filter-calibration'
+    strategy:
+      fail-fast: false
+      matrix:
+        N: [64, 96, 128, 160, 192]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run preregistered manufactured calibration grid
+        run: |
+          mkdir -p experiments/m1_events/results_filter_calibration
+          python experiments/m1_events/filter_resolution_calibration.py run \
+            ${{ matrix.N }} \
+            experiments/m1_events/results_filter_calibration/N${{ matrix.N }}.json
+      - name: Sanity-check calibration output
+        run: |
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          N = int('${{ matrix.N }}')
+          p = Path(f'experiments/m1_events/results_filter_calibration/N{N}.json')
+          d = json.loads(p.read_text())
+          assert int(d['N']) == N
+          assert d['classification'].startswith('NUMERICAL CALIBRATION')
+          assert math.isclose(float(d['nu']), 0.02, rel_tol=0.0, abs_tol=1e-15)
+          assert math.isclose(float(d['dt_cal']), 1e-4, rel_tol=0.0, abs_tol=1e-15)
+          assert math.isclose(float(d['rho']), 0.25, rel_tol=0.0, abs_tol=1e-15)
+          assert set(d['fields']) == {'M0','M1','M2'}
+          ncells = 0
+          for fd in d['fields'].values():
+              assert float(fd['fourier_divergence_max']) <= 1e-10
+              assert len(fd['cells']) == 6
+              ncells += len(fd['cells'])
+              for c in fd['cells']:
+                  assert float(c['P']) > 0.0
+                  for k in ('A_N','g','B_F','B_C','B_L','budget_resid','ell_over_dx'):
+                      assert math.isfinite(float(c[k])), (k,c)
+          assert ncells == 18
+          print(f'N={N}: sanity PASS cells={ncells}')
+          PY
+      - name: Upload calibration grid artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-filter-calibration-N${{ matrix.N }}
+          path: experiments/m1_events/results_filter_calibration/N${{ matrix.N }}.json
+          if-no-files-found: error
+
+  aggregate:
+    needs: calibrate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all calibration grids
+        uses: actions/download-artifact@v4
+        with:
+          pattern: m1-filter-calibration-N*
+          path: experiments/m1_events/results_filter_calibration
+          merge-multiple: true
+      - name: Freeze empirical envelopes
+        run: |
+          mkdir -p experiments/m1_events/results_filter_calibration
+          python experiments/m1_events/filter_resolution_calibration.py aggregate \
+            experiments/m1_events/results_filter_calibration \
+            experiments/m1_events/results_filter_calibration/envelopes.json \
+            | tee experiments/m1_events/results_filter_calibration/envelopes.txt
+      - name: Sanity-check frozen coverage rule
+        run: |
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          p = Path('experiments/m1_events/results_filter_calibration/envelopes.json')
+          d = json.loads(p.read_text())
+          assert d['reference_pair'] == [160, 192]
+          env = d['frozen_envelopes']
+          for b in ('B0','B1','B2','B4'):
+              assert env[b]['A_N']['n'] > 0, (b, env[b])
+              for q in ('A_N','g','B_F','B_C','B_L','budget_resid'):
+                  assert env[b][q]['epsilon'] is not None
+                  assert math.isfinite(float(env[b][q]['epsilon']))
+                  assert float(env[b][q]['epsilon']) >= 0.0
+          for q in ('A_N','g','B_F','B_C','B_L','budget_resid'):
+              assert env['B3'][q]['n'] == 0
+              assert env['B3'][q]['epsilon'] is None
+          print('aggregate coverage sanity PASS; B3 intentionally uncovered')
+          PY
+      - name: Upload frozen calibration envelope
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-filter-calibration-envelope
+          path: |
+            experiments/m1_events/results_filter_calibration/envelopes.json
+            experiments/m1_events/results_filter_calibration/envelopes.txt
+          if-no-files-found: error
