@@ -1,0 +1,83 @@
+name: M-1 filter calibration aggregate rescue
+
+on:
+  pull_request:
+    types: [synchronize]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  aggregate-rescue:
+    if: github.head_ref == 'numerics/m1-filter-calibration'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Recover completed calibration grid artifacts from qualified source run
+        uses: actions/download-artifact@v4
+        with:
+          pattern: m1-filter-calibration-N*
+          path: experiments/m1_events/results_filter_calibration
+          merge-multiple: true
+          github-token: ${{ github.token }}
+          repository: HeliCorgi/ns-mns2-flowmap-bridge
+          run-id: 34049061871
+      - name: Verify recovered source files
+        run: |
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          root = Path('experiments/m1_events/results_filter_calibration')
+          for N in (64,96,128,160,192):
+              p = root / f'N{N}.json'
+              d = json.loads(p.read_text())
+              assert int(d['N']) == N
+              assert set(d['fields']) == {'M0','M1','M2'}
+              assert all(float(fd['fourier_divergence_max']) <= 1e-10 for fd in d['fields'].values())
+              assert sum(len(fd['cells']) for fd in d['fields'].values()) == 18
+              for fd in d['fields'].values():
+                  for c in fd['cells']:
+                      assert float(c['P']) > 0.0
+                      for k in ('A_N','g','B_F','B_C','B_L','budget_resid','ell_over_dx'):
+                          assert math.isfinite(float(c[k]))
+          print('recovered five-grid calibration suite PASS')
+          PY
+      - name: Freeze empirical envelopes
+        run: |
+          python experiments/m1_events/filter_resolution_calibration.py aggregate \
+            experiments/m1_events/results_filter_calibration \
+            experiments/m1_events/results_filter_calibration/envelopes.json \
+            | tee experiments/m1_events/results_filter_calibration/envelopes.txt
+      - name: Enforce preregistered coverage rule
+        run: |
+          python - <<'PY'
+          import json, math
+          from pathlib import Path
+          d = json.loads(Path('experiments/m1_events/results_filter_calibration/envelopes.json').read_text())
+          assert d['reference_pair'] == [160, 192]
+          env = d['frozen_envelopes']
+          for b in ('B0','B1','B2','B4'):
+              for q in ('A_N','g','B_F','B_C','B_L','budget_resid'):
+                  row = env[b][q]
+                  assert row['n'] > 0
+                  assert row['epsilon'] is not None
+                  assert math.isfinite(float(row['epsilon'])) and float(row['epsilon']) >= 0.0
+          for q in ('A_N','g','B_F','B_C','B_L','budget_resid'):
+              assert env['B3'][q]['n'] == 0
+              assert env['B3'][q]['epsilon'] is None
+          print('aggregate coverage sanity PASS; B3 intentionally uncovered')
+          PY
+      - name: Upload frozen calibration envelope
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-filter-calibration-envelope
+          path: |
+            experiments/m1_events/results_filter_calibration/envelopes.json
+            experiments/m1_events/results_filter_calibration/envelopes.txt
+          if-no-files-found: error
