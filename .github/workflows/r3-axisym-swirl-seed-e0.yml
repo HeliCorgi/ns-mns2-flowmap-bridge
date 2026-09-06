@@ -4,8 +4,10 @@ on:
   push:
     branches: ["research/r3-axisym-swirl-candidate-seed"]
     paths:
-      - "experiments/r3_axi_swirl/**"
-      - ".github/workflows/r3-axisym-swirl-seed-e0.yml"
+      - "experiments/r3_axi_swirl/compact_family.py"
+      - "experiments/r3_axi_swirl/check_compact_family.py"
+      - "experiments/r3_axi_swirl/free_space_elliptic_prototype.py"
+      - "experiments/r3_axi_swirl/check_free_space_elliptic.py"
   workflow_dispatch:
 
 concurrency:
