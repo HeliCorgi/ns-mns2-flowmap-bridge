@@ -1,0 +1,167 @@
+name: M-1 E3c near-far R1-R2
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened]
+    paths:
+      - ".github/workflows/m1-e3c-nearfar-r1r2.yml"
+      - "experiments/m1_events/compare_nearfar_refinement.py"
+      - "experiments/m1_events/M1_E3C_NEARFAR_R1R2_PREREG_2026-09-06.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m1-e3c-nearfar-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  nearfar:
+    if: github.event_name == 'workflow_dispatch' || github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: E3c96
+            N: 96
+            dt: "0.008333333333333333"
+            source_run: "34013942287"
+            artifact_id: "9983371155"
+            artifact_name: m1-E3c96-resolution-screen
+            artifact_digest: sha256:c8775148c3a9d00614fd474561e14f592711efe799e09934382c8f495000815b
+          - name: E3c128
+            N: 128
+            dt: "0.00625"
+            source_run: "34015004075"
+            artifact_id: "9983774115"
+            artifact_name: m1-E3c128-resolution-screen
+            artifact_digest: sha256:9f8dd8f4cb79f3d84cab81701b98d85189c3ae74f3b01d56b51788f44455fc8e
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Verify source artifact metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTIFACT_ID: ${{ matrix.artifact_id }}
+          EXPECTED_NAME: ${{ matrix.artifact_name }}
+          EXPECTED_DIGEST: ${{ matrix.artifact_digest }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          aid = os.environ["ARTIFACT_ID"]
+          url = f"https://api.github.com/repos/HeliCorgi/ns-mns2-flowmap-bridge/actions/artifacts/{aid}"
+          req = urllib.request.Request(url, headers={
+              "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          })
+          with urllib.request.urlopen(req) as r:
+              d = json.load(r)
+          assert str(d["id"]) == aid, d
+          assert d["name"] == os.environ["EXPECTED_NAME"], d
+          assert not d["expired"], d
+          assert d.get("digest") == os.environ["EXPECTED_DIGEST"], d
+          print(f"artifact provenance PASS id={aid} name={d['name']} digest={d.get('digest')}")
+          PY
+
+      - name: Recover accepted R0 screen artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: experiments/m1_events/results_resolution_rescue
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: HeliCorgi/ns-mns2-flowmap-bridge
+          run-id: ${{ matrix.source_run }}
+
+      - name: Recheck fail-closed R0 fields
+        env:
+          RUN_NAME: ${{ matrix.name }}
+          EXPECTED_N: ${{ matrix.N }}
+          EXPECTED_DT: ${{ matrix.dt }}
+        run: |
+          python - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          name = os.environ["RUN_NAME"]
+          d = json.loads(Path(f"experiments/m1_events/results_resolution_rescue/{name}.json").read_text())
+          assert d["name"] == name, d
+          assert int(d["N"]) == int(os.environ["EXPECTED_N"]), d
+          assert math.isclose(float(d["nu"]), 0.02, rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["T"]), 3.5, rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["dt"]), float(os.environ["EXPECTED_DT"]), rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["tail_tolerance"]), 1e-5, rel_tol=0.0, abs_tol=1e-18), d
+          assert d["tail_pass"] is True, d
+          assert d["finite_pass"] is True, d
+          assert float(d["max_tail"]) <= float(d["tail_tolerance"]), d
+          print(f"{name} R0 provenance/gate PASS max_tail={d['max_tail']:.12e}")
+          PY
+
+      - name: Run accepted-grid Yu-structured near/far diagnostic
+        run: python experiments/m1_events/nearfar_rescue.py ${{ matrix.name }}
+
+      - name: Sanity-check R1 output
+        env:
+          RUN_NAME: ${{ matrix.name }}
+        run: |
+          python - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          name = os.environ["RUN_NAME"]
+          p = Path(f"experiments/m1_events/results_nearfar_yu_rescue/{name}.json")
+          d = json.loads(p.read_text())
+          assert d["name"] == name
+          assert len(d["t"]) == len(d["snap"]) == len(d["tail"]) > 1
+          assert all(math.isfinite(float(x)) for x in d["tail"])
+          assert max(float(x) for x in d["tail"]) <= 1e-5
+          print(f"{name}: R1 samples={len(d['t'])} sampled_max_tail={max(d['tail']):.12e} wall={d['walltime_s']:.3f}s")
+          PY
+
+      - name: Upload R1 near/far artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-${{ matrix.name }}-nearfar-rescue
+          path: experiments/m1_events/results_nearfar_yu_rescue/${{ matrix.name }}.json
+          if-no-files-found: error
+
+  compare-r2:
+    if: github.event_name == 'workflow_dispatch' || github.event.action == 'opened'
+    needs: nearfar
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download both R1 outputs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: m1-E3c*-nearfar-rescue
+          path: experiments/m1_events/results_nearfar_yu_rescue
+          merge-multiple: true
+
+      - name: Run threshold-free common-time R2 comparison
+        run: |
+          mkdir -p experiments/m1_events/results_nearfar_refinement
+          python experiments/m1_events/compare_nearfar_refinement.py \
+            experiments/m1_events/results_nearfar_yu_rescue/E3c96.json \
+            experiments/m1_events/results_nearfar_yu_rescue/E3c128.json \
+            experiments/m1_events/results_nearfar_refinement/E3c96_vs_E3c128.json \
+            | tee experiments/m1_events/results_nearfar_refinement/E3c96_vs_E3c128.txt
+
+      - name: Upload R2 comparison artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-E3c96-E3c128-nearfar-R2
+          path: experiments/m1_events/results_nearfar_refinement/
+          if-no-files-found: error
