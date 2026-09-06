@@ -1,14 +1,12 @@
 name: M-1 E3c128 resolution screen
 
+# The revision-qualified PR execution has been obtained. Keep this workflow available for
+# explicit reproduction without re-running the expensive N=128 screen on every docs-only PR sync.
 on:
-  pull_request:
-    branches: ["main"]
-    paths:
-      - ".github/workflows/m1-resolution-rescue-stage3.yml"
   workflow_dispatch:
 
 concurrency:
-  group: m1-e3c128-${{ github.event.pull_request.number || github.ref }}
+  group: m1-e3c128-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
