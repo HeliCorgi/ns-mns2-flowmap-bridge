@@ -1,6 +1,6 @@
 # MNS-2 / Navier–Stokes flow-map bridge handoff
 
-Last updated: **2026-09-06 JST (forty-seventh session)**.
+Last updated: **2026-09-06 JST (forty-eighth session)**.
 
 This is the durable short-form continuation point. Current theorem/source files and merged `main` control accepted state. Open/stacked research PRs and numerical branches are not accepted `main` state until merged.
 
@@ -8,9 +8,9 @@ This is the durable short-form continuation point. Current theorem/source files 
 
 Current accepted `main` head at this session start:
 
-`6d70e3c9a8040d7d6e6570f0f62379fdb9b313c9`
+`6d824e274cd116036a08ed2781dd1368e89863b8`
 
-(PR #90 merge).
+(PR #96 merge: `Numerics: preregister M1 resolution rescue`).
 
 Accepted formal state includes:
 
@@ -24,18 +24,19 @@ Latest accepted hosted Lean evidence remains:
 - PR #92 head `198f1c68297b1d55aea0a5ea053ca2956e5bb13e`, workflow #277: PASS;
 - PR #90 reconciled head `cf8ea8b0ba502223e83c03383abc4187ba1ccfe2`, workflow #278: PASS.
 
-No Lean/runtime formal source changed in sessions 39–47.
+No Lean/runtime formal source changed in sessions 39–48.
 
 ## Breakdown analytic state
 
 Merged PR #89 and PR #90 leave the parent B2 middle limb OPEN while parking the Gamma-saturation microgeometry route.
 
-Two later analytic branches remain outside accepted main:
+The later analytic records remain outside accepted main unless PR #97 is merged:
 
-- PR #94 `Research: decide B2 modulation compactness gate` — the exact convective normalization shows slow fitted parameters do not imply shape stationarity; strong compactness is not supplied by current B2 budgets; the fixed-profile ancient/steady-Euler lane is parked.
-- PR #95 `Research: audit B2 signed global budgets` — bounded audit of standard exact signed/global identities returns `B2-SIGNED-BUDGET-SELECTION = NO-CHANNEL`.
-
-These analytic records motivate the present numerical pivot but must not be treated as merged main state unless separately integrated.
+- `B2-ANCIENT-EULER-COMPACTNESS = NO` from current B2 controls;
+- `B2-MODULATION-SHAPE-STATIONARITY = NO` from current hypotheses;
+- `B2-MODULATION-STRONG-COMPACTNESS = NO` from current budgets;
+- the fixed-profile ancient/steady-Euler lane is parked;
+- the old unconditional phrase `interior => quasi-static steady-Euler core` is withdrawn, while the K11 cut `gamma+alpha>=1` itself remains valid.
 
 S15, FDT, Gamma-saturation microgeometry, and the fixed-profile ancient/steady-Euler lane remain parked under their recorded reopen conditions.
 
@@ -43,11 +44,7 @@ S15, FDT, Gamma-saturation microgeometry, and the fixed-profile ancient/steady-E
 
 User commissioned a return to the `SPEC.md` numerical candidate / M-1 lane rather than opening another analytic escape variable.
 
-Current branch:
-
-`numerics/m1-resolution-rescue`
-
-The immediate decision was **not** to invent another observable. The standing M-1 prerequisite is to repair resolution/convergence evidence first.
+PR #96 added and merged the resolution-rescue infrastructure. The immediate decision was **not** to invent another observable. The standing M-1 prerequisite is to repair resolution/convergence evidence first.
 
 ### Existing run-level resolution audit
 
@@ -74,9 +71,9 @@ The legacy random initializers `ic_random_band` and the random perturbation insi
 
 Therefore holding the RNG seed fixed while changing `N` does **not** define one fixed continuum datum. Old E3/E4 remain valid one-grid diagnostics, but a naive `N=64 -> 96 -> 128` rerun is not a spatial-convergence sequence for one datum.
 
-This branch adds a resolution-independent continuum seeding layer instead of silently reusing the old provenance.
+PR #96 adds a resolution-independent continuum seeding layer instead of silently reusing the old provenance.
 
-## New numerical files
+## M-1 resolution-rescue files now on main
 
 ### `experiments/m1_events/resolution_invariant_ic.py`
 
@@ -97,8 +94,6 @@ Deterministic construction self-check for N=24/48:
 - Fourier divergence to roundoff;
 - exact agreement on shared physical grid points;
 - invariant Fourier coefficient norm.
-
-An equivalent isolated mock-grid check was run during development and passed (shared-grid difference `0`, Fourier divergence about `3e-17`). The repository script itself has not yet been executed against a checked-out branch in this environment.
 
 ### `experiments/m1_events/resolution_rescue.py`
 
@@ -126,42 +121,67 @@ Runs the expensive existing `nearfar_yu.snapshot` diagnostic only after the matc
 
 ### `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`
 
-Durable preregistration for the resolution rescue and stop/go rule.
-
 GO only if at least two genuinely different continuum data produce tail-qualified, refinement-stable growth events with the same residual class carrying the positive surplus after near-field absorption. STOP/park if residual dominance changes with datum/refinement or cannot be resolved without moving to impractical scales.
 
 No post-hoc percentage convergence tolerance is introduced. A mechanism promotion needs a separately justified tolerance/manufactured filter-resolution test, and the highest accepted spatial grid must also be rerun with `dt/2` before moving beyond diagnostic-only status.
 
-## Verification state
+## Session 48 — PR #97 repair and first repository M-1 execution
 
-No production M-1 rescue simulation has been executed in this ChatGPT environment yet.
+The user reported an error on PR #97. Inspection showed **no CI failure** on its old head. The error was a stale-branch merge conflict after PR #96 advanced `main`, primarily because both histories changed `HANDOFF.md`.
 
-Completed development checks:
+PR #97 was synchronized with current `main` by a two-parent merge commit while retaining only its three analytic research documents over the post-#96 tree:
 
-- new Python source was syntax-checked in isolated form;
-- the continuum-seeding construction was checked with an equivalent mock spectral grid: RMS normalization exact to floating precision, shared-grid values identical, Fourier divergence approximately `3e-17`.
+- branch: `research/b2-ancient-euler-compactness`;
+- synchronized head: `ffec0c9ec667daf12387231407ea943a2106ccb8`;
+- PR #97 is now open and mergeable, not merged;
+- the stale branch-local `HANDOFF.md` was deliberately replaced by current-main M-1 handoff content;
+- PR title/body were repaired to state the actual analytic claim boundary.
 
-Not yet verified here:
+Do not merge PR #97 without explicit user instruction. Numerical M-1 remains the active lane.
 
-- repository execution of `check_resolution_invariant_ic.py`;
-- E1R96/E2R128/E3c*/E4c* whole-run screens;
-- any rescued filtered near/far run;
-- any spatial/time convergence verdict.
+### First execution branch / PR
 
-Do not report the rescue as numerically passed until those runs exist.
+Current numerical branch:
+
+`numerics/m1-resolution-run1`
+
+Current PR:
+
+PR #98 `Numerics: run first M1 resolution rescue screen`.
+
+A focused workflow `.github/workflows/m1-resolution-rescue.yml` was added. It runs:
+
+1. the exact repository `check_resolution_invariant_ic.py` self-check;
+2. only after that passes, the preregistered `E1R96` whole-run screen;
+3. uploads `E1R96.json` as `m1-e1r96-resolution-screen`.
+
+Scientific `tail_pass=false` is **not** converted into a red CI result; exceptions, non-finite state, timeout, missing artifact, and self-check failure remain infrastructure failures.
+
+Workflow run #1 / run id `34005384433` is the relevant numerical run.
+
+Verified so far on the actual PR checkout:
+
+- `seed-self-check`: **PASS**;
+- exact output: `PASS shared=0.000e+00 coeff_norm_delta=4.441e-16`;
+- Python 3.12.14, NumPy 2.5.2, SciPy 1.18.1 on Ubuntu 24.04 hosted runner;
+- `e1r96-screen`: **IN PROGRESS** at this handoff update.
+
+A local/container reproduction made from the current-main source fragments gave the same self-check output before the hosted run. The hosted PR checkout is the revision-qualified evidence.
+
+Opening PR #98 also triggered the repository's ordinary Lean PR workflow even though no Lean source changed. Do not interpret that unrelated check as numerical evidence; no Lean theorem frontier changes in this PR.
 
 ## Next work
 
-Execute the **cheap resolution screen first**, not the filtered diagnostic.
+First inspect workflow run `34005384433` and the `E1R96` artifact/result.
 
-Recommended order:
+If `E1R96` has `tail_pass=true` and `finite_pass=true`, it becomes eligible for `nearfar_rescue.py`; this is still one-datum periodic evidence only. If it fails the tail gate, proceed to `E1R128` before any near/far diagnostic for Taylor--Green.
 
-1. repository self-check `check_resolution_invariant_ic.py`;
-2. `E1R96` (analytic fixed datum; simplest unresolved historical case);
-3. `E3c64` and `E3c96`;
-4. `E4c64` and `E4c96`;
-5. `E2R128`;
-6. advance to N=128/160/192 only when the previous resolution fails the tail gate or a second qualified resolution is needed for convergence.
+After the E1 decision, continue the preregistered order:
+
+1. `E3c64` and `E3c96`;
+2. `E4c64` and `E4c96`;
+3. `E2R128`;
+4. advance to N=128/160/192 only when the previous resolution fails the tail gate or a second qualified resolution is needed for convergence.
 
 Only after a run passes the **whole-run** tail gate may `nearfar_rescue.py` be run for it.
 
@@ -184,7 +204,7 @@ At substantive resume read:
 11. `experiments/m1_events/M1_RESOLUTION_RESCUE_PREREG_2026-09-06.md`;
 12. `resolution_invariant_ic.py`, `resolution_rescue.py`, `nearfar_rescue.py`;
 13. external `FABLE5_NEXT_TASK_AUDIT.md` numerical guardrails;
-14. current main, open PRs, branch state, and current numerical outputs.
+14. current main, PR #97, PR #98, and current numerical outputs/artifacts.
 
 ## Claim boundary / forbidden shortcuts
 
@@ -198,6 +218,7 @@ Do not:
 - select a convergence tolerance after seeing which tolerance makes the desired mechanism pass;
 - call the historical FAR pattern universal before at least two distinct fixed continuum data are resolved and refinement-stable;
 - reopen parked analytic lanes merely because numerical data are inconclusive;
+- identify a scientific tail FAIL with a software/CI failure;
 - add Lean plumbing merely for completeness.
 
 The present objective is evidence-grade mechanism selection and candidate infrastructure only. No current result proves 3D Navier--Stokes blow-up or global regularity.
