@@ -1,0 +1,86 @@
+name: M-1 E4c R0 resolution pair
+
+on:
+  pull_request:
+    branches: ["numerics/m1-e3c-nearfar-r1r2"]
+    types: [opened]
+    paths:
+      - ".github/workflows/m1-e4c-r0-pair.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: m1-e4c-r0-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seed-self-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check fixed-continuum seed construction
+        working-directory: experiments/m1_events
+        run: python check_resolution_invariant_ic.py
+
+  screen:
+    needs: seed-self-check
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - run_name: E4c64
+            expected_n: 64
+            expected_dt: 0.0125
+          - run_name: E4c96
+            expected_n: 96
+            expected_dt: 0.008333333333333333
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run preregistered whole-run R0 screen
+        run: python experiments/m1_events/resolution_rescue.py ${{ matrix.run_name }}
+      - name: Report scientific gate without converting tail FAIL into CI failure
+        env:
+          RUN_NAME: ${{ matrix.run_name }}
+          EXPECTED_N: ${{ matrix.expected_n }}
+          EXPECTED_DT: ${{ matrix.expected_dt }}
+        run: |
+          python - <<'PY'
+          import json, math, os
+          from pathlib import Path
+          name = os.environ["RUN_NAME"]
+          p = Path(f"experiments/m1_events/results_resolution_rescue/{name}.json")
+          d = json.loads(p.read_text())
+          assert d["name"] == name, d
+          assert int(d["N"]) == int(os.environ["EXPECTED_N"]), d
+          assert math.isclose(float(d["nu"]), 0.02, rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["T"]), 6.0, rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["dt"]), float(os.environ["EXPECTED_DT"]), rel_tol=0.0, abs_tol=1e-15), d
+          assert math.isclose(float(d["tail_tolerance"]), 1e-5, rel_tol=0.0, abs_tol=1e-18), d
+          print(f"{name} N={d['N']}")
+          print(f"max_tail={d['max_tail']:.12e}")
+          print(f"tail_tolerance={d['tail_tolerance']:.12e}")
+          print(f"tail_pass={d['tail_pass']}")
+          print(f"finite_pass={d['finite_pass']}")
+          print(f"max_relative_single_step_energy_growth={d['max_relative_single_step_energy_growth']:.12e}")
+          print(f"walltime_s={d['walltime_s']:.3f}")
+          if not d["finite_pass"]:
+              raise SystemExit("non-finite numerical state: infrastructure/numerical failure")
+          PY
+      - name: Upload R0 screen artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: m1-${{ matrix.run_name }}-resolution-screen
+          path: experiments/m1_events/results_resolution_rescue/${{ matrix.run_name }}.json
+          if-no-files-found: error
