@@ -1,0 +1,73 @@
+name: R3 axisymmetric swirl convergence E2
+
+on:
+  push:
+    branches: ["research/r3-axisym-swirl-candidate-seed"]
+    paths:
+      - "experiments/r3_axi_swirl/compact_family.py"
+      - "experiments/r3_axi_swirl/free_space_elliptic_prototype.py"
+      - "experiments/r3_axi_swirl/check_compact_family.py"
+      - "experiments/r3_axi_swirl/check_free_space_elliptic.py"
+      - "experiments/r3_axi_swirl/check_low_axial_frequency_e0.py"
+      - "experiments/r3_axi_swirl/whole_space_evolution_e1.py"
+      - "experiments/r3_axi_swirl/check_evolution_e1.py"
+      - "experiments/r3_axi_swirl/check_evolution_e2.py"
+      - "experiments/r3_axi_swirl/R3_EVOLUTION_E2_PREREG_2026-09-07.md"
+      - ".github/workflows/r3-axisym-swirl-e2.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-axisym-swirl-e2-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e0-preflight-and-e2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile E0-E2 stack
+        run: |
+          python -m py_compile \
+            experiments/r3_axi_swirl/compact_family.py \
+            experiments/r3_axi_swirl/free_space_elliptic_prototype.py \
+            experiments/r3_axi_swirl/check_compact_family.py \
+            experiments/r3_axi_swirl/check_free_space_elliptic.py \
+            experiments/r3_axi_swirl/check_low_axial_frequency_e0.py \
+            experiments/r3_axi_swirl/whole_space_evolution_e1.py \
+            experiments/r3_axi_swirl/check_evolution_e1.py \
+            experiments/r3_axi_swirl/check_evolution_e2.py
+
+      - name: Fail-closed S0 preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_compact_family.py
+
+      - name: Fail-closed E0 manufactured preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_free_space_elliptic.py
+
+      - name: Fail-closed E0 low-axial-frequency preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_low_axial_frequency_e0.py
+
+      - name: Run preregistered E2 same-datum lattice
+        working-directory: experiments/r3_axi_swirl
+        run: python check_evolution_e2.py
+
+      - name: Upload E2 result bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-axisym-swirl-e2-results
+          path: |
+            experiments/r3_axi_swirl/results_evolution_e2/summary.json
+            experiments/r3_axi_swirl/results_evolution_e2/final_states.npz
+          if-no-files-found: warn
