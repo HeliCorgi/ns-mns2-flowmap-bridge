@@ -1,198 +1,200 @@
-# MNS-2 / Navier–Stokes flow-map bridge handoff
+# MNS-2 / Navier--Stokes flow-map bridge handoff
 
-Last updated: **2026-09-07 JST (stack integration after sessions 51–55)**.
+Last updated: **2026-09-07 JST — periodic M-1 stopped; primary `R^3` axisymmetric-swirl track through E1**.
 
-This is the durable continuation point. Merged `main` controls accepted repository state; Actions artifacts are evidence only for the exact revisions/runs recorded below. No current result proves Clay A/B/C/D.
+This is the durable continuation point. Merged `main` controls accepted repository state; branch
+results and Actions artifacts are evidence only for the exact revisions/runs recorded below. No
+current result proves Clay A/B/C/D.
 
-## Accepted boundary
+## Accepted `main` boundary
 
-Immediately before PR #105 integration, `main` is:
-
-`08105f8c89414f628e51dc2fe24afb177531dc6d`
-
-and already includes PR #102 (E3c raw R1/R2), PR #103 (E4c R0 qualification), and PR #104 (independent filter-resolution calibration). This branch is PR #105, the final integration step for the calibrated E3c certification. **After PR #105 is merged, accepted main includes PRs #102–#105.**
-
-Formal state is unchanged by this numerical stack:
-
-- whole-space `R^3` local actual-NS mild stack for real divergence-free Schwartz data, including `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and `MNS2.r3EndpointSafeProjectedMild_navierStokes`;
-- periodic special-family sidecar from PR #92, including `ClayNS.certified_nonzero_periodic_NS` and `ClayNS.clayB_has_nonzero_smooth_specialization`;
-- `ClayNS.ClayB` remains defined but unproved.
-
-No Lean/formal source changed. `FORMAL_SCOPE.md` and `STATUS.md` remain unchanged.
-
-## Breakdown analytic state
-
-The B2 middle limb remains **OPEN**. Current in-house analytic sublanes remain parked/narrowed: S15 `(q,d)`, FDT deformation route, Gamma flat-top/residence microgeometry, and fixed-profile ancient/steady-Euler. In particular:
+Current accepted `main`:
 
 ```text
-B2-ANCIENT-EULER-COMPACTNESS = NO
-B2-MODULATION-SHAPE-STATIONARITY = NO
-B2-MODULATION-STRONG-COMPACTNESS = NO
+1a9228633b9cc532ece82401410a95945f27bab3
 ```
 
-K11's exponent cut survives; the old unconditional phrase `interior => quasi-static steady-Euler core` is withdrawn.
+This is the merge of PR #105, the calibrated E3c periodic M-1 result. The formal theorem boundary
+is unchanged:
 
-## Active lane — periodic M-1 mechanism selection
+- whole-space local actual-NS mild theory for real divergence-free Schwartz data, including
+  `MNS2.r3AdmissibleSchwartzDatum_navierStokes` and
+  `MNS2.r3EndpointSafeProjectedMild_navierStokes`;
+- periodic explicit shear sidecar, including `ClayNS.certified_nonzero_periodic_NS` and
+  `ClayNS.clayB_has_nonzero_smooth_specialization`;
+- universal `ClayNS.ClayB` remains unproved.
 
-This is periodic `T^3` evidence-grade work only. It is not an `R^3` candidate and not a blow-up/regularity theorem.
+No Lean/formal source changed in the numerical work below. `FORMAL_SCOPE.md` and `STATUS.md` do not
+need synchronization for this branch.
 
-Standing fail-closed R0 gate:
+## Periodic M-1 lane — STOP/PARK
+
+PR #106 is closed **unmerged**:
+
+`[STOPPED] Numerics: test E4c with frozen near-far calibration`.
+
+The preregistered primary row was `(c,sigma)=(16,0.125)`. E4c96 completed its R1 diagnostic and,
+on the 17 common positive-forward global-enstrophy times, gave
 
 ```text
-max_tail <= 1e-5 over the entire run
-and finite numerical state
+FAR                       14
+NO_POSITIVE_LOCAL_GROWTH   3
 ```
 
-Legacy E3/E4 array-random initializers cannot be compared across changing `N`; only E3c/E4c fixed-continuum families enter same-datum refinement.
+with the three non-FAR samples at `t=0.1,0.2,1.5`. Therefore even a perfect E4c128 result could
+not satisfy the preregistered `17/17 FAR->FAR` GO condition.
 
-### Accepted E3c raw R1/R2 — PR #102
-
-R0-qualified pair:
+E4c128 passed exact R0 artifact provenance/gates in both attempts, then its expensive near/far
+step was terminated twice by hosted-runner shutdown (`exit 143`). This is an infrastructure
+termination, not a scientific E4c128 FAIL. A third retry is not justified because E4c96 already
+logically forces the decision:
 
 ```text
-E3c96  max_tail = 3.274744131023e-07  PASS
-E3c128 max_tail = 2.845872144398e-09  PASS
+M1-FILTERED-NEARFAR-PROMOTION = STOP/PARK
+GO_TO_DT2 = NO
 ```
 
-R1/R2 workflow run `34017370158`:
+Do not reopen this periodic mechanism-selection lane through post-hoc calibration changes,
+alternative rows, B3 borrowing/interpolation, E4c64 reuse, or `dt/2` rescue.
 
-- E3c96 R1 artifact `9984447543`, `sha256:445c4cbbb0c9431a2d1bc14cc589b01d06941b733569576b5c0310b02975ada7`;
-- E3c128 R1 artifact `9984844033`, `sha256:8f0722332854e022c3a0976d015e46ee4a36fda0a0c2158235148ee2b422970e`;
-- R2 artifact `9984845801`, `sha256:89e3284a6c3e377de9b4d32df38d2bf7b1f846d8e2b3dca38f1affccb3f6b320`.
+## Active branch — primary `R^3` axisymmetric-with-swirl track
 
-Both identify sampled global enstrophy growth `t=0.1 -> 1.8`. Raw `(c,sigma)=(16,0.125)` was `17/17 FAR->FAR`, but raw labels alone were not promoted.
-
-### Accepted E4c R0 qualification — PR #103
+Branch:
 
 ```text
-E4c64  max_tail = 7.564561392480e-05  FAIL
-E4c96  max_tail = 1.134755892947e-06  PASS
-E4c128 max_tail = 3.536985710923e-08  PASS
+research/r3-axisym-swirl-candidate-seed
 ```
 
-Retained R0 artifacts:
-
-- E4c96 `9985091027`, `sha256:ca63edd772797ad325e819b682f8187f6aa1500eb34484400e0c30cd5ddae8da`;
-- E4c128 `9985610481`, `sha256:9f17b8e926f9a90c69b33a61701a22e724a15da46931e3e19f8eb914d1aeef88`.
-
-E4c96/E4c128 identify the same sampled global-enstrophy growth event `t=0.1 -> 1.8`. E4c64 is excluded.
-
-### Accepted independent filter calibration — PR #104
-
-Five manufactured grids `N=64,96,128,160,192` completed. Frozen-envelope rescue run `34049373265`, job `101530085033`, artifact:
+The load-bearing hosted scientific execution for the current frontier is revision
 
 ```text
-9994071254
-sha256:6d6ca58697a1659d814dc5ae9736e105847ebdd690423d5233997f547129506e
+dd8b06af0837b40eb221b7a54bb22b5211d76f1a
 ```
 
-Frozen empirical envelopes:
+Later commits on the same branch only record result documentation unless explicitly noted.
+No PR has been opened yet, avoiding an unnecessary Lean PR build while this numerical lane is
+still being qualified.
+
+### S0 — explicit compact continuum seed family
+
+`compact_family.py` defines 12 fixed `C_c^infty` axisymmetric-with-swirl continuum data using
+`s=r^2`, with `omega1` derived exactly from `-L5 psi1` and Cartesian reconstruction built in.
+
+Hosted S0 certificate:
 
 ```text
-B0: eps_A_N=6.8945663460310835e-3, eps_g=3.5413556715919725e-3,
-    eps_B_F=1.960161040038466e-2, eps_B_C=3.19599675328297e-5,
-    eps_B_L=2.6387636755327293e-3
-B1: eps_A_N=6.475448975403433e-3, eps_g=8.936244899508949e-4,
-    eps_B_F=2.4584563268122694e-2, eps_B_C=2.057052509252255e-5,
-    eps_B_L=6.695920656003551e-4
-B2: eps_A_N=6.628136031402332e-3, eps_g=1.023851486348093e-4,
-    eps_B_F=2.4259403812155134e-2, eps_B_C=9.872584358694425e-6,
-    eps_B_L=6.761854101378431e-5
-B3: NO_CALIBRATION_COVERAGE
-B4: eps_A_N=3.881200655061423e-3, eps_g=5.45962783382592e-6,
-    eps_B_F=1.3268696673768676e-2, eps_B_C=7.912242151464355e-7,
-    eps_B_L=3.3276714978824895e-6
+run       34066171548
+job       101575195688
+head      763dbc36812b5a2592f3784bda31c6db65b3ba31
+artifact  9998999218
+digest    sha256:8f84c3175537118f07112e3d67756fe7c043f964d42fada79daf2d28c6a29582
+result    12/12 PASS
 ```
 
-Production classification uses signed `B_F=V_far/P`, `B_C=Rcomm/P`, `B_L=Lloc/P`; `A_F` is not a winner score. B3 remains uncertified with no interpolation or borrowing. This is an empirical numerical calibration, not a rigorous continuum discretization bound.
+This certifies the static formula/reconstruction audit only; it is not evolution evidence.
 
-### Calibrated E3c certification — PR #105
+### E0 — strictly nonperiodic elliptic prototype
 
-Scientific workflow:
+`free_space_elliptic_prototype.py` solves the truncated-box approximation to
+
+\[
+-\mathcal L_5\psi_1=\omega_1,
+\qquad \mathcal L_5=\partial_r^2+3r^{-1}\partial_r+\partial_z^2,
+\]
+
+with the regular axis limit and strictly nonperiodic `z`.
+
+The completed E0 suite was rerun successfully on the E1 scientific head `dd8b06af...` and now
+includes:
 
 ```text
-M-1 E3c calibrated near-far certification
-run 34049792061
-job 101531200494
-execution head f578cda07f9267f0ad9c9e6a90479785b264e717
-PASS
+R3-E0-GAUSSIAN-SPATIAL-REFINEMENT             PASS
+R3-E0-FIRST-DERIVATIVE-RECOVERY               PASS
+R3-E0-GREEN-REFERENCE-CROSSCHECK              PASS (floating, not interval)
+R3-E0-INDEPENDENT-R/Z-DOMAIN-SENSITIVITY      PASS as diagnostic
+R3-E0-LOW-AXIAL-FREQUENCY-STRESS              PASS
+R3-E0-COMPACT-R3S04-RECOVERY                  PASS
+R3-E0-HOSTED-REVISION-CERT                    PASS
+R3-E0-RIGOROUS-FREE-SPACE-TAIL-ENCLOSURE      NOT DONE
 ```
 
-Output artifact:
+The low-axial-frequency manufactured stress uses
+`psi=exp(-r^2/0.20^2-z^2/0.80^2)` and showed clear second-order reduction at
+`24/48/96`, so the old periodic-Fourier-gap concern is explicitly tested at E0.
+
+### E1 — nonlinear integrator smoke
+
+Preregistration: `experiments/r3_axi_swirl/R3_EVOLUTION_E1_PREREG_2026-09-07.md`.
+
+Frozen run: `R3S04`, `nu=.002`, `T=.02`, `(Rmax,Zmax)=(.8,.7)`, `nr=96`, `nz=168`,
+SSPRK3, centered second-order node FD, factorized `-L5`, zero artificial outer Dirichlet,
+strictly nonperiodic `z`.
+
+Hosted result:
 
 ```text
-9994185333
-sha256:f9a7e8eadddbba79ec42f70324854eb3e7066de97edf38856c645c46d9480d26
+workflow  R3 axisymmetric swirl nonlinear E1
+run       34075898846
+job       101601815270
+head      dd8b06af0837b40eb221b7a54bb22b5211d76f1a
+artifact  10002018444
+digest    sha256:9de007fd3ecbc15c385fb47d33e40462bda548986de087dc9d9e1072a03db0a2
+result    SUCCESS / E1_pass=True
 ```
 
-All 17 common positive-forward global-enstrophy samples are `t=0.1,...,1.7`.
-
-Load-bearing calibrated result:
+Key streamed maxima/minima:
 
 ```text
-(c,sigma)=(16,0.125): 17/17 FAR -> FAR
+accepted/rejected steps            20 / 0
+max pre/stage/post CFL             0.07844
+max viscous number                 0.576
+max positive one-step dE/E         0
+Gamma sup overshoot                0
+axis regularity defect             0
+max relative divergence Linf       2.40424e-3
+max elliptic residual Linf         1.10489e-12
+minimum gradient scale             1.42877 grid points
+maximum curvature-tail diagnostic  1.93098
+outer shell ratio                  2.02e-77
 ```
 
-Other rows retain the preregistered uncertainty/mismatch structure; in particular B3 samples remain `NUMERICALLY_UNCERTIFIED_RESOLUTION` and the c=8 near-absorption mismatch is not discarded.
-
-Across all `(time,c,sigma)` cells the descriptive same-certified residual count is:
+Exact current decision:
 
 ```text
-FAR = 47
-COMM = 0
-LOC = 0
+R3-E1-NONLINEAR-INTEGRATOR-SMOKE = PASS
+R3-E1-RESOLVED-R3-TRAJECTORY = NOT ESTABLISHED
+R3-E1-GROWTH-CANDIDATE = NO CLAIM
+R3-FREE-SPACE-TRUNCATION-CERTIFICATE = NOT DONE
 ```
 
-This is not 47 independent trials. Exact decision:
+The weak resolution diagnostics matter: `1.43` grid points for the minimum gradient scale and
+curvature-tail `1.93` are acceptable only under the deliberately weak E1 smoke gate. They are not
+resolved-candidate evidence. On this short interval energy and circulation decrease, and the run
+is not itself a growth event.
 
-```text
-M1-E3c-CALIBRATED-CERT-EXECUTION = PASS
-M1-E3c-CALIBRATED-CLEAN-ROW-(16,0.125) = 17/17 FAR/FAR
-M1-E3c-CALIBRATED-FAR = YES on covered production rows
-M1-E3c-CALIBRATED-B3-ROWS = UNCERTIFIED, as preregistered
-M1-E3c-MECHANISM-PROMOTION = NOT YET
-```
+## Exact next gate — E2 same-continuum-datum convergence lattice
 
-## Open next gate — PR #106, do not merge yet
+Before any multi-seed candidate search or singularity/exponent fit, E2 must test the same `R3S04`
+continuum datum through:
 
-PR #106 `Numerics: test E4c with frozen near-far calibration` remains **DRAFT / UNMERGED**. Its preregistration fixes the same load-bearing row `(c,sigma)=(16,0.125)` before E4c execution; no secondary row may rescue the result post hoc.
+1. three spatial resolutions on the same physical box;
+2. highest accepted spatial grid rerun with actual time step halved;
+3. radial-only and axial-only domain enlargement at fixed physical grid spacing;
+4. common-physical-coordinate comparisons of `u1`, `omega1`, reconstructed velocity, and first
+   derivatives;
+5. all E1 streaming gates at every run;
+6. reload/provenance and finite-state checks.
 
-Scientific workflow run `34060612610`, execution head `0c41109662a0aac1dfd869156089f01d0c1e23d5`, is currently **in progress** at this handoff update. Only the R0-qualified E4c96/E4c128 pair is used.
+No resolution threshold or exponent fit may be selected after seeing E2 results. The next code
+change should therefore be an E2 preregistration plus a comparison driver before the hosted
+lattice is run.
 
-Decision rule:
+## Negative-knowledge / commission boundaries
 
-```text
-GO_TO_DT2
-```
+Do not reopen the steady continuous self-similar front (Tsai / Chae--Wolf kill), continuum-to-
+lattice shadowing, or other registry-killed routes without proving escape from the recorded
+binding obstruction. Do not identify the 5D scalar `L5` representation with a 5D fluid problem.
+Do not call truncated-box E0/E1 evidence a whole-space convergence theorem.
 
-only if every common positive-forward global-enstrophy sample on `(16,0.125)` is calibration-covered on both grids and independently certified `FAR->FAR`, with at least one sample. Otherwise:
-
-```text
-STOP_PARK_FILTERED_NEARFAR
-```
-
-If GO occurs, the next preregistered step is the highest accepted grid `dt/2` confirmation. GO remains a numerical mechanism-selection milestone only.
-
-## Commission boundaries / forbidden shortcuts
-
-Do **not**:
-
-- merge PR #106 before its experiment/result audit and explicit user instruction;
-- claim Clay A/B/C/D, numerical blow-up, or numerical global regularity;
-- call periodic M-1 an `R^3` candidate;
-- use E3c64/E4c64 in mechanism verdicts;
-- call E3c96/128 or E4c96/128 continuum convergence theorems;
-- infer a universal FAR law from E3c alone;
-- select a convergence percentage or `ell/dx` cutoff post hoc;
-- relax the frozen calibration envelope;
-- borrow/interpolate B3 calibration;
-- use `A_F` instead of signed `B_F` for residual winner;
-- discard the c=8 near-absorption mismatch;
-- reopen killed Betchov-boundary mechanics or parked analytic lanes without recorded reopen conditions;
-- add Lean plumbing merely for completeness.
-
-## Resume protocol
-
-At substantive resume inspect `PROJECT_GOAL.md`, `SPEC.md`, `AGENTS.md`, `FORMAL_SCOPE.md`, this file, current `main`, PR #106, exact Actions artifacts/logs, and the M-1 prereg/result records. Relevant implementation files are `resolution_invariant_ic.py`, `resolution_rescue.py`, `nearfar_rescue.py`, `compare_nearfar_refinement.py`, `filter_resolution_calibration.py`, and `certify_nearfar_with_calibration.py`.
-
-Current objective: determine whether the same independently calibrated FAR residual mechanism survives the second fixed-continuum datum. No current result proves a 3D Navier–Stokes singularity or global regularity.
+No current numerical result proves finite-time singularity, nonextendability, global regularity,
+or Clay A/B/C/D.
