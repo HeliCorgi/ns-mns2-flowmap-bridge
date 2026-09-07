@@ -74,12 +74,7 @@ def _stencil_indices(total_nodes: int, center: int, width: int = 7) -> np.ndarra
 
 
 def polynomial_fd_weights(nodes: np.ndarray, x0: float, derivative_order: int) -> np.ndarray:
-    """Return local polynomial finite-difference weights with scaled moment equations.
-
-    For n nodes, the weights differentiate every polynomial of degree < n exactly (modulo
-    floating arithmetic).  Scaling to a local O(1) coordinate avoids a raw Vandermonde in powers
-    of small physical mesh widths.
-    """
+    """Return local polynomial finite-difference weights with scaled moment equations."""
     x = np.asarray(nodes, dtype=float)
     if x.ndim != 1 or x.size < derivative_order + 1:
         raise ValueError("invalid finite-difference node set")
@@ -96,7 +91,6 @@ def polynomial_fd_weights(nodes: np.ndarray, x0: float, derivative_order: int) -
     rhs[derivative_order] = float(math.factorial(derivative_order))
     weights_t = np.linalg.solve(moment, rhs)
     weights = weights_t / scale**derivative_order
-    # Fail closed on a catastrophically ill-conditioned local solve.
     residual = moment @ weights_t - rhs
     if not np.all(np.isfinite(weights)) or float(np.max(np.abs(residual))) > 5.0e-10:
         raise RuntimeError("unstable local polynomial differentiation weights")
@@ -147,13 +141,11 @@ def build_minus_l5(box: HOSBox, boundary: Boundary) -> HOSSystem:
         + sp.kron(sp.eye(box.nr, format="csr"), axial_unknown, format="csr")
     ).tocsr()
 
-    # Known boundary contribution C is moved from A*u + C = omega to rhs = omega - C.
     radial_outer_coeff = np.asarray(radial_full[:, box.nr].todense()).ravel()
     br = np.asarray(boundary(box.Rmax, z), dtype=float)
     if br.ndim == 0:
         br = np.full_like(z, float(br))
-    if br.shape != z.shape:
-        br = np.broadcast_to(br, z.shape).astype(float)
+    br = np.broadcast_to(br, z.shape).astype(float)
     contribution = radial_outer_coeff[:, None] * br[None, :]
 
     zlo_coeff = np.asarray(axial_full[:, 0].todense()).ravel()
@@ -228,10 +220,8 @@ def differentiate_s_z(
     system: HOSSystem, interior: np.ndarray, boundary: Boundary
 ) -> tuple[np.ndarray, np.ndarray]:
     full = full_array(system, interior, boundary)
-    ds = system.radial_Ds_full @ full[:, 1:-1]
-    dz = full[:-1, :] @ system.axial_Dz_full.T
-    ds = np.asarray(ds, dtype=float)
-    dz = np.asarray(dz, dtype=float)
+    ds = np.asarray(system.radial_Ds_full @ full[:, 1:-1], dtype=float)
+    dz = np.asarray((system.axial_Dz_full @ full[:-1, :].T).T, dtype=float)
     if not np.all(np.isfinite(ds)) or not np.all(np.isfinite(dz)):
         raise RuntimeError("non-finite HOS first derivative")
     return ds, dz
