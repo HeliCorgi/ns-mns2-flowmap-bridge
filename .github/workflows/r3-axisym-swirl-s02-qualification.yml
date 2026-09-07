@@ -1,0 +1,74 @@
+name: R3 axisymmetric swirl R3S02 qualification
+
+on:
+  push:
+    branches: ["research/r3-axisym-swirl-candidate-seed"]
+    paths:
+      - "experiments/r3_axi_swirl/compact_family.py"
+      - "experiments/r3_axi_swirl/free_space_elliptic_prototype.py"
+      - "experiments/r3_axi_swirl/check_compact_family.py"
+      - "experiments/r3_axi_swirl/check_free_space_elliptic.py"
+      - "experiments/r3_axi_swirl/check_low_axial_frequency_e0.py"
+      - "experiments/r3_axi_swirl/whole_space_evolution_e1.py"
+      - "experiments/r3_axi_swirl/check_evolution_e1.py"
+      - "experiments/r3_axi_swirl/check_evolution_e2.py"
+      - "experiments/r3_axi_swirl/check_alt_s02_qualification.py"
+      - ".github/workflows/r3-axisym-swirl-s02-qualification.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-axisym-swirl-s02-qualification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight-and-qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile qualification stack
+        run: |
+          python -m py_compile \
+            experiments/r3_axi_swirl/compact_family.py \
+            experiments/r3_axi_swirl/free_space_elliptic_prototype.py \
+            experiments/r3_axi_swirl/check_compact_family.py \
+            experiments/r3_axi_swirl/check_free_space_elliptic.py \
+            experiments/r3_axi_swirl/check_low_axial_frequency_e0.py \
+            experiments/r3_axi_swirl/whole_space_evolution_e1.py \
+            experiments/r3_axi_swirl/check_evolution_e1.py \
+            experiments/r3_axi_swirl/check_evolution_e2.py \
+            experiments/r3_axi_swirl/check_alt_s02_qualification.py
+
+      - name: Fail-closed S0 preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_compact_family.py
+
+      - name: Fail-closed E0 manufactured preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_free_space_elliptic.py
+
+      - name: Fail-closed E0 low-axial-frequency preflight
+        working-directory: experiments/r3_axi_swirl
+        run: python check_low_axial_frequency_e0.py
+
+      - name: Run preregistered R3S02 qualification
+        working-directory: experiments/r3_axi_swirl
+        run: python check_alt_s02_qualification.py
+
+      - name: Upload R3S02 qualification bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-axisym-swirl-s02-qualification-results
+          path: |
+            experiments/r3_axi_swirl/results_alt_s02_qualification/summary.json
+            experiments/r3_axi_swirl/results_alt_s02_qualification/final_states.npz
+          if-no-files-found: warn
