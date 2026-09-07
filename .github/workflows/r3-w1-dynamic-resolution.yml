@@ -1,0 +1,43 @@
+name: R3 W1 resolution-aware early-time dynamic audit
+
+on:
+  pull_request:
+    branches: ["research/r3-axisym-wholespace-w1-elliptic-decomposition"]
+    paths:
+      - "experiments/r3_wholespace_w1/manufactured_short_time.py"
+      - "experiments/r3_wholespace_w1/green_quadrature_repair.py"
+      - "experiments/r3_wholespace_w1/dynamic_resolution_audit.py"
+      - "docs/gates/R3_AXISYM_WHOLESPACE_W1_DYNAMIC_RESOLUTION_*.md"
+      - ".github/workflows/r3-w1-dynamic-resolution.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-w1-dynamic-resolution-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dynamic-resolution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile dynamic resolution gate
+        run: |
+          python -m py_compile \
+            experiments/r3_wholespace_w1/manufactured_short_time.py \
+            experiments/r3_wholespace_w1/green_quadrature_repair.py \
+            experiments/r3_wholespace_w1/dynamic_resolution_audit.py
+      - name: Execute frozen dynamic resolution gate
+        run: python experiments/r3_wholespace_w1/dynamic_resolution_audit.py
+      - name: Upload dynamic resolution report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-w1-dynamic-resolution
+          path: experiments/r3_wholespace_w1/results/W1_DYNAMIC_RESOLUTION.json
+          if-no-files-found: warn
