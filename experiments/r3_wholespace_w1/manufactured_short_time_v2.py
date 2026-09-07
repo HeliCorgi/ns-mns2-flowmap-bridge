@@ -27,7 +27,7 @@ DIV_REFINEMENT_RATIO = 0.35
 class V2GridSolver(v1.GridSolver):
     def state_diagnostics(self, u: np.ndarray, w: np.ndarray) -> Dict[str, float | bool]:
         base = dict(super().state_diagnostics(u, w))
-        legacy_div = float(base.pop("relative_recovered_divergence"))
+        legacy_div = float(base["relative_recovered_divergence"])
 
         psi, _pres = self.solve_psi(w)
         pr = self.d_r(psi)
