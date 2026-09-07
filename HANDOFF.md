@@ -1,6 +1,6 @@
 # MNS-2 / Navier--Stokes flow-map bridge handoff
 
-Last updated: **2026-09-07 JST — periodic M-1 parked; primary `R^3` axisymmetric-swirl track at bounded E2R rescue**.
+Last updated: **2026-09-07 JST — periodic M-1 parked; centered-FD `R^3` seed qualification path parked after E2R and R3S02**.
 
 This is the durable continuation point. Merged `main` controls accepted repository state; branch
 results and Actions artifacts are evidence only for the exact revisions/runs recorded below. No
@@ -23,51 +23,39 @@ This includes merged PRs #102--#105. Formal state is unchanged by the numerical 
   `ClayNS.clayB_has_nonzero_smooth_specialization`;
 - universal `ClayNS.ClayB` remains unproved.
 
-No Lean/formal source changed on the active numerical branch. `FORMAL_SCOPE.md` and `STATUS.md`
-remain unchanged.
+No Lean/formal source changed. `FORMAL_SCOPE.md` and `STATUS.md` remain unchanged.
 
 ## Periodic M-1 lane — STOP/PARK
 
-PR #106 is closed **unmerged**. The frozen primary row `(c,sigma)=(16,0.125)` gave on E4c96,
-across the 17 common positive-forward global-enstrophy times,
-
-```text
-FAR                       14
-NO_POSITIVE_LOCAL_GROWTH   3
-```
-
-so even a perfect E4c128 result could not satisfy the preregistered `17/17 FAR->FAR` GO rule.
-E4c128 passed its R0 provenance/gates in both attempts and then suffered hosted-runner shutdown
-inside the expensive near/far computation; that is infrastructure termination, not a scientific
-E4c128 FAIL. Exact decision:
+PR #106 is closed **unmerged**. On the frozen primary row `(c,sigma)=(16,0.125)`, E4c96 gave
+`14 FAR + 3 NO_POSITIVE_LOCAL_GROWTH` across the 17 common positive-forward times, so the
+preregistered `17/17 FAR->FAR` GO rule became impossible regardless of E4c128. E4c128's repeated
+runner shutdowns occurred only after R0 provenance/gates passed and are infrastructure
+terminations, not scientific R0 failures.
 
 ```text
 M1-FILTERED-NEARFAR-PROMOTION = STOP/PARK
 GO_TO_DT2 = NO
 ```
 
-Do not reopen through post-hoc calibration changes, an alternative `(c,sigma)` row, B3 borrowing,
-E4c64 reuse, or a `dt/2` rescue.
+Do not reopen by changing calibration, selecting another row, borrowing B3, reusing E4c64, or
+adding a post-hoc `dt/2` rescue.
 
-## Active branch — primary `R^3` axisymmetric-with-swirl track
+## `R^3` axisymmetric-with-swirl numerical track
 
-Branch:
+Source branch containing the completed centered-FD study:
 
 ```text
 research/r3-axisym-swirl-candidate-seed
 ```
 
-No PR is open yet; this avoids spending Lean PR CI while the numerical stack is still being
-qualified. The continuum target is the unforced whole-space `R^3` axisymmetric-with-swirl system
-from `SPEC.md`. The finite rectangles below are artificial truncations only.
+No PR is open. The physical target is the unforced whole-space `R^3` system in `SPEC.md`; every
+finite rectangle below is only an artificial truncation.
 
-### S0 — explicit compact continuum seed family: PASS
+### S0 compact continuum family — PASS
 
-`compact_family.py` defines 12 fixed `C_c^infty` axisymmetric-with-swirl continuum data using
-`s=r^2`; `omega1` is derived from `-L5 psi1`, and Cartesian reconstruction/axis regularity are
-audited.
-
-Hosted S0 certificate:
+Twelve fixed `C_c^infty` axisymmetric-with-swirl data are defined analytically in `s=r^2`, with
+`omega1=-L5 psi1` and Cartesian/axis reconstruction audits.
 
 ```text
 run       34066171548
@@ -78,37 +66,15 @@ digest    sha256:8f84c3175537118f07112e3d67756fe7c043f964d42fada79daf2d28c6a2958
 result    12/12 PASS
 ```
 
-### E0 — strictly nonperiodic elliptic prototype: PASS as numerical prototype
+### E0 centered second-order nonperiodic elliptic prototype — PASS as prototype
 
-The truncated-box solver for
+Manufactured Gaussian/compact tests, first derivatives, independent 5D Green cross-check,
+one-coordinate domain enlargement, and low-axial-frequency stress pass. This is not a rigorous
+free-space tail enclosure.
 
-\[
--\mathcal L_5\psi_1=\omega_1,
-\qquad \mathcal L_5=\partial_r^2+3r^{-1}\partial_r+\partial_z^2
-\]
-
-uses the regular axis limit and strictly nonperiodic `z`. The completed hosted suite includes:
+### E1 centered-FD nonlinear SSPRK3 smoke — PASS only as smoke
 
 ```text
-R3-E0-GAUSSIAN-SPATIAL-REFINEMENT             PASS
-R3-E0-FIRST-DERIVATIVE-RECOVERY               PASS
-R3-E0-GREEN-REFERENCE-CROSSCHECK              PASS (floating, not interval)
-R3-E0-INDEPENDENT-R/Z-DOMAIN-SENSITIVITY      PASS as diagnostic
-R3-E0-LOW-AXIAL-FREQUENCY-STRESS              PASS
-R3-E0-COMPACT-R3S04-RECOVERY                  PASS
-R3-E0-HOSTED-REVISION-CERT                    PASS
-R3-E0-RIGOROUS-FREE-SPACE-TAIL-ENCLOSURE      NOT DONE
-```
-
-The completed E0 suite passed as a fail-closed precondition of hosted E1/E2 executions.
-
-### E1 — nonlinear SSPRK3 smoke: PASS, not a resolved trajectory
-
-Preregistration: `experiments/r3_axi_swirl/R3_EVOLUTION_E1_PREREG_2026-09-07.md`.
-Hosted scientific run:
-
-```text
-workflow  R3 axisymmetric swirl nonlinear E1
 run       34075898846
 job       101601815270
 head      dd8b06af0837b40eb221b7a54bb22b5211d76f1a
@@ -117,144 +83,138 @@ digest    sha256:9de007fd3ecbc15c385fb47d33e40462bda548986de087dc9d9e1072a03db0a
 result    E1_pass=True
 ```
 
-Key streamed diagnostics:
+The short R3S04 smoke had min gradient scale `1.42877` grid points and curvature-tail `1.93098`,
+so it never established a resolved trajectory or growth candidate.
+
+### E2 R3S04 same-datum lattice — FAIL
+
+Prereg/result:
+
+- `R3_EVOLUTION_E2_PREREG_2026-09-07.md`
+- `R3_EVOLUTION_E2_RESULT_2026-09-07.md`
 
 ```text
-accepted/rejected steps            20 / 0
-max pre/stage/post CFL             0.07844
-max viscous number                 0.576
-max positive one-step dE/E         0
-Gamma sup overshoot                0
-axis regularity defect             0
-max relative divergence Linf       2.40424e-3
-max elliptic residual Linf         1.10489e-12
-minimum gradient scale             1.42877 grid points
-maximum curvature-tail diagnostic  1.93098
-outer shell ratio                  2.02e-77
-```
-
-Exact boundary:
-
-```text
-R3-E1-NONLINEAR-INTEGRATOR-SMOKE = PASS
-R3-E1-RESOLVED-R3-TRAJECTORY = NOT ESTABLISHED
-R3-E1-GROWTH-CANDIDATE = NO CLAIM
-```
-
-### E2 — first same-datum convergence lattice: FAIL
-
-Preregistration:
-`experiments/r3_axi_swirl/R3_EVOLUTION_E2_PREREG_2026-09-07.md`.
-Result record:
-`experiments/r3_axi_swirl/R3_EVOLUTION_E2_RESULT_2026-09-07.md`.
-
-Hosted provenance:
-
-```text
-workflow  R3 axisymmetric swirl convergence E2
 run       34076351801
 job       101603124339
 head      37368f37fb32477850388fe9abc3c0a8df5141e6
 artifact  10002183475
 digest    sha256:6d88d10749cc744dcf2c2afecce019b000461cf2cf9f98994dffd9de8ea511a2
 NPZ sha   c14c45618f9a07c4a65d247ffa0a071d8fca3bc719120609c6fd80ab879bdf3a
-result    R3-E2-SAME-DATUM-CONVERGENCE = FAIL
 ```
 
-All six runs passed inherited E1 gates and exact NPZ reload. Time refinement was very small:
-
-```text
-max field discrepancy S160 -> S160H
-relative Linf   3.96091e-6
-relative L2     3.30073e-6
-```
-
-but spatial qualification was not in a stable asymptotic regime. The worst fine-pair relative
-`Linf` remained `1.90782e-1`, 12 preregistered field/norm spatial inequalities failed, the minimum
-gradient scale sequence was
-
-```text
-1.428770 -> 1.601331 -> 1.549889 grid points
-```
-
-and S160 missed the required `>=2.0` points. The curvature-tail diagnostic did improve
-`1.930980 -> 1.261577 -> 0.939627`. The radial-only domain test also missed one frozen threshold:
-`uz` relative physical-L2 `1.133115e-3 > 1e-3`.
-
-Exact decision:
+Time refinement was tiny, but 12 field/norm spatial inequalities failed, the fine-grid minimum
+gradient scale was `1.549889 < 2`, and one radial-domain `uz` physical-L2 comparison missed
+`1e-3`. Exact:
 
 ```text
 R3-E2-SAME-DATUM-CONVERGENCE = FAIL
-R3-E2-TIME-REFINEMENT = PASS as subdiagnostic
-R3-E2-SPATIAL-ASYMPTOTIC-REGIME = NOT ESTABLISHED
 R3S04-RESOLVED-R3-TRAJECTORY = NOT ESTABLISHED
-R3-MULTI-SEED-SCREEN = NOT LICENSED BY E2
 ```
 
-No E2 threshold was relaxed and no failing field was deleted.
+### E2R single bounded R3S04 rescue — FAIL / R3S04 stack PARK
 
-### Current gate — one bounded E2R resolution/domain rescue
+Prereg/result:
 
-Preregistration:
-`experiments/r3_axi_swirl/R3_EVOLUTION_E2R_PREREG_2026-09-07.md`.
-Implementation:
-`experiments/r3_axi_swirl/check_evolution_e2_rescue.py`.
-
-The rescue keeps `R3S04`, `nu=.002`, `T=.02`, equations, SSPRK3, centered second-order FD,
-zero artificial outer Dirichlet, common comparison grid, all 15 comparison fields, norm
-definitions, and all qualification thresholds unchanged. It changes only the artificial box and
-frozen mesh lattice.
-
-Base box and spatial ladder:
+- `R3_EVOLUTION_E2R_PREREG_2026-09-07.md`
+- `R3_EVOLUTION_E2R_RESULT_2026-09-07.md`
 
 ```text
-(Rmax,Zmax)=(1.0,0.9)
-B160  160 x 288   h=0.00625
-B200  200 x 360   h=0.005
-B240  240 x 432   h=0.004166666667
-B240H same B240 grid, dt_cap=0.00015
-```
-
-One-coordinate domain tests at B200 spacing:
-
-```text
-RPLUS2  (Rmax,Zmax)=(1.2,0.9), 240 x 360
-ZPLUS2  (Rmax,Zmax)=(1.0,1.1), 200 x 440
-```
-
-The same E2 rules are reused: every fine spatial discrepancy must improve, the B240 minimum
-gradient scale must be at least 2 points, curvature-tail must decrease to at most 1, highest-grid
-`dt/2` must be subdominant, and every domain discrepancy must be at most `1e-3`.
-
-Hosted E2R execution is currently active at this handoff revision family:
-
-```text
-workflow  R3 axisymmetric swirl bounded E2R rescue
 run       34080735102
+job       101615368942
 head      9a99a6fd5384e1d578398edd517d4b4db318834b
-status    IN PROGRESS at handoff update
+artifact  10003623062
+digest    sha256:608f51b57f3e9415ad9c28d2244b6f01ab6779dab5b2b2c2c4c16f9f94c31407
+NPZ sha   3978b8f5a7ee1031347b6f8c4df80aed16209ac838ad360951212fc233ebf585
 ```
 
-Bounded stop rule is frozen: if E2R fails, park `R3S04 + centered-FD + zero-Dirichlet` and do not
-add another resolution rescue. A future continuation would require a genuinely new numerical
-method contract or a separately preregistered continuum datum. If E2R passes, it only licenses a
-separate bounded multi-seed screen; it is not continuum convergence or a blow-up claim.
+The larger-box/finer-grid rescue substantially improved the actual field comparisons:
 
-## Negative knowledge / forbidden shortcuts
+```text
+B160->B200  max rel Linf 1.90794e-1   max rel L2 1.40037e-1
+B200->B240  max rel Linf 3.72495e-2   max rel L2 3.21412e-2
+B240->B240H max rel Linf 1.65434e-6   max rel L2 1.52579e-6
+B200->RPLUS2 max rel Linf 1.40025e-5  max rel L2 5.48611e-5
+B200->ZPLUS2 max rel Linf 1.26725e-5  max rel L2 3.02934e-5
+```
 
-Do not reopen the steady continuous self-similar front (Tsai / Chae--Wolf kill), continuum-to-
-lattice shadowing, or other registry-killed routes without proving escape from the recorded
-binding obstruction. Do not identify the scalar 5D representation of `L5` with a 5D fluid
-problem. Do not call finite-box E0/E1/E2R results a whole-space theorem. Do not fit a singularity
-exponent or blow-up time before numerical qualification. Do not add Lean plumbing merely because
-new numerical files exist.
+Every preregistered field/norm spatial comparison improved on the fine pair. Nevertheless four
+frozen resolution-diagnostic conditions failed:
 
-## Resume protocol
+```text
+min gradient scale  1.601357 -> 1.549890 -> 1.874704   not monotone
+B240 min scale       1.874704 < 2.0
+curvature-tail       1.261577 -> .939627 -> 1.070218    not monotone
+B240 curvature-tail  1.070218 > 1.0
+```
 
-On resume inspect `PROJECT_GOAL.md`, `SPEC.md`, `AGENTS.md`, `FORMAL_SCOPE.md`, this file,
-`R3_WHOLE_SPACE_SOLVER_CONTRACT_2026-09-07.md`, the E2/E2R prereg/result records, current `main`,
-active branch head, and exact hosted E2R run/artifact. First action is to adjudicate run
-`34080735102` exactly against the frozen E2R rule and record PASS/FAIL without threshold changes.
+No rounding or threshold relaxation is allowed. Exact:
 
-No current numerical result proves finite-time singularity, nonextendability, global regularity,
-or Clay A/B/C/D.
+```text
+R3-E2R-SAME-DATUM-CONVERGENCE = FAIL
+R3S04-CENTERED-FD-ZERO-BC-STACK = PARK
+NO THIRD R3S04 RESOLUTION-RESCUE LATTICE
+```
+
+### Single alternate datum R3S02 — FAIL / current 12-seed centered-FD path PARK
+
+R3S02 was selected before evolution from the frozen continuum geometry (`s0=.04`, `ws=.05`,
+`wz=.28`, `zu=0`) as the single permitted alternate datum. The preregistration explicitly
+forbids seed-shopping if it fails.
+
+Prereg/result:
+
+- `R3_ALT_S02_QUALIFICATION_PREREG_2026-09-07.md`
+- `R3_ALT_S02_QUALIFICATION_RESULT_2026-09-07.md`
+
+Hosted provenance:
+
+```text
+workflow  R3 axisymmetric swirl R3S02 qualification
+run       34081115069
+job       101616428611
+head      b2eaa219e69bc6ed0905334a61ccbfe757ca139d
+artifact  10003744205
+digest    sha256:d70b9951b74478b28a363f7ec1b0f40a671ea92df5731918099dd3a6090d52b4
+NPZ sha   a2619b491089d3c27a6056ceaefc6fcb24d82f47f8c10aa7265c2ce2c718868f
+```
+
+R3S02's nonlinear short-time diagnostics are markedly cleaner than R3S04: B240 reaches exactly
+`2.0` gradient-scale points, curvature-tail decreases to `.941021`, time-refinement differences
+are ~`1e-6`, and domain differences are O(`1e-5`). But the fail-closed datum-specific elliptic A0
+is nonmonotone from B200 to B240, and two frozen derivative comparisons fail:
+
+```text
+omega1_z relative Linf: fine 5.10054e-2 >= coarse 4.05309e-2
+utheta_r relative Linf: fine 1.10767e-2 >= coarse 9.48012e-3
+```
+
+Exact:
+
+```text
+R3S02-ALT-DATUM-QUALIFICATION = FAIL
+CURRENT-12-SEED-CENTERED-FD-QUALIFICATION-PATH = PARK
+R3-MULTI-SEED-SCREEN = NOT LICENSED
+```
+
+Do not try R3S00/R3S06/etc sequentially under the same centered-second-order / zero-Dirichlet
+method.
+
+## Exact next allowed numerical direction
+
+The next active numerical work must use a **genuinely new method contract**. It must restart from
+manufactured elliptic and derivative qualification before any nonlinear candidate evolution. The
+old centered-FD path provides diagnostic comparison only and does not confer qualification on the
+new method.
+
+Preferred smallest next gate: a high-order strictly nonperiodic finite-difference elliptic/
+derivative prototype (`M0`) with explicit axis treatment, manufactured Gaussian + compact-datum
+recovery, low-axial-frequency stress, and one-coordinate boundary sensitivity. Only if M0 passes
+may a new nonlinear integrator/evolution qualification be preregistered.
+
+## Forbidden shortcuts / claim boundary
+
+Do not reopen registry-killed self-similar routes, do not identify scalar 5D `L5` with a 5D fluid,
+do not fit a singularity exponent or blow-up time before numerical qualification, do not add a
+third R3S04 rescue, and do not shop the current 12 seeds for a centered-FD pass. No finite-box
+result is a whole-space theorem. No current result proves finite-time singularity,
+nonextendability, global regularity, or Clay A/B/C/D.
