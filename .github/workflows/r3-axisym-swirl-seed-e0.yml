@@ -8,6 +8,8 @@ on:
       - "experiments/r3_axi_swirl/check_compact_family.py"
       - "experiments/r3_axi_swirl/free_space_elliptic_prototype.py"
       - "experiments/r3_axi_swirl/check_free_space_elliptic.py"
+      - "experiments/r3_axi_swirl/check_low_axial_frequency_e0.py"
+      - ".github/workflows/r3-axisym-swirl-seed-e0.yml"
   workflow_dispatch:
 
 concurrency:
@@ -34,7 +36,8 @@ jobs:
             experiments/r3_axi_swirl/compact_family.py \
             experiments/r3_axi_swirl/check_compact_family.py \
             experiments/r3_axi_swirl/free_space_elliptic_prototype.py \
-            experiments/r3_axi_swirl/check_free_space_elliptic.py
+            experiments/r3_axi_swirl/check_free_space_elliptic.py \
+            experiments/r3_axi_swirl/check_low_axial_frequency_e0.py
 
       - name: Run preregistered S0 seed audit
         working-directory: experiments/r3_axi_swirl
@@ -44,6 +47,10 @@ jobs:
         working-directory: experiments/r3_axi_swirl
         run: python check_free_space_elliptic.py
 
+      - name: Run low-axial-frequency E0 stress
+        working-directory: experiments/r3_axi_swirl
+        run: python check_low_axial_frequency_e0.py
+
       - name: Upload S0 and E0 result JSON
         uses: actions/upload-artifact@v4
         with:
@@ -51,4 +58,5 @@ jobs:
           path: |
             experiments/r3_axi_swirl/results_seed_preflight/summary.json
             experiments/r3_axi_swirl/results_elliptic_e0/summary.json
+            experiments/r3_axi_swirl/results_elliptic_e0_lowk/summary.json
           if-no-files-found: error
