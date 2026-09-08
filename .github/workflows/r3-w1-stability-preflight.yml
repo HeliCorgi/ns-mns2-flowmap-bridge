@@ -1,0 +1,37 @@
+name: R3 W1 stability preflight
+
+on:
+  pull_request:
+    branches: ["research/r3-axisym-wholespace-w0"]
+    paths:
+      - "experiments/r3_wholespace_w1/**"
+      - "docs/gates/R3_AXISYM_WHOLESPACE_W1_*.md"
+      - ".github/workflows/r3-w1-stability-preflight.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-w1-stability-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stability-detector:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install NumPy
+        run: python -m pip install "numpy>=1.24"
+      - name: Compile detector
+        run: python -m py_compile experiments/r3_wholespace_w1/stability_preflight.py
+      - name: Execute frozen stability preflight
+        run: python experiments/r3_wholespace_w1/stability_preflight.py
+      - name: Upload stability report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-w1-stability-preflight
+          path: experiments/r3_wholespace_w1/results/W1_STABILITY_PREFLIGHT.json
+          if-no-files-found: warn
