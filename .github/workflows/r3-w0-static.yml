@@ -1,0 +1,43 @@
+name: R3 whole-space W0 static gate
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "experiments/r3_wholespace_w0/**"
+      - "docs/gates/R3_AXISYM_WHOLESPACE_W0_*.md"
+      - ".github/workflows/r3-w0-static.yml"
+      - "requirements.txt"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-w0-static-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  w0-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile W0 gate
+        run: python -m py_compile experiments/r3_wholespace_w0/w0_static_gate.py
+
+      - name: Execute preregistered W0 gate
+        run: python experiments/r3_wholespace_w0/w0_static_gate.py
+
+      - name: Upload W0 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-w0-static-report
+          path: experiments/r3_wholespace_w0/results/W0_STATIC_GATE.json
+          if-no-files-found: warn
