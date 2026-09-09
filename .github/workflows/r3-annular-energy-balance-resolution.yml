@@ -1,0 +1,49 @@
+name: R3 annular energy-balance resolution audit
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "experiments/r3_wholespace_w1/annular_energy_balance_resolution.py"
+      - "docs/gates/R3_AXISYM_WHOLESPACE_ANNULAR_ENERGY_BALANCE_RESOLUTION_*.md"
+      - ".github/workflows/r3-annular-energy-balance-resolution.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: r3-annular-energy-balance-resolution-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  annular-energy-balance-resolution:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install numerical dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile annular energy-balance audit
+        run: |
+          python -m py_compile \
+            experiments/r3_wholespace_w1/manufactured_short_time.py \
+            experiments/r3_wholespace_w1/green_quadrature_repair.py \
+            experiments/r3_wholespace_w1/dynamic_resolution_audit.py \
+            experiments/r3_wholespace_w1/candidate_time_pilot.py \
+            experiments/r3_wholespace_w1/shape_family_screen.py \
+            experiments/r3_wholespace_w1/annular_energy_balance_resolution.py
+
+      - name: Execute frozen annular energy-balance audit
+        run: python experiments/r3_wholespace_w1/annular_energy_balance_resolution.py
+
+      - name: Upload annular energy-balance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-annular-energy-balance-resolution
+          path: experiments/r3_wholespace_w1/results/ANNULAR_ENERGY_BALANCE_RESOLUTION.json
+          if-no-files-found: warn
